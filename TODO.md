@@ -12,6 +12,6 @@
   1. Complete navigation system
   1. Complete timer
   1. Complete input handle
-- Trung:
+- Nguyên:
   1. Draw About screen, put results in "Screens/About.txt"
   1. Write description for menus in English
