@@ -7,7 +7,7 @@
 1. Nguyễn Quang Thông
 1. Nguyễn Anh Vũ
 1. Võ Nhật Phước
-1. Nguyên Hoàng Trung
+1. Hoàng Trung Nguyên
 
 # Features
 
