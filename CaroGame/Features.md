@@ -1,14 +1,3 @@
-# CaroGame
-
-### Đồ án cờ caro. GVHD: Trương Toàn Thịnh.
-
-### Thành Viên:
-
-1. Nguyễn Quang Thông
-1. Nguyễn Anh Vũ
-1. Võ Nhật Phước
-1. Nguyên Hoàng Trung
-
 # Features
 
 ## Backend
