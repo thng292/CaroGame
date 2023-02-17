@@ -134,6 +134,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Navigate.cpp" />
     <ClCompile Include="SaveLoad.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
