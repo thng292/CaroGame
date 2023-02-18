@@ -26,7 +26,7 @@ namespace View {
 	const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
 	const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
 	const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
-	
+
 	// Setup console
 	void Setup();
 
@@ -34,10 +34,10 @@ namespace View {
 	void Goto(short x, short y);
 
 	// Print string to console
-	void Print(
-		int x, int y, //Draw position
-		std::string str,
-		char shortcut = 0, //Character want to underline
+	void WriteToView(
+		short x, short y, //Draw position
+		std::wstring str,
+		wchar_t shortcut = 0, //Character want to underline
 		bool highlight = false,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
@@ -45,8 +45,8 @@ namespace View {
 	);
 
 	//Print character to console
-	void Print(
-		int x, int y, //Draw position
+	void WriteToView(
+		short x, short y, //Draw position
 		char str,
 		bool highlight = false,
 		Color textColor = DEFAULT_TEXT_COLOR,
@@ -55,8 +55,8 @@ namespace View {
 	);
 
 	// Return underlined string
-	std::string Underline(std::string str);
+	std::wstring Underline(std::wstring str);
 
 	// Return underlined string
-	std::string Underline(char str);
+	std::wstring Underline(wchar_t str);
 }
