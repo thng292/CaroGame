@@ -2,16 +2,16 @@
 #include <chrono>
 #include <thread>
 #include <functional>
-#include <mutex>
-#include <condition_variable>
 
+//Reference: https://gist.github.com/zekroTJA/00317b41aa69f38090071b6c8065272b
 class Timer {
 public:
 	Timer(std::function<void(void)> callback, const long& interval = 1000);
 	void Start();
 	void Stop();
 	void Restart();
-	void TogglePause();
+	void Pause();
+	void Continued();
 	bool isRunning();
 	long long getInterval();
 	~Timer();

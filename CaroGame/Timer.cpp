@@ -1,6 +1,6 @@
 #include "Timer.h"
 
-Timer::Timer(std::function<void(void)> callback, const long& interval = 1000) {
+Timer::Timer(std::function<void(void)> callback, const long& interval) {
     _callback = callback;
     _interval = std::chrono::milliseconds{ interval };
 }
@@ -28,8 +28,12 @@ void Timer::Restart() {
     Start();
 }
 
-void Timer::TogglePause() {
-    _pause = !_pause;
+void Timer::Pause() {
+    _pause = true;
+}
+
+void Timer::Continued() {
+    _pause = false;
 }
 
 bool Timer::isRunning() {

@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CaroGame.cpp" />
     <ClCompile Include="InputHandle.cpp" />
