@@ -1,3 +1,8 @@
 #pragma once
-class InputHandle {};
+#include <string>
+#include <wchar.h>
+#include <conio.h>
 
+namespace InputHandle {
+	std::wstring Get();
+};

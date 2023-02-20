@@ -36,12 +36,10 @@ void View::Setup() {
 	SetConsoleTitle(TEXT("Caro Game"));
 
 
-	// Change color
-	system("cls");
-	system("color f0");
+	// Change color and clear screen
+	ClearScreen();
 
-
-	// IO Unicode
+	// Set IO Unicode
 	_setmode(_fileno(stdout), _O_WTEXT);
 	_setmode(_fileno(stdin), _O_WTEXT);
 }
@@ -77,7 +75,7 @@ void View::WriteToView(
 
 void View::WriteToView(
 	short x, short y, //Draw position
-	char str,
+	wchar_t str,
 	bool highlight,
 	View::Color textColor,
 	View::Color highlightColor,
@@ -99,4 +97,11 @@ std::wstring View::Underline(std::wstring str) {
 
 std::wstring View::Underline(wchar_t str) {
 	return	L"\033[4m" + std::wstring(1, str) + L"\033[24m";
+}
+
+void View::ClearScreen() {
+	DWORD tmp = 0;
+	HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	FillConsoleOutputCharacter(StdOut, L' ', 120 * 30, { 0,0 }, &tmp);
+	FillConsoleOutputAttribute(StdOut, 240, 120 * 30, { 0,0 }, &tmp);
 }

@@ -47,7 +47,7 @@ namespace View {
 	//Print character to console
 	void WriteToView(
 		short x, short y, //Draw position
-		char str,
+		wchar_t str,
 		bool highlight = false,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
@@ -59,4 +59,6 @@ namespace View {
 
 	// Return underlined string
 	std::wstring Underline(wchar_t str);
+
+	void ClearScreen();
 }

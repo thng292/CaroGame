@@ -1,22 +1,56 @@
-// CaroGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
+﻿#include "View.h"
+#include "InputHandle.h"
+#include "Navigate.h"
 #include <iostream>
-#include "View.h"
+#include <functional>
+#include <string>
+#include <Windows.h>
 
-int main()
-{
-    View::Setup();
-    //while (1) {}
+//DEMO PURPOSE ONLY
+void TestView1(NavigationHost& NavHost) {
+	View::WriteToView(20, 20, L"HẾ lô quợt!", 0, true);
+	auto tmp = InputHandle::Get();
+	if (tmp == L"\r") {
+		return NavHost.NavigateStack("TestView2");
+	}
+	if (tmp == L"b" || tmp == L"B") {
+		return NavHost.Back();
+	}
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+//DEMO PURPOSE ONLY
+void TestView2(NavigationHost& NavHost) {
+	View::WriteToView(20, 21, L"Test view 2", 0, true);
+	auto tmp = InputHandle::Get();
+	if (tmp == L"\r") {
+		return NavHost.Navigate("TestView3");
+	}
+	if (tmp == L"b" || tmp == L"B") {
+		return NavHost.Back();
+	}
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+//DEMO PURPOSE ONLY
+void TestView3(NavigationHost& NavHost) {
+	View::WriteToView(20, 22, L"Test view 3", 0, true);
+	auto tmp = InputHandle::Get();
+	if (tmp == L"\r") {
+		return NavHost.Navigate("TestView1");
+	}
+	if (tmp == L"b" || tmp == L"B") {
+		return NavHost.Back();
+	}
+}
+
+//DEMO PURPOSE ONLY
+int main() {
+	View::Setup();							// Setting up the screen
+
+	// App start here
+	NavigationHost NavHost("TestView1", {	// Initialize Navigation Host
+		{"TestView1", TestView1},			// "TestView1 is the first view to be shown
+		{"TestView2", TestView2},
+		{"TestView3", TestView3}
+		});
+	//std::wcin.get();
+}
