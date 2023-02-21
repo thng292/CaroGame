@@ -1,238 +1,115 @@
-//int moveCount = 0;
-//int winValueCount = 3;
-//int rowCur = 0, colCur = 0;
-//
-//const int INF = 1000, NULL_VALUE = -5;
-//int rowChosen = -1, colChosen = -1;
-//
-//void MakeMove(const int &row, const int &col, const int&playerValue) {
-//	boardPointArray[row][col].value = playerValue;
-//	moveCount++;
-//}
-//
-//void UndoMove(const int &row, const int &col) {
-//	boardPointArray[row][col].value = 0;
-//	moveCount--;
-//}
-//
-//
-//bool CheckLeftDiagonalWin(const int &rowCur, const int &colCur, const int &playerValue) {
-//	int pointSameValueCount = 1;
-//	for (int row = rowCur + 1, col = colCur + 1;row < boardSize && col < boardSize; ++row, ++col) {
-//		if (boardPointArray[row][col].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		}
-//	}
-//
-//	
-//
-//	for (int row = rowCur - 1, col = colCur - 1;row >= 0 && col >= 0; --row, --col) {
-//		if (boardPointArray[row][col].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		}
-//
-//	}
-//	
-//	return 0;
-//
-//}
-//
-//bool CheckRightDiagonalWin(const int &rowCur, const int &colCur, const int &playerValue) {
-//	int pointSameValueCount = 1;
-//	for (int row = rowCur - 1, col = colCur + 1;row >= 0 && col < boardSize; --row, ++col) {
-//		if (boardPointArray[row][col].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		}
-//	}
-//
-//	
-//
-//	
-//
-//	for (int row = rowCur + 1, col = colCur - 1;row < boardSize && col >= 0; ++row, --col) {
-//		if (boardPointArray[row][col].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		}
-//
-//	}
-//	
-//	return 0;
-//
-//}
-//
-//bool CheckHorizontalWin(const int &rowCur, const int &colCur, const int &playerValue) {
-//	int pointSameValueCount = 1;
-//	for (int col = colCur + 1;col < boardSize;++col) {
-//		if (boardPointArray[rowCur][col].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		} 
-//	}
-//
-//	for (int col = colCur - 1;col >= 0;--col) {
-//		if (boardPointArray[rowCur][col].value == playerValue) {
-//			pointSameValueCount++;
-//
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		} 
-//	}
-//
-//	return 0;
-//
-//}
-//
-//bool CheckVerticalWin(const int &rowCur, const int &colCur, const int &playerValue) {
-//	int pointSameValueCount = 1;
-//	for (int row = rowCur + 1;row < boardSize;++row) {
-//		if (boardPointArray[row][colCur].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		} 
-//	}
-//
-//	for (int row = rowCur - 1;row >= 0;--row) {
-//		if (boardPointArray[row][colCur].value == playerValue) {
-//			pointSameValueCount++;
-//			if (pointSameValueCount == winValueCount) {
-//				return 1;
-//			}
-//		}
-//		else {
-//			break;
-//		} 
-//	}
-//
-//	return 0;
-//
-//}
-//
-//bool CheckDraw() {
-//	return (moveCount == boardSize * boardSize);
-//}
-//
-//int GetGameState(const int &rowCur, const int &colCur, const int &playerValue) {
-//	if (CheckRightDiagonalWin(rowCur, colCur, playerValue) 
-//		|| CheckLeftDiagonalWin(rowCur, colCur, playerValue)
-//		|| CheckHorizontalWin(rowCur, colCur, playerValue) 
-//		|| CheckVerticalWin(rowCur, colCur, playerValue)) {
-//		return (playerValue == playerHuman)? -1:1;
-//	}
-//
-//	if (CheckDraw()) {
-//		return 0;
-//	}
-//	return NULL_VALUE;
-//}
-//
-//int Eval(const int &rowLastMove, const int &colLastMove, bool isMaximizingPlayer) {
-//	int playerValue = (!isMaximizingPlayer)? playerAI:playerHuman;
-//	return GetGameState(rowLastMove, colLastMove, playerValue);
-//}
-//
-//void GetBestMove(const int &rowLastMove, bool isMaximizingPlayer, const int &colLastMove) {
-//	int valBest = -INF; 
-//	for (int row = 0;row < boardSize;++row) {
-//		for (int col = 0;col < boardSize;++col) {
-//			if (boardPointArray[row][col].value == 0) {
-//				MakeMove(row, col, playerAI);
-//
-//				int valCur = MiniMax(false, row, col);
-//				if (valCur > valBest) {
-//					valBest = valCur;
-//					rowChosen = row;
-//					colChosen = col;
-//				}
-//					
-//				UndoMove(row, col);
-//			}
-//		}
-//	}
-//}
-//
-//int MiniMax(const bool &isMaximizingPlayer, const int &rowLastMove, const int &colLastMove) {
-//	const int evalValue = Eval(rowLastMove, colLastMove, isMaximizingPlayer);
-//	// PlacePoints(20, 20);
-//	// cout << "   Eval: " << evalValue << "|" << "x: " << rowLastMove << "y: " << colLastMove;
-//	// char c = getch();
-//	if (evalValue != NULL_VALUE) {
-//		return evalValue;
-//	}
-//
-//	if (isMaximizingPlayer) {
-//		int valBest = -INF; 
-//
-//		for (int row = 0;row < boardSize;++row) {
-//			for (int col = 0;col < boardSize;++col) {
-//				if (boardPointArray[row][col].value == 0) {
-//					MakeMove(row, col, playerAI);
-//
-//					int valCur = MiniMax(false, row, col);
-//					valBest = (valCur > valBest)? valCur:valBest;
-//
-//					
-//										
-//					UndoMove(row, col);
-//				}
-//			}
-//		}
-//
-//		return valBest;
-//	}		
-//	else {
-//		int valBest = INF; 
-//		for (int row = 0;row < boardSize;++row) {
-//			for (int col = 0;col < boardSize;++col) {
-//				if (boardPointArray[row][col].value == 0) {
-//					MakeMove(row, col, playerHuman);
-//
-//					int valCur = MiniMax(true, row, col);
-//					valBest = (valCur < valBest)? valCur:valBest;
-//					
-//					UndoMove(row, col);
-//
-//				}
-//			}
-//		}
-//		return valBest;
-//	}
-//
-//}
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+#include <vector>
+
+#include "AI.h"
+#include "Constants.h"
+#include "Logic.h"
+using namespace std;
+
+namespace AI {
+	void MakeMove(
+		vector<vector<short>>& boardGameMatrix,
+		int& moveCount,
+		const int& row,
+		const int& col,
+		const int& playerValue) {
+
+		boardGameMatrix[row][col] = playerValue;
+		moveCount++;
+	}
+  
+	void UndoMove(
+		vector<vector<short>>& boardGameMatrix,
+		int& moveCount,
+		const int& row,
+		const int& col) {
+
+		boardGameMatrix[row][col] = 0;
+		moveCount--;
+	}
+
+	int Eval(
+		const vector<vector<short>>& boardGameMatrix,
+		const int& moveCount,
+		const int& rowLastMove,
+		const int& colLastMove,
+		bool isMaximizingPlayer) {
+
+		int playerValue = (!isMaximizingPlayer) ? Constants::PLAYER_AI : Constants::PLAYER_HUMAN;
+		return Logic::GetGameState(boardGameMatrix, moveCount, rowLastMove, colLastMove, playerValue);
+	}
+  
+	pair<short, short> GetBestMove(
+		vector<vector<short>>& boardGameMatrix,
+		int& moveCount,
+		const int& rowLastMove,
+		bool isMaximizingPlayer,
+		const int& colLastMove) {
+
+		int valBest = -Constants::INF;
+		pair<short, short>moveBest;
+		for (int row = 0;row < boardGameMatrix.size();++row) {
+			for (int col = 0;col < boardGameMatrix.size();++col) {
+				if (boardGameMatrix[row][col] == 0) {
+					MakeMove(boardGameMatrix, moveCount, row, col, Constants::PLAYER_AI);
+
+					int valCur = MiniMax(boardGameMatrix, moveCount, row, col, false);
+					if (valCur > valBest) {
+						valBest = valCur;
+						moveBest.first = row;
+						moveBest.second = col;
+					}
+
+					UndoMove(boardGameMatrix, moveCount, row, col);
+				}
+			}
+		}
+		return moveBest;
+	}
+
+	int MiniMax(
+		vector<vector<short>>& boardGameMatrix,
+		int& moveCount,
+		const int& rowLastMove,
+		const int& colLastMove,
+		const bool& isMaximizingPlayer) {
+
+		const int evalValue = Eval(boardGameMatrix, moveCount, rowLastMove, colLastMove, isMaximizingPlayer);
+		if (evalValue != Constants::NULL_VALUE) {
+			return evalValue;
+		}
+
+		if (isMaximizingPlayer) {
+			int valBest = -Constants::INF;
+			for (int row = 0;row < boardGameMatrix.size();++row) {
+				for (int col = 0;col < boardGameMatrix.size();++col) {
+					if (boardGameMatrix[row][col] == 0) {
+						MakeMove(boardGameMatrix, moveCount, row, col, Constants::PLAYER_AI);
+						int valCur = MiniMax(boardGameMatrix, moveCount, row, col, false);
+						valBest = (valCur > valBest) ? valCur : valBest;
+						UndoMove(boardGameMatrix, moveCount, row, col);
+					}
+				}
+			}
+			return valBest;
+		}
+		else {
+			int valBest = Constants::INF;
+			for (int row = 0;row < boardGameMatrix.size();++row) {
+				for (int col = 0;col < boardGameMatrix.size();++col) {
+					if (boardGameMatrix[row][col] == 0) {
+						MakeMove(boardGameMatrix, moveCount, row, col, Constants::PLAYER_HUMAN);
+						int valCur = MiniMax(boardGameMatrix, moveCount, row, col, true);
+						valBest = (valCur < valBest) ? valCur : valBest;
+						UndoMove(boardGameMatrix, moveCount, row, col);
+					}
+				}
+			}
+			return valBest;
+		}
+	}
+
+}
+
