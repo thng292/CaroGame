@@ -28,8 +28,8 @@ void NavigationHost::NavigateStack(std::string path) {
 }
 
 void NavigationHost::Navigate(std::string path) {
-	HistoryPopAllOverlay();
 	_History.push(_CurrentScreen);
+	HistoryPopAllOverlay();
 	_CurrentScreen = { path, nullptr };
 	View::ClearScreen();
 }
@@ -49,6 +49,19 @@ void NavigationHost::Back() {
 	_History.pop();
 }
 
+void NavigationHost::BackToLastNotOverlay() {
+	// Pop to last overlay
+	while (!_History.empty() && _History.top().prevScreenBuffer != nullptr) {
+		_CurrentScreen = _History.top();
+		HistoryPop();
+	}
+	Back();
+}
+
+void NavigationHost::NavigateExit() {
+	_CurrentScreen.name = EXIT;
+}
+
 NavigationHost::~NavigationHost() {
 	delete[] _CurrentScreen.prevScreenBuffer;
 	while (!_History.empty())
@@ -58,7 +71,7 @@ NavigationHost::~NavigationHost() {
 }
 
 void NavigationHost::HistoryPopAllOverlay() {
-	while (_History.top().prevScreenBuffer != nullptr) {
+	while (!_History.empty() && _History.top().prevScreenBuffer != nullptr) {
 		HistoryPop();
 	}
 }

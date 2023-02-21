@@ -27,6 +27,7 @@ public:
 	[[nodiscard]] void NavigateStack(std::string path);
 	[[nodiscard]] void Navigate(std::string path);
 	[[nodiscard]] void Back();
+	[[nodiscard]] void BackToLastNotOverlay();
 	[[nodiscard]] void NavigateExit();
 	~NavigationHost();
 };

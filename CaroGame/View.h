@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include <algorithm>
 
 namespace View {
 	//All posible color
@@ -22,10 +24,22 @@ namespace View {
 		BRIGHT_WHITE = 15
 	};
 
+	struct Rect {
+		short Top, Left, Right, Bottom;
+	};
+
+	struct Option {
+		const std::wstring& option;
+		const wchar_t underline;
+	};
+
 	const Color DEFAULT_TEXT_COLOR = Color::BLACK;
 	const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
 	const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
 	const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
+	const short HPADDING = 3;
+	const short VPADDING = 1;
+	const short BORDER_WIDTH = 1;
 
 	// Setup console
 	void Setup();
@@ -55,10 +69,37 @@ namespace View {
 	);
 
 	// Return underlined string
-	std::wstring Underline(std::wstring str);
+	inline std::wstring Underline(std::wstring str);
 
 	// Return underlined string
-	std::wstring Underline(wchar_t str);
+	inline std::wstring Underline(wchar_t str);
 
 	void ClearScreen();
+
+	void ClearRect(Rect area);
+
+	void DrawRect(
+		Rect rect, 
+		Color textColor = DEFAULT_TEXT_COLOR,
+		Color bgColor = DEFAULT_BACKGROUND_COLOR
+	);
+
+	void DrawMenu(
+		short x, short y,
+		const std::wstring& title,
+		const std::vector<Option>& optionsList,
+		size_t selected,
+		Color textColor = DEFAULT_TEXT_COLOR,
+		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
+		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
+	);
+
+	void DrawMenuCenter(
+		std::wstring title,
+		std::vector<Option> optionsList,
+		size_t selected,
+		Color textColor = DEFAULT_TEXT_COLOR,
+		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
+		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
+	);
 }

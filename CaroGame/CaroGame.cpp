@@ -8,6 +8,11 @@
 
 //DEMO PURPOSE ONLY
 void TestView1(NavigationHost& NavHost) {
+	View::DrawMenuCenter(L"This is a title!", { // Add support for shortcut
+		{L"TEst", L'T'},
+		{L"HelloWorld!", L'H'},
+		{L"...", 0}
+		}, 2);
 	View::WriteToView(20, 20, L"HẾ lô quợt!", 0, true);
 	auto tmp = InputHandle::Get();
 	if (tmp == L"\r") {
@@ -38,13 +43,14 @@ void TestView3(NavigationHost& NavHost) {
 		return NavHost.Navigate("TestView1");
 	}
 	if (tmp == L"b" || tmp == L"B") {
-		return NavHost.Back();
+		return NavHost.BackToLastNotOverlay();
 	}
 }
 
 //DEMO PURPOSE ONLY
 int main() {
 	View::Setup();							// Setting up the screen
+	//View::WriteToView(0, 0, L"\u2016\uFF1DTets");
 
 	// App start here
 	NavigationHost NavHost("TestView1", {	// Initialize Navigation Host

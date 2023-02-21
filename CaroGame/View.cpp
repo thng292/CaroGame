@@ -105,3 +105,93 @@ void View::ClearScreen() {
 	FillConsoleOutputCharacter(StdOut, L' ', 120 * 30, { 0,0 }, &tmp);
 	FillConsoleOutputAttribute(StdOut, 240, 120 * 30, { 0,0 }, &tmp);
 }
+
+void View::ClearRect(Rect area) {
+	DWORD tmp = 0;
+	auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	for (auto i = area.Top; i <= area.Bottom; i++)
+	{
+		FillConsoleOutputCharacter(stdHandle, L' ', area.Right - area.Left + 1, { 0,i }, &tmp);
+	}
+}
+
+void View::DrawRect(Rect rect, Color textColor, Color bgColor) {
+	View::ClearRect(rect);
+	View::WriteToView(rect.Left, rect.Top, L'\u2554');
+	View::WriteToView(rect.Left, rect.Bottom, L'\u255A');
+	View::WriteToView(rect.Right, rect.Top, L'\u2557');
+	View::WriteToView(rect.Right, rect.Bottom, L'\u255D');
+	DWORD tmp = 0;
+	auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	FillConsoleOutputCharacter(stdHandle, L'\u2550',
+		rect.Right - rect.Left - View::BORDER_WIDTH,
+		{ rect.Left + View::BORDER_WIDTH, rect.Top },
+		&tmp);
+	FillConsoleOutputCharacter(stdHandle, L'\u2550',
+		rect.Right - rect.Left - View::BORDER_WIDTH,
+		{ rect.Left + View::BORDER_WIDTH, rect.Bottom },
+		&tmp);
+	for (int i = rect.Top + 1; i < rect.Bottom; i++)
+	{
+		View::WriteToView(rect.Left, i, L'\u2551');
+		View::WriteToView(rect.Right, i, L'\u2551');
+	}
+}
+
+short CalcWidth(const std::vector<View::Option>& options, const std::wstring& title) {
+	int tmp = 0;
+	for (auto i : options) {
+		tmp = max(i.option.length(), tmp);
+	}
+	return max(tmp, title.length()) + (View::BORDER_WIDTH * View::HPADDING) * 2;
+}
+
+short CalcHeight(const std::vector<View::Option>& options) {
+	return options.size() + (View::BORDER_WIDTH + View::VPADDING) * 2;
+}
+
+std::pair<short, short> CalcCenter(short width, short height) {
+	return { 59 - width / 2, 14 - height / 2 };
+}
+
+void View::DrawMenu(
+	short x, short y,
+	const std::wstring& title,
+	const std::vector<Option>& optionsList,
+	size_t selected,
+	Color textColor,
+	Color highlightColor,
+	Color highlightTextColor
+) {
+	short w = CalcWidth(optionsList, title);
+	short h = CalcHeight(optionsList);
+	View::DrawRect({ y, x, x + w + View::BORDER_WIDTH, y + h + View::BORDER_WIDTH});
+	short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
+	short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
+	View::WriteToView(leftAlign, topAlign, title);
+	topAlign += 2;
+	for (int i = 0; i < optionsList.size(); i++) {
+		View::WriteToView(leftAlign, topAlign + i, optionsList[i].option, optionsList[i].underline, selected == i);
+	}
+}
+
+void View::DrawMenuCenter(
+	std::wstring title,
+	std::vector<Option> optionsList,
+	size_t selected,
+	Color textColor,
+	Color highlightColor,
+	Color highlightTextColor
+) {
+	short w = CalcWidth(optionsList, title);
+	short h = CalcHeight(optionsList);
+	auto tmp = CalcCenter(w, h);
+	View::DrawRect({ tmp.second, tmp.first, tmp.first + w + View::BORDER_WIDTH, tmp.second + h + View::BORDER_WIDTH });
+	short leftAlign = View::BORDER_WIDTH + View::HPADDING + tmp.first;
+	short topAlign = View::BORDER_WIDTH + View::VPADDING + tmp.second;
+	View::WriteToView(leftAlign, topAlign, title);
+	topAlign += 2;
+	for (int i = 0; i < optionsList.size(); i++) {
+		View::WriteToView(leftAlign, topAlign + i, optionsList[i].option, optionsList[i].underline, selected == i);
+	}
+}
