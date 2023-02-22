@@ -132,6 +132,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CaroGame.cpp" />
     <ClCompile Include="InputHandle.cpp" />
+    <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Navigate.cpp" />
     <ClCompile Include="SaveLoad.cpp" />
@@ -142,7 +143,9 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="InputHandle.h" />
+    <ClInclude Include="Logic.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Navigate.h" />
     <ClInclude Include="SaveLoad.h" />

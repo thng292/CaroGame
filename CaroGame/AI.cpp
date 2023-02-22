@@ -19,7 +19,7 @@ namespace AI {
 		boardGameMatrix[row][col] = playerValue;
 		moveCount++;
 	}
-  
+
 	void UndoMove(
 		vector<vector<short>>& boardGameMatrix,
 		int& moveCount,
@@ -40,7 +40,7 @@ namespace AI {
 		int playerValue = (!isMaximizingPlayer) ? Constants::PLAYER_AI : Constants::PLAYER_HUMAN;
 		return Logic::GetGameState(boardGameMatrix, moveCount, rowLastMove, colLastMove, playerValue);
 	}
-  
+
 	pair<short, short> GetBestMove(
 		vector<vector<short>>& boardGameMatrix,
 		int& moveCount,
@@ -50,8 +50,8 @@ namespace AI {
 
 		int valBest = -Constants::INF;
 		pair<short, short>moveBest;
-		for (int row = 0;row < boardGameMatrix.size();++row) {
-			for (int col = 0;col < boardGameMatrix.size();++col) {
+		for (int row = 0; row < boardGameMatrix.size(); ++row) {
+			for (int col = 0; col < boardGameMatrix.size(); ++col) {
 				if (boardGameMatrix[row][col] == 0) {
 					MakeMove(boardGameMatrix, moveCount, row, col, Constants::PLAYER_AI);
 
@@ -83,8 +83,8 @@ namespace AI {
 
 		if (isMaximizingPlayer) {
 			int valBest = -Constants::INF;
-			for (int row = 0;row < boardGameMatrix.size();++row) {
-				for (int col = 0;col < boardGameMatrix.size();++col) {
+			for (int row = 0; row < boardGameMatrix.size(); ++row) {
+				for (int col = 0; col < boardGameMatrix.size(); ++col) {
 					if (boardGameMatrix[row][col] == 0) {
 						MakeMove(boardGameMatrix, moveCount, row, col, Constants::PLAYER_AI);
 						int valCur = MiniMax(boardGameMatrix, moveCount, row, col, false);
@@ -97,8 +97,8 @@ namespace AI {
 		}
 		else {
 			int valBest = Constants::INF;
-			for (int row = 0;row < boardGameMatrix.size();++row) {
-				for (int col = 0;col < boardGameMatrix.size();++col) {
+			for (int row = 0; row < boardGameMatrix.size(); ++row) {
+				for (int col = 0; col < boardGameMatrix.size(); ++col) {
 					if (boardGameMatrix[row][col] == 0) {
 						MakeMove(boardGameMatrix, moveCount, row, col, Constants::PLAYER_HUMAN);
 						int valCur = MiniMax(boardGameMatrix, moveCount, row, col, true);
