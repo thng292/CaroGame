@@ -50,7 +50,7 @@ void View::Goto(short x, short y) {
 
 void View::WriteToView(
 	short x, short y, //Draw position
-	std::wstring str,
+	const std::wstring& str,
 	wchar_t shortcut, //Character want to underline
 	bool highlight,
 	View::Color textColor,
@@ -91,8 +91,8 @@ void View::WriteToView(
 	std::wcout << str;
 }
 
-std::wstring View::Underline(std::wstring str) {
-	return L"\033[4m" + std::wstring(str.begin(), str.end()) + L"\033[24m";
+std::wstring View::Underline(const std::wstring& str) {
+	return L"\033[4m" + str + L"\033[24m";
 }
 
 std::wstring View::Underline(wchar_t str) {
@@ -116,7 +116,7 @@ void View::ClearRect(Rect area) {
 	}
 }
 
-void View::DrawRect(Rect rect, Color textColor, Color bgColor) {
+void View::DrawRect(const Rect& rect, Color textColor, Color bgColor) {
 	View::ClearRect(rect);
 	View::WriteToView(rect.Left, rect.Top, L'\u2554');
 	View::WriteToView(rect.Left, rect.Bottom, L'\u255A');
@@ -147,11 +147,11 @@ short CalcWidth(const std::vector<View::Option>& options, const std::wstring& ti
 	return max(tmp, title.length()) + (View::BORDER_WIDTH * View::HPADDING) * 2;
 }
 
-short CalcHeight(const std::vector<View::Option>& options) {
-	return options.size() + (View::BORDER_WIDTH + View::VPADDING) * 2;
+inline short CalcHeight(const std::vector<View::Option>& options, const std::wstring& title) {
+	return options.size() + (View::BORDER_WIDTH + View::VPADDING) * 2 + (title.length() ? 2 : 0);
 }
 
-std::pair<short, short> CalcCenter(short width, short height) {
+inline std::pair<short, short> CalcCenter(short width, short height) {
 	return { 59 - width / 2, 14 - height / 2 };
 }
 
@@ -165,12 +165,14 @@ void View::DrawMenu(
 	Color highlightTextColor
 ) {
 	short w = CalcWidth(optionsList, title);
-	short h = CalcHeight(optionsList);
-	View::DrawRect({ y, x, x + w + View::BORDER_WIDTH, y + h + View::BORDER_WIDTH});
+	short h = CalcHeight(optionsList, title);
+	View::DrawRect({ y, x, x + w, y + h - 1});
 	short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
 	short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
-	View::WriteToView(leftAlign, topAlign, title);
-	topAlign += 2;
+	if (title.length()) {
+		View::WriteToView(leftAlign, topAlign, title);
+		topAlign += 2;
+	}
 	for (int i = 0; i < optionsList.size(); i++) {
 		View::WriteToView(leftAlign, topAlign + i, optionsList[i].option, optionsList[i].underline, selected == i);
 	}
@@ -185,7 +187,7 @@ void View::DrawMenuCenter(
 	Color highlightTextColor
 ) {
 	short w = CalcWidth(optionsList, title);
-	short h = CalcHeight(optionsList);
+	short h = CalcHeight(optionsList, title);
 	auto tmp = CalcCenter(w, h);
 	View::DrawMenu(tmp.first, tmp.second, title, optionsList, selected, textColor, highlightColor, highlightTextColor);
 }

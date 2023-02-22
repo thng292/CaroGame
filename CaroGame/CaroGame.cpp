@@ -48,7 +48,7 @@ void TestView1(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 3;										// Number of option
 	while (1) {																// Main while loop
-		View::DrawMenuCenter(L"This is a title!", {
+		View::DrawMenuCenter(L"", {
 			{L"TestView2", L'2'},
 			{L"TestView3", L'3'},
 			{L"Exit", L'E'}

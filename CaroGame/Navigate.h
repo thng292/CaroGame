@@ -5,6 +5,8 @@
 #include <functional>
 #include <string>
 #include <Windows.h>
+#define ViewFunc std::function<void(NavigationHost&)>
+#define ViewFuncMap std::unordered_map<std::string, ViewFunc>
 
 const int CONSOLE_WIDTH = 120;
 const int CONSOLE_HEIGHT = 30;
@@ -17,15 +19,15 @@ private:
 		PCHAR_INFO prevScreenBuffer = nullptr;
 	};
 	Screen _CurrentScreen;
-	std::unordered_map<std::string, std::function<void(NavigationHost&)>> _Links;
+	ViewFuncMap _Links;
 	std::stack<Screen> _History;
 	void HistoryPop();
 	void HistoryPopAllOverlay();
 public:
-	NavigationHost(std::string Start, std::unordered_map<std::string, std::function<void(NavigationHost&)>> links);
-	void Add(std::string path, std::function<std::string(NavigationHost&)> view);
-	[[nodiscard]] void NavigateStack(std::string path);
-	[[nodiscard]] void Navigate(std::string path);
+	NavigationHost(const std::string& Start, const ViewFuncMap& links);
+	void Add(const std::string& path, const ViewFunc& view);
+	[[nodiscard]] void NavigateStack(const std::string& path);
+	[[nodiscard]] void Navigate(const std::string& path);
 	[[nodiscard]] void Back();
 	[[nodiscard]] void BackToLastNotOverlay();
 	[[nodiscard]] void NavigateExit();

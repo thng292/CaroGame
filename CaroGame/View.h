@@ -51,7 +51,7 @@ namespace View {
 	// Print string to console
 	void WriteToView(
 		short x, short y, //Draw position
-		std::wstring str,
+		const std::wstring& str,
 		wchar_t shortcut = 0, //Character want to underline
 		bool highlight = false,
 		Color textColor = DEFAULT_TEXT_COLOR,
@@ -70,7 +70,7 @@ namespace View {
 	);
 
 	// Return underlined string
-	inline std::wstring Underline(std::wstring str);
+	inline std::wstring Underline(const std::wstring& str);
 
 	// Return underlined string
 	inline std::wstring Underline(wchar_t str);
@@ -80,7 +80,7 @@ namespace View {
 	void ClearRect(Rect area);
 
 	void DrawRect(
-		Rect rect, 
+		const Rect& rect, 
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color bgColor = DEFAULT_BACKGROUND_COLOR
 	);

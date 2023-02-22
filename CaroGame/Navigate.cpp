@@ -1,7 +1,7 @@
 #include "Navigate.h"
 #include "View.h"
 
-NavigationHost::NavigationHost(std::string Start, std::unordered_map<std::string, std::function<void(NavigationHost&)>> links) {
+NavigationHost::NavigationHost(const std::string& Start, const ViewFuncMap& links) {
 	_CurrentScreen = { Start, nullptr };
 	_Links = links;
 	while (_CurrentScreen.name != EXIT) {
@@ -9,7 +9,7 @@ NavigationHost::NavigationHost(std::string Start, std::unordered_map<std::string
 	}
 }
 
-void NavigationHost::Add(std::string path, std::function<std::string(NavigationHost&)> view) {
+void NavigationHost::Add(const std::string& path, const ViewFunc& view) {
 	_Links[path] = view;
 }
 void NavigationHost::HistoryPop() {
@@ -17,7 +17,7 @@ void NavigationHost::HistoryPop() {
 	_History.pop();
 }
 
-void NavigationHost::NavigateStack(std::string path) {
+void NavigationHost::NavigateStack(const std::string& path) {
 	// Save current screen
 	HANDLE StdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	PCHAR_INFO buffer = new CHAR_INFO[CONSOLE_WIDTH * CONSOLE_HEIGHT];
@@ -27,7 +27,7 @@ void NavigationHost::NavigateStack(std::string path) {
 	_CurrentScreen = { path, buffer };
 }
 
-void NavigationHost::Navigate(std::string path) {
+void NavigationHost::Navigate(const std::string& path) {
 	_History.push(_CurrentScreen);
 	HistoryPopAllOverlay();
 	_CurrentScreen = { path, nullptr };
