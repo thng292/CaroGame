@@ -40,6 +40,7 @@ namespace View {
 	const short HPADDING = 3;
 	const short VPADDING = 1;
 	const short BORDER_WIDTH = 1;
+	const short DEFAULT_SCREEN_ATTRIBUTE = 240;
 
 	// Setup console
 	void Setup();

@@ -103,7 +103,7 @@ void View::ClearScreen() {
 	DWORD tmp = 0;
 	HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	FillConsoleOutputCharacter(StdOut, L' ', 120 * 30, { 0,0 }, &tmp);
-	FillConsoleOutputAttribute(StdOut, 240, 120 * 30, { 0,0 }, &tmp);
+	FillConsoleOutputAttribute(StdOut, DEFAULT_SCREEN_ATTRIBUTE, 120 * 30, { 0,0 }, &tmp);
 }
 
 void View::ClearRect(Rect area) {
@@ -111,7 +111,8 @@ void View::ClearRect(Rect area) {
 	auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (auto i = area.Top; i <= area.Bottom; i++)
 	{
-		FillConsoleOutputCharacter(stdHandle, L' ', area.Right - area.Left + 1, { 0,i }, &tmp);
+		FillConsoleOutputCharacter(stdHandle, L' ', area.Right - area.Left + 1, { area.Left,i }, &tmp);
+		FillConsoleOutputAttribute(stdHandle, DEFAULT_SCREEN_ATTRIBUTE, area.Right - area.Left + 1, { area.Left,i }, &tmp);
 	}
 }
 
@@ -186,12 +187,5 @@ void View::DrawMenuCenter(
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList);
 	auto tmp = CalcCenter(w, h);
-	View::DrawRect({ tmp.second, tmp.first, tmp.first + w + View::BORDER_WIDTH, tmp.second + h + View::BORDER_WIDTH });
-	short leftAlign = View::BORDER_WIDTH + View::HPADDING + tmp.first;
-	short topAlign = View::BORDER_WIDTH + View::VPADDING + tmp.second;
-	View::WriteToView(leftAlign, topAlign, title);
-	topAlign += 2;
-	for (int i = 0; i < optionsList.size(); i++) {
-		View::WriteToView(leftAlign, topAlign + i, optionsList[i].option, optionsList[i].underline, selected == i);
-	}
+	View::DrawMenu(tmp.first, tmp.second, title, optionsList, selected, textColor, highlightColor, highlightTextColor);
 }
