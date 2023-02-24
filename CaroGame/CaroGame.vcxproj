@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +132,10 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CaroGame.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="InputHandle.cpp" />
+    <ClCompile Include="Language.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Navigate.cpp" />
@@ -143,8 +147,11 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="FileHandle.h" />
     <ClInclude Include="InputHandle.h" />
+    <ClInclude Include="Language.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Navigate.h" />

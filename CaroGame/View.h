@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 
 namespace View {
 	//All posible color
@@ -103,4 +104,6 @@ namespace View {
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
 		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
 	);
+
+	void DrawWrappedText(short x, short y, const std::wstring& text, short maxRow, short maxCol);
 }

@@ -191,3 +191,16 @@ void View::DrawMenuCenter(
 	auto tmp = CalcCenter(w, h);
 	View::DrawMenu(tmp.first, tmp.second, title, optionsList, selected, textColor, highlightColor, highlightTextColor);
 }
+
+std::vector<std::wstring> WrapText(const std::wstring& text, short maxRow, short maxCol) {
+	std::vector<std::wstring> res;
+	std::wistringstream iss(text);
+	std::wstring tmp;
+	while (iss) {
+		res.emplace_back();
+	}
+}
+
+void View::DrawWrappedText(short x, short y, const std::wstring& text, short maxRow, short maxCol) {
+
+}

@@ -5,6 +5,7 @@
 #include <functional>
 #include <string>
 #include <Windows.h>
+#include "Language.h"
 
 void ExitView(NavigationHost& NavHost) {
 	static short selectedOption = 1;										// User option
@@ -51,7 +52,7 @@ void TestView1(NavigationHost& NavHost) {
 		View::DrawMenuCenter(L"", {
 			{L"TestView2", L'2'},
 			{L"TestView3", L'3'},
-			{L"Exit", L'E'}
+			{L"Exit", L'E'},
 			}, selectedOption);
 		auto tmp = InputHandle::Get();										// Get input from user
 		// Input Handle
@@ -113,6 +114,7 @@ void TestView3(NavigationHost& NavHost) {
 //DEMO PURPOSE ONLY
 int main() {
 	View::Setup();							// Setting up the screen
+	Language::LoadLanguageFromFile("asset/language/vi.txt");
 	// App start here
 	NavigationHost NavHost("TestView1",		// Initialize Navigation Host. "TestView1 is the first view to be shown
 		{	
