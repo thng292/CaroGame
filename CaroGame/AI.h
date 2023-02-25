@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include "Game.h"
+#include "Constants.h"
 
 using namespace std;
 
@@ -16,12 +18,15 @@ namespace AI {
 		int &moveCount,
 		const int& rowLastMove,
 		const int& colLastMove,
-		const bool& isMaximizingPlayer);
+		int alpha,
+		int beta,
+		const bool& isMaximizingPlayer,
+		const int& depth);
 
 	pair<short, short> GetBestMove(
 		vector<vector<short>>&boardGameMatrix,
 		int &moveCount,
-		const int& rowLastMove, 
-		bool isMaximizingPlayer, 
-		const int& colLastMove);
+		int alpha,
+		int beta,
+		const int &depth);
 }
