@@ -7,7 +7,7 @@ namespace Constants {
 
 	// AI const
 	const int PLAYER_AI = -1, PLAYER_HUMAN = 1;
-	const string PLAYER_HUMAN_STRING = "X", PLAYER_AI_STRING = "O";
+	const std::string PLAYER_HUMAN_STRING = "X", PLAYER_AI_STRING = "O";
 	const int WIN_VALUE_COUNT = 5;
 	const int INF = 1000, NULL_VALUE = -5;
 	const int MAX_SCORE = 100;
@@ -29,6 +29,8 @@ namespace Constants {
 
 
 	// User config path
+	const std::string STR_USERCONFIG_PATH = "config/";
+	const std::string STR_USERCONFIG_FILENAME = "user_config.txt";
 
 	// Error
 	const std::wstring STR_ERROR_CANNOT_FIND_LABEL = L"Cannot find";

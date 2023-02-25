@@ -1,2 +1,6 @@
 #pragma once
-class Config {};
+namespace Config {
+
+
+
+};

@@ -49,6 +49,7 @@ void TestView1(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 3;										// Number of option
 	View::DrawTextWrapped(0, 0, L"This is a very very long long paragraph.", 5, 20);
+	NavHost.SetContext("TestContextValue", L"this is the context value");
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", {
 			{L"TestView2", L'2'},
@@ -91,7 +92,7 @@ void TestView1(NavigationHost& NavHost) {
 
 //DEMO PURPOSE ONLY
 void TestView2(NavigationHost& NavHost) {
-	View::WriteToView(20, 21, L"Test view 2", 0, true);
+	View::WriteToView(20, 20, std::any_cast<const wchar_t*>(NavHost.GetFromContext("TestContextValue")), 0, true);
 	View::WriteToView(20, 21, L"Enter to go back", 0, true);
 	auto tmp = InputHandle::Get();
 	/*if (tmp == L"\r") {

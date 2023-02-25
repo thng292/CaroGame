@@ -26,13 +26,16 @@ namespace Language {
 		auto fin = FileHandle::OpenInFile(filePath);
 		LanguageDict res;
 		std::wstring inp;
-		while (!fin.eof())
-		{
-			std::getline(fin, inp);
-			if (inp[0] != L'[') break;
-			auto tmp = LineSplitter(inp);
-			res[tmp.first] = tmp.second;
+		if (!fin.fail()) {
+			while (!fin.eof())
+			{
+				std::getline(fin, inp);
+				if (inp[0] != L'[') break;
+				auto tmp = LineSplitter(inp);
+				res[tmp.first] = tmp.second;
+			}
 		}
+		currentLanguageMeta[L"Error"] = Constants::STR_ERROR_CANNOT_FIND_LABEL;
 		fin.close();
 		return res;
 	}
@@ -42,10 +45,13 @@ namespace Language {
 		currentLanguageDict.clear();
 		auto fin = FileHandle::OpenInFile(filePath);
 		std::wstring inp;
-		while (!fin.eof()) {
-			std::getline(fin, inp);
-			auto tmp = LineSplitter(inp);
-			currentLanguageDict[tmp.first] = tmp.second;
+		if (!fin.fail()) {
+			while (!fin.eof()) 
+			{
+				std::getline(fin, inp);
+				auto tmp = LineSplitter(inp);
+				currentLanguageDict[tmp.first] = tmp.second;
+			}
 		}
 		currentLanguageDict[L"Error"] = Constants::STR_ERROR_CANNOT_FIND_LABEL;
 		fin.close();
@@ -56,7 +62,7 @@ namespace Language {
 		std::vector<LanguageOption> res;
 		auto files = FileHandle::GetAllTextFileInDir(Constants::LANGUAGE_PATH);
 		for (const auto& i : files) {
-			res.push_back({ ExtractMetaFromFile(i.filePath), i.filePath });
+			res.emplace_back( ExtractMetaFromFile(i.filePath), i.filePath );
 		}
 		return res;
 	}
@@ -69,6 +75,9 @@ namespace Language {
 	}
 
 	inline std::wstring& GetMeta(const std::wstring& Label) {
+		if (!currentLanguageMeta.contains(Label)) {
+			return currentLanguageMeta[L"Error"];
+		}
 		return currentLanguageMeta[Label];
 	}
 }

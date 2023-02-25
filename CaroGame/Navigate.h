@@ -4,6 +4,7 @@
 #include <stack>
 #include <functional>
 #include <string>
+#include <any>
 #include <Windows.h>
 #define ViewFunc std::function<void(NavigationHost&)>
 #define ViewFuncMap std::unordered_map<std::string, ViewFunc>
@@ -19,12 +20,15 @@ private:
 		PCHAR_INFO prevScreenBuffer = nullptr;
 	};
 	Screen _CurrentScreen;
+	std::unordered_map<std::string, std::any> Context;
 	ViewFuncMap _Links;
 	std::stack<Screen> _History;
 	void HistoryPop();
 	void HistoryPopAllOverlay();
 public:
 	NavigationHost(const std::string& Start, const ViewFuncMap& links);
+	std::any& GetFromContext(const std::string& name);
+	void SetContext(const std::string& name, const std::any& data);
 	void Add(const std::string& path, const ViewFunc& view);
 	[[nodiscard]] void NavigateStack(const std::string& path);
 	[[nodiscard]] void Navigate(const std::string& path);
