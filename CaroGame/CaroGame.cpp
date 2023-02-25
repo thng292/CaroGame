@@ -48,6 +48,7 @@ void ExitView(NavigationHost& NavHost) {
 void TestView1(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 3;										// Number of option
+	View::DrawTextWrapped(0, 0, L"This is a very very long long paragraph.", 5, 20);
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", {
 			{L"TestView2", L'2'},

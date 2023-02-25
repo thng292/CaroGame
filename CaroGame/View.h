@@ -105,5 +105,10 @@ namespace View {
 		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
 	);
 
-	void DrawWrappedText(short x, short y, const std::wstring& text, short maxRow, short maxCol);
+	void DrawTextWrapped(
+		short x, short y, 
+		const std::wstring& text, 
+		short maxRow, short maxWidth, 
+		const std::wstring& overflowStr = L"..."
+	);
 }

@@ -19,7 +19,8 @@ void View::Setup() {
 
 	// Turn off mouse input
 	GetConsoleMode(hOut, &currMode);
-	SetConsoleMode(hOut, currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE));
+	SetConsoleMode(hOut, 
+		currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE));
 
 
 	// Set font bold
@@ -59,14 +60,18 @@ void View::WriteToView(
 ) {
 	View::Goto(x, y);
 	if (highlight) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (int(highlightColor) << 4) | int(highlightTextColor));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+			(int(highlightColor) << 4) | int(highlightTextColor));
 	}
 	else {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (int(View::DEFAULT_BACKGROUND_COLOR) << 4) | int(textColor));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+			(int(View::DEFAULT_BACKGROUND_COLOR) << 4) | int(textColor));
 	}
 	if (shortcut) {
 		int shortcutIndex = str.find_first_of(shortcut);
-		std::wcout << str.substr(0, shortcutIndex) << View::Underline(str[shortcutIndex]) << str.substr(shortcutIndex + 1, str.length() - 1);
+		std::wcout << str.substr(0, shortcutIndex) <<
+			View::Underline(str[shortcutIndex]) << 
+			str.substr(shortcutIndex + 1, str.length() - 1);
 	}
 	else {
 		std::wcout << str;
@@ -83,10 +88,12 @@ void View::WriteToView(
 ) {
 	View::Goto(x, y);
 	if (highlight) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (int(highlightColor) << 4) | int(highlightTextColor));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 
+			(int(highlightColor) << 4) | int(highlightTextColor));
 	}
 	else {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (int(View::DEFAULT_BACKGROUND_COLOR) << 4) | int(textColor));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 
+			(int(View::DEFAULT_BACKGROUND_COLOR) << 4) | int(textColor));
 	}
 	std::wcout << str;
 }
@@ -111,8 +118,10 @@ void View::ClearRect(Rect area) {
 	auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (auto i = area.Top; i <= area.Bottom; i++)
 	{
-		FillConsoleOutputCharacter(stdHandle, L' ', area.Right - area.Left + 1, { area.Left,i }, &tmp);
-		FillConsoleOutputAttribute(stdHandle, DEFAULT_SCREEN_ATTRIBUTE, area.Right - area.Left + 1, { area.Left,i }, &tmp);
+		FillConsoleOutputCharacter(stdHandle, L' ', area.Right - area.Left + 1, 
+			{ area.Left,i }, &tmp);
+		FillConsoleOutputAttribute(stdHandle, DEFAULT_SCREEN_ATTRIBUTE, 
+			area.Right - area.Left + 1, { area.Left,i }, &tmp);
 	}
 }
 
@@ -147,11 +156,17 @@ short CalcWidth(const std::vector<View::Option>& options, const std::wstring& ti
 	return max(tmp, title.length()) + (View::BORDER_WIDTH * View::HPADDING) * 2;
 }
 
-inline short CalcHeight(const std::vector<View::Option>& options, const std::wstring& title) {
-	return options.size() + (View::BORDER_WIDTH + View::VPADDING) * 2 + (title.length() ? 2 : 0);
+inline short CalcHeight(
+	const std::vector<View::Option>& options, 
+	const std::wstring& title
+) {
+	return options.size() + (View::BORDER_WIDTH + View::VPADDING) * 2 + 
+		(title.length() ? 2 : 0);
 }
 
-inline std::pair<short, short> CalcCenter(short width, short height) {
+inline std::pair<short, short> CalcCenter(
+	short width, short height
+) {
 	return { 59 - width / 2, 14 - height / 2 };
 }
 
@@ -166,7 +181,7 @@ void View::DrawMenu(
 ) {
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList, title);
-	View::DrawRect({ y, x, x + w, y + h - 1});
+	View::DrawRect({ y, x, x + w, y + h - 1 });
 	short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
 	short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
 	if (title.length()) {
@@ -174,7 +189,9 @@ void View::DrawMenu(
 		topAlign += 2;
 	}
 	for (int i = 0; i < optionsList.size(); i++) {
-		View::WriteToView(leftAlign, topAlign + i, optionsList[i].option, optionsList[i].underline, selected == i);
+		View::WriteToView(leftAlign, topAlign + i, 
+			optionsList[i].option, optionsList[i].underline, 
+			selected == i);
 	}
 }
 
@@ -189,18 +206,59 @@ void View::DrawMenuCenter(
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList, title);
 	auto tmp = CalcCenter(w, h);
-	View::DrawMenu(tmp.first, tmp.second, title, optionsList, selected, textColor, highlightColor, highlightTextColor);
+	View::DrawMenu(tmp.first, tmp.second, 
+		title, optionsList, selected, 
+		textColor, highlightColor, 
+		highlightTextColor);
 }
 
-std::vector<std::wstring> WrapText(const std::wstring& text, short maxRow, short maxCol) {
+std::vector<std::wstring> 
+WrapText(
+	const std::wstring& text, 
+	short maxRow, short maxWidth, 
+	const std::wstring& overflowStr = L"..."
+) {
 	std::vector<std::wstring> res;
 	std::wistringstream iss(text);
 	std::wstring tmp;
-	while (iss) {
+	int cnt = 0;
+	while (iss && cnt < maxRow) {
 		res.emplace_back();
+		while (1) {
+			iss >> tmp;
+			if (res[cnt].length() + tmp.length() + 1 <= maxWidth) {
+				res[cnt].append(tmp);
+				res[cnt].append(L" ");
+			}
+			else {
+				break;
+			}
+		};
+		cnt++;
 	}
+	if (iss) {
+		if (res.back().length() <= maxWidth - 3) {
+			res.back().append(overflowStr);
+		}
+		else {
+			std::wstring& t = res.back();
+			t.resize(maxWidth);
+			t[maxWidth - 1] = t[maxWidth - 2] = t[maxWidth - 3] = L'.';
+		}
+	}
+	return res;
 }
 
-void View::DrawWrappedText(short x, short y, const std::wstring& text, short maxRow, short maxCol) {
-
+void View::DrawTextWrapped(
+	short x, short y,
+	const std::wstring& text, 
+	short maxRow, short maxWidth, 
+	const std::wstring& overflowStr
+) {
+	auto wrappedText = WrapText(text, maxRow, maxWidth, overflowStr);
+	int n = wrappedText.size();
+	for (size_t i = 0; i < n; i++)
+	{
+		WriteToView(x, y + i, wrappedText[i]);
+	}
 }
