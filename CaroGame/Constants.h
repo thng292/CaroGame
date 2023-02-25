@@ -7,8 +7,15 @@ namespace Constants {
 
 	// AI const
 	const int PLAYER_AI = -1, PLAYER_HUMAN = 1;
-	const int WIN_VALUE_COUNT = 3;
+	const string PLAYER_HUMAN_STRING = "X", PLAYER_AI_STRING = "O";
+	const int WIN_VALUE_COUNT = 5;
 	const int INF = 1000, NULL_VALUE = -5;
+	const int MAX_SCORE = 100;
+	const int WIN_SCORE_THRESHOLD = 32;
+	const int LOOKUP_RANGE = 3;
+	const int DEPTH = 3;
+
+	const int BOARD_SIZE = 10;
 
 
 	// Asset path
