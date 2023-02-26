@@ -1,6 +1,6 @@
 #pragma once
 #include <wchar.h>
-#include <array>
+#include <format>
 #include <Windows.h>
 #pragma comment(lib, "Winmm.lib")
 
@@ -15,5 +15,18 @@ namespace Audio {
 		BackgroundMusic = 1,
 	};
 
-	void Play(Song song);
+	class AudioPlayer {
+	private:
+		bool isPlaying = 0;
+		bool hasStopped = 1;
+		bool isRepeat = 0;
+		Song currentSong;
+	public:
+		AudioPlayer(Song song);
+		int Play(bool fromStart = true, bool repeat = false);
+		int Pause();
+		int Resume();
+		int Stop();
+		~AudioPlayer();
+	};
 }

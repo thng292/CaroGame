@@ -109,6 +109,13 @@ namespace View {
 		short x, short y, 
 		const std::wstring& text, 
 		short maxRow, short maxWidth, 
-		const std::wstring& overflowStr = L"..."
+		const std::wstring& overflowStr = L"...",
+		Color textColor = DEFAULT_TEXT_COLOR
+	);
+
+	void DrawTextCenterdVertically(
+		short y,
+		const std::wstring& text,
+		Color textColor = DEFAULT_TEXT_COLOR
 	);
 }
