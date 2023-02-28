@@ -48,14 +48,11 @@ void ExitView(NavigationHost& NavHost) {
 void TestView1(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 3;										// Number of option
-	View::WriteToView(2, 2, L'\u2584', 0,
-		View::Color::LIGHT_RED, 
-		View::DEFAULT_HIGHLIGHT_COLOR, 
-		View::DEFAULT_HIGHLIGHT_TEXT_COLOR, 
-		View::Color::LIGHT_BLUE
+	View::DrawTextWrapped(
+		0, 0, 
+		L"This is a very very long long text. This is a very very long long text. This is a very very long long text.", 
+		10, 30
 	);
-	View::WriteToView(3, 2, L'\u2588', 0, View::Color::BLACK);
-	View::DrawTextWrapped(0, 0, L"This is a very very long long text. This is a very very long long text. This is a very very long long text.", 2, 20);
 	NavHost.SetContext("TestContextValue", L"this is the context value");
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", {

@@ -222,10 +222,15 @@ WrapText(
 ) {
 	std::vector<std::wstring> res;
 	std::wistringstream iss(text);
-	std::wstring tmp;
+	std::wstring tmp, buff;
 	int cnt = 0;
 	while (iss && cnt < maxRow) {
 		res.emplace_back();
+		if (buff.length()) {
+			res[cnt].append(buff);
+			res[cnt].append(L"");
+			buff = L"";
+		}
 		while (1) {
 			iss >> tmp;
 			if (res[cnt].length() + tmp.length() + 1 <= maxWidth) {
@@ -233,6 +238,7 @@ WrapText(
 				res[cnt].append(L" ");
 			}
 			else {
+				buff = tmp;
 				break;
 			}
 		};
