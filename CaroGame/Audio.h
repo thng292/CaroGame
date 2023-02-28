@@ -21,12 +21,14 @@ namespace Audio {
 		bool hasStopped = 1;
 		bool isRepeat = 0;
 		Song currentSong;
+		static int instanceCount;
+		int currentInstance;
 	public:
 		AudioPlayer(Song song);
-		int Play(bool fromStart = true, bool repeat = false);
-		int Pause();
-		int Resume();
-		int Stop();
+		inline int Play(bool fromStart = true, bool repeat = false);
+		inline int Pause();
+		inline int Resume();
+		inline int Stop();
 		~AudioPlayer();
 	};
 }

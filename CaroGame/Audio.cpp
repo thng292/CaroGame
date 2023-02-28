@@ -1,12 +1,15 @@
 #include "Audio.h"
 
+int Audio::AudioPlayer::instanceCount = 0;
+
 Audio::AudioPlayer::AudioPlayer(Song song) {
+	currentInstance = instanceCount++;
 	currentSong = song;
 	mciSendString(
 		std::format(
 			L"open {} type waveaudio alias {}",
 			SongName[int(song)],
-			this
+			currentInstance
 		).c_str(),
 		0, 0, 0);
 }
@@ -14,7 +17,7 @@ Audio::AudioPlayer::AudioPlayer(Song song) {
 int Audio::AudioPlayer::Play(bool fromStart, bool repeat) {
 	isRepeat = repeat;
 	auto command = std::format(
-		L"play {}", this
+		L"play {}", currentInstance
 	);
 	if (fromStart) {
 		command += L" from 0";
@@ -26,17 +29,17 @@ int Audio::AudioPlayer::Play(bool fromStart, bool repeat) {
 }
 
 int Audio::AudioPlayer::Pause() {
-	return mciSendString(std::format(L"pause {}", this).c_str(), 0, 0, 0);
+	return mciSendString(std::format(L"pause {}", currentInstance).c_str(), 0, 0, 0);
 }
 
 int Audio::AudioPlayer::Resume() {
-	return mciSendString(std::format(L"resume {}", this).c_str(), 0, 0, 0);
+	return mciSendString(std::format(L"resume {}", currentInstance).c_str(), 0, 0, 0);
 }
 
 
 int Audio::AudioPlayer::Stop() {
-	return mciSendString(std::format(L"stop {}", this).c_str(), 0, 0, 0);
+	return mciSendString(std::format(L"stop {}", currentInstance).c_str(), 0, 0, 0);
 }
 Audio::AudioPlayer::~AudioPlayer() {
-	mciSendString(std::format(L"close {}", this).c_str(), 0, 0, 0);
+	mciSendString(std::format(L"close {}", currentInstance).c_str(), 0, 0, 0);
 }
