@@ -57,7 +57,8 @@ namespace View {
 		bool highlight = false,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
+		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
 
 	//Print character to console
@@ -67,7 +68,8 @@ namespace View {
 		bool highlight = false,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
+		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
 
 	// Return underlined string

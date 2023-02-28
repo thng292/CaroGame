@@ -56,7 +56,8 @@ void View::WriteToView(
 	bool highlight,
 	View::Color textColor,
 	View::Color highlightColor,
-	View::Color highlightTextColor
+	View::Color highlightTextColor,
+	View::Color backgroundColor
 ) {
 	View::Goto(x, y);
 	if (highlight) {
@@ -65,7 +66,7 @@ void View::WriteToView(
 	}
 	else {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
-			(int(View::DEFAULT_BACKGROUND_COLOR) << 4) | int(textColor));
+			(int(backgroundColor) << 4) | int(textColor));
 	}
 	if (shortcut) {
 		int shortcutIndex = str.find_first_of(shortcut);
@@ -84,7 +85,8 @@ void View::WriteToView(
 	bool highlight,
 	View::Color textColor,
 	View::Color highlightColor,
-	View::Color highlightTextColor
+	View::Color highlightTextColor,
+	View::Color backgroundColor
 ) {
 	View::Goto(x, y);
 	if (highlight) {
@@ -93,7 +95,7 @@ void View::WriteToView(
 	}
 	else {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
-			(int(View::DEFAULT_BACKGROUND_COLOR) << 4) | int(textColor));
+			(int(backgroundColor) << 4) | int(textColor));
 	}
 	std::wcout << str;
 }
