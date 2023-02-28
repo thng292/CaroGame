@@ -9,7 +9,6 @@
 #include "Constants.h"
 #include "Logic.h"
 #include "Evaluation.h"
-#include "Ui.h"
 using namespace std;
 
 
@@ -25,8 +24,6 @@ namespace AI {
 		int totalEval = 0;
 		totalEval += Evaluation::GetComboEval(boardGameMatrix, playerValue);
 		totalEval += Evaluation::GetGameStateEval(boardGameMatrix, moveCount, rowLastMove, colLastMove, playerValue);
-		//totalEval += Evaluation::GetNodeValueEval(boardGameMatrix, playerValue);
-		//return Logic::GetGameState(boardGameMatrix, moveCount, rowLastMove, colLastMove, playerValue);
 		return (!isMaximizingPlayer) ? totalEval : -totalEval;
 	}
 	pair<short, short> GetBestMove(
