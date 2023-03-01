@@ -228,10 +228,10 @@ WrapText(
 		res.emplace_back();
 		if (buff.length()) {
 			res[cnt].append(buff);
-			res[cnt].append(L"");
+			res[cnt].append(L" ");
 			buff = L"";
 		}
-		while (1) {
+		while (iss) {
 			iss >> tmp;
 			if (res[cnt].length() + tmp.length() + 1 <= maxWidth) {
 				res[cnt].append(tmp);
