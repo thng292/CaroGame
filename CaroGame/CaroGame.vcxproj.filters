@@ -72,6 +72,9 @@
     <ClCompile Include="CaroGame.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Demo.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -119,9 +122,15 @@
     <ClInclude Include="Board.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Demo.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
+    <Text Include="asset\language\vi.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

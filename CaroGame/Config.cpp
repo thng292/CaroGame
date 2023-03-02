@@ -5,23 +5,29 @@ inline std::pair<std::wstring, std::wstring> LineSplitter(const std::wstring& li
 	return { line.substr(0, tmp), line.substr(tmp + 1) };
 }
 
-void Config::LoadUserSetting() {
+bool Config::LoadUserSetting() {
 	auto fin = FileHandle::OpenInFile(Constants::STR_USERCONFIG_PATH);
-	isFirstTime = fin.fail();
-	if (!isFirstTime) { //First time
-		std::wstring buffer;
-		while (!fin.eof())
-		{
-			fin >> buffer;
-			auto tmp = LineSplitter(buffer);
-			Settings[tmp.first] = tmp.second;
-		}
+	if (fin.fail()) {
+		return 0;
+	}
+	Settings.clear();
+	std::wstring buffer;
+	while (!fin.eof())
+	{
+		fin >> buffer;
+		auto tmp = LineSplitter(buffer);
+		Settings[tmp.first] = tmp.second;
 	}
 	fin.close();
+	return 1;
 }
 
 std::wstring& Config::GetSetting(const std::wstring& name) {
 	return Settings[name];
+}
+
+void Config::SetSetting(const std::wstring& name, const std::wstring& data) {
+	Settings[name] = data;
 }
 
 bool Config::SaveUserSetting() {
@@ -30,7 +36,7 @@ bool Config::SaveUserSetting() {
 		return 0;
 	}
 	for (const auto& [key, val] : Settings) {
-		fout << key << '=' << val <<'\n';
+		fout << key << '=' << val << '\n';
 	}
 	fout.close();
 	return 1;

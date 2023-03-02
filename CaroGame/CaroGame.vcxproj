@@ -134,6 +134,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="CaroGame.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Demo.cpp" />
     <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="InputHandle.cpp" />
     <ClCompile Include="Language.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Demo.h" />
     <ClInclude Include="FileHandle.h" />
     <ClInclude Include="InputHandle.h" />
     <ClInclude Include="Language.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="asset\language\vi.txt" />
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
   </ItemGroup>
