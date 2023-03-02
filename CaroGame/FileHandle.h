@@ -20,7 +20,11 @@ namespace FileHandle {
 	std::wofstream OpenOutFile(const std::filesystem::path& fileName);
 
 	std::wifstream OpenInFile(const std::filesystem::path& fileName);
-	
+
+	std::ofstream OpenOutFileA(const std::filesystem::path& fileName);
+
+	std::ifstream OpenInFileA(const std::filesystem::path& fileName);
+
 	std::vector<FileDetail> GetAllTextFileInDir(const std::filesystem::path& Dir);
 };
 

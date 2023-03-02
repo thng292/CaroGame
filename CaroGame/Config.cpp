@@ -1,17 +1,17 @@
 #include "Config.h"
 
-inline std::pair<std::wstring, std::wstring> LineSplitter(const std::wstring& line, wchar_t delim = L'=') {
+inline std::pair<std::string, std::string> LineSplitter(const std::string& line, wchar_t delim = L'=') {
 	size_t tmp = line.find_first_of(delim);
 	return { line.substr(0, tmp), line.substr(tmp + 1) };
 }
 
 bool Config::LoadUserSetting() {
-	auto fin = FileHandle::OpenInFile(Constants::STR_USERCONFIG_PATH);
+	auto fin = FileHandle::OpenInFileA(Constants::STR_USERCONFIG_PATH);
 	if (fin.fail()) {
 		return 0;
 	}
 	Settings.clear();
-	std::wstring buffer;
+	std::string buffer;
 	while (!fin.eof())
 	{
 		fin >> buffer;
@@ -22,16 +22,16 @@ bool Config::LoadUserSetting() {
 	return 1;
 }
 
-std::wstring& Config::GetSetting(const std::wstring& name) {
+std::string& Config::GetSetting(const std::string& name) {
 	return Settings[name];
 }
 
-void Config::SetSetting(const std::wstring& name, const std::wstring& data) {
+void Config::SetSetting(const std::string& name, const std::string& data) {
 	Settings[name] = data;
 }
 
 bool Config::SaveUserSetting() {
-	auto fout = FileHandle::OpenOutFile(Constants::USERCONFIG_PATH);
+	auto fout = FileHandle::OpenOutFileA(Constants::USERCONFIG_PATH);
 	if (fout.fail()) {
 		//return 0;
 	}

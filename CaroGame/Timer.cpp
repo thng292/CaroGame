@@ -15,11 +15,14 @@ void Timer::Start() {
             }
         }
         });
-    _thread.detach();
+    //_thread.detach();
 }
 
 void Timer::Stop() {
     _running = false;
+    if (_thread.joinable()) {
+        _thread.join();
+    }
     _thread.~thread();
 }
 
