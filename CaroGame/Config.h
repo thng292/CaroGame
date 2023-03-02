@@ -5,14 +5,14 @@
 #include "Constants.h"
 namespace Config {
 
-	static std::unordered_map<std::string, std::string> Settings;
+	static std::unordered_map<std::wstring, std::wstring> Settings;
 
 	// Return if the setting is previously exist(first time or not)
 	bool LoadUserSetting();
 
-	std::string& GetSetting(const std::string& name);
+	std::wstring& GetSetting(const std::wstring& name);
 
-	void SetSetting(const std::string& name, const std::string& data);
+	void SetSetting(const std::wstring& name, const std::wstring& data);
 
 	bool SaveUserSetting();
 };

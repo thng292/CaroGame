@@ -11,11 +11,11 @@ void StartUp::StartUpScreen(NavigationHost& NavHost) {
 	t.Start();
 	InputHandle::Get();
 	t.Stop();
-	if (!Config::LoadUserSetting()) {
+	if (!Config::LoadUserSetting() || !Config::GetSetting(L"LanguageFilePath").length()) {
 		return NavHost.Navigate("FirstTimeLanguageScreen");
 	}
 	else {
-		Language::LoadLanguageFromFile(Config::GetSetting("LanguageFilePath"));
+		Language::LoadLanguageFromFile(Config::GetSetting(L"LanguageFilePath"));
 		return NavHost.Navigate("MainMenu");
 	}
 }
@@ -42,7 +42,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost) {
 			userSelect = Utils::modCycle(userSelect + 1, languages.size());
 		}
 		if (tmp == L"\r") {
-			Config::SetSetting("LanguageFilePath", languages[userSelect].path.generic_string());
+			Config::SetSetting(L"LanguageFilePath", languages[userSelect].path.generic_wstring());
 			Language::LoadLanguageFromFile(languages[userSelect].path);
 			return NavHost.Navigate("FirstTimeMusicScreen");
 		}
@@ -70,7 +70,7 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 			select = Utils::modCycle(select + 1, num);
 		}
 		if (tmp == L"\r") {
-			Config::SetSetting("Music", (select == 1 ? "True" : "False"));
+			Config::SetSetting(L"Music", (select == 0 ? L"True" : L"False"));
 			return NavHost.Navigate("FirstTimeSoundEffectScreen");
 		}
 	}
@@ -97,7 +97,7 @@ void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost) {
 			select = Utils::modCycle(select + 1, num);
 		}
 		if (tmp == L"\r") {
-			Config::SetSetting("SoundEffect", (select == 1 ? "True" : "False"));
+			Config::SetSetting(L"SoundEffect", (select == 0 ? L"True" : L"False"));
 			Config::SaveUserSetting();
 			//return NavHost.Navigate("FirstTimeSoundEffectScreen");
 		}

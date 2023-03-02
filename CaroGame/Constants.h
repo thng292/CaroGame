@@ -33,7 +33,7 @@ namespace Constants {
 	// User config path
 	const std::wstring STR_USERCONFIG_PATH = L"config/";
 	const std::wstring STR_USERCONFIG_FILENAME = L"user_config.txt";
-	const std::filesystem::path USERCONFIG_PATH = STR_USERCONFIG_PATH + STR_USERCONFIG_FILENAME;
+	const std::filesystem::path USERCONFIG_FILE_PATH = STR_USERCONFIG_PATH + STR_USERCONFIG_FILENAME;
 
 	// Error
 	const std::wstring STR_ERROR_CANNOT_FIND_LABEL = L"Cannot find";
