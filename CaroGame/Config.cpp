@@ -33,7 +33,7 @@ void Config::SetSetting(const std::wstring& name, const std::wstring& data) {
 bool Config::SaveUserSetting() {
 	auto fout = FileHandle::OpenOutFile(Constants::USERCONFIG_PATH);
 	if (fout.fail()) {
-		return 0;
+		//return 0;
 	}
 	for (const auto& [key, val] : Settings) {
 		fout << key << '=' << val << '\n';

@@ -9,13 +9,14 @@
 #include <filesystem>
 
 namespace FileHandle {
-	const std::locale LOCALE(std::locale::empty(), new std::codecvt_utf8<wchar_t>);
+	const std::locale LOCALE(std::locale::empty(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::generate_header>);
 
 	struct FileDetail {
 		std::filesystem::path filePath;
 		std::filesystem::file_time_type lastModified;
 	};
 
+	// Not working !!FUCK!!
 	std::wofstream OpenOutFile(const std::filesystem::path& fileName);
 
 	std::wifstream OpenInFile(const std::filesystem::path& fileName);

@@ -18,4 +18,7 @@ namespace StartUp {
 
 	// FirstTimeMusicScreen
 	void FirstTimeMusicScreen(NavigationHost& NavHost);
+
+	// FirstTimeSoundEffectScreen
+	void FirstTimeSoundEffectScreen(NavigationHost& NavHost);
 }

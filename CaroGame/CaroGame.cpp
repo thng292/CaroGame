@@ -16,6 +16,7 @@ int main() {
 	NavigationHost NavHost("StartUpScreen", {
 		{"StartUpScreen", StartUp::StartUpScreen},
 		{"FirstTimeLanguageScreen", StartUp::FirstTimeLanguageScreen},
-		{"FirstTimeMusicScreen", StartUp::FirstTimeMusicScreen}
+		{"FirstTimeMusicScreen", StartUp::FirstTimeMusicScreen},
+		{"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen}
 		});
 }

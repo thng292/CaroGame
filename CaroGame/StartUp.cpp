@@ -1,7 +1,15 @@
 #include "StartUp.h"
+#include "Timer.h"
 
 void StartUp::StartUpScreen(NavigationHost& NavHost) {
 	View::Setup();
+	int time = 0;
+	Timer t([&time]() {
+		View::WriteToView(0, 0, std::format(L"{}", time));
+		time++;
+		});
+	t.Start();
+	InputHandle::Get();
 	if (!Config::LoadUserSetting()) {
 		return NavHost.Navigate("FirstTimeLanguageScreen");
 	}
@@ -58,7 +66,35 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 		}
 		if (tmp == L"\r") {
 			Config::SetSetting(L"Music", (select == 1 ? L"On" : L"Off"));
-			return;
+			return NavHost.Navigate("FirstTimeSoundEffectScreen");
+		}
+	}
+}
+
+void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost) {
+	auto title = Language::GetString(L"ENABLE_SOUND_EFFECT_Q");
+	std::vector<View::Option> options = {
+		{Language::GetString(L"YES"),	Language::GetString(L"YES_SHORTCUT")[0]},
+		{Language::GetString(L"NO"),	Language::GetString(L"NO_SHORTCUT")[0]}
+	};
+	static int select = 0;
+	int num = 2;
+	std::wstring tmp;
+	while (1)
+	{
+		View::DrawMenuCenter(title, options, select);
+		tmp = InputHandle::Get();
+		Utils::PlayKeyPressSound();
+		if (Utils::keyMeanDown(tmp)) {
+			select = Utils::modCycle(select - 1, num);
+		}
+		if (Utils::keyMeanUp(tmp)) {
+			select = Utils::modCycle(select + 1, num);
+		}
+		if (tmp == L"\r") {
+			Config::SetSetting(L"SoundEffect", (select == 1 ? L"On" : L"Off"));
+			Config::SaveUserSetting();
+			//return NavHost.Navigate("FirstTimeSoundEffectScreen");
 		}
 	}
 }

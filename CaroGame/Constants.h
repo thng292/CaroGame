@@ -2,6 +2,8 @@
 #include <string>
 #include <filesystem>
 
+typedef float floatArr1D[3];
+
 namespace Constants {
 	const std::wstring version = L"0.1.0";
 
