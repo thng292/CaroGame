@@ -40,6 +40,11 @@ void ExitView(NavigationHost& NavHost) {
 	}
 }
 
+
+
+
+
+
 //DEMO PURPOSE ONLY
 void TestView1(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
