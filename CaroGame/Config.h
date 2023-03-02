@@ -10,9 +10,9 @@ namespace Config {
 	// Return if the setting is previously exist(first time or not)
 	bool LoadUserSetting();
 
-	inline std::wstring& GetSetting(const std::wstring& name);
+	std::wstring& GetSetting(const std::wstring& name);
 
-	inline void SetSetting(const std::wstring& name, const std::wstring& data);
+	void SetSetting(const std::wstring& name, const std::wstring& data);
 
 	bool SaveUserSetting();
 };

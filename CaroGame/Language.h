@@ -5,7 +5,6 @@
 #include "FileHandle.h"
 #include "Constants.h"
 
-
 namespace Language {
 	typedef std::unordered_map<std::wstring, std::wstring> LanguageDict;
 
@@ -21,9 +20,9 @@ namespace Language {
 
 	void LoadLanguageFromFile(const std::filesystem::path& filePath);
 
-	std::vector<LanguageOption> DiscoverLanguageFile(const std::filesystem::path& dirPath);
+	std::vector<LanguageOption> DiscoverLanguageFile(const std::filesystem::path& dirPath = Constants::LANGUAGE_PATH);
 
-	inline std::wstring& GetString(const std::wstring& Label);
+	std::wstring& GetString(const std::wstring& Label);
 
-	inline std::wstring& GetMeta(const std::wstring& Label);
+	std::wstring& GetMeta(const std::wstring& Label);
 }

@@ -75,6 +75,12 @@
     <ClCompile Include="Demo.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StartUp.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -125,11 +131,20 @@
     <ClInclude Include="Demo.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StartUp.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
     <Text Include="asset\language\vi.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="asset\language\en.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

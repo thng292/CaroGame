@@ -1,0 +1,2 @@
+[LANGUAGE]=English
+[LANG_SELECT]=Language

@@ -45,11 +45,10 @@ void TestView1(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 3;										// Number of option
 	View::DrawTextWrapped(
-		0, 0,
+		0, 1,
 		L"This is a very very long long text. This is a very very long long text. This is a very very long long text.",
 		3, 30
 	);
-	View::WriteToView(10, 10, L'\u250F');
 	NavHost.SetContext("TestContextValue", L"this is the context value");
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", {

@@ -2,13 +2,14 @@
 
 int Audio::AudioPlayer::instanceCount = 0;
 
-Audio::AudioPlayer::AudioPlayer(Song song) {
+Audio::AudioPlayer::AudioPlayer(Sound song) {
 	currentInstance = instanceCount++;
 	currentSong = song;
 	mciSendString(
 		std::format(
-			L"open {} type waveaudio alias {}",
-			SongName[int(song)],
+			L"open {}{} type waveaudio alias {}",
+			Constants::STR_AUDIO_PATH,
+			SoundName[int(song)],
 			currentInstance
 		).c_str(),
 		0, 0, 0);

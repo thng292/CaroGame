@@ -15,7 +15,7 @@ std::wifstream FileHandle::OpenInFile(const std::filesystem::path& fileName) {
 std::vector<FileHandle::FileDetail> FileHandle::GetAllTextFileInDir(const std::filesystem::path& Dir) {
 	std::vector<FileDetail> tmp;
 	for (const auto& file : std::filesystem::directory_iterator(Dir)) {
-		if (file.is_character_file()) {
+		if (file.is_regular_file()) {
 			tmp.push_back({ file.path(), file.last_write_time()});
 		}
 	}

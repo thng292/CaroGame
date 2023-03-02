@@ -3,11 +3,11 @@
 #include <filesystem>
 
 namespace Constants {
-	const std::string version = "0.1.0";
+	const std::wstring version = L"0.1.0";
 
 	// AI const
 	const int PLAYER_AI = -1, PLAYER_HUMAN = 1;
-	const std::string PLAYER_HUMAN_STRING = "X", PLAYER_AI_STRING = "O";
+	const std::wstring PLAYER_HUMAN_string = L"X", PLAYER_AI_string = L"O";
 	const int WIN_VALUE_COUNT = 5;
 	const int INF = 1000, NULL_VALUE = -5;
 	const int MAX_SCORE = 100;
@@ -19,9 +19,9 @@ namespace Constants {
 
 
 	// Asset path
-	const std::string STR_ASSET_PATH = "asset/";
-	const std::string STR_AUDIO_PATH = STR_ASSET_PATH + "audio/";
-	const std::string STR_LANGUAGE_PATH = STR_ASSET_PATH + "language/";
+	const std::wstring STR_ASSET_PATH = L"asset/";
+	const std::wstring STR_AUDIO_PATH = STR_ASSET_PATH + L"audio/";
+	const std::wstring STR_LANGUAGE_PATH = STR_ASSET_PATH + L"language/";
 
 	const std::filesystem::path ASSET_PATH(STR_ASSET_PATH);
 	const std::filesystem::path AUDIO_PATH(STR_AUDIO_PATH);
@@ -29,8 +29,8 @@ namespace Constants {
 
 
 	// User config path
-	const std::string STR_USERCONFIG_PATH = "config/";
-	const std::string STR_USERCONFIG_FILENAME = "user_config.txt";
+	const std::wstring STR_USERCONFIG_PATH = L"config/";
+	const std::wstring STR_USERCONFIG_FILENAME = L"user_config.txt";
 	const std::filesystem::path USERCONFIG_PATH = STR_USERCONFIG_PATH + STR_USERCONFIG_FILENAME;
 
 	// Error
