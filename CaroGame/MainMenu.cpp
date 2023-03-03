@@ -906,7 +906,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 7;										// Number of option
 	int x = 32;                                                             // Vi tri bat dau ve 
-	int y = 3;                                                              // Vi tri bat dau ve 
+	int y = 2;                                                              // Vi tri bat dau ve 
 	MainMenu::Logo(x, y);
 	vector<View::Option> options = {
 			{Language::GetString(L"NEW_GAME_TITLE"),Language::GetString(L"NEW_GAME_SHORTCUT")[0]},
