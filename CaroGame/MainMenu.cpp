@@ -918,7 +918,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			{Language::GetString(L"EXIT_TITLE"),Language::GetString(L"EXIT_SHORTCUT")[0]},
 	};
 	while (1) {																// Main while loop
-		View::DrawMenuCenter(L"", options, selectedOption);
+		View::DrawMenu(51,11,L"", options, selectedOption);
 		auto tmp = InputHandle::Get();										// Get input from user
 		// Input Handle
 		// Normal Navigation
