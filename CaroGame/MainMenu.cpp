@@ -1,6 +1,6 @@
 
 #include "MainMenu.h"
-void mauve(int x, int y, View::Color mat, View::Color mau) {
+void AmongUs(int x, int y, View::Color mat, View::Color mau) {
 	View::WriteToView(x + 1, y + 2, L'\u2580', 0,
 		View::Color::BLACK,
 		View::DEFAULT_HIGHLIGHT_COLOR,
@@ -915,7 +915,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			{Language::GetString(L"SETTINGS_TITLE"),Language::GetString(L"SETTINGS_SHORTCUT")[0]},
 			{Language::GetString(L"TUTORIAL_TITLE"),Language::GetString(L"TUTORIAL_SHORTCUT")[0]},
 			{Language::GetString(L"ABOUT_TITLE"),Language::GetString(L"ABOUT_SHORTCUT")[0]},
-			{Language::GetString(L"ESC_TITLE"),Language::GetString(L"ESC_SHORTCUT")[0]},
+			{Language::GetString(L"EXIT_TITLE"),Language::GetString(L"EXIT_SHORTCUT")[0]},
 	};
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", options, selectedOption);
