@@ -147,10 +147,10 @@
   <ItemGroup>
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
-    <Text Include="asset\language\en.txt">
+    <Text Include="asset\language\vi.txt">
       <Filter>Resource Files\Language</Filter>
     </Text>
-    <Text Include="asset\language\vi.txt">
+    <Text Include="asset\language\en.txt">
       <Filter>Resource Files\Language</Filter>
     </Text>
   </ItemGroup>
