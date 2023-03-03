@@ -1,78 +1,6 @@
 
 #include "MainMenu.h"
-
-void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
-	static short selectedOption = 0;										// User option
-	static const short maxOption = 7;										// Number of option
-	int x = 32;                                                             // Vi tri bat dau ve 
-	int y = 3;                                                              // Vi tri bat dau ve 
-	MainMenu::Logo(x, y);
-	vector<View::Option> options = {
-			{Language::GetString(L"NEW_GAME_TITLE"),Language::GetString(L"NEW_GAME_SHORTCUT")[0]},
-			{Language::GetString(L"LOAD_TITLE"),Language::GetString(L"LOAD_SHORTCUT")[0]},
-			{Language::GetString(L"REPLAY_TITLE"),Language::GetString(L"REPLAY_SHORTCUT")[0]},
-			{Language::GetString(L"SETTINGS_TITLE"),Language::GetString(L"SETTINGS_SHORTCUT")[0]},
-			{Language::GetString(L"TUTORIAL_TITLE"),Language::GetString(L"TUTORIAL_SHORTCUT")[0]},
-			{Language::GetString(L"ABOUT_TITLE"),Language::GetString(L"ABOUT_SHORTCUT")[0]},
-			{Language::GetString(L"ESC_TITLE"),Language::GetString(L"ESC_SHORTCUT")[0]},
-	};
-	while (1) {																// Main while loop
-		View::DrawMenuCenter(L"", options, selectedOption);
-		auto tmp = InputHandle::Get();										// Get input from user
-		// Input Handle
-		// Normal Navigation
-		if (tmp == L"w" || tmp == L"W") {
-			selectedOption = (selectedOption - 1 + maxOption) % maxOption;	// Cycle effect
-		}
-		if (tmp == L"s" || tmp == L"S") {
-			selectedOption = (selectedOption + 1) % maxOption;				// Cycle effect
-		}
-		// Shortcut
-		if (tmp == L"1") {
-			return NavHost.Navigate("New Game");							// Nho return
-		}
-		if (tmp == L"2") {
-			return NavHost.Navigate("Load Game");							// Nho return
-		}
-		if (tmp == L"3") {
-			return NavHost.Navigate("Replay game");							// Nho return
-		}
-		if (tmp == L"4") {
-			return NavHost.Navigate("Setting");							// Nho return
-		}
-		if (tmp == L"5") {
-			return NavHost.Navigate("Tutorial");							// Nho return
-		}
-		if (tmp == L"6") {
-			return NavHost.Navigate("About");							// Nho return
-		}
-		if (tmp == L"e" || tmp == L"E") {
-			return NavHost.NavigateStack("ExitView");						// Nho return
-		}
-		// Handle Select
-		if (tmp == L"\r") {
-			switch (selectedOption)
-			{
-			case 0:
-				return NavHost.Navigate("New Game");						// Nho return
-			case 1:
-				return NavHost.Navigate("Load Game");                       // Nho return
-			case 2:
-				return NavHost.Navigate("Replay Game");
-			case 3:
-				return NavHost.Navigate("Setting");
-			case 4:
-				return NavHost.Navigate("Tutorial");
-			case 5:
-				return NavHost.Navigate("About");
-			case 6:
-				return NavHost.NavigateStack("ExitView");					// Nho return
-			}
-		}
-	}
-}
-
-void MainMenu::Avatar(int x, int y, View::Color mat, View::Color mau) {
+void mauve(int x, int y, View::Color mat, View::Color mau) {
 	View::WriteToView(x + 1, y + 2, L'\u2580', 0,
 		View::Color::BLACK,
 		View::DEFAULT_HIGHLIGHT_COLOR,
@@ -973,4 +901,74 @@ void MainMenu::Logo(int x, int y) {                                         // f
 		View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
 		View::Color::BRIGHT_WHITE
 	);
+}
+void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
+	static short selectedOption = 0;										// User option
+	static const short maxOption = 7;										// Number of option
+	int x = 32;                                                             // Vi tri bat dau ve 
+	int y = 2;                                                              // Vi tri bat dau ve 
+	MainMenu::Logo(x, y);
+	vector<View::Option> options = {
+			{Language::GetString(L"NEW_GAME_TITLE"),Language::GetString(L"NEW_GAME_SHORTCUT")[0]},
+			{Language::GetString(L"LOAD_TITLE"),Language::GetString(L"LOAD_SHORTCUT")[0]},
+			{Language::GetString(L"REPLAY_TITLE"),Language::GetString(L"REPLAY_SHORTCUT")[0]},
+			{Language::GetString(L"SETTINGS_TITLE"),Language::GetString(L"SETTINGS_SHORTCUT")[0]},
+			{Language::GetString(L"TUTORIAL_TITLE"),Language::GetString(L"TUTORIAL_SHORTCUT")[0]},
+			{Language::GetString(L"ABOUT_TITLE"),Language::GetString(L"ABOUT_SHORTCUT")[0]},
+			{Language::GetString(L"EXIT_TITLE"),Language::GetString(L"EXIT_SHORTCUT")[0]},
+	};
+	while (1) {																// Main while loop
+		View::DrawMenuCenter(L"", options, selectedOption);
+		auto tmp = InputHandle::Get();										// Get input from user
+		// Input Handle
+		// Normal Navigation
+		if (tmp == L"w" || tmp == L"W") {
+			selectedOption = (selectedOption - 1 + maxOption) % maxOption;	// Cycle effect
+		}
+		if (tmp == L"s" || tmp == L"S") {
+			selectedOption = (selectedOption + 1) % maxOption;				// Cycle effect
+		}
+		// Shortcut
+		if (tmp == L"1") {
+			return NavHost.Navigate("New Game");							// Nho return
+		}
+		if (tmp == L"2") {
+			return NavHost.Navigate("Load Game");							// Nho return
+		}
+		if (tmp == L"3") {
+			return NavHost.Navigate("Replay game");							// Nho return
+		}
+		if (tmp == L"4") {
+			return NavHost.Navigate("Setting");							// Nho return
+		}
+		if (tmp == L"5") {
+			return NavHost.Navigate("Tutorial");							// Nho return
+		}
+		if (tmp == L"6") {
+			return NavHost.Navigate("About");							// Nho return
+		}
+		if (tmp == L"e" || tmp == L"E") {
+			return NavHost.NavigateStack("ExitView");						// Nho return
+		}
+		// Handle Select
+		if (tmp == L"\r") {
+			switch (selectedOption)
+			{
+			case 0:
+				return NavHost.Navigate("New Game");						// Nho return
+			case 1:
+				return NavHost.Navigate("Load Game");                       // Nho return
+			case 2:
+				return NavHost.Navigate("Replay Game");
+			case 3:
+				return NavHost.Navigate("Setting");
+			case 4:
+				return NavHost.Navigate("Tutorial");
+			case 5:
+				return NavHost.Navigate("About");
+			case 6:
+				return NavHost.NavigateStack("ExitView");					// Nho return
+			}
+		}
+	}
 }
