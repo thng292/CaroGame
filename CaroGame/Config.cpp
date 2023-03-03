@@ -6,7 +6,7 @@ inline std::pair<std::wstring, std::wstring> LineSplitter(const std::wstring& li
 }
 
 bool Config::LoadUserSetting() {
-	auto fin = FileHandle::OpenInFile(Constants::STR_USERCONFIG_PATH);
+	auto fin = FileHandle::OpenInFile(Constants::USERCONFIG_FILE_PATH);
 	if (fin.fail()) {
 		return 0;
 	}

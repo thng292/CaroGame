@@ -3,14 +3,6 @@
 
 void StartUp::StartUpScreen(NavigationHost& NavHost) {
 	View::Setup();
-	int time = 0;
-	Timer t([&time]() {
-		View::WriteToView(0, 0, std::format(L"{}", time));
-		time++;
-		});
-	t.Start();
-	InputHandle::Get();
-	t.Stop();
 	if (!Config::LoadUserSetting() || !Config::GetSetting(L"LanguageFilePath").length()) {
 		return NavHost.Navigate("FirstTimeLanguageScreen");
 	}
@@ -22,6 +14,14 @@ void StartUp::StartUpScreen(NavigationHost& NavHost) {
 
 void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost) {
 	auto languages = Language::DiscoverLanguageFile();
+	int time = 0;
+	Timer t([&time]() {
+		View::WriteToView(0, 0, std::format(L"{}", time));
+		time++;
+		});
+	t.Start();
+	InputHandle::Get();
+	t.Stop();
 	static int userSelect = 0;
 	std::wstring tmp;
 	while (1) {
