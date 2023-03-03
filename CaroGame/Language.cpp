@@ -2,7 +2,7 @@
 
 inline std::pair<std::wstring, std::wstring> LineSplitter(const std::wstring& line, wchar_t delim = L'=') {
 	size_t tmp = line.find_first_of(delim);
-	return { line.substr(0, tmp), line.substr(tmp + 1) };
+	return { line.substr(0, tmp), line.substr(tmp + 1)};
 }
 
 Language::LanguageDict Language::ExtractMetaFromFile(const std::filesystem::path& filePath) {
@@ -12,9 +12,11 @@ Language::LanguageDict Language::ExtractMetaFromFile(const std::filesystem::path
 	while (!fin.eof())
 	{
 		std::getline(fin, inp);
-		if (inp[0] != L'[') break;
 		auto tmp = LineSplitter(inp);
-		res[tmp.first] = tmp.second;
+		Utils::trim(tmp.first);
+		Utils::trim(tmp.second);
+		if (tmp.first[0] != L'[') break;
+		res.insert(tmp);
 	}
 	fin.close();
 	return res;
@@ -28,7 +30,9 @@ void Language::LoadLanguageFromFile(const std::filesystem::path& filePath) {
 	while (!fin.eof()) {
 		std::getline(fin, inp);
 		auto tmp = LineSplitter(inp);
-		currentLanguageDict[tmp.first] = tmp.second;
+		Utils::trim(tmp.first);
+		Utils::trim(tmp.second);
+		currentLanguageDict.insert(tmp);
 	}
 	currentLanguageDict[L"Error"] = Constants::STR_ERROR_CANNOT_FIND_LABEL;
 	fin.close();

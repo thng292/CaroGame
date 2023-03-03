@@ -173,6 +173,14 @@
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="asset\audio\nhac_an_chon.mp3" />
+    <Media Include="asset\audio\nhac_hoa.mp3" />
+    <Media Include="asset\audio\nhac_nen_choi_game.mp3" />
+    <Media Include="asset\audio\nhac_thang.mp3" />
+    <Media Include="asset\audio\nhac_thua.mp3" />
+    <Media Include="asset\audio\onKey.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

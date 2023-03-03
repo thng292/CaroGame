@@ -4,6 +4,7 @@
 #include <vector>
 #include "FileHandle.h"
 #include "Constants.h"
+#include "Utils.h"
 
 namespace Language {
 	typedef std::unordered_map<std::wstring, std::wstring> LanguageDict;

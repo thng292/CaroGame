@@ -28,9 +28,9 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost) {
 		View::ClearScreen();
 		View::DrawMenuCenter(L"", {
 			{std::format(
-				L"{}: < {} >", 
+				L"{}: < {} >",
 				languages[userSelect].meta[L"[LANG_SELECT]"],
-				languages[userSelect].meta[L"[LANGUAGE]"]), 
+				languages[userSelect].meta[L"[LANGUAGE]"]),
 			0},
 			}, -1);
 		tmp = InputHandle::Get();
@@ -58,6 +58,10 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 	static int select = 0;
 	int num = 2;
 	std::wstring tmp;
+	auto next = [&]() {
+		Config::SetSetting(L"Music", (select == 0 ? L"True" : L"False"));
+		return NavHost.Navigate("FirstTimeSoundEffectScreen");
+	};
 	while (1)
 	{
 		View::DrawMenuCenter(title, options, select);
@@ -65,13 +69,20 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 		Utils::PlayKeyPressSound();
 		if (Utils::keyMeanDown(tmp)) {
 			select = Utils::modCycle(select - 1, num);
+			continue;
 		}
 		if (Utils::keyMeanUp(tmp)) {
 			select = Utils::modCycle(select + 1, num);
+			continue;
 		}
 		if (tmp == L"\r") {
-			Config::SetSetting(L"Music", (select == 0 ? L"True" : L"False"));
-			return NavHost.Navigate("FirstTimeSoundEffectScreen");
+			return next();
+		}
+		for (int i = 0; i < options.size(); i++) {
+			if (tmp[0] == options[i].underline) {
+				select = i;
+				return next();
+			}
 		}
 	}
 }
@@ -85,6 +96,11 @@ void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost) {
 	static int select = 0;
 	int num = 2;
 	std::wstring tmp;
+	auto next = [&]() {
+		Config::SetSetting(L"SoundEffect", (select == 0 ? L"True" : L"False"));
+		Config::SaveUserSetting();
+		return NavHost.Navigate("MainMenu");
+	};
 	while (1)
 	{
 		View::DrawMenuCenter(title, options, select);
@@ -92,14 +108,21 @@ void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost) {
 		Utils::PlayKeyPressSound();
 		if (Utils::keyMeanDown(tmp)) {
 			select = Utils::modCycle(select - 1, num);
+			continue;
 		}
 		if (Utils::keyMeanUp(tmp)) {
 			select = Utils::modCycle(select + 1, num);
+			continue;
 		}
 		if (tmp == L"\r") {
-			Config::SetSetting(L"SoundEffect", (select == 0 ? L"True" : L"False"));
-			Config::SaveUserSetting();
-			//return NavHost.Navigate("FirstTimeSoundEffectScreen");
+			return next();
+		}
+		for (int i = 0; i < options.size(); i++)
+		{
+			if (tmp.size()==1 && tmp[0] == options[i].underline) {
+				select = i;
+				return next();
+			}
 		}
 	}
 }

@@ -30,6 +30,40 @@ int Utils::modCycle(int current, int max) {
 	return current % max;
 }
 
+void Utils::ltrim(std::string& str) {
+	str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char ch) {
+		return !std::isspace(ch);
+		}));
+}
+
+void Utils::ltrim(std::wstring& str) {
+	str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](wchar_t ch) {
+		return !std::iswspace(ch);
+		}));
+}
+
+void Utils::rtrim(std::string& str) {
+	str.erase(std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
+		return !std::isspace(ch);
+		}).base(), str.end());
+}
+
+void Utils::rtrim(std::wstring& str) {
+	str.erase(std::find_if(str.rbegin(), str.rend(), [](wchar_t ch) {
+		return !std::iswspace(ch);
+		}).base(), str.end());
+}
+
+void Utils::trim(std::string& str) {
+	ltrim(str);
+	rtrim(str);
+}
+
+void Utils::trim(std::wstring& str) {
+	ltrim(str);
+	rtrim(str);
+}
+
 void Utils::PlayKeyPressSound() {
 	OnKeyPressSound.Pause();
 	OnKeyPressSound.Play();
