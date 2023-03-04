@@ -52,8 +52,8 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost) {
 void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 	auto title = Language::GetString(L"ENABLE_MUSIC_Q");
 	std::vector<View::Option> options = {
-		{Language::GetString(L"YES"),	Language::GetString(L"YES_SHORTCUT")[0]},
-		{Language::GetString(L"NO"),	Language::GetString(L"NO_SHORTCUT")[0]}
+		{Language::GetString(L"YES_TITLE"),	Language::GetString(L"YES_SHORTCUT")[0]},
+		{Language::GetString(L"NO_TITLE"),		Language::GetString(L"NO_SHORTCUT")[0]}
 	};
 	static int select = 0;
 	int num = 2;
@@ -90,8 +90,8 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost) {
 	auto title = Language::GetString(L"ENABLE_SOUND_EFFECT_Q");
 	std::vector<View::Option> options = {
-		{Language::GetString(L"YES"),	Language::GetString(L"YES_SHORTCUT")[0]},
-		{Language::GetString(L"NO"),	Language::GetString(L"NO_SHORTCUT")[0]}
+		{Language::GetString(L"YES_TITLE"),	Language::GetString(L"YES_SHORTCUT")[0]},
+		{Language::GetString(L"NO_TITLE"),		Language::GetString(L"NO_SHORTCUT")[0]}
 	};
 	static int select = 0;
 	int num = 2;

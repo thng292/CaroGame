@@ -26,11 +26,48 @@ namespace Audio {
 		static int instanceCount;
 		int currentInstance;
 	public:
-		AudioPlayer(Sound song);
-		int Play(bool fromStart = true, bool repeat = false);
-		int Pause();
-		int Resume();
-		int Stop();
-		~AudioPlayer();
+		inline AudioPlayer(Sound song) {
+			currentInstance = instanceCount++;
+			currentSong = song;
+			mciSendString(
+				std::format(
+					L"open {}{} type waveaudio alias {}",
+					Constants::STR_AUDIO_PATH,
+					SoundName[int(song)],
+					currentInstance
+				).c_str(),
+				0, 0, 0);
+		}
+
+		inline int Play(bool fromStart = true, bool repeat = false) {
+			isRepeat = repeat;
+			auto command = std::format(
+				L"play {}", currentInstance
+			);
+			if (fromStart) {
+				command += L" from 0";
+			}
+			if (repeat) {
+				command += L" repeat";
+			}
+			return mciSendString(command.c_str(), 0, 0, 0);
+		}
+
+		inline int Pause() {
+			return mciSendString(std::format(L"pause {}", currentInstance).c_str(), 0, 0, 0);
+		}
+
+		inline int Resume() {
+			return mciSendString(std::format(L"resume {}", currentInstance).c_str(), 0, 0, 0);
+		}
+
+
+		inline int Stop() {
+			return mciSendString(std::format(L"stop {}", currentInstance).c_str(), 0, 0, 0);
+		}
+		inline ~AudioPlayer() {
+			mciSendString(std::format(L"close {}", currentInstance).c_str(), 0, 0, 0);
+		}
+
 	};
 }

@@ -1,8 +1,5 @@
 #include "View.h"
-#include <iostream>
-#include <Windows.h>
-#include <fcntl.h>
-#include <io.h>
+
 
 void View::Setup() {
 	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -43,10 +40,6 @@ void View::Setup() {
 	// Set IO Unicode
 	_setmode(_fileno(stdout), _O_WTEXT);
 	_setmode(_fileno(stdin), _O_WTEXT);
-}
-
-void View::Goto(short x, short y) {
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, y });
 }
 
 void View::WriteToView(
@@ -100,14 +93,6 @@ void View::WriteToView(
 	std::wcout << str;
 }
 
-std::wstring View::Underline(const std::wstring& str) {
-	return L"\033[4m" + str + L"\033[24m";
-}
-
-std::wstring View::Underline(wchar_t str) {
-	return	L"\033[4m" + std::wstring(1, str) + L"\033[24m";
-}
-
 void View::ClearScreen() {
 	DWORD tmp = 0;
 	HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -150,7 +135,7 @@ void View::DrawRect(const Rect& rect, Color textColor, Color bgColor) {
 	}
 }
 
-short CalcWidth(const std::vector<View::Option>& options, const std::wstring& title) {
+inline short CalcWidth(const std::vector<View::Option>& options, const std::wstring& title) {
 	int tmp = 0;
 	for (auto i : options) {
 		tmp = max(i.option.length(), tmp);

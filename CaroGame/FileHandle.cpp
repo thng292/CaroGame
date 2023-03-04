@@ -12,14 +12,6 @@ std::wifstream FileHandle::OpenInFile(const std::filesystem::path& fileName) {
 	return fin;
 }
 
-std::ofstream FileHandle::OpenOutFileA(const std::filesystem::path& fileName) {
-	return std::ofstream(fileName);
-}
-
-std::ifstream FileHandle::OpenInFileA(const std::filesystem::path& fileName) {
-	return std::ifstream(fileName);
-}
-
 std::vector<FileHandle::FileDetail> FileHandle::GetAllTextFileInDir(const std::filesystem::path& Dir) {
 	std::vector<FileDetail> tmp;
 	for (const auto& file : std::filesystem::directory_iterator(Dir)) {

@@ -1,6 +1,7 @@
 ﻿#include "StartUp.h"
 #include "Navigate.h"
 #include "MainMenu.h"
+#include "Setting.h"
 //#define _TEST
 
 #ifdef _TEST
@@ -19,6 +20,7 @@ int main() {
 		{"FirstTimeLanguageScreen", StartUp::FirstTimeLanguageScreen},
 		{"FirstTimeMusicScreen", StartUp::FirstTimeMusicScreen},
 		{"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
-		{"MainMenu", MainMenu::ScreenMainMenu}
+		{"MainMenu", MainMenu::ScreenMainMenu},
+		{"Setting", Setting::SettingScreen}
 		});
 }

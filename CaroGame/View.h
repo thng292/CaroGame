@@ -3,6 +3,10 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <iostream>
+#include <Windows.h>
+#include <fcntl.h>
+#include <io.h>
 
 namespace View {
 	//All posible color
@@ -47,7 +51,9 @@ namespace View {
 	void Setup();
 
 	// Set cursor position
-	void Goto(short x, short y);
+	inline void Goto(short x, short y) {
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, y });
+	}
 
 	// Print string to console
 	void WriteToView(
@@ -72,18 +78,20 @@ namespace View {
 		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
 
-	// Return underlined string
-	inline std::wstring Underline(const std::wstring& str);
+	inline std::wstring Underline(const std::wstring& str) {
+		return L"\033[4m" + str + L"\033[24m";
+	}
 
-	// Return underlined string
-	inline std::wstring Underline(wchar_t str);
+	inline std::wstring Underline(wchar_t str) {
+		return	L"\033[4m" + std::wstring(1, str) + L"\033[24m";
+	}
 
 	void ClearScreen();
 
 	void ClearRect(Rect area);
 
 	void DrawRect(
-		const Rect& rect, 
+		const Rect& rect,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color bgColor = DEFAULT_BACKGROUND_COLOR
 	);
@@ -108,9 +116,9 @@ namespace View {
 	);
 
 	void DrawTextWrapped(
-		short x, short y, 
-		const std::wstring& text, 
-		short maxRow, short maxWidth, 
+		short x, short y,
+		const std::wstring& text,
+		short maxRow, short maxWidth,
 		const std::wstring& overflowStr = L"...",
 		Color textColor = DEFAULT_TEXT_COLOR
 	);
