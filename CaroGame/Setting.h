@@ -1,5 +1,6 @@
 #pragma once
 #include <format>
+#include <numeric>
 #include "View.h"
 #include "Navigate.h"
 #include "Language.h"

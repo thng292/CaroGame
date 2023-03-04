@@ -38,14 +38,14 @@ namespace View {
 		const wchar_t underline;
 	};
 
-	const Color DEFAULT_TEXT_COLOR = Color::BLACK;
+	const Color DEFAULT_TEXT_COLOR = Color::RED;
 	const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
 	const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
 	const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
+	const short DEFAULT_SCREEN_ATTRIBUTE = (int(DEFAULT_BACKGROUND_COLOR) << 4) | int(DEFAULT_TEXT_COLOR);
 	const short HPADDING = 3;
 	const short VPADDING = 1;
 	const short BORDER_WIDTH = 1;
-	const short DEFAULT_SCREEN_ATTRIBUTE = 240;
 
 	// Setup console
 	void Setup();

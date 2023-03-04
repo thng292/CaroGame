@@ -49,7 +49,7 @@ std::vector<Language::LanguageOption> Language::DiscoverLanguageFile(const std::
 
 std::wstring& Language::GetString(const std::wstring& Label) {
 	if (!currentLanguageDict.contains(Label)) {
-		return currentLanguageDict[L"Error"];
+		currentLanguageDict[Label] = Label;
 	}
 	return currentLanguageDict[Label];
 }
