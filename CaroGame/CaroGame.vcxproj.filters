@@ -25,6 +25,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Language">
+      <UniqueIdentifier>{9fb5f911-009d-47fa-a630-23f2fb62ccbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Audio">
+      <UniqueIdentifier>{d8b27f36-98f9-494b-b021-d3b4fa478f93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="View.cpp">
@@ -72,22 +78,16 @@
     <ClCompile Include="CaroGame.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Container.cpp">
+    <ClCompile Include="Demo.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartUp.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardContainer.cpp">
-      <Filter>Screens\Source Files</Filter>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Core\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CornersHandler.cpp">
-      <Filter>Screens\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScreen.cpp">
-      <Filter>Screens\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Label.cpp">
-      <Filter>Screens\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameView.cpp">
+    <ClCompile Include="Setting.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,36 +146,35 @@
     <ClInclude Include="WinCountContainer.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerContainer.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerInfoContainer.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogContainer.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardContainer.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScreen.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CornersHandler.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Label.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameView.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
+    <Text Include="asset\language\vi.txt">
+      <Filter>Resource Files\Language</Filter>
+    </Text>
+    <Text Include="asset\language\en.txt">
+      <Filter>Resource Files\Language</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="asset\audio\onKey.wav">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\nhac_an_chon.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\nhac_hoa.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\nhac_nen_choi_game.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\nhac_thang.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\nhac_thua.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

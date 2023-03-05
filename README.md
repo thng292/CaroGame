@@ -11,6 +11,8 @@
 
 # Features
 
+![UI Flow](./References/CaroGameFlow.jpg)
+
 ## Backend
 
 1. Capture game log:
@@ -26,6 +28,7 @@
 1. Multilevel Undo
    - Using log
 1. Replay
+
 ## Frontend
 
 1. Description for selection

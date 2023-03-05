@@ -6,12 +6,19 @@
 #include <string>
 #include <any>
 #include <Windows.h>
-#define ViewFunc std::function<void(NavigationHost&)>
-#define ViewFuncMap std::unordered_map<std::string, ViewFunc>
 
-const int CONSOLE_WIDTH = 120;
-const int CONSOLE_HEIGHT = 30;
-const std::string EXIT = "EXITCODE";
+#ifndef ViewFunc
+	#define ViewFunc std::function<void(NavigationHost&)>
+#endif
+#ifndef ViewFuncMap
+	#define ViewFuncMap std::unordered_map<std::string, ViewFunc>
+#endif
+
+namespace Navigate {
+	const int CONSOLE_WIDTH = 120;
+	const int CONSOLE_HEIGHT = 30;
+	const std::string EXIT = "EXITCODE";
+}
 
 class NavigationHost {
 private:

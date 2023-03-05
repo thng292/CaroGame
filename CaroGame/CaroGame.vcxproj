@@ -135,8 +135,7 @@
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="CaroGame.cpp" />
     <ClCompile Include="Config.cpp" />
-    <ClCompile Include="Container.cpp" />
-    <ClCompile Include="CornersHandler.cpp" />
+    <ClCompile Include="Demo.cpp" />
     <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameView.cpp" />
@@ -147,7 +146,10 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Navigate.cpp" />
     <ClCompile Include="SaveLoad.cpp" />
+    <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="StartUp.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,8 +160,6 @@
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="Container.h" />
-    <ClInclude Include="CornersHandler.h" />
     <ClInclude Include="FileHandle.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GameState.h" />
@@ -174,14 +174,25 @@
     <ClInclude Include="PlayerContainer.h" />
     <ClInclude Include="PlayerInfoContainer.h" />
     <ClInclude Include="SaveLoad.h" />
+    <ClInclude Include="Setting.h" />
+    <ClInclude Include="StartUp.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="TimerContainer.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="WinCountContainer.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="asset\language\en.txt" />
+    <Text Include="asset\language\vi.txt" />
     <Text Include="Features.md" />
     <Text Include="TODO.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="asset\audio\nhac_an_chon.mp3" />
+    <Media Include="asset\audio\nhac_hoa.mp3" />
+    <Media Include="asset\audio\nhac_nen_choi_game.mp3" />
+    <Media Include="asset\audio\nhac_thang.mp3" />
+    <Media Include="asset\audio\nhac_thua.mp3" />
+    <Media Include="asset\audio\onKey.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
