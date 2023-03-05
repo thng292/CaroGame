@@ -164,8 +164,10 @@ void View::DrawMenu(
 	size_t selected,
 	Color textColor,
 	Color highlightColor,
-	Color highlightTextColor
+	Color highlightTextColor,
+	Color backgroundColor
 ) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),(int(backgroundColor) << 4) | int(textColor));
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList, title);
 	View::DrawRect({ y, x, x + w, y + h - 1 });
@@ -177,8 +179,13 @@ void View::DrawMenu(
 	}
 	for (int i = 0; i < optionsList.size(); i++) {
 		View::WriteToView(leftAlign, topAlign + i,
-			optionsList[i].option, optionsList[i].underline,
-			selected == i);
+			optionsList[i].option,
+			optionsList[i].underline,
+			selected == i, 
+			textColor, 
+			highlightColor, 
+			highlightTextColor, 
+			backgroundColor);
 	}
 }
 
@@ -188,7 +195,8 @@ void View::DrawMenuCenter(
 	size_t selected,
 	Color textColor,
 	Color highlightColor,
-	Color highlightTextColor
+	Color highlightTextColor,
+	Color backgroundColor
 ) {
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList, title);
@@ -196,7 +204,7 @@ void View::DrawMenuCenter(
 	View::DrawMenu(tmp.first, tmp.second,
 		title, optionsList, selected,
 		textColor, highlightColor,
-		highlightTextColor);
+		highlightTextColor, backgroundColor);
 }
 
 std::vector<std::wstring>

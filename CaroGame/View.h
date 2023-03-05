@@ -103,7 +103,8 @@ namespace View {
 		size_t selected,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
+		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
 
 	void DrawMenuCenter(
@@ -112,7 +113,8 @@ namespace View {
 		size_t selected,
 		Color textColor = DEFAULT_TEXT_COLOR,
 		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR
+		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
 
 	void DrawTextWrapped(
