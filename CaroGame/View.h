@@ -77,7 +77,7 @@ namespace View {
 		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
 		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
-
+	
 	inline std::wstring Underline(const std::wstring& str) {
 		return L"\033[4m" + str + L"\033[24m";
 	}

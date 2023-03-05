@@ -15,10 +15,11 @@ public:
 		_running = true;
 		_thread = std::thread([&]() {
 			while (_running) {
-				std::this_thread::sleep_for(_interval);
+				auto nextInterval = std::chrono::system_clock::now() + _interval;
 				if (!_pause) {
 					_callback();
 				}
+				std::this_thread::sleep_until(nextInterval);
 			}
 			});
 		//_thread.detach();
