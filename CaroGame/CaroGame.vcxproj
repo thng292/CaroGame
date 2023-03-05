@@ -132,10 +132,16 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="CaroGame.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Container.cpp" />
+    <ClCompile Include="CornersHandler.cpp" />
     <ClCompile Include="FileHandle.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GameView.cpp" />
     <ClCompile Include="InputHandle.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="Language.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -149,17 +155,29 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Container.h" />
+    <ClInclude Include="CornersHandler.h" />
     <ClInclude Include="FileHandle.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameView.h" />
     <ClInclude Include="InputHandle.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="Language.h" />
+    <ClInclude Include="LogContainer.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Navigate.h" />
+    <ClInclude Include="PlayerContainer.h" />
+    <ClInclude Include="PlayerInfoContainer.h" />
     <ClInclude Include="SaveLoad.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TimerContainer.h" />
     <ClInclude Include="View.h" />
+    <ClInclude Include="WinCountContainer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Features.md" />

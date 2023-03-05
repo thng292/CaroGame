@@ -6,6 +6,8 @@
 #include <string>
 #include <Windows.h>
 #include "Language.h"
+#include "GameScreen.h"
+#include "GameView.h"
 
 void ExitView(NavigationHost& NavHost) {
 	static short selectedOption = 1;										// User option
@@ -45,9 +47,9 @@ void ExitView(NavigationHost& NavHost) {
 }
 
 //DEMO PURPOSE ONLY
-void TestView1(NavigationHost& NavHost) {
+void ScreenView(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
-	static const short maxOption = 3;										// Number of option
+	static const short maxOption = 4;										// Number of option
 	View::WriteToView(2, 2, L'\u2584', 0,
 		View::Color::LIGHT_RED, 
 		View::DEFAULT_HIGHLIGHT_COLOR, 
@@ -57,11 +59,14 @@ void TestView1(NavigationHost& NavHost) {
 	View::WriteToView(3, 2, L'\u2588', 0, View::Color::BLACK);
 	View::DrawTextWrapped(0, 0, L"This is a very very long long text. This is a very very long long text. This is a very very long long text.", 2, 20);
 	NavHost.SetContext("TestContextValue", L"this is the context value");
+
+
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", {
 			{L"TestView2", L'2'},
 			{L"TestView3", L'3'},
 			{L"Exit", L'E'},
+			{L"TestView4", L'4'},
 			}, selectedOption);
 		auto tmp = InputHandle::Get();										// Get input from user
 		// Input Handle
@@ -92,7 +97,10 @@ void TestView1(NavigationHost& NavHost) {
 				return NavHost.Navigate("TestView3");						// Nho return
 			case 2:
 				return NavHost.NavigateStack("ExitView");					// Nho return
+			case 3:
+				return NavHost.NavigateStack("TestView4");
 			}
+			
 		}
 	}
 }
@@ -120,17 +128,44 @@ void TestView3(NavigationHost& NavHost) {
 	}
 }
 
+void TestView4(NavigationHost& NavHost) {
+	GameScreen gameScreen(7, 2);
+	gameScreen.DrawGameScreen();
+	auto tmp = InputHandle::Get();
+	if (tmp == L"\r") {
+		return NavHost.Back();
+	}
+}
+
+
 //DEMO PURPOSE ONLY
 int main() {
 	View::Setup();							// Setting up the screen
 	Language::LoadLanguageFromFile("asset/language/vi.txt");
 	// App start here
-	NavigationHost NavHost("TestView1",		// Initialize Navigation Host. "TestView1 is the first view to be shown
-		{	
-			{"TestView1", TestView1},		// Register TestView1
-			{"TestView2", TestView2},		// Register TestView2
-			{"TestView3", TestView3},		// Register TestView3
-			{"ExitView", ExitView}			// Register ExitView
-		}
-	);
+	//NavigationHost NavHost("ScreenView",		// Initialize Navigation Host. "TestView1 is the first view to be shown
+	//	{	
+	//		{"ScreenView", GameView::GameModeVersusView},		// Register TestView1
+	//		{"TestView2", TestView2},		// Register TestView2
+	//		{"TestView3", TestView3},
+	//		{"TestView4", TestView4},/// Register TestView3
+	//		{"ExitView", ExitView}			// Register ExitView
+	//	}
+	//);
+
+	//NavigationHost NavHost("GameScreenView",
+	//	{
+	//		{"GameScreenView", GameView::GameScreenView}
+	//	});
+	
+	//NavigationHost NavHost("GameModeVersusView",		// Initialize Navigation Host. "TestView1 is the first view to be shown
+	//	{
+	//		{"GameModeVersusView", GameView::GameModeVersusView},
+	//		{"AIDifficultyView", GameView::AIDifficultyView},
+	//		{"GameModeTypeView", GameView::GameModeTypeView},		// Register TestView1
+	//		{"GameScreenView", GameView::GameScreenView},		// Register TestView2
+	//		{"AIDifficultyView", GameView::AIDifficultyView},
+	//	}
+	//);
+
 }

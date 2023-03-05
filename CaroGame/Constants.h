@@ -15,8 +15,9 @@ namespace Constants {
 	const int LOOKUP_RANGE = 3;
 	const int DEPTH = 3;
 
-	const int BOARD_SIZE = 10;
-
+	//Game const
+	const short BOARD_SIZE = 13;
+	
 
 	// Asset path
 	const std::string STR_ASSET_PATH = "asset/";
