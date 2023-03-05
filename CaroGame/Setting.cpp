@@ -11,10 +11,10 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 	int select = 0;
 	int langSelect = [&langList]() {
 		const auto& tmp = Config::GetSetting(L"LanguageFilePath");
-		for (int i = 0; i < langList.size(); i++) 
+		for (int i = 0; i < langList.size(); i++)
 			if (langList[i].path == tmp) return i;
 		return 0;
-		}
+	}
 	();
 
 	std::vector<std::wstring> titles;
@@ -23,12 +23,13 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 	bool soundEffectSetting = Config::GetSetting(L"SoundEffect") == L"True";
 	{
 		const auto controlHint1 = std::format(
-			L"A, W, S, D, Arrow Keys: {}",
-			Language::GetString(L"NAVIGATION_KEYS_TITLE")
+			L"A, W, S, D, Arrow Keys: {}, Space: {}",
+			Language::GetString(L"NAVIGATION_KEYS_TITLE"),
+			Language::GetString(L"APPLY_LABEL")
 		);
 		View::WriteToView(59 - controlHint1.size() / 2, 29 - 4, controlHint1);
 		const auto controlHint2 = std::format(
-			L"Enter: {} B: {}",
+			L"Enter: {}, B: {}",
 			Language::GetString(L"SELECT_KEY_TITLE"),
 			Language::GetString(L"NAVIGATE_BACK_TITLE")
 		);
@@ -55,7 +56,7 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			titlesWidth,
 			CalcMaxWidth(options)
 		);
-		short menuHeight = CalcMenuHeight(titles.size(), true);
+		short menuHeight = CalcMenuHeight(titles.size(), true) + 2;
 		auto posCenter = CalcPosCenter(menuWidth, menuHeight);
 		View::Rect DrawnRect = {
 			posCenter.second,
@@ -75,13 +76,21 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			View::WriteToView(posCenter.first + titlesWidth - 2, posCenter.second + i, L":");
 			View::WriteToView(posCenter.first + titlesWidth, posCenter.second + i, options[i], 0, i == select);
 		}
+		View::WriteToView(
+			posCenter.first, posCenter.second + titles.size() + 1, 
+			Language::GetString(L"NAVIGATE_BACK_TITLE"), 
+			Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0],
+			select == titles.size());
 		auto tmp = InputHandle::Get();
 		Utils::PlayKeyPressSound();
+		if (tmp == L"B" || tmp == L"b") {
+			return NavHost.Back();
+		}
 		if (Utils::keyMeanDown(tmp)) {
-			select = Utils::modCycle(select + 1, titles.size());
+			select = Utils::modCycle(select + 1, titles.size() + 1);
 		}
 		if (Utils::keyMeanUp(tmp)) {
-			select = Utils::modCycle(select - 1, titles.size());
+			select = Utils::modCycle(select - 1, titles.size() + 1);
 		}
 		if (select == 0) {
 			if (Utils::keyMeanLeft(tmp)) {
@@ -103,14 +112,15 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 				break;
 			case 2:
 				soundEffectSetting = !soundEffectSetting;
-			default:
 				break;
+			case 3:
+				return NavHost.Back();
 			}
 		}
 		if (tmp == L" ") {
 			Language::LoadLanguageFromFile(langList[langSelect].path);
 			Config::SaveUserSetting();
-			auto tmp = Language::GetString(L"SAVE_SUCCESSFULLY");
+			auto tmp = Language::GetString(L"APPLY_SUCCESSFULLY");
 			View::WriteToView(59 - tmp.size() / 2, 2, tmp);
 		}
 		View::ClearRect(DrawnRect);

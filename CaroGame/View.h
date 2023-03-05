@@ -38,7 +38,7 @@ namespace View {
 		const wchar_t underline;
 	};
 
-	const Color DEFAULT_TEXT_COLOR = Color::RED;
+	const Color DEFAULT_TEXT_COLOR = Color::BLACK;
 	const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
 	const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
 	const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
