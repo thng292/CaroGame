@@ -72,9 +72,6 @@
     <ClCompile Include="About.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Screens\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CaroGame.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -134,17 +131,14 @@
     <ClInclude Include="About.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Screens\Header Files</Filter>
+    <ClInclude Include="GameState.h">
+      <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Container.h">
-      <Filter>Screens\Header Files</Filter>
+    <ClInclude Include="Setting.h">
+      <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TimerContainer.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WinCountContainer.h">
-      <Filter>Screens\Header Files</Filter>
+    <ClInclude Include="StartUp.h">
+      <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
