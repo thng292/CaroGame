@@ -110,6 +110,14 @@
 //	}
 //}
 
+void TestView3(NavigationHost& NavHost) {
+	/*GameScreen gameScreen(7, 2);
+	gameScreen.DrawGameScreen();
+	auto tmp = InputHandle::Get();
+	if (tmp == L"\r") {
+		return NavHost.Back();
+	}*/
+}
 
 
 //DEMO PURPOSE ONLY

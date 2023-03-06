@@ -34,7 +34,6 @@ void Language::LoadLanguageFromFile(const std::filesystem::path& filePath) {
 		Utils::trim(tmp.second);
 		currentLanguageDict.insert(tmp);
 	}
-	currentLanguageDict[L"Error"] = Constants::STR_ERROR_CANNOT_FIND_LABEL;
 	fin.close();
 }
 

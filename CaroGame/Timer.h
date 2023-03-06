@@ -15,7 +15,7 @@ public:
 		_running = true;
 		_thread = std::thread([&]() {
 			while (_running) {
-				auto nextInterval = std::chrono::system_clock::now() + _interval;
+				auto nextInterval = std::chrono::steady_clock::now() + _interval;
 				if (!_pause) {
 					_callback();
 				}
