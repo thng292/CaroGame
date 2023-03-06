@@ -108,13 +108,13 @@ void TestView2(NavigationHost& NavHost) {
 }
 
 
-void TestView4(NavigationHost& NavHost) {
-	GameScreen gameScreen(7, 2);
+void TestView3(NavigationHost& NavHost) {
+	/*GameScreen gameScreen(7, 2);
 	gameScreen.DrawGameScreen();
 	auto tmp = InputHandle::Get();
 	if (tmp == L"\r") {
 		return NavHost.Back();
-	}
+	}*/
 }
 
 
