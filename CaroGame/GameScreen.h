@@ -4,6 +4,7 @@
 #include "Label.h"
 #include "BoardContainer.h"
 
+// Class for the game's UI
 class GameScreen {
 public:
 	BoardContainer boardContainer;

@@ -2,6 +2,8 @@
 #include "Navigate.h"
 #include "MainMenu.h"
 #include "Setting.h"
+#include "GameScreen.h"
+#include "GameView.h"
 
 
 
@@ -119,6 +121,18 @@
 int main() {
 	View::Setup();							// Setting up the screen
 	Language::LoadLanguageFromFile("asset/language/vi.txt");
+	NavigationHost NavHost("GameModeTypeView",		
+		{	
+			{"GameModeTypeView", GameView::GameModeTypeView},
+			{"GameModeVersusView", GameView::GameModeVersusView},
+			{"GameScreenView", GameView::GameScreenView},
+			{"PlayerNameView", GameView::PlayerNameView},
+			{"AIDifficultyView", GameView::AIDifficultyView},
+		{"ReplayMenuView", GameView::ReplayMenuView},
+		{"PlayAgainView", GameView::PlayAgainView}
+		}
+	);
+
 	
 	// App start here
 	

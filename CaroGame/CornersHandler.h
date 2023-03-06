@@ -2,6 +2,7 @@
 
 #include "Container.h"
 
+// Fixes the corners of various containers
 namespace CornersHandler {
 	void FixBoardCorners(short x, short y);
 	void FixStatusBarCorners(

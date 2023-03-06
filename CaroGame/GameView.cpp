@@ -132,6 +132,11 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 			}
 		}
 
+		if (tmp == L"p" || tmp == L"P") {
+			return NavHost.Navigate("ReplayMenuView");
+		}
+
+
 		if (tmp == L"\r") {
 			gameScreen.boardContainer.DrawToBoardContainerCell(row, col, player);
 			if (player == L"O") player = L"X";
@@ -139,9 +144,6 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 		}
 
 
-		if (tmp == L"e" || tmp == L"E") {
-			return NavHost.Back();
-		}
 	}
 
 
@@ -187,6 +189,52 @@ void GameView::AIDifficultyView(NavigationHost& NavHost)
 
 			case 2:
 				return NavHost.Navigate("PlayerNameView");
+			}
+		}
+	}
+}
+
+void GameView::ReplayMenuView(NavigationHost& NavHost)
+{
+	View::WriteToView(10, 10, L"Replay menu view, press Enter to continue");
+	auto tmp = InputHandle::Get();
+	if (tmp == L"\r") {
+		return NavHost.Navigate("PlayAgainView");
+	}
+}
+
+void GameView::PlayAgainView(NavigationHost& NavHost) {
+	short selectedOption = 0;
+	const short MAX_OPTIONS = 2;
+	while (1) {
+		View::DrawMenuCenter(L"Play again?", {
+			{L"Yes", L'Y'},
+			{L"Return to main menu", L'R'},
+			}, selectedOption);
+		auto tmp = InputHandle::Get();
+		if (tmp == L"w" || tmp == L"W") {
+			selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
+		}
+		if (tmp == L"s" || tmp == L"S") {
+			selectedOption = (selectedOption + 1) % MAX_OPTIONS;
+		}
+		if (tmp == L"1") {
+			return NavHost.Navigate("GameScreenView");
+		}
+		if (tmp == L"2") {
+			return NavHost.Navigate("GameModeVersusView");
+		}
+		if (tmp == L"e" || tmp == L"E") {
+			return NavHost.Back();
+		}
+
+		if (tmp == L"\r") {
+			switch (selectedOption)
+			{
+			case 0:
+				return NavHost.Navigate("GameScreenView");
+			case 1:
+				return NavHost.Navigate("GameModeVersusView");
 			}
 		}
 	}
