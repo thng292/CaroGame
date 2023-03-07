@@ -6,6 +6,9 @@
 #include <string>
 #include <any>
 #include <Windows.h>
+#include "View.h"
+#include "InputHandle.h"
+
 
 #ifndef ViewFunc
 	#define ViewFunc std::function<void(NavigationHost&)>
@@ -32,6 +35,7 @@ private:
 	std::stack<Screen> _History;
 	void HistoryPop();
 	void HistoryPopAllOverlay();
+	void Draw404(NavigationHost& NavHost);
 public:
 	NavigationHost(const std::string& Start, const ViewFuncMap& links);
 	std::any& GetFromContext(const std::string& name);

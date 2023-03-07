@@ -19,8 +19,9 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 
 	std::vector<std::wstring> titles;
 	std::vector<std::wstring> options;
-	bool musicSetting = Config::GetSetting(L"Music") == L"True";
-	auto& soundEffectSetting = Config::GetSetting(L"SoundEffect");
+	auto& musicSetting = Config::GetSetting(Config::BGMusic);
+	auto& soundEffectSetting = Config::GetSetting(Config::SoundEffect);
+	auto& undoSetting = Config::GetSetting(Config::UndoOption);
 	{
 		const auto controlHint1 = std::format(
 			L"A, W, S, D, Arrow Keys: {}, Space: {}",
@@ -41,13 +42,17 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			Language::GetMeta(L"[LANG_SELECT]"),
 			Language::GetString(L"BG_MUSIC_TITLE"),
 			Language::GetString(L"SOUND_EFFECT_TITLE"),
+			Language::GetString(L"UNDO_OPTION_TITLE"),
 		};
 		options = {
 			L"< " + langList[langSelect].meta[L"[LANGUAGE]"] + L" >",
-			musicSetting
+			musicSetting == Config::Value_True
 			? Language::GetString(L"ON_TITLE")
 			: Language::GetString(L"OFF_TITLE"),
-			soundEffectSetting == L"True"
+			soundEffectSetting == Config::Value_True
+			? Language::GetString(L"ON_TITLE")
+			: Language::GetString(L"OFF_TITLE"),
+			undoSetting == Config::Value_True
 			? Language::GetString(L"ON_TITLE")
 			: Language::GetString(L"OFF_TITLE"),
 		};
@@ -82,10 +87,10 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0],
 			select == titles.size());
 		auto tmp = InputHandle::Get();
-		if (soundEffectSetting == L"True") {
+		if (soundEffectSetting == Config::Value_True) {
 			Utils::PlayKeyPressSound();
 		}
-		if (tmp == L"B" || tmp == L"b") {
+		if (tmp == Language::GetString(L"NAVIGATE_BACK_SHORTCUT")) {
 			return NavHost.Back();
 		}
 		if (Utils::keyMeanDown(tmp)) {
@@ -110,12 +115,15 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 				Language::LoadLanguageFromFile(langList[langSelect].path);
 				break;
 			case 1:
-				musicSetting = !musicSetting;
+				musicSetting = (musicSetting == Config::Value_True ? Config::Value_False : Config::Value_True);
 				break;
 			case 2:
-				soundEffectSetting = (soundEffectSetting == L"True" ? L"False" : L"True");
+				soundEffectSetting = (soundEffectSetting == Config::Value_True ? Config::Value_False : Config::Value_True);
 				break;
 			case 3:
+				undoSetting = (undoSetting == Config::Value_True ? Config::Value_False : Config::Value_True);
+				break;
+			case 4:
 				return NavHost.Back();
 			}
 		}

@@ -1,18 +1,17 @@
 #include "Navigate.h"
-#include "View.h"
 
 NavigationHost::NavigationHost(const std::string& Start, const ViewFuncMap& links) {
 	_CurrentScreen = { Start, nullptr };
 	_Links = links;
 	Context["No exist"] = nullptr;
 	while (_CurrentScreen.name != Navigate::EXIT) {
-#if _DEBUG
 		if (!_Links.contains(_CurrentScreen.name)) {
-			throw 404;
-			return;
+			Draw404(*this);
 		}
-#endif // N_DEBUG
-		_Links[_CurrentScreen.name](*this);
+		else {
+
+			_Links[_CurrentScreen.name](*this);
+		}
 	}
 }
 
@@ -95,5 +94,19 @@ NavigationHost::~NavigationHost() {
 void NavigationHost::HistoryPopAllOverlay() {
 	while (!_History.empty() && _History.top().prevScreenBuffer != nullptr) {
 		HistoryPop();
+	}
+}
+
+void NavigationHost::Draw404(NavigationHost& NavHost) {
+	View::DrawMenuCenter(L"404", {
+		{L"This screen does not exist", 0},
+		{L"Press Enter to back", 0},
+		}, 0);
+	while (true)
+	{
+		auto tmp = InputHandle::Get();
+		if (tmp == L"\r") {
+			return NavHost.Back();
+		}
 	}
 }

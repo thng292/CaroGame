@@ -130,4 +130,5 @@ namespace View {
 		const std::wstring& text,
 		Color textColor = DEFAULT_TEXT_COLOR
 	);
+
 }
