@@ -27,6 +27,10 @@ void NavigationHost::SetContext(const std::string& name, const std::any& data) {
 	Context[name] = data;
 }
 
+void NavigationHost::DeleteContext(const std::string& name) {
+	Context.erase(name);
+}
+
 void NavigationHost::Add(const std::string& path, const ViewFunc& view) {
 	_Links[path] = view;
 }

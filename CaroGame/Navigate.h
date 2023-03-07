@@ -36,11 +36,12 @@ public:
 	NavigationHost(const std::string& Start, const ViewFuncMap& links);
 	std::any& GetFromContext(const std::string& name);
 	void SetContext(const std::string& name, const std::any& data);
+	void DeleteContext(const std::string& name);
 	void Add(const std::string& path, const ViewFunc& view);
-	[[nodiscard]] void NavigateStack(const std::string& path);
-	[[nodiscard]] void Navigate(const std::string& path);
-	[[nodiscard]] void Back();
-	[[nodiscard]] void BackToLastNotOverlay();
-	[[nodiscard]] void NavigateExit();
+	void NavigateStack(const std::string& path);
+	void Navigate(const std::string& path);
+	void Back();
+	void BackToLastNotOverlay();
+	void NavigateExit();
 	~NavigationHost();
 };

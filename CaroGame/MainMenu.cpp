@@ -17,7 +17,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			{Language::GetString(L"EXIT_TITLE"),Language::GetString(L"EXIT_SHORTCUT")[0]},
 	};
 	auto& soundEffect = Config::GetSetting(L"SoundEffect");
-	while (1) {																// Main while loop
+	while (1) {																			// Main while loop
 		View::DrawMenuCenter(L"", options, selectedOption);
 		auto tmp = InputHandle::Get();										// Get input from user
 		if (soundEffect == L"True") {
@@ -42,13 +42,13 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			return NavHost.Navigate("Replay game");							// Nho return
 		}
 		if (tmp == L"4") {
-			return NavHost.Navigate("Setting");							// Nho return
+			return NavHost.Navigate("Setting");								// Nho return
 		}
 		if (tmp == L"5") {
 			return NavHost.Navigate("Tutorial");							// Nho return
 		}
 		if (tmp == L"6") {
-			return NavHost.Navigate("About");							// Nho return
+			return NavHost.Navigate("About");								// Nho return
 		}
 		if (tmp == L"e" || tmp == L"E") {
 			return NavHost.NavigateStack("ExitView");						// Nho return
@@ -60,7 +60,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			case 0:
 				return NavHost.Navigate("New Game");						// Nho return
 			case 1:
-				return NavHost.Navigate("Load Game");                       // Nho return
+				return NavHost.Navigate("Load Game");						// Nho return
 			case 2:
 				return NavHost.Navigate("Replay Game");
 			case 3:
