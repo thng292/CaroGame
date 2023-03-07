@@ -121,15 +121,21 @@
 int main() {
 	View::Setup();							// Setting up the screen
 	Language::LoadLanguageFromFile("asset/language/vi.txt");
-	NavigationHost NavHost("GameModeTypeView",		
+	NavigationHost NavHost("MainMenu",		
 		{	
 			{"GameModeTypeView", GameView::GameModeTypeView},
 			{"GameModeVersusView", GameView::GameModeVersusView},
 			{"GameScreenView", GameView::GameScreenView},
 			{"PlayerNameView", GameView::PlayerNameView},
 			{"AIDifficultyView", GameView::AIDifficultyView},
-		{"ReplayMenuView", GameView::ReplayMenuView},
-		{"PlayAgainView", GameView::PlayAgainView}
+			{"ReplayMenuView", GameView::ReplayMenuView},
+			{"PlayAgainView", GameView::PlayAgainView},
+			{"StartUpScreen", StartUp::StartUpScreen},
+			{"FirstTimeLanguageScreen", StartUp::FirstTimeLanguageScreen},
+			{"FirstTimeMusicScreen", StartUp::FirstTimeMusicScreen},
+			{"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
+			{"MainMenu", MainMenu::ScreenMainMenu},
+			{"Setting", Setting::SettingScreen}
 		}
 	);
 

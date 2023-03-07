@@ -16,9 +16,15 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			{Language::GetString(L"ABOUT_TITLE"),Language::GetString(L"ABOUT_SHORTCUT")[0]},
 			{Language::GetString(L"EXIT_TITLE"),Language::GetString(L"EXIT_SHORTCUT")[0]},
 	};
+	auto& soundOnOff = Config::GetSetting(L"SoundEffect");
+	
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", options, selectedOption);
-		auto tmp = InputHandle::Get();										// Get input from user
+		auto tmp = InputHandle::Get();
+		if (soundOnOff == L"True") {
+			Utils::PlayKeyPressSound();
+		}
+		// Get input from user
 		// Input Handle
 		// Normal Navigation
 		if (tmp == L"w" || tmp == L"W") {
@@ -28,25 +34,25 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			selectedOption = (selectedOption + 1) % maxOption;				// Cycle effect
 		}
 		// Shortcut
-		if (tmp == L"1") {
+		if (tmp == Language::GetString(L"NEW_GAME_SHORTCUT")) {
 			return NavHost.Navigate("New Game");							// Nho return
 		}
-		if (tmp == L"2") {
+		if (tmp == Language::GetString(L"LOAD_SHORTCUT")) {
 			return NavHost.Navigate("Load Game");							// Nho return
 		}
-		if (tmp == L"3") {
+		if (tmp == Language::GetString(L"REPLAY_SHORTCUT")) {
 			return NavHost.Navigate("Replay game");							// Nho return
 		}
-		if (tmp == L"4") {
+		if (tmp == Language::GetString(L"SETTINGS_SHORTCUT")) {
 			return NavHost.Navigate("Setting");							// Nho return
 		}
-		if (tmp == L"5") {
+		if (tmp == Language::GetString(L"TUTORIAL_SHORTCUT")) {
 			return NavHost.Navigate("Tutorial");							// Nho return
 		}
-		if (tmp == L"6") {
+		if (tmp == Language::GetString(L"ABOUT_SHORTCUT")) {
 			return NavHost.Navigate("About");							// Nho return
 		}
-		if (tmp == L"e" || tmp == L"E") {
+		if (tmp == Language::GetString(L"EXIT_SHORTCUT")) {
 			return NavHost.NavigateStack("ExitView");						// Nho return
 		}
 		// Handle Select
