@@ -32,25 +32,25 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			selectedOption = Utils::modCycle(selectedOption + 1, options.size());
 		}
 		// Shortcut
-		if (tmp == L"1") {
+		if (tmp == Language::GetString(L"NEW_GAME_SHORTCUT")) {
 			return NavHost.Navigate("New Game");							// Nho return
 		}
-		if (tmp == L"2") {
+		if (tmp == Language::GetString(L"LOAD_SHORTCUT")) {
 			return NavHost.Navigate("Load Game");							// Nho return
 		}
-		if (tmp == L"3") {
+		if (tmp == Language::GetString(L"REPLAY_SHORTCUT")) {
 			return NavHost.Navigate("Replay game");							// Nho return
 		}
-		if (tmp == L"4") {
-			return NavHost.Navigate("Setting");								// Nho return
+		if (tmp == Language::GetString(L"SETTINGS_SHORTCUT")) {
+			return NavHost.Navigate("Setting");							// Nho return
 		}
-		if (tmp == L"5") {
+		if (tmp == Language::GetString(L"TUTORIAL_SHORTCUT")) {
 			return NavHost.Navigate("Tutorial");							// Nho return
 		}
-		if (tmp == L"6") {
-			return NavHost.Navigate("About");								// Nho return
+		if (tmp == Language::GetString(L"ABOUT_SHORTCUT")) {
+			return NavHost.Navigate("About");							// Nho return
 		}
-		if (tmp == L"e" || tmp == L"E") {
+		if (tmp == Language::GetString(L"EXIT_SHORTCUT")) {
 			return NavHost.NavigateStack("ExitView");						// Nho return
 		}
 		// Handle Select
