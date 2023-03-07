@@ -16,22 +16,20 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			{Language::GetString(L"ABOUT_TITLE"),Language::GetString(L"ABOUT_SHORTCUT")[0]},
 			{Language::GetString(L"EXIT_TITLE"),Language::GetString(L"EXIT_SHORTCUT")[0]},
 	};
-	auto& soundOnOff = Config::GetSetting(L"SoundEffect");
-	
+	auto& soundEffect = Config::GetSetting(L"SoundEffect");
 	while (1) {																// Main while loop
 		View::DrawMenuCenter(L"", options, selectedOption);
-		auto tmp = InputHandle::Get();
-		if (soundOnOff == L"True") {
+		auto tmp = InputHandle::Get();										// Get input from user
+		if (soundEffect == L"True") {
 			Utils::PlayKeyPressSound();
 		}
-		// Get input from user
 		// Input Handle
 		// Normal Navigation
-		if (tmp == L"w" || tmp == L"W") {
-			selectedOption = (selectedOption - 1 + maxOption) % maxOption;	// Cycle effect
+		if (Utils::keyMeanUp(tmp)) {
+			selectedOption = Utils::modCycle(selectedOption - 1, options.size());
 		}
-		if (tmp == L"s" || tmp == L"S") {
-			selectedOption = (selectedOption + 1) % maxOption;				// Cycle effect
+		if (Utils::keyMeanDown(tmp)) {
+			selectedOption = Utils::modCycle(selectedOption + 1, options.size());
 		}
 		// Shortcut
 		if (tmp == Language::GetString(L"NEW_GAME_SHORTCUT")) {

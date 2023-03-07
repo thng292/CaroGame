@@ -3,8 +3,8 @@
 #include "InputHandle.h"
 #include "View.h"
 #include "Language.h"
-#include"Utils.h"
-#include"Config.h"
+#include "Utils.h"
+#include "Config.h"
 using namespace std;
 namespace MainMenu {
 	void AmongUs(int x, int y, View::Color mat, View::Color mau);       // Paint Among us

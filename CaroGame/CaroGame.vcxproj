@@ -177,6 +177,7 @@
     <ClInclude Include="Setting.h" />
     <ClInclude Include="StartUp.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>

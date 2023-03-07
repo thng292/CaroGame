@@ -6,6 +6,12 @@ NavigationHost::NavigationHost(const std::string& Start, const ViewFuncMap& link
 	_Links = links;
 	Context["No exist"] = nullptr;
 	while (_CurrentScreen.name != Navigate::EXIT) {
+#if _DEBUG
+		if (!_Links.contains(_CurrentScreen.name)) {
+			throw 404;
+			return;
+		}
+#endif // N_DEBUG
 		_Links[_CurrentScreen.name](*this);
 	}
 }

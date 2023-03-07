@@ -121,8 +121,8 @@
 int main() {
 	View::Setup();							// Setting up the screen
 	Language::LoadLanguageFromFile("asset/language/vi.txt");
-	NavigationHost NavHost("MainMenu",		
-		{	
+	NavigationHost NavHost("StartUpScreen",
+		{
 			{"GameModeTypeView", GameView::GameModeTypeView},
 			{"GameModeVersusView", GameView::GameModeVersusView},
 			{"GameScreenView", GameView::GameScreenView},
@@ -139,7 +139,7 @@ int main() {
 		}
 	);
 
-	
+
 	// App start here
-	
+
 }
