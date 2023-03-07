@@ -1,3 +1,3 @@
-﻿Music=False
-LanguageFilePath=asset/language/vi.txt
-SoundEffect=False
+﻿LanguageFilePath=asset/language/vi.txt
+Music=False
+SoundEffect=True

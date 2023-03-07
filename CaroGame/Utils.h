@@ -3,11 +3,11 @@
 #include <cwctype>
 #include "InputHandle.h"
 #include "Audio.h"
+#include "Utils.h"
 
 namespace Utils {
 	static Audio::AudioPlayer OnKeyPressSound(Audio::Sound::OnKey);
 
-#include "Utils.h"
 
 	inline bool keyMatchPattern(const std::wstring& key, std::initializer_list<std::wstring> patterns) {
 		bool res = 0;

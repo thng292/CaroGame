@@ -152,12 +152,6 @@
     <ClInclude Include="GameState.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Setting.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StartUp.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Container.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
@@ -175,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="Label.h">
       <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartUp.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

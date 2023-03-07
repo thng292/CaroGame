@@ -20,7 +20,7 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 	std::vector<std::wstring> titles;
 	std::vector<std::wstring> options;
 	bool musicSetting = Config::GetSetting(L"Music") == L"True";
-	bool soundEffectSetting = Config::GetSetting(L"SoundEffect") == L"True";
+	auto& soundEffectSetting = Config::GetSetting(L"SoundEffect");
 	{
 		const auto controlHint1 = std::format(
 			L"A, W, S, D, Arrow Keys: {}, Space: {}",
@@ -47,7 +47,7 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			musicSetting
 			? Language::GetString(L"ON_TITLE")
 			: Language::GetString(L"OFF_TITLE"),
-			soundEffectSetting
+			soundEffectSetting == L"True"
 			? Language::GetString(L"ON_TITLE")
 			: Language::GetString(L"OFF_TITLE"),
 		};
@@ -77,12 +77,14 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			View::WriteToView(posCenter.first + titlesWidth, posCenter.second + i, options[i], 0, i == select);
 		}
 		View::WriteToView(
-			posCenter.first, posCenter.second + titles.size() + 1, 
-			Language::GetString(L"NAVIGATE_BACK_TITLE"), 
+			posCenter.first, posCenter.second + titles.size() + 1,
+			Language::GetString(L"NAVIGATE_BACK_TITLE"),
 			Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0],
 			select == titles.size());
 		auto tmp = InputHandle::Get();
-		Utils::PlayKeyPressSound();
+		if (soundEffectSetting == L"True") {
+			Utils::PlayKeyPressSound();
+		}
 		if (tmp == L"B" || tmp == L"b") {
 			return NavHost.Back();
 		}
@@ -111,7 +113,7 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 				musicSetting = !musicSetting;
 				break;
 			case 2:
-				soundEffectSetting = !soundEffectSetting;
+				soundEffectSetting = (soundEffectSetting == L"True" ? L"False" : L"True");
 				break;
 			case 3:
 				return NavHost.Back();
