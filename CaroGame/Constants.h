@@ -8,7 +8,6 @@ namespace Constants {
 	// AI const
 	const int PLAYER_AI = -1, PLAYER_HUMAN = 1;
 	const std::wstring PLAYER_HUMAN_string = L"X", PLAYER_AI_string = L"O";
-	const int WIN_VALUE_COUNT = 5;
 	const int INF = 1000, NULL_VALUE = -5;
 	const int MAX_SCORE = 100;
 	const int WIN_SCORE_THRESHOLD = 32;
@@ -16,7 +15,14 @@ namespace Constants {
 	const int DEPTH = 3;
 
 	//Game const
+	struct Player {
+		short value;
+		std::wstring symbol;
+	};
 	const short BOARD_SIZE = 13;
+	const Player PLAYER_ONE = { -1, L"X" };
+	const Player PLAYER_TWO = { 1, L"O" };
+	const int WIN_VALUE_COUNT = 5;
 	
 
 	// Asset path

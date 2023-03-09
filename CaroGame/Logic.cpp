@@ -162,7 +162,7 @@ namespace Logic {
 			|| CheckLeftDiagonalWin(boardGameMatrix, rowCur, colCur, playerValue)
 			|| CheckHorizontalWin(boardGameMatrix, rowCur, colCur, playerValue)
 			|| CheckVerticalWin(boardGameMatrix, rowCur, colCur, playerValue)) {
-			return (playerValue == Constants::PLAYER_HUMAN) ? -1 : 1;
+			return 1;
 		}
 
 		if (CheckDraw(boardGameMatrix, moveCount)) {

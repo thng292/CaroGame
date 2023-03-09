@@ -2,6 +2,20 @@
 #include "Navigate.h"
 
 namespace GameView {
+	const short GAME_MODE_PVP = 0;
+	const short GAME_MODE_PVE = 1;
+
+	const short GAME_TYPE_NORMAL = 0;
+	const short GAME_TYPE_RUSH = 1;
+
+	const short AI_DIFFICULTY_EASY = 0;
+	const short AI_DIFFICULTY_NORMAL = 1;
+	const short AI_DIFFICULTY_HARD = 2;
+
+	const std::string GAME_STATE = "GAME_STATE";
+
+	typedef std::vector<std::vector<short>> GameBoard;
+
 	// View when choosing PvP / PvE
 	void GameModeVersusView(NavigationHost& NavHost);
 

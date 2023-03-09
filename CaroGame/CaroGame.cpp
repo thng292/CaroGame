@@ -4,6 +4,7 @@
 #include "Setting.h"
 #include "GameScreen.h"
 #include "GameView.h"
+#include "InputBox.h"
 
 
 
@@ -120,8 +121,8 @@
 //DEMO PURPOSE ONLY
 int main() {
 	View::Setup();							// Setting up the screen
-	Language::LoadLanguageFromFile("asset/language/vi.txt");
-	NavigationHost NavHost("StartUpScreen",
+	Language::LoadLanguageFromFile("asset/language/en.txt");
+	NavigationHost NavHost("GameModeTypeView",
 		{
 			{"GameModeTypeView", GameView::GameModeTypeView},
 			{"GameModeVersusView", GameView::GameModeVersusView},
@@ -138,7 +139,25 @@ int main() {
 			{"Setting", Setting::SettingScreen}
 		}
 	);
+	/*std::vector<std::wstring> s = { L"Player 1's name:", L"Player 2's name:" };
 
+	std::wstring a;
+	bool maxReached = false;
+	while (1) {
+		InputBox::DrawInputBox(s, 1, a, maxReached, 6);
+		auto tmp = InputHandle::Get();
+		if (tmp == L"ESC") {
+			a.pop_back();
+			maxReached = false;
+		}
+		else {
+			if (a.length() < 6) a += tmp;
+			else maxReached = true;
+		}
+	}
+
+
+	char c = _getch();*/
 
 	// App start here
 
