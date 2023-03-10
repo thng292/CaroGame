@@ -212,10 +212,15 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 				Constants::Player curPlayer = (isPlayerOneTurn)? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
 				GameAction::MakeMove(gameBoard, moveCount, row, col, curPlayer.value);
 				gameScreen.boardContainer.DrawToBoardContainerCell(row, col, curPlayer.symbol);
+				curGameState.moveList.push_back({ row, col });
+				gameScreen.logContainer.DrawToLogContainer(curGameState.moveList, curGameState.playerNameOne, curGameState.playerNameTwo);
 
 				const short GAME_STATE = Logic::GetGameState(gameBoard, moveCount, row, col, curPlayer.value);
 				switch (GAME_STATE) {
 				case 1:
+					if (isPlayerOneTurn) curGameState.playerScoreOne++;
+					else curGameState.playerScoreTwo++;
+
 					View::WriteToView(80, 5, curPlayer.symbol + L" won");
 					endGame = 1;
 					break;
@@ -229,6 +234,8 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 		}
 	}
 	auto tmp = InputHandle::Get();
+	curGameState.moveList.clear();
+	NavHost.SetContext(GAME_STATE, curGameState);
 	return NavHost.Navigate("ReplayMenuView");
 }
 

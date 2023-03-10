@@ -3,7 +3,6 @@
 #include "Constants.h"
 #include "CornersHandler.h"
 
-
 GameScreen::GameScreen(short x, short y) {
 	boardContainer.xCoord = x, boardContainer.yCoord = y;
 	x += Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH + 5;
@@ -11,14 +10,19 @@ GameScreen::GameScreen(short x, short y) {
 	const short X_PIVOT = x; // Resets X to original position (next to board)
 	InitElement(timerContainerOne, x, y, 12, 2, 3, 1);
 	x += timerContainerOne.cellWidth;
-	InitElement(winCountContainerOne, x, y, 7, 2, 2, 1);
+
+	InitElement(winCountContainerOne, x, y, 7, 2, 3, 1);
 	x += winCountContainerOne.cellWidth;
+
 	InitElement(playerContainerOne, x, y, 6, 2, 3, 1);
 	x += playerContainerOne.cellWidth;
+
 	InitElement(playerContainerTwo, x, y, 6, 2, 3, 1);
 	x += playerContainerTwo.cellWidth;
-	InitElement(winCountContainerTwo, x, y, 7, 2, 2, 1);
+
+	InitElement(winCountContainerTwo, x, y, 7, 2, 3, 1);
 	x += winCountContainerTwo.cellWidth;
+
 	InitElement(timerContainerTwo, x, y, 12, 2, 3, 1);
 
 	x = X_PIVOT;
@@ -71,7 +75,17 @@ void GameScreen::DrawToElements(GameState gameState)
 
 	playerInfoContainerOne.DrawToContainer(gameState.playerNameOne);
 	playerInfoContainerTwo.DrawToContainer(gameState.playerNameTwo);
+	
+	std::wstring playerScoreOne = 
+		(gameState.playerScoreOne < 10) ? 
+		std::format(L"0{}", gameState.playerScoreOne) : std::format(L"{}", gameState.playerScoreOne);
 
+	std::wstring playerScoreTwo =
+		(gameState.playerScoreTwo < 10) ?
+		std::format(L"0{}", gameState.playerScoreTwo) : std::format(L"{}", gameState.playerScoreTwo);
+
+	winCountContainerOne.DrawToContainer(playerScoreOne);
+	winCountContainerTwo.DrawToContainer(playerScoreTwo);
 
 }
 
