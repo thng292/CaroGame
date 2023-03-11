@@ -25,7 +25,6 @@ void Container::DrawToLogContainer(
 	size_t startIndex = valueListSize - numOfValueDisplay;
 
 	std::wstring playerName, playerSymbol;
-	//std::wstring clearString = ;
 
 	DWORD tmp = 0;
 	HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);

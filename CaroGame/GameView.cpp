@@ -13,6 +13,8 @@
 
 void GameView::GameModeVersusView(NavigationHost& NavHost)
 {
+	GameState curGameState = std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
+
 	short selectedOption = 0;
 	const short MAX_OPTIONS = 2;
 	std::wstring label = Language::GetString(L"LABEL_GAME_MODE");
@@ -21,7 +23,6 @@ void GameView::GameModeVersusView(NavigationHost& NavHost)
 		{Language::GetString(L"OPTION_MODE_PVE"), Language::GetString(L"OPTION_MODE_PVE")[0]} 
 	};
 
-	GameState curGameState = std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
 	while (1) {
 		View::DrawMenuCenter(label, options, selectedOption);
@@ -170,7 +171,6 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
 	View::Goto(gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET, gameScreen.boardContainer.yCoord + BoardContainer::Y_OFFSET);
 
-	//View::WriteToView(20, 20, curGameState.playerNameOne);
 	while (!endGame) {
 		auto tmp = InputHandle::Get();
 		if (Utils::keyMeanUp(tmp)) {
@@ -214,6 +214,18 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 				gameScreen.boardContainer.DrawToBoardContainerCell(row, col, curPlayer.symbol);
 				curGameState.moveList.push_back({ row, col });
 				gameScreen.logContainer.DrawToLogContainer(curGameState.moveList, curGameState.playerNameOne, curGameState.playerNameTwo);
+
+				// AI's turn
+				if (curGameState.gameMode == GAME_MODE_PVE) {
+					/*isPlayerOneTurn = !isPlayerOneTurn;
+					curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
+
+					std::pair<short, short>moveAI = GetBestMove(gameBoard, moveCount, row, col);
+					GameAction::MakeMove(gameBoard, moveCount, moveAI.first, moveAI.second, curPlayer.value);
+					gameScreen.boardContainer.DrawToBoardContainerCell(row, col, curPlayer.symbol);
+					curGameState.moveList.push_back({ moveAI.first, moveAI.second });
+					gameScreen.logContainer.DrawToLogContainer(curGameState.moveList, curGameState.playerNameOne, curGameState.playerNameTwo);*/
+				}
 
 				const short GAME_STATE = Logic::GetGameState(gameBoard, moveCount, row, col, curPlayer.value);
 				switch (GAME_STATE) {
