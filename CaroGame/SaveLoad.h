@@ -10,11 +10,11 @@ namespace SaveLoad {
 		const std::filesystem::path& dir = Constants::SAVE_PATH
 	);
 
-	GameState Load(
+	std::optional<GameState> Load(
 		const std::filesystem::path& filePath
 	);
 
-	inline GameState Load(
+	inline std::optional<GameState> Load(
 		const std::wstring& name,
 		const std::filesystem::path& dir = Constants::SAVE_PATH
 	) {

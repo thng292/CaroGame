@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,6 +145,7 @@
     <ClCompile Include="InputHandle.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="Language.cpp" />
+    <ClCompile Include="LoadScreen.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Navigate.cpp" />
@@ -170,6 +172,7 @@
     <ClInclude Include="InputHandle.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="Language.h" />
+    <ClInclude Include="LoadScreen.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Navigate.h" />

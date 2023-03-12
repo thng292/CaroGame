@@ -24,8 +24,11 @@ bool SaveLoad::Save(const GameState& data, const std::wstring& name, const std::
     return 1;
 }
 
-GameState SaveLoad::Load(const std::filesystem::path& filePath) {
+std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath) {
     auto file = FileHandle::OpenInFile(filePath);
+    if (file.fail()) {
+        return {};
+    }
     GameState data;
     file >> data.playerNameOne;
     file >> data.playerScoreOne;

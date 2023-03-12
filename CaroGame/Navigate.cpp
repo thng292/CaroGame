@@ -9,7 +9,6 @@ NavigationHost::NavigationHost(const std::string& Start, const ViewFuncMap& link
 			Draw404(*this);
 		}
 		else {
-
 			_Links[_CurrentScreen.name](*this);
 		}
 	}
@@ -38,6 +37,7 @@ void NavigationHost::HistoryPop() {
 	_History.pop();
 }
 
+//No return
 void NavigationHost::NavigateStack(const std::string& path) {
 	// Save current screen
 	HANDLE StdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -63,7 +63,12 @@ void NavigationHost::Back() {
 	View::ClearScreen();
 	if (_CurrentScreen.prevScreenBuffer != nullptr) {
 		SMALL_RECT tmp = { 0,0,Navigate::CONSOLE_WIDTH - 1,Navigate::CONSOLE_HEIGHT - 1 };
-		WriteConsoleOutput(GetStdHandle(STD_OUTPUT_HANDLE), _CurrentScreen.prevScreenBuffer, { Navigate::CONSOLE_WIDTH, Navigate::CONSOLE_HEIGHT }, { 0,0 }, &tmp);
+		WriteConsoleOutput(
+			GetStdHandle(STD_OUTPUT_HANDLE), 
+			_CurrentScreen.prevScreenBuffer, 
+			{ Navigate::CONSOLE_WIDTH, Navigate::CONSOLE_HEIGHT }, 
+			{ 0,0 }, &tmp
+		);
 		delete[] _CurrentScreen.prevScreenBuffer;
 	}
 	_CurrentScreen = _History.top();

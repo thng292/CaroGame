@@ -96,7 +96,7 @@ namespace View {
 		Color bgColor = DEFAULT_BACKGROUND_COLOR
 	);
 
-	void DrawMenu(
+	Rect DrawMenu(
 		short x, short y,
 		const std::wstring& title,
 		const std::vector<Option>& optionsList,
@@ -107,7 +107,7 @@ namespace View {
 		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
 	);
 
-	void DrawMenuCenter(
+	Rect DrawMenuCenter(
 		std::wstring title,
 		std::vector<Option> optionsList,
 		size_t selected,

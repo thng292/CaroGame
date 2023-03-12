@@ -26,14 +26,16 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 		const auto controlHint1 = std::format(
 			L"A, W, S, D, Arrow Keys: {}, Space: {}",
 			Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-			Language::GetString(L"APPLY_LABEL")
+			Language::GetString(L"APPLY_KEY_TITLE")
 		);
-		View::WriteToView(59 - controlHint1.size() / 2, 29 - 4, controlHint1);
+
 		const auto controlHint2 = std::format(
 			L"Enter: {}, B: {}",
 			Language::GetString(L"SELECT_KEY_TITLE"),
 			Language::GetString(L"NAVIGATE_BACK_TITLE")
 		);
+
+		View::WriteToView(59 - controlHint1.size() / 2, 29 - 4, controlHint1);
 		View::WriteToView(59 - controlHint2.size() / 2, 29 - 3, controlHint2);
 	}
 	while (true)
@@ -132,6 +134,9 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
 			Config::SaveUserSetting();
 			auto tmp = Language::GetString(L"APPLY_SUCCESSFULLY");
 			View::WriteToView(59 - tmp.size() / 2, 2, tmp);
+		}
+		if (tmp == L"B" || tmp == L"b") {
+			return NavHost.Back();
 		}
 		View::ClearRect(DrawnRect);
 	}

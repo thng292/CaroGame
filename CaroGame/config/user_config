@@ -1,4 +1,3 @@
-﻿Music=False
+﻿SoundEffect=False
+Music=False
 LanguageFilePath=asset/language/en.txt
-SoundEffect=True
-UndoOption=

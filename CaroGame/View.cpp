@@ -53,12 +53,13 @@ void View::WriteToView(
 	View::Color backgroundColor
 ) {
 	View::Goto(x, y);
+	static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (highlight) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+		SetConsoleTextAttribute(STD_HANDLE,
 			(int(highlightColor) << 4) | int(highlightTextColor));
 	}
 	else {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+		SetConsoleTextAttribute(STD_HANDLE,
 			(int(backgroundColor) << 4) | int(textColor));
 	}
 	if (shortcut) {
@@ -82,12 +83,13 @@ void View::WriteToView(
 	View::Color backgroundColor
 ) {
 	View::Goto(x, y);
+	static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (highlight) {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+		SetConsoleTextAttribute(STD_HANDLE,
 			(int(highlightColor) << 4) | int(highlightTextColor));
 	}
 	else {
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+		SetConsoleTextAttribute(STD_HANDLE,
 			(int(backgroundColor) << 4) | int(textColor));
 	}
 	std::wcout << str;
@@ -157,7 +159,7 @@ inline std::pair<short, short> CalcCenter(
 	return { 59 - width / 2, 14 - height / 2 };
 }
 
-void View::DrawMenu(
+View::Rect View::DrawMenu(
 	short x, short y,
 	const std::wstring& title,
 	const std::vector<Option>& optionsList,
@@ -170,7 +172,8 @@ void View::DrawMenu(
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),(int(backgroundColor) << 4) | int(textColor));
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList, title);
-	View::DrawRect({ y, x, x + w, y + h - 1 });
+	View::Rect res = { y, x, x + w, y + h - 1 };
+	View::DrawRect(res);
 	short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
 	short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
 	if (title.length()) {
@@ -187,9 +190,10 @@ void View::DrawMenu(
 			highlightTextColor, 
 			backgroundColor);
 	}
+	return res;
 }
 
-void View::DrawMenuCenter(
+View::Rect View::DrawMenuCenter(
 	std::wstring title,
 	std::vector<Option> optionsList,
 	size_t selected,
@@ -201,7 +205,7 @@ void View::DrawMenuCenter(
 	short w = CalcWidth(optionsList, title);
 	short h = CalcHeight(optionsList, title);
 	auto tmp = CalcCenter(w, h);
-	View::DrawMenu(tmp.first, tmp.second,
+	return View::DrawMenu(tmp.first, tmp.second,
 		title, optionsList, selected,
 		textColor, highlightColor,
 		highlightTextColor, backgroundColor);

@@ -2,12 +2,13 @@
 #include <wchar.h>
 #include <format>
 #include <Windows.h>
+#include <array>
 #include "Constants.h"
 #pragma comment(lib, "Winmm.lib")
 
 // To be changed
 namespace Audio {
-	static const wchar_t* SoundName[] = {
+	static const std::array<std::wstring, 2> SoundName = { 
 		L".wav",
 		L"onKey.wav"
 	};

@@ -60,9 +60,9 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 			case 0:
 				return NavHost.Navigate("New Game");						// Nho return
 			case 1:
-				return NavHost.Navigate("Load Game");						// Nho return
+				return NavHost.Navigate("Load");						// Nho return
 			case 2:
-				return NavHost.Navigate("Replay Game");
+				return NavHost.Navigate("Replay");
 			case 3:
 				return NavHost.Navigate("Setting");
 			case 4:

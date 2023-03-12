@@ -1,6 +1,8 @@
 #pragma once
 #include <initializer_list>
 #include <cwctype>
+#include <chrono>
+#include <time.h>
 #include "InputHandle.h"
 #include "Audio.h"
 #include "Utils.h"
@@ -82,5 +84,18 @@ namespace Utils {
 		size_t tmp = line.find_first_of(delim);
 		return { line.substr(0, tmp), line.substr(tmp + 1) };
 	}
+
+	inline tm filesystem_time_to_time_t_local(std::filesystem::file_time_type fileTime) {
+		auto tmp = std::chrono::system_clock
+				::to_time_t(std::chrono::clock_cast
+					<std::chrono::system_clock>(fileTime));
+		tm res;
+		localtime_s(&res, &tmp);
+		return res;
+	}
+
+	std::wstring filesystem_time_to_wstr_local(std::filesystem::file_time_type fileTime);
+
+	std::wstring CatStringSpaceBetween(int width, const std::wstring& str1, const std::wstring& str2);
 };
 
