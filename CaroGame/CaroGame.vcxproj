@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -140,8 +140,10 @@
     <ClCompile Include="CornersHandler.cpp" />
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="FileHandle.cpp" />
+    <ClCompile Include="GameAction.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="InputHandle.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="Language.cpp" />
@@ -166,9 +168,11 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="CornersHandler.h" />
     <ClInclude Include="FileHandle.h" />
+    <ClInclude Include="GameAction.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameView.h" />
+    <ClInclude Include="InputBox.h" />
     <ClInclude Include="InputHandle.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="Language.h" />

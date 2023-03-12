@@ -108,6 +108,9 @@
     <ClCompile Include="LoadScreen.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputBox.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -181,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadScreen.h">
-      <Filter>Screens\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

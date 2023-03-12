@@ -3,19 +3,21 @@
 #include "Container.h"
 #include "Label.h"
 #include "BoardContainer.h"
+#include "GameState.h"
 
 // Class for the game's UI
 class GameScreen {
 public:
 	BoardContainer boardContainer;
-	Container timerContainer1, timerContainer2;
-	Container playerContainer1, playerContainer2;
-	Container winCountContainer1, winCountContainer2;
-	Container playerInfoContainer1, playerInfoContainer2;
+	Container timerContainerOne, timerContainerTwo;
+	Container playerContainerOne, playerContainerTwo;
+	Container winCountContainerOne, winCountContainerTwo;
+	Container playerInfoContainerOne, playerInfoContainerTwo;
 	Container logContainer;
 
 	GameScreen(short x, short y);
 	void DrawGameScreen();
+	void DrawToElements(GameState gameState);
 
 private:
 	void InitElement(
