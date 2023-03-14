@@ -1,12 +1,20 @@
 
 #include "MainMenu.h"
+void MainMenu::Logo_Win(NavigationHost& NavHost,int x,int y) {
+
+}
+
+
+
 
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 7;										// Number of option
-	int x = 32;                                                             // Vi tri bat dau ve 
+	int x = 33;                                                             // Vi tri bat dau ve 
 	int y = 2;                                                              // Vi tri bat dau ve 
+	MainMenu::Logo_Win( NavHost,1,1);
 	MainMenu::Logo(x, y);
+	//MainMenu::AmongUs(5, 12, View::Color::RED, View::Color::LIGHT_CYAN);
 	vector<View::Option> options = {
 			{Language::GetString(L"NEW_GAME_TITLE"),Language::GetString(L"NEW_GAME_SHORTCUT")[0]},
 			{Language::GetString(L"LOAD_TITLE"),Language::GetString(L"LOAD_SHORTCUT")[0]},
@@ -18,7 +26,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 	};
 	auto& soundEffect = Config::GetSetting(L"SoundEffect");
 	while (1) {																			// Main while loop
-		View::DrawMenuCenter(L"", options, selectedOption);
+		View::DrawMenu(54,12,L"", options, selectedOption);
 		auto tmp = InputHandle::Get();										// Get input from user
 		if (soundEffect == L"True") {
 			Utils::PlayKeyPressSound();
