@@ -149,6 +149,7 @@
     <ClCompile Include="Language.cpp" />
     <ClCompile Include="LoadScreen.cpp" />
     <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="Logo.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Navigate.cpp" />
     <ClCompile Include="SaveLoad.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Language.h" />
     <ClInclude Include="LoadScreen.h" />
     <ClInclude Include="Logic.h" />
+    <ClInclude Include="Logo.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Navigate.h" />
     <ClInclude Include="SaveLoad.h" />
