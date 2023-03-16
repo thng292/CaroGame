@@ -7,6 +7,7 @@
 #include "Config.h"
 using namespace std;
 namespace Logo {
+	void Deadpool(NavigationHost& NavHost, int x, int y);
 	void Logo_Draw(NavigationHost& NavHost, int x, int y, View::Color a1, View::Color a2, View::Color a3, View::Color a4, View::Color a5);
 	void Logo_Win(NavigationHost& NavHost, int x, int y, View::Color a1, View::Color a2, View::Color a3, View::Color a4, View::Color a5);
 	void Logo_Lose(NavigationHost& NavHost, int x, int y, View::Color a1, View::Color a2, View::Color a3, View::Color a4, View::Color a5);
