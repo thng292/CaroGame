@@ -8,7 +8,7 @@
 
 // To be changed
 namespace Audio {
-	static const std::array<std::wstring, 2> SoundName = { 
+	static constexpr std::array SoundName{ 
 		L".wav",
 		L"onKey.wav"
 	};

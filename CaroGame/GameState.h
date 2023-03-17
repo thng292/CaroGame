@@ -3,7 +3,7 @@
 #include <string>
 
 struct GameState {
-	std::vector<std::pair<short, short>>moveList;
+	std::vector<std::pair<short, short>> moveList;
 
 	short playerTimeOne = 0;
 
