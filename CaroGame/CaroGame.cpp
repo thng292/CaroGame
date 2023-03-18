@@ -9,6 +9,18 @@
 int main() {
 	View::Setup();							// Setting up the screen
 	Language::LoadLanguageFromFile("asset/language/en.txt");
+	/*while (true)
+	{
+		auto tmp = _getwch();
+		std::wcout << tmp << ' ';
+	}*/
+	std::wstring inpTxt = L"Thong";
+	while (true)
+	{
+		View::Input(10, 10, L"Your Name", inpTxt, true, [&inpTxt](auto newTxt) {
+			inpTxt = newTxt;
+		});
+	}
  	NavigationHost NavHost("StartUpScreen",
 		{
 			{"GameModeTypeView",			GameView::GameModeTypeView			},

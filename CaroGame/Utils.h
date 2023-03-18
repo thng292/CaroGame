@@ -10,6 +10,14 @@
 namespace Utils {
 	static Audio::AudioPlayer OnKeyPressSound(Audio::Sound::OnKey);
 
+	inline bool keyMatchPattern(wchar_t key, const std::initializer_list<wchar_t>& patterns) {
+		bool res = 0;
+		for (auto& pattern : patterns)
+		{
+			res |= (pattern == key);
+		}
+		return res;
+	}
 
 	inline bool keyMatchPattern(const std::wstring& key, const std::initializer_list<std::wstring>& patterns) {
 		bool res = 0;
