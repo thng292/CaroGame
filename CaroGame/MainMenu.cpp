@@ -3,14 +3,15 @@
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 	static short selectedOption = 0;										// User option
 	static const short maxOption = 7;										// Number of option
-	int x = 33;                                                             // Vi tri bat dau ve 
-	int y = 2;                                                              // Vi tri bat dau ve 
-	//Logo::Logo_Caro(x, y);
+	                                                              // Vi tri bat dau ve 
+	Logo::Logo_Caro(32, 1);
 	//Logo::AmongUs(5, 12, View::Color::LIGHT_CYAN, View::Color::RED);
 	//Logo::Logo_Draw(NavHost, 1, 1, View::Color::WHITE, View::Color::LIGHT_YELLOW, View::Color::YELLOW, View::Color::GREEN, View::Color::LIGHT_GREEN);
 	//Logo::Logo_Win(NavHost, 1, 1, View::Color::WHITE, View::Color::LIGHT_RED, View::Color::RED, View::Color::LIGHT_MAGENTA, View::Color::MAGENTA);
 	//Logo::Logo_Lose(NavHost, 1, 21,View::Color::WHITE,View::Color::LIGHT_CYAN,View::Color::CYAN,View::Color::LIGHT_BLUE,View::Color::BLUE);
-	Logo::Deadpool( NavHost, 1,  1);
+	Logo::Deadpool( NavHost, 8,  5);
+	Logo::Captain(NavHost, 79, 5);
+	
 	vector<View::Option> options = {
 			{Language::GetString(L"NEW_GAME_TITLE"),Language::GetString(L"NEW_GAME_SHORTCUT")[0]},
 			{Language::GetString(L"LOAD_TITLE"),Language::GetString(L"LOAD_SHORTCUT")[0]},
@@ -22,7 +23,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
 	};
 	auto& soundEffect = Config::GetSetting(L"SoundEffect");
 	while (1) {																			// Main while loop
-		//View::DrawMenu(54, 12, L"", options, selectedOption);
+		View::DrawMenu(52, 13, L"", options, selectedOption);
 		auto tmp = InputHandle::Get();										// Get input from user
 		if (soundEffect == L"True") {
 			Utils::PlayKeyPressSound();
