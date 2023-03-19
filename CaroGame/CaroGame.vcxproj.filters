@@ -117,6 +117,9 @@
     <ClCompile Include="Logo.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SaveScreen.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Logo.h">
       <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveScreen.h">
+      <Filter>Screens\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,134 +1,174 @@
 #pragma once
+#include <io.h>
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <cwctype>
+#include <fcntl.h>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 #include <Windows.h>
-#include <fcntl.h>
-#include <io.h>
+#include <functional>
+#include <initializer_list>
+#include "InputHandle.h"
+#include "Utils.h"
 
 namespace View {
-	//All posible color
-	enum class Color : char {
-		BLACK = 0,
-		BLUE = 1,
-		GREEN = 2,
-		CYAN = 3,
-		RED = 4,
-		MAGENTA = 5,
-		YELLOW = 6,
-		WHITE = 7,
-		GRAY = 8,
-		LIGHT_BLUE = 9,
-		LIGHT_GREEN = 10,
-		LIGHT_CYAN = 11,
-		LIGHT_RED = 12,
-		LIGHT_MAGENTA = 13,
-		LIGHT_YELLOW = 14,
-		BRIGHT_WHITE = 15
-	};
+    //All posible color
+    enum class Color : char {
+        BLACK = 0,
+        BLUE = 1,
+        GREEN = 2,
+        CYAN = 3,
+        RED = 4,
+        MAGENTA = 5,
+        YELLOW = 6,
+        WHITE = 7,
+        GRAY = 8,
+        LIGHT_BLUE = 9,
+        LIGHT_GREEN = 10,
+        LIGHT_CYAN = 11,
+        LIGHT_RED = 12,
+        LIGHT_MAGENTA = 13,
+        LIGHT_YELLOW = 14,
+        BRIGHT_WHITE = 15
+    };
 
-	struct Rect {
-		short Top, Left, Right, Bottom;
-	};
+    struct Rect {
+        short Top, Left, Right, Bottom;
+    };
 
-	struct Option {
-		const std::wstring& option;
-		const wchar_t underline;
-	};
+    struct CursorPosition {
+        long x, y;
+    };
 
-	const Color DEFAULT_TEXT_COLOR = Color::BLACK;
-	const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
-	const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
-	const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
-	const short DEFAULT_SCREEN_ATTRIBUTE = (int(DEFAULT_BACKGROUND_COLOR) << 4) | int(DEFAULT_TEXT_COLOR);
-	const short HPADDING = 3;
-	const short VPADDING = 1;
-	const short BORDER_WIDTH = 1;
+    struct Option {
+        const std::wstring& option;
+        const wchar_t underline;
+    };
 
-	// Setup console
-	void Setup();
+    const Color DEFAULT_TEXT_COLOR = Color::BLACK;
+    const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
+    const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
+    const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
+    const short DEFAULT_SCREEN_ATTRIBUTE = (int(DEFAULT_BACKGROUND_COLOR) << 4) | int(DEFAULT_TEXT_COLOR);
+    const short HPADDING = 3;
+    const short VPADDING = 1;
+    const short BORDER_WIDTH = 1;
 
-	// Set cursor position
-	inline void Goto(short x, short y) {
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, y });
-	}
+    // Setup console
+    void Setup();
 
-	// Print string to console
-	void WriteToView(
-		short x, short y, //Draw position
-		const std::wstring& str,
-		wchar_t shortcut = 0, //Character want to underline
-		bool highlight = false,
-		Color textColor = DEFAULT_TEXT_COLOR,
-		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
-	);
+    // Set cursor position
+    inline void Goto(short x, short y) {
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, y });
+    }
 
-	//Print character to console
-	void WriteToView(
-		short x, short y, //Draw position
-		wchar_t str,
-		bool highlight = false,
-		Color textColor = DEFAULT_TEXT_COLOR,
-		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
-	);
-	
-	inline std::wstring Underline(const std::wstring& str) {
-		return L"\033[4m" + str + L"\033[24m";
-	}
+    COORD GetCursorPos();
 
-	inline std::wstring Underline(wchar_t str) {
-		return	L"\033[4m" + std::wstring(1, str) + L"\033[24m";
-	}
+    // Print string to console
+    void WriteToView(
+        short x, short y, //Draw position
+        const std::wstring& str,
+        wchar_t shortcut = 0, //Character want to underline
+        bool highlight = false,
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
+        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+    );
 
-	void ClearScreen();
+    //Print character to console
+    void WriteToView(
+        short x, short y, //Draw position
+        wchar_t str,
+        bool highlight = false,
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
+        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+    );
 
-	void ClearRect(Rect area);
+    inline std::pair<short, short> CalcCenter(
+        short width, short height
+    ) {
+        return { 59 - width / 2, 14 - height / 2 };
+    }
 
-	void DrawRect(
-		const Rect& rect,
-		Color textColor = DEFAULT_TEXT_COLOR,
-		Color bgColor = DEFAULT_BACKGROUND_COLOR
-	);
+    inline std::wstring Underline(const std::wstring& str) {
+        return L"\033[4m" + str + L"\033[24m";
+    }
 
-	Rect DrawMenu(
-		short x, short y,
-		const std::wstring& title,
-		const std::vector<Option>& optionsList,
-		size_t selected,
-		Color textColor = DEFAULT_TEXT_COLOR,
-		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
-	);
+    inline std::wstring Underline(wchar_t str) {
+        return	L"\033[4m" + std::wstring(1, str) + L"\033[24m";
+    }
 
-	Rect DrawMenuCenter(
-		std::wstring title,
-		std::vector<Option> optionsList,
-		size_t selected,
-		Color textColor = DEFAULT_TEXT_COLOR,
-		Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-		Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-		Color backgroundColor = DEFAULT_BACKGROUND_COLOR
-	);
+    void ClearScreen();
 
-	void DrawTextWrapped(
-		short x, short y,
-		const std::wstring& text,
-		short maxRow, short maxWidth,
-		const std::wstring& overflowStr = L"...",
-		Color textColor = DEFAULT_TEXT_COLOR
-	);
+    void ClearRect(Rect area);
 
-	void DrawTextCenterdVertically(
-		short y,
-		const std::wstring& text,
-		Color textColor = DEFAULT_TEXT_COLOR
-	);
+    void DrawRect(
+        const Rect& rect,
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color bgColor = DEFAULT_BACKGROUND_COLOR
+    );
+
+    Rect DrawMenu(
+        short x, short y,
+        const std::wstring& title,
+        const std::vector<Option>& optionsList,
+        size_t selected,
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
+        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+    );
+
+    Rect DrawMenuCenter(
+        std::wstring title,
+        std::vector<Option> optionsList,
+        size_t selected,
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
+        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+    );
+
+    std::vector<std::wstring>
+    WrapText(
+        const std::wstring& text,
+        short maxRow, short maxWidth,
+        const std::wstring& overflowStr = L"..."
+    );
+
+    void DrawTextWrapped(
+        short x, short y,
+        const std::wstring& text,
+        short maxRow, short maxWidth,
+        const std::wstring& overflowStr = L"...",
+        Color textColor = DEFAULT_TEXT_COLOR
+    );
+
+    inline void DrawTextCenterdVertically(
+        short y, 
+        const std::wstring& text, 
+        Color textColor = DEFAULT_TEXT_COLOR
+    ) {
+        WriteToView((119 - text.size()) / 2, y, text, 0, 0, textColor);
+    }
+
+    wchar_t Input(
+        short x,
+        short y,
+        const std::wstring& leadingText,
+        std::wstring& inputText,
+        bool hasFocus = 0,
+        const std::function<void(std::wstring)>& onValueChange = [](std::wstring) {},
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color backgroundColor = DEFAULT_BACKGROUND_COLOR,
+        const std::function<bool(wchar_t)>& toogleFocus = [](wchar_t inp) -> bool {
+            return Utils::keyMatchPattern(inp, {L'\t', L'\r', L'\n', L'\x1b'});
+        }
+    );
 
 }
