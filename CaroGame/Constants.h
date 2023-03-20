@@ -5,26 +5,25 @@
 namespace Constants {
     const std::wstring version = L"0.1.0";
 
+    // Game const
+    struct Player {
+        short value;
+        std::wstring symbol;
+    };
 
-	//Game const
-	struct Player {
-		short value;
-		std::wstring symbol;
-	};
-	const short BOARD_SIZE = 13;
-	const short PAGE_SIZE = 10;
-	const std::string CURRENT_GAME = "CurrentGame";
-	const Player PLAYER_ONE = { 1, L"X" };
-	const Player PLAYER_TWO = { 2, L"O" };
-	const int WIN_VALUE_COUNT = 5;
+    const short BOARD_SIZE = 13;
+    const short PAGE_SIZE = 10;
+    const std::string CURRENT_GAME = "CurrentGame";
+    const Player PLAYER_ONE = {1, L"X"};
+    const Player PLAYER_TWO = {2, L"O"};
+    const int WIN_VALUE_COUNT = 5;
 
-	// AI const
+    // AI const
 
-
-	// Asset path
-	const std::wstring STR_ASSET_PATH = L"asset/";
-	const std::wstring STR_AUDIO_PATH = STR_ASSET_PATH + L"audio/";
-	const std::wstring STR_LANGUAGE_PATH = STR_ASSET_PATH + L"language/";
+    // Asset path
+    const std::wstring STR_ASSET_PATH = L"asset/";
+    const std::wstring STR_AUDIO_PATH = STR_ASSET_PATH + L"audio/";
+    const std::wstring STR_LANGUAGE_PATH = STR_ASSET_PATH + L"language/";
 
     const std::filesystem::path ASSET_PATH(STR_ASSET_PATH);
     const std::filesystem::path AUDIO_PATH(STR_AUDIO_PATH);

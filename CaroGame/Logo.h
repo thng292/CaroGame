@@ -5,7 +5,6 @@
 #include "Navigate.h"
 #include "Utils.h"
 #include "View.h"
-using namespace std;
 
 namespace Logo {
     void Captain(NavigationHost& NavHost, int x, int y);

@@ -8,7 +8,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
     Logo::Deadpool(NavHost, 8, 5);
     Logo::Captain(NavHost, 79, 5);
 
-    vector<View::Option> options = {
+    std::vector<View::Option> options = {
         {Language::GetString(L"NEW_GAME_TITLE"),
          Language::GetString(L"NEW_GAME_SHORTCUT")[0]},
         {Language::GetString(L"LOAD_TITLE"),

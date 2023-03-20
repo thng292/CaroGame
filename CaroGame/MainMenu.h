@@ -6,7 +6,6 @@
 #include "Navigate.h"
 #include "Utils.h"
 #include "View.h"
-using namespace std;
 
 namespace MainMenu {
 

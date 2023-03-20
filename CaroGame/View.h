@@ -152,8 +152,8 @@ namespace View {
     wchar_t Input(
         short x, short y, const std::wstring& leadingText,
         std::wstring& inputText, bool hasFocus = 0,
-        const std::function<void(const std::wstring&)>& onValueChange = [](const std::wstring&
-                                                                 ) {},
+        const std::function<void(const std::wstring&)>& onValueChange =
+            [](const std::wstring&) {},
         const std::function<bool(wchar_t)>& toogleFocus = defaultToogleFocus,
         Color textColor = DEFAULT_TEXT_COLOR,
         Color backgroundColor = DEFAULT_BACKGROUND_COLOR,

@@ -7,7 +7,6 @@
 #include "StartUp.h"
 
 int main() {
-    View::Setup();  // Setting up the screen
     Language::LoadLanguageFromFile("asset/language/en.txt");
     NavigationHost NavHost(
         "StartUpScreen",
