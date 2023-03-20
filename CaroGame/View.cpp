@@ -273,7 +273,7 @@ static COORD DrawInput(
 
 wchar_t View::Input(
     short x, short y, const std::wstring& leadingText, std::wstring& inputText,
-    bool hasFocus, const std::function<void(std::wstring)>& onValueChange,
+    bool hasFocus, const std::function<void(const std::wstring&)>& onValueChange,
     const std::function<bool(wchar_t)>& toogleFocus, Color textColor,
     Color backgroundColor, Color focusTextColor, Color focusBackgroundColor
 ) {

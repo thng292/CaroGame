@@ -145,15 +145,16 @@ namespace View {
         WriteToView((119 - text.size()) / 2, y, text, 0, 0, textColor);
     }
 
+    inline bool defaultToogleFocus(wchar_t inp) {
+        return Utils::keyMatchPattern(inp, {L'\t', L'\r', L'\n', L'\x1b'});
+    }
+
     wchar_t Input(
         short x, short y, const std::wstring& leadingText,
         std::wstring& inputText, bool hasFocus = 0,
-        const std::function<void(std::wstring)>& onValueChange = [](std::wstring
+        const std::function<void(const std::wstring&)>& onValueChange = [](const std::wstring&
                                                                  ) {},
-        const std::function<bool(wchar_t)>& toogleFocus = [](wchar_t inp
-                                                          ) -> bool {
-            return Utils::keyMatchPattern(inp, {L'\t', L'\r', L'\n', L'\x1b'});
-        },
+        const std::function<bool(wchar_t)>& toogleFocus = defaultToogleFocus,
         Color textColor = DEFAULT_TEXT_COLOR,
         Color backgroundColor = DEFAULT_BACKGROUND_COLOR,
         Color focusTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,

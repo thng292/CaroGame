@@ -29,24 +29,58 @@ bool SaveLoad::Save(
 std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath) {
     auto file = FileHandle::OpenInFile(filePath);
     if (file.fail()) {
-        return {};
+        return std::nullopt;
     }
     GameState data;
-    file >> data.playerNameOne;
-    file >> data.playerScoreOne;
-    file >> data.playerTimeOne;
 
+    file >> data.playerNameOne;
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
+    file >> data.playerScoreOne;
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
+    file >> data.playerTimeOne;
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
     file >> data.playerNameTwo;
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
     file >> data.playerScoreTwo;
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
     file >> data.playerTimeTwo;
+    if (file.fail()) {
+        return std::nullopt;
+    }
 
     file >> data.gameMode;
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
     file >> data.aiDifficulty;
-
+    if (file.fail()) {
+        return std::nullopt;
+    }
+    
     short a, b;
     while (!file.eof()) {
         file >> a >> b;
+        if (file.fail()) {
+            return std::nullopt;
+        }
         data.moveList.emplace_back(a, b);
     }
+    
     return data;
 }

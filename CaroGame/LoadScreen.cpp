@@ -1,8 +1,8 @@
 #include "LoadScreen.h"
 
-void EmptyLoad(NavigationHost& NavHost);
+static void EmptyLoad(NavigationHost& NavHost);
 
-void LoadFailed(NavigationHost& NavHost);
+static void LoadFailed(NavigationHost& NavHost);
 
 static void DrawHints() {
     View::DrawTextCenterdVertically(
@@ -35,26 +35,29 @@ static void LoadPage(
     options.emplace_back(pageIndicator, 0);
 }
 
-static struct SortTemporary {
+struct SortTemporary {
     size_t foundIndex;
     std::wstring name;
     size_t mapIndex;
 };
 
-static void Search(
-    std::vector<std::pair<std::wstring, std::filesystem::path>>& allOptions,
+std::vector<std::pair<std::wstring, std::filesystem::path>> Search(
+    const std::vector<std::pair<std::wstring, std::filesystem::path>>&
+        allOptions,
     const std::wstring& searchTerm
 ) {
+    size_t n = allOptions.size();
     std::vector<SortTemporary> tmp;
-    for (size_t i = 0; i < allOptions.size(); i++) {
+    tmp.resize(n);
+    for (size_t i = 0; i < n; i++) {
         auto ttt = allOptions[i].second.filename().wstring();
-        tmp.emplace_back(ttt.find(searchTerm), std::move(ttt), i);
+        tmp[i] = {ttt.find(searchTerm), std::move(ttt), i};
     }
 
     std::sort(
         tmp.begin(), tmp.end(),
         [](const SortTemporary& a, const SortTemporary& b) {
-            if (a.foundIndex >= 0 && b.foundIndex >= 0) {
+            if (a.foundIndex != size_t(-1) && b.foundIndex != size_t(-1)) {
                 return a.name > b.name;
             }
 
@@ -62,9 +65,15 @@ static void Search(
                 return a.name > b.name;
             }
 
-            return a.foundIndex > b.foundIndex;
+            return a.foundIndex < b.foundIndex;
         }
     );
+    std::vector<std::pair<std::wstring, std::filesystem::path>> vtmp;
+    vtmp.resize(n);
+    for (size_t i = 0; i < n; i++) {
+        vtmp[i] = allOptions[tmp[i].mapIndex];
+    }
+    return std::move(vtmp);
 }
 
 void LoadScreen::Load(NavigationHost& NavHost) {
@@ -113,23 +122,29 @@ void LoadScreen::Load(NavigationHost& NavHost) {
     std::wstring tmp;
 
     auto drawMain = [&] {
-        auto tmp = View::DrawMenuCenter(title, options, selected);
-        View::Input(
-            searchX, 29 - 5, leadingText, searchInput, isSearching,
-            [&](const std::wstring newInp) {
-                searchInput = newInp;
-                Search(allOptions, searchInput);
-                currentPage = 0;
-                LoadPage(
-                    allOptions, selected, maxPage, pageIndicator, options, 0
-                );
-            }
-        );
-        return tmp;
+        return View::DrawMenuCenter(title, options, selected);
     };
 
     while (1) {
         drawnRect = drawMain();
+        if (View::Input(
+                searchX, 29 - 5, leadingText, searchInput, isSearching,
+                [&](const std::wstring newInp) {
+                    searchInput = newInp;
+                    allOptions = Search(allOptions, searchInput);
+                    currentPage = 0;
+                    LoadPage(
+                        allOptions, selected, maxPage, pageIndicator, options, 0
+                    );
+                    View::ClearRect(drawnRect);
+                    drawnRect = drawMain();
+                }
+            )) {
+            isSearching = 0;
+            continue;
+        };
+        View::Goto(0, 0);
+        isSearching = 0;
         tmp = InputHandle::Get();
         if (soundSetting == Config::Value_True) {
             Utils::PlayKeyPressSound();
@@ -179,7 +194,7 @@ void LoadScreen::Load(NavigationHost& NavHost) {
     }
 }
 
-void EmptyLoad(NavigationHost& NavHost) {
+static void EmptyLoad(NavigationHost& NavHost) {
     View::DrawMenuCenter(
         Language::GetString(L"EMPTY_SAVE_TITLE"),
         {
@@ -193,7 +208,7 @@ void EmptyLoad(NavigationHost& NavHost) {
     NavHost.Back();
 }
 
-void LoadFailed(NavigationHost& NavHost) {
+static void LoadFailed(NavigationHost& NavHost) {
     View::DrawMenuCenter(Language::GetString(L"LOAD_FAILED_TITLE"), {}, 0);
     InputHandle::Get();
     return NavHost.Back();
