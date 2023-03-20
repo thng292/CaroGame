@@ -61,7 +61,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost) {
 
 void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
     DrawHints();
-    auto title = Language::GetString(L"ENABLE_MUSIC_Q");
+    auto& title = Language::GetString(L"ENABLE_MUSIC_Q");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_SHORTCUT")[0]},
@@ -103,7 +103,7 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost) {
 
 void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost) {
     DrawHints();
-    auto title = Language::GetString(L"ENABLE_SOUND_EFFECT_Q");
+    auto& title = Language::GetString(L"ENABLE_SOUND_EFFECT_Q");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_SHORTCUT")[0]},
