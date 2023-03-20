@@ -50,7 +50,6 @@ Generated\ Files/
 TestResult.xml
 nunit-*.xml
 
-# Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
@@ -361,4 +360,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-user_config
+user_config/
+saves/
+replay/

@@ -1,4 +1,5 @@
 #include "Logic.h"
+
 #include "Constants.h"
 
 namespace Logic {
@@ -75,7 +76,8 @@ namespace Logic {
 
 		}
 
-		return 0;
+        return 0;
+    }
 
 	}
 	bool CheckHorizontalWin(
@@ -141,7 +143,8 @@ namespace Logic {
 			}
 		}
 
-		return 0;
+        return 0;
+    }
 
 	}
 	bool CheckDraw(const GameAction::Board& boardGameMatrix, const short& moveCount) {

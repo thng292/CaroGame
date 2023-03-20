@@ -1,26 +1,25 @@
 #pragma once
-#include <vector>
 #include <string>
+#include <vector>
 
 struct GameState {
-	std::vector<std::pair<short, short>> moveList;
+    std::vector<std::pair<short, short>> moveList;
 
-	short playerTimeOne = 0;
+    short playerTimeOne = 0;
 
-	short playerTimeTwo = 0;
+    short playerTimeTwo = 0;
 
-	short playerScoreOne = 0;
+    short playerScoreOne = 0;
 
-	short playerScoreTwo = 0;
+    short playerScoreTwo = 0;
 
-	std::wstring playerNameOne;
+    std::wstring playerNameOne;
 
-	std::wstring playerNameTwo;
+    std::wstring playerNameTwo;
 
-	short gameType = 0;
+    short gameType = 0;
 
-	short gameMode = 0;
+    short gameMode = 0;
 
-	short aiDifficulty = 0;
-
+    short aiDifficulty = 0;
 };

@@ -1,5 +1,3 @@
 #include "SaveScreen.h"
 
-void SaveScreen::SaveScreen(NavigationHost& NavHost) {
-    
-}
+void SaveScreen::SaveScreen(NavigationHost& NavHost) {}

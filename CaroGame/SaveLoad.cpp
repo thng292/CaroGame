@@ -1,11 +1,14 @@
 #include "SaveLoad.h"
 
-bool SaveLoad::Save(const GameState& data, const std::wstring& name, const std::filesystem::path& dir) {
+bool SaveLoad::Save(
+    const GameState& data, const std::wstring& name,
+    const std::filesystem::path& dir
+) {
     auto file = FileHandle::OpenOutFile(dir.generic_wstring() + name);
     if (file.fail()) {
         return false;
     }
-    
+
     file << data.playerNameOne << '\n';
     file << data.playerScoreOne << '\n';
     file << data.playerTimeOne << '\n';
@@ -17,8 +20,7 @@ bool SaveLoad::Save(const GameState& data, const std::wstring& name, const std::
     file << data.gameMode << '\n';
     file << data.aiDifficulty << '\n';
 
-    for (auto& i : data.moveList)
-    {
+    for (auto& i : data.moveList) {
         file << i.first << ' ' << i.second << '\n';
     }
     return 1;
@@ -42,8 +44,7 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath) {
     file >> data.aiDifficulty;
 
     short a, b;
-    while (!file.eof())
-    {
+    while (!file.eof()) {
         file >> a >> b;
         data.moveList.emplace_back(a, b);
     }

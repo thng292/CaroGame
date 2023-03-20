@@ -1,12 +1,12 @@
 #pragma once
 #include <format>
 #include <numeric>
-#include "View.h"
-#include "Navigate.h"
-#include "Language.h"
+
 #include "Config.h"
+#include "Language.h"
+#include "Navigate.h"
+#include "View.h"
 
 namespace Setting {
-	void SettingScreen(NavigationHost& NavHost);
+    void SettingScreen(NavigationHost& NavHost);
 };
-

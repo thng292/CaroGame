@@ -3,99 +3,99 @@
 #include "GameView.h"
 
 
-void GameView::GameModeVersusView(NavigationHost& NavHost)
-{
-	GameState curGameState = std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
+void GameView::GameModeVersusView(NavigationHost& NavHost) {
+    GameState curGameState =
+        std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-	short selectedOption = 0;
-	const short MAX_OPTIONS = 2;
-	std::wstring label = Language::GetString(L"LABEL_GAME_MODE");
-	std::vector<View::Option> options = { 
-		{Language::GetString(L"OPTION_MODE_PVP"), Language::GetString(L"OPTION_MODE_PVP")[0]},
-		{Language::GetString(L"OPTION_MODE_PVE"), Language::GetString(L"OPTION_MODE_PVE")[0]} 
-	};
+    short selectedOption = 0;
+    const short MAX_OPTIONS = 2;
+    std::wstring label = Language::GetString(L"LABEL_GAME_MODE");
+    std::vector<View::Option> options = {
+        {Language::GetString(L"OPTION_MODE_PVP"),
+         Language::GetString(L"OPTION_MODE_PVP")[0]},
+        {Language::GetString(L"OPTION_MODE_PVE"),
+         Language::GetString(L"OPTION_MODE_PVE")[0]}
+    };
 
+    while (1) {
+        View::DrawMenuCenter(label, options, selectedOption);
 
-	while (1) {
-		View::DrawMenuCenter(label, options, selectedOption);
+        auto tmp = InputHandle::Get();
+        if (Utils::keyMeanUp(tmp)) {
+            selectedOption = Utils::modCycle(selectedOption - 1, MAX_OPTIONS);
+        }
+        if (Utils::keyMeanDown(tmp)) {
+            selectedOption = Utils::modCycle(selectedOption + 1, MAX_OPTIONS);
+        }
+        if (tmp == L"1") {
+            curGameState.gameMode = GAME_MODE_PVP;
+            NavHost.SetContext(GAME_STATE, curGameState);
+            return NavHost.Navigate("PlayerNameView");
+        }
+        if (tmp == L"2") {
+            curGameState.gameMode = GAME_MODE_PVE;
+            NavHost.SetContext(GAME_STATE, curGameState);
+            return NavHost.Navigate("AIDifficultyView");
+        }
+        if (tmp == L"e" || tmp == L"E") {
+            return NavHost.Back();
+        }
 
-		auto tmp = InputHandle::Get();
-		if (Utils::keyMeanUp(tmp)) {
-			selectedOption = Utils::modCycle(selectedOption - 1, MAX_OPTIONS);
-		}
-		if (Utils::keyMeanDown(tmp)) {
-			selectedOption = Utils::modCycle(selectedOption + 1, MAX_OPTIONS);
-		}
-		if (tmp == L"1") {
-			curGameState.gameMode = GAME_MODE_PVP;
-			NavHost.SetContext(GAME_STATE, curGameState);
-			return NavHost.Navigate("PlayerNameView");
-		}
-		if (tmp == L"2") {
-			curGameState.gameMode = GAME_MODE_PVE;
-			NavHost.SetContext(GAME_STATE, curGameState);
-			return NavHost.Navigate("AIDifficultyView");
-		}
-		if (tmp == L"e" || tmp == L"E") {
-			return NavHost.Back();
-		}
-
-		if (tmp == L"\r") {
-			switch (selectedOption)
-			{
-			case 0:
-				curGameState.gameMode = GAME_MODE_PVP;
-				NavHost.SetContext(GAME_STATE, curGameState);
-				return NavHost.Navigate("PlayerNameView");
-			case 1:
-				curGameState.gameMode = GAME_MODE_PVE;
-				NavHost.SetContext(GAME_STATE, curGameState);
-				return NavHost.Navigate("AIDifficultyView");
-			}
-		}
-	}
-
+        if (tmp == L"\r") {
+            switch (selectedOption) {
+                case 0:
+                    curGameState.gameMode = GAME_MODE_PVP;
+                    NavHost.SetContext(GAME_STATE, curGameState);
+                    return NavHost.Navigate("PlayerNameView");
+                case 1:
+                    curGameState.gameMode = GAME_MODE_PVE;
+                    NavHost.SetContext(GAME_STATE, curGameState);
+                    return NavHost.Navigate("AIDifficultyView");
+            }
+        }
+    }
 }
 
-void GameView::PlayerNameView(NavigationHost& NavHost)
-{
-	GameState curGameState = std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
+void GameView::PlayerNameView(NavigationHost& NavHost) {
+    GameState curGameState =
+        std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-	std::vector<std::wstring> labelList;
-	std::vector<std::string> contextList;
-	std::wstring value;
-	bool maxReached = false;
-	const short MAX_LENGTH = 10;
-	size_t curLabel = 0;
+    std::vector<std::wstring> labelList;
+    std::vector<std::string> contextList;
+    std::wstring value;
+    bool maxReached = false;
+    const short MAX_LENGTH = 10;
+    size_t curLabel = 0;
 
-	if (curGameState.gameMode == GAME_MODE_PVE) {
-		labelList = { L"Player's name:"};
-		curGameState.playerNameTwo = L"Gura";
-	}
-	else {
-		labelList = { L"Player 1's name:", L"Player 2's name:" };
-	}
+    if (curGameState.gameMode == GAME_MODE_PVE) {
+        labelList = {L"Player's name:"};
+        curGameState.playerNameTwo = L"Gura";
+    } else {
+        labelList = {L"Player 1's name:", L"Player 2's name:"};
+    }
 
-	const short MAX_LABEL = labelList.size();
+    const short MAX_LABEL = labelList.size();
 
-	while (curLabel < MAX_LABEL) {
-		InputBox::DrawInputBox(labelList, curLabel, value, maxReached, MAX_LENGTH);
-		auto tmp = InputHandle::Get();
-		if (tmp == L"ESC") {
-			value.pop_back();
-		}
-		else if (tmp == L"\r") {
-			if (curLabel == 0) curGameState.playerNameOne = value;
-			else curGameState.playerNameTwo = value;
-			value = L"";
-			curLabel++;
-		}
-		else {
-			if (value.length() < MAX_LENGTH) value += tmp;
-		}
-	}
-	NavHost.SetContext(GAME_STATE, curGameState);
-	return NavHost.Navigate("GameScreenView");
+    while (curLabel < MAX_LABEL) {
+        InputBox::DrawInputBox(
+            labelList, curLabel, value, maxReached, MAX_LENGTH
+        );
+        auto tmp = InputHandle::Get();
+        if (tmp == L"ESC") {
+            value.pop_back();
+        } else if (tmp == L"\r") {
+            if (curLabel == 0)
+                curGameState.playerNameOne = value;
+            else
+                curGameState.playerNameTwo = value;
+            value = L"";
+            curLabel++;
+        } else {
+            if (value.length() < MAX_LENGTH) value += tmp;
+        }
+    }
+    NavHost.SetContext(GAME_STATE, curGameState);
+    return NavHost.Navigate("GameScreenView");
 }
 
 void GameView::GameModeTypeView(NavigationHost& NavHost)
@@ -112,44 +112,43 @@ void GameView::GameModeTypeView(NavigationHost& NavHost)
 		{Language::GetString(L"OPTION_TYPE_NORMAL"), Language::GetString(L"OPTION_TYPE_NORMAL")[0]}
 	};
 
-	while (1) {
-		View::DrawMenuCenter(label, options, selectedOption);
+    while (1) {
+        View::DrawMenuCenter(label, options, selectedOption);
 
-		auto tmp = InputHandle::Get();
-		if (Utils::keyMeanUp(tmp)) {
-			selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
-		}
-		if (Utils::keyMeanDown(tmp)) {
-			selectedOption = (selectedOption + 1) % MAX_OPTIONS;
-		}
-		if (tmp == L"1") {
-			curGameState.gameType = GAME_TYPE_RUSH;
-			NavHost.SetContext(GAME_STATE, curGameState);
-			return NavHost.Navigate("GameModeVersusView");
-		}
-		if (tmp == L"2") {
-			curGameState.gameType = GAME_TYPE_NORMAL;
-			NavHost.SetContext(GAME_STATE, curGameState);
-			return NavHost.Navigate("GameModeVersusView");
-		}
-		if (tmp == L"e" || tmp == L"E") {
-			return NavHost.Back();
-		}
+        auto tmp = InputHandle::Get();
+        if (Utils::keyMeanUp(tmp)) {
+            selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
+        }
+        if (Utils::keyMeanDown(tmp)) {
+            selectedOption = (selectedOption + 1) % MAX_OPTIONS;
+        }
+        if (tmp == L"1") {
+            curGameState.gameType = GAME_TYPE_RUSH;
+            NavHost.SetContext(GAME_STATE, curGameState);
+            return NavHost.Navigate("GameModeVersusView");
+        }
+        if (tmp == L"2") {
+            curGameState.gameType = GAME_TYPE_NORMAL;
+            NavHost.SetContext(GAME_STATE, curGameState);
+            return NavHost.Navigate("GameModeVersusView");
+        }
+        if (tmp == L"e" || tmp == L"E") {
+            return NavHost.Back();
+        }
 
-		if (tmp == L"\r") {
-			switch (selectedOption)
-			{
-			case 0:
-				curGameState.gameType = GAME_TYPE_RUSH;
-				NavHost.SetContext(GAME_STATE, curGameState);
-				return NavHost.Navigate("GameModeVersusView");
-			case 1:
-				curGameState.gameType = GAME_TYPE_NORMAL;
-				NavHost.SetContext(GAME_STATE, curGameState);
-				return NavHost.Navigate("GameModeVersusView");
-			}
-		}
-	}
+        if (tmp == L"\r") {
+            switch (selectedOption) {
+                case 0:
+                    curGameState.gameType = GAME_TYPE_RUSH;
+                    NavHost.SetContext(GAME_STATE, curGameState);
+                    return NavHost.Navigate("GameModeVersusView");
+                case 1:
+                    curGameState.gameType = GAME_TYPE_NORMAL;
+                    NavHost.SetContext(GAME_STATE, curGameState);
+                    return NavHost.Navigate("GameModeVersusView");
+            }
+        }
+    }
 }
 
 void GameView::UpdateGame(
@@ -202,7 +201,10 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 	GameAction::Board gameBoard(Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0));
 	bool isPlayerOneTurn = 1, endGame = 0;
 
-	View::Goto(gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET, gameScreen.boardContainer.yCoord + BoardContainer::Y_OFFSET);
+    View::Goto(
+        gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET,
+        gameScreen.boardContainer.yCoord + BoardContainer::Y_OFFSET
+    );
 
 	AI myAI;
 	myAI.hash.initTable();
@@ -239,9 +241,9 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 			}
 		}
 
-		if (tmp == L"p" || tmp == L"P") {
-			return NavHost.Navigate("ReplayMenuView");
-		}
+        if (tmp == L"p" || tmp == L"P") {
+            return NavHost.Navigate("ReplayMenuView");
+        }
 
 
 		if (tmp == L"\r") {
@@ -277,20 +279,23 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 	return NavHost.Navigate("ReplayMenuView");
 }
 
-void GameView::AIDifficultyView(NavigationHost& NavHost)
-{
-	GameState curGameState = std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
+void GameView::AIDifficultyView(NavigationHost& NavHost) {
+    GameState curGameState =
+        std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-	short selectedOption = 0;
-	const short MAX_OPTIONS = 3;
-	std::wstring label = Language::GetString(L"LABEL_AI_DIFICULTY");
-	std::vector<View::Option> options = {
-		{Language::GetString(L"OPTION_AI_EASY"), Language::GetString(L"OPTION_AI_EASY")[0]},
-		{Language::GetString(L"OPTION_AI_NORMAL"), Language::GetString(L"OPTION_AI_NORMAL")[0]},
-		{Language::GetString(L"OPTION_AI_HARD"), Language::GetString(L"OPTION_AI_HARD")[0]}
-	};
-	while (1) {
-		View::DrawMenuCenter(label, options, selectedOption);
+    short selectedOption = 0;
+    const short MAX_OPTIONS = 3;
+    std::wstring label = Language::GetString(L"LABEL_AI_DIFICULTY");
+    std::vector<View::Option> options = {
+        {Language::GetString(L"OPTION_AI_EASY"),
+         Language::GetString(L"OPTION_AI_EASY")[0]  },
+        {Language::GetString(L"OPTION_AI_NORMAL"),
+         Language::GetString(L"OPTION_AI_NORMAL")[0]},
+        {Language::GetString(L"OPTION_AI_HARD"),
+         Language::GetString(L"OPTION_AI_HARD")[0]  }
+    };
+    while (1) {
+        View::DrawMenuCenter(label, options, selectedOption);
 
 		auto tmp = InputHandle::Get();
 		if (Utils::keyMeanUp(tmp)) {
