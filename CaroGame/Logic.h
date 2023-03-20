@@ -1,35 +1,42 @@
 #pragma once
-#include <vector>
+
+#include "GameAction.h"
 
 using namespace std;
 
 namespace Logic {
-    int GetGameState(
-        const vector<vector<short>>& boardGameMatrix, const int& moveCount,
-        const int& rowCur, const int& colCur, const int& playerValue
-    );
 
-    bool CheckDraw(
-        const vector<vector<short>>& boardGameMatrix, const int& moveCount
-    );
+	const short NULL_VALUE = 0;
+	const short WIN_VALUE = 2;
+	const short DRAW_VALUE = 1;
 
-    bool CheckVerticalWin(
-        const vector<vector<short>>& boardGameMatrix, const int& rowCur,
-        const int& colCur, const int& playerValue
-    );
+	short GetGameState(
+		const GameAction::Board& board,
+		const short& moveCount,
+		const GameAction::Point& move,
+		const short& playerValue);
 
-    bool CheckHorizontalWin(
-        const vector<vector<short>>& boardGameMatrix, const int& rowCur,
-        const int& colCur, const int& playerValue
-    );
+	bool CheckDraw(
+		const GameAction::Board& board,
+		const short& moveCount);
 
-    bool CheckLeftDiagonalWin(
-        const vector<vector<short>>& boardGameMatrix, const int& rowCur,
-        const int& colCur, const int& playerValue
-    );
+	bool CheckVerticalWin(
+		const GameAction::Board& board,
+		const GameAction::Point& move,
+		const short& playerValue);
 
-    bool CheckRightDiagonalWin(
-        const vector<vector<short>>& boardGameMatrix, const int& rowCur,
-        const int& colCur, const int& playerValue
-    );
-}  // namespace Logic
+	bool CheckHorizontalWin(
+		const GameAction::Board& board,
+		const GameAction::Point& move,
+		const short& playerValue);
+
+	bool CheckLeftDiagonalWin(
+		const GameAction::Board& board,
+		const GameAction::Point& move,
+		const short& playerValue);
+
+	bool CheckRightDiagonalWin(
+		const GameAction::Board& board,
+		const GameAction::Point& move,
+		const short& playerValue);
+}

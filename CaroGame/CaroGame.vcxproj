@@ -139,10 +139,12 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="CornersHandler.cpp" />
     <ClCompile Include="Demo.cpp" />
+    <ClCompile Include="Evaluation.cpp" />
     <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="GameAction.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="Hash.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="InputHandle.cpp" />
     <ClCompile Include="Label.cpp" />
@@ -169,11 +171,13 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="CornersHandler.h" />
+    <ClInclude Include="Evaluation.h" />
     <ClInclude Include="FileHandle.h" />
     <ClInclude Include="GameAction.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameView.h" />
+    <ClInclude Include="Hash.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="InputHandle.h" />
     <ClInclude Include="Label.h" />
