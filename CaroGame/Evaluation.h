@@ -1,21 +1,13 @@
 #pragma once
-#include <vector>
+#include "GameAction.h"
 
 using namespace std;
 
 namespace Evaluation {
-	int GetComboEval(
-		const vector<vector<short>>& boardGameArray,
-		const int& playerValue);
 
-	int GetGameStateEval(
-		const vector<vector<short>>& boardGameMatrix,
-		const int& moveCount,
-		const int& rowCur,
-		const int& colCur,
-		const int& playerValue);
+	const short tempBoost = 10;
 
-	int GetNodeValueEval(const vector<vector<short>>& boardGameMatrix,
-		const int& playerValue);
-
+	short GetComboEval(
+		const GameAction::Board& boardGameArray,
+		const short& playerValue);
 }

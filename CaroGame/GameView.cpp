@@ -1,15 +1,7 @@
-#include <vector>
+#include <format>
+
 #include "GameView.h"
-#include "View.h"
-#include "InputHandle.h"
-#include "GameScreen.h"
-#include "Constants.h"
-#include "Utils.h"
-#include "Language.h"
-#include "InputBox.h"
-#include "GameState.h"
-#include "Logic.h"
-#include "GameAction.h"
+
 
 void GameView::GameModeVersusView(NavigationHost& NavHost)
 {
@@ -109,6 +101,8 @@ void GameView::PlayerNameView(NavigationHost& NavHost)
 void GameView::GameModeTypeView(NavigationHost& NavHost)
 {
 	GameState curGameState;
+	NavHost.SetContext(GAME_STATE, curGameState);
+
 	short selectedOption = 0;
 	const short MAX_OPTIONS = 2;
 	
@@ -158,6 +152,45 @@ void GameView::GameModeTypeView(NavigationHost& NavHost)
 	}
 }
 
+void GameView::UpdateGame(
+	GameScreen gameScreen,
+	GameAction::Board &board,
+	short &moveCount, 
+	const GameAction::Point &move,
+	const Constants::Player &player, 
+	GameState &gameState) {
+
+	GameAction::MakeMove(board, moveCount, move, player.value);
+	gameScreen.boardContainer.DrawToBoardContainerCell(move.row, move.col, player.symbol);
+	gameState.moveList.push_back({ move.row, move.col });
+	gameScreen.logContainer.DrawToLogContainer(gameState.moveList, gameState.playerNameOne, gameState.playerNameTwo);
+}
+
+void GameView::HandleState(
+	const GameAction::Board &board,
+	const short& moveCount,
+	const GameAction::Point &move,
+	const Constants::Player &player,
+	const bool& isPlayerOneTurn,
+	GameState &curGameState,
+	bool& endGame) {
+	
+	short state = Logic::GetGameState(board, moveCount, move, player.value);
+	switch (state) {
+	case Logic::WIN_VALUE:
+		if (isPlayerOneTurn) curGameState.playerScoreOne++;
+		else curGameState.playerScoreTwo++;
+
+		View::WriteToView(80, 5, player.symbol + L" won");
+		endGame = 1;
+		break;
+	case Logic::DRAW_VALUE:
+		View::WriteToView(80, 5, L"Draw");
+		endGame = 1;
+		break;
+	}
+}
+
 void GameView::GameScreenView(NavigationHost& NavHost)
 {
 	GameState curGameState = std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
@@ -166,10 +199,14 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 	gameScreen.DrawToElements(curGameState);
 
 	short row = 0, col = 0, moveCount = 0;
-	GameBoard gameBoard(Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0));
+	GameAction::Board gameBoard(Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0));
 	bool isPlayerOneTurn = 1, endGame = 0;
 
 	View::Goto(gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET, gameScreen.boardContainer.yCoord + BoardContainer::Y_OFFSET);
+
+	AI myAI;
+	myAI.hash.initTable();
+	myAI.SetDifficulty(curGameState.aiDifficulty);
 
 	while (!endGame) {
 		auto tmp = InputHandle::Get();
@@ -210,37 +247,26 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 		if (tmp == L"\r") {
 			if (gameBoard[row][col] == 0) {
 				Constants::Player curPlayer = (isPlayerOneTurn)? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
-				GameAction::MakeMove(gameBoard, moveCount, row, col, curPlayer.value);
-				gameScreen.boardContainer.DrawToBoardContainerCell(row, col, curPlayer.symbol);
-				curGameState.moveList.push_back({ row, col });
-				gameScreen.logContainer.DrawToLogContainer(curGameState.moveList, curGameState.playerNameOne, curGameState.playerNameTwo);
+				GameAction::Point curMove = { row, col };
+
+				UpdateGame(gameScreen, gameBoard, moveCount, curMove, curPlayer, curGameState);
+				HandleState(gameBoard, moveCount, curMove, curPlayer, isPlayerOneTurn, curGameState, endGame);
+
 
 				// AI's turn
-				if (curGameState.gameMode == GAME_MODE_PVE) {
-					/*isPlayerOneTurn = !isPlayerOneTurn;
+				if (!endGame && curGameState.gameMode == GAME_MODE_PVE) {
+					myAI.UpdatePrivateValues(curMove);
+					isPlayerOneTurn = !isPlayerOneTurn;
 					curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
 
-					std::pair<short, short>moveAI = GetBestMove(gameBoard, moveCount, row, col);
-					GameAction::MakeMove(gameBoard, moveCount, moveAI.first, moveAI.second, curPlayer.value);
-					gameScreen.boardContainer.DrawToBoardContainerCell(row, col, curPlayer.symbol);
-					curGameState.moveList.push_back({ moveAI.first, moveAI.second });
-					gameScreen.logContainer.DrawToLogContainer(curGameState.moveList, curGameState.playerNameOne, curGameState.playerNameTwo);*/
+					curMove = myAI.GetBestMove(gameBoard, moveCount);
+					UpdateGame(gameScreen, gameBoard, moveCount, curMove, curPlayer, curGameState);
+					myAI.UpdatePrivateValues(curMove);
+
+					HandleState(gameBoard, moveCount, curMove, curPlayer, isPlayerOneTurn, curGameState, endGame);
 				}
 
-				const short GAME_STATE = Logic::GetGameState(gameBoard, moveCount, row, col, curPlayer.value);
-				switch (GAME_STATE) {
-				case 1:
-					if (isPlayerOneTurn) curGameState.playerScoreOne++;
-					else curGameState.playerScoreTwo++;
-
-					View::WriteToView(80, 5, curPlayer.symbol + L" won");
-					endGame = 1;
-					break;
-				case 0:
-					View::WriteToView(80, 5, L"Draw");
-					endGame = 1;
-					break;
-				}
+				
 				isPlayerOneTurn = !isPlayerOneTurn;
 			}
 		}
@@ -274,17 +300,17 @@ void GameView::AIDifficultyView(NavigationHost& NavHost)
 			selectedOption = (selectedOption + 1) % MAX_OPTIONS;
 		}
 		if (tmp == L"1") {
-			curGameState.aiDifficulty = AI_DIFFICULTY_EASY;
+			curGameState.aiDifficulty = AI::AI_DIFFICULTY_EASY;
 			NavHost.SetContext(GAME_STATE, curGameState);
 			return NavHost.Navigate("PlayerNameView");
 		}
 		if (tmp == L"2") {
-			curGameState.aiDifficulty = AI_DIFFICULTY_NORMAL;
+			curGameState.aiDifficulty = AI::AI_DIFFICULTY_NORMAL;
 			NavHost.SetContext(GAME_STATE, curGameState);
 			return NavHost.Navigate("PlayerNameView");
 		}
 		if (tmp == L"3") {
-			curGameState.aiDifficulty = AI_DIFFICULTY_HARD;
+			curGameState.aiDifficulty = AI::AI_DIFFICULTY_HARD;
 			NavHost.SetContext(GAME_STATE, curGameState);
 			return NavHost.Navigate("PlayerNameView");
 		}
@@ -296,16 +322,16 @@ void GameView::AIDifficultyView(NavigationHost& NavHost)
 			switch (selectedOption)
 			{
 			case 0:
-				curGameState.aiDifficulty = AI_DIFFICULTY_EASY;
+				curGameState.aiDifficulty = AI::AI_DIFFICULTY_EASY;
 				NavHost.SetContext(GAME_STATE, curGameState);
 				return NavHost.Navigate("PlayerNameView");
 			case 1:
-				curGameState.aiDifficulty = AI_DIFFICULTY_NORMAL;
+				curGameState.aiDifficulty = AI::AI_DIFFICULTY_NORMAL;
 				NavHost.SetContext(GAME_STATE, curGameState);
 				return NavHost.Navigate("PlayerNameView");
 
 			case 2:
-				curGameState.aiDifficulty = AI_DIFFICULTY_HARD;
+				curGameState.aiDifficulty = AI::AI_DIFFICULTY_HARD;
 				NavHost.SetContext(GAME_STATE, curGameState);
 				return NavHost.Navigate("PlayerNameView");
 			}
@@ -315,11 +341,49 @@ void GameView::AIDifficultyView(NavigationHost& NavHost)
 
 void GameView::ReplayMenuView(NavigationHost& NavHost)
 {
-	View::WriteToView(10, 10, L"Replay menu view, press Enter to continue");
-	auto tmp = InputHandle::Get();
-	if (tmp == L"\r") {
-		return NavHost.Navigate("PlayAgainView");
+	short selectedOption = 0;
+	const short MAX_OPTIONS = 2;
+
+	std::wstring label = Language::GetString(L"LABEL_SAVE_REPLAY");
+
+	std::vector<View::Option> options = {
+		{Language::GetString(L"OPTION_YES"), Language::GetString(L"OPTION_YES")[0]},
+		{Language::GetString(L"OPTION_NO"), Language::GetString(L"OPTION_NO")[0]}
+	};
+	
+	while (1) {
+		View::DrawMenuCenter(label, options, selectedOption);
+		auto tmp = InputHandle::Get();
+		if (Utils::keyMeanUp(tmp)) {
+			selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
+		}
+		if (Utils::keyMeanDown(tmp)) {
+			selectedOption = (selectedOption + 1) % MAX_OPTIONS;
+		}
+		if (tmp == L"1") {
+			return NavHost.Navigate("ReplaySaveView");
+		}
+		if (tmp == L"2") {
+			return NavHost.Navigate("PlayAgainView");
+		}
+
+		if (tmp == L"\r") {
+			switch (selectedOption)
+			{
+			case 0:
+				return NavHost.Navigate("ReplaySaveView");
+			case 1:
+				return NavHost.Navigate("PlayAgainView");
+			}
+		}
 	}
+	
+}
+
+void GameView::ReplaySaveView(NavigationHost& NavHost) {
+	View::WriteToView(20, 20, L"Replay saving view, press any key to continue");
+	auto tmp = InputHandle::Get();
+	return NavHost.Navigate("PlayAgainView");
 }
 
 void GameView::PlayAgainView(NavigationHost& NavHost) {
@@ -343,7 +407,7 @@ void GameView::PlayAgainView(NavigationHost& NavHost) {
 			return NavHost.Navigate("GameScreenView");
 		}
 		if (tmp == L"2") {
-			return NavHost.Navigate("GameModeVersusView");
+			return NavHost.Navigate("GameModeTypeView");
 		}
 		if (tmp == L"e" || tmp == L"E") {
 			return NavHost.Back();
@@ -355,7 +419,7 @@ void GameView::PlayAgainView(NavigationHost& NavHost) {
 			case 0:
 				return NavHost.Navigate("GameScreenView");
 			case 1:
-				return NavHost.Navigate("GameModeVersusView");
+				return NavHost.Navigate("GameModeTypeView");
 			}
 		}
 	}

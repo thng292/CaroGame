@@ -3,18 +3,17 @@
 
 namespace Logic {
 	bool CheckLeftDiagonalWin(
-		const vector<vector<short>>& boardGameMatrix,
-		const int& rowCur,
-		const int& colCur,
-		const int& playerValue) {
+		const GameAction::Board& boardGameMatrix,
+		const GameAction::Point& move,
+		const short& playerValue) {
 
-		int pointSameValueCount = 1;
-		for (int row = rowCur + 1, col = colCur + 1;
+		short poshortSameValueCount = 1;
+		for (short row = move.row + 1, col = move.col + 1;
 			row < boardGameMatrix.size() && col < boardGameMatrix.size();
 			++row, ++col) {
 			if (boardGameMatrix[row][col] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -25,10 +24,10 @@ namespace Logic {
 
 
 
-		for (int row = rowCur - 1, col = colCur - 1;row >= 0 && col >= 0; --row, --col) {
+		for (short row = move.row - 1, col = move.col - 1; row >= 0 && col >= 0; --row, --col) {
 			if (boardGameMatrix[row][col] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -42,18 +41,17 @@ namespace Logic {
 
 	}
 	bool CheckRightDiagonalWin(
-		const vector<vector<short>>& boardGameMatrix,
-		const int& rowCur,
-		const int& colCur,
-		const int& playerValue) {
+		const GameAction::Board& boardGameMatrix,
+		const GameAction::Point& move,
+		const short& playerValue) {
 
-		int pointSameValueCount = 1;
-		for (int row = rowCur - 1, col = colCur + 1;
+		short poshortSameValueCount = 1;
+		for (short row = move.row - 1, col = move.col + 1;
 			row >= 0 && col < boardGameMatrix.size();
 			--row, ++col) {
 			if (boardGameMatrix[row][col] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -62,12 +60,12 @@ namespace Logic {
 			}
 		}
 
-		for (int row = rowCur + 1, col = colCur - 1;
+		for (short row = move.row + 1, col = move.col - 1;
 			row < boardGameMatrix.size() && col >= 0;
 			++row, --col) {
 			if (boardGameMatrix[row][col] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -81,16 +79,15 @@ namespace Logic {
 
 	}
 	bool CheckHorizontalWin(
-		const vector<vector<short>>& boardGameMatrix,
-		const int& rowCur,
-		const int& colCur,
-		const int& playerValue) {
+		const GameAction::Board& boardGameMatrix,
+		const GameAction::Point& move,
+		const short& playerValue) {
 
-		int pointSameValueCount = 1;
-		for (int col = colCur + 1;col < boardGameMatrix.size();++col) {
-			if (boardGameMatrix[rowCur][col] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+		short poshortSameValueCount = 1;
+		for (short col = move.col + 1; col < boardGameMatrix.size(); ++col) {
+			if (boardGameMatrix[move.row][col] == playerValue) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -99,11 +96,11 @@ namespace Logic {
 			}
 		}
 
-		for (int col = colCur - 1;col >= 0;--col) {
-			if (boardGameMatrix[rowCur][col] == playerValue) {
-				pointSameValueCount++;
+		for (short col = move.col - 1; col >= 0; --col) {
+			if (boardGameMatrix[move.row][col] == playerValue) {
+				poshortSameValueCount++;
 
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -116,15 +113,14 @@ namespace Logic {
 
 	}
 	bool CheckVerticalWin(
-		const vector<vector<short>>& boardGameMatrix,
-		const int& rowCur,
-		const int& colCur,
-		const int& playerValue) {
-		int pointSameValueCount = 1;
-		for (int row = rowCur + 1;row < boardGameMatrix.size();++row) {
-			if (boardGameMatrix[row][colCur] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+		const GameAction::Board& boardGameMatrix,
+		const GameAction::Point& move,
+		const short& playerValue) {
+		short poshortSameValueCount = 1;
+		for (short row = move.row + 1; row < boardGameMatrix.size(); ++row) {
+			if (boardGameMatrix[row][move.col] == playerValue) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -133,10 +129,10 @@ namespace Logic {
 			}
 		}
 
-		for (int row = rowCur - 1;row >= 0;--row) {
-			if (boardGameMatrix[row][colCur] == playerValue) {
-				pointSameValueCount++;
-				if (pointSameValueCount == Constants::WIN_VALUE_COUNT) {
+		for (short row = move.row - 1; row >= 0; --row) {
+			if (boardGameMatrix[row][move.col] == playerValue) {
+				poshortSameValueCount++;
+				if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
 					return 1;
 				}
 			}
@@ -148,27 +144,26 @@ namespace Logic {
 		return 0;
 
 	}
-	bool CheckDraw(const vector<vector<short>>& boardGameMatrix, const int& moveCount) {
+	bool CheckDraw(const GameAction::Board& boardGameMatrix, const short& moveCount) {
 		return (moveCount == boardGameMatrix.size() * boardGameMatrix.size());
 	}
 
-	int GetGameState(
-		const vector<vector<short>>& boardGameMatrix,
-		const int& moveCount,
-		const int& rowCur,
-		const int& colCur,
-		const int& playerValue) {
-		if (CheckRightDiagonalWin(boardGameMatrix, rowCur, colCur, playerValue)
-			|| CheckLeftDiagonalWin(boardGameMatrix, rowCur, colCur, playerValue)
-			|| CheckHorizontalWin(boardGameMatrix, rowCur, colCur, playerValue)
-			|| CheckVerticalWin(boardGameMatrix, rowCur, colCur, playerValue)) {
-			return 1;
+	short GetGameState(
+		const GameAction::Board& board,
+		const short& moveCount,
+		const GameAction::Point& move,
+		const short& playerValue) {
+		if (CheckRightDiagonalWin(board, move, playerValue)
+			|| CheckLeftDiagonalWin(board, move, playerValue)
+			|| CheckHorizontalWin(board, move, playerValue)
+			|| CheckVerticalWin(board, move, playerValue)) {
+			return WIN_VALUE;
 		}
 
-		if (CheckDraw(boardGameMatrix, moveCount)) {
-			return 0;
+		if (CheckDraw(board, moveCount)) {
+			return DRAW_VALUE;
 		}
-		return Constants::NULL_VALUE;
+		return NULL_VALUE;
 	}
 }
 

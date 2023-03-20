@@ -14,14 +14,14 @@ int main() {
 		auto tmp = _getwch();
 		std::wcout << tmp << ' ';
 	}*/
-	std::wstring inpTxt = L"Thong";
+	/*std::wstring inpTxt = L"Thong";
 	while (true)
 	{
 		View::Input(10, 10, L"Your Name", inpTxt, true, [&inpTxt](auto newTxt) {
 			inpTxt = newTxt;
 		});
-	}
- 	NavigationHost NavHost("StartUpScreen",
+	}*/
+ 	NavigationHost NavHost("GameModeTypeView",
 		{
 			{"GameModeTypeView",			GameView::GameModeTypeView			},
 			{"GameModeVersusView",			GameView::GameModeVersusView		},
@@ -36,7 +36,8 @@ int main() {
 			{"FirstTimeSoundEffectScreen",	StartUp::FirstTimeSoundEffectScreen	},
 			{"MainMenu",					MainMenu::ScreenMainMenu			},
 			{"Setting",						Setting::SettingScreen				},
-			{"Load",						LoadScreen::Load					}
+			{"Load",						LoadScreen::Load					},
+			{"ReplaySaveView",					GameView::ReplaySaveView		},
 		}
 	);
 	

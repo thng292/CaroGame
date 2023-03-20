@@ -1,19 +1,31 @@
 #pragma once
-#include "GameView.h"
+#include <vector>
+#include "GameState.h"
+
+using namespace std;
 
 namespace GameAction {
+	struct Point {
+		short row, col;
+	};
+
+	typedef std::vector<vector<short>>Board;
+
 	void MakeMove(
-		GameView::GameBoard& gameBoard,
+		Board& board,
 		short& moveCount,
-		const short& row,
-		const short& col,
+		const Point& move,
 		const short& playerValue);
 
 	void UndoMove(
-		GameView::GameBoard& gameBoard,
+		Board& board,
 		short& moveCount,
-		const short& row,
-		const short& col,
-		const short& playerValue);
+		const Point& move);
 
+	void ResetGameState(
+		GameState& gameState
+	);
+
+	void InitBoard(Board& board, short& moveCount, Point& topLeftCorner, Point& bottomRightCorner);
+	//void InitBoard(vector<vector<short>>& boardGameMatrix, short& moveCount);
 }
