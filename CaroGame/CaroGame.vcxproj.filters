@@ -203,11 +203,11 @@
     <ClInclude Include="LoadScreen.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Logo.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SaveScreen.h">
       <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,5 +239,8 @@
     <Media Include="asset\audio\nhac_thua.mp3">
       <Filter>Resource Files\Audio</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang-format" />
   </ItemGroup>
 </Project>

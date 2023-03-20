@@ -1,0 +1,13 @@
+BasedOnStyle: Google    
+Language: Cpp
+ColumnLimit: 80
+IndentWidth: 4
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Left
+NamespaceIndentation: All
+SeparateDefinitionBlocks : Always
+SortIncludes: CaseSensitive
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements 
+SpaceBeforeRangeBasedForLoopColon: true
+Standard: Latest

@@ -205,6 +205,9 @@
     <Media Include="asset\audio\nhac_thua.mp3" />
     <Media Include="asset\audio\onKey.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang-format" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

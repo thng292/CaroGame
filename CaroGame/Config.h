@@ -1,25 +1,27 @@
 #pragma once
-#include <unordered_map>
 #include <any>
-#include "FileHandle.h"
+#include <unordered_map>
+
 #include "Constants.h"
+#include "FileHandle.h"
+
 namespace Config {
 
-	const std::wstring SoundEffect = L"SoundEffect";
-	const std::wstring BGMusic = L"Music";
-	const std::wstring UndoOption = L"UndoOption";
+    const std::wstring SoundEffect = L"SoundEffect";
+    const std::wstring BGMusic = L"Music";
+    const std::wstring UndoOption = L"UndoOption";
 
-	const std::wstring Value_True = L"True";
-	const std::wstring Value_False = L"False";
+    const std::wstring Value_True = L"True";
+    const std::wstring Value_False = L"False";
 
-	static std::unordered_map<std::wstring, std::wstring> Settings;
+    static std::unordered_map<std::wstring, std::wstring> Settings;
 
-	// Return if the setting is previously exist(first time or not)
-	bool LoadUserSetting();
+    // Return if the setting is previously exist(first time or not)
+    bool LoadUserSetting();
 
-	std::wstring& GetSetting(const std::wstring& name);
+    std::wstring& GetSetting(const std::wstring& name);
 
-	void SetSetting(const std::wstring& name, const std::wstring& data);
+    void SetSetting(const std::wstring& name, const std::wstring& data);
 
-	bool SaveUserSetting();
-};
+    bool SaveUserSetting();
+};  // namespace Config

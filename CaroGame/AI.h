@@ -3,9 +3,9 @@
 //#include "Game.h"
 //#include "Constants.h"
 //
-//using namespace std;
+// using namespace std;
 //
-//namespace AI {
+// namespace AI {
 //	int Eval(
 //		const vector<vector<short>> &boardGameMatrix,
 //		const int &moveCount,
@@ -14,7 +14,7 @@
 //		bool isMaximizingPlayer);
 //
 //	int MiniMax(
-//		vector<vector<short>>& boardGameMatrix, 
+//		vector<vector<short>>& boardGameMatrix,
 //		int &moveCount,
 //		const int& rowLastMove,
 //		const int& colLastMove,
