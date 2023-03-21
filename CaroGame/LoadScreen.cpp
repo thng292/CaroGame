@@ -4,216 +4,94 @@ static void EmptyLoad(NavigationHost& NavHost);
 
 static void LoadFailed(NavigationHost& NavHost);
 
-void LoadScreen::DrawHints() {
-    View::DrawTextCenterdVertically(
-        29 - 3,
-        std::format(
-            L"A, W, S, D, Arrow Keys: {}",
-            Language::GetString(L"NAVIGATION_KEYS_TITLE")
-        )
-    );
-    View::DrawTextCenterdVertically(
-        29 - 2,
-        std::format(
-            L"B: {}, Enter: {}, Tab: {}",
-            Language::GetString(L"NAVIGATE_BACK_TITLE"),
-            Language::GetString(L"SELECT_KEY_TITLE"),
-            Language::GetString(L"SEARCH_TITLE")
-        )
-    );
-}
-
-std::vector<std::pair<std::wstring, std::filesystem::path>>
-LoadScreen::LoadAllOptions(
-    const std::filesystem::path& dir = Constants::SAVE_PATH
-) {
-    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles(dir);
-    std::sort(
-        availableLoadFiles.begin(),
-        availableLoadFiles.end(),
-        [](const FileHandle::FileDetail& a, const FileHandle::FileDetail& b) {
-            return a.lastModified > b.lastModified;
-        }
-    );
-    std::vector<std::pair<std::wstring, std::filesystem::path>> res;
-    for (auto& file : availableLoadFiles) {
-        res.emplace_back(
-            Utils::CatStringSpaceBetween(
-                50,
-                file.filePath.filename(),
-                Utils::filesystem_time_to_wstr_local(file.lastModified)
-            ),
-            file.filePath
-        );
-    }
-    return res;
-}
-
-void LoadScreen::LoadPage(
-    const auto& allOptions,
-    int& selected,
-    int maxPage,
-    std::wstring& pageIndicator,
-    std::vector<View::Option>& options,
-    int page
-) {
-    selected = 0;
-    options.clear();
-    size_t end = min((page + 1) * Constants::PAGE_SIZE, allOptions.size());
-    for (size_t i = page * Constants::PAGE_SIZE; i < end; i++) {
-        options.emplace_back(allOptions[i].first, 0);
-    }
-    pageIndicator = std::format(L"{}/{}", page + 1, maxPage);
-    options.emplace_back(pageIndicator, 0);
-}
-
-std::vector<std::pair<std::wstring, std::filesystem::path>> LoadScreen::Search(
-    const std::vector<std::pair<std::wstring, std::filesystem::path>>&
-        allOptions,
-    const std::wstring& searchTerm
-) {
-    size_t n = allOptions.size();
-    std::vector<SortTemporary> tmp;
-    tmp.resize(n);
-    for (size_t i = 0; i < n; i++) {
-        auto ttt = allOptions[i].second.filename().wstring();
-        tmp[i] = {ttt.find(searchTerm), std::move(ttt), i};
-    }
-
-    std::sort(
-        tmp.begin(),
-        tmp.end(),
-        [](const SortTemporary& a, const SortTemporary& b) {
-            if (a.foundIndex != size_t(-1) && b.foundIndex != size_t(-1)) {
-                return a.name > b.name;
-            }
-
-            if (a.foundIndex == b.foundIndex) {
-                return a.name > b.name;
-            }
-
-            return a.foundIndex < b.foundIndex;
-        }
-    );
-    std::vector<std::pair<std::wstring, std::filesystem::path>> vtmp;
-    vtmp.resize(n);
-    for (size_t i = 0; i < n; i++) {
-        vtmp[i] = allOptions[tmp[i].mapIndex];
-    }
-    return vtmp;
-}
-
 void LoadScreen::LoadSceen(NavigationHost& NavHost) {
-    auto allOptions = LoadAllOptions();
+    auto currentState = LoadScreenState();
 
-    if (allOptions.size() == 0) {
+    if (currentState.allOptions.size() == 0) {
         return EmptyLoad(NavHost);
     }
 
     DrawHints();
 
     auto& soundSetting = Config::GetSetting(Config::SoundEffect);
-    int selected = 0;
-    int currentPage = 0;
-    bool isSearching = 0;
-    int maxPage = allOptions.size() / 10 + bool(allOptions.size() % 10);
-    std::vector<View::Option> options;
-    std::wstring pageIndicator;
-
-    LoadPage(allOptions, selected, maxPage, pageIndicator, options, 0);
-
     auto& title = Language::GetString(L"LOAD_MENU_TITLE");
     auto& leadingText = Language::GetString(L"SEARCH_FIELD_TITLE");
-    short searchX = 59 - (leadingText.length() + 32) / 2;
-    std::wstring searchInput;
-    View::Rect drawnRect;
+
+    const short searchX = 59 - (leadingText.length() + 32) / 2;
     std::wstring tmp;
 
     auto drawMain = [&] {
-        return View::DrawMenuCenter(title, options, selected);
+        return View::DrawMenuCenter(
+            title, currentState.options, currentState.selected
+        );
     };
 
     while (1) {
-        drawnRect = drawMain();
-        if (View::Input(
-                searchX,
-                29 - 5,
-                leadingText,
-                searchInput,
-                isSearching,
-                [&](const std::wstring newInp) {
-                    if (newInp.length() > 30) {
-                        return;
-                    }
-                    searchInput = newInp;
-                    allOptions = Search(allOptions, searchInput);
-                    currentPage = 0;
-                    LoadPage(
-                        allOptions, selected, maxPage, pageIndicator, options, 0
-                    );
-                    View::ClearRect(drawnRect);
-                    drawnRect = drawMain();
-                }
-            )) {
-            isSearching = 0;
+        currentState.drawnRect = drawMain();
+
+        wchar_t exitKeyPressed = View::Input(
+            searchX,
+            29 - 5,
+            leadingText,
+            currentState.searchInput,
+            currentState.isSearching,
+            currentState.onSearchValueChange([&currentState, &drawMain] {
+                View::ClearRect(currentState.drawnRect);
+                currentState.drawnRect = drawMain();
+            })
+        );
+
+        if (exitKeyPressed) {
+            currentState.isSearching = 0;
             continue;
         };
+
         View::Goto(0, 0);
-        isSearching = 0;
+        currentState.isSearching = 0;
+
         tmp = InputHandle::Get();
+
         if (soundSetting == Config::Value_True) {
             Utils::PlayKeyPressSound();
         }
 
         if (Utils::keyMeanDown(tmp)) {
-            selected = Utils::modCycle(selected + 1, options.size() - 1);
+            currentState.NextSelection();
         }
+
         if (Utils::keyMeanUp(tmp)) {
-            selected = Utils::modCycle(selected - 1, options.size() - 1);
+            currentState.PrevSelection();
         }
+
         if (Utils::keyMeanLeft(tmp)) {
-            currentPage = Utils::modCycle(currentPage - 1, maxPage);
-            LoadPage(
-                allOptions,
-                selected,
-                maxPage,
-                pageIndicator,
-                options,
-                currentPage
-            );
+            currentState.PrevPage();
         }
+
         if (Utils::keyMeanRight(tmp)) {
-            currentPage = Utils::modCycle(currentPage + 1, maxPage);
-            LoadPage(
-                allOptions,
-                selected,
-                maxPage,
-                pageIndicator,
-                options,
-                currentPage
-            );
+            currentState.NextPage();
         }
+
         if (tmp == L"B" || tmp == L"b") {
             return NavHost.Back();
         }
-        if (tmp == L"\r") {
-            if (options[selected].underline == 0) {
-                auto loaded = SaveLoad::Load(
-                    allOptions[currentPage * Constants::PAGE_SIZE + selected]
-                        .second
-                );
-                if (loaded) {
-                    NavHost.SetContext(Constants::CURRENT_GAME, loaded.value());
-                    return NavHost.Navigate("GameScreenView");
-                } else {
-                    return LoadFailed(NavHost);
-                }
+
+        if (tmp == L"\r" &&
+            currentState.options[currentState.selected].underline == 0) {
+            
+            auto loaded = currentState.LoadCurrentSelect();
+            if (loaded) {
+                NavHost.SetContext(Constants::CURRENT_GAME, loaded.value());
+                return NavHost.Navigate("GameScreenView");
+            } else {
+                return LoadFailed(NavHost);
             }
         }
+
         if (tmp == L"\t") {
-            isSearching = 1;
+            currentState.isSearching = 1;
         }
-        View::ClearRect(drawnRect);
+
+        View::ClearRect(currentState.drawnRect);
     }
 }
 
@@ -235,4 +113,131 @@ static void LoadFailed(NavigationHost& NavHost) {
     View::DrawMenuCenter(Language::GetString(L"LOAD_FAILED_TITLE"), {}, 0);
     InputHandle::Get();
     return NavHost.Back();
+}
+
+void LoadScreen::DrawHints() {
+    View::DrawTextCenterdVertically(
+        29 - 3,
+        std::format(
+            L"A, W, S, D, Arrow Keys: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE")
+        )
+    );
+
+    View::DrawTextCenterdVertically(
+        29 - 2,
+        std::format(
+            L"B: {}, Enter: {}, Tab: {}",
+            Language::GetString(L"NAVIGATE_BACK_TITLE"),
+            Language::GetString(L"SELECT_KEY_TITLE"),
+            Language::GetString(L"SEARCH_TITLE")
+        )
+    );
+}
+
+inline void LoadScreen::LoadScreenState::LoadAllOptions() {
+    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles();
+
+    std::sort(
+        availableLoadFiles.begin(),
+        availableLoadFiles.end(),
+        [](const FileHandle::FileDetail& a, const FileHandle::FileDetail& b) {
+            return a.lastModified > b.lastModified;
+        }
+    );
+    
+    allOptions.reserve(availableLoadFiles.size());
+    
+    for (auto& file : availableLoadFiles) {
+        allOptions.emplace_back(
+            Utils::CatStringSpaceBetween(
+                50,
+                file.filePath.filename(),
+                Utils::filesystem_time_to_wstr_local(file.lastModified)
+            ),
+            file.filePath
+        );
+    }
+}
+
+inline void LoadScreen::LoadScreenState::NextPage() {
+    UpdatePage(Utils::modCycle(currentPage + 1, maxPage));
+}
+
+inline void LoadScreen::LoadScreenState::PrevPage() {
+    UpdatePage(Utils::modCycle(currentPage - 1, maxPage));
+}
+
+inline void LoadScreen::LoadScreenState::NextSelection() {
+    selected = Utils::modCycle(selected + 1, options.size() - 1);
+}
+
+inline void LoadScreen::LoadScreenState::PrevSelection() {
+    selected = Utils::modCycle(selected - 1, options.size() - 1);
+}
+
+void LoadScreen::LoadScreenState::UpdatePage(int page) {
+    currentPage = Utils::modCycle(page, maxPage);
+    selected = 0;
+    options.clear();
+    size_t end = min((page + 1) * Constants::PAGE_SIZE, allOptions.size());
+    for (size_t i = page * Constants::PAGE_SIZE; i < end; i++) {
+        options.emplace_back(allOptions[i].first, 0);
+    }
+    pageIndicator = std::format(L"{}/{}", page + 1, maxPage);
+    options.emplace_back(pageIndicator, 0);
+}
+
+inline void LoadScreen::LoadScreenState::Search() {
+    size_t n = allOptions.size();
+    std::vector<SortTemporary> tmp;
+    tmp.resize(n);
+    for (size_t i = 0; i < n; i++) {
+        auto ttt = allOptions[i].second.filename().wstring();
+        tmp[i] = {ttt.find(searchInput), std::move(ttt), i};
+    }
+
+    std::sort(
+        tmp.begin(),
+        tmp.end(),
+        [](const SortTemporary& a, const SortTemporary& b) {
+            if (a.foundIndex != size_t(-1) && b.foundIndex != size_t(-1)) {
+                return a.name > b.name;
+            }
+
+            if (a.foundIndex == b.foundIndex) {
+                return a.name > b.name;
+            }
+
+            return a.foundIndex < b.foundIndex;
+        }
+    );
+    OptionList vtmp;
+    vtmp.resize(n);
+    for (size_t i = 0; i < n; i++) {
+        vtmp[i] = allOptions[tmp[i].mapIndex];
+    }
+    allOptions = vtmp;
+}
+
+inline std::function<void(const std::wstring&)>
+LoadScreen::LoadScreenState::onSearchValueChange(
+    const std::function<void(void)>& callback
+) {
+    return [&](const std::wstring& newInp) {
+        if (newInp.length() > 30) {
+            return;
+        }
+        searchInput = newInp;
+        Search();
+        UpdatePage(0);
+        callback();
+    };
+}
+
+inline std::optional<GameState> LoadScreen::LoadScreenState::LoadCurrentSelect(
+) {
+    return SaveLoad::Load(
+        allOptions[currentPage * Constants::PAGE_SIZE + selected].second
+    );
 }

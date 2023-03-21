@@ -25,7 +25,7 @@ int main() {
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
             {"MainMenu",                   MainMenu::ScreenMainMenu           },
             {"Setting",                    Setting::SettingScreen             },
-            {"Load",                       LoadScreen::Load                   }
+            {"Load",                       LoadScreen::LoadSceen              }
     }
     );
 }
