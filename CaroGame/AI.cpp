@@ -1,24 +1,5 @@
 #include "AI.h"
 
-#include <conio.h>
-#include <math.h>
-#include <windows.h>
-
-#include <iostream>
-#include <random>
-
-#include "Constants.h"
-#include "Evaluation.h"
-#include "Logic.h"
-
-
-GameAction::Point AI::GetFirstMove() {
-    srand(time(NULL));
-    short row = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
-    short col = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
-    return {row, col};
-}
-
 short AI::Eval(
     const GameAction::Board& board, const short& moveCount,
     const GameAction::Point& lastMove, bool isMaximizingPlayer
@@ -125,24 +106,6 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount) {
     }
 
     return moveBest;
-}
-
-GameAction::Point NewTopLeftPoint(
-    const GameAction::Point& topLeftPoint, const GameAction::Point& point
-) {
-    GameAction::Point newPoint = topLeftPoint;
-    if (point.row < topLeftPoint.row) newPoint.row = point.row;
-    if (point.col < topLeftPoint.col) newPoint.col = point.col;
-    return newPoint;
-}
-
-GameAction::Point NewBottomRightPoint(
-    const GameAction::Point& bottomRightPoint, const GameAction::Point& point
-) {
-    GameAction::Point newPoint = bottomRightPoint;
-    if (point.row > bottomRightPoint.row) newPoint.row = point.row;
-    if (point.col > bottomRightPoint.col) newPoint.col = point.col;
-    return newPoint;
 }
 
 short AI::MiniMax(
@@ -272,25 +235,3 @@ short AI::MiniMax(
     }
 }
 
-void AI::UpdatePrivateValues(GameAction::Point point) {
-    if (point.row < _topLeftPoint.row) _topLeftPoint.row = point.row;
-    if (point.col < _topLeftPoint.col) _topLeftPoint.col = point.col;
-
-    if (point.row > _bottomRightPoint.row) _bottomRightPoint.row = point.row;
-    if (point.col > _bottomRightPoint.col) _bottomRightPoint.col = point.col;
-    cnt = 0;
-}
-
-void AI::SetDifficulty(const short& difficulty) {
-    switch (difficulty) {
-        case AI_DIFFICULTY_EASY:
-            _depth = 1;
-            break;
-        case AI_DIFFICULTY_NORMAL:
-            _depth = 2;
-            break;
-        case AI_DIFFICULTY_HARD:
-            _depth = 4;
-            break;
-    }
-}

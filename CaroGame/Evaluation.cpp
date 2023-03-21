@@ -5,8 +5,6 @@
 #include "Constants.h"
 #include "Logic.h"
 
-namespace Evaluation {
-
     // Don't change this please it'll break everything
     const short score[4] = {1, 10, 50, 200};
 
@@ -39,7 +37,7 @@ namespace Evaluation {
         else if (blockLeft || blockRight)
             evalValue /= 2;
 
-        if (evalValue == score[3]) evalValue = score[3] * tempBoost;
+        if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
         return evalValue;
     }
@@ -73,7 +71,7 @@ namespace Evaluation {
         else if (blockLeft || blockRight)
             evalValue /= 2;
 
-        if (evalValue == score[3]) evalValue = score[3] * tempBoost;
+        if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
         return evalValue;
     }
@@ -114,7 +112,7 @@ namespace Evaluation {
         else if (blockLeft || blockRight)
             evalValue /= 2;
 
-        if (evalValue == score[3]) evalValue = score[3] * tempBoost;
+        if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
         return evalValue;
     }
@@ -153,12 +151,12 @@ namespace Evaluation {
         else if (blockLeft || blockRight)
             evalValue /= 2;
 
-        if (evalValue == score[3]) evalValue = score[3] * tempBoost;
+        if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
         return evalValue;
     }
 
-    short GetComboEval(
+    short Evaluation::GetComboEval(
         const GameAction::Board& board, const short& playerValue
     ) {
         GameAction::Board comboCheckBoard(
@@ -206,4 +204,3 @@ namespace Evaluation {
         }
         return evalResult;
     }
-}  // namespace Evaluation

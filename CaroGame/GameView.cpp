@@ -1,7 +1,5 @@
 #include "GameView.h"
 
-#include <format>
-
 void GameView::GameModeVersusView(NavigationHost& NavHost) {
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
@@ -208,7 +206,6 @@ void GameView::GameScreenView(NavigationHost& NavHost) {
     );
 
     AI myAI;
-    myAI.hash.initTable();
     myAI.SetDifficulty(curGameState.aiDifficulty);
 
     while (!endGame) {

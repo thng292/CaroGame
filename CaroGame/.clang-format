@@ -1,11 +1,11 @@
 BasedOnStyle: Google    
 Language: Cpp
-ColumnLimit: 80
-IndentWidth: 4
 AlignAfterOpenBracket: BlockIndent
 AlignArrayOfStructures: Left
+ColumnLimit: 80
+IndentWidth: 4
 NamespaceIndentation: All
-SeparateDefinitionBlocks : Always
+SeparateDefinitionBlocks: Always
 SortIncludes: CaseSensitive
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements 

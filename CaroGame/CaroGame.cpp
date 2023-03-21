@@ -8,8 +8,9 @@
 
 int main() {
     Language::LoadLanguageFromFile("asset/language/en.txt");
+    View::Setup();
     NavigationHost NavHost(
-        "StartUpScreen",
+        "GameModeTypeView",
         {
             {"GameModeTypeView",           GameView::GameModeTypeView         },
             {"GameModeVersusView",         GameView::GameModeVersusView       },
