@@ -10,7 +10,7 @@ int main() {
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
     NavigationHost NavHost(
-        "GameModeTypeView",
+        "MainMenu",
         {
             {"GameModeTypeView",           GameView::GameModeTypeView         },
             {"GameModeVersusView",         GameView::GameModeVersusView       },

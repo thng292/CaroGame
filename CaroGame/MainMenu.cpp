@@ -4,9 +4,9 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
     static short selectedOption = 0;   // User option
     static const short maxOption = 7;  // Number of option
                                        // Vi tri bat dau ve
-    Logo::Logo_Caro(32, 1);
-    Logo::Deadpool(NavHost, 8, 5);
-    Logo::Captain(NavHost, 79, 5);
+    Caro(32, 1);
+    Logo_Deadpool( 8, 5);
+    Logo_Captain( 79, 5);
 
     std::vector<View::Option> options = {
         {Language::GetString(L"NEW_GAME_TITLE"),

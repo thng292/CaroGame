@@ -31,6 +31,15 @@
     <Filter Include="Resource Files\Audio">
       <UniqueIdentifier>{d8b27f36-98f9-494b-b021-d3b4fa478f93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{ad1cb675-7018-4d8a-97a1-2132ead43a06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Header Files">
+      <UniqueIdentifier>{1451b364-659e-4b9b-a82e-e07eb9b7682a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Source Files">
+      <UniqueIdentifier>{308ab83b-1494-457e-b402-5cf96efe58b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="View.cpp">
@@ -114,11 +123,29 @@
     <ClCompile Include="GameAction.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Logo.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SaveScreen.cpp">
       <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Evaluation.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hash.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Deadpool.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Captain.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo_Caro.cpp">
+      <Filter>Graphics\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,8 +233,26 @@
     <ClInclude Include="SaveScreen.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Logo.h">
+    <ClInclude Include="Evaluation.h">
       <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Deadpool.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Captain.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo_Caro.h">
+      <Filter>Graphics\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
