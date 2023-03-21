@@ -31,6 +31,15 @@
     <Filter Include="Resource Files\Audio">
       <UniqueIdentifier>{d8b27f36-98f9-494b-b021-d3b4fa478f93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Bot">
+      <UniqueIdentifier>{660d1d81-a9f4-4f57-ab35-f16b6fdb90a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bot\Header Files">
+      <UniqueIdentifier>{d57c8c8f-475a-473b-8893-8d3cad3bf9cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bot\Source Files">
+      <UniqueIdentifier>{2c776e73-e07d-4f2e-808a-9518baa3de05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="View.cpp">
@@ -40,9 +49,6 @@
       <Filter>Core\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Navigate.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AI.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputHandle.cpp">
@@ -120,6 +126,15 @@
     <ClCompile Include="SaveScreen.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Bot\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Evaluation.cpp">
+      <Filter>Bot\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hash.cpp">
+      <Filter>Bot\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -129,9 +144,6 @@
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Navigate.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
@@ -208,6 +220,15 @@
     </ClInclude>
     <ClInclude Include="Logo.h">
       <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Bot\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Evaluation.h">
+      <Filter>Bot\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>Bot\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
