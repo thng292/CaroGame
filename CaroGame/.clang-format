@@ -2,6 +2,8 @@ BasedOnStyle: Google
 Language: Cpp
 AlignAfterOpenBracket: BlockIndent
 AlignArrayOfStructures: Left
+BinPackArguments: false
+BinPackParameters: false
 ColumnLimit: 80
 IndentWidth: 4
 NamespaceIndentation: All

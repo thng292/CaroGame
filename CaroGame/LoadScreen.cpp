@@ -4,26 +4,58 @@ static void EmptyLoad(NavigationHost& NavHost);
 
 static void LoadFailed(NavigationHost& NavHost);
 
-static void DrawHints() {
+void LoadScreen::DrawHints() {
     View::DrawTextCenterdVertically(
-        29 - 3, std::format(
-                    L"A, W, S, D, Arrow Keys: {}",
-                    Language::GetString(L"NAVIGATION_KEYS_TITLE")
-                )
+        29 - 3,
+        std::format(
+            L"A, W, S, D, Arrow Keys: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE")
+        )
     );
     View::DrawTextCenterdVertically(
-        29 - 2, std::format(
-                    L"B: {}, Enter: {}, Tab: {}",
-                    Language::GetString(L"NAVIGATE_BACK_TITLE"),
-                    Language::GetString(L"SELECT_KEY_TITLE"),
-                    Language::GetString(L"SEARCH_TITLE")
-                )
+        29 - 2,
+        std::format(
+            L"B: {}, Enter: {}, Tab: {}",
+            Language::GetString(L"NAVIGATE_BACK_TITLE"),
+            Language::GetString(L"SELECT_KEY_TITLE"),
+            Language::GetString(L"SEARCH_TITLE")
+        )
     );
 }
 
-static void LoadPage(
-    const auto& allOptions, int& selected, int maxPage,
-    std::wstring& pageIndicator, std::vector<View::Option>& options, int page
+std::vector<std::pair<std::wstring, std::filesystem::path>>
+LoadScreen::LoadAllOptions(
+    const std::filesystem::path& dir = Constants::SAVE_PATH
+) {
+    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles(dir);
+    std::sort(
+        availableLoadFiles.begin(),
+        availableLoadFiles.end(),
+        [](const FileHandle::FileDetail& a, const FileHandle::FileDetail& b) {
+            return a.lastModified > b.lastModified;
+        }
+    );
+    std::vector<std::pair<std::wstring, std::filesystem::path>> res;
+    for (auto& file : availableLoadFiles) {
+        res.emplace_back(
+            Utils::CatStringSpaceBetween(
+                50,
+                file.filePath.filename(),
+                Utils::filesystem_time_to_wstr_local(file.lastModified)
+            ),
+            file.filePath
+        );
+    }
+    return res;
+}
+
+void LoadScreen::LoadPage(
+    const auto& allOptions,
+    int& selected,
+    int maxPage,
+    std::wstring& pageIndicator,
+    std::vector<View::Option>& options,
+    int page
 ) {
     selected = 0;
     options.clear();
@@ -35,13 +67,7 @@ static void LoadPage(
     options.emplace_back(pageIndicator, 0);
 }
 
-struct SortTemporary {
-    size_t foundIndex;
-    std::wstring name;
-    size_t mapIndex;
-};
-
-std::vector<std::pair<std::wstring, std::filesystem::path>> Search(
+std::vector<std::pair<std::wstring, std::filesystem::path>> LoadScreen::Search(
     const std::vector<std::pair<std::wstring, std::filesystem::path>>&
         allOptions,
     const std::wstring& searchTerm
@@ -55,7 +81,8 @@ std::vector<std::pair<std::wstring, std::filesystem::path>> Search(
     }
 
     std::sort(
-        tmp.begin(), tmp.end(),
+        tmp.begin(),
+        tmp.end(),
         [](const SortTemporary& a, const SortTemporary& b) {
             if (a.foundIndex != size_t(-1) && b.foundIndex != size_t(-1)) {
                 return a.name > b.name;
@@ -73,30 +100,11 @@ std::vector<std::pair<std::wstring, std::filesystem::path>> Search(
     for (size_t i = 0; i < n; i++) {
         vtmp[i] = allOptions[tmp[i].mapIndex];
     }
-    return std::move(vtmp);
+    return vtmp;
 }
 
-void LoadScreen::Load(NavigationHost& NavHost) {
-    auto allOptions = ([] {
-        auto availableLoadFiles = SaveLoad::DiscoverSaveFiles();
-        std::sort(
-            availableLoadFiles.begin(), availableLoadFiles.end(),
-            [](const FileHandle::FileDetail& a, const FileHandle::FileDetail& b
-            ) { return a.lastModified > b.lastModified; }
-        );
-        std::wstring tmp;
-        std::vector<std::pair<std::wstring, std::filesystem::path>> res;
-        for (auto& file : availableLoadFiles) {
-            res.emplace_back(
-                Utils::CatStringSpaceBetween(
-                    50, file.filePath.filename(),
-                    Utils::filesystem_time_to_wstr_local(file.lastModified)
-                ),
-                file.filePath
-            );
-        }
-        return res;
-    })();
+void LoadScreen::LoadSceen(NavigationHost& NavHost) {
+    auto allOptions = LoadAllOptions();
 
     if (allOptions.size() == 0) {
         return EmptyLoad(NavHost);
@@ -128,8 +136,15 @@ void LoadScreen::Load(NavigationHost& NavHost) {
     while (1) {
         drawnRect = drawMain();
         if (View::Input(
-                searchX, 29 - 5, leadingText, searchInput, isSearching,
+                searchX,
+                29 - 5,
+                leadingText,
+                searchInput,
+                isSearching,
                 [&](const std::wstring newInp) {
+                    if (newInp.length() > 30) {
+                        return;
+                    }
                     searchInput = newInp;
                     allOptions = Search(allOptions, searchInput);
                     currentPage = 0;
@@ -159,14 +174,22 @@ void LoadScreen::Load(NavigationHost& NavHost) {
         if (Utils::keyMeanLeft(tmp)) {
             currentPage = Utils::modCycle(currentPage - 1, maxPage);
             LoadPage(
-                allOptions, selected, maxPage, pageIndicator, options,
+                allOptions,
+                selected,
+                maxPage,
+                pageIndicator,
+                options,
                 currentPage
             );
         }
         if (Utils::keyMeanRight(tmp)) {
             currentPage = Utils::modCycle(currentPage + 1, maxPage);
             LoadPage(
-                allOptions, selected, maxPage, pageIndicator, options,
+                allOptions,
+                selected,
+                maxPage,
+                pageIndicator,
+                options,
                 currentPage
             );
         }
