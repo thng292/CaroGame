@@ -1,13 +1,15 @@
 #include "FileHandle.h"
 
-std::wofstream FileHandle::OpenOutFile(const std::filesystem::path& fileName) {
+std::wofstream FileHandle::OpenOutFile(const std::filesystem::path& fileName)
+{
     Ensure(fileName.parent_path());
     std::wofstream fout(fileName);
     fout.imbue(LOCALE);
     return fout;
 }
 
-std::wifstream FileHandle::OpenInFile(const std::filesystem::path& fileName) {
+std::wifstream FileHandle::OpenInFile(const std::filesystem::path& fileName)
+{
     Ensure(fileName.parent_path());
     std::wifstream fin(fileName);
     fin.imbue(LOCALE);
@@ -16,7 +18,8 @@ std::wifstream FileHandle::OpenInFile(const std::filesystem::path& fileName) {
 
 std::vector<FileHandle::FileDetail> FileHandle::GetAllTextFileInDir(
     const std::filesystem::path& Dir
-) {
+)
+{
     std::vector<FileDetail> tmp;
     Ensure(Dir);
     for (const auto& file : std::filesystem::directory_iterator(Dir)) {

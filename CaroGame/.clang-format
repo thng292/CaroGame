@@ -4,6 +4,7 @@ AlignAfterOpenBracket: BlockIndent
 AlignArrayOfStructures: Left
 BinPackArguments: false
 BinPackParameters: false
+BreakBeforeBraces: WebKit
 ColumnLimit: 80
 IndentWidth: 4
 NamespaceIndentation: All

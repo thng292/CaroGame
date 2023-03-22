@@ -21,7 +21,12 @@ class GameScreen {
 
    private:
     void InitElement(
-        Container& element, short x, short y, short cell_width,
-        short cell_height, short x_offset, short y_offset
+        Container& element,
+        short x,
+        short y,
+        short cell_width,
+        short cell_height,
+        short x_offset,
+        short y_offset
     );
 };

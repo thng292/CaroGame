@@ -138,9 +138,6 @@
     <ClCompile Include="Hash.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Result.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Deadpool.cpp">
       <Filter>Graphics\Source Files</Filter>
     </ClCompile>
@@ -160,6 +157,9 @@
       <Filter>Bot\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logo_Caro.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
       <Filter>Graphics\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -251,9 +251,6 @@
     <ClInclude Include="Hash.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Result.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AI.h">
       <Filter>Bot\Header Files</Filter>
     </ClInclude>
@@ -273,6 +270,9 @@
       <Filter>Graphics\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Logo_Caro.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
       <Filter>Graphics\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

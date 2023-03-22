@@ -4,7 +4,8 @@ static void EmptyLoad(NavigationHost& NavHost);
 
 static void LoadFailed(NavigationHost& NavHost);
 
-void LoadScreen::LoadSceen(NavigationHost& NavHost) {
+void LoadScreen::LoadSceen(NavigationHost& NavHost)
+{
     auto currentState = LoadScreenState();
 
     if (currentState.allOptions.size() == 0) {
@@ -29,7 +30,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost) {
     while (1) {
         currentState.drawnRect = drawMain();
 
-        wchar_t exitKeyPressed = View::Input(
+        View::Input(
             searchX,
             29 - 5,
             leadingText,
@@ -41,13 +42,12 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost) {
             })
         );
 
-        if (exitKeyPressed) {
+        if (currentState.isSearching) {
             currentState.isSearching = 0;
             continue;
         };
 
         View::Goto(0, 0);
-        currentState.isSearching = 0;
 
         tmp = InputHandle::Get();
 
@@ -77,7 +77,6 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost) {
 
         if (tmp == L"\r" &&
             currentState.options[currentState.selected].underline == 0) {
-            
             auto loaded = currentState.LoadCurrentSelect();
             if (loaded) {
                 NavHost.SetContext(Constants::CURRENT_GAME, loaded.value());
@@ -95,7 +94,8 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost) {
     }
 }
 
-static void EmptyLoad(NavigationHost& NavHost) {
+static void EmptyLoad(NavigationHost& NavHost)
+{
     View::DrawMenuCenter(
         Language::GetString(L"EMPTY_SAVE_TITLE"),
         {
@@ -109,13 +109,15 @@ static void EmptyLoad(NavigationHost& NavHost) {
     NavHost.Back();
 }
 
-static void LoadFailed(NavigationHost& NavHost) {
+static void LoadFailed(NavigationHost& NavHost)
+{
     View::DrawMenuCenter(Language::GetString(L"LOAD_FAILED_TITLE"), {}, 0);
     InputHandle::Get();
     return NavHost.Back();
 }
 
-void LoadScreen::DrawHints() {
+void LoadScreen::DrawHints()
+{
     View::DrawTextCenterdVertically(
         29 - 3,
         std::format(
@@ -135,7 +137,8 @@ void LoadScreen::DrawHints() {
     );
 }
 
-inline void LoadScreen::LoadScreenState::LoadAllOptions() {
+inline void LoadScreen::LoadScreenState::LoadAllOptions()
+{
     auto availableLoadFiles = SaveLoad::DiscoverSaveFiles();
 
     std::sort(
@@ -145,9 +148,9 @@ inline void LoadScreen::LoadScreenState::LoadAllOptions() {
             return a.lastModified > b.lastModified;
         }
     );
-    
+
     allOptions.reserve(availableLoadFiles.size());
-    
+
     for (auto& file : availableLoadFiles) {
         allOptions.emplace_back(
             Utils::CatStringSpaceBetween(
@@ -160,38 +163,48 @@ inline void LoadScreen::LoadScreenState::LoadAllOptions() {
     }
 }
 
-inline void LoadScreen::LoadScreenState::NextPage() {
+inline void LoadScreen::LoadScreenState::NextPage()
+{
     UpdatePage(Utils::modCycle(currentPage + 1, maxPage));
 }
 
-inline void LoadScreen::LoadScreenState::PrevPage() {
+inline void LoadScreen::LoadScreenState::PrevPage()
+{
     UpdatePage(Utils::modCycle(currentPage - 1, maxPage));
 }
 
-inline void LoadScreen::LoadScreenState::NextSelection() {
+inline void LoadScreen::LoadScreenState::NextSelection()
+{
     selected = Utils::modCycle(selected + 1, options.size() - 1);
 }
 
-inline void LoadScreen::LoadScreenState::PrevSelection() {
+inline void LoadScreen::LoadScreenState::PrevSelection()
+{
     selected = Utils::modCycle(selected - 1, options.size() - 1);
 }
 
-void LoadScreen::LoadScreenState::UpdatePage(int page) {
+void LoadScreen::LoadScreenState::UpdatePage(int page)
+{
     currentPage = Utils::modCycle(page, maxPage);
+
     selected = 0;
     options.clear();
+
     size_t end = min((page + 1) * Constants::PAGE_SIZE, allOptions.size());
     for (size_t i = page * Constants::PAGE_SIZE; i < end; i++) {
         options.emplace_back(allOptions[i].first, 0);
     }
+
     pageIndicator = std::format(L"{}/{}", page + 1, maxPage);
     options.emplace_back(pageIndicator, 0);
 }
 
-inline void LoadScreen::LoadScreenState::Search() {
+inline void LoadScreen::LoadScreenState::Search()
+{
     size_t n = allOptions.size();
     std::vector<SortTemporary> tmp;
     tmp.resize(n);
+
     for (size_t i = 0; i < n; i++) {
         auto ttt = allOptions[i].second.filename().wstring();
         tmp[i] = {ttt.find(searchInput), std::move(ttt), i};
@@ -212,6 +225,7 @@ inline void LoadScreen::LoadScreenState::Search() {
             return a.foundIndex < b.foundIndex;
         }
     );
+
     OptionList vtmp;
     vtmp.resize(n);
     for (size_t i = 0; i < n; i++) {
@@ -223,7 +237,8 @@ inline void LoadScreen::LoadScreenState::Search() {
 inline std::function<void(const std::wstring&)>
 LoadScreen::LoadScreenState::onSearchValueChange(
     const std::function<void(void)>& callback
-) {
+)
+{
     return [&](const std::wstring& newInp) {
         if (newInp.length() > 30) {
             return;
@@ -235,8 +250,8 @@ LoadScreen::LoadScreenState::onSearchValueChange(
     };
 }
 
-inline std::optional<GameState> LoadScreen::LoadScreenState::LoadCurrentSelect(
-) {
+inline std::optional<GameState> LoadScreen::LoadScreenState::LoadCurrentSelect()
+{
     return SaveLoad::Load(
         allOptions[currentPage * Constants::PAGE_SIZE + selected].second
     );

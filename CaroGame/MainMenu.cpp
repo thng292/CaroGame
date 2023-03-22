@@ -1,12 +1,13 @@
 #include "MainMenu.h"
 
-void MainMenu::ScreenMainMenu(NavigationHost& NavHost) {
+void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
+{
     static short selectedOption = 0;   // User option
     static const short maxOption = 7;  // Number of option
                                        // Vi tri bat dau ve
     Caro(32, 1);
-    Logo_Deadpool( 8, 5);
-    Logo_Captain( 79, 5);
+    Logo_Deadpool(8, 5);
+    Logo_Captain(79, 5);
 
     std::vector<View::Option> options = {
         {Language::GetString(L"NEW_GAME_TITLE"),

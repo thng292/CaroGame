@@ -2,14 +2,16 @@
 
 inline std::pair<std::wstring, std::wstring> LineSplitter(
     const std::wstring& line, wchar_t delim = L'='
-) {
+)
+{
     size_t tmp = line.find_first_of(delim);
     return {line.substr(0, tmp), line.substr(tmp + 1)};
 }
 
 Language::LanguageDict Language::ExtractMetaFromFile(
     const std::filesystem::path& filePath
-) {
+)
+{
     auto fin = FileHandle::OpenInFile(filePath);
     LanguageDict res;
     std::wstring inp;
@@ -25,7 +27,8 @@ Language::LanguageDict Language::ExtractMetaFromFile(
     return res;
 }
 
-void Language::LoadLanguageFromFile(const std::filesystem::path& filePath) {
+void Language::LoadLanguageFromFile(const std::filesystem::path& filePath)
+{
     currentLanguageMeta = ExtractMetaFromFile(filePath);
     currentLanguageDict.clear();
     auto fin = FileHandle::OpenInFile(filePath);
@@ -42,7 +45,8 @@ void Language::LoadLanguageFromFile(const std::filesystem::path& filePath) {
 
 std::vector<Language::LanguageOption> Language::DiscoverLanguageFile(
     const std::filesystem::path& dirPath
-) {
+)
+{
     std::vector<LanguageOption> res;
     auto files = FileHandle::GetAllTextFileInDir(Constants::LANGUAGE_PATH);
     for (const auto& i : files) {
@@ -51,13 +55,15 @@ std::vector<Language::LanguageOption> Language::DiscoverLanguageFile(
     return res;
 }
 
-std::wstring& Language::GetString(const std::wstring& Label) {
+std::wstring& Language::GetString(const std::wstring& Label)
+{
     if (!currentLanguageDict.contains(Label)) {
         currentLanguageDict[Label] = Label;
     }
     return currentLanguageDict[Label];
 }
 
-std::wstring& Language::GetMeta(const std::wstring& Label) {
+std::wstring& Language::GetMeta(const std::wstring& Label)
+{
     return currentLanguageMeta[Label];
 }

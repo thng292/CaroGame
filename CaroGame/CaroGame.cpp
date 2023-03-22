@@ -6,7 +6,8 @@
 #include "Setting.h"
 #include "StartUp.h"
 
-int main() {
+int main()
+{
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
     NavigationHost NavHost(

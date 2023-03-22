@@ -5,7 +5,8 @@
 #include "Constants.h"
 #include "CornersHandler.h"
 
-GameScreen::GameScreen(short x, short y) {
+GameScreen::GameScreen(short x, short y)
+{
     boardContainer.xCoord = x, boardContainer.yCoord = y;
     x += Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH + 5;
     y += 1;
@@ -38,7 +39,8 @@ GameScreen::GameScreen(short x, short y) {
     InitElement(logContainer, x, y, 50, 7, 3, 1);
 }
 
-void GameScreen::DrawGameScreen() {
+void GameScreen::DrawGameScreen()
+{
     boardContainer.DrawBoardContainer();
     timerContainerOne.DrawContainer();
     winCountContainerOne.DrawContainer();
@@ -54,40 +56,62 @@ void GameScreen::DrawGameScreen() {
         boardContainer.xCoord, boardContainer.yCoord
     );
     CornersHandler::FixPlayerInfoCorners(
-        playerInfoContainerOne.xCoord, playerInfoContainerOne.yCoord,
+        playerInfoContainerOne.xCoord,
+        playerInfoContainerOne.yCoord,
         playerInfoContainerOne
     );
     CornersHandler::FixStatusBarCorners(
-        timerContainerOne.xCoord, timerContainerOne.yCoord, timerContainerOne,
-        winCountContainerOne, playerContainerOne
+        timerContainerOne.xCoord,
+        timerContainerOne.yCoord,
+        timerContainerOne,
+        winCountContainerOne,
+        playerContainerOne
     );
 
     Label::DrawLabelCenter(
-        logContainer.xCoord, logContainer.xCoord + logContainer.cellWidth,
-        timerContainerOne.xCoord, timerContainerOne.yCoord - 1, L"Game Status"
+        logContainer.xCoord,
+        logContainer.xCoord + logContainer.cellWidth,
+        timerContainerOne.xCoord,
+        timerContainerOne.yCoord - 1,
+        L"Game Status"
     );
     Label::DrawLabelCenter(
-        logContainer.xCoord, logContainer.xCoord + logContainer.cellWidth,
-        playerInfoContainerOne.xCoord, playerInfoContainerOne.yCoord - 1,
+        logContainer.xCoord,
+        logContainer.xCoord + logContainer.cellWidth,
+        playerInfoContainerOne.xCoord,
+        playerInfoContainerOne.yCoord - 1,
         L"Player Info"
     );
     Label::DrawLabelCenter(
-        logContainer.xCoord, logContainer.xCoord + logContainer.cellWidth,
-        logContainer.xCoord, logContainer.yCoord - 1, L"Move History"
+        logContainer.xCoord,
+        logContainer.xCoord + logContainer.cellWidth,
+        logContainer.xCoord,
+        logContainer.yCoord - 1,
+        L"Move History"
     );
 
     const std::vector<std::wstring> INSTRUCTION_LIST = {
-        L"A: Lorem ispum", L"A: Lorem ispum", L"A: Lorem ispum",
-        L"A: Lorem ispum", L"A: Lorem ispum", L"A: Lorem ispum",
-        L"A: Lorem ispum", L"A: Lorem ispum", L"A: Lorem ispum"};
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum",
+        L"A: Lorem ispum"};
     Label::DrawLabelGrid(
-        logContainer.xCoord, logContainer.xCoord + logContainer.cellWidth,
-        logContainer.xCoord, logContainer.yCoord + logContainer.cellHeight + 2,
-        INSTRUCTION_LIST, 3
+        logContainer.xCoord,
+        logContainer.xCoord + logContainer.cellWidth,
+        logContainer.xCoord,
+        logContainer.yCoord + logContainer.cellHeight + 2,
+        INSTRUCTION_LIST,
+        3
     );
 }
 
-void GameScreen::DrawToElements(GameState gameState) {
+void GameScreen::DrawToElements(GameState gameState)
+{
     playerContainerOne.DrawToContainer(L"X");
     playerContainerTwo.DrawToContainer(L"O");
 
@@ -109,9 +133,15 @@ void GameScreen::DrawToElements(GameState gameState) {
 }
 
 void GameScreen::InitElement(
-    Container& element, short x, short y, short cell_width, short cell_height,
-    short x_offset, short y_offset
-) {
+    Container& element,
+    short x,
+    short y,
+    short cell_width,
+    short cell_height,
+    short x_offset,
+    short y_offset
+)
+{
     element.xCoord = x;
     element.yCoord = y;
     element.cellWidth = cell_width;

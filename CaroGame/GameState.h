@@ -22,4 +22,8 @@ struct GameState {
     short gameMode = 0;
 
     short aiDifficulty = 0;
+
+    bool whosFirst = 1;
+
+    short avatarId = 0;
 };

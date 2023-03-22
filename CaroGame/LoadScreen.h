@@ -25,7 +25,8 @@ namespace LoadScreen {
             size_t mapIndex = 0;
         };
 
-        LoadScreenState() {
+        LoadScreenState()
+        {
             LoadAllOptions();
             maxPage = allOptions.size() / 10 + bool(allOptions.size() % 10);
             UpdatePage(0);

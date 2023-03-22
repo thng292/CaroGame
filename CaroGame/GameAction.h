@@ -3,7 +3,6 @@
 
 #include "GameState.h"
 
-
 namespace GameAction {
     struct Point {
         short row, col;
@@ -12,7 +11,9 @@ namespace GameAction {
     typedef std::vector<std::vector<short>> Board;
 
     void MakeMove(
-        Board& board, short& moveCount, const Point& move,
+        Board& board,
+        short& moveCount,
+        const Point& move,
         const short& playerValue
     );
 
@@ -21,7 +22,9 @@ namespace GameAction {
     void ResetGameState(GameState& gameState);
 
     void InitBoard(
-        Board& board, short& moveCount, Point& topLeftCorner,
+        Board& board,
+        short& moveCount,
+        Point& topLeftCorner,
         Point& bottomRightCorner
     );
     // void InitBoard(vector<vector<short>>& boardGameMatrix, short& moveCount);

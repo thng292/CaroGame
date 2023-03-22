@@ -4,7 +4,8 @@
 #include "Constants.h"
 #include "View.h"
 
-void CornersHandler::FixBoardCorners(short x, short y) {
+void CornersHandler::FixBoardCorners(short x, short y)
+{
     // Fixes the surrounding 4 corners
     View::WriteToView(x, y, L'\u2554');
     View::WriteToView(
@@ -15,7 +16,8 @@ void CornersHandler::FixBoardCorners(short x, short y) {
     );
     View::WriteToView(
         x + Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH,
-        y + Constants::BOARD_SIZE * BoardContainer::CELL_HEIGHT, L'\u255D'
+        y + Constants::BOARD_SIZE * BoardContainer::CELL_HEIGHT,
+        L'\u255D'
     );
 
     // Fixes the top and bottom corners
@@ -23,7 +25,8 @@ void CornersHandler::FixBoardCorners(short x, short y) {
         View::WriteToView(x + i * BoardContainer::CELL_WIDTH, y, L'\u2566');
         View::WriteToView(
             x + i * BoardContainer::CELL_WIDTH,
-            y + Constants::BOARD_SIZE * BoardContainer::CELL_HEIGHT, L'\u2569'
+            y + Constants::BOARD_SIZE * BoardContainer::CELL_HEIGHT,
+            L'\u2569'
         );
     }
 
@@ -32,7 +35,8 @@ void CornersHandler::FixBoardCorners(short x, short y) {
         for (short col = 1; col < Constants::BOARD_SIZE; ++col) {
             View::WriteToView(
                 x + col * BoardContainer::CELL_WIDTH,
-                y + row * BoardContainer::CELL_HEIGHT, L'\u256C'
+                y + row * BoardContainer::CELL_HEIGHT,
+                L'\u256C'
             );
         }
     }
@@ -42,15 +46,20 @@ void CornersHandler::FixBoardCorners(short x, short y) {
         View::WriteToView(x, y + i * BoardContainer::CELL_HEIGHT, L'\u2560');
         View::WriteToView(
             x + Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH,
-            y + i * BoardContainer::CELL_HEIGHT, L'\u2563'
+            y + i * BoardContainer::CELL_HEIGHT,
+            L'\u2563'
         );
     }
 }
 
 void CornersHandler::FixStatusBarCorners(
-    short x, short y, const Container& timerContainer,
-    const Container& winCountContainer, const Container& playerContainer
-) {
+    short x,
+    short y,
+    const Container& timerContainer,
+    const Container& winCountContainer,
+    const Container& playerContainer
+)
+{
     short xCur = x;
     xCur += timerContainer.cellWidth;
     View::WriteToView(xCur, y, L'\u2566');
@@ -71,10 +80,12 @@ void CornersHandler::FixStatusBarCorners(
 
 void CornersHandler::FixPlayerInfoCorners(
     short x, short y, const Container& playerInfoContainer
-) {
+)
+{
     View::WriteToView(x + playerInfoContainer.cellWidth, y, L'\u2566');
     View::WriteToView(
-        x + playerInfoContainer.cellWidth, y + playerInfoContainer.cellHeight,
+        x + playerInfoContainer.cellWidth,
+        y + playerInfoContainer.cellHeight,
         L'\u2569'
     );
 }

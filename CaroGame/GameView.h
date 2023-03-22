@@ -40,15 +40,22 @@ namespace GameView {
     void GameModeTypeView(NavigationHost& NavHost);
 
     void UpdateGame(
-        GameScreen gameScreen, GameAction::Board& board, short& moveCount,
-        const GameAction::Point& move, const Constants::Player& player,
+        GameScreen gameScreen,
+        GameAction::Board& board,
+        short& moveCount,
+        const GameAction::Point& move,
+        const Constants::Player& player,
         GameState& gameState
     );
 
     void HandleState(
-        const GameAction::Board& board, const short& moveCount,
-        const GameAction::Point& move, const Constants::Player& player,
-        const bool& isPlayerOneTurn, GameState& curGameState, bool& endGame
+        const GameAction::Board& board,
+        const short& moveCount,
+        const GameAction::Point& move,
+        const Constants::Player& player,
+        const bool& isPlayerOneTurn,
+        GameState& curGameState,
+        bool& endGame
     );
 
     // View for the actual game

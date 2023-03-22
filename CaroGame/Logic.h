@@ -9,29 +9,35 @@ namespace Logic {
     const short DRAW_VALUE = 1;
 
     short GetGameState(
-        const GameAction::Board& board, const short& moveCount,
-        const GameAction::Point& move, const short& playerValue
+        const GameAction::Board& board,
+        const short& moveCount,
+        const GameAction::Point& move,
+        const short& playerValue
     );
 
     bool CheckDraw(const GameAction::Board& board, const short& moveCount);
 
     bool CheckVerticalWin(
-        const GameAction::Board& board, const GameAction::Point& move,
+        const GameAction::Board& board,
+        const GameAction::Point& move,
         const short& playerValue
     );
 
     bool CheckHorizontalWin(
-        const GameAction::Board& board, const GameAction::Point& move,
+        const GameAction::Board& board,
+        const GameAction::Point& move,
         const short& playerValue
     );
 
     bool CheckLeftDiagonalWin(
-        const GameAction::Board& board, const GameAction::Point& move,
+        const GameAction::Board& board,
+        const GameAction::Point& move,
         const short& playerValue
     );
 
     bool CheckRightDiagonalWin(
-        const GameAction::Board& board, const GameAction::Point& move,
+        const GameAction::Board& board,
+        const GameAction::Point& move,
         const short& playerValue
     );
 }  // namespace Logic

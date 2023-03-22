@@ -8,12 +8,14 @@ class Timer {
    public:
     inline Timer(
         std::function<void(void)> callback, const long& interval = 1000
-    ) {
+    )
+    {
         _callback = callback;
         _interval = std::chrono::milliseconds{interval};
     }
 
-    inline void Start() {
+    inline void Start()
+    {
         _running = true;
         _thread = std::thread([&]() {
             while (_running) {
@@ -28,7 +30,8 @@ class Timer {
         //_thread.detach();
     }
 
-    inline void Stop() {
+    inline void Stop()
+    {
         _running = false;
         if (_thread.joinable()) {
             _thread.join();
@@ -36,7 +39,8 @@ class Timer {
         _thread.~thread();
     }
 
-    inline void Restart() {
+    inline void Restart()
+    {
         Stop();
         Start();
     }
@@ -47,7 +51,8 @@ class Timer {
 
     inline bool isRunning() { return _running && !_pause; }
 
-    inline long long getInterval() {
+    inline long long getInterval()
+    {
         return std::chrono::duration_cast<std::chrono::milliseconds>(_interval)
             .count();
     }
