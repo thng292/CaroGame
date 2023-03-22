@@ -2,12 +2,14 @@
 
 inline std::pair<std::wstring, std::wstring> LineSplitter(
     const std::wstring& line, wchar_t delim = L'='
-) {
+)
+{
     size_t tmp = line.find_first_of(delim);
     return {line.substr(0, tmp), line.substr(tmp + 1)};
 }
 
-bool Config::LoadUserSetting() {
+bool Config::LoadUserSetting()
+{
     auto fin = FileHandle::OpenInFile(Constants::USERCONFIG_FILE_PATH);
     if (fin.fail()) {
         return 0;
@@ -23,15 +25,18 @@ bool Config::LoadUserSetting() {
     return 1;
 }
 
-std::wstring& Config::GetSetting(const std::wstring& name) {
+std::wstring& Config::GetSetting(const std::wstring& name)
+{
     return Settings[name];
 }
 
-void Config::SetSetting(const std::wstring& name, const std::wstring& data) {
+void Config::SetSetting(const std::wstring& name, const std::wstring& data)
+{
     Settings[name] = data;
 }
 
-bool Config::SaveUserSetting() {
+bool Config::SaveUserSetting()
+{
     if (!std::filesystem::exists(Constants::STR_USERCONFIG_PATH)) {
         std::filesystem::create_directory(Constants::STR_USERCONFIG_PATH);
     }

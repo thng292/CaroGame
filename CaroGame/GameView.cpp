@@ -1,6 +1,7 @@
 #include "GameView.h"
 
-void GameView::GameModeVersusView(NavigationHost& NavHost) {
+void GameView::GameModeVersusView(NavigationHost& NavHost)
+{
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
@@ -53,7 +54,8 @@ void GameView::GameModeVersusView(NavigationHost& NavHost) {
     }
 }
 
-void GameView::PlayerNameView(NavigationHost& NavHost) {
+void GameView::PlayerNameView(NavigationHost& NavHost)
+{
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
@@ -122,7 +124,8 @@ void GameView::PlayerNameView(NavigationHost& NavHost) {
     //}
 }
 
-void GameView::GameModeTypeView(NavigationHost& NavHost) {
+void GameView::GameModeTypeView(NavigationHost& NavHost)
+{
     GameState curGameState;
     NavHost.SetContext(GAME_STATE, curGameState);
 
@@ -177,10 +180,14 @@ void GameView::GameModeTypeView(NavigationHost& NavHost) {
 }
 
 void GameView::UpdateGame(
-    GameScreen gameScreen, GameAction::Board& board, short& moveCount,
-    const GameAction::Point& move, const Constants::Player& player,
+    GameScreen gameScreen,
+    GameAction::Board& board,
+    short& moveCount,
+    const GameAction::Point& move,
+    const Constants::Player& player,
     GameState& gameState
-) {
+)
+{
     GameAction::MakeMove(board, moveCount, move, player.value);
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, player.symbol
@@ -192,10 +199,15 @@ void GameView::UpdateGame(
 }
 
 void GameView::HandleState(
-    const GameAction::Board& board, const short& moveCount,
-    const GameAction::Point& move, const Constants::Player& player,
-    const bool& isPlayerOneTurn, GameState& curGameState, bool& endGame
-) {
+    const GameAction::Board& board,
+    const short& moveCount,
+    const GameAction::Point& move,
+    const Constants::Player& player,
+    const bool& isPlayerOneTurn,
+    GameState& curGameState,
+    bool& endGame
+)
+{
     short state = Logic::GetGameState(board, moveCount, move, player.value);
     switch (state) {
         case Logic::WIN_VALUE:
@@ -214,7 +226,8 @@ void GameView::HandleState(
     }
 }
 
-void GameView::GameScreenView(NavigationHost& NavHost) {
+void GameView::GameScreenView(NavigationHost& NavHost)
+{
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
     GameScreen gameScreen(7, 2);
@@ -302,12 +315,21 @@ void GameView::GameScreenView(NavigationHost& NavHost) {
                 GameAction::Point curMove = {row, col};
 
                 UpdateGame(
-                    gameScreen, gameBoard, moveCount, curMove, curPlayer,
+                    gameScreen,
+                    gameBoard,
+                    moveCount,
+                    curMove,
+                    curPlayer,
                     curGameState
                 );
                 HandleState(
-                    gameBoard, moveCount, curMove, curPlayer, isPlayerOneTurn,
-                    curGameState, endGame
+                    gameBoard,
+                    moveCount,
+                    curMove,
+                    curPlayer,
+                    isPlayerOneTurn,
+                    curGameState,
+                    endGame
                 );
 
                 // AI's turn
@@ -319,14 +341,23 @@ void GameView::GameScreenView(NavigationHost& NavHost) {
 
                     curMove = myAI.GetBestMove(gameBoard, moveCount);
                     UpdateGame(
-                        gameScreen, gameBoard, moveCount, curMove, curPlayer,
+                        gameScreen,
+                        gameBoard,
+                        moveCount,
+                        curMove,
+                        curPlayer,
                         curGameState
                     );
                     myAI.UpdatePrivateValues(curMove);
 
                     HandleState(
-                        gameBoard, moveCount, curMove, curPlayer,
-                        isPlayerOneTurn, curGameState, endGame
+                        gameBoard,
+                        moveCount,
+                        curMove,
+                        curPlayer,
+                        isPlayerOneTurn,
+                        curGameState,
+                        endGame
                     );
                 }
 
@@ -340,7 +371,8 @@ void GameView::GameScreenView(NavigationHost& NavHost) {
     return NavHost.Navigate("ReplayMenuView");
 }
 
-void GameView::AIDifficultyView(NavigationHost& NavHost) {
+void GameView::AIDifficultyView(NavigationHost& NavHost)
+{
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
@@ -404,7 +436,8 @@ void GameView::AIDifficultyView(NavigationHost& NavHost) {
     }
 }
 
-void GameView::ReplayMenuView(NavigationHost& NavHost) {
+void GameView::ReplayMenuView(NavigationHost& NavHost)
+{
     short selectedOption = 0;
     const short MAX_OPTIONS = 2;
 
@@ -444,13 +477,15 @@ void GameView::ReplayMenuView(NavigationHost& NavHost) {
     }
 }
 
-void GameView::ReplaySaveView(NavigationHost& NavHost) {
+void GameView::ReplaySaveView(NavigationHost& NavHost)
+{
     View::WriteToView(20, 20, L"Replay saving view, press any key to continue");
     auto tmp = InputHandle::Get();
     return NavHost.Navigate("PlayAgainView");
 }
 
-void GameView::PlayAgainView(NavigationHost& NavHost) {
+void GameView::PlayAgainView(NavigationHost& NavHost)
+{
     short selectedOption = 0;
     const short MAX_OPTIONS = 2;
     std::wstring label = Language::GetString(L"LABEL_PLAY_AGAIN");

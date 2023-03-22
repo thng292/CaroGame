@@ -17,7 +17,8 @@ namespace FileHandle {
         std::filesystem::file_time_type lastModified;
     };
 
-    inline void Ensure(const std::filesystem::path& Dir) {
+    inline void Ensure(const std::filesystem::path& Dir)
+    {
         if (!std::filesystem::exists(Dir)) {
             std::filesystem::create_directories(Dir);
         }
@@ -27,12 +28,14 @@ namespace FileHandle {
 
     std::wifstream OpenInFile(const std::filesystem::path& fileName);
 
-    inline std::ofstream OpenOutFileA(const std::filesystem::path& fileName) {
+    inline std::ofstream OpenOutFileA(const std::filesystem::path& fileName)
+    {
         Ensure(fileName.parent_path());
         return std::ofstream(fileName);
     }
 
-    inline std::ifstream OpenInFileA(const std::filesystem::path& fileName) {
+    inline std::ifstream OpenInFileA(const std::filesystem::path& fileName)
+    {
         Ensure(fileName.parent_path());
         return std::ifstream(fileName);
     }

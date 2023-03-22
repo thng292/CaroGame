@@ -4,30 +4,37 @@
 
 #include "Constants.h"
 
-void BoardContainer::DrawBoardContainer() {
+void BoardContainer::DrawBoardContainer()
+{
     DrawBoardRow();
     DrawBoardCol();
     DrawBoardHorizontalLabels();
     DrawBoardVerticalLabels();
 }
 
-void BoardContainer::DrawBoardRow() {
+void BoardContainer::DrawBoardRow()
+{
     auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD tmp = 0;
     for (short row = 0; row < Constants::BOARD_SIZE + 1; ++row) {
         FillConsoleOutputCharacter(
-            stdHandle, L'\u2550', CELL_WIDTH * Constants::BOARD_SIZE,
-            {xCoord, yCoord + row * CELL_HEIGHT}, &tmp
+            stdHandle,
+            L'\u2550',
+            CELL_WIDTH * Constants::BOARD_SIZE,
+            {xCoord, yCoord + row * CELL_HEIGHT},
+            &tmp
         );
     }
 }
 
-void BoardContainer::DrawBoardCol() {
+void BoardContainer::DrawBoardCol()
+{
     for (short col = 0; col < Constants::BOARD_SIZE + 1; ++col) {
         for (short i = 0; i < Constants::BOARD_SIZE; ++i) {
             for (short j = 0; j < CELL_HEIGHT; j++) {
                 View::WriteToView(
-                    xCoord + col * CELL_WIDTH, yCoord + i * CELL_HEIGHT + j,
+                    xCoord + col * CELL_WIDTH,
+                    yCoord + i * CELL_HEIGHT + j,
                     L'\u2551'
                 );
             }
@@ -37,14 +44,17 @@ void BoardContainer::DrawBoardCol() {
 
 void BoardContainer::DrawToBoardContainerCell(
     short row, short col, std::wstring value
-) {
+)
+{
     View::WriteToView(
         xCoord + col * CELL_WIDTH + X_OFFSET,
-        yCoord + row * CELL_HEIGHT + Y_OFFSET, value
+        yCoord + row * CELL_HEIGHT + Y_OFFSET,
+        value
     );
 }
 
-void BoardContainer::DrawBoardHorizontalLabels() {
+void BoardContainer::DrawBoardHorizontalLabels()
+{
     char c = 'A';
     for (int i = 0; i < Constants::BOARD_SIZE; ++i) {
         std::wstring s = L"1";
@@ -53,7 +63,8 @@ void BoardContainer::DrawBoardHorizontalLabels() {
     }
 }
 
-void BoardContainer::DrawBoardVerticalLabels() {
+void BoardContainer::DrawBoardVerticalLabels()
+{
     char c = '1';
     for (int i = 0; i < Constants::BOARD_SIZE; ++i) {
         std::wstring s = L"1";

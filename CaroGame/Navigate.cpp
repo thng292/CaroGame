@@ -2,7 +2,8 @@
 
 NavigationHost::NavigationHost(
     const std::string& Start, const ViewFuncMap& links
-) {
+)
+{
     _CurrentScreen = {Start, nullptr};
     _Links = links;
     Context["No exist"] = nullptr;
@@ -15,32 +16,38 @@ NavigationHost::NavigationHost(
     }
 }
 
-std::any& NavigationHost::GetFromContext(const std::string& name) {
+std::any& NavigationHost::GetFromContext(const std::string& name)
+{
     if (!Context.contains(name)) {
         return Context["No exist"];
     }
     return Context[name];
 }
 
-void NavigationHost::SetContext(const std::string& name, const std::any& data) {
+void NavigationHost::SetContext(const std::string& name, const std::any& data)
+{
     Context[name] = data;
 }
 
-void NavigationHost::DeleteContext(const std::string& name) {
+void NavigationHost::DeleteContext(const std::string& name)
+{
     Context.erase(name);
 }
 
-void NavigationHost::Add(const std::string& path, const ViewFunc& view) {
+void NavigationHost::Add(const std::string& path, const ViewFunc& view)
+{
     _Links[path] = view;
 }
 
-void NavigationHost::HistoryPop() {
+void NavigationHost::HistoryPop()
+{
     delete[] _History.top().prevScreenBuffer;
     _History.pop();
 }
 
 // No return
-void NavigationHost::NavigateStack(const std::string& path) {
+void NavigationHost::NavigateStack(const std::string& path)
+{
     // Save current screen
     HANDLE StdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     PCHAR_INFO buffer =
@@ -51,14 +58,16 @@ void NavigationHost::NavigateStack(const std::string& path) {
     _CurrentScreen = {path, buffer};
 }
 
-void NavigationHost::Navigate(const std::string& path) {
+void NavigationHost::Navigate(const std::string& path)
+{
     _History.push(_CurrentScreen);
     HistoryPopAllOverlay();
     _CurrentScreen = {path, nullptr};
     View::ClearScreen();
 }
 
-void NavigationHost::Back() {
+void NavigationHost::Back()
+{
     if (_History.empty()) {
         _CurrentScreen = {Navigate::EXIT, nullptr};
         return;
@@ -68,8 +77,11 @@ void NavigationHost::Back() {
         SMALL_RECT tmp = {
             0, 0, Navigate::CONSOLE_WIDTH - 1, Navigate::CONSOLE_HEIGHT - 1};
         WriteConsoleOutput(
-            GetStdHandle(STD_OUTPUT_HANDLE), _CurrentScreen.prevScreenBuffer,
-            {Navigate::CONSOLE_WIDTH, Navigate::CONSOLE_HEIGHT}, {0, 0}, &tmp
+            GetStdHandle(STD_OUTPUT_HANDLE),
+            _CurrentScreen.prevScreenBuffer,
+            {Navigate::CONSOLE_WIDTH, Navigate::CONSOLE_HEIGHT},
+            {0, 0},
+            &tmp
         );
         delete[] _CurrentScreen.prevScreenBuffer;
     }
@@ -77,7 +89,8 @@ void NavigationHost::Back() {
     _History.pop();
 }
 
-void NavigationHost::BackToLastNotOverlay() {
+void NavigationHost::BackToLastNotOverlay()
+{
     // Pop to last overlay
     while (!_History.empty() && _History.top().prevScreenBuffer != nullptr) {
         _CurrentScreen = _History.top();
@@ -88,20 +101,23 @@ void NavigationHost::BackToLastNotOverlay() {
 
 void NavigationHost::NavigateExit() { _CurrentScreen.name = Navigate::EXIT; }
 
-NavigationHost::~NavigationHost() {
+NavigationHost::~NavigationHost()
+{
     delete[] _CurrentScreen.prevScreenBuffer;
     while (!_History.empty()) {
         HistoryPop();
     }
 }
 
-void NavigationHost::HistoryPopAllOverlay() {
+void NavigationHost::HistoryPopAllOverlay()
+{
     while (!_History.empty() && _History.top().prevScreenBuffer != nullptr) {
         HistoryPop();
     }
 }
 
-void NavigationHost::Draw404(NavigationHost& NavHost) {
+void NavigationHost::Draw404(NavigationHost& NavHost)
+{
     View::DrawMenuCenter(
         L"404",
         {

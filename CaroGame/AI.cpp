@@ -1,9 +1,12 @@
 #include "AI.h"
 
 short AI::Eval(
-    const GameAction::Board& board, const short& moveCount,
-    const GameAction::Point& lastMove, bool isMaximizingPlayer
-) {
+    const GameAction::Board& board,
+    const short& moveCount,
+    const GameAction::Point& lastMove,
+    bool isMaximizingPlayer
+)
+{
     short playerValue = (isMaximizingPlayer) ? PLAYER_AI : PLAYER_HUMAN;
     short totalEval = 0;
 
@@ -11,7 +14,8 @@ short AI::Eval(
     return (isMaximizingPlayer) ? totalEval : -totalEval;
 }
 
-bool isValidPoint(short row, short col) {
+bool isValidPoint(short row, short col)
+{
     return !(
         row < 0 || col < 0 || row >= Constants::BOARD_SIZE ||
         col >= Constants::BOARD_SIZE
@@ -19,9 +23,11 @@ bool isValidPoint(short row, short col) {
 }
 
 bool IsGoodMove(
-    const GameAction::Board& board, const GameAction::Point& move,
+    const GameAction::Board& board,
+    const GameAction::Point& move,
     const short& playerValue
-) {
+)
+{
     for (short row = move.row - 1; row <= move.row + 1; ++row) {
         for (short col = move.col - 1; col <= move.col + 1; ++col) {
             if (isValidPoint(row, col)) {
@@ -33,7 +39,8 @@ bool IsGoodMove(
     return 0;
 }
 
-GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount) {
+GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
+{
     short rowLowerLimit = (_topLeftPoint.row - FIRST_LOOKUP_RANGE >= 0)
                               ? _topLeftPoint.row - FIRST_LOOKUP_RANGE
                               : 0;
@@ -83,8 +90,15 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount) {
             valCur = hash.evalTable[hashKey];
         else {
             valCur = MiniMax(
-                board, moveCount, moveList[i], alpha, beta, false, _depth - 1,
-                _topLeftPoint, _bottomRightPoint
+                board,
+                moveCount,
+                moveList[i],
+                alpha,
+                beta,
+                false,
+                _depth - 1,
+                _topLeftPoint,
+                _bottomRightPoint
             );
             hash.checkTable[hashKey] = 1;
             hash.evalTable[hashKey] = valCur;
@@ -109,9 +123,13 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount) {
 }
 
 short AI::MiniMax(
-    GameAction::Board& board, short& moveCount,
-    const GameAction::Point& lastMove, short alpha, short beta,
-    const bool& isMaximizingPlayer, const short& depth,
+    GameAction::Board& board,
+    short& moveCount,
+    const GameAction::Point& lastMove,
+    short alpha,
+    short beta,
+    const bool& isMaximizingPlayer,
+    const short& depth,
     const GameAction::Point topLeftPoint,
     const GameAction::Point bottomRightPoint
 )
@@ -181,7 +199,12 @@ short AI::MiniMax(
                 valCur = hash.evalTable[hashKey];
             else {
                 valCur = MiniMax(
-                    board, moveCount, moveList[i], alpha, beta, false,
+                    board,
+                    moveCount,
+                    moveList[i],
+                    alpha,
+                    beta,
+                    false,
                     depth - 1,
                     NewTopLeftPoint(
                         {rowLowerLimit, colLowerLimit},
@@ -212,7 +235,13 @@ short AI::MiniMax(
                 valCur = hash.evalTable[hashKey];
             else {
                 valCur = MiniMax(
-                    board, moveCount, moveList[i], alpha, beta, true, depth - 1,
+                    board,
+                    moveCount,
+                    moveList[i],
+                    alpha,
+                    beta,
+                    true,
+                    depth - 1,
                     NewTopLeftPoint(
                         {rowLowerLimit, colLowerLimit},
                         {moveList[i].row, moveList[i].col}
@@ -234,4 +263,3 @@ short AI::MiniMax(
         return valBest;
     }
 }
-

@@ -17,21 +17,28 @@ class AI {
     Hash hash;
     int cnt = 0;
     short Eval(
-        const GameAction::Board& board, const short& moveCount,
-        const GameAction::Point& lastMove, bool isMaximizingPlayer
+        const GameAction::Board& board,
+        const short& moveCount,
+        const GameAction::Point& lastMove,
+        bool isMaximizingPlayer
     );
 
     short MiniMax(
-        GameAction::Board& board, short& moveCount,
-        const GameAction::Point& lastMove, short alpha, short beta,
-        const bool& isMaximizingPlayer, const short& depth,
+        GameAction::Board& board,
+        short& moveCount,
+        const GameAction::Point& lastMove,
+        short alpha,
+        short beta,
+        const bool& isMaximizingPlayer,
+        const short& depth,
         const GameAction::Point topLeftPoint,
         const GameAction::Point bottomRightPoint
     );
 
     GameAction::Point GetBestMove(GameAction::Board& board, short& moveCount);
 
-    inline void UpdatePrivateValues(GameAction::Point point) {
+    inline void UpdatePrivateValues(GameAction::Point point)
+    {
         if (point.row < _topLeftPoint.row) _topLeftPoint.row = point.row;
         if (point.col < _topLeftPoint.col) _topLeftPoint.col = point.col;
 
@@ -40,9 +47,10 @@ class AI {
         if (point.col > _bottomRightPoint.col)
             _bottomRightPoint.col = point.col;
         cnt = 0;
-    }   
+    }
 
-    inline void SetDifficulty(const short& difficulty) {
+    inline void SetDifficulty(const short& difficulty)
+    {
         switch (difficulty) {
             case AI_DIFFICULTY_EASY:
                 _depth = 1;
@@ -56,7 +64,8 @@ class AI {
         }
     }
 
-    inline GameAction::Point GetFirstMove() {
+    inline GameAction::Point GetFirstMove()
+    {
         srand(time(NULL));
         short row = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
         short col = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
@@ -74,7 +83,8 @@ class AI {
 
 inline GameAction::Point NewBottomRightPoint(
     const GameAction::Point& bottomRightPoint, const GameAction::Point& point
-) {
+)
+{
     GameAction::Point newPoint = bottomRightPoint;
     if (point.row > bottomRightPoint.row) newPoint.row = point.row;
     if (point.col > bottomRightPoint.col) newPoint.col = point.col;
@@ -83,7 +93,8 @@ inline GameAction::Point NewBottomRightPoint(
 
 inline GameAction::Point NewTopLeftPoint(
     const GameAction::Point& topLeftPoint, const GameAction::Point& point
-) {
+)
+{
     GameAction::Point newPoint = topLeftPoint;
     if (point.row < topLeftPoint.row) newPoint.row = point.row;
     if (point.col < topLeftPoint.col) newPoint.col = point.col;

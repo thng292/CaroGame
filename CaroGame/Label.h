@@ -10,14 +10,20 @@ namespace Label {
 
     // Draws a centered-label based on the width of the container
     void DrawLabelCenter(
-        const short& X_LEFT, const short& X_RIGHT, const short& X,
-        const short& Y, const std::wstring& VALUE
+        const short& X_LEFT,
+        const short& X_RIGHT,
+        const short& X,
+        const short& Y,
+        const std::wstring& VALUE
     );
 
     // Draws a grid of labels based on the width of the container
     void DrawLabelGrid(
-        const short& X_LEFT, const short& X_RIGHT, const short& X,
-        const short& Y, const std::vector<std::wstring>& VALUE_LIST,
+        const short& X_LEFT,
+        const short& X_RIGHT,
+        const short& X,
+        const short& Y,
+        const std::vector<std::wstring>& VALUE_LIST,
         const short& COL_NUM
     );
 }  // namespace Label

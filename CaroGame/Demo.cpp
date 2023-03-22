@@ -3,7 +3,8 @@
 #include "Navigate.h"
 #include "View.h"
 
-void ExitView(NavigationHost& NavHost) {
+void ExitView(NavigationHost& NavHost)
+{
     static short selectedOption = 1;   // User option
     static const short maxOption = 2;  // Number of option
     while (1) {                        // Main while loop
@@ -45,14 +46,17 @@ void ExitView(NavigationHost& NavHost) {
 }
 
 // DEMO PURPOSE ONLY
-void TestView1(NavigationHost& NavHost) {
+void TestView1(NavigationHost& NavHost)
+{
     static short selectedOption = 0;   // User option
     static const short maxOption = 3;  // Number of option
     View::DrawTextWrapped(
-        0, 1,
+        0,
+        1,
         L"This is a very very long long text. This is a very very long long "
         L"text. This is a very very long long text.",
-        3, 30
+        3,
+        30
     );
     NavHost.SetContext("TestContextValue", L"this is the context value");
     while (1) {  // Main while loop
@@ -100,12 +104,15 @@ void TestView1(NavigationHost& NavHost) {
 }
 
 // DEMO PURPOSE ONLY
-void TestView2(NavigationHost& NavHost) {
+void TestView2(NavigationHost& NavHost)
+{
     View::WriteToView(
-        20, 20,
+        20,
+        20,
         std::any_cast<const wchar_t*>(NavHost.GetFromContext("TestContextValue")
         ),
-        0, true
+        0,
+        true
     );
     View::WriteToView(20, 21, L"Enter to go back", 0, true);
     auto tmp = InputHandle::Get();
@@ -118,7 +125,8 @@ void TestView2(NavigationHost& NavHost) {
 }
 
 // DEMO PURPOSE ONLY
-void TestView3(NavigationHost& NavHost) {
+void TestView3(NavigationHost& NavHost)
+{
     View::WriteToView(20, 22, L"Test view 3", 0, true);
     View::WriteToView(20, 21, L"Enter to go back", 0, true);
     auto tmp = InputHandle::Get();
@@ -127,7 +135,8 @@ void TestView3(NavigationHost& NavHost) {
     }
 }
 
-int Demo() {
+int Demo()
+{
     NavigationHost NavHost(
         "TestView1",  // Initialize Navigation Host. "TestView1 is the first
                       // view to be shown

@@ -12,6 +12,7 @@ class Container {
     void DrawToContainer(std::wstring value);
     void DrawToLogContainer(
         const std::vector<std::pair<short, short>>& valueList,
-        std::wstring playerNameOne, std::wstring playerNameTwo
+        std::wstring playerNameOne,
+        std::wstring playerNameTwo
     );
 };

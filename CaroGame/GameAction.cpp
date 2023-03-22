@@ -6,27 +6,35 @@
 
 namespace GameAction {
     void MakeMove(
-        Board& board, short& moveCount, const Point& move,
+        Board& board,
+        short& moveCount,
+        const Point& move,
         const short& playerValue
-    ) {
+    )
+    {
         board[move.row][move.col] = playerValue;
         moveCount++;
     }
 
-    void UndoMove(Board& board, short& moveCount, const Point& move) {
+    void UndoMove(Board& board, short& moveCount, const Point& move)
+    {
         board[move.row][move.col] = 0;
         moveCount--;
     }
 
-    void ResetGameState(GameState& gameState) {
+    void ResetGameState(GameState& gameState)
+    {
         GameState temp;
         gameState = temp;
     }
 
     void InitBoard(
-        Board& board, short& moveCount, Point& topLeftPoint,
+        Board& board,
+        short& moveCount,
+        Point& topLeftPoint,
         Point& bottomRightPoint
-    ) {
+    )
+    {
         moveCount = 0;
         board.resize(Constants::BOARD_SIZE);
 

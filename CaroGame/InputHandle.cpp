@@ -1,6 +1,7 @@
 #include "InputHandle.h"
 
-std::wstring InputHandle::Filter(wchar_t inp) {
+std::wstring InputHandle::Filter(wchar_t inp)
+{
     if (inp == 0 || inp == 0xE0) {
         wchar_t tmp = _getwch();
         switch (tmp) {
@@ -29,7 +30,8 @@ std::wstring InputHandle::Filter(wchar_t inp) {
     return std::wstring(1, inp);
 }
 
-std::wstring InputHandle::Get() {
+std::wstring InputHandle::Get()
+{
     wchar_t inp = _getwch();
     return Filter(inp);
 }

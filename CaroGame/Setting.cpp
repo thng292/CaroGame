@@ -5,7 +5,8 @@ short CalcMenuHeight(short noLine, bool hasTitle = true);
 short CalcMenuWidth(short titlesMaxWidth, short optionsMaxWidth);
 std::pair<short, short> CalcPosCenter(short menuWidth, short menuHeight);
 
-void Setting::SettingScreen(NavigationHost& NavHost) {
+void Setting::SettingScreen(NavigationHost& NavHost)
+{
     auto langList = Language::DiscoverLanguageFile();
 
     int select = 0;
@@ -29,7 +30,8 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
         );
 
         const auto controlHint2 = std::format(
-            L"Enter: {}, B: {}", Language::GetString(L"SELECT_KEY_TITLE"),
+            L"Enter: {}, B: {}",
+            Language::GetString(L"SELECT_KEY_TITLE"),
             Language::GetString(L"NAVIGATE_BACK_TITLE")
         );
 
@@ -60,13 +62,16 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
         short menuHeight = CalcMenuHeight(titles.size(), true) + 2;
         auto posCenter = CalcPosCenter(menuWidth, menuHeight);
         View::Rect DrawnRect = {
-            posCenter.second, posCenter.first, posCenter.first + menuWidth - 1,
+            posCenter.second,
+            posCenter.first,
+            posCenter.first + menuWidth - 1,
             posCenter.second + menuHeight - 1};
         View::DrawRect(DrawnRect);
         posCenter.first += View::BORDER_WIDTH + View::HPADDING;
         posCenter.second += View::BORDER_WIDTH + View::VPADDING;
         View::WriteToView(
-            posCenter.first, posCenter.second,
+            posCenter.first,
+            posCenter.second,
             Language::GetString(L"SETTINGS_TITLE")
         );
         posCenter.second += 2;
@@ -77,12 +82,16 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
                 posCenter.first + titlesWidth - 2, posCenter.second + i, L":"
             );
             View::WriteToView(
-                posCenter.first + titlesWidth, posCenter.second + i, options[i],
-                0, i == select
+                posCenter.first + titlesWidth,
+                posCenter.second + i,
+                options[i],
+                0,
+                i == select
             );
         }
         View::WriteToView(
-            posCenter.first, posCenter.second + titles.size() + 1,
+            posCenter.first,
+            posCenter.second + titles.size() + 1,
             Language::GetString(L"NAVIGATE_BACK_TITLE"),
             Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0],
             select == titles.size()
@@ -151,7 +160,8 @@ void Setting::SettingScreen(NavigationHost& NavHost) {
     }
 }
 
-inline short CalcMaxWidth(const auto& strList) {
+inline short CalcMaxWidth(const auto& strList)
+{
     short res = 0;
     for (auto& i : strList) {
         res = res < i.size() ? i.size() : res;
@@ -159,18 +169,19 @@ inline short CalcMaxWidth(const auto& strList) {
     return res;
 }
 
-inline short CalcMenuHeight(short noLine, bool hasTitle) {
+inline short CalcMenuHeight(short noLine, bool hasTitle)
+{
     return noLine + 2 * (View::BORDER_WIDTH + View::VPADDING) +
            (hasTitle ? 2 : 0);
 }
 
-inline short CalcMenuWidth(short titlesMaxWidth, short optionsMaxWidth) {
+inline short CalcMenuWidth(short titlesMaxWidth, short optionsMaxWidth)
+{
     return titlesMaxWidth + optionsMaxWidth + 2 +
            2 * (View::BORDER_WIDTH + View::HPADDING);
 }
 
-inline std::pair<short, short> CalcPosCenter(
-    short menuWidth, short menuHeight
-) {
+inline std::pair<short, short> CalcPosCenter(short menuWidth, short menuHeight)
+{
     return {59 - menuWidth / 2, 14 - menuHeight / 2};
 }

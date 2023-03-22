@@ -16,7 +16,8 @@ class Hash {
     Ulli ZobristTable[Constants::BOARD_SIZE][Constants::BOARD_SIZE][3];
 
     // Initializes the table
-    inline constexpr void initTable() {
+    inline constexpr void initTable()
+    {
         for (int i = 0; i < Constants::BOARD_SIZE; i++) {
             for (int j = 0; j < Constants::BOARD_SIZE; j++) {
                 for (int k = 0; k < 3; k++) {
@@ -32,7 +33,8 @@ class Hash {
 
     Hash() { initTable(); }
 
-    inline Ulli randomInt() {
+    inline Ulli randomInt()
+    {
         std::uniform_int_distribution<Ulli> dist(0, UINT64_MAX);
         return dist(mt);
     }
