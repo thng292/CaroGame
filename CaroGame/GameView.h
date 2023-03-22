@@ -28,7 +28,7 @@ namespace GameView {
     const short AI_DIFFICULTY_NORMAL = 1;
     const short AI_DIFFICULTY_HARD = 2;
 
-    const std::string GAME_STATE = "GAME_STATE";
+    const std::string GAME_STATE = Constants::CURRENT_GAME;
 
     // View when choosing PvP / PvE
     void GameModeVersusView(NavigationHost& NavHost);

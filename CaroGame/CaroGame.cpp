@@ -3,6 +3,7 @@
 #include "LoadScreen.h"
 #include "MainMenu.h"
 #include "Navigate.h"
+#include "SaveScreen.h"
 #include "Setting.h"
 #include "StartUp.h"
 
@@ -13,6 +14,9 @@ int main()
     NavigationHost NavHost(
         "MainMenu",
         {
+            {"SaveSuccess",                SaveScreen::SaveSuccess            },
+            {"SaveFailed",                 SaveScreen::SaveFailed             },
+            {"SaveScreen",                 SaveScreen::SaveScreen             },
             {"GameModeTypeView",           GameView::GameModeTypeView         },
             {"GameModeVersusView",         GameView::GameModeVersusView       },
             {"GameScreenView",             GameView::GameScreenView           },
@@ -26,7 +30,9 @@ int main()
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
             {"MainMenu",                   MainMenu::ScreenMainMenu           },
             {"Setting",                    Setting::SettingScreen             },
-            {"Load",                       LoadScreen::LoadSceen              }
+            {"LoadScreen",                 LoadScreen::LoadSceen              },
+            {"LoadFailed",                 LoadScreen::LoadFailed             },
+            {"EmptyLoad",                  LoadScreen::EmptyLoad              },
     }
     );
 }

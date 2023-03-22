@@ -1,15 +1,32 @@
 #include "LoadScreen.h"
 
-static void EmptyLoad(NavigationHost& NavHost);
+static void DrawHints()
+{
+    View::DrawTextCenterdVertically(
+        29 - 3,
+        std::format(
+            L"A, W, S, D, Arrow Keys: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE")
+        )
+    );
 
-static void LoadFailed(NavigationHost& NavHost);
+    View::DrawTextCenterdVertically(
+        29 - 2,
+        std::format(
+            L"B: {}, Enter: {}, Tab: {}",
+            Language::GetString(L"NAVIGATE_BACK_TITLE"),
+            Language::GetString(L"SELECT_KEY_TITLE"),
+            Language::GetString(L"SEARCH_TITLE")
+        )
+    );
+}
 
 void LoadScreen::LoadSceen(NavigationHost& NavHost)
 {
-    auto currentState = LoadScreenState();
+    static auto currentState = LoadScreenState();
 
     if (currentState.allOptions.size() == 0) {
-        return EmptyLoad(NavHost);
+        return NavHost.Navigate("EmptyLoad");
     }
 
     DrawHints();
@@ -36,7 +53,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
             leadingText,
             currentState.searchInput,
             currentState.isSearching,
-            currentState.onSearchValueChange([&currentState, &drawMain] {
+            currentState.onSearchValueChange([&drawMain] {
                 View::ClearRect(currentState.drawnRect);
                 currentState.drawnRect = drawMain();
             })
@@ -75,14 +92,13 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
             return NavHost.Back();
         }
 
-        if (tmp == L"\r" &&
-            currentState.options[currentState.selected].underline == 0) {
+        if (tmp == L"\r") {
             auto loaded = currentState.LoadCurrentSelect();
             if (loaded) {
                 NavHost.SetContext(Constants::CURRENT_GAME, loaded.value());
                 return NavHost.Navigate("GameScreenView");
             } else {
-                return LoadFailed(NavHost);
+                return NavHost.NavigateStack("LoadFailed");
             }
         }
 
@@ -94,7 +110,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
     }
 }
 
-static void EmptyLoad(NavigationHost& NavHost)
+void LoadScreen::EmptyLoad(NavigationHost& NavHost)
 {
     View::DrawMenuCenter(
         Language::GetString(L"EMPTY_SAVE_TITLE"),
@@ -109,32 +125,11 @@ static void EmptyLoad(NavigationHost& NavHost)
     NavHost.Back();
 }
 
-static void LoadFailed(NavigationHost& NavHost)
+void LoadScreen::LoadFailed(NavigationHost& NavHost)
 {
     View::DrawMenuCenter(Language::GetString(L"LOAD_FAILED_TITLE"), {}, 0);
     InputHandle::Get();
     return NavHost.Back();
-}
-
-void LoadScreen::DrawHints()
-{
-    View::DrawTextCenterdVertically(
-        29 - 3,
-        std::format(
-            L"A, W, S, D, Arrow Keys: {}",
-            Language::GetString(L"NAVIGATION_KEYS_TITLE")
-        )
-    );
-
-    View::DrawTextCenterdVertically(
-        29 - 2,
-        std::format(
-            L"B: {}, Enter: {}, Tab: {}",
-            Language::GetString(L"NAVIGATE_BACK_TITLE"),
-            Language::GetString(L"SELECT_KEY_TITLE"),
-            Language::GetString(L"SEARCH_TITLE")
-        )
-    );
 }
 
 inline void LoadScreen::LoadScreenState::LoadAllOptions()

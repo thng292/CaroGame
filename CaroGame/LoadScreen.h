@@ -1,8 +1,6 @@
 #pragma once
 #include <algorithm>
-#include <ctime>
 #include <format>
-#include <locale>
 
 #include "Config.h"
 #include "Constants.h"
@@ -43,27 +41,19 @@ namespace LoadScreen {
         View::Rect drawnRect;
 
         void LoadAllOptions();
-
         void NextPage();
-
         void PrevPage();
-
         void NextSelection();
-
         void PrevSelection();
-
         void UpdatePage(int page);
-
         void Search();
-
         std::function<void(const std::wstring&)> onSearchValueChange(
             const std::function<void(void)>& callback
         );
-
         std::optional<GameState> LoadCurrentSelect();
     };
 
-    void DrawHints();
-
+    void EmptyLoad(NavigationHost& NavHost);
+    void LoadFailed(NavigationHost& NavHost);
     void LoadSceen(NavigationHost& NavHost);
 }  // namespace LoadScreen

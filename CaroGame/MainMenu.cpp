@@ -42,6 +42,8 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
             selectedOption =
                 Utils::modCycle(selectedOption + 1, options.size());
         }
+
+        // TODO ???????????????????
         // Shortcut
         if (tmp == Language::GetString(L"NEW_GAME_SHORTCUT")) {
             return NavHost.Navigate("New Game");  // Nho return
@@ -70,7 +72,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
                 case 0:
                     return NavHost.Navigate("New Game");  // Nho return
                 case 1:
-                    return NavHost.Navigate("Load");  // Nho return
+                    return NavHost.Navigate("LoadScreen");  // Nho return
                 case 2:
                     return NavHost.Navigate("Replay");
                 case 3:
