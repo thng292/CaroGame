@@ -146,7 +146,9 @@ namespace View {
     }
 
     inline bool defaultToogleFocus(wchar_t inp) {
-        return Utils::keyMatchPattern(inp, {L'\t', L'\r', L'\n', L'\x1b'});
+        return Utils::keyMatchPattern(
+            inp, {L'\t', L'\r', L'\n', L'\x1b'}
+        );
     }
 
     wchar_t Input(

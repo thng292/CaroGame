@@ -17,7 +17,7 @@ short InputBox::GetMaxWidth(LabelList labelList) {
 }
 
 void InputBox::DrawInputBox(
-    LabelList labelList, size_t selected, std::wstring curInput,
+    LabelList labelList, size_t &selected, std::wstring curInput,
     bool maxReached, short maxLength
 ) {
     const short MARGIN = 2, PADDING = 2;
@@ -38,9 +38,13 @@ void InputBox::DrawInputBox(
         );
     }
 
-    View::WriteToView(
-        CENTER.first + 3 + MAX_LABEL_WIDTH,
-        CENTER.second + 1 + selected * MARGIN, curInput + L" \b"
+    View::Input(
+        CENTER.first + 2, CENTER.second + 1 + selected * MARGIN,
+        labelList[selected], curInput, 1,
+        [&](const std::wstring newInp) {
+            curInput = newInp;
+            selected = (selected + 1) % labelList.size();
+        }
     );
 
     Label::DrawLabelCenter(

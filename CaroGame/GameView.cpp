@@ -57,8 +57,9 @@ void GameView::PlayerNameView(NavigationHost& NavHost) {
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-    std::vector<std::wstring> labelList;
+     std::vector<std::wstring> labelList;
     std::vector<std::string> contextList;
+
     std::wstring value;
     bool maxReached = false;
     const short MAX_LENGTH = 10;
@@ -93,6 +94,32 @@ void GameView::PlayerNameView(NavigationHost& NavHost) {
     }
     NavHost.SetContext(GAME_STATE, curGameState);
     return NavHost.Navigate("GameScreenView");
+
+    std::wstring curInput;
+
+        
+
+    //std::vector<std::wstring> labelList;
+    //size_t curOption = 0;
+    //   
+    ////if (curGameState.gameMode == GAME_MODE_PVP) {
+    //    labelList = {
+    //        Language::GetString(L"LABEL_PLAYER_NAME_ONE"),
+    //        Language::GetString(L"LABEL_PLAYER_NAME_TWO")};
+    ////}
+    ////else {
+    //   /* labelList = {
+    //        Language::GetString(L"LABEL_PLAYER_NAME_ONE"),
+    //    };*/
+    ////}
+
+    //const short labelListSize = labelList.size();
+    //const short xCoord = View::CalcCenter(120, 30).first;
+    //const short yCoord = View::CalcCenter(120, 30).second;
+
+    //while (1) {
+    //    InputBox::DrawInputBox(labelList, curOption, curInput);
+    //}
 }
 
 void GameView::GameModeTypeView(NavigationHost& NavHost) {
