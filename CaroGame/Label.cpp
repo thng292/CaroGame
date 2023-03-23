@@ -30,7 +30,7 @@ void Label::DrawLabelGrid(
     const short& COL_NUM
 )
 {
-    const short X_SPACE = (X_RIGHT - X_LEFT) / COL_NUM, Y_SPACE = 2;
+    const short X_SPACE = (X_RIGHT - X_LEFT) / COL_NUM, Y_SPACE = 1;
     short ind = 0;
     const short LIST_LENGTH = VALUE_LIST.size();
 

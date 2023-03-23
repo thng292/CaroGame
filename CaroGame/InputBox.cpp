@@ -19,7 +19,7 @@ short InputBox::GetMaxWidth(LabelList labelList)
 }
 
 void InputBox::DrawInputBox(
-    LabelList labelList, size_t &selected, std::wstring curInput,
+    LabelList labelList, size_t &selected, InputList &inputList,
     bool maxReached, short maxLength
 ) {
     const short MARGIN = 2, PADDING = 2;
@@ -40,15 +40,15 @@ void InputBox::DrawInputBox(
             CENTER.first + 2,
             CENTER.second + 1 + i * MARGIN,
             labelList[i],
-            0,
-            i == selected
+            0
+        );
+        View::WriteToView(
+            CENTER.first + 2 + labelList[i].size() + 1,
+            CENTER.second + 1 + i * MARGIN,
+            inputList[i],
+            0
         );
     }
-
-    View::WriteToView(
-        CENTER.first + 3 + MAX_LABEL_WIDTH,
-        CENTER.second + 1 + selected * MARGIN, curInput + L" \b"
-    );
 
     Label::DrawLabelCenter(
         CENTER.first,
@@ -57,6 +57,36 @@ void InputBox::DrawInputBox(
         CENTER.second + HEIGHT + 1,
         std::format(L"Username must have a maximum length of {}", maxLength)
     );
+
+    auto tmp = View::Input(
+        CENTER.first + 2,
+        CENTER.second + 1 + selected * MARGIN,
+        labelList[selected],
+        inputList[selected],
+        1,
+        [&](std::wstring newInp) { 
+            if (newInp.size() > 10) return;
+            inputList[selected] = newInp; 
+        }
+    );
+    
+    switch (tmp) {
+        case L'\r':
+            if (labelList[selected].size() != 0) selected++;
+            break;
+        case L'\t':
+            selected = Utils::modCycle(selected + 1, labelList.size());
+            break;
+    }
+
+
+
+    /* View::WriteToView(
+        CENTER.first + 3 + MAX_LABEL_WIDTH,
+        CENTER.second + 1 + selected * MARGIN, curInput + L" \b"
+    );*/
+
+    
 
     // View::Goto(CENTER.first + 3 + MAX_LABEL_WIDTH, CENTER.second + 1 +
     // selected * MARGIN);

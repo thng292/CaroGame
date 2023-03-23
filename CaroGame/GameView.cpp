@@ -56,72 +56,38 @@ void GameView::GameModeVersusView(NavigationHost& NavHost)
 
 void GameView::PlayerNameView(NavigationHost& NavHost)
 {
+    GameState temp;
+    temp.gameMode = GAME_MODE_PVP;
+    NavHost.SetContext(GAME_STATE, temp);
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-     std::vector<std::wstring> labelList;
-    std::vector<std::string> contextList;
-
-    std::wstring value;
     bool maxReached = false;
     const short MAX_LENGTH = 10;
     size_t curLabel = 0;
 
+    InputBox::LabelList labelList;
+    InputBox::InputList inputList;
+
     if (curGameState.gameMode == GAME_MODE_PVE) {
-        labelList = {L"Player's name:"};
-        curGameState.playerNameTwo = L"Gura";
+        labelList = {L"Player's name"};
+        inputList = {L"", L"Gura"};
     } else {
-        labelList = {L"Player 1's name:", L"Player 2's name:"};
+        labelList = {L"Player 1's name", L"Player 2's name"};
+        inputList = {L"", L""};     
     }
 
     const short MAX_LABEL = labelList.size();
 
     while (curLabel < MAX_LABEL) {
-        InputBox::DrawInputBox(
-            labelList, curLabel, value, maxReached, MAX_LENGTH
-        );
-        auto tmp = InputHandle::Get();
-        if (tmp == L"ESC") {
-            value.pop_back();
-        } else if (tmp == L"\r") {
-            if (curLabel == 0)
-                curGameState.playerNameOne = value;
-            else
-                curGameState.playerNameTwo = value;
-            value = L"";
-            curLabel++;
-        } else {
-            if (value.length() < MAX_LENGTH) value += tmp;
-        }
+        InputBox::DrawInputBox(labelList, curLabel, inputList);
     }
+    curGameState.playerNameOne = inputList[0];
+    curGameState.playerNameTwo = inputList[1];
+
     NavHost.SetContext(GAME_STATE, curGameState);
     return NavHost.Navigate("GameScreenView");
 
-    std::wstring curInput;
-
-        
-
-    //std::vector<std::wstring> labelList;
-    //size_t curOption = 0;
-    //   
-    ////if (curGameState.gameMode == GAME_MODE_PVP) {
-    //    labelList = {
-    //        Language::GetString(L"LABEL_PLAYER_NAME_ONE"),
-    //        Language::GetString(L"LABEL_PLAYER_NAME_TWO")};
-    ////}
-    ////else {
-    //   /* labelList = {
-    //        Language::GetString(L"LABEL_PLAYER_NAME_ONE"),
-    //    };*/
-    ////}
-
-    //const short labelListSize = labelList.size();
-    //const short xCoord = View::CalcCenter(120, 30).first;
-    //const short yCoord = View::CalcCenter(120, 30).second;
-
-    //while (1) {
-    //    InputBox::DrawInputBox(labelList, curOption, curInput);
-    //}
 }
 
 void GameView::GameModeTypeView(NavigationHost& NavHost)
@@ -226,6 +192,8 @@ void GameView::HandleState(
     }
 }
 
+
+
 void GameView::GameScreenView(NavigationHost& NavHost)
 {
     GameState curGameState =
@@ -247,6 +215,23 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     AI myAI;
     myAI.SetDifficulty(curGameState.aiDifficulty);
+
+    std::function<void(void)> timerCallbackOne;
+    std::function<void(void)> timerCallbackTwo;
+
+    if (curGameState.gameType == GAME_TYPE_NORMAL) {
+        timerCallbackOne = [&]() { curGameState.playerTimeOne--; };
+        timerCallbackTwo = [&]() { curGameState.playerTimeTwo--; };
+    } else {
+        timerCallbackOne = [&]() { curGameState.playerTimeOne++; };
+        timerCallbackTwo = [&]() { curGameState.playerTimeTwo++; };
+    }
+
+    Timer timerPlayerOne(timerCallbackOne, 1000);
+    Timer timerPlayerTwo(timerCallbackTwo, 1000);
+
+    timerPlayerOne.Start();
+    timerPlayerTwo.Start();
 
     while (!endGame) {
         auto tmp = InputHandle::Get();
@@ -365,6 +350,10 @@ void GameView::GameScreenView(NavigationHost& NavHost)
             }
         }
     }
+
+    timerPlayerOne.Stop();
+    timerPlayerTwo.Stop();
+
     auto tmp = InputHandle::Get();
     curGameState.moveList.clear();
     NavHost.SetContext(GAME_STATE, curGameState);

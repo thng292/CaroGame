@@ -9,7 +9,7 @@ GameScreen::GameScreen(short x, short y)
 {
     boardContainer.xCoord = x, boardContainer.yCoord = y;
     x += Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH + 5;
-    y += 1;
+    //y += 1;
     const short X_PIVOT = x;  // Resets X to original position (next to board)
     InitElement(timerContainerOne, x, y, 12, 2, 3, 1);
     x += timerContainerOne.cellWidth;
@@ -29,10 +29,10 @@ GameScreen::GameScreen(short x, short y)
     InitElement(timerContainerTwo, x, y, 12, 2, 3, 1);
 
     x = X_PIVOT;
-    y += timerContainerOne.cellHeight * 2;
-    InitElement(playerInfoContainerOne, x, y, 25, 4, 3, 1);
+    y += timerContainerOne.cellHeight + 1;
+    InitElement(playerInfoContainerOne, x, y, 25, 12, 9, 0);
     x += playerInfoContainerOne.cellWidth;
-    InitElement(playerInfoContainerTwo, x, y, 25, 4, 3, 1);
+    InitElement(playerInfoContainerTwo, x, y, 25, 12, 8, 0);
 
     x = X_PIVOT;
     y += playerInfoContainerOne.cellHeight + timerContainerOne.cellHeight;
@@ -75,13 +75,13 @@ void GameScreen::DrawGameScreen()
         timerContainerOne.yCoord - 1,
         L"Game Status"
     );
-    Label::DrawLabelCenter(
+   /* Label::DrawLabelCenter(
         logContainer.xCoord,
         logContainer.xCoord + logContainer.cellWidth,
         playerInfoContainerOne.xCoord,
         playerInfoContainerOne.yCoord - 1,
         L"Player Info"
-    );
+    );*/
     Label::DrawLabelCenter(
         logContainer.xCoord,
         logContainer.xCoord + logContainer.cellWidth,
@@ -95,18 +95,14 @@ void GameScreen::DrawGameScreen()
         L"A: Lorem ispum",
         L"A: Lorem ispum",
         L"A: Lorem ispum",
-        L"A: Lorem ispum",
-        L"A: Lorem ispum",
-        L"A: Lorem ispum",
-        L"A: Lorem ispum",
-        L"A: Lorem ispum"};
+    };
     Label::DrawLabelGrid(
         logContainer.xCoord,
         logContainer.xCoord + logContainer.cellWidth,
         logContainer.xCoord,
-        logContainer.yCoord + logContainer.cellHeight + 2,
+        logContainer.yCoord + logContainer.cellHeight + 1,
         INSTRUCTION_LIST,
-        3
+        2
     );
 }
 
@@ -114,6 +110,16 @@ void GameScreen::DrawToElements(GameState gameState)
 {
     playerContainerOne.DrawToContainer(L"X");
     playerContainerTwo.DrawToContainer(L"O");
+
+    short temp = (playerInfoContainerOne.cellWidth - gameState.playerNameOne.size()) / 2;
+    playerInfoContainerOne.xOffset =
+        (gameState.playerNameOne.size() % 2 == 0) ? temp + 1 : temp;
+        
+       
+    temp = (playerInfoContainerTwo.cellWidth - gameState.playerNameTwo.size()) / 2;
+
+     playerInfoContainerTwo.xOffset =
+        (gameState.playerNameTwo.size() % 2 == 0) ? temp + 1 : temp;
 
     playerInfoContainerOne.DrawToContainer(gameState.playerNameOne);
     playerInfoContainerTwo.DrawToContainer(gameState.playerNameTwo);
