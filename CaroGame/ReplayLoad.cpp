@@ -1,4 +1,4 @@
-#include "LoadScreen.h"
+#include "ReplayLoad.h"
 
 static void DrawHints()
 {
@@ -21,9 +21,9 @@ static void DrawHints()
     );
 }
 
-void LoadScreen::LoadSceen(NavigationHost& NavHost)
+void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 {
-    static auto currentState = LoadScreenState();
+    static auto currentState = ReplayLoadState();
 
     if (currentState.allOptions.size() == 0) {
         return NavHost.Navigate("EmptyLoad");
@@ -32,7 +32,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
     DrawHints();
 
     auto& soundSetting = Config::GetSetting(Config::SoundEffect);
-    auto& title = Language::GetString(L"LOAD_MENU_TITLE");
+    auto& title = Language::GetString(L"REPLAY_LOAD_MENU_TITLE");
     auto& leadingText = Language::GetString(L"SEARCH_FIELD_TITLE");
 
     const short searchX = 59 - (leadingText.length() + 32) / 2;
@@ -110,31 +110,9 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
     }
 }
 
-void LoadScreen::EmptyLoad(NavigationHost& NavHost)
+inline void ReplayLoad::ReplayLoadState::LoadAllOptions()
 {
-    View::DrawMenuCenter(
-        Language::GetString(L"EMPTY_SAVE_TITLE"),
-        {
-            {Language::GetString(L"EMPTY_SAVE_DESC"),     0   },
-            {Language::GetString(L"NAVIGATE_BACK_TITLE"),
-             Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0]}
-    },
-        1
-    );
-    InputHandle::Get();
-    NavHost.Back();
-}
-
-void LoadScreen::LoadFailed(NavigationHost& NavHost)
-{
-    View::DrawMenuCenter(Language::GetString(L"LOAD_FAILED_TITLE"), {}, 0);
-    InputHandle::Get();
-    return NavHost.Back();
-}
-
-inline void LoadScreen::LoadScreenState::LoadAllOptions()
-{
-    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles();
+    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles(Constants::REPLAY_PATH);
 
     std::sort(
         availableLoadFiles.begin(),
@@ -158,27 +136,27 @@ inline void LoadScreen::LoadScreenState::LoadAllOptions()
     }
 }
 
-inline void LoadScreen::LoadScreenState::NextPage()
+inline void ReplayLoad::ReplayLoadState::NextPage()
 {
     UpdatePage(Utils::modCycle(currentPage + 1, maxPage));
 }
 
-inline void LoadScreen::LoadScreenState::PrevPage()
+inline void ReplayLoad::ReplayLoadState::PrevPage()
 {
     UpdatePage(Utils::modCycle(currentPage - 1, maxPage));
 }
 
-inline void LoadScreen::LoadScreenState::NextSelection()
+inline void ReplayLoad::ReplayLoadState::NextSelection()
 {
     selected = Utils::modCycle(selected + 1, options.size() - 1);
 }
 
-inline void LoadScreen::LoadScreenState::PrevSelection()
+inline void ReplayLoad::ReplayLoadState::PrevSelection()
 {
     selected = Utils::modCycle(selected - 1, options.size() - 1);
 }
 
-void LoadScreen::LoadScreenState::UpdatePage(int page)
+void ReplayLoad::ReplayLoadState::UpdatePage(int page)
 {
     currentPage = Utils::modCycle(page, maxPage);
 
@@ -194,7 +172,7 @@ void LoadScreen::LoadScreenState::UpdatePage(int page)
     options.emplace_back(pageIndicator, 0);
 }
 
-inline void LoadScreen::LoadScreenState::Search()
+inline void ReplayLoad::ReplayLoadState::Search()
 {
     size_t n = allOptions.size();
     std::vector<SortTemporary> tmp;
@@ -230,7 +208,7 @@ inline void LoadScreen::LoadScreenState::Search()
 }
 
 inline std::function<void(const std::wstring&)>
-LoadScreen::LoadScreenState::onSearchValueChange(
+ReplayLoad::ReplayLoadState::onSearchValueChange(
     const std::function<void(void)>& callback
 )
 {
@@ -245,9 +223,10 @@ LoadScreen::LoadScreenState::onSearchValueChange(
     };
 }
 
-inline std::optional<GameState> LoadScreen::LoadScreenState::LoadCurrentSelect()
+inline std::optional<GameState> ReplayLoad::ReplayLoadState::LoadCurrentSelect()
 {
     return SaveLoad::Load(
-        allOptions[currentPage * Constants::PAGE_SIZE + selected].second
+        allOptions[currentPage * Constants::PAGE_SIZE + selected].second,
+        Constants::REPLAY_PATH
     );
 }

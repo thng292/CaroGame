@@ -180,6 +180,7 @@ namespace View {
         const std::function<void(const std::wstring&)>& onValueChange =
             [](const std::wstring&) {},
         const std::function<bool(wchar_t)>& toogleFocus = defaultToogleFocus,
+        const wchar_t delimiter = L':',
         Color textColor = DEFAULT_TEXT_COLOR,
         Color backgroundColor = DEFAULT_BACKGROUND_COLOR,
         Color focusTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,

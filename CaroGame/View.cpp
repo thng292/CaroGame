@@ -319,13 +319,18 @@ static COORD DrawInput(
     const std::wstring& leadingText,
     const std::wstring& inputText,
     bool hasFocus,
+    wchar_t delimiter,
     View::Color textColor,
     View::Color backgroundColor,
     View::Color focusTextColor,
     View::Color focusBackgroundColor
 )
 {
-    auto text = leadingText.length() ? leadingText + L": " : L"";
+    std::wstring strdelimiter;
+    if (delimiter) {
+        strdelimiter = std::wstring(1, delimiter);
+    }
+    auto text = leadingText.length() ? leadingText + strdelimiter + L" " : L"";
 
     View::WriteToView(
         x,
@@ -361,6 +366,7 @@ wchar_t View::Input(
     bool hasFocus,
     const std::function<void(const std::wstring&)>& onValueChange,
     const std::function<bool(wchar_t)>& toogleFocus,
+    const wchar_t delimiter,
     Color textColor,
     Color backgroundColor,
     Color focusTextColor,
@@ -388,6 +394,7 @@ wchar_t View::Input(
                     leadingText,
                     inputTextCopy,
                     hasFocus,
+                    delimiter,
                     textColor,
                     backgroundColor,
                     focusTextColor,
@@ -475,6 +482,7 @@ wchar_t View::Input(
             leadingText,
             inputText,
             hasFocus,
+            delimiter,
             textColor,
             backgroundColor,
             focusTextColor,
