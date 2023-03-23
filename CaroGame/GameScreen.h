@@ -18,6 +18,7 @@ class GameScreen {
     GameScreen(short x, short y);
     void DrawGameScreen();
     void DrawToElements(GameState gameState);
+    void DrawToTimer();
 
    private:
     void InitElement(

@@ -216,19 +216,18 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     AI myAI;
     myAI.SetDifficulty(curGameState.aiDifficulty);
 
-    std::function<void(void)> timerCallbackOne;
-    std::function<void(void)> timerCallbackTwo;
+    Timer timerPlayerOne;
+    Timer timerPlayerTwo;
 
     if (curGameState.gameType == GAME_TYPE_NORMAL) {
-        timerCallbackOne = [&]() { curGameState.playerTimeOne--; };
-        timerCallbackTwo = [&]() { curGameState.playerTimeTwo--; };
-    } else {
-        timerCallbackOne = [&]() { curGameState.playerTimeOne++; };
-        timerCallbackTwo = [&]() { curGameState.playerTimeTwo++; };
+        timerPlayerOne.LateInit([&]() { curGameState.playerTimeOne--; }, 1000);
+        timerPlayerTwo.LateInit([&]() { curGameState.playerTimeTwo--; }, 1000);   
+    } 
+    else {
+        timerPlayerOne.LateInit([&]() { curGameState.playerTimeOne++; }, 1000);   
+        timerPlayerTwo.LateInit([&]() { curGameState.playerTimeTwo--; }, 1000);           
     }
 
-    Timer timerPlayerOne(timerCallbackOne, 1000);
-    Timer timerPlayerTwo(timerCallbackTwo, 1000);
 
     timerPlayerOne.Start();
     timerPlayerTwo.Start();
