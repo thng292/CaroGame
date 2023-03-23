@@ -14,35 +14,41 @@ int main()
 #if _DEBUG
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
+    std::wstring a = L"";
+    View::Input(
+        0, 0, L"hskfdh", a, true, [](auto b) {}, [](auto b) { return false; },
+        0
+    );
 #endif
-    NavigationHost NavHost(
+        NavigationHost NavHost(
 #if _DEBUG
-        "MainMenu",
+            "MainMenu",
 #else
         "StartUpScreen",
 #endif
-        {
-            {"GameModeTypeView",           GameView::GameModeTypeView         },
-            {"GameModeVersusView",         GameView::GameModeVersusView       },
-            {"GameScreenView",             GameView::GameScreenView           },
-            {"PlayerNameView",             GameView::PlayerNameView           },
-            {"AIDifficultyView",           GameView::AIDifficultyView         },
-            {"ReplayMenuView",             GameView::ReplayMenuView           },
-            {"PlayAgainView",              GameView::PlayAgainView            },
-            {"LoadScreen",                 LoadScreen::LoadSceen              },
-            {"LoadFailed",                 LoadScreen::LoadFailed             },
-            {"EmptyLoad",                  LoadScreen::EmptyLoad              },
-            {"MainMenu",                   MainMenu::ScreenMainMenu           },
-            {"ReplayLoad",                 ReplayLoad::ReplayLoad             },
-            {"ReplaySave",                 ReplaySave::ReplaySave             },
-            {"SaveScreen",                 SaveScreen::SaveScreen             },
-            {"SaveSuccess",                SaveScreen::SaveSuccess            },
-            {"SaveFailed",                 SaveScreen::SaveFailed             },
-            {"Setting",                    Setting::SettingScreen             },
-            {"StartUpScreen",              StartUp::StartUpScreen             },
-            {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen   },
-            {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen      },
-            {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
-        }
-    );
+            {
+                {"GameModeTypeView", GameView::GameModeTypeView},
+                {"GameModeVersusView", GameView::GameModeVersusView},
+                {"GameScreenView", GameView::GameScreenView},
+                {"PlayerNameView", GameView::PlayerNameView},
+                {"AIDifficultyView", GameView::AIDifficultyView},
+                {"ReplayMenuView", GameView::ReplayMenuView},
+                {"PlayAgainView", GameView::PlayAgainView},
+                {"LoadScreen", LoadScreen::LoadSceen},
+                {"LoadFailed", LoadScreen::LoadFailed},
+                {"EmptyLoad", LoadScreen::EmptyLoad},
+                {"MainMenu", MainMenu::ScreenMainMenu},
+                {"ReplayLoad", ReplayLoad::ReplayLoad},
+                {"ReplaySave", ReplaySave::ReplaySave},
+                {"SaveScreen", SaveScreen::SaveScreen},
+                {"SaveSuccess", SaveScreen::SaveSuccess},
+                {"SaveFailed", SaveScreen::SaveFailed},
+                {"Setting", Setting::SettingScreen},
+                {"StartUpScreen", StartUp::StartUpScreen},
+                {"FirstTimeLanguageScreen", StartUp::FirstTimeLanguageScreen},
+                {"FirstTimeMusicScreen", StartUp::FirstTimeMusicScreen},
+                {"FirstTimeSoundEffectScreen",
+                 StartUp::FirstTimeSoundEffectScreen},
+            }
+        );
 }
