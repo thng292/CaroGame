@@ -14,11 +14,6 @@ int main()
 #if _DEBUG
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
-    std::wstring a = L"";
-    View::Input(
-        0, 0, L"hskfdh", a, true, [](auto b) {}, [](auto b) { return false; },
-        0
-    );
 #endif
         NavigationHost NavHost(
 #if _DEBUG

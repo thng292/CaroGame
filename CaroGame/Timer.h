@@ -6,7 +6,14 @@
 // Reference: https://gist.github.com/zekroTJA/00317b41aa69f38090071b6c8065272b
 class Timer {
    public:
-    inline Timer(
+    Timer() {}
+
+    Timer(std::function<void(void)> callback, const long& interval = 1000)
+    {
+        LateInit(callback, interval);
+    }
+
+    void LateInit(
         std::function<void(void)> callback, const long& interval = 1000
     )
     {
@@ -61,7 +68,7 @@ class Timer {
 
    private:
     std::function<void(void)> _callback;
-    std::chrono::milliseconds _interval;
+    std::chrono::milliseconds _interval = std::chrono::milliseconds{1000};
     std::thread _thread;
     bool _running = false;
     bool _pause = false;
