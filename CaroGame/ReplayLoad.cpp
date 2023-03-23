@@ -21,7 +21,7 @@ static void DrawHints()
     );
 }
 
-void ReplayLoad::LoadSceen(NavigationHost& NavHost)
+void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 {
     static auto currentState = ReplayLoadState();
 
