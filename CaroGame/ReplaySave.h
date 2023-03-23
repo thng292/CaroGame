@@ -11,21 +11,21 @@
 #include "Utils.h"
 #include "View.h"
 
-namespace SaveScreen {
+namespace ReplaySave {
 
     typedef std::vector<std::pair<std::wstring, std::filesystem::path>>
         OptionList;
 
     const std::wstring isOverwrite = L"SAVE_SCREEN_IS_OVERWRITE_CONTEXT";
 
-    struct SaveScreenState {
+    struct ReplaySaveState {
         struct SortTemporary {
             size_t foundIndex = 0;
             std::wstring name;
             size_t mapIndex = 0;
         };
 
-        SaveScreenState()
+        ReplaySaveState()
         {
             LoadAllOptions();
             maxPage = allOptions.size() / 10 + bool(allOptions.size() % 10);
@@ -59,7 +59,5 @@ namespace SaveScreen {
         bool CheckOverwrite();
     };
 
-    void SaveSuccess(NavigationHost& NavHost);
-    void SaveFailed(NavigationHost& NavHost);
-    void SaveScreen(NavigationHost& NavHost);
+    void ReplaySave(NavigationHost& NavHost);
 }  // namespace SaveScreen

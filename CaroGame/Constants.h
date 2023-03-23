@@ -35,7 +35,11 @@ namespace Constants {
     const std::filesystem::path USERCONFIG_FILE_PATH =
         STR_USERCONFIG_PATH + STR_USERCONFIG_FILENAME;
 
-    // User config path
+    // Save/Load path
     const std::wstring STR_SAVE_PATH = L"saves/";
     const std::filesystem::path SAVE_PATH = STR_SAVE_PATH;
+
+    // Save/Load path
+    const std::wstring STR_REPLAY_PATH = L"replay/";
+    const std::filesystem::path REPLAY_PATH = STR_REPLAY_PATH;
 }  // namespace Constants

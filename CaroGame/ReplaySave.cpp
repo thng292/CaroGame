@@ -1,4 +1,4 @@
-#include "SaveScreen.h"
+#include "ReplaySave.h"
 
 static void DrawHints()
 {
@@ -21,7 +21,8 @@ static void DrawHints()
     );
 }
 
-static bool OverwritePrompt() {
+static bool OverwritePrompt()
+{
     auto& title = Language::GetString(L"OVERWRITE_NOTICE_TITLE");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
@@ -56,9 +57,9 @@ static bool OverwritePrompt() {
     }
 }
 
-void SaveScreen::SaveScreen(NavigationHost& NavHost)
+void ReplaySave::ReplaySave(NavigationHost& NavHost)
 {
-    static auto currentState = SaveScreenState();
+    static auto currentState = ReplaySaveState();
 
     DrawHints();
 
@@ -68,7 +69,7 @@ void SaveScreen::SaveScreen(NavigationHost& NavHost)
             userChoice = OverwritePrompt();
         }
         if (!userChoice) {
-            return NavHost.Navigate("SaveScreen");
+            return NavHost.Navigate("ReplaySave");
         }
         auto currentGameState = std::any_cast<GameState>(
             NavHost.GetFromContext(Constants::CURRENT_GAME)
@@ -81,7 +82,7 @@ void SaveScreen::SaveScreen(NavigationHost& NavHost)
     };
 
     auto& soundSetting = Config::GetSetting(Config::SoundEffect);
-    auto& title = Language::GetString(L"SAVE_MENU_TITLE");
+    auto& title = Language::GetString(L"REPLAY_SAVE_MENU_TITLE");
     auto& leadingText = Language::GetString(L"NAMING_FIELD_TITLE");
 
     const short searchX = 59 - (leadingText.length() + 32) / 2;
@@ -163,9 +164,9 @@ void SaveScreen::SaveScreen(NavigationHost& NavHost)
     }
 }
 
-inline void SaveScreen::SaveScreenState::LoadAllOptions()
+inline void ReplaySave::ReplaySaveState::LoadAllOptions()
 {
-    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles();
+    auto availableLoadFiles = SaveLoad::DiscoverSaveFiles(Constants::REPLAY_PATH);
 
     std::sort(
         availableLoadFiles.begin(),
@@ -189,31 +190,31 @@ inline void SaveScreen::SaveScreenState::LoadAllOptions()
     }
 }
 
-inline void SaveScreen::SaveScreenState::NextPage()
+inline void ReplaySave::ReplaySaveState::NextPage()
 {
     UpdatePage(Utils::modCycle(currentPage + 1, maxPage));
     UpdateSearchInputOnNavigate();
 }
 
-inline void SaveScreen::SaveScreenState::PrevPage()
+inline void ReplaySave::ReplaySaveState::PrevPage()
 {
     UpdatePage(Utils::modCycle(currentPage - 1, maxPage));
     UpdateSearchInputOnNavigate();
 }
 
-inline void SaveScreen::SaveScreenState::NextSelection()
+inline void ReplaySave::ReplaySaveState::NextSelection()
 {
     selected = Utils::modCycle(selected + 1, options.size() - 1);
     UpdateSearchInputOnNavigate();
 }
 
-inline void SaveScreen::SaveScreenState::PrevSelection()
+inline void ReplaySave::ReplaySaveState::PrevSelection()
 {
     selected = Utils::modCycle(selected - 1, options.size() - 1);
     UpdateSearchInputOnNavigate();
 }
 
-void SaveScreen::SaveScreenState::UpdatePage(int page)
+void ReplaySave::ReplaySaveState::UpdatePage(int page)
 {
     currentPage = Utils::modCycle(page, maxPage);
 
@@ -229,13 +230,13 @@ void SaveScreen::SaveScreenState::UpdatePage(int page)
     options.emplace_back(pageIndicator, 0);
 }
 
-void SaveScreen::SaveScreenState::UpdateSearchInputOnNavigate()
+void ReplaySave::ReplaySaveState::UpdateSearchInputOnNavigate()
 {
     searchInput = allOptions[Constants::PAGE_SIZE * currentPage + selected]
                       .second.filename();
 }
 
-inline void SaveScreen::SaveScreenState::Search()
+inline void ReplaySave::ReplaySaveState::Search()
 {
     size_t n = allOptions.size();
     std::vector<SortTemporary> tmp;
@@ -271,7 +272,7 @@ inline void SaveScreen::SaveScreenState::Search()
 }
 
 inline std::function<void(const std::wstring&)>
-SaveScreen::SaveScreenState::onSearchValueChange(
+ReplaySave::ReplaySaveState::onSearchValueChange(
     const std::function<void(void)>& callback
 )
 {
@@ -286,15 +287,15 @@ SaveScreen::SaveScreenState::onSearchValueChange(
     };
 }
 
-inline bool SaveScreen::SaveScreenState::Save(const GameState& currentGameState)
+inline bool ReplaySave::ReplaySaveState::Save(const GameState& currentGameState)
 {
     if (searchInput.length()) {
-        return SaveLoad::Save(currentGameState, searchInput);
+        return SaveLoad::Save(currentGameState, searchInput, Constants::REPLAY_PATH);
     }
     return 0;
 }
 
-bool SaveScreen::SaveScreenState::CheckOverwrite()
+bool ReplaySave::ReplaySaveState::CheckOverwrite()
 {
     for (auto& [i, path] : allOptions) {
         if (searchInput == path.filename()) {
@@ -302,18 +303,4 @@ bool SaveScreen::SaveScreenState::CheckOverwrite()
         }
     }
     return false;
-}
-
-void SaveScreen::SaveFailed(NavigationHost& NavHost)
-{
-    View::DrawMenuCenter(Language::GetString(L"SAVE_FAILED_TITLE"), {}, 0);
-    InputHandle::Get();
-    return NavHost.Back();
-}
-
-void SaveScreen::SaveSuccess(NavigationHost& NavHost)
-{
-    View::DrawMenuCenter(Language::GetString(L"SAVE_SUCCESS_TITLE"), {}, 0);
-    InputHandle::Get();
-    return NavHost.Back();
 }

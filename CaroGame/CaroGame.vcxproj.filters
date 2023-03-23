@@ -162,6 +162,12 @@
     <ClCompile Include="Result.cpp">
       <Filter>Graphics\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ReplayLoad.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplaySave.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -239,9 +245,6 @@
     <ClInclude Include="InputBox.h">
       <Filter>Core\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadScreen.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SaveScreen.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
@@ -274,6 +277,15 @@
     </ClInclude>
     <ClInclude Include="Result.h">
       <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplayLoad.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplaySave.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadScreen.h">
+      <Filter>Screens\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
