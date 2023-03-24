@@ -112,4 +112,6 @@ namespace Utils {
     std::wstring CatStringSpaceBetween(
         int width, const std::wstring& str1, const std::wstring& str2
     );
+
+    std::wstring SecondToMMSS(short seconds);
 };  // namespace Utils

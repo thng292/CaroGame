@@ -8,10 +8,11 @@
 GameScreen::GameScreen(short x, short y)
 {
     boardContainer.xCoord = x, boardContainer.yCoord = y;
-    x += Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH + 5;
-    //y += 1;
+    x += Constants::BOARD_SIZE * BoardContainer::CELL_WIDTH + 3;
+    // y += 1;
     const short X_PIVOT = x;  // Resets X to original position (next to board)
-    InitElement(timerContainerOne, x, y, 12, 2, 3, 1);
+    x += 2;
+    InitElement(timerContainerOne, x, y, 12, 2, 4, 1);
     x += timerContainerOne.cellWidth;
 
     InitElement(winCountContainerOne, x, y, 7, 2, 3, 1);
@@ -26,17 +27,17 @@ GameScreen::GameScreen(short x, short y)
     InitElement(winCountContainerTwo, x, y, 7, 2, 3, 1);
     x += winCountContainerTwo.cellWidth;
 
-    InitElement(timerContainerTwo, x, y, 12, 2, 3, 1);
+    InitElement(timerContainerTwo, x, y, 12, 2, 4, 1);
 
     x = X_PIVOT;
     y += timerContainerOne.cellHeight + 1;
-    InitElement(playerInfoContainerOne, x, y, 25, 12, 9, 0);
+    InitElement(playerInfoContainerOne, x, y, 27, 12, 9, 0);
     x += playerInfoContainerOne.cellWidth;
-    InitElement(playerInfoContainerTwo, x, y, 25, 12, 8, 0);
+    InitElement(playerInfoContainerTwo, x, y, 27, 12, 8, 0);
 
     x = X_PIVOT;
     y += playerInfoContainerOne.cellHeight + timerContainerOne.cellHeight;
-    InitElement(logContainer, x, y, 50, 7, 3, 1);
+    InitElement(logContainer, x, y, 54, 7, 3, 1);
 }
 
 void GameScreen::DrawGameScreen()
@@ -69,19 +70,19 @@ void GameScreen::DrawGameScreen()
     );
 
     Label::DrawLabelCenter(
-        logContainer.xCoord,
-        logContainer.xCoord + logContainer.cellWidth,
+        timerContainerOne.xCoord,
+        timerContainerOne.xCoord + timerContainerOne.cellWidth * 2 + playerContainerOne.cellWidth * 2 + winCountContainerOne.cellWidth * 2,
         timerContainerOne.xCoord,
         timerContainerOne.yCoord - 1,
         L"Game Status"
     );
-   /* Label::DrawLabelCenter(
-        logContainer.xCoord,
-        logContainer.xCoord + logContainer.cellWidth,
-        playerInfoContainerOne.xCoord,
-        playerInfoContainerOne.yCoord - 1,
-        L"Player Info"
-    );*/
+    /* Label::DrawLabelCenter(
+         logContainer.xCoord,
+         logContainer.xCoord + logContainer.cellWidth,
+         playerInfoContainerOne.xCoord,
+         playerInfoContainerOne.yCoord - 1,
+         L"Player Info"
+     );*/
     Label::DrawLabelCenter(
         logContainer.xCoord,
         logContainer.xCoord + logContainer.cellWidth,
@@ -111,14 +112,15 @@ void GameScreen::DrawToElements(GameState gameState)
     playerContainerOne.DrawToContainer(L"X");
     playerContainerTwo.DrawToContainer(L"O");
 
-    short temp = (playerInfoContainerOne.cellWidth - gameState.playerNameOne.size()) / 2;
+    short temp =
+        (playerInfoContainerOne.cellWidth - gameState.playerNameOne.size()) / 2;
     playerInfoContainerOne.xOffset =
         (gameState.playerNameOne.size() % 2 == 0) ? temp + 1 : temp;
-        
-       
-    temp = (playerInfoContainerTwo.cellWidth - gameState.playerNameTwo.size()) / 2;
 
-     playerInfoContainerTwo.xOffset =
+    temp =
+        (playerInfoContainerTwo.cellWidth - gameState.playerNameTwo.size()) / 2;
+
+    playerInfoContainerTwo.xOffset =
         (gameState.playerNameTwo.size() % 2 == 0) ? temp + 1 : temp;
 
     playerInfoContainerOne.DrawToContainer(gameState.playerNameOne);
@@ -136,6 +138,13 @@ void GameScreen::DrawToElements(GameState gameState)
 
     winCountContainerOne.DrawToContainer(playerScoreOne);
     winCountContainerTwo.DrawToContainer(playerScoreTwo);
+
+    timerContainerOne.DrawToContainer(
+        Utils::SecondToMMSS(gameState.playerTimeOne)
+    );
+    timerContainerTwo.DrawToContainer(
+        Utils::SecondToMMSS(gameState.playerTimeTwo)
+    );
 }
 
 void GameScreen::InitElement(

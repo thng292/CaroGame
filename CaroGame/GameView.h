@@ -1,6 +1,7 @@
 #pragma once
 #include <format>
 #include <vector>
+#include <mutex>
 
 #include "AI.h"
 #include "Constants.h"
@@ -68,4 +69,9 @@ namespace GameView {
 
     // View when asking if the player wants to play again
     void PlayAgainView(NavigationHost& NavHost);
+
+    void RushTimeView(NavigationHost& NavHost);
+
+    void PauseMenuView(NavigationHost& NavHost);
+
 }  // namespace GameView

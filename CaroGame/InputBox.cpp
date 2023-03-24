@@ -67,7 +67,9 @@ void InputBox::DrawInputBox(
         [&](std::wstring newInp) { 
             if (newInp.size() > 10) return;
             inputList[selected] = newInp; 
-        }
+        },
+        View::defaultToogleFocus,
+        L'\0'
     );
     
     switch (tmp) {
@@ -78,16 +80,4 @@ void InputBox::DrawInputBox(
             selected = Utils::modCycle(selected + 1, labelList.size());
             break;
     }
-
-
-
-    /* View::WriteToView(
-        CENTER.first + 3 + MAX_LABEL_WIDTH,
-        CENTER.second + 1 + selected * MARGIN, curInput + L" \b"
-    );*/
-
-    
-
-    // View::Goto(CENTER.first + 3 + MAX_LABEL_WIDTH, CENTER.second + 1 +
-    // selected * MARGIN);
 }

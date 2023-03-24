@@ -23,3 +23,15 @@ std::wstring Utils::CatStringSpaceBetween(
     }
     return wss.str();
 }
+
+std::wstring Utils::SecondToMMSS(short seconds)
+{
+    short min = seconds / 60;
+    short sec = seconds % 60;
+    std::wstring minStr =
+        (min < 10) ? std::format(L"0{}", min) : std::format(L"{}", min);
+    std::wstring secStr =
+        (sec < 10) ? std::format(L"0{}", sec) : std::format(L"{}", sec);
+    return std::format(L"{}:{}", minStr, secStr);
+}
+

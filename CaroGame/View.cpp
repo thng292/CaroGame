@@ -16,7 +16,8 @@ void View::Setup()
     // Turn off mouse input
     GetConsoleMode(hOut, &currMode);
     SetConsoleMode(
-        hOut, currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE)
+        hOut, //currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE) & (ENABLE_EXTENDED_FLAGS)
+        0
     );
 
     // Set font bold
@@ -63,6 +64,8 @@ void View::WriteToView(
     View::Color backgroundColor
 )
 {
+    static std::mutex lock;
+    lock.lock();
     View::Goto(x, y);
     static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(
@@ -84,6 +87,7 @@ void View::WriteToView(
     } else {
         std::wcout << str;
     }
+    lock.unlock();
 }
 
 void View::WriteToView(

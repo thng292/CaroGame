@@ -1,9 +1,5 @@
 #include "Container.h"
 
-#include <format>
-
-#include "Constants.h"
-
 void Container::DrawContainer()
 {
     View::Rect rect = {yCoord, xCoord, xCoord + cellWidth, yCoord + cellHeight};
@@ -59,3 +55,4 @@ void Container::DrawToLogContainer(
         startIndex++;
     }
 }
+
