@@ -9,9 +9,15 @@
 #pragma comment(lib, "Winmm.lib")
 
 namespace Audio {
-    static constexpr std::array SoundName{L".wav", L"onKey.wav"};
+    static constexpr std::array SoundName{
+        L"Key.wav",
+        L"Draw.mp3",
+        L"Win.mp3",
+        L"Lose.wav",
+        L"MenuBGM.mp3",
+        L"GameBGM.mp3"};
 
-    enum class Sound : char { BackgroundMusic, OnKey };
+    enum class Sound : char { OnKey, Draw, Win, Lose, MenuBGM, GameBGM };
 
     class AudioPlayer {
        private:
@@ -23,22 +29,35 @@ namespace Audio {
         int currentInstance;
 
        public:
+        AudioPlayer() { currentInstance = instanceCount++; }
+
         inline AudioPlayer(Sound song)
         {
             currentInstance = instanceCount++;
+            Open(song);
+        }
+
+        inline int Open(Sound song)
+        {
             currentSong = song;
-            mciSendString(
-                std::format(
-                    L"open {}{} type waveaudio alias {}",
-                    Constants::STR_AUDIO_PATH,
-                    SoundName[int(song)],
-                    currentInstance
-                )
-                    .c_str(),
-                0,
-                0,
-                0
+            auto tmp = SoundName[int(song)];
+            auto command = std::format(
+                L"open {}{} type {} alias {}",
+                Constants::STR_AUDIO_PATH,
+                tmp,
+                L"waveaudio",
+                currentInstance
             );
+            if (tmp[std::wcslen(tmp) - 1] == L'3') {
+                command = std::format(
+                    L"open {}{} type {} alias {}",
+                    Constants::STR_AUDIO_PATH,
+                    tmp,
+                    L"mpegvideo",
+                    currentInstance
+                );
+            }
+            return mciSendString(command.c_str(), 0, 0, 0);
         }
 
         inline int Play(bool fromStart = true, bool repeat = false)

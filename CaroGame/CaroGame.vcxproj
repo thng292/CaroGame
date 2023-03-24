@@ -134,6 +134,7 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Avatar.cpp" />
+    <ClCompile Include="BackgroundAudioService.cpp" />
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="Captain.cpp" />
     <ClCompile Include="CaroGame.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="AI.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Avatar.h" />
+    <ClInclude Include="BackgroundAudioService.h" />
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="Captain.h" />
     <ClInclude Include="Config.h" />
@@ -214,12 +216,13 @@
     <Text Include="TODO.md" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="asset\audio\Draw.mp3" />
+    <Media Include="asset\audio\GameBGM.mp3" />
+    <Media Include="asset\audio\Key.wav" />
+    <Media Include="asset\audio\Lose.mp3" />
+    <Media Include="asset\audio\MenuBGM.mp3" />
     <Media Include="asset\audio\nhac_an_chon.mp3" />
-    <Media Include="asset\audio\nhac_hoa.mp3" />
-    <Media Include="asset\audio\nhac_nen_choi_game.mp3" />
-    <Media Include="asset\audio\nhac_thang.mp3" />
-    <Media Include="asset\audio\nhac_thua.mp3" />
-    <Media Include="asset\audio\onKey.wav" />
+    <Media Include="asset\audio\Win.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />

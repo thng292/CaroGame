@@ -16,9 +16,13 @@ void View::Setup()
     // Turn off mouse input
     GetConsoleMode(hOut, &currMode);
     SetConsoleMode(
-        hOut, //currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE) & (ENABLE_EXTENDED_FLAGS)
-        0
+        hOut,
+        ((currMode | ENABLE_EXTENDED_FLAGS) & ~ENABLE_QUICK_EDIT_MODE &
+         ~ENABLE_MOUSE_INPUT)
     );
+    /*currMode & ~(ENABLE_QUICK_EDIT_MODE) &
+        ~(ENABLE_MOUSE_INPUT) &
+);*/
 
     // Set font bold
     fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
@@ -65,29 +69,30 @@ void View::WriteToView(
 )
 {
     static std::mutex lock;
-    lock.lock();
-    View::Goto(x, y);
     static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(
         STD_HANDLE,
         highlight ? ((int(highlightColor) << 4) | int(highlightTextColor))
                   : ((int(backgroundColor) << 4) | int(textColor))
     );
+
     if (shortcut) {
         int shortcutIndex = str.find_first_of(shortcut);
+        lock.lock();
+        View::Goto(x, y);
         std::wcout << std::format(
             L"{}{}{}",
             str.substr(0, shortcutIndex),
             View::Underline(str[shortcutIndex]),
             str.c_str() + shortcutIndex + 1
         );
-        /*std::wcout << str.substr(0, shortcutIndex)
-                   << View::Underline(str[shortcutIndex])
-                   << str.substr(shortcutIndex + 1, str.length() - 1);*/
+        lock.unlock();
     } else {
+        lock.lock();
+        View::Goto(x, y);
         std::wcout << str;
+        lock.unlock();
     }
-    lock.unlock();
 }
 
 void View::WriteToView(
@@ -108,7 +113,7 @@ void View::WriteToView(
         highlight ? ((int(highlightColor) << 4) | int(highlightTextColor))
                   : ((int(backgroundColor) << 4) | int(textColor))
     );
-    std::wcout << str;
+    _putwchar_nolock(str);
 }
 
 void View::ClearScreen()

@@ -168,6 +168,9 @@
     <ClCompile Include="ReplaySave.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundAudioService.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -287,6 +290,9 @@
     <ClInclude Include="LoadScreen.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BackgroundAudioService.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Features.md" />
@@ -299,22 +305,25 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="asset\audio\onKey.wav">
-      <Filter>Resource Files\Audio</Filter>
-    </Media>
     <Media Include="asset\audio\nhac_an_chon.mp3">
       <Filter>Resource Files\Audio</Filter>
     </Media>
-    <Media Include="asset\audio\nhac_hoa.mp3">
+    <Media Include="asset\audio\Draw.mp3">
       <Filter>Resource Files\Audio</Filter>
     </Media>
-    <Media Include="asset\audio\nhac_nen_choi_game.mp3">
+    <Media Include="asset\audio\GameBGM.mp3">
       <Filter>Resource Files\Audio</Filter>
     </Media>
-    <Media Include="asset\audio\nhac_thang.mp3">
+    <Media Include="asset\audio\Key.wav">
       <Filter>Resource Files\Audio</Filter>
     </Media>
-    <Media Include="asset\audio\nhac_thua.mp3">
+    <Media Include="asset\audio\Lose.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\MenuBGM.mp3">
+      <Filter>Resource Files\Audio</Filter>
+    </Media>
+    <Media Include="asset\audio\Win.mp3">
       <Filter>Resource Files\Audio</Filter>
     </Media>
   </ItemGroup>
