@@ -20,7 +20,7 @@ bool SaveLoad::Save(
 
     file << data.gameMode << '\n';
     file << data.aiDifficulty << '\n';
-    file << data.whosFirst << '\n';
+    file << data.playerOneFirst << '\n';
     file << data.avatarId << '\n';
 
     for (auto& i : data.moveList) {
@@ -44,7 +44,7 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
 
     file >> data.gameMode;
     file >> data.aiDifficulty;
-    file >> data.whosFirst;
+    file >> data.playerOneFirst;
     file >> data.avatarId;
 
     if (file.fail()) {

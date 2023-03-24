@@ -151,16 +151,17 @@ void GameView::UpdateGame(
     short& moveCount,
     const GameAction::Point& move,
     const Constants::Player& player,
-    GameState& gameState
+    GameState& gameState,
+    bool loadFromSave
 )
 {
     GameAction::MakeMove(board, moveCount, move, player.value);
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, player.symbol
     );
-    gameState.moveList.push_back({move.row, move.col});
+    if (!loadFromSave) gameState.moveList.push_back({move.row, move.col});
     gameScreen.logContainer.DrawToLogContainer(
-        gameState.moveList, gameState.playerNameOne, gameState.playerNameTwo
+        gameState.moveList, gameState.playerNameOne, gameState.playerNameTwo, gameState.playerOneFirst
     );
 }
 
@@ -194,32 +195,46 @@ void GameView::HandleState(
 
 void GameView::GameScreenView(NavigationHost& NavHost)
 {
-    //GameState temp;
-    //NavHost.SetContext(GAME_STATE, temp);
+    // GameState temp;
+    // NavHost.SetContext(GAME_STATE, temp);
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
+
+    GameAction::Board gameBoard(
+        Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
+    );
+
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
     gameScreen.DrawToElements(curGameState);
 
-    short row = 0, col = 0, moveCount = 0;
-    GameAction::Board gameBoard(
-        Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
-    );
-    bool isPlayerOneTurn = 1, endGame = 0;
-
-    View::Goto(
-        gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET,
-        gameScreen.boardContainer.yCoord + BoardContainer::Y_OFFSET
-    );
+    short moveCount = 0;
 
     AI myAI;
     myAI.SetDifficulty(curGameState.aiDifficulty);
 
+    LoadGameToView(gameScreen, gameBoard, moveCount, curGameState, myAI);
+
+    short row = 0, col = 0;
+    if (curGameState.moveList.size() != 0) {
+        row = curGameState.moveList.back().first;
+        col = curGameState.moveList.back().second;
+    }
+
+    bool isPlayerOneTurn = (curGameState.playerOneFirst && (curGameState.moveList.size() % 2 == 0)) || (!curGameState.playerOneFirst && (curGameState.moveList.size() % 2 != 0));
+    bool endGame = 0;
+    bool aiFirst = (curGameState.gameMode == GAME_MODE_PVE && !isPlayerOneTurn && curGameState.moveList.size() == 0); 
+
+    
+    View::Goto(
+        gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET +
+            gameScreen.boardContainer.CELL_WIDTH * col,
+        gameScreen.boardContainer.yCoord + BoardContainer::Y_OFFSET +
+            gameScreen.boardContainer.CELL_HEIGHT * row
+    );
+
     const short timeAddition =
         (curGameState.gameType == GAME_TYPE_NORMAL) ? 1 : -1;
-    const short playerTimeOneOrig = curGameState.playerTimeOne;
-    const short playerTimeTwoOrig = curGameState.playerTimeTwo;
 
     std::mutex lock;
 
@@ -233,6 +248,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                 if (curGameState.playerTimeOne == 0) {
                     lock.lock();
                     endGame = true;
+                    curGameState.playerScoreTwo++;
                     lock.unlock();
                 }
             }
@@ -250,8 +266,8 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                 if (curGameState.playerTimeTwo == 0) {
                     lock.lock();
                     endGame = true;
+                    curGameState.playerScoreOne++;
                     lock.unlock();
-
                 }
             }
         },
@@ -263,10 +279,39 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     timerPlayerTwo.Start();
     timerPlayerTwo.Pause();
 
+    if (isPlayerOneTurn)
+        timerPlayerOne.Continued();
+    else
+        timerPlayerTwo.Continued();
+
     while (!endGame) {
-        //auto tmp = InputHandle::Get();
-        auto tmp = std::wstring(1, _getwch_nolock());
+
+        if (aiFirst) {
+            GameAction::Point curMove = myAI.GetFirstMove();
+            Constants::Player curPlayer = Constants::PLAYER_TWO;
+            UpdateGame(
+                gameScreen,
+                gameBoard,
+                moveCount,
+                curMove,
+                curPlayer,
+                curGameState
+            );
+            timerPlayerOne.Continued();
+            timerPlayerTwo.Pause();
+            aiFirst = false;
+            isPlayerOneTurn = !isPlayerOneTurn;
+        }
+
+        auto tmp = InputHandle::Get();
         if (endGame) break;
+
+        if (tmp == L"ESC") {
+            timerPlayerOne.Stop();
+            timerPlayerTwo.Stop();
+            NavHost.SetContext(GAME_STATE, curGameState);
+            return NavHost.Navigate("PauseMenuView");
+        }
 
         if (Utils::keyMeanUp(tmp)) {
             if (row - 1 >= 0) {
@@ -386,9 +431,9 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                 }
 
                 if (isPlayerOneTurn) {
-                    timerPlayerTwo.Continued();     
+                    timerPlayerTwo.Continued();
                 } else {
-                    timerPlayerOne.Continued();          
+                    timerPlayerOne.Continued();
                 }
 
                 isPlayerOneTurn = !isPlayerOneTurn;
@@ -399,8 +444,8 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     timerPlayerOne.Stop();
     timerPlayerTwo.Stop();
 
-    curGameState.playerTimeOne = playerTimeOneOrig;
-    curGameState.playerTimeTwo = playerTimeTwoOrig;
+    curGameState.playerTimeOne = curGameState.playerTimeTwo = curGameState.gameTime;
+    curGameState.playerOneFirst = !curGameState.playerOneFirst;
 
     auto tmp = InputHandle::Get();
     curGameState.moveList.clear();
@@ -617,30 +662,47 @@ void GameView::RushTimeView(NavigationHost& NavHost)
         }
     }
     curGameState.playerTimeOne = curGameState.playerTimeTwo = optionValue;
+    curGameState.gameTime = optionValue;
     NavHost.SetContext(GAME_STATE, curGameState);
     return NavHost.Navigate(navigationValue);
 }
 
-void GameView::PauseMenuView(NavigationHost& NavHost) {
+void GameView::PauseMenuView(NavigationHost& NavHost)
+{
     short selectedOption = 0;
     const short MAX_OPTIONS = 6;
 
-    /*std::array<std::string, MAX_OPTIONS> navigationValueList = {
+    std::string navigationValue;
+
+    std::wstring label = Language::GetString(L"LABEL_PAUSE");
+    std::vector<View::Option> options = {
+        {Language::GetString(L"SAVE_TITLE"),
+         Language::GetString(L"SAVE_SHORTCUT")[0]     },
+
+        {Language::GetString(L"NEW_GAME_TITLE"),
+         Language::GetString(L"NEW_GAME_SHORTCUT")[0] },
+
+        {Language::GetString(L"LOAD_TITLE"),
+         Language::GetString(L"LOAD_SHORTCUT")[0]     },
+
+        {Language::GetString(L"SETTINGS_TITLE"),
+         Language::GetString(L"SETTINGS_SHORTCUT")[0] },
+
+        {Language::GetString(L"MAIN_MENU_TITLE"),
+         Language::GetString(L"MAIN_MENU_SHORTCUT")[0]},
+
+        {Language::GetString(L"BACK_TITLE"),
+         Language::GetString(L"BACK_TITLE")[0]        }
+    };
+
+    std::array<std::string, MAX_OPTIONS> navigationValueList = {
         "SaveScreen",
         "GameModeTypeView",
         "LoadScreen",
         "Setting",
         "MainMenu",
-        ""};
-    std::string navigationValue;
+        "Back"};
 
-    std::wstring label = Language::GetString(L"LABEL_PAUSE");
-    std::vector<View::Option> options = {
-        {Language::GetString(L""),
-         Language::GetString(L"")[0]},
-        {Language::GetString(L""),
-         Language::GetString(L"")[0] }
-    };
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
         auto tmp = InputHandle::Get();
@@ -658,6 +720,22 @@ void GameView::PauseMenuView(NavigationHost& NavHost) {
             navigationValue = navigationValueList[1];
             break;
         }
+        if (tmp == L"3") {
+            navigationValue = navigationValueList[2];
+            break;
+        }
+        if (tmp == L"4") {
+            navigationValue = navigationValueList[3];
+            break;
+        }
+        if (tmp == L"5") {
+            navigationValue = navigationValueList[4];
+            break;
+        }
+        if (tmp == L"6") {
+            navigationValue = navigationValueList[5];
+            break;
+        }
         if (tmp == L"e" || tmp == L"E") {
             return NavHost.Back();
         }
@@ -667,5 +745,37 @@ void GameView::PauseMenuView(NavigationHost& NavHost) {
             break;
         }
     }
-    return NavHost.Navigate(navigationValue);*/
+    if (selectedOption == 5) return NavHost.Back();
+    return NavHost.Navigate(navigationValue);
+}
+
+void GameView::LoadGameToView(
+    GameScreen& gameScreen,
+    GameAction::Board& board,
+    short& moveCount,
+    GameState gameState,
+    AI& ai
+)
+{
+    bool isPlayerOne = gameState.playerOneFirst;
+
+    const short moveListSize = gameState.moveList.size();
+    Constants::Player player;
+
+    for (size_t i = 0; i < moveListSize; ++i) {
+        player = (isPlayerOne) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
+        ai.UpdatePrivateValues(
+            {gameState.moveList[i].first, gameState.moveList[i].second}
+        );
+        UpdateGame(
+            gameScreen,
+            board,
+            moveCount,
+            {gameState.moveList[i].first, gameState.moveList[i].second},
+            player,
+            gameState,
+            true
+        );
+        isPlayerOne = !isPlayerOne;
+    }
 }

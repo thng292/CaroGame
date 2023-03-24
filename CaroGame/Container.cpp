@@ -14,7 +14,8 @@ void Container::DrawToContainer(std::wstring value)
 void Container::DrawToLogContainer(
     const std::vector<std::pair<short, short>> &valueList,
     std::wstring playerNameOne,
-    std::wstring playerNameTwo
+    std::wstring playerNameTwo,
+    bool playerOneFirst
 )
 {
     short valueListSize = valueList.size();
@@ -26,8 +27,11 @@ void Container::DrawToLogContainer(
     DWORD tmp = 0;
     HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
+    bool isPlayerOneTurn = (startIndex % 2 == 0 && playerOneFirst) ||
+                           (startIndex % 2 != 0 && !playerOneFirst);
+
     for (size_t i = 0; i < numOfValueDisplay; ++i) {
-        if (startIndex % 2 == 0) {
+        if (isPlayerOneTurn) {
             playerName = playerNameOne;
             playerSymbol = Constants::PLAYER_ONE.symbol;
         } else {
@@ -53,6 +57,7 @@ void Container::DrawToLogContainer(
         );
         View::WriteToView(xCoord + xOffset, yCoord + yOffset + i, value);
         startIndex++;
+        isPlayerOneTurn = !isPlayerOneTurn;
     }
 }
 

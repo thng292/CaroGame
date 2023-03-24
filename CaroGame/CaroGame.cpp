@@ -16,18 +16,9 @@ int main()
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
 #endif
-    /*auto buff = std::make_unique<wchar_t[]>(100);
-    for (size_t i = 0; i < 6; i++) {
-        std::wcout << "Playing: " << Audio::SoundName[i] << '\n';
-        Audio::AudioPlayer player((Audio::Sound)i);
-        mciGetErrorString(player.Play(), buff.get(), 100);
-        std::wcout << buff << '\n';
-        std::wcin.get();
-        player.Stop();
-    }*/
     NavigationHost NavHost(
 #if _DEBUG
-        "MainMenu",
+        "GameModeTypeView",
 #else
         "StartUpScreen",
 #endif
@@ -53,6 +44,8 @@ int main()
             {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen   },
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen      },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
+            {"RushTimeView",               GameView::RushTimeView             },
+            {"PauseMenuView", GameView::PauseMenuView}
     }
     );
 }
