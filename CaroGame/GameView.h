@@ -42,7 +42,8 @@ namespace GameView {
         short& moveCount,
         const GameAction::Point& move,
         const Constants::Player& player,
-        GameState& gameState
+        GameState& gameState,
+        bool loadFromSave = false
     );
 
     void HandleState(
@@ -73,5 +74,13 @@ namespace GameView {
     void RushTimeView(NavigationHost& NavHost);
 
     void PauseMenuView(NavigationHost& NavHost);
+
+    void LoadGameToView(
+        GameScreen& gameScreen,
+        GameAction::Board& board,
+        short& moveCount,
+        GameState gameState,
+        AI &ai
+    );
 
 }  // namespace GameView

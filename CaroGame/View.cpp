@@ -16,8 +16,7 @@ void View::Setup()
     // Turn off mouse input
     GetConsoleMode(hOut, &currMode);
     SetConsoleMode(
-        hOut, //currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE) & (ENABLE_EXTENDED_FLAGS)
-        0
+        hOut, currMode & ~(ENABLE_MOUSE_INPUT) & ~(ENABLE_QUICK_EDIT_MODE)
     );
 
     // Set font bold

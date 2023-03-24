@@ -1,4 +1,6 @@
 #pragma once
+#include "Constants.h"
+
 #include <string>
 #include <vector>
 
@@ -23,7 +25,9 @@ struct GameState {
 
     short aiDifficulty = 0;
 
-    bool whosFirst = 1;
+    bool playerOneFirst = true;
 
     short avatarId = 0;
+
+    short gameTime = 0;
 };

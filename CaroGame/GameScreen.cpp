@@ -147,6 +147,7 @@ void GameScreen::DrawToElements(GameState gameState)
     );
 }
 
+
 void GameScreen::InitElement(
     Container& element,
     short x,

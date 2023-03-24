@@ -17,7 +17,7 @@ int main()
 #endif
     NavigationHost NavHost(
 #if _DEBUG
-        "MainMenu",
+        "GameModeTypeView",
 #else
         "StartUpScreen",
 #endif
@@ -44,6 +44,7 @@ int main()
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen      },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
             {"RushTimeView",               GameView::RushTimeView             },
+            {"PauseMenuView", GameView::PauseMenuView}
     }
     );
 }
