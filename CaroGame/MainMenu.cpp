@@ -46,13 +46,13 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
         // TODO ???????????????????
         // Shortcut
         if (tmp == Language::GetString(L"NEW_GAME_SHORTCUT")) {
-            return NavHost.Navigate("New Game");  // Nho return
+            return NavHost.Navigate("GameModeTypeView");  // Nho return
         }
         if (tmp == Language::GetString(L"LOAD_SHORTCUT")) {
-            return NavHost.Navigate("Load Game");  // Nho return
+            return NavHost.Navigate("LoadScreen");  // Nho return
         }
         if (tmp == Language::GetString(L"REPLAY_SHORTCUT")) {
-            return NavHost.Navigate("Replay game");  // Nho return
+            return NavHost.Navigate("ReplayLoad");  // Nho return
         }
         if (tmp == Language::GetString(L"SETTINGS_SHORTCUT")) {
             return NavHost.Navigate("Setting");  // Nho return
@@ -70,11 +70,11 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
         if (tmp == L"\r") {
             switch (selectedOption) {
                 case 0:
-                    return NavHost.Navigate("New Game");  // Nho return
+                    return NavHost.Navigate("GameModeTypeView");  // Nho return
                 case 1:
                     return NavHost.Navigate("LoadScreen");  // Nho return
                 case 2:
-                    return NavHost.Navigate("Replay");
+                    return NavHost.Navigate("ReplayLoad");
                 case 3:
                     return NavHost.Navigate("Setting");
                 case 4:

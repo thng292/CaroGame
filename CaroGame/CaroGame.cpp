@@ -11,25 +11,26 @@
 
 int main()
 {
-
 #if _DEBUG
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
 #endif
     NavigationHost NavHost(
 #if _DEBUG
-        "GameModeTypeView",
+        "StartUpScreen",
 #else
         "StartUpScreen",
 #endif
         {
+            {"AIDifficultyView",           GameView::AIDifficultyView         },
             {"GameModeTypeView",           GameView::GameModeTypeView         },
             {"GameModeVersusView",         GameView::GameModeVersusView       },
             {"GameScreenView",             GameView::GameScreenView           },
+            {"PauseMenuView",              GameView::PauseMenuView            },
             {"PlayerNameView",             GameView::PlayerNameView           },
-            {"AIDifficultyView",           GameView::AIDifficultyView         },
-            {"ReplayMenuView",             GameView::ReplayMenuView           },
             {"PlayAgainView",              GameView::PlayAgainView            },
+            {"ReplayMenuView",             GameView::ReplayMenuView           },
+            {"RushTimeView",               GameView::RushTimeView             },
             {"LoadScreen",                 LoadScreen::LoadSceen              },
             {"LoadFailed",                 LoadScreen::LoadFailed             },
             {"EmptyLoad",                  LoadScreen::EmptyLoad              },
@@ -44,8 +45,6 @@ int main()
             {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen   },
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen      },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
-            {"RushTimeView",               GameView::RushTimeView             },
-            {"PauseMenuView", GameView::PauseMenuView}
     }
     );
 }

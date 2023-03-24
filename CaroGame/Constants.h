@@ -3,7 +3,7 @@
 #include <string>
 
 namespace Constants {
-    const std::wstring version = L"0.1.0";
+    const std::wstring version = L"0.0.1";
 
     // Game const
     struct Player {

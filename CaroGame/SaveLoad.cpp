@@ -53,10 +53,10 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
 
     short a, b;
     while (!file.eof()) {
-        file >> a >> b;
         if (file.fail()) {
             return std::nullopt;
         }
+        file >> a >> b;
         data.moveList.emplace_back(a, b);
     }
     return data;
