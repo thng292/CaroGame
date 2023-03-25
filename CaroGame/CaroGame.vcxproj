@@ -138,6 +138,7 @@
     <ClCompile Include="BoardContainer.cpp" />
     <ClCompile Include="Captain.cpp" />
     <ClCompile Include="CaroGame.cpp" />
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="CornersHandler.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="BackgroundAudioService.h" />
     <ClInclude Include="BoardContainer.h" />
     <ClInclude Include="Captain.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Container.h" />

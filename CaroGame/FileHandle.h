@@ -40,6 +40,11 @@ namespace FileHandle {
         return std::ifstream(fileName);
     }
 
-    std::vector<FileDetail> GetAllTextFileInDir(const std::filesystem::path& Dir
+    std::vector<FileDetail> GetAllTextFileInDir(
+        const std::filesystem::path& Dir
     );
+
+    inline bool Delete(const std::filesystem::path& target) {
+        return std::filesystem::remove(target);
+    }
 };  // namespace FileHandle

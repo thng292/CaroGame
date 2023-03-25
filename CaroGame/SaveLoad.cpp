@@ -27,6 +27,10 @@ bool SaveLoad::Save(
         file << i.first << ' ' << i.second << '\n';
     }
 
+    if (file.fail()) {
+        std::filesystem::remove(dir.generic_wstring() + name);
+    }
+
     return !file.fail();
 }
 
@@ -53,10 +57,10 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
 
     short a, b;
     while (!file.eof()) {
-        if (file.fail()) {
+        file >> a >> b;
+        if (file.fail() && !file.eof()) {
             return std::nullopt;
         }
-        file >> a >> b;
         data.moveList.emplace_back(a, b);
     }
     return data;

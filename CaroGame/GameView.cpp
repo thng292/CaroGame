@@ -424,9 +424,11 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                     isPlayerOneTurn = !isPlayerOneTurn;
 
                     if (isPlayerOneTurn) {
-                        timerPlayerOne.Continued();
+                        curPlayer = Constants::PLAYER_ONE;
+                        timerPlayerOne.Pause();
                     } else {
-                        timerPlayerTwo.Continued();
+                        curPlayer = Constants::PLAYER_TWO;
+                        timerPlayerTwo.Pause();
                     }
 
                     curMove = myAI.GetBestMove(gameBoard, moveCount);
