@@ -233,7 +233,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     int booltmp =
         (curGameState.playerOneFirst + (curGameState.moveList.size() % 2));
-    bool isPlayerOneTurn = booltmp == 2 || booltmp == 0;
+    bool isPlayerOneTurn = !(booltmp == 2 || booltmp == 0);
 
     bool endGame = 0;
     bool aiFirst =
@@ -253,7 +253,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     std::mutex lock;
 
     Timer timerPlayerOne(
-        [&]() {
+        [&] {
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
                 curGameState.playerTimeOne += timeAddition;
@@ -273,7 +273,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     );
 
     Timer timerPlayerTwo(
-        [&]() {
+        [&] {
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
                 curGameState.playerTimeTwo += timeAddition;
@@ -305,6 +305,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     while (!endGame) {
         if (aiFirst) {
             GameAction::Point curMove = myAI.GetFirstMove();
+            myAI.UpdatePrivateValues(curMove);
             Constants::Player curPlayer = Constants::PLAYER_TWO;
             timerPlayerOne.Continued();
             UpdateGame(
@@ -327,7 +328,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
             timerPlayerOne.Stop();
             timerPlayerTwo.Stop();
             NavHost.SetContext(GAME_STATE, curGameState);
-            return NavHost.Navigate("PauseMenuView");
+            return NavHost.NavigateStack("PauseMenuView");
         }
 
         if (Utils::keyMeanUp(tmp)) {
