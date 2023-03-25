@@ -205,9 +205,10 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-    GameAction::Board gameBoard(
-        Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
-    );
+    GameAction::Board gameBoard;
+    for (size_t i = 0; i < Constants::BOARD_SIZE; i++) {
+        memset(gameBoard[i].data(), 0, Constants::BOARD_SIZE * sizeof(char));
+    }
 
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
@@ -215,7 +216,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     short moveCount = 0;
 
-    AI myAI;
+    static AI myAI;
     myAI.SetDifficulty(curGameState.aiDifficulty);
 
     LoadGameToView(gameScreen, gameBoard, moveCount, curGameState, myAI);
@@ -225,11 +226,6 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         row = curGameState.moveList.back().first;
         col = curGameState.moveList.back().second;
     }
-
-    // bool isPlayerOneTurn = (curGameState.playerOneFirst &&
-    //                         (curGameState.moveList.size() % 2 == 0)) ||
-    //                        (!curGameState.playerOneFirst &&
-    //                         (curGameState.moveList.size() % 2 != 0));
 
     int booltmp =
         (curGameState.playerOneFirst + (curGameState.moveList.size() % 2));
@@ -250,7 +246,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     const short timeAddition =
         (curGameState.gameType == GAME_TYPE_NORMAL) ? 1 : -1;
 
-    std::mutex lock;
+    /*std::mutex lock;
 
     Timer timerPlayerOne(
         [&] {
@@ -290,24 +286,25 @@ void GameView::GameScreenView(NavigationHost& NavHost)
             }
         },
         1000
-    );
+    );*/
 
-    timerPlayerOne.Start();
+    /*timerPlayerOne.Start();
     timerPlayerOne.Pause();
     timerPlayerTwo.Start();
-    timerPlayerTwo.Pause();
+    timerPlayerTwo.Pause();*/
 
-    if (isPlayerOneTurn)
+    /*if (isPlayerOneTurn) {
         timerPlayerOne.Continued();
-    else
+    } else {
         timerPlayerTwo.Continued();
+    }*/
 
     while (!endGame) {
         if (aiFirst) {
             GameAction::Point curMove = myAI.GetFirstMove();
             myAI.UpdatePrivateValues(curMove);
             Constants::Player curPlayer = Constants::PLAYER_TWO;
-            timerPlayerOne.Continued();
+            //timerPlayerOne.Continued();
             UpdateGame(
                 gameScreen,
                 gameBoard,
@@ -316,7 +313,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                 curPlayer,
                 curGameState
             );
-            timerPlayerTwo.Pause();
+            //timerPlayerTwo.Pause();
             aiFirst = false;
             isPlayerOneTurn = !isPlayerOneTurn;
         }
@@ -325,8 +322,8 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         if (endGame) break;
 
         if (tmp == L"ESC") {
-            timerPlayerOne.Stop();
-            timerPlayerTwo.Stop();
+           /* timerPlayerOne.Stop();
+            timerPlayerTwo.Stop();*/
             NavHost.SetContext(GAME_STATE, curGameState);
             return NavHost.NavigateStack("PauseMenuView");
         }
@@ -395,10 +392,10 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
                 if (isPlayerOneTurn) {
                     curPlayer = Constants::PLAYER_ONE;
-                    timerPlayerOne.Pause();
+                    //timerPlayerOne.Pause();
                 } else {
                     curPlayer = Constants::PLAYER_TWO;
-                    timerPlayerTwo.Pause();
+                    //timerPlayerTwo.Pause();
                 }
 
                 UpdateGame(
@@ -426,19 +423,19 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
                     if (isPlayerOneTurn) {
                         curPlayer = Constants::PLAYER_ONE;
-                        timerPlayerOne.Pause();
+                        //timerPlayerOne.Pause();
                     } else {
                         curPlayer = Constants::PLAYER_TWO;
-                        timerPlayerTwo.Pause();
+                        //timerPlayerTwo.Pause();
                     }
 
                     curMove = myAI.GetBestMove(gameBoard, moveCount);
 
-                    if (isPlayerOneTurn) {
+                    /*if (isPlayerOneTurn) {
                         timerPlayerOne.Pause();
                     } else {
                         timerPlayerTwo.Pause();
-                    }
+                    }*/
 
                     UpdateGame(
                         gameScreen,
@@ -461,19 +458,16 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                     );
                 }
 
-                if (isPlayerOneTurn) {
+                /*if (isPlayerOneTurn) {
                     timerPlayerTwo.Continued();
                 } else {
                     timerPlayerOne.Continued();
-                }
+                }*/
 
                 isPlayerOneTurn = !isPlayerOneTurn;
             }
         }
     }
-
-    timerPlayerOne.Stop();
-    timerPlayerTwo.Stop();
 
     curGameState.playerTimeOne = curGameState.playerTimeTwo =
         curGameState.gameTime;

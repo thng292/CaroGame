@@ -132,12 +132,6 @@
     <ClCompile Include="SaveScreen.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Evaluation.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hash.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Deadpool.cpp">
       <Filter>Graphics\Source Files</Filter>
     </ClCompile>
@@ -173,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="Common.cpp">
       <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hash.cpp">
+      <Filter>Bot\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Evaluation.cpp">
+      <Filter>Bot\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,12 +254,6 @@
     <ClInclude Include="SaveScreen.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Evaluation.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hash.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AI.h">
       <Filter>Bot\Header Files</Filter>
     </ClInclude>
@@ -298,6 +292,12 @@
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>Bot\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Evaluation.h">
+      <Filter>Bot\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

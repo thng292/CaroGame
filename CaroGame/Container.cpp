@@ -13,8 +13,8 @@ void Container::DrawToContainer(std::wstring value)
 
 void Container::DrawToLogContainer(
     const std::vector<std::pair<short, short>> &valueList,
-    std::wstring playerNameOne,
-    std::wstring playerNameTwo,
+    const std::wstring& playerNameOne,
+    const std::wstring& playerNameTwo,
     bool playerOneFirst
 )
 {
