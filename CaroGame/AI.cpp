@@ -85,10 +85,10 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
     for (size_t i = 0; i < moveListSize; ++i) {
         short valCur;
         GameAction::MakeMove(board, moveCount, moveList[i], PLAYER_AI);
-        unsigned long long int hashKey = hash.computeHash(board);
-        if (hash.checkTable[hashKey])
-            valCur = hash.evalTable[hashKey];
-        else {
+        auto hashKey = hash.computeHash(board);
+        if (hash.checkHashExist(hashKey)) {
+            valCur = hash.getValue(hashKey);
+        } else {
             valCur = MiniMax(
                 board,
                 moveCount,
@@ -100,8 +100,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
                 _topLeftPoint,
                 _bottomRightPoint
             );
-            hash.checkTable[hashKey] = 1;
-            hash.evalTable[hashKey] = valCur;
+            hash.setValue(hashKey, valCur);
         }
 
         if (valCur > valBest) {
@@ -133,7 +132,6 @@ short AI::MiniMax(
     const GameAction::Point topLeftPoint,
     const GameAction::Point bottomRightPoint
 )
-
 {
     cnt++;
 
@@ -195,9 +193,9 @@ short AI::MiniMax(
             short valCur;
             GameAction::MakeMove(board, moveCount, moveList[i], PLAYER_AI);
             unsigned long long int hashKey = hash.computeHash(board);
-            if (hash.checkTable[hashKey])
-                valCur = hash.evalTable[hashKey];
-            else {
+            if (hash.checkHashExist(hashKey)) {
+                valCur = hash.getValue(hashKey);
+            } else {
                 valCur = MiniMax(
                     board,
                     moveCount,
@@ -215,8 +213,7 @@ short AI::MiniMax(
                         {moveList[i].row, moveList[i].col}
                     )
                 );
-                hash.checkTable[hashKey] = 1;
-                hash.evalTable[hashKey] = valCur;
+                hash.setValue(hashKey, valCur);
             }
             valBest = (valCur > valBest) ? valCur : valBest;
             GameAction::UndoMove(board, moveCount, moveList[i]);
@@ -231,9 +228,9 @@ short AI::MiniMax(
             short valCur;
             GameAction::MakeMove(board, moveCount, moveList[i], PLAYER_HUMAN);
             unsigned long long int hashKey = hash.computeHash(board);
-            if (hash.checkTable[hashKey])
-                valCur = hash.evalTable[hashKey];
-            else {
+            if (hash.checkHashExist(hashKey)) {
+                valCur = hash.getValue(hashKey);
+            } else {
                 valCur = MiniMax(
                     board,
                     moveCount,
@@ -251,8 +248,7 @@ short AI::MiniMax(
                         {moveList[i].row, moveList[i].col}
                     )
                 );
-                hash.checkTable[hashKey] = 1;
-                hash.evalTable[hashKey] = valCur;
+                hash.setValue(hashKey, valCur);
             }
             valBest = (valCur < valBest) ? valCur : valBest;
             GameAction::UndoMove(board, moveCount, moveList[i]);
