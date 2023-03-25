@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <array>
 
 #include "GameState.h"
 
@@ -8,18 +9,29 @@ namespace GameAction {
         short row, col;
     };
 
-    typedef std::vector<std::vector<short>> Board;
+    typedef std::array<std::array<char, Constants::BOARD_SIZE>, Constants::BOARD_SIZE> Board;
 
-    void MakeMove(
+    inline void MakeMove(
         Board& board,
         short& moveCount,
         const Point& move,
         const short& playerValue
-    );
+    )
+    {
+        board[move.row][move.col] = playerValue;
+        moveCount++;
+    }
 
-    void UndoMove(Board& board, short& moveCount, const Point& move);
+    inline void UndoMove(Board& board, short& moveCount, const Point& move)
+    {
+        board[move.row][move.col] = 0;
+        moveCount--;
+    }
 
-    void ResetGameState(GameState& gameState);
+    inline void ResetGameState(GameState& gameState)
+    {
+        gameState = GameState();
+    }
 
     void InitBoard(
         Board& board,

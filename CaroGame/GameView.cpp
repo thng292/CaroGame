@@ -205,9 +205,10 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-    GameAction::Board gameBoard(
-        Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
-    );
+    GameAction::Board gameBoard;
+    for (size_t i = 0; i < Constants::BOARD_SIZE; i++) {
+        memset(gameBoard[i].data(), 0, Constants::BOARD_SIZE * sizeof(char));
+    }
 
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
@@ -215,7 +216,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     short moveCount = 0;
 
-    AI myAI;
+    static AI myAI;
     myAI.SetDifficulty(curGameState.aiDifficulty);
 
     LoadGameToView(gameScreen, gameBoard, moveCount, curGameState, myAI);
@@ -225,11 +226,6 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         row = curGameState.moveList.back().first;
         col = curGameState.moveList.back().second;
     }
-
-    // bool isPlayerOneTurn = (curGameState.playerOneFirst &&
-    //                         (curGameState.moveList.size() % 2 == 0)) ||
-    //                        (!curGameState.playerOneFirst &&
-    //                         (curGameState.moveList.size() % 2 != 0));
 
     int booltmp =
         (curGameState.playerOneFirst + (curGameState.moveList.size() % 2));
@@ -297,10 +293,11 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     timerPlayerTwo.Start();
     timerPlayerTwo.Pause();
 
-    if (isPlayerOneTurn)
+    if (isPlayerOneTurn) {
         timerPlayerOne.Continued();
-    else
+    } else {
         timerPlayerTwo.Continued();
+    }
 
     while (!endGame) {
         if (aiFirst) {
@@ -471,9 +468,6 @@ void GameView::GameScreenView(NavigationHost& NavHost)
             }
         }
     }
-
-    timerPlayerOne.Stop();
-    timerPlayerTwo.Stop();
 
     curGameState.playerTimeOne = curGameState.playerTimeTwo =
         curGameState.gameTime;

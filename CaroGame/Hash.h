@@ -1,19 +1,23 @@
 #pragma once
+#include <array>
 #include <random>
 #include <unordered_map>
 #include <vector>
 
 #include "Constants.h"
+#include "GameAction.h"
 
 typedef unsigned long long int Ulli;
-typedef std::unordered_map<Ulli, short> evalTable;
-typedef std::unordered_map<Ulli, bool> checkTable;
 
 using std::vector;
+
+const size_t HASH_TABLE_SIZE = 10000;
 
 class Hash {
     static std::mt19937 mt;
     Ulli ZobristTable[Constants::BOARD_SIZE][Constants::BOARD_SIZE][3];
+    std::array<std::pair<Ulli, short>, HASH_TABLE_SIZE>
+        hashTable;
 
     // Initializes the table
     inline constexpr void initTable()
@@ -28,10 +32,26 @@ class Hash {
     }
 
    public:
-    evalTable evalTable;
-    checkTable checkTable;
+    Hash()
+    {
+        initTable();
+        hashTable.fill({0, 0});
+    }
 
-    Hash() { initTable(); }
+    inline bool checkHashExist(Ulli hash)
+    {
+        return hashTable[hash % HASH_TABLE_SIZE].first == hash;
+    };
+
+    inline short getValue(Ulli hash)
+    {
+        return hashTable[hash % HASH_TABLE_SIZE].second;
+    }
+
+    inline void setValue(Ulli hash, short value)
+    {
+        hashTable[hash % HASH_TABLE_SIZE] = {hash, value};
+    }
 
     inline Ulli randomInt()
     {
@@ -40,5 +60,5 @@ class Hash {
     }
 
     // Computes the hash value of a given board
-    Ulli computeHash(const vector<vector<short>>& board);
+    Ulli computeHash(const GameAction::Board& board);
 };

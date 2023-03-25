@@ -3,6 +3,8 @@
 #include <functional>
 #include <thread>
 
+static const auto REST_INTERVAL = std::chrono::milliseconds{200};
+
 // Reference: https://gist.github.com/zekroTJA/00317b41aa69f38090071b6c8065272b
 class Timer {
    public:
@@ -32,18 +34,18 @@ class Timer {
                     _callback();
                 }
                 std::this_thread::sleep_until(nextInterval);
+                /*while (std::chrono::steady_clock::now() < nextInterval &&
+                       _running && !_pause) {
+                    std::this_thread::sleep_for(REST_INTERVAL);
+                };*/
             }
         });
-        //_thread.detach();
+        _thread.detach();
     }
 
     inline void Stop()
     {
         _running = false;
-        if (_thread.joinable()) {
-            _thread.join();
-        }
-        _thread.~thread();
     }
 
     inline void Restart()
