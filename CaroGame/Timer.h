@@ -3,7 +3,12 @@
 #include <functional>
 #include <thread>
 
-static const auto REST_INTERVAL = std::chrono::milliseconds{200};
+struct TimerInternalState {
+    std::function<void(void)> callback;
+    std::chrono::milliseconds interval = std::chrono::milliseconds{1000};
+    bool running = false;
+    bool pause = false;
+};
 
 // Reference: https://gist.github.com/zekroTJA/00317b41aa69f38090071b6c8065272b
 class Timer {
@@ -19,30 +24,30 @@ class Timer {
         std::function<void(void)> callback, const long& interval = 1000
     )
     {
-        _callback = callback;
-        _interval = std::chrono::milliseconds{interval};
+        _state->callback = callback;
+        _state->interval = std::chrono::milliseconds{interval};
     }
 
     inline void Start()
     {
-        _running = true;
-        _thread = std::thread([&]() {
-            while (_running) {
-                auto nextInterval =
-                    std::chrono::steady_clock::now() + _interval;
-                if (!_pause) {
-                    _callback();
+        _state->running = true;
+        auto metaFn = [](std::shared_ptr<TimerInternalState> state) {
+            return [state] {
+                while (state->running) {
+                    auto nextInterval =
+                        std::chrono::steady_clock::now() + state->interval;
+                    if (!state->pause) {
+                        state->callback();
+                    }
+                    std::this_thread::sleep_until(nextInterval);
                 }
-                std::this_thread::sleep_until(nextInterval);
-            }
-        });
+            };
+        };
+        _thread = std::thread(metaFn(_state));
         _thread.detach();
     }
 
-    inline void Stop()
-    {
-        _running = false;
-    }
+    inline void Stop() { _state->running = false; }
 
     inline void Restart()
     {
@@ -50,24 +55,23 @@ class Timer {
         Start();
     }
 
-    inline void Pause() { _pause = true; }
+    inline void Pause() { _state->pause = true; }
 
-    inline void Continued() { _pause = false; }
+    inline void Continued() { _state->pause = false; }
 
-    inline bool isRunning() { return _running && !_pause; }
+    inline bool isRunning() { return _state->running && !_state->pause; }
 
     inline long long getInterval()
     {
-        return std::chrono::duration_cast<std::chrono::milliseconds>(_interval)
+        return std::chrono::duration_cast<std::chrono::milliseconds>(_state->interval)
             .count();
     }
 
     inline ~Timer() { Stop(); }
 
    private:
-    std::function<void(void)> _callback;
-    std::chrono::milliseconds _interval = std::chrono::milliseconds{1000};
     std::thread _thread;
-    bool _running = false;
-    bool _pause = false;
+
+    std::shared_ptr<TimerInternalState> _state = std::make_shared<TimerInternalState>();
+    
 };
