@@ -101,7 +101,6 @@ void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 inline std::optional<GameState> ReplayLoad::ReplayLoadState::LoadCurrentSelect()
 {
     return SaveLoad::Load(
-        allOptions[currentPage * Constants::PAGE_SIZE + selected].second,
-        Constants::REPLAY_PATH
+        allOptions[currentPage * Constants::PAGE_SIZE + selected].second
     );
 }

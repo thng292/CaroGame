@@ -248,7 +248,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     std::mutex lock;
 
-    Timer timerPlayerOne(
+    static Timer timerPlayerOne(
         [&] {
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
@@ -268,7 +268,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         1000
     );
 
-    Timer timerPlayerTwo(
+    static Timer timerPlayerTwo(
         [&] {
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
@@ -287,6 +287,11 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         },
         1000
     );
+
+    Utils::ON_SCOPE_EXIT([&] {
+        timerPlayerOne.Stop();
+        timerPlayerTwo.Stop();
+    });
 
     timerPlayerOne.Start();
     timerPlayerOne.Pause();

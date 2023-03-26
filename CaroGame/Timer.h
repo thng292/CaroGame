@@ -34,10 +34,6 @@ class Timer {
                     _callback();
                 }
                 std::this_thread::sleep_until(nextInterval);
-                /*while (std::chrono::steady_clock::now() < nextInterval &&
-                       _running && !_pause) {
-                    std::this_thread::sleep_for(REST_INTERVAL);
-                };*/
             }
         });
         _thread.detach();

@@ -11,7 +11,7 @@ typedef unsigned long long int Ulli;
 
 using std::vector;
 
-const size_t HASH_TABLE_SIZE = 10000;
+const size_t HASH_TABLE_SIZE = 8192;
 
 class Hash {
     static std::mt19937 mt;

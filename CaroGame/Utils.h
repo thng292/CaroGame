@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <cwctype>
+#include <functional>
 #include <initializer_list>
 
 #include "Audio.h"
@@ -11,6 +12,17 @@
 
 namespace Utils {
     static Audio::AudioPlayer OnKeyPressSound(Audio::Sound::OnKey);
+
+    struct ON_SCOPE_EXIT {
+        std::function<void(void)> func;
+
+        ON_SCOPE_EXIT(std::function<void(void)> onScopeExit)
+        {
+            func = onScopeExit;
+        };
+
+        ~ON_SCOPE_EXIT() { func(); };
+    };
 
     template <typename T, typename U = T>
     inline bool keyMatchPattern(
