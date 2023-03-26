@@ -1,5 +1,5 @@
 #include "BackgroundAudioService.h"
 
-BackgroundAudioService* BackgroundAudioService::singletonInstance = nullptr;
-
-std::mutex BackgroundAudioService::locker;
+std::unique_ptr<BackgroundAudioService>
+    BackgroundAudioService::singletonInstance = nullptr;
+std::mutex BackgroundAudioService::locker{};

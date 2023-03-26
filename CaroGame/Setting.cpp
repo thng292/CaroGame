@@ -22,6 +22,11 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto& musicSetting = Config::GetSetting(Config::BGMusic);
     auto& soundEffectSetting = Config::GetSetting(Config::SoundEffect);
     auto& undoSetting = Config::GetSetting(Config::UndoOption);
+    if (musicSetting == Config::Value_True) {
+        BackgroundAudioService::getInstance()->getPlayer().Play();
+    } else {
+        BackgroundAudioService::getInstance()->getPlayer().Stop();
+    }
     {
         const auto controlHint1 = std::format(
             L"A, W, S, D, Arrow Keys: {}, Space: {}",
@@ -152,6 +157,7 @@ void Setting::SettingScreen(NavigationHost& NavHost)
             Config::SaveUserSetting();
             auto tmp = Language::GetString(L"APPLY_SUCCESSFULLY");
             View::WriteToView(59 - tmp.size() / 2, 2, tmp);
+            return NavHost.Navigate("Settings");
         }
         if (tmp == L"B" || tmp == L"b") {
             return NavHost.Back();

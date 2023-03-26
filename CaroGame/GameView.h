@@ -1,9 +1,11 @@
 #pragma once
 #include <format>
-#include <vector>
 #include <mutex>
+#include <vector>
 
 #include "AI.h"
+#include "BackgroundAudioService.h"
+#include "Config.h"
 #include "Constants.h"
 #include "GameAction.h"
 #include "GameScreen.h"
@@ -80,7 +82,7 @@ namespace GameView {
         GameAction::Board& board,
         short& moveCount,
         GameState gameState,
-        AI &ai
+        AI& ai
     );
 
 }  // namespace GameView

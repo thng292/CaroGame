@@ -9,18 +9,18 @@
 #pragma comment(lib, "Winmm.lib")
 
 namespace Audio {
-    static constexpr std::array SoundName{
-        L"Key.wav",
-        L"Draw.mp3",
-        L"Win.mp3",
-        L"Lose.wav",
-        L"MenuBGM.mp3",
-        L"GameBGM.mp3"};
 
     enum class Sound : char { OnKey, Draw, Win, Lose, MenuBGM, GameBGM };
 
     class AudioPlayer {
        private:
+        static constexpr std::array SoundName{
+            L"Key.wav",
+            L"Draw.mp3",
+            L"Win.mp3",
+            L"Lose.wav",
+            L"MenuBGM.mp3",
+            L"GameBGM.mp3"};
         bool isPlaying = 0;
         bool hasStopped = 1;
         bool isRepeat = 0;
@@ -29,16 +29,16 @@ namespace Audio {
         int currentInstance;
 
        public:
-        AudioPlayer() { currentInstance = instanceCount++; }
+        AudioPlayer() {}
 
         inline AudioPlayer(Sound song)
         {
-            currentInstance = instanceCount++;
             Open(song);
         }
 
         inline int Open(Sound song)
         {
+            currentInstance = instanceCount++;
             currentSong = song;
             auto tmp = SoundName[int(song)];
             auto command = std::format(

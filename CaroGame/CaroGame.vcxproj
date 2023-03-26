@@ -221,7 +221,7 @@
     <Media Include="asset\audio\Draw.mp3" />
     <Media Include="asset\audio\GameBGM.mp3" />
     <Media Include="asset\audio\Key.wav" />
-    <Media Include="asset\audio\Lose.mp3" />
+    <Media Include="asset\audio\Lose.wav" />
     <Media Include="asset\audio\MenuBGM.mp3" />
     <Media Include="asset\audio\nhac_an_chon.mp3" />
     <Media Include="asset\audio\Win.mp3" />

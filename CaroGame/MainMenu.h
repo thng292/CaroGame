@@ -1,5 +1,6 @@
 #pragma once
 #include "Avatar.h"
+#include "BackgroundAudioService.h"
 #include "Captain.h"
 #include "Config.h"
 #include "Deadpool.h"

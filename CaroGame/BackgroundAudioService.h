@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <mutex>
 
 #include "Audio.h"
@@ -9,19 +10,20 @@ using Audio::Sound;
 class BackgroundAudioService {
     static std::mutex locker;
     AudioPlayer player;
-    static BackgroundAudioService* singletonInstance;
+    static std::unique_ptr<BackgroundAudioService> singletonInstance;
 
+   public:
     static BackgroundAudioService* getInstance()
     {
         locker.lock();
         if (singletonInstance == nullptr) {
-            singletonInstance = new BackgroundAudioService();
+            singletonInstance = std::make_unique<BackgroundAudioService>();
         }
         locker.unlock();
-        return singletonInstance;
+        return singletonInstance.get();
     }
 
-    const AudioPlayer& getPlayer() { return player; }
+    AudioPlayer& getPlayer() { return player; }
 
     void ChangeSong(Sound song)
     {

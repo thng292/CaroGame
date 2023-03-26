@@ -9,6 +9,12 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     Logo_Deadpool(8, 5);
     Logo_Captain(79, 5);
 
+    auto bgmAudio = BackgroundAudioService::getInstance();
+    bgmAudio->ChangeSong(Sound::MenuBGM);
+    if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+        bgmAudio->getPlayer().Play();
+    }
+
     std::vector<View::Option> options = {
         {Language::GetString(L"NEW_GAME_TITLE"),
          Language::GetString(L"NEW_GAME_SHORTCUT")[0]},

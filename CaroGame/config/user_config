@@ -1,3 +1,4 @@
-﻿SoundEffect=False
-Music=False
-LanguageFilePath=asset/language/en.txt
+﻿Music=True
+LanguageFilePath=asset/language/vi.txt
+SoundEffect=True
+UndoOption=

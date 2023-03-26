@@ -210,6 +210,12 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         memset(gameBoard[i].data(), 0, Constants::BOARD_SIZE * sizeof(char));
     }
 
+    if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+        auto bgmAudio = BackgroundAudioService::getInstance();
+        bgmAudio->ChangeSong(Sound::GameBGM);
+        bgmAudio->getPlayer().Play();
+    }
+
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
     gameScreen.DrawToElements(curGameState);

@@ -5,13 +5,35 @@
 #include <cwctype>
 #include <functional>
 #include <initializer_list>
+#include <memory>
 
 #include "Audio.h"
 #include "InputHandle.h"
 #include "Utils.h"
 
 namespace Utils {
-    static Audio::AudioPlayer OnKeyPressSound(Audio::Sound::OnKey);
+
+    class KeyPressSound {
+        Audio::AudioPlayer OnKeyPressSound =
+            Audio::AudioPlayer(Audio::Sound::OnKey);
+        static std::unique_ptr<KeyPressSound> singletonInstance;
+        static std::mutex locker;
+
+       public:
+        static KeyPressSound* getInstance()
+        {
+            locker.lock();
+            if (singletonInstance == nullptr) {
+                singletonInstance = std::make_unique<KeyPressSound>();
+            }
+            locker.unlock();
+            return singletonInstance.get();
+        }
+
+        inline void Play() { OnKeyPressSound.Play(); }
+
+        inline void Pause() { OnKeyPressSound.Pause(); }
+    };
 
     struct ON_SCOPE_EXIT {
         std::function<void(void)> func;
@@ -94,8 +116,9 @@ namespace Utils {
 
     inline void PlayKeyPressSound()
     {
-        OnKeyPressSound.Pause();
-        OnKeyPressSound.Play();
+        auto OnKeyPressSound = KeyPressSound::getInstance();
+        OnKeyPressSound->Pause();
+        OnKeyPressSound->Play();
     }
 
     template <typename T, typename _Elem>
