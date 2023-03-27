@@ -29,6 +29,11 @@ namespace Audio {
         int currentInstance;
 
        public:
+        AudioPlayer(AudioPlayer&&) = delete;
+        AudioPlayer(const AudioPlayer&) = delete;
+        AudioPlayer& operator=(AudioPlayer&&) = delete;
+        AudioPlayer& operator=(const AudioPlayer&) = delete;
+
         AudioPlayer() {}
 
         inline AudioPlayer(Sound song)

@@ -5,7 +5,7 @@
 #define LANGUAGE_LABEL_FALLBACK
 
 namespace Constants {
-    const std::wstring version = L"0.0.1";
+    const std::wstring version = L"0.0.2";
 
     // Game const
     struct Player {

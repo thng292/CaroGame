@@ -222,7 +222,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     short moveCount = 0;
 
-    static AI myAI;
+    AI myAI;
     myAI.SetDifficulty(curGameState.aiDifficulty);
 
     LoadGameToView(gameScreen, gameBoard, moveCount, curGameState, myAI);
