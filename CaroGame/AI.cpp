@@ -40,6 +40,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
         for (short col = colLowerLimit; col <= colUpperLimit; ++col) {
             if (board[row][col] == 0) {
                 moveBest = {row, col};
+                break;
             }
         }
     }
