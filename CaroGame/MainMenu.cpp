@@ -9,13 +9,17 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     Logo_Deadpool(8, 5);
     Logo_Captain(79, 5);
     View::WriteToView(
-        119 - Constants::version.size() - 9, 0, L"Version: " + Constants::version
+        119 - Constants::version.size() - 9,
+        0,
+        L"Version: " + Constants::version
     );
 
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
-        bgmAudio->ChangeSong(Sound::MenuBGM);
-        bgmAudio->getPlayer()->Play();
+        if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::MenuBGM) {
+            bgmAudio->ChangeSong(Sound::MenuBGM);
+            bgmAudio->getPlayer()->Play(true, true);
+        }
     }
 
     std::vector<View::Option> options = {

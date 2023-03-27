@@ -10,11 +10,12 @@
 
 namespace Audio {
 
-    enum class Sound : char { OnKey, Draw, Win, Lose, MenuBGM, GameBGM };
+    enum class Sound : char { NoSound, OnKey, Draw, Win, Lose, MenuBGM, GameBGM };
 
     class AudioPlayer {
        private:
         static constexpr std::array SoundName{
+            L"",
             L"Key.wav",
             L"Draw.mp3",
             L"Win.mp3",
@@ -24,7 +25,7 @@ namespace Audio {
         bool isPlaying = 0;
         bool hasStopped = 1;
         bool isRepeat = 0;
-        Sound currentSong;
+        Sound currentSong = Sound::NoSound;
         static int instanceCount;
         int currentInstance;
 
@@ -36,15 +37,15 @@ namespace Audio {
 
         AudioPlayer() {}
 
-        inline AudioPlayer(Sound song)
-        {
-            Open(song);
-        }
+        inline AudioPlayer(Sound song) { Open(song); }
 
         inline int Open(Sound song)
         {
             currentInstance = instanceCount++;
             currentSong = song;
+            if (song == Sound::NoSound) {
+                return 0;
+            }
             auto tmp = SoundName[int(song)];
             auto command = std::format(
                 L"open {}{} type {} alias {}",
@@ -64,6 +65,8 @@ namespace Audio {
             }
             return mciSendString(command.c_str(), 0, 0, 0);
         }
+
+        inline Sound getCurrentSong() { return currentSong; }
 
         inline int Play(bool fromStart = true, bool repeat = false)
         {

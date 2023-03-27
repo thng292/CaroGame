@@ -23,7 +23,7 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto& soundEffectSetting = Config::GetSetting(Config::SoundEffect);
     auto& undoSetting = Config::GetSetting(Config::UndoOption);
     if (musicSetting == Config::Value_True) {
-        BackgroundAudioService::getInstance()->getPlayer()->Play();
+        BackgroundAudioService::getInstance()->getPlayer()->Play(false, true);
     } else {
         BackgroundAudioService::getInstance()->getPlayer()->Stop();
     }

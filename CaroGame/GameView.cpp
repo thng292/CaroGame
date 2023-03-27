@@ -211,8 +211,10 @@ void GameView::GameScreenView(NavigationHost& NavHost)
 
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
-        bgmAudio->ChangeSong(Sound::GameBGM);
-        bgmAudio->getPlayer()->Play();
+        if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::GameBGM) {
+            bgmAudio->ChangeSong(Sound::GameBGM);
+            bgmAudio->getPlayer()->Play(true, true);
+        }
     }
 
     GameScreen gameScreen(7, 2);

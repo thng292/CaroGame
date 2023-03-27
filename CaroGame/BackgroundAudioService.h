@@ -9,7 +9,7 @@ using Audio::Sound;
 
 class BackgroundAudioService {
     static std::mutex locker;
-    std::unique_ptr<AudioPlayer> player;
+    std::unique_ptr<AudioPlayer> player = nullptr;
     static std::unique_ptr<BackgroundAudioService> singletonInstance;
 
    public:
@@ -23,7 +23,12 @@ class BackgroundAudioService {
         return singletonInstance.get();
     }
 
-    AudioPlayer* getPlayer() { return player.get(); }
+    AudioPlayer* getPlayer() { 
+        if (player == nullptr) {
+            player = std::make_unique<AudioPlayer>();
+        }
+        return player.get(); 
+    }
 
     void ChangeSong(Sound song)
     {
