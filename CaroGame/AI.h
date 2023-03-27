@@ -14,7 +14,6 @@ class AI {
                        AI_DIFFICULTY_HARD = 3;
     GameAction::Point _topLeftPoint = {100, 100},
                       _bottomRightPoint = {-100, -100};
-    int cnt = 0;
     short Eval(
         const GameAction::Board& board,
         const short& moveCount,
@@ -43,7 +42,6 @@ class AI {
             _bottomRightPoint.row = point.row;
         if (point.col > _bottomRightPoint.col)
             _bottomRightPoint.col = point.col;
-        cnt = 0;
     }
 
     inline void SetDifficulty(const short& difficulty)
@@ -73,7 +71,7 @@ class AI {
     const short INF = 25000;
     const short MAX_SCORE = 10000;
     const short FIRST_LOOKUP_RANGE = 1;
-    short _depth = 2;
+    const short _DEPTH = 2;
     const short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
                 PLAYER_AI = Constants::PLAYER_TWO.value;
     short _range;

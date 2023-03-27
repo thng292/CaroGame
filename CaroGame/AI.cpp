@@ -14,31 +14,6 @@ short AI::Eval(
     return (isMaximizingPlayer) ? totalEval : -totalEval;
 }
 
-bool isValidPoint(short row, short col)
-{
-    return !(
-        row < 0 || col < 0 || row >= Constants::BOARD_SIZE ||
-        col >= Constants::BOARD_SIZE
-    );
-}
-
-bool IsGoodMove(
-    const GameAction::Board& board,
-    const GameAction::Point& move,
-    const short& playerValue
-)
-{
-    for (short row = move.row - 1; row <= move.row + 1; ++row) {
-        for (short col = move.col - 1; col <= move.col + 1; ++col) {
-            if (isValidPoint(row, col)) {
-                if (board[row][col] != 0) return 1;
-            }
-        }
-    }
-
-    return 0;
-}
-
 GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
 {
     short rowLowerLimit = (_topLeftPoint.row - FIRST_LOOKUP_RANGE >= 0)
@@ -84,7 +59,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
                     alpha,
                     beta,
                     false,
-                    _depth - 1
+                    _DEPTH - 1
                 );
 
                 if (valCur > valBest) {
@@ -118,7 +93,6 @@ short AI::MiniMax(
 )
 
 {
-    cnt++;
 
     const short playerValue = (!isMaximizingPlayer) ? PLAYER_AI : PLAYER_HUMAN;
 
