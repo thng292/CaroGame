@@ -68,7 +68,6 @@ void View::WriteToView(
     View::Color backgroundColor
 )
 {
-    static std::mutex lock;
     static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(
         STD_HANDLE,
@@ -78,7 +77,6 @@ void View::WriteToView(
 
     if (shortcut) {
         int shortcutIndex = str.find_first_of(shortcut);
-        lock.lock();
         View::Goto(x, y);
         std::wcout << std::format(
             L"{}{}{}",
@@ -86,12 +84,9 @@ void View::WriteToView(
             View::Underline(str[shortcutIndex]),
             str.c_str() + shortcutIndex + 1
         );
-        lock.unlock();
     } else {
-        lock.lock();
         View::Goto(x, y);
         std::wcout << str;
-        lock.unlock();
     }
 }
 

@@ -40,10 +40,6 @@ namespace View {
         short Top, Left, Right, Bottom;
     };
 
-    struct CursorPosition {
-        long x, y;
-    };
-
     struct Option {
         const std::wstring& option;
         const wchar_t underline;

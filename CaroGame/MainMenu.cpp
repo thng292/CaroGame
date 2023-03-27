@@ -8,11 +8,13 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     Caro(32, 1);
     Logo_Deadpool(8, 5);
     Logo_Captain(79, 5);
-    //View::WriteToView(119-Constants::version.size(), 0, Constants::version);
+    View::WriteToView(
+        119 - Constants::version.size() - 9, 0, L"Version: " + Constants::version
+    );
 
-    auto bgmAudio = BackgroundAudioService::getInstance();
-    bgmAudio->ChangeSong(Sound::MenuBGM);
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+        auto bgmAudio = BackgroundAudioService::getInstance();
+        bgmAudio->ChangeSong(Sound::MenuBGM);
         bgmAudio->getPlayer()->Play();
     }
 

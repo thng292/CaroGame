@@ -258,15 +258,14 @@ void GameView::GameScreenView(NavigationHost& NavHost)
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
                 curGameState.playerTimeOne += timeAddition;
+                std::lock_guard guard(lock);
                 gameScreen.timerContainerOne.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeOne)
                 );
                 View::Goto(currPos.X, currPos.Y);
                 if (curGameState.playerTimeOne == 0) {
-                    lock.lock();
                     endGame = true;
                     curGameState.playerScoreTwo++;
-                    lock.unlock();
                 }
             }
         },
@@ -277,26 +276,20 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         [&] {
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
+                std::lock_guard guard(lock);
                 curGameState.playerTimeTwo += timeAddition;
                 gameScreen.timerContainerTwo.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeTwo)
                 );
                 View::Goto(currPos.X, currPos.Y);
                 if (curGameState.playerTimeTwo == 0) {
-                    lock.lock();
                     endGame = true;
                     curGameState.playerScoreOne++;
-                    lock.unlock();
                 }
             }
         },
         1000
     );
-
-    /*Utils::ON_SCOPE_EXIT([&] {
-        timerPlayerOne.Stop();
-        timerPlayerTwo.Stop();
-    });*/
 
     timerPlayerOne.Start();
     timerPlayerOne.Pause();
@@ -315,6 +308,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
             myAI.UpdatePrivateValues(curMove);
             Constants::Player curPlayer = Constants::PLAYER_TWO;
             timerPlayerOne.Continued();
+            std::lock_guard guard(lock);
             UpdateGame(
                 gameScreen,
                 gameBoard,
@@ -341,6 +335,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         if (Utils::keyMeanUp(tmp)) {
             if (row - 1 >= 0) {
                 row--;
+                std::lock_guard guard(lock);
                 View::Goto(
                     gameScreen.boardContainer.xCoord +
                         BoardContainer::CELL_WIDTH * col +
@@ -354,6 +349,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         if (Utils::keyMeanLeft(tmp)) {
             if (col - 1 >= 0) {
                 col--;
+                std::lock_guard guard(lock);
                 View::Goto(
                     gameScreen.boardContainer.xCoord +
                         BoardContainer::CELL_WIDTH * col +
@@ -367,6 +363,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             if (row + 1 < Constants::BOARD_SIZE) {
                 row++;
+                std::lock_guard guard(lock);
                 View::Goto(
                     gameScreen.boardContainer.xCoord +
                         BoardContainer::CELL_WIDTH * col +
@@ -380,6 +377,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
         if (Utils::keyMeanRight(tmp)) {
             if (col + 1 < Constants::BOARD_SIZE) {
                 col++;
+                std::lock_guard guard(lock);
                 View::Goto(
                     gameScreen.boardContainer.xCoord +
                         BoardContainer::CELL_WIDTH * col +
@@ -408,6 +406,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                     timerPlayerTwo.Pause();
                 }
 
+                lock.lock();
                 UpdateGame(
                     gameScreen,
                     gameBoard,
@@ -416,6 +415,8 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                     curPlayer,
                     curGameState
                 );
+                lock.unlock();
+
                 HandleState(
                     gameBoard,
                     moveCount,
@@ -447,6 +448,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                         timerPlayerTwo.Pause();
                     }
 
+                    lock.lock();
                     UpdateGame(
                         gameScreen,
                         gameBoard,
@@ -455,6 +457,7 @@ void GameView::GameScreenView(NavigationHost& NavHost)
                         curPlayer,
                         curGameState
                     );
+                    lock.unlock();
                     myAI.UpdatePrivateValues(curMove);
 
                     HandleState(
