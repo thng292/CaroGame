@@ -8,17 +8,28 @@
 #include "Utils.h"
 
 namespace Language {
-    typedef std::unordered_map<std::wstring, std::wstring> LanguageDict;
+    typedef std::unordered_map<std::wstring, std::wstring> Dict;
+
+    class LanguageDict {
+        static std::unique_ptr<LanguageDict> instance;
+
+       public:
+        Dict dict;
+        static LanguageDict* getInstance()
+        {
+            if (instance == nullptr) {
+                instance = std::make_unique<LanguageDict>();
+            }
+            return instance.get();
+        }
+    };
 
     struct LanguageOption {
-        LanguageDict meta;
+        Dict meta;
         std::filesystem::path path;
     };
 
-    static LanguageDict currentLanguageDict;
-    static LanguageDict currentLanguageMeta;
-
-    LanguageDict ExtractMetaFromFile(const std::filesystem::path& filePath);
+    Dict ExtractMetaFromFile(const std::filesystem::path& filePath);
 
     void LoadLanguageFromFile(const std::filesystem::path& filePath);
 

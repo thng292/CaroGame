@@ -1,5 +1,7 @@
 #include "Config.h"
 
+std::unique_ptr<Config::Configs> Config::Configs::instance = nullptr;
+
 inline std::pair<std::wstring, std::wstring> LineSplitter(
     const std::wstring& line, wchar_t delim = L'='
 )
@@ -10,6 +12,7 @@ inline std::pair<std::wstring, std::wstring> LineSplitter(
 
 bool Config::LoadUserSetting()
 {
+    auto& Settings = Configs::getInstance()->dict;
     auto fin = FileHandle::OpenInFile(Constants::USERCONFIG_FILE_PATH);
     if (fin.fail()) {
         return 0;
@@ -27,16 +30,19 @@ bool Config::LoadUserSetting()
 
 std::wstring& Config::GetSetting(const std::wstring& name)
 {
+    static auto& Settings = Configs::getInstance()->dict;
     return Settings[name];
 }
 
 void Config::SetSetting(const std::wstring& name, const std::wstring& data)
 {
+    static auto& Settings = Configs::getInstance()->dict;
     Settings[name] = data;
 }
 
 bool Config::SaveUserSetting()
 {
+    auto& Settings = Configs::getInstance()->dict;
     if (!std::filesystem::exists(Constants::STR_USERCONFIG_PATH)) {
         std::filesystem::create_directory(Constants::STR_USERCONFIG_PATH);
     }

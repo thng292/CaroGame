@@ -2,6 +2,8 @@
 #include <filesystem>
 #include <string>
 
+#define LANGUAGE_LABEL_FALLBACK
+
 namespace Constants {
     const std::wstring version = L"0.0.1";
 

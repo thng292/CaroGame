@@ -1,5 +1,8 @@
 #include "Language.h"
 
+std::unique_ptr<Language::LanguageDict> Language::LanguageDict::instance =
+    nullptr;
+
 inline std::pair<std::wstring, std::wstring> LineSplitter(
     const std::wstring& line, wchar_t delim = L'='
 )
@@ -8,12 +11,12 @@ inline std::pair<std::wstring, std::wstring> LineSplitter(
     return {line.substr(0, tmp), line.substr(tmp + 1)};
 }
 
-Language::LanguageDict Language::ExtractMetaFromFile(
+Language::Dict Language::ExtractMetaFromFile(
     const std::filesystem::path& filePath
 )
 {
     auto fin = FileHandle::OpenInFile(filePath);
-    LanguageDict res;
+    Dict res;
     std::wstring inp;
     while (!fin.eof()) {
         std::getline(fin, inp);
@@ -29,8 +32,10 @@ Language::LanguageDict Language::ExtractMetaFromFile(
 
 void Language::LoadLanguageFromFile(const std::filesystem::path& filePath)
 {
-    currentLanguageMeta = ExtractMetaFromFile(filePath);
+    static auto& currentLanguageDict = LanguageDict::getInstance()->dict;
     currentLanguageDict.clear();
+    auto metaDict = ExtractMetaFromFile(filePath);
+    currentLanguageDict.insert(metaDict.begin(), metaDict.end());
     auto fin = FileHandle::OpenInFile(filePath);
     std::wstring inp;
     while (!fin.eof()) {
@@ -57,13 +62,17 @@ std::vector<Language::LanguageOption> Language::DiscoverLanguageFile(
 
 std::wstring& Language::GetString(const std::wstring& Label)
 {
+    static auto& currentLanguageDict = LanguageDict::getInstance()->dict;
+#ifdef LANGUAGE_LABEL_FALLBACK
     if (!currentLanguageDict.contains(Label)) {
         currentLanguageDict[Label] = Label;
     }
+#endif
     return currentLanguageDict[Label];
 }
 
 std::wstring& Language::GetMeta(const std::wstring& Label)
 {
+    static auto& currentLanguageMeta = LanguageDict::getInstance()->dict;
     return currentLanguageMeta[Label];
 }

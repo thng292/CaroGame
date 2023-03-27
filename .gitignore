@@ -360,6 +360,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-user_config/
+config/
+user_config
 saves/
 replay/

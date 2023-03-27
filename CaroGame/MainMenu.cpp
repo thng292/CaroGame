@@ -12,7 +12,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     auto bgmAudio = BackgroundAudioService::getInstance();
     bgmAudio->ChangeSong(Sound::MenuBGM);
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
-        bgmAudio->getPlayer().Play();
+        bgmAudio->getPlayer()->Play();
     }
 
     std::vector<View::Option> options = {
