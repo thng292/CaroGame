@@ -6,7 +6,7 @@
 #include "Logic.h"
 
 // Don't change this please it'll break everything
-constexpr short score[4] = {1, 10, 50, 200};
+const short score[4] = {1, 10, 50, 200};
 
 short GetHorizontalComboEval(
     const GameAction::Board& board,
@@ -27,25 +27,20 @@ short GetHorizontalComboEval(
     short evalValue = score[(colLast - move.col)];
 
     bool blockLeft = false, blockRight = false;
-    if (move.col == 0) {
+    if (move.col == 0)
         blockLeft = true;
-    } else if (board[move.row][move.col - 1] != 0 && board[move.row][move.col - 1] != playerValue) {
+    else if (board[move.row][move.col - 1] != 0 && board[move.row][move.col - 1] != playerValue)
         blockLeft = true;
-    }
-    if (colLast == Constants::BOARD_SIZE - 1) {
+    if (colLast == Constants::BOARD_SIZE - 1)
         blockRight = true;
-    } else if (board[move.row][colLast + 1] != 0 && board[move.row][colLast + 1] != playerValue) {
+    else if (board[move.row][colLast + 1] != 0 && board[move.row][colLast + 1] != playerValue)
         blockRight = true;
-    }
-    if (blockLeft && blockRight) {
+    if (blockLeft && blockRight)
         evalValue = 0;
-    } else if (blockLeft || blockRight) {
+    else if (blockLeft || blockRight)
         evalValue /= 2;
-    }
 
-    if (evalValue == score[3]) {
-        evalValue = score[3] * Evaluation::tempBoost;
-    }
+    if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
     return evalValue;
 }
@@ -69,25 +64,20 @@ short GetVerticalComboEval(
     short evalValue = score[(rowLast - move.row)];
 
     bool blockLeft = false, blockRight = false;
-    if (move.row == 0) {
+    if (move.row == 0)
         blockLeft = true;
-    } else if (board[move.row - 1][move.col] != 0 && board[move.row - 1][move.col] != playerValue) {
+    else if (board[move.row - 1][move.col] != 0 && board[move.row - 1][move.col] != playerValue)
         blockLeft = true;
-    }
-    if (rowLast == Constants::BOARD_SIZE - 1) {
+    if (rowLast == Constants::BOARD_SIZE - 1)
         blockRight = true;
-    } else if (board[rowLast + 1][move.col] != 0 && board[rowLast + 1][move.col] != playerValue) {
+    else if (board[rowLast + 1][move.col] != 0 && board[rowLast + 1][move.col] != playerValue)
         blockRight = true;
-    }
-    if (blockLeft && blockRight) {
+    if (blockLeft && blockRight)
         evalValue = 0;
-    } else if (blockLeft || blockRight) {
+    else if (blockLeft || blockRight)
         evalValue /= 2;
-    }
 
-    if (evalValue == score[3]) {
-        evalValue = score[3] * Evaluation::tempBoost;
-    }
+    if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
     return evalValue;
 }
@@ -115,28 +105,23 @@ short GetDiagonalRightComboEval(
     short evalValue = score[rowLast - move.row];
 
     bool blockLeft = false, blockRight = false;
-    if (move.row == 0 || move.col == 0) {
+    if (move.row == 0 || move.col == 0)
         blockLeft = true;
-    } else if (board[move.row - 1][move.col - 1] != 0 && board[move.row - 1][move.col - 1] != playerValue) {
+    else if (board[move.row - 1][move.col - 1] != 0 && board[move.row - 1][move.col - 1] != playerValue)
         blockLeft = true;
-    }
 
     if (rowLast == Constants::BOARD_SIZE - 1 ||
-        colLast == Constants::BOARD_SIZE - 1) {
+        colLast == Constants::BOARD_SIZE - 1)
         blockRight = true;
-    } else if (board[rowLast + 1][colLast + 1] != 0 && board[rowLast + 1][colLast + 1] != playerValue) {
+    else if (board[rowLast + 1][colLast + 1] != 0 && board[rowLast + 1][colLast + 1] != playerValue)
         blockRight = true;
-    }
 
-    if (blockLeft && blockRight) {
+    if (blockLeft && blockRight)
         evalValue = 0;
-    } else if (blockLeft || blockRight) {
+    else if (blockLeft || blockRight)
         evalValue /= 2;
-    }
 
-    if (evalValue == score[3]) {
-        evalValue = score[3] * Evaluation::tempBoost;
-    }
+    if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
     return evalValue;
 }
@@ -164,27 +149,22 @@ short GetDiagonalLeftComboEval(
     short evalValue = score[rowLast - move.row];
 
     bool blockLeft = false, blockRight = false;
-    if (move.row == 0 || move.col == Constants::BOARD_SIZE - 1) {
+    if (move.row == 0 || move.col == Constants::BOARD_SIZE - 1)
         blockLeft = true;
-    } else if (board[move.row - 1][move.col + 1] != 0 && board[move.row - 1][move.col + 1] != playerValue) {
+    else if (board[move.row - 1][move.col + 1] != 0 && board[move.row - 1][move.col + 1] != playerValue)
         blockLeft = true;
-    }
 
-    if (rowLast == Constants::BOARD_SIZE - 1 || colLast == 0) {
+    if (rowLast == Constants::BOARD_SIZE - 1 || colLast == 0)
         blockRight = true;
-    } else if (board[rowLast + 1][colLast - 1] != 0 && board[rowLast + 1][colLast - 1] != playerValue) {
+    else if (board[rowLast + 1][colLast - 1] != 0 && board[rowLast + 1][colLast - 1] != playerValue)
         blockRight = true;
-    }
 
-    if (blockLeft && blockRight) {
+    if (blockLeft && blockRight)
         evalValue = 0;
-    } else if (blockLeft || blockRight) {
+    else if (blockLeft || blockRight)
         evalValue /= 2;
-    }
 
-    if (evalValue == score[3]) {
-        evalValue = score[3] * Evaluation::tempBoost;
-    }
+    if (evalValue == score[3]) evalValue = score[3] * Evaluation::tempBoost;
 
     return evalValue;
 }
@@ -193,12 +173,9 @@ short Evaluation::GetComboEval(
     const GameAction::Board& board, const short& playerValue
 )
 {
-    GameAction::Board comboCheckBoard;
-    for (size_t i = 0; i < Constants::BOARD_SIZE; i++) {
-        memset(
-            comboCheckBoard[i].data(), 210, Constants::BOARD_SIZE * sizeof(char)
-        );
-    }
+    GameAction::Board comboCheckBoard(
+        Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 210)
+    );
 
     short evalResult = 0;
     for (short row = 0; row < Constants::BOARD_SIZE; ++row) {

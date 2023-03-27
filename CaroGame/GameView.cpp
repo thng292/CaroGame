@@ -205,10 +205,9 @@ void GameView::GameScreenView(NavigationHost& NavHost)
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(GAME_STATE));
 
-    GameAction::Board gameBoard;
-    for (size_t i = 0; i < Constants::BOARD_SIZE; i++) {
-        memset(gameBoard[i].data(), 0, Constants::BOARD_SIZE * sizeof(char));
-    }
+    GameAction::Board gameBoard(
+        Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
+    );
 
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
