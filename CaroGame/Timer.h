@@ -13,16 +13,14 @@ struct TimerInternalState {
 // Reference: https://gist.github.com/zekroTJA/00317b41aa69f38090071b6c8065272b
 class Timer {
    public:
-    Timer() {}
+    // delete copy and move constructor
+    Timer(const Timer&) = delete;
+    Timer(Timer&&) = delete;
+    // delete copy and move assignment
+    Timer& operator=(const Timer&) = delete;
+    Timer& operator=(Timer&&) = delete;
 
     Timer(std::function<void(void)> callback, const long& interval = 1000)
-    {
-        LateInit(callback, interval);
-    }
-
-    void LateInit(
-        std::function<void(void)> callback, const long& interval = 1000
-    )
     {
         _state->callback = callback;
         _state->interval = std::chrono::milliseconds{interval};
@@ -31,19 +29,17 @@ class Timer {
     inline void Start()
     {
         _state->running = true;
-        auto metaFn = [](std::shared_ptr<TimerInternalState> state) {
-            return [state] {
-                while (state->running) {
-                    auto nextInterval =
-                        std::chrono::steady_clock::now() + state->interval;
-                    if (!state->pause) {
-                        state->callback();
-                    }
-                    std::this_thread::sleep_until(nextInterval);
+        auto state = _state;
+        _thread = std::thread([state] {
+            while (state->running) {
+                auto nextInterval =
+                    std::chrono::steady_clock::now() + state->interval;
+                if (!state->pause) {
+                    state->callback();
                 }
-            };
-        };
-        _thread = std::thread(metaFn(_state));
+                std::this_thread::sleep_until(nextInterval);
+            }
+        });
         _thread.detach();
     }
 
@@ -63,7 +59,9 @@ class Timer {
 
     inline long long getInterval()
     {
-        return std::chrono::duration_cast<std::chrono::milliseconds>(_state->interval)
+        return std::chrono::duration_cast<std::chrono::milliseconds>(
+                   _state->interval
+        )
             .count();
     }
 
@@ -72,6 +70,6 @@ class Timer {
    private:
     std::thread _thread;
 
-    std::shared_ptr<TimerInternalState> _state = std::make_shared<TimerInternalState>();
-    
+    std::shared_ptr<TimerInternalState> _state =
+        std::make_shared<TimerInternalState>();
 };

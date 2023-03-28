@@ -8,3 +8,8 @@
 + Write the docs
 + Undo
 + Finish all the screen
++ Add colors
+
+### Nguyên:
++ Hoàn thiện 2 file ngôn ngữ
++ 
