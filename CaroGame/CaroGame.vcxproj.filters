@@ -114,9 +114,6 @@
     <ClCompile Include="GameScreen.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameView.cpp">
-      <Filter>Screens\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Label.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
@@ -174,6 +171,39 @@
     <ClCompile Include="Evaluation.cpp">
       <Filter>Bot\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PokemonBlack.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonBlue.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonGray.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonGreen.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonPink.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonRed.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonWhite.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonYellow.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSelectionView.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenView.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreenAction.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -228,9 +258,6 @@
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameScreen.h">
-      <Filter>Screens\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameView.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Label.h">
@@ -298,6 +325,39 @@
     </ClInclude>
     <ClInclude Include="Evaluation.h">
       <Filter>Bot\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonBlack.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonBlue.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonGray.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonGreen.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonPink.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonRed.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonWhite.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonYellow.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSelectionView.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreenView.h">
+      <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreenAction.h">
+      <Filter>Screens\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

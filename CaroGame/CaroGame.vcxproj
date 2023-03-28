@@ -162,7 +162,9 @@
     <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="GameAction.cpp" />
     <ClCompile Include="GameScreen.cpp" />
-    <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="GameScreenAction.cpp" />
+    <ClCompile Include="GameScreenView.cpp" />
+    <ClCompile Include="GameSelectionView.cpp" />
     <ClCompile Include="Hash.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="InputHandle.cpp" />
@@ -210,8 +212,9 @@
     <ClInclude Include="FileHandle.h" />
     <ClInclude Include="GameAction.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GameScreenAction.h" />
+    <ClInclude Include="GameScreenView.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="GameView.h" />
     <ClInclude Include="Hash.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="InputHandle.h" />
@@ -235,6 +238,7 @@
     <ClInclude Include="Result.h" />
     <ClInclude Include="SaveLoad.h" />
     <ClInclude Include="SaveScreen.h" />
+    <ClInclude Include="GameSelectionView.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="StartUp.h" />
     <ClInclude Include="Timer.h" />

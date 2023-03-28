@@ -20,6 +20,12 @@ namespace Constants {
     const Player PLAYER_TWO = {2, L"O"};
     const int WIN_VALUE_COUNT = 5;
 
+    const short GAME_MODE_PVP = 0;
+    const short GAME_MODE_PVE = 1;
+
+    const short GAME_TYPE_NORMAL = 0;
+    const short GAME_TYPE_RUSH = 1;
+
     // AI const
 
     // Asset path

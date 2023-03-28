@@ -6,16 +6,21 @@ namespace Logic {
     bool CheckLeftDiagonalWin(
         const GameAction::Board& boardGameMatrix,
         const GameAction::Point& move,
-        const short& playerValue
+        const short& playerValue,
+        GameAction::Point& winPoint,
+        bool getWinPoint
+
+
     )
     {
         short poshortSameValueCount = 1;
         for (short row = move.row + 1, col = move.col + 1;
-             row < boardGameMatrix.size() && col < boardGameMatrix.size();
+             row < Constants::BOARD_SIZE && col < Constants::BOARD_SIZE;
              ++row, ++col) {
             if (boardGameMatrix[row][col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {row, col};
                     return 1;
                 }
             } else {
@@ -28,6 +33,8 @@ namespace Logic {
             if (boardGameMatrix[row][col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {row, col};
+
                     return 1;
                 }
             } else {
@@ -41,16 +48,22 @@ namespace Logic {
     bool CheckRightDiagonalWin(
         const GameAction::Board& boardGameMatrix,
         const GameAction::Point& move,
-        const short& playerValue
+        const short& playerValue,
+        GameAction::Point& winPoint,
+        bool getWinPoint
+
     )
     {
         short poshortSameValueCount = 1;
         for (short row = move.row - 1, col = move.col + 1;
-             row >= 0 && col < boardGameMatrix.size();
+             row >= 0 && col < Constants::BOARD_SIZE;
              --row, ++col) {
             if (boardGameMatrix[row][col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {row, col};
+
+
                     return 1;
                 }
             } else {
@@ -59,11 +72,14 @@ namespace Logic {
         }
 
         for (short row = move.row + 1, col = move.col - 1;
-             row < boardGameMatrix.size() && col >= 0;
+             row < Constants::BOARD_SIZE && col >= 0;
              ++row, --col) {
             if (boardGameMatrix[row][col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {row, col};
+
+
                     return 1;
                 }
             } else {
@@ -77,14 +93,18 @@ namespace Logic {
     bool CheckHorizontalWin(
         const GameAction::Board& boardGameMatrix,
         const GameAction::Point& move,
-        const short& playerValue
+        const short& playerValue,
+        GameAction::Point& winPoint,
+        bool getWinPoint
     )
     {
         short poshortSameValueCount = 1;
-        for (short col = move.col + 1; col < boardGameMatrix.size(); ++col) {
+        for (short col = move.col + 1; col < Constants::BOARD_SIZE; ++col) {
             if (boardGameMatrix[move.row][col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {move.row, col};
+
                     return 1;
                 }
             } else {
@@ -97,6 +117,8 @@ namespace Logic {
                 poshortSameValueCount++;
 
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {move.row, col};
+
                     return 1;
                 }
             } else {
@@ -110,14 +132,19 @@ namespace Logic {
     bool CheckVerticalWin(
         const GameAction::Board& boardGameMatrix,
         const GameAction::Point& move,
-        const short& playerValue
+        const short& playerValue,
+        GameAction::Point& winPoint,
+        bool getWinPoint
+
     )
     {
         short poshortSameValueCount = 1;
-        for (short row = move.row + 1; row < boardGameMatrix.size(); ++row) {
+        for (short row = move.row + 1; row < Constants::BOARD_SIZE; ++row) {
             if (boardGameMatrix[row][move.col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {row, move.col};
+
                     return 1;
                 }
             } else {
@@ -129,6 +156,8 @@ namespace Logic {
             if (boardGameMatrix[row][move.col] == playerValue) {
                 poshortSameValueCount++;
                 if (poshortSameValueCount == Constants::WIN_VALUE_COUNT) {
+                    if (getWinPoint) winPoint = {row, move.col};
+
                     return 1;
                 }
             } else {
@@ -143,20 +172,23 @@ namespace Logic {
         const GameAction::Board& boardGameMatrix, const short& moveCount
     )
     {
-        return (moveCount == boardGameMatrix.size() * boardGameMatrix.size());
+        return (moveCount == Constants::BOARD_SIZE * Constants::BOARD_SIZE);
     }
 
     short GetGameState(
         const GameAction::Board& board,
         const short& moveCount,
         const GameAction::Point& move,
-        const short& playerValue
+        const short& playerValue,
+        GameAction::Point& winPoint,
+        bool getWinPoint
+
     )
     {
-        if (CheckRightDiagonalWin(board, move, playerValue) ||
-            CheckLeftDiagonalWin(board, move, playerValue) ||
-            CheckHorizontalWin(board, move, playerValue) ||
-            CheckVerticalWin(board, move, playerValue)) {
+        if (CheckRightDiagonalWin(board, move, playerValue, winPoint, getWinPoint) ||
+            CheckLeftDiagonalWin(board, move, playerValue, winPoint, getWinPoint) ||
+            CheckHorizontalWin(board, move, playerValue, winPoint, getWinPoint) ||
+            CheckVerticalWin(board, move, playerValue, winPoint, getWinPoint)) {
             return WIN_VALUE;
         }
 

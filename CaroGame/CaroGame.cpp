@@ -1,5 +1,6 @@
 ﻿#include "GameScreen.h"
-#include "GameView.h"
+#include "GameScreenView.h"
+#include "GameSelectionView.h"
 #include "LoadScreen.h"
 #include "MainMenu.h"
 #include "Navigate.h"
@@ -17,34 +18,34 @@ int main()
 #endif
     NavigationHost NavHost(
 #if _DEBUG
-        "StartUpScreen",
+        "GameModeTypeView",
 #else
         "StartUpScreen",
 #endif
         {
-            {"AIDifficultyView",           GameView::AIDifficultyView         },
-            {"GameModeTypeView",           GameView::GameModeTypeView         },
-            {"GameModeVersusView",         GameView::GameModeVersusView       },
-            {"GameScreenView",             GameView::GameScreenView           },
-            {"PauseMenuView",              GameView::PauseMenuView            },
-            {"PlayerNameView",             GameView::PlayerNameView           },
-            {"PlayAgainView",              GameView::PlayAgainView            },
-            {"ReplayMenuView",             GameView::ReplayMenuView           },
-            {"RushTimeView",               GameView::RushTimeView             },
-            {"LoadScreen",                 LoadScreen::LoadSceen              },
-            {"LoadFailed",                 LoadScreen::LoadFailed             },
-            {"EmptyLoad",                  LoadScreen::EmptyLoad              },
-            {"MainMenu",                   MainMenu::ScreenMainMenu           },
-            {"ReplayLoad",                 ReplayLoad::ReplayLoad             },
-            {"ReplaySave",                 ReplaySave::ReplaySave             },
-            {"SaveScreen",                 SaveScreen::SaveScreen             },
-            {"SaveSuccess",                SaveScreen::SaveSuccess            },
-            {"SaveFailed",                 SaveScreen::SaveFailed             },
-            {"Setting",                    Setting::SettingScreen             },
-            {"StartUpScreen",              StartUp::StartUpScreen             },
-            {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen   },
-            {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen      },
-            {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen},
+            {"AIDifficultyView",           GameSelectionView::AIDifficultyView  },
+            {"GameModeTypeView",           GameSelectionView::GameModeTypeView  },
+            {"GameModeVersusView",         GameSelectionView::GameModeVersusView},
+            {"GameScreenView",             GameScreenView::GameScreenView       },
+            {"PauseMenuView",              GameSelectionView::PauseMenuView     },
+            {"PlayerNameView",             GameSelectionView::PlayerNameView    },
+            {"PlayAgainView",              GameSelectionView::PlayAgainView     },
+            {"ReplayMenuView",             GameSelectionView::ReplayMenuView    },
+            {"RushTimeView",               GameSelectionView::RushTimeView      },
+            {"LoadScreen",                 LoadScreen::LoadSceen                },
+            {"LoadFailed",                 LoadScreen::LoadFailed               },
+            {"EmptyLoad",                  LoadScreen::EmptyLoad                },
+            {"MainMenu",                   MainMenu::ScreenMainMenu             },
+            {"ReplayLoad",                 ReplayLoad::ReplayLoad               },
+            {"ReplaySave",                 ReplaySave::ReplaySave               },
+            {"SaveScreen",                 SaveScreen::SaveScreen               },
+            {"SaveSuccess",                SaveScreen::SaveSuccess              },
+            {"SaveFailed",                 SaveScreen::SaveFailed               },
+            {"Setting",                    Setting::SettingScreen               },
+            {"StartUpScreen",              StartUp::StartUpScreen               },
+            {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen     },
+            {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen        },
+            {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen  },
     }
     );
 }
