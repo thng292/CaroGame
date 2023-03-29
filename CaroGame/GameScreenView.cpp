@@ -3,8 +3,10 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
-    /*GameState temp;
-    temp.gameMode = GAME_MODE_PVP;
+   /* GameState temp;
+    temp.gameMode = Constants::GAME_MODE_PVP;
+    temp.playerNameOne = L"aaaaaaaaaa";
+    temp.playerNameTwo = L"aazzz";
     NavHost.SetContext(Constants::CURRENT_GAME, temp);*/
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
@@ -29,12 +31,26 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     myAI.SetDifficulty(curGameState.aiDifficulty);
     short moveCount = 0;
 
+    GameAction::Point prevMove = {-1, -1};
+    Constants::Player prevPlayer;
+
     GameScreenAction::LoadGameToView(gameScreen, gameBoard, moveCount, curGameState, myAI);
 
     short row = 0, col = 0;
     if (curGameState.moveList.size() != 0) {
         row = curGameState.moveList.back().first;
         col = curGameState.moveList.back().second;
+
+        prevMove = {
+            curGameState.moveList.back().first,
+            curGameState.moveList.back().second};
+
+        gameScreen.logContainer.DrawToLogContainer(
+            curGameState.moveList,
+            curGameState.playerNameOne,
+            curGameState.playerNameTwo,
+            curGameState.playerOneFirst
+        );
     }
 
     int booltmp =
@@ -102,13 +118,15 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     timerPlayerTwo.Pause();
 
     if (isPlayerOneTurn) {
+        prevPlayer = Constants::PLAYER_TWO;
         timerPlayerOne.Continued();
     } else {
+        prevPlayer = Constants::PLAYER_ONE;
+
         timerPlayerTwo.Continued();
     }
 
-    GameAction::Point prevMove = {-1, -1};
-    Constants::Player prevPlayer;
+  
 
     while (!endGame) {
         if (aiFirst) {
@@ -178,9 +196,13 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 GameAction::Point curMove = {row, col};
 
                 if (isPlayerOneTurn) {
+
                     curPlayer = Constants::PLAYER_ONE;
+
                     timerPlayerOne.Pause();
                 } else {
+
+
                     curPlayer = Constants::PLAYER_TWO;
                     timerPlayerTwo.Pause();
                 }

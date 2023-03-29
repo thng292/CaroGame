@@ -37,7 +37,7 @@ GameScreen::GameScreen(short x, short y)
 
     x = X_PIVOT;
     y += playerInfoContainerOne.cellHeight + timerContainerOne.cellHeight;
-    InitElement(logContainer, x, y, 54, 7, 3, 1);
+    InitElement(logContainer, x, y, 54, 7, 7, 1);
 }
 
 void GameScreen::DrawGameScreen()

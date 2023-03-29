@@ -1,4 +1,5 @@
 #include "GameScreenAction.h"
+
 void GameScreenAction::UpdateGame(
     GameScreen gameScreen,
     GameAction::Board& board,
@@ -15,13 +16,16 @@ void GameScreenAction::UpdateGame(
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, player.symbol, color
     );
-    if (!loadFromSave) gameState.moveList.push_back({move.row, move.col});
-    gameScreen.logContainer.DrawToLogContainer(
-        gameState.moveList,
-        gameState.playerNameOne,
-        gameState.playerNameTwo,
-        gameState.playerOneFirst
-    );
+    if (!loadFromSave) {
+        gameState.moveList.push_back({move.row, move.col});
+        gameScreen.logContainer.DrawToLogContainer(
+            gameState.moveList,
+            gameState.playerNameOne,
+            gameState.playerNameTwo,
+            gameState.playerOneFirst
+        );
+    }
+        
 }
 
 void GameScreenAction::HightLightWin(
@@ -127,8 +131,6 @@ void GameScreenAction::HandleState(
     }
 }
 
-
-
 void GameScreenAction::LoadGameToView(
     GameScreen& gameScreen,
     GameAction::Board& board,
@@ -141,21 +143,17 @@ void GameScreenAction::LoadGameToView(
 
     const short moveListSize = gameState.moveList.size();
     Constants::Player player;
+    GameAction::Point move;
 
     for (size_t i = 0; i < moveListSize; ++i) {
         player = (isPlayerOne) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
-        ai.UpdatePrivateValues(
-            {gameState.moveList[i].first, gameState.moveList[i].second}
-        );
-        UpdateGame(
-            gameScreen,
-            board,
-            moveCount,
-            {gameState.moveList[i].first, gameState.moveList[i].second},
-            player,
-            gameState,
-            true
-        );
+        move = {gameState.moveList[i].first, gameState.moveList[i].second};
+
+        ai.UpdatePrivateValues(move);
+        board[move.row][move.col] = player.value;
+        UpdateGame(gameScreen, board, moveCount, move, player, gameState, true);
+        if (i == moveListSize - 1)
+            HighlightMove(gameScreen, move, player.symbol);
         isPlayerOne = !isPlayerOne;
     }
 }

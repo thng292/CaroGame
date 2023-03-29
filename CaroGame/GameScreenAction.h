@@ -10,7 +10,6 @@
 #include "GameState.h"
 #include "Language.h"
 #include "Logic.h"
-#include "Utils.h"
 #include "View.h"
 
 namespace GameScreenAction {
@@ -22,6 +21,7 @@ namespace GameScreenAction {
         const Constants::Player& player,
         GameState& gameState,
         bool loadFromSave = false
+
     );
 
     void HightLightWin(
