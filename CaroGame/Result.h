@@ -1,4 +1,6 @@
 #include "View.h"
+#include "Avatar.h"
+void khung_Among_Us();
 
 void Win(
     int x,
@@ -32,30 +34,15 @@ void Draw(
 
 void Logo_Draw(
     int x,
-    int y,
-    View::Color a1,
-    View::Color a2,
-    View::Color a3,
-    View::Color a4,
-    View::Color a5
+    int y
 );
 
 void Logo_Win(
     int x,
-    int y,
-    View::Color a1,
-    View::Color a2,
-    View::Color a3,
-    View::Color a4,
-    View::Color a5
+    int y
 );
 
 void Logo_Lose(
     int x,
-    int y,
-    View::Color a1,
-    View::Color a2,
-    View::Color a3,
-    View::Color a4,
-    View::Color a5
+    int y
 );
