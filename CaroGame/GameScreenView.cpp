@@ -305,10 +305,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     curGameState.playerTimeOne = curGameState.playerTimeTwo =
         curGameState.gameTime;
-    curGameState.playerOneFirst = !curGameState.playerOneFirst;
 
     auto tmp = InputHandle::Get();
-    curGameState.moveList.clear();
+    //curGameState.moveList.clear();
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
-    return NavHost.Navigate("ReplayMenuView");
+    return NavHost.Navigate("ReplaySave");
 }

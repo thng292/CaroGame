@@ -361,6 +361,10 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
 
 void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 {
+    GameState curGameState =
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
+
     short selectedOption = 0;
     const short MAX_OPTIONS = 2;
 
@@ -404,6 +408,11 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
             break;
         }
     }
+    if (navigationValue == navigationValueList[0]) {
+        curGameState.playerOneFirst = !curGameState.playerOneFirst;
+        curGameState.moveList.clear();
+    }
+    NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate(navigationValue);
 }
 

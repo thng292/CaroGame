@@ -204,6 +204,9 @@
     <ClCompile Include="PokemonYellow.cpp">
       <Filter>Graphics\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ReplayScreenView.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -358,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="PokemonYellow.h">
       <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplayScreenView.h">
+      <Filter>Screens\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

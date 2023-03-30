@@ -65,4 +65,7 @@ namespace GameScreenAction {
         AI& ai
     );
 
+
+    void DeleteMoveFromScreen(GameScreen& gameScreen, const GameAction::Point &move); 
+
 }  // namespace GameView

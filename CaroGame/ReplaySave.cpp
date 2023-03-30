@@ -94,7 +94,7 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
         }
 
         if (tmp == L"B" || tmp == L"b") {
-            return NavHost.Back();
+            return NavHost.Navigate("PlayAgainView");
         }
 
         if (tmp == L"x" || tmp == L"X") {
