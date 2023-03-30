@@ -22,6 +22,17 @@ void Common::DrawHints()
     );
 }
 
+void Common::DrawHintsLess() {
+    View::DrawTextCenterdVertically(
+        29 - 2,
+        std::format(
+            L"A, W, S, D, Arrow Keys: {}, Enter: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE"),
+            Language::GetString(L"SELECT_KEY_LABEL")
+        )
+    );
+}
+
 bool Common::ConfirmPrompt(const std::wstring& title)
 {
     std::vector<View::Option> options = {

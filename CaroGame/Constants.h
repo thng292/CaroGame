@@ -13,6 +13,8 @@ namespace Constants {
         std::wstring symbol;
     };
 
+    const std::string CURRENT_BGM = "CurrentBGM";
+
     const short BOARD_SIZE = 13;
     const short PAGE_SIZE = 10;
     const std::string CURRENT_GAME = "CurrentGame";

@@ -1,17 +1,5 @@
 #include "StartUp.h"
 
-static void DrawHints()
-{
-    View::DrawTextCenterdVertically(
-        29 - 2,
-        std::format(
-            L"A, W, S, D, Arrow Keys: {}, Enter: {}",
-            Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-            Language::GetString(L"SELECT_KEY_LABEL")
-        )
-    );
-}
-
 void StartUp::StartUpScreen(NavigationHost& NavHost)
 {
     View::Setup();
@@ -26,7 +14,7 @@ void StartUp::StartUpScreen(NavigationHost& NavHost)
 
 void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
 {
-    DrawHints();
+    Common::DrawHints();
     auto languages = Language::DiscoverLanguageFile();
     static int userSelect = 0;
     std::wstring tmp;
@@ -65,7 +53,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
 
 void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost)
 {
-    DrawHints();
+    Common::DrawHints();
     auto& title = Language::GetString(L"ENABLE_MUSIC_Q");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
@@ -108,7 +96,7 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost)
 
 void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost)
 {
-    DrawHints();
+    Common::DrawHints();
     auto& title = Language::GetString(L"ENABLE_SOUND_EFFECT_Q");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
