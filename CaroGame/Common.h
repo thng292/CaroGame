@@ -65,5 +65,6 @@ namespace Common {
     };
 
     void DrawHints();
+    void DrawHintsLess();
     bool ConfirmPrompt(const std::wstring& title);
 }  // namespace Common

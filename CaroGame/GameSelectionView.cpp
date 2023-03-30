@@ -24,6 +24,8 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
          Language::GetString(L"OPTION_MODE_PVE")[0]}
     };
 
+    Common::DrawHintsLess();
+
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
 
@@ -129,10 +131,26 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         )
     );
 
+    View::Rect drawnRect, player1Selection;
+
     while (currentGameState.playerAvatarOne == -1 ||
            currentGameState.playerAvatarTwo == -1) {
+        if (currentGameState.playerAvatarOne != -1) {
+            View::DrawBorder(player1Selection);
+        }
 
-        
+        if (selected < 4) {
+            drawnRect = {
+                3, short(selected * 30), short(selected * 30 + 29), 16};
+            View::DrawBorder(drawnRect);
+        } else {
+            drawnRect = {
+                16,
+                short((selected - 4) * 30),
+                short((selected - 4) * 30 + 29),
+                27};
+            View::DrawBorder(drawnRect);
+        }
 
         auto tmp = InputHandle::Get();
         if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
@@ -157,10 +175,14 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         if (tmp == L"\r") {
             if (currentGameState.playerAvatarOne == -1) {
                 currentGameState.playerAvatarOne = selected;
+                player1Selection = drawnRect;
             } else {
                 currentGameState.playerAvatarTwo = selected;
             }
         }
+        View::DrawBorder(
+            drawnRect, View::Color::BRIGHT_WHITE, View::Color::BRIGHT_WHITE
+        );
     }
     NavHost.SetContext(Constants::CURRENT_GAME, currentGameState);
     return NavHost.Navigate("GameScreenView");
@@ -187,6 +209,8 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
         {Language::GetString(L"OPTION_TYPE_NORMAL"),
          Language::GetString(L"OPTION_TYPE_NORMAL")[0]}
     };
+
+    Common::DrawHintsLess();
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
@@ -249,6 +273,8 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
          Language::GetString(L"OPTION_AI_HARD")[0]  }
     };
 
+    Common::DrawHintsLess();
+
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
 
@@ -302,6 +328,8 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
          Language::GetString(L"OPTION_NO")[0] }
     };
 
+    Common::DrawHintsLess();
+
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
         auto tmp = InputHandle::Get();
@@ -331,13 +359,6 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
     return NavHost.Navigate(navigationValue);
 }
 
-void GameSelectionView::ReplaySaveView(NavigationHost& NavHost)
-{
-    View::WriteToView(20, 20, L"Replay saving view, press any key to continue");
-    auto tmp = InputHandle::Get();
-    return NavHost.Navigate("PlayAgainView");
-}
-
 void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 {
     short selectedOption = 0;
@@ -354,6 +375,9 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
         {Language::GetString(L"OPTION_NO"),
          Language::GetString(L"OPTION_NO")[0] }
     };
+
+    Common::DrawHintsLess();
+
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
         auto tmp = InputHandle::Get();
@@ -404,6 +428,8 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
         {Language::GetString(L"OPTION_1"),
          Language::GetString(L"OPTION_1")[0]                                   }
     };
+
+    Common::DrawHintsLess();
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
@@ -477,6 +503,8 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         "Setting",
         "MainMenu",
         "Back"};
+
+    Common::DrawHintsLess();
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);

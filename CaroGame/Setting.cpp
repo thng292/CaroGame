@@ -22,11 +22,20 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto& musicSetting = Config::GetSetting(Config::BGMusic);
     auto& soundEffectSetting = Config::GetSetting(Config::SoundEffect);
     auto& undoSetting = Config::GetSetting(Config::UndoOption);
-    if (musicSetting == Config::Value_True) {
-        BackgroundAudioService::getInstance()->getPlayer()->Play(false, true);
-    } else {
-        BackgroundAudioService::getInstance()->getPlayer()->Stop();
-    }
+    auto musicCheck = [&musicSetting, &NavHost]() {
+        if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+            auto bgmAudio = BackgroundAudioService::getInstance();
+            auto currentBGM = std::any_cast<Audio::Sound>(NavHost.GetFromContext(Constants::CURRENT_BGM));
+            if (bgmAudio->getPlayer()->getCurrentSong() != currentBGM) {
+                bgmAudio->ChangeSong(currentBGM);
+            }
+            bgmAudio->getPlayer()->Play(false, true);
+        } else {
+            BackgroundAudioService::getInstance()->getPlayer()->Stop();
+        }
+    };
+    musicCheck();
+    auto onExit = Utils::ON_SCOPE_EXIT(musicCheck);
     {
         const auto controlHint1 = std::format(
             L"A, W, S, D, Arrow Keys: {}, Space: {}",
@@ -155,15 +164,20 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         if (tmp == L" ") {
             Language::LoadLanguageFromFile(langList[langSelect].path);
             Config::SaveUserSetting();
-            auto tmp = Language::GetString(L"APPLY_SUCCESSFULLY");
-            View::WriteToView(59 - tmp.size() / 2, 2, tmp);
-            return NavHost.Navigate("Settings");
+            return NavHost.Navigate("SettingApplied");
         }
         if (tmp == L"B" || tmp == L"b") {
             return NavHost.Back();
         }
         View::ClearRect(DrawnRect);
     }
+}
+
+void Setting::ApplySuccess(NavigationHost& NavHost)
+{
+    View::DrawMenuCenter(Language::GetString(L"APPLY_SUCCESSFULLY"), {}, 0);
+    InputHandle::Get();
+    return NavHost.Back();
 }
 
 inline short CalcMaxWidth(const auto& strList)

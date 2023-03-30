@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Ai.h"
+#include "Common.h"
 #include "Config.h"
 #include "Constants.h"
 #include "GameState.h"
@@ -20,8 +21,6 @@
 #include "Utils.h"
 #include "View.h"
 
-
-
 namespace GameSelectionView {
     // View when choosing PvP / PvE
     void GameModeVersusView(NavigationHost& NavHost);
@@ -37,9 +36,6 @@ namespace GameSelectionView {
 
     // View when asking if the player wants to save a replay
     void ReplayMenuView(NavigationHost& NavHost);
-
-    // View when saving the game's replay
-    void ReplaySaveView(NavigationHost& NavHost);
 
     // View when asking if the player wants to play again
     void PlayAgainView(NavigationHost& NavHost);
