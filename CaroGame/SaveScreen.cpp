@@ -8,6 +8,11 @@ void SaveScreen::SaveScreen(NavigationHost& NavHost)
     Common::DrawHints();
 
     auto SaveHandle = [&] {
+        currentState.isSearching = 0;
+        if (!currentState.searchInput.length()) {
+            currentState.searchInput =
+                currentState.allOptions[currentState.selected].second.filename();
+        }
         bool userChoice = 1;
         if (currentState.CheckOverwrite()) {
             userChoice =

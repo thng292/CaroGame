@@ -171,30 +171,6 @@
     <ClCompile Include="Evaluation.cpp">
       <Filter>Bot\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PokemonBlack.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonBlue.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonGray.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonGreen.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonPink.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonRed.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonWhite.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PokemonYellow.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameSelectionView.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
@@ -203,6 +179,30 @@
     </ClCompile>
     <ClCompile Include="GameScreenAction.cpp">
       <Filter>Screens\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonBlack.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonBlue.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonGray.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonGreen.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonPink.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonRed.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonWhite.cpp">
+      <Filter>Graphics\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PokemonYellow.cpp">
+      <Filter>Graphics\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,30 +326,6 @@
     <ClInclude Include="Evaluation.h">
       <Filter>Bot\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PokemonBlack.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonBlue.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonGray.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonGreen.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonPink.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonRed.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonWhite.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PokemonYellow.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameSelectionView.h">
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
@@ -358,6 +334,30 @@
     </ClInclude>
     <ClInclude Include="GameScreenAction.h">
       <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonBlack.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonBlue.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonGray.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonGreen.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonPink.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonRed.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonWhite.h">
+      <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PokemonYellow.h">
+      <Filter>Graphics\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

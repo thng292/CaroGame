@@ -364,3 +364,4 @@ config/
 user_config
 saves/
 replay/
+report/**/*.zip

@@ -1,9 +1,7 @@
 #pragma once
-#include <format>
-#include <mutex>
 #include <vector>
 
-#include "AI.h"
+#include "Ai.h"
 #include "Config.h"
 #include "Constants.h"
 #include "GameState.h"
@@ -11,8 +9,18 @@
 #include "InputHandle.h"
 #include "Language.h"
 #include "Navigate.h"
+#include "PokemonBlack.h"
+#include "PokemonBlue.h"
+#include "PokemonGray.h"
+#include "PokemonGreen.h"
+#include "PokemonPink.h"
+#include "PokemonRed.h"
+#include "PokemonWhite.h"
+#include "PokemonYellow.h"
 #include "Utils.h"
 #include "View.h"
+
+
 
 namespace GameSelectionView {
     // View when choosing PvP / PvE
@@ -23,7 +31,7 @@ namespace GameSelectionView {
 
     // View when choosing Normal / Rush
     void GameModeTypeView(NavigationHost& NavHost);
- 
+
     // View for choosing the AI's difficulty
     void AIDifficultyView(NavigationHost& NavHost);
 
@@ -40,4 +48,9 @@ namespace GameSelectionView {
 
     void PauseMenuView(NavigationHost& NavHost);
 
-}  // namespace GameView
+    // View when choosing the player's avatar
+    void AvatarSelectView(NavigationHost& NavHost);
+
+}  // namespace GameSelectionView
+
+// 24*11

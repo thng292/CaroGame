@@ -81,7 +81,7 @@ namespace Utils {
     inline auto modCycle(auto current, auto max)
     {
         current += max;
-        return current % max;
+        return max ? current % max : 0;
     }
 
     inline void ltrim(auto& str)

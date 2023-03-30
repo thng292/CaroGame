@@ -1,4 +1,5 @@
 #pragma once
+#include "Common.h"
 #include "Config.h"
 #include "Format"
 #include "InputHandle.h"
@@ -20,4 +21,6 @@ namespace StartUp {
 
     // FirstTimeSoundEffectScreen
     void FirstTimeSoundEffectScreen(NavigationHost& NavHost);
+
+    void ExitScreen(NavigationHost& NavHost);
 }  // namespace StartUp

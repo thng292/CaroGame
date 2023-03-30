@@ -41,6 +41,12 @@ class NavigationHost {
 
    public:
     NavigationHost(const std::string& Start, const ViewFuncMap& links);
+    //delete other constructor
+    NavigationHost(const NavigationHost&) = delete;
+    NavigationHost& operator=(const NavigationHost&) = delete;
+    NavigationHost(NavigationHost&&) = delete;
+    NavigationHost& operator=(NavigationHost&&) = delete;
+
     std::any& GetFromContext(const std::string& name);
     void SetContext(const std::string& name, const std::any& data);
     void DeleteContext(const std::string& name);

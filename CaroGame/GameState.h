@@ -15,6 +15,10 @@ struct GameState {
 
     short playerScoreTwo = 0;
 
+    short playerAvatarOne = -1;
+
+    short playerAvatarTwo = -1;
+
     std::wstring playerNameOne;
 
     std::wstring playerNameTwo;
@@ -26,8 +30,6 @@ struct GameState {
     short aiDifficulty = 0;
 
     bool playerOneFirst = true;
-
-    short avatarId = 0;
 
     short gameTime = 0;
 };

@@ -32,6 +32,7 @@ int main()
             {"PlayAgainView",              GameSelectionView::PlayAgainView     },
             {"ReplayMenuView",             GameSelectionView::ReplayMenuView    },
             {"RushTimeView",               GameSelectionView::RushTimeView      },
+            {"AvatarSelectView",           GameSelectionView::AvatarSelectView  },
             {"LoadScreen",                 LoadScreen::LoadSceen                },
             {"LoadFailed",                 LoadScreen::LoadFailed               },
             {"EmptyLoad",                  LoadScreen::EmptyLoad                },
@@ -42,10 +43,11 @@ int main()
             {"SaveSuccess",                SaveScreen::SaveSuccess              },
             {"SaveFailed",                 SaveScreen::SaveFailed               },
             {"Setting",                    Setting::SettingScreen               },
-            {"StartUpScreen",              StartUp::StartUpScreen               },
+            {"ExitScreen",                 StartUp::ExitScreen                  },
             {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen     },
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen        },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen  },
+            {"StartUpScreen",              StartUp::StartUpScreen               },
     }
     );
 }

@@ -40,7 +40,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     };
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
     while (1) {  // Main while loop
-        View::DrawMenu(52, 13, L"", options, selectedOption);
+        View::DrawMenu(50, 13, L"", options, selectedOption);
         auto tmp = InputHandle::Get();  // Get input from user
         if (soundEffect == L"True") {
             Utils::PlayKeyPressSound();
@@ -77,7 +77,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
             return NavHost.Navigate("About");  // Nho return
         }
         if (tmp == Language::GetString(L"EXIT_SHORTCUT")) {
-            return NavHost.NavigateStack("ExitView");  // Nho return
+            return NavHost.NavigateStack("ExitScreen");  // Nho return
         }
         // Handle Select
         if (tmp == L"\r") {
@@ -95,7 +95,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
                 case 5:
                     return NavHost.Navigate("About");
                 case 6:
-                    return NavHost.NavigateStack("ExitView");  // Nho return
+                    return NavHost.NavigateStack("ExitScreen");  // Nho return
             }
         }
     }

@@ -149,3 +149,14 @@ void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost)
         }
     }
 }
+
+void StartUp::ExitScreen(NavigationHost& NavHost)
+{
+    bool userOption =
+        Common::ConfirmPrompt(Language::GetString(L"EXIT_CONFIRM_TITLE"));
+    if (userOption) {
+        return NavHost.NavigateExit();
+    } else {
+        return NavHost.Back();
+    }
+}

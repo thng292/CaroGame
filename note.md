@@ -12,4 +12,8 @@
 
 ### Nguyên:
 + Hoàn thiện 2 file ngôn ngữ
-+ 
++ Viết lời cảm ơn cho báo cáo
++ Tìm tmeplate cho bài thuyết trình
++ Lí do hoàn thành mục tiêu cho báo cáo
++ Hoàn thành phần about
+

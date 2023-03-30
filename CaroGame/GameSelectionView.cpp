@@ -3,12 +3,14 @@
 void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
 
     short selectedOption = 0;
     const short MAX_OPTIONS = 2;
 
-    std::vector<short> optionValueList = {Constants::GAME_MODE_PVP, Constants::GAME_MODE_PVE};
+    std::vector<short> optionValueList = {
+        Constants::GAME_MODE_PVP, Constants::GAME_MODE_PVE};
     short optionValue;
     std::vector<std::string> navigationValueList = {
         "PlayerNameView", "AIDifficultyView"};
@@ -60,7 +62,8 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
 void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
 
     bool maxReached = false;
     const short MAX_LENGTH = 10;
@@ -88,6 +91,78 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     curGameState.playerNameTwo = inputList[1];
 
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
+    return NavHost.Navigate("AvatarSelectView");
+}
+
+void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
+{
+    auto currentGameState =
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
+
+    int selected = 0;
+    const int MaxSelect = 8;
+    if (currentGameState.gameMode == Constants::GAME_MODE_PVE) {
+        currentGameState.playerAvatarTwo = MaxSelect + 1;
+    }
+
+    View::DrawTextCenterdVertically(
+        2, Language::GetString(L"SELECT_AVATAR_TITLE")
+    );
+
+    logo_pokemon_red(3, 3);
+    logo_pokemon_blue(33, 3);
+    logo_pokemon_green(63, 3);
+    logo_pokemon_yellow(93, 3);
+    logo_pokemon_pink(3, 15);
+    logo_pokemon_gray(33, 15);
+    logo_pokemon_white(63, 15);
+    logo_pokemon_black(93, 15);
+
+    View::DrawTextCenterdVertically(
+        28,
+        std::format(
+            L"A, W, S, D, Arrow Keys: {}, Enter: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE"),
+            Language::GetString(L"SELECT_KEY_TITLE")
+
+        )
+    );
+
+    while (currentGameState.playerAvatarOne == -1 ||
+           currentGameState.playerAvatarTwo == -1) {
+
+        
+
+        auto tmp = InputHandle::Get();
+        if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
+            Utils::PlayKeyPressSound();
+        }
+
+        if (Utils::keyMeanLeft(tmp)) {
+            selected = Utils::modCycle(selected - 1, MaxSelect);
+        }
+
+        if (Utils::keyMeanRight(tmp)) {
+            selected = Utils::modCycle(selected + 1, MaxSelect);
+        }
+
+        if (Utils::keyMeanDown(tmp)) {
+            selected = Utils::modCycle(selected + MaxSelect / 2, MaxSelect);
+        }
+
+        if (Utils::keyMeanUp(tmp)) {
+            selected = Utils::modCycle(selected - MaxSelect / 2, MaxSelect);
+        }
+        if (tmp == L"\r") {
+            if (currentGameState.playerAvatarOne == -1) {
+                currentGameState.playerAvatarOne = selected;
+            } else {
+                currentGameState.playerAvatarTwo = selected;
+            }
+        }
+    }
+    NavHost.SetContext(Constants::CURRENT_GAME, currentGameState);
     return NavHost.Navigate("GameScreenView");
 }
 
@@ -100,7 +175,8 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
 
     std::string navigateValue;
     short optionValue;
-    std::vector<short> optionValueList = {Constants::GAME_TYPE_RUSH, Constants::GAME_TYPE_NORMAL};
+    std::vector<short> optionValueList = {
+        Constants::GAME_TYPE_RUSH, Constants::GAME_TYPE_NORMAL};
     std::vector<std::string> navigationValueList = {
         "RushTimeView", "GameModeVersusView"};
 
@@ -150,7 +226,8 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
 void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
 
     short selectedOption = 0;
     const short MAX_OPTIONS = 3;
@@ -215,7 +292,7 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
 
     std::wstring label = Language::GetString(L"LABEL_SAVE_REPLAY");
     std::vector<std::string> navigationValueList = {
-        "ReplaySaveView", "PlayAgainView"};
+        "ReplaySave", "PlayAgainView"};
     std::string navigationValue;
 
     std::vector<View::Option> options = {
@@ -248,6 +325,9 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
             break;
         }
     }
+    if (selectedOption == 0) {
+        NavHost.Navigate(navigationValueList[1]);
+    }
     return NavHost.Navigate(navigationValue);
 }
 
@@ -264,7 +344,7 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
     const short MAX_OPTIONS = 2;
 
     std::vector<std::string> navigationValueList = {
-        "GameScreenView", "GameModeTypeView"};
+        "GameScreenView", "MainMenu"};
     std::string navigationValue;
 
     std::wstring label = Language::GetString(L"LABEL_PLAY_AGAIN");
@@ -306,7 +386,8 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 void GameSelectionView::RushTimeView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
 
     short selectedOption = 0;
     const short MAX_OPTIONS = 3;

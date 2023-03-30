@@ -13,15 +13,16 @@ bool SaveLoad::Save(
     file << data.playerNameOne << '\n';
     file << data.playerScoreOne << '\n';
     file << data.playerTimeOne << '\n';
+    file << data.playerAvatarOne << '\n';
 
     file << data.playerNameTwo << '\n';
     file << data.playerScoreTwo << '\n';
     file << data.playerTimeTwo << '\n';
+    file << data.playerAvatarTwo << '\n';
 
     file << data.gameMode << '\n';
     file << data.aiDifficulty << '\n';
     file << data.playerOneFirst << '\n';
-    file << data.avatarId << '\n';
 
     for (auto& i : data.moveList) {
         file << i.first << ' ' << i.second << '\n';
@@ -41,15 +42,16 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
     file >> data.playerNameOne;
     file >> data.playerScoreOne;
     file >> data.playerTimeOne;
+    file >> data.playerAvatarOne;
 
     file >> data.playerNameTwo;
     file >> data.playerScoreTwo;
     file >> data.playerTimeTwo;
+    file >> data.playerAvatarTwo;
 
     file >> data.gameMode;
     file >> data.aiDifficulty;
     file >> data.playerOneFirst;
-    file >> data.avatarId;
 
     if (file.fail()) {
         return std::nullopt;
