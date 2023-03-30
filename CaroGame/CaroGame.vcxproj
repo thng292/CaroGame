@@ -185,6 +185,7 @@
     <ClCompile Include="PokemonYellow.cpp" />
     <ClCompile Include="ReplayLoad.cpp" />
     <ClCompile Include="ReplaySave.cpp" />
+    <ClCompile Include="ReplayScreenView.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="SaveLoad.cpp" />
     <ClCompile Include="SaveScreen.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="PokemonYellow.h" />
     <ClInclude Include="ReplayLoad.h" />
     <ClInclude Include="ReplaySave.h" />
+    <ClInclude Include="ReplayScreenView.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="SaveLoad.h" />
     <ClInclude Include="SaveScreen.h" />

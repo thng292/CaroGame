@@ -17,7 +17,7 @@ class GameScreen {
 
     GameScreen(short x, short y);
     void DrawGameScreen();
-    void DrawToElements(GameState gameState);
+    void DrawToElements(GameState gameState, bool isReplay = false);
     
 
    private:

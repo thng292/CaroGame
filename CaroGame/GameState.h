@@ -29,7 +29,7 @@ struct GameState {
 
     short aiDifficulty = 0;
 
-    bool playerOneFirst = true;
+    bool playerOneFirst = 1;
 
     short gameTime = 0;
 };

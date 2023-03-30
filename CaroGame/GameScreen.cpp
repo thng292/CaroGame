@@ -107,7 +107,7 @@ void GameScreen::DrawGameScreen()
     );
 }
 
-void GameScreen::DrawToElements(GameState gameState)
+void GameScreen::DrawToElements(GameState gameState, bool isReplay)
 {
     playerContainerOne.DrawToContainer(L"X");
     playerContainerTwo.DrawToContainer(L"O");
@@ -139,12 +139,20 @@ void GameScreen::DrawToElements(GameState gameState)
     winCountContainerOne.DrawToContainer(playerScoreOne);
     winCountContainerTwo.DrawToContainer(playerScoreTwo);
 
-    timerContainerOne.DrawToContainer(
-        Utils::SecondToMMSS(gameState.playerTimeOne)
-    );
-    timerContainerTwo.DrawToContainer(
-        Utils::SecondToMMSS(gameState.playerTimeTwo)
-    );
+    if (!isReplay) {
+        timerContainerOne.DrawToContainer(
+            Utils::SecondToMMSS(gameState.playerTimeOne)
+        );
+        timerContainerTwo.DrawToContainer(
+            Utils::SecondToMMSS(gameState.playerTimeTwo)
+        );
+    } else {
+        timerContainerOne.xOffset -= 1;
+        timerContainerTwo.xOffset -= 1;
+
+        timerContainerOne.DrawToContainer(L"\u221eREPLAY");
+        timerContainerTwo.DrawToContainer(L"REPLAY\u221e");
+    }
 }
 
 

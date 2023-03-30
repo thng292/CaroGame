@@ -1,6 +1,7 @@
 ﻿#include "GameScreen.h"
 #include "GameScreenView.h"
 #include "GameSelectionView.h"
+#include "ReplayScreenView.h"
 #include "LoadScreen.h"
 #include "MainMenu.h"
 #include "Navigate.h"
@@ -48,6 +49,7 @@ int main()
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen        },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen  },
             {"StartUpScreen",              StartUp::StartUpScreen               },
+            {"ReplayScreenView", ReplayScreenView::ReplayScreenView}
     }
     );
 }

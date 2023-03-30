@@ -157,3 +157,10 @@ void GameScreenAction::LoadGameToView(
         isPlayerOne = !isPlayerOne;
     }
 }
+
+void GameScreenAction::DeleteMoveFromScreen(
+    GameScreen& gameScreen, const GameAction::Point& move
+)
+{
+    gameScreen.boardContainer.DrawToBoardContainerCell(move.row, move.col, L" ");
+}

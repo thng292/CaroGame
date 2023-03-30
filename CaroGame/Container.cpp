@@ -39,7 +39,19 @@ void Container::DrawToLogContainer(
   
 
     View::Color color;
+
+    for (short i = 0; i < 6; ++i) {
+        FillConsoleOutputCharacter(
+            StdOut,
+            L' ',
+            cellWidth - 1,
+            {xCoord + 1, yCoord + yOffset + i},
+            &tmp
+        );
+    }
+
     for (short i = 0; i < numOfValueDisplay; ++i) {
+        
         std::wstring extraSpace;
         if (isPlayerOneTurn) {
             playerName = playerNameOne;
@@ -69,13 +81,7 @@ void Container::DrawToLogContainer(
         );
 
 
-        FillConsoleOutputCharacter(
-            StdOut,
-            L' ',
-            cellWidth - 1,
-            {xCoord + 1, yCoord + yOffset + i},
-            &tmp
-        );
+        
 
         short temp =
             value.size() - 1 - ((valueList[startIndex].first + 1 < 10) ? 1 : 2) + 2;
