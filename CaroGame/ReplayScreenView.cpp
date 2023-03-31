@@ -6,86 +6,133 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
         );
 
+    GameState tempGameState = curGameState;
+    tempGameState.moveList.clear();
+
     GameAction::Board gameBoard(
         Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
     );
 
-    GameScreen replayScreen(7, 2);
-    replayScreen.DrawGameScreen();
-    replayScreen.DrawToElements(curGameState, true);
+    GameScreen gameScreen(7, 2);
+    gameScreen.DrawGameScreen();
+    gameScreen.DrawToElements(curGameState, true);
 
+    short moveCount = 0;
+
+    GameAction::Point prevMove = {-1, -1};
+    Constants::Player prevPlayer;
+
+    short row = 0, col = 0;
+
+    bool isPlayerOneTurn = curGameState.playerOneFirst;
+    bool endGame = 0;
     short index = -1;
-    bool isPlayerOne = curGameState.playerOneFirst;
-    std::vector<std::pair<short, short>> tempMoveList;
-    short moveListSize = curGameState.moveList.size();
-    GameAction::Point latestMove;
+    short moveListSize = curGameState.moveList.size() - 1;
+
+    GameAction::Point curMove = {-1, -1};
+    GameAction::Point winPoint;
+
     while (1) {
         auto tmp = InputHandle::Get();
-        bool moveBack = false, validKey = false;
+        bool validKey = false, moveBack = false;
+        Constants::Player curPlayer;
 
-        if (Utils::keyMeanLeft(tmp) && index > 0) {
+        if (Utils::keyMeanLeft(tmp) && index >= 0) {
+            validKey = true;
             moveBack = true;
+        }
+
+        if (Utils::keyMeanRight(tmp) && index < moveListSize - 1) {
             validKey = true;
         }
 
-        if (Utils::keyMeanRight(tmp) && (index < moveListSize - 1)) {
-            validKey = true;
-        };
+        if (tmp == L"ESC") {
+            break;
+        }
 
         if (validKey) {
-            GameAction::Point move;
             if (!moveBack) {
                 index++;
-                move = {
+                curMove = {
                     curGameState.moveList[index].first,
                     curGameState.moveList[index].second};
-                tempMoveList.push_back({move.row, move.col});
-                
+
+                curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE
+                                              : Constants::PLAYER_TWO;
+                GameScreenAction::UpdateGame(
+                    gameScreen,
+                    gameBoard,
+                    moveCount,
+                    curMove,
+                    curPlayer,
+                    tempGameState
+                );
+
+                winPoint = GameScreenAction::HandleState(
+                    gameBoard,
+                    moveCount,
+                    curMove,
+                    curPlayer,
+                    isPlayerOneTurn,
+                    tempGameState,
+                    endGame,
+                    gameScreen
+                );
+
+                GameScreenAction::UnhightlightMove(
+                    gameScreen, prevMove, prevPlayer.symbol
+                );
+
             } else {
                 index--;
-                move = {
-                    curGameState.moveList[index].first,
-                    curGameState.moveList[index].second};
-         
-                GameScreenAction::DeleteMoveFromScreen(
-                    replayScreen, latestMove
+                if (endGame) {
+                    Constants::Player temp = (isPlayerOneTurn)
+                                                 ? Constants::PLAYER_TWO
+                                                 : Constants::PLAYER_ONE;
+                    GameScreenAction::HightLightWin(
+                        winPoint, curMove, temp.symbol, gameScreen, true
+                    );
+                    endGame = false;
+                }
+                GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
+
+                tempGameState.moveList.pop_back();
+
+                if (index >= 0) {
+                    GameAction::UndoMove(gameBoard, moveCount, curMove);
+                    tempGameState.moveList.pop_back();
+
+                    curMove = {
+                        curGameState.moveList[index].first,
+                        curGameState.moveList[index].second};
+
+                } else {
+                    curMove = {-1, -1};
+                }
+
+                curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE
+                                              : Constants::PLAYER_TWO;
+
+                GameScreenAction::UpdateGame(
+                    gameScreen,
+                    gameBoard,
+                    moveCount,
+                    curMove,
+                    curPlayer,
+                    tempGameState
                 );
-                tempMoveList.pop_back();
             }
 
-            Constants::Player player =
-                (isPlayerOne) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
+            if (!endGame)
+                GameScreenAction::HighlightMove(
+                    gameScreen, curMove, curPlayer.symbol
+                );
 
-            UpdateScreen(
-                replayScreen, move, player, tempMoveList, curGameState
-            );
-            isPlayerOne = !isPlayerOne;
-            latestMove = move;
+            prevMove = curMove;
+            prevPlayer = curPlayer;
 
+            isPlayerOneTurn = !isPlayerOneTurn;
         }
     }
-
-    auto c = _getch();
-    return NavHost.NavigateExit();
-}
-
-void ReplayScreenView::UpdateScreen(
-    GameScreen gameScreen,
-    const GameAction::Point& move,
-    const Constants::Player& player,
-    const std::vector<std::pair<short, short>>& moveList,
-    const GameState& gameState
-)
-{
-    View::Color color =
-        (player.symbol == L"X") ? View::Color::RED : View::Color::BLUE;
-    gameScreen.boardContainer.DrawToBoardContainerCell(
-        move.row, move.col, player.symbol, color
-    );
-    gameScreen.logContainer.DrawToLogContainer(
-        moveList,
-        gameState.playerNameOne,
-        gameState.playerNameTwo,
-        gameState.playerOneFirst
-    );
+    return NavHost.Back();
 }

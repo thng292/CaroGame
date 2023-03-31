@@ -227,6 +227,7 @@
     <ClInclude Include="Logo_Caro.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Navigate.h" />
+    <ClInclude Include="Pokemon.h" />
     <ClInclude Include="PokemonBlack.h" />
     <ClInclude Include="PokemonBlue.h" />
     <ClInclude Include="PokemonGray.h" />

@@ -38,6 +38,9 @@ GameScreen::GameScreen(short x, short y)
     x = X_PIVOT;
     y += playerInfoContainerOne.cellHeight + timerContainerOne.cellHeight;
     InitElement(logContainer, x, y, 54, 7, 7, 1);
+
+
+
 }
 
 void GameScreen::DrawGameScreen()
@@ -107,7 +110,7 @@ void GameScreen::DrawGameScreen()
     );
 }
 
-void GameScreen::DrawToElements(GameState gameState, bool isReplay)
+void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
 {
     playerContainerOne.DrawToContainer(L"X");
     playerContainerTwo.DrawToContainer(L"O");
@@ -153,6 +156,14 @@ void GameScreen::DrawToElements(GameState gameState, bool isReplay)
         timerContainerOne.DrawToContainer(L"\u221eREPLAY");
         timerContainerTwo.DrawToContainer(L"REPLAY\u221e");
     }
+
+    if (gameState.playerAvatarOne != -1 ) avatarMap[gameState.playerAvatarOne](playerInfoContainerOne.xCoord + 3, playerInfoContainerOne.yCoord);
+    if (gameState.playerAvatarTwo != -1)
+        avatarMap[gameState.playerAvatarTwo](
+        playerInfoContainerTwo.xCoord + 3, playerInfoContainerTwo.yCoord
+    );
+
+
 }
 
 

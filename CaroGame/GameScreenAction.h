@@ -1,6 +1,5 @@
 #pragma once
 #include <format>
-#include <mutex>
 #include <vector>
 
 #include "AI.h"
@@ -29,8 +28,8 @@ namespace GameScreenAction {
         const GameAction::Point& winMoveTwo,
         const std::wstring& playerValue,
 
-        GameScreen& gameScreen
-
+        GameScreen& gameScreen,
+        bool unhighlight = false
     );
 
     void HighlightMove(
@@ -45,7 +44,7 @@ namespace GameScreenAction {
         const std::wstring value
     );
 
-    void HandleState(
+    GameAction::Point HandleState(
         const GameAction::Board& board,
         const short& moveCount,
         const GameAction::Point& move,
@@ -65,7 +64,8 @@ namespace GameScreenAction {
         AI& ai
     );
 
+    void DeleteMoveFromScreen(
+        GameScreen& gameScreen, const GameAction::Point& move
+    );
 
-    void DeleteMoveFromScreen(GameScreen& gameScreen, const GameAction::Point &move); 
-
-}  // namespace GameView
+}  // namespace GameScreenAction

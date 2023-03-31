@@ -1,0 +1,9 @@
+#pragma once
+#include "PokemonBlack.h"
+#include "PokemonBlue.h"
+#include "PokemonGray.h"
+#include "PokemonGreen.h"
+#include "PokemonPink.h"
+#include "PokemonRed.h"
+#include "PokemonWhite.h"
+#include "PokemonYellow.h"

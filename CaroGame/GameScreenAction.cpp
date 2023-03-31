@@ -10,14 +10,17 @@ void GameScreenAction::UpdateGame(
     bool loadFromSave
 )
 {
-    View::Color color =
-        (player.symbol == L"X") ? View::Color::RED : View::Color::BLUE;
-    GameAction::MakeMove(board, moveCount, move, player.value);
-    gameScreen.boardContainer.DrawToBoardContainerCell(
-        move.row, move.col, player.symbol, color
-    );
+    if (move.row != -1) {
+        View::Color color =
+            (player.symbol == L"X") ? View::Color::RED : View::Color::BLUE;
+        GameAction::MakeMove(board, moveCount, move, player.value);
+        gameScreen.boardContainer.DrawToBoardContainerCell(
+            move.row, move.col, player.symbol, color
+        );
+    }
+
     if (!loadFromSave) {
-        gameState.moveList.push_back({move.row, move.col});
+        if (move.row != -1) gameState.moveList.push_back({move.row, move.col});
         gameScreen.logContainer.DrawToLogContainer(
             gameState.moveList,
             gameState.playerNameOne,
@@ -25,14 +28,14 @@ void GameScreenAction::UpdateGame(
             gameState.playerOneFirst
         );
     }
-        
 }
 
 void GameScreenAction::HightLightWin(
     const GameAction::Point& winMoveOne,
     const GameAction::Point& winMoveTwo,
     const std::wstring& playerValue,
-    GameScreen& gameScreen
+    GameScreen& gameScreen,
+    bool unhighlight
 )
 {
     GameAction::Point leftPoint, rightPoint;
@@ -56,9 +59,18 @@ void GameScreenAction::HightLightWin(
     short cnt = 0;
     GameAction::Point point = leftPoint;
 
+    View::Color color;
+    if (unhighlight) {
+        if (playerValue == L"X")
+            color = View::Color::RED;
+        else
+            color = View::Color::BLUE;
+    } else
+        color = View::Color::GREEN;
+
     while (cnt < 5) {
         gameScreen.boardContainer.DrawToBoardContainerCell(
-            point.row, point.col, playerValue, View::Color::GREEN
+            point.row, point.col, playerValue, color
         );
         point.row += rowAddition;
         point.col += colAddition;
@@ -72,6 +84,7 @@ void GameScreenAction::HighlightMove(
     const std::wstring value
 )
 {
+    if (move.row == -1) return;
     View::Color color =
         (value == L"X") ? View::Color::LIGHT_RED : View::Color::LIGHT_CYAN;
     gameScreen.boardContainer.DrawToBoardContainerCell(
@@ -92,7 +105,7 @@ void GameScreenAction::UnhightlightMove(
     );
 }
 
-void GameScreenAction::HandleState(
+GameAction::Point GameScreenAction::HandleState(
     const GameAction::Board& board,
     const short& moveCount,
     const GameAction::Point& move,
@@ -115,20 +128,13 @@ void GameScreenAction::HandleState(
             else
                 curGameState.playerScoreTwo++;
             HightLightWin(move, winPoint, player.symbol, gameScreen);
-            View::WriteToView(
-                80,
-                5,
-                std::format(
-                    L"{} won, {} {}", player.symbol, winPoint.row, winPoint.col
-                )
-            );
             endGame = 1;
             break;
         case Logic::DRAW_VALUE:
-            View::WriteToView(80, 5, L"Draw");
             endGame = 1;
             break;
     }
+    return winPoint;
 }
 
 void GameScreenAction::LoadGameToView(
@@ -162,5 +168,8 @@ void GameScreenAction::DeleteMoveFromScreen(
     GameScreen& gameScreen, const GameAction::Point& move
 )
 {
-    gameScreen.boardContainer.DrawToBoardContainerCell(move.row, move.col, L" ");
+    if (move.row == -1) return;
+    gameScreen.boardContainer.DrawToBoardContainerCell(
+        move.row, move.col, L" "
+    );
 }
