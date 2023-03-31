@@ -3,10 +3,6 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
-    GameState temp;
-    temp.playerAvatarOne = 7;
-    temp.playerAvatarTwo = 3;
-    NavHost.SetContext(Constants::CURRENT_GAME, temp);
 
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
