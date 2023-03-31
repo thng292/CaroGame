@@ -1823,11 +1823,11 @@ void Logo_Win( int x, int y)
 
 void Logo_Lose(int x, int y)
 {
-    View::Color a1 = View::Color::GRAY;
-    View::Color a2 = View::Color::BLUE;
-    View::Color a3 = View::Color::LIGHT_BLUE;
-    View::Color a4 = View::Color::CYAN;
-    View::Color a5 = View::Color::LIGHT_CYAN;
+    View::Color a1 = View::Color::WHITE;
+    View::Color a2 = View::Color::LIGHT_CYAN;
+    View::Color a3 = View::Color::CYAN;
+    View::Color a4 = View::Color::LIGHT_BLUE;
+    View::Color a5 = View::Color::BLUE;
     View::Color a[] = {
         View::Color::RED,
         View::Color::LIGHT_MAGENTA,
@@ -1836,52 +1836,69 @@ void Logo_Lose(int x, int y)
         View::Color::YELLOW,
         View::Color::LIGHT_CYAN,
     };
+    int i = 0;
 
-    Sleep(250);
-    Logo_AmongUs(x - 14, y + 8, a[5], a[0]);
-    Logo_AmongUs(x - 14, y - 8, a[5], a[0]);
-    Lose(x, y, a5, a1, a2, a3, a4);
-    Sleep(250);
-    Logo_AmongUs(x - 2, y + 8, a[5], a[1]);
-    Logo_AmongUs(x - 2, y - 8, a[5], a[1]);
-    Lose(x, y, a4, a5, a1, a2, a3);
-    Sleep(250);
-    Logo_AmongUs(x + 10, y + 8, a[5], a[2]);
-    Logo_AmongUs(x + 10, y - 8, a[5], a[2]);
-    Lose(x, y, a3, a4, a5, a1, a2);
-    Sleep(250);
-    Logo_AmongUs(x + 22, y + 8, a[5], a[3]);
-    Logo_AmongUs(x + 22, y - 8, a[5], a[3]);
-    Lose(x, y, a2, a3, a4, a5, a1);
-    Sleep(250);
-    Logo_AmongUs(x + 34, y + 8, a[5], a[4]);
-    Logo_AmongUs(x + 34, y - 8, a[5], a[4]);
-    Lose(x, y, a1, a2, a3, a4, a5);
-    tao_khoang_trang(x-14, y+8, 58, 10);
-    tao_khoang_trang(x - 14, y - 8, 58, 10);
     while (true) {
-        Sleep(250);
         Lose(x, y, a5, a1, a2, a3, a4);
         Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Lose(x, y, a4, a5, a1, a2, a3);
         Sleep(250);
+
+        Lose(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Lose(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+
+        Lose(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Lose(x, y, a5, a1, a2, a3, a4);
+        Sleep(250);
+
+        Lose(x, y, a4, a5, a1, a2, a3);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Lose(x, y, a3, a4, a5, a1, a2);
         Sleep(250);
 
         Lose(x, y, a2, a3, a4, a5, a1);
         Sleep(250);
-
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Lose(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+
+        srand(i - 5);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 4);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 3);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 2);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 1);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
     }
 }
 
 void Logo_Draw(int x, int y)
 {
-    View::Color a1 = View::Color::GRAY;
-    View::Color a2 = View::Color::BLUE;
-    View::Color a3 = View::Color::LIGHT_BLUE;
-    View::Color a4 = View::Color::CYAN;
-    View::Color a5 = View::Color::LIGHT_CYAN;
+    View::Color a1 = View::Color::WHITE;
+    View::Color a2 = View::Color::LIGHT_CYAN;
+    View::Color a3 = View::Color::CYAN;
+    View::Color a4 = View::Color::LIGHT_BLUE;
+    View::Color a5 = View::Color::BLUE;
     View::Color a[] = {
         View::Color::RED,
         View::Color::LIGHT_MAGENTA,
@@ -1890,39 +1907,58 @@ void Logo_Draw(int x, int y)
         View::Color::YELLOW,
         View::Color::LIGHT_CYAN,
     };
+    int i = 0;
 
-    Sleep(250);
-    Logo_AmongUs(x - 14, y + 8, a[5], a[0]);
-    Logo_AmongUs(x - 14, y - 8, a[5], a[0]);
-    Draw(x, y, a5, a1, a2, a3, a4);
-    Sleep(250);
-    Logo_AmongUs(x - 2, y + 8, a[5], a[1]);
-    Logo_AmongUs(x - 2, y - 8, a[5], a[1]);
-    Draw(x, y, a4, a5, a1, a2, a3);
-    Sleep(250);
-    Logo_AmongUs(x + 10, y + 8, a[5], a[2]);
-    Logo_AmongUs(x + 10, y - 8, a[5], a[2]);
-    Draw(x, y, a3, a4, a5, a1, a2);
-    Sleep(250);
-    Logo_AmongUs(x + 22, y + 8, a[5], a[3]);
-    Logo_AmongUs(x + 22, y - 8, a[5], a[3]);
-    Draw(x, y, a2, a3, a4, a5, a1);
-    Sleep(250);
-    Logo_AmongUs(x + 34, y + 8, a[5], a[4]);
-    Logo_AmongUs(x + 34, y - 8, a[5], a[4]);
-    Draw(x, y, a1, a2, a3, a4, a5);
     while (true) {
-        Sleep(250);
         Draw(x, y, a5, a1, a2, a3, a4);
         Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Draw(x, y, a4, a5, a1, a2, a3);
         Sleep(250);
+
+        Draw(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+
+        Draw(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a5, a1, a2, a3, a4);
+        Sleep(250);
+
+        Draw(x, y, a4, a5, a1, a2, a3);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Draw(x, y, a3, a4, a5, a1, a2);
         Sleep(250);
 
         Draw(x, y, a2, a3, a4, a5, a1);
         Sleep(250);
-
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Draw(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+
+        srand(i - 5);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 4);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 3);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 2);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 1);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
     }
 }
