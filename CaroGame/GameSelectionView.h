@@ -40,6 +40,9 @@ namespace GameSelectionView {
     // View when choosing the player's avatar
     void AvatarSelectView(NavigationHost& NavHost);
 
+    void DrawCurrentOptionBox(const GameState& gameState, short selected);
+
+
 }  // namespace GameSelectionView
 
 // 24*11

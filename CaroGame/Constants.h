@@ -28,6 +28,16 @@ namespace Constants {
     const short GAME_TYPE_NORMAL = 0;
     const short GAME_TYPE_RUSH = 1;
 
+    const char PLAYER_ONE_COLOR = 4;  // RED
+    const char PLAYER_TWO_COLOR = 1;  // BLUE
+
+    const char PLAYER_ONE_HIGHLIGHT = 13;  // LIGHT MAGENTA
+    const char PLAYER_TWO_HIGHLIGHT = 11;  // LIGHT CYAN
+
+    const char WIN_HIGHLIGHT = 2;  // GREEN
+
+
+
     // AI const
 
     // Asset path

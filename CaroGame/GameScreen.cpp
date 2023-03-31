@@ -112,8 +112,10 @@ void GameScreen::DrawGameScreen()
 
 void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
 {
-    playerContainerOne.DrawToContainer(L"X");
-    playerContainerTwo.DrawToContainer(L"O");
+    playerContainerOne.DrawToContainer(Constants::PLAYER_ONE.symbol, (View::Color)Constants::PLAYER_ONE_COLOR);
+    playerContainerTwo.DrawToContainer(
+        Constants::PLAYER_TWO.symbol, (View::Color)Constants::PLAYER_TWO_COLOR
+    );
 
     short temp =
         (playerInfoContainerOne.cellWidth - gameState.playerNameOne.size()) / 2;
@@ -126,8 +128,12 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
     playerInfoContainerTwo.xOffset =
         (gameState.playerNameTwo.size() % 2 == 0) ? temp + 1 : temp;
 
-    playerInfoContainerOne.DrawToContainer(gameState.playerNameOne);
-    playerInfoContainerTwo.DrawToContainer(gameState.playerNameTwo);
+    playerInfoContainerOne.DrawToContainer(
+        gameState.playerNameOne, (View::Color)Constants::PLAYER_ONE_COLOR
+    );
+    playerInfoContainerTwo.DrawToContainer(
+        gameState.playerNameTwo, (View::Color)Constants::PLAYER_TWO_COLOR
+    );
 
     std::wstring playerScoreOne =
         (gameState.playerScoreOne < 10)
@@ -139,28 +145,42 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
             ? std::format(L"0{}", gameState.playerScoreTwo)
             : std::format(L"{}", gameState.playerScoreTwo);
 
-    winCountContainerOne.DrawToContainer(playerScoreOne);
-    winCountContainerTwo.DrawToContainer(playerScoreTwo);
+    winCountContainerOne.DrawToContainer(
+        playerScoreOne, View::Color::LIGHT_RED
+    );
+    winCountContainerTwo.DrawToContainer(
+        playerScoreTwo, View::Color::LIGHT_BLUE
+    );
 
     if (!isReplay) {
         timerContainerOne.DrawToContainer(
-            Utils::SecondToMMSS(gameState.playerTimeOne)
+            Utils::SecondToMMSS(gameState.playerTimeOne),
+            (View::Color)Constants::PLAYER_ONE_COLOR
         );
         timerContainerTwo.DrawToContainer(
-            Utils::SecondToMMSS(gameState.playerTimeTwo)
+            Utils::SecondToMMSS(gameState.playerTimeTwo),
+            (View::Color)Constants::PLAYER_TWO_COLOR
         );
     } else {
         timerContainerOne.xOffset -= 1;
         timerContainerTwo.xOffset -= 1;
 
-        timerContainerOne.DrawToContainer(L"\u221eREPLAY");
-        timerContainerTwo.DrawToContainer(L"REPLAY\u221e");
+        timerContainerOne.DrawToContainer(L"\u221eREPLAY", View::Color::YELLOW);
+        timerContainerTwo.DrawToContainer(
+            L"REPLAY\u221e", View::Color::YELLOW
+        );
     }
 
-    if (gameState.playerAvatarOne != 9 ) avatarMap[gameState.playerAvatarOne](playerInfoContainerOne.xCoord + 3, playerInfoContainerOne.yCoord);
+    const short avatarOffset[] = {3, 2, 3, 5, 2, 2, 3, 4};
+
+    if (gameState.playerAvatarOne != 9)
+        avatarMap[gameState.playerAvatarOne](
+            playerInfoContainerOne.xCoord + avatarOffset[gameState.playerAvatarOne],
+            playerInfoContainerOne.yCoord
+        );
     if (gameState.playerAvatarTwo != 9)
         avatarMap[gameState.playerAvatarTwo](
-        playerInfoContainerTwo.xCoord + 3, playerInfoContainerTwo.yCoord
+        playerInfoContainerTwo.xCoord + avatarOffset[gameState.playerAvatarTwo], playerInfoContainerTwo.yCoord
     );
 
 

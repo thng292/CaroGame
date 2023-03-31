@@ -6,9 +6,9 @@ void Container::DrawContainer()
     View::DrawRect(rect);
 }
 
-void Container::DrawToContainer(std::wstring value)
+void Container::DrawToContainer(std::wstring value, View::Color color)
 {
-    View::WriteToView(xCoord + xOffset, yCoord + yOffset, value);
+    View::WriteToView(xCoord + xOffset, yCoord + yOffset, value, (wchar_t)0U, false, color);
 }
 
 void Container::DrawToLogContainer(

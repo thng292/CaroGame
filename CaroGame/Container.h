@@ -14,7 +14,7 @@ class Container {
     void DrawContainer();
 
     // Draws the value inside of the container
-    void DrawToContainer(std::wstring value);
+    void DrawToContainer(std::wstring value, View::Color color = View::DEFAULT_TEXT_COLOR);
     void DrawToLogContainer(
         const std::vector<std::pair<short, short>>& valueList,
         const std::wstring& playerNameOne,

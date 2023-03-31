@@ -11,8 +11,9 @@ void GameScreenAction::UpdateGame(
 )
 {
     if (move.row != -1) {
-        View::Color color =
-            (player.symbol == L"X") ? View::Color::RED : View::Color::BLUE;
+        View::Color color = (player.symbol == Constants::PLAYER_ONE.symbol)
+                                ? (View::Color)Constants::PLAYER_ONE_COLOR
+                                : (View::Color)Constants::PLAYER_TWO_COLOR;
         GameAction::MakeMove(board, moveCount, move, player.value);
         gameScreen.boardContainer.DrawToBoardContainerCell(
             move.row, move.col, player.symbol, color
@@ -61,12 +62,12 @@ void GameScreenAction::HightLightWin(
 
     View::Color color;
     if (unhighlight) {
-        if (playerValue == L"X")
-            color = View::Color::RED;
+        if (playerValue == Constants::PLAYER_ONE.symbol)
+            color = (View::Color)Constants::PLAYER_ONE_COLOR;
         else
-            color = View::Color::BLUE;
+            color = (View::Color)Constants::PLAYER_TWO_COLOR;
     } else
-        color = View::Color::GREEN;
+        color = (View::Color)Constants::WIN_HIGHLIGHT;
 
     while (cnt < 5) {
         gameScreen.boardContainer.DrawToBoardContainerCell(
@@ -85,8 +86,9 @@ void GameScreenAction::HighlightMove(
 )
 {
     if (move.row == -1) return;
-    View::Color color =
-        (value == L"X") ? View::Color::LIGHT_RED : View::Color::LIGHT_CYAN;
+    View::Color color = (value == Constants::PLAYER_ONE.symbol)
+                            ? (View::Color)Constants::PLAYER_ONE_HIGHLIGHT
+                            : (View::Color)Constants::PLAYER_TWO_HIGHLIGHT;
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, value, color
     );
@@ -99,7 +101,9 @@ void GameScreenAction::UnhightlightMove(
 )
 {
     if (move.row == -1) return;
-    View::Color color = (value == L"X") ? View::Color::RED : View::Color::BLUE;
+    View::Color color = (value == Constants::PLAYER_ONE.symbol)
+                            ? (View::Color)Constants::PLAYER_ONE_COLOR
+                            : (View::Color)Constants::PLAYER_TWO_COLOR;
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, value, color
     );

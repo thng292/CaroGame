@@ -3,6 +3,11 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
+    GameState temp;
+    temp.playerAvatarOne = 7;
+    temp.playerAvatarTwo = 3;
+    NavHost.SetContext(Constants::CURRENT_GAME, temp);
+
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
 
@@ -19,6 +24,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             bgmAudio->getPlayer()->Play(true, true);
         }
     }
+    auto& soundEffect = Config::GetSetting(L"SoundEffect");
+
 
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
@@ -78,7 +85,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 curGameState.playerTimeOne += timeAddition;
                 std::lock_guard guard(lock);
                 gameScreen.timerContainerOne.DrawToContainer(
-                    Utils::SecondToMMSS(curGameState.playerTimeOne)
+                    Utils::SecondToMMSS(curGameState.playerTimeOne),
+                    (View::Color)Constants::PLAYER_ONE_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
                 if (curGameState.playerTimeOne == 0) {
@@ -97,7 +105,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 std::lock_guard guard(lock);
                 curGameState.playerTimeTwo += timeAddition;
                 gameScreen.timerContainerTwo.DrawToContainer(
-                    Utils::SecondToMMSS(curGameState.playerTimeTwo)
+                    Utils::SecondToMMSS(curGameState.playerTimeTwo),
+                    (View::Color)Constants::PLAYER_TWO_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
                 if (curGameState.playerTimeTwo == 0) {
@@ -154,6 +163,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         auto tmp = InputHandle::Get();
         if (endGame) break;
+
+        if (soundEffect == L"True") {
+            Utils::PlayKeyPressSound();
+        }
 
         if (tmp == L"ESC") {
             timerPlayerOne.Stop();

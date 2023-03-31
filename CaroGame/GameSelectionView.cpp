@@ -188,6 +188,39 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     return NavHost.Navigate("GameScreenView");
 }
 
+void GameSelectionView::DrawCurrentOptionBox(
+    const GameState& gameState, short selected
+)
+{
+    const short X_PIVOT = 10, Y_PIVOT = 5;
+    const short WIDTH = 50, HEIGHT = 2;
+    View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
+    View::DrawRect(rect);
+
+    const std::wstring GAME_TYPE_LABEL = L"Type";
+    const std::wstring GAME_MODE_LABEL = L"Mode";
+    const std::wstring GAME_TIME_LABEL = L"Time";
+
+    /*const std::wstring GAME_NORMAL_LABEL = 
+
+    const std::wstring GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+
+    const std::array<std::wstring, 3> LABEL_LIST = {
+        GAME_TYPE_LABEL, GAME_MODE_LABEL, GAME_TIME_LABEL};
+
+    const std::array<std::wstring, 3> VALUE_LIST = {
+
+    }
+
+    short x = X_PIVOT + 1, y = Y_PIVOT + 1;
+
+    for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
+        View::WriteToView(x, y, GAME_TYPE)
+    
+    }*/
+
+}
+
 void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
 {
     GameState curGameState;
@@ -211,6 +244,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
+    //DrawCurrentOptionBox(curGameState, 0);
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
@@ -242,6 +276,9 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
             break;
         }
     }
+
+
+
     curGameState.gameType = optionValue;
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate(navigateValue);
