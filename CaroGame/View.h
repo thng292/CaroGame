@@ -37,7 +37,7 @@ namespace View {
     };
 
     struct Rect {
-        short Top, Left, Right, Bottom;
+        short Top = 0, Left = 0, Right = 0, Bottom = 0;
     };
 
     struct Option {
@@ -109,6 +109,12 @@ namespace View {
     void ClearScreen();
 
     void ClearRect(Rect area);
+
+    void DrawBorder(
+        const Rect& rect,
+        Color textColor = DEFAULT_TEXT_COLOR,
+        Color bgColor = DEFAULT_BACKGROUND_COLOR
+    );
 
     void DrawRect(
         const Rect& rect,

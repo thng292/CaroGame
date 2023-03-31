@@ -3,13 +3,10 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
-   /* GameState temp;
-    temp.gameMode = Constants::GAME_MODE_PVP;
-    temp.playerNameOne = L"aaaaaaaaaa";
-    temp.playerNameTwo = L"aazzz";
-    NavHost.SetContext(Constants::CURRENT_GAME, temp);*/
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
+
+    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
 
     GameAction::Board gameBoard(
         Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)

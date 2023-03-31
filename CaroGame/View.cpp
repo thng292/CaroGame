@@ -139,13 +139,48 @@ void View::ClearRect(Rect area)
     }
 }
 
-void View::DrawRect(const Rect& rect, Color textColor, Color bgColor)
+void View::DrawBorder(const Rect& rect, Color textColor, Color bgColor)
 {
-    View::ClearRect(rect);
-    View::WriteToView(rect.Left, rect.Top, L'\u2554');
-    View::WriteToView(rect.Left, rect.Bottom, L'\u255A');
-    View::WriteToView(rect.Right, rect.Top, L'\u2557');
-    View::WriteToView(rect.Right, rect.Bottom, L'\u255D');
+    View::WriteToView(
+        rect.Left,
+        rect.Top,
+        L'\u2554',
+        0,
+        textColor,
+        Color::BLACK,
+        Color::BLACK,
+        bgColor
+    );
+    View::WriteToView(
+        rect.Right,
+        rect.Top,
+        L'\u2557',
+        0,
+        textColor,
+        Color::BLACK,
+        Color::BLACK,
+        bgColor
+    );
+    View::WriteToView(
+        rect.Left,
+        rect.Bottom,
+        L'\u255A',
+        0,
+        textColor,
+        Color::BLACK,
+        Color::BLACK,
+        bgColor
+    );
+    View::WriteToView(
+        rect.Right,
+        rect.Bottom,
+        L'\u255D',
+        0,
+        textColor,
+        Color::BLACK,
+        Color::BLACK,
+        bgColor
+    );
     DWORD tmp = 0;
     auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     FillConsoleOutputCharacter(
@@ -162,10 +197,48 @@ void View::DrawRect(const Rect& rect, Color textColor, Color bgColor)
         {rect.Left + View::BORDER_WIDTH, rect.Bottom},
         &tmp
     );
+    FillConsoleOutputAttribute(
+        stdHandle,
+        int(textColor) | int(bgColor) << 4,
+        rect.Right - rect.Left - View::BORDER_WIDTH,
+        {rect.Left + View::BORDER_WIDTH, rect.Top},
+        &tmp
+    );
+    FillConsoleOutputAttribute(
+        stdHandle,
+        int(textColor) | int(bgColor) << 4,
+        rect.Right - rect.Left - View::BORDER_WIDTH,
+        {rect.Left + View::BORDER_WIDTH, rect.Bottom},
+        &tmp
+    );
     for (int i = rect.Top + 1; i < rect.Bottom; i++) {
-        View::WriteToView(rect.Left, i, L'\u2551');
-        View::WriteToView(rect.Right, i, L'\u2551');
+        View::WriteToView(
+            rect.Left,
+            i,
+            L'\u2551',
+            0,
+            textColor,
+            Color::BLACK,
+            Color::BLACK,
+            bgColor
+        );
+        View::WriteToView(
+            rect.Right,
+            i,
+            L'\u2551',
+            0,
+            textColor,
+            Color::BLACK,
+            Color::BLACK,
+            bgColor
+        );
     }
+}
+
+void View::DrawRect(const Rect& rect, Color textColor, Color bgColor)
+{
+    View::ClearRect(rect);
+    View::DrawBorder(rect, textColor, bgColor);
 }
 
 inline short CalcWidth(

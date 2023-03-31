@@ -43,6 +43,7 @@ int main()
             {"SaveScreen",                 SaveScreen::SaveScreen               },
             {"SaveSuccess",                SaveScreen::SaveSuccess              },
             {"SaveFailed",                 SaveScreen::SaveFailed               },
+            {"SettingApplied",             Setting::ApplySuccess                },
             {"Setting",                    Setting::SettingScreen               },
             {"ExitScreen",                 StartUp::ExitScreen                  },
             {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen     },

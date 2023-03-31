@@ -2,6 +2,8 @@
 
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
 {
+    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
+
     static short selectedOption = 0;   // User option
     static const short maxOption = 7;  // Number of option
                                        // Vi tri bat dau ve

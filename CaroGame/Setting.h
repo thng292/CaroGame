@@ -10,4 +10,6 @@
 
 namespace Setting {
     void SettingScreen(NavigationHost& NavHost);
+
+    void ApplySuccess(NavigationHost& NavHost);
 };
