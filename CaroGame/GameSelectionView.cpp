@@ -141,7 +141,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
 
         if (selected < 4) {
             drawnRect = {
-                3, short(selected * 30), short(selected * 30 + 29), 16};
+                3, short(selected * 30), short(selected * 30 + 29), 15};
             View::DrawBorder(drawnRect);
         } else {
             drawnRect = {
