@@ -3,13 +3,13 @@
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
 {
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
-
+    Common::DrawHintsLess();
     static short selectedOption = 0;   // User option
     static const short maxOption = 7;  // Number of option
                                        // Vi tri bat dau ve
     Caro(32, 1);
-    Logo_Deadpool(8, 5);
-    Logo_Captain(79, 5);
+    Logo_Deadpool(3, 5);
+    Logo_Captain(79 + 4, 5);
     View::WriteToView(
         119 - Constants::version.size() - 9,
         0,

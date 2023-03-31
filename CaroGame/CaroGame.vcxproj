@@ -192,6 +192,7 @@
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="StartUp.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
@@ -244,6 +245,7 @@
     <ClInclude Include="Setting.h" />
     <ClInclude Include="StartUp.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>

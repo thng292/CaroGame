@@ -2,6 +2,7 @@
 #include "Avatar.h"
 #include "BackgroundAudioService.h"
 #include "Captain.h"
+#include "Common.h"
 #include "Config.h"
 #include "Deadpool.h"
 #include "InputHandle.h"
