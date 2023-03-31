@@ -157,8 +157,8 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
         timerContainerTwo.DrawToContainer(L"REPLAY\u221e");
     }
 
-    if (gameState.playerAvatarOne != -1 ) avatarMap[gameState.playerAvatarOne](playerInfoContainerOne.xCoord + 3, playerInfoContainerOne.yCoord);
-    if (gameState.playerAvatarTwo != -1)
+    if (gameState.playerAvatarOne != 9 ) avatarMap[gameState.playerAvatarOne](playerInfoContainerOne.xCoord + 3, playerInfoContainerOne.yCoord);
+    if (gameState.playerAvatarTwo != 9)
         avatarMap[gameState.playerAvatarTwo](
         playerInfoContainerTwo.xCoord + 3, playerInfoContainerTwo.yCoord
     );
