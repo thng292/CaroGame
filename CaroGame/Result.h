@@ -1,5 +1,6 @@
 #include "View.h"
 #include "Avatar.h"
+#include "cstdlib"
 void khung_Among_Us();
 
 void Win(
