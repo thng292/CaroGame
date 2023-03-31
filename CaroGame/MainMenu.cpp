@@ -15,7 +15,6 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
         0,
         L"Version: " + Constants::version
     );
-
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
         if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::MenuBGM) {

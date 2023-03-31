@@ -11,7 +11,7 @@
 #include "Navigate.h"
 #include "Utils.h"
 #include "View.h"
-
+#include "Result.h"
 namespace MainMenu {
 
     void ScreenMainMenu(NavigationHost& NavHost);

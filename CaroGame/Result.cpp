@@ -1,8 +1,77 @@
 #include "Result.h"
 
-void Win(
-    int x,
-    int y,
+void tao_khoang_trang(int x, int y, int length, int height)
+{
+    for (int i = 1; i <= height; i++) {
+        for (int j = 1; j <= length; j++) {
+            View::WriteToView(
+                x +  j,
+                y + i,
+                L'\u2584',
+                0,
+                View::Color::BRIGHT_WHITE,
+                View::DEFAULT_HIGHLIGHT_COLOR,
+                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BRIGHT_WHITE
+            );
+        }
+    }
+}
+
+
+void khung_Among_Us()
+{
+    View::Color a[8] = {
+        View::Color::RED,
+        View::Color::LIGHT_MAGENTA,
+        View::Color::MAGENTA,
+        View::Color::LIGHT_BLUE,
+        View::Color::LIGHT_CYAN,
+        View::Color::LIGHT_GREEN,
+        View::Color::YELLOW,
+        View::Color::GRAY};
+    int k = 0;
+    for (int i = 0; i < 12; i++) {
+        k %= 8;
+        if (k == 4) {
+            Logo_AmongUs(-1 + i * 10, -1, a[7], a[k]);
+        } else {
+            Logo_AmongUs(-1 + i * 10, -1, a[4], a[k]);
+        }
+        k++;
+    }
+    for (int i=0; i < 4; i++) {
+        k %= 8;
+        if (k == 4) {
+            Logo_AmongUs(109, 4+i*5, a[7], a[k]);
+        } else {
+            Logo_AmongUs(109, 4+i*5, a[4], a[k]);
+        }
+        k++;
+    }
+    for (int i = 11; i >= 0; i--) {
+        k %= 8;
+        if (k == 4) {
+            Logo_AmongUs(-1 + i * 10, 24, a[7], a[k]);
+        } else {
+            Logo_AmongUs(-1 + i * 10, 24, a[4], a[k]);
+        }
+        k++;
+    }
+    for (int i = 3; i >=0; i--) {
+        k %= 8;
+        if (k == 4) {
+            Logo_AmongUs(-1, 4 + i * 5, a[7], a[k]);
+        } else {
+            Logo_AmongUs(-1, 4 + i * 5, a[4], a[k]);
+        }
+        k++;
+    }
+}
+
+
+
+void Win(int x,int y,
     View::Color a1,
     View::Color a2,
     View::Color a3,
@@ -10,6 +79,7 @@ void Win(
     View::Color a5
 )
 {
+    
     for (int i = 0; i < 2; i++) {
         View::WriteToView(
             x + 1 + i,
@@ -448,9 +518,7 @@ void Win(
     }
 }
 
-void Lose(
-    int x,
-    int y,
+void Lose(int x,int y,
     View::Color a1,
     View::Color a2,
     View::Color a3,
@@ -872,9 +940,7 @@ void Lose(
     }
 }
 
-void Draw(
-    int x,
-    int y,
+void Draw(int x,int y,
     View::Color a1,
     View::Color a2,
     View::Color a3,
@@ -1680,74 +1746,219 @@ void Draw(
     );
 }
 
-void Logo_Draw(
-    int x,
-    int y,
-    View::Color a1,
-    View::Color a2,
-    View::Color a3,
-    View::Color a4,
-    View::Color a5
-)
-{
-    while (true) {
-        Sleep(250);
-        Draw(x, y, a1, a2, a3, a4, a5);
-        Sleep(250);
-        Draw(x, y, a2, a3, a4, a5, a1);
-        Sleep(250);
-        Draw(x, y, a3, a4, a5, a1, a2);
-        Sleep(250);
-        Draw(x, y, a4, a5, a1, a2, a3);
-        Sleep(250);
-        Draw(x, y, a5, a1, a2, a3, a4);
-    }
-}
 
-void Logo_Win(
-    int x,
-    int y,
-    View::Color a1,
-    View::Color a2,
-    View::Color a3,
-    View::Color a4,
-    View::Color a5
-)
+
+void Logo_Win( int x, int y)
 {
-    while (true) {
+    View::Color a1 = View::Color::WHITE;
+    View::Color a2 = View::Color::LIGHT_CYAN;
+    View::Color a3 = View::Color::CYAN;
+    View::Color a4 = View::Color::LIGHT_BLUE;
+    View::Color a5 = View::Color::BLUE;
+    View::Color a[] = {
+        View::Color::RED,
+        View::Color::LIGHT_MAGENTA,
+        View::Color::LIGHT_BLUE,
+        View::Color::LIGHT_GREEN,
+        View::Color::YELLOW,
+        View::Color::LIGHT_CYAN,
+    };
+    int i = 0;
+    
+    while (true) {  
+        
+        
+        Win(x, y, a5, a1, a2, a3, a4);
         Sleep(250);
-        Win(x, y, a1, a2, a3, a4, a5);
-        Sleep(250);
-        Win(x, y, a2, a3, a4, a5, a1);
-        Sleep(250);
-        Win(x, y, a3, a4, a5, a1, a2);
-        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110-1, rand() % 25-1, a[5], a[i % 5]);
+        i++;
         Win(x, y, a4, a5, a1, a2, a3);
         Sleep(250);
+        
+        Win(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110-1, rand() % 25-1, a[5], a[i % 5]);
+        i++;
+        Win(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+        
+        Win(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Win(x, y, a5, a1, a2, a3, a4);
+        Sleep(250);
+        
+        Win(x, y, a4, a5, a1, a2, a3);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Win(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+        
+        Win(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Win(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+
+        srand(i - 5);
+        tao_khoang_trang(rand() % 110-1, rand() % 25-1, 10, 5);
+        srand(i - 4);
+        tao_khoang_trang(rand() % 110-1, rand() % 25-1, 10, 5);
+        srand(i - 3);
+        tao_khoang_trang(rand() % 110-1, rand() % 25-1, 10, 5);
+        srand(i - 2);
+        tao_khoang_trang(rand() % 110-1, rand() % 25-1, 10, 5);
+        srand(i - 1);
+        tao_khoang_trang(rand() % 110-1, rand() % 25-1, 10, 5);
     }
 }
 
-void Logo_Lose(
-    int x,
-    int y,
-    View::Color a1,
-    View::Color a2,
-    View::Color a3,
-    View::Color a4,
-    View::Color a5
-)
+void Logo_Lose(int x, int y)
 {
+    View::Color a1 = View::Color::WHITE;
+    View::Color a2 = View::Color::LIGHT_CYAN;
+    View::Color a3 = View::Color::CYAN;
+    View::Color a4 = View::Color::LIGHT_BLUE;
+    View::Color a5 = View::Color::BLUE;
+    View::Color a[] = {
+        View::Color::RED,
+        View::Color::LIGHT_MAGENTA,
+        View::Color::LIGHT_BLUE,
+        View::Color::LIGHT_GREEN,
+        View::Color::YELLOW,
+        View::Color::LIGHT_CYAN,
+    };
+    int i = 0;
+
     while (true) {
+        Lose(x, y, a5, a1, a2, a3, a4);
         Sleep(250);
-        Lose(x, y, a1, a2, a3, a4, a5);
-        Sleep(250);
-        Lose(x, y, a2, a3, a4, a5, a1);
-        Sleep(250);
-        Lose(x, y, a3, a4, a5, a1, a2);
-        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Lose(x, y, a4, a5, a1, a2, a3);
         Sleep(250);
+
+        Lose(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Lose(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+
+        Lose(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
         Lose(x, y, a5, a1, a2, a3, a4);
+        Sleep(250);
+
+        Lose(x, y, a4, a5, a1, a2, a3);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Lose(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+
+        Lose(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Lose(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+
+        srand(i - 5);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 4);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 3);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 2);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 1);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+    }
+}
+
+void Logo_Draw(int x, int y)
+{
+    View::Color a1 = View::Color::WHITE;
+    View::Color a2 = View::Color::LIGHT_CYAN;
+    View::Color a3 = View::Color::CYAN;
+    View::Color a4 = View::Color::LIGHT_BLUE;
+    View::Color a5 = View::Color::BLUE;
+    View::Color a[] = {
+        View::Color::RED,
+        View::Color::LIGHT_MAGENTA,
+        View::Color::LIGHT_BLUE,
+        View::Color::LIGHT_GREEN,
+        View::Color::YELLOW,
+        View::Color::LIGHT_CYAN,
+    };
+    int i = 0;
+
+    while (true) {
+        Draw(x, y, a5, a1, a2, a3, a4);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a4, a5, a1, a2, a3);
+        Sleep(250);
+
+        Draw(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+
+        Draw(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a5, a1, a2, a3, a4);
+        Sleep(250);
+
+        Draw(x, y, a4, a5, a1, a2, a3);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a3, a4, a5, a1, a2);
+        Sleep(250);
+
+        Draw(x, y, a2, a3, a4, a5, a1);
+        Sleep(250);
+        srand(i);
+        Logo_AmongUs(rand() % 110 - 1, rand() % 25 - 1, a[5], a[i % 5]);
+        i++;
+        Draw(x, y, a1, a2, a3, a4, a5);
+        Sleep(250);
+
+        srand(i - 5);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 4);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 3);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 2);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
+        srand(i - 1);
+        tao_khoang_trang(rand() % 110 - 1, rand() % 25 - 1, 10, 5);
     }
 }
