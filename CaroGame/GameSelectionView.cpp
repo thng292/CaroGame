@@ -119,11 +119,16 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     if (currentGameState.gameMode == Constants::GAME_MODE_PVE) {
         currentGameState.playerAvatarTwo = MaxSelect + 1;
     }
-
-    if (bool isTutorial =
-            std::any_cast<bool>(NavHost.GetFromContext(Constants::TUTORIAL_MODE)
+    if (NavHost.CheckContext(Constants::TUTORIAL_MODE)) {
+        if (bool isTutorial =
+                std::any_cast<bool>(NavHost.GetFromContext(Constants::TUTORIAL_MODE)
+                );
+            !isTutorial) {
+            View::DrawTextCenterdVertically(
+                2, Language::GetString(L"SELECT_AVATAR_TITLE")
             );
-        !isTutorial) {
+        }
+    } else {
         View::DrawTextCenterdVertically(
             2, Language::GetString(L"SELECT_AVATAR_TITLE")
         );

@@ -24,6 +24,8 @@ std::any& NavigationHost::GetFromContext(const std::string& name)
     return Context[name];
 }
 
+bool NavigationHost::CheckContext(const std::string& name) { return Context.contains(name); }
+
 void NavigationHost::SetContext(const std::string& name, const std::any& data)
 {
     Context[name] = data;

@@ -28,10 +28,11 @@ int main()
 #endif
         {
             {"About",                      About::AboutScreen                   },
+            {"GameEndView",                GameEndView::GameEndView             },
+            {"GameScreenView",             GameScreenView::GameScreenView       },
             {"AIDifficultyView",           GameSelectionView::AIDifficultyView  },
             {"GameModeTypeView",           GameSelectionView::GameModeTypeView  },
             {"GameModeVersusView",         GameSelectionView::GameModeVersusView},
-            {"GameScreenView",             GameScreenView::GameScreenView       },
             {"PauseMenuView",              GameSelectionView::PauseMenuView     },
             {"PlayerNameView",             GameSelectionView::PlayerNameView    },
             {"PlayAgainView",              GameSelectionView::PlayAgainView     },
@@ -58,7 +59,6 @@ int main()
             {"FirstTimeTutorialScreen",    StartUp::FirstTimeTutorialScreen     },
             {"StartUpScreen",              StartUp::StartUpScreen               },
             {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
-            {"GameEndView",                GameEndView::GameEndView             }
             {"Tutorial",                   Tutorial::TutorialScreen             },
     }
     );
