@@ -201,9 +201,8 @@ void GameSelectionView::DrawCurrentOptionBox(
     const std::wstring GAME_MODE_LABEL = L"Mode";
     const std::wstring GAME_TIME_LABEL = L"Time";
 
-    /*const std::wstring GAME_NORMAL_LABEL = 
 
-    const std::wstring GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+  /*  const std::wstring GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
 
     const std::array<std::wstring, 3> LABEL_LIST = {
         GAME_TYPE_LABEL, GAME_MODE_LABEL, GAME_TIME_LABEL};
