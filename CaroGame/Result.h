@@ -47,3 +47,4 @@ void Logo_Lose(
     int x,
     int y
 );
+void Logo_Result(int k);
