@@ -102,4 +102,3 @@ TUTORIAL_SHORTCUT           =    T
 TUTORIAL_TITLE              =    Tutorial
 UNDO_OPTION_TITLE           =    Undo
 YES_TITLE                   =    Yes
-LABEL_RUSH_TIME             =    Choose Rush time
