@@ -210,6 +210,9 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>Core\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameEndView.cpp">
+      <Filter>Screens\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -373,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="Pokemon.h">
       <Filter>Graphics\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEndView.h">
+      <Filter>Screens\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

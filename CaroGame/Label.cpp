@@ -45,3 +45,7 @@ void Label::DrawLabelGrid(
         }
     }
 }
+
+short Label::GetCenterX(short x, short width, short length) { 
+    return x + (width - length) / 2;
+}

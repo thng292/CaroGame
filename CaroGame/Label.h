@@ -26,4 +26,6 @@ namespace Label {
         const std::vector<std::wstring>& VALUE_LIST,
         const short& COL_NUM
     );
+
+    short GetCenterX(short x, short width, short length);
 }  // namespace Label
