@@ -10,6 +10,7 @@
 #include "SaveScreen.h"
 #include "Setting.h"
 #include "StartUp.h"
+#include "GameEndView.h"
 
 int main()
 {
@@ -50,7 +51,8 @@ int main()
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen        },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen  },
             {"StartUpScreen",              StartUp::StartUpScreen               },
-            {"ReplayScreenView", ReplayScreenView::ReplayScreenView}
+            {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
+            {"GameEndView",                GameEndView::GameEndView             }
     }
     );
 }

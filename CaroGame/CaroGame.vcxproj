@@ -161,6 +161,7 @@
     <ClCompile Include="Evaluation.cpp" />
     <ClCompile Include="FileHandle.cpp" />
     <ClCompile Include="GameAction.cpp" />
+    <ClCompile Include="GameEndView.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameScreenAction.cpp" />
     <ClCompile Include="GameScreenView.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Evaluation.h" />
     <ClInclude Include="FileHandle.h" />
     <ClInclude Include="GameAction.h" />
+    <ClInclude Include="GameEndView.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GameScreenAction.h" />
     <ClInclude Include="GameScreenView.h" />

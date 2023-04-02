@@ -25,6 +25,8 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
+    DrawCurrentOptionBox(curGameState, 2);
+
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
@@ -81,6 +83,9 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
         labelList = {L"Player 1's name:", L"Player 2's name:"};
         inputList = {L"", L""};
     }
+
+    DrawCurrentOptionBox(curGameState, 4);
+
 
     const short MAX_LABEL = labelList.size();
 
@@ -192,31 +197,99 @@ void GameSelectionView::DrawCurrentOptionBox(
     const GameState& gameState, short selected
 )
 {
-    const short X_PIVOT = 10, Y_PIVOT = 5;
-    const short WIDTH = 50, HEIGHT = 2;
+    const short X_PIVOT = 20, Y_PIVOT = 5;
+    const short WIDTH = 80, HEIGHT = 2;
     View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
     View::DrawRect(rect);
 
-    const std::wstring GAME_TYPE_LABEL = L"Type";
-    const std::wstring GAME_MODE_LABEL = L"Mode";
-    const std::wstring GAME_TIME_LABEL = L"Time";
+    const std::wstring GAME_TYPE_LABEL = Language::GetString(L"CUR_GAME_TYPE");
+    const std::wstring GAME_MODE_LABEL = Language::GetString(L"CUR_GAME_MODE");
+    const std::wstring GAME_TIME_LABEL = Language::GetString(L"CUR_TIME");
+    const std::wstring AI_DIFFICULTY_LABEL =
+        Language::GetString(L"CUR_DIFFICULTY");
 
 
-  /*  const std::wstring GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+    std::wstring GAME_TYPE_VALUE;
+    std::wstring GAME_TIME_VALUE;
+    std::wstring GAME_MODE_VALUE;
+    std:: wstring AI_DIFFICULTY_VALUE;
 
-    const std::array<std::wstring, 3> LABEL_LIST = {
-        GAME_TYPE_LABEL, GAME_MODE_LABEL, GAME_TIME_LABEL};
-
-    const std::array<std::wstring, 3> VALUE_LIST = {
-
+    if (selected > 0) {
+        GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+                              ? Language::GetString(L"OPTION_TYPE_NORMAL")
+                              : Language::GetString(L"OPTION_TYPE_RUSH");
     }
+    if (selected > 1) {
+        if (gameState.gameType == Constants::GAME_TYPE_RUSH) {
+            switch (gameState.gameTime) {
+                case 60 * 1:
+                    GAME_TIME_VALUE = Language::GetString(L"OPTION_1");
+                    break;
+                case 60 * 5:
+                    GAME_TIME_VALUE = Language::GetString(L"OPTION_5");
+                    break;
+                case 60 * 15:
+                    GAME_TIME_VALUE = Language::GetString(L"OPTION_15");
+                    break;
+            }
+        } else {
+            GAME_TIME_VALUE = L"\u221e";
+        }
+        
+    }
+    if (selected > 2) {
+        GAME_MODE_VALUE = (gameState.gameMode == Constants::GAME_MODE_PVP)
+                              ? Language::GetString(L"OPTION_MODE_PVP")
+                              : Language::GetString(L"OPTION_MODE_PVE");
+    }
+    if (selected > 3) {
+        if (gameState.gameMode == Constants::GAME_MODE_PVE) {
+            switch (gameState.aiDifficulty) {
+                case AI::AI_DIFFICULTY_EASY:
+                    AI_DIFFICULTY_VALUE =
+                        Language::GetString(L"OPTION_AI_EASY");
+                    break;
+                case AI::AI_DIFFICULTY_NORMAL:
+                    AI_DIFFICULTY_VALUE =
+                        Language::GetString(L"OPTION_AI_NORMAL");
+                    break;
+                case AI::AI_DIFFICULTY_HARD:
+                    AI_DIFFICULTY_VALUE =
+                        Language::GetString(L"OPTION_AI_HARD");
+                    break;
 
-    short x = X_PIVOT + 1, y = Y_PIVOT + 1;
+            }
+        }
+        else {
+            AI_DIFFICULTY_VALUE = Language::GetString(L"OPTION_NULL");
+        }
+    }
+       
+
+
+
+    const std::array<std::wstring, 4> LABEL_LIST = {
+        GAME_TYPE_LABEL,
+        GAME_TIME_LABEL,
+        GAME_MODE_LABEL,
+        AI_DIFFICULTY_LABEL
+    };
+
+    const std::array<std::wstring, 4> VALUE_LIST = {
+        GAME_TYPE_VALUE, GAME_TIME_VALUE, GAME_MODE_VALUE, AI_DIFFICULTY_VALUE};
+
+
+    short x = X_PIVOT + 10, y = Y_PIVOT + 1, space = 15;
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
-        View::WriteToView(x, y, GAME_TYPE)
+        View::WriteToView(
+            x + i * space, y, LABEL_LIST[i] + L":", (wchar_t)0U, i == selected
+        );
+        View::WriteToView(x + i * space + LABEL_LIST[i].size() + 2, y, VALUE_LIST[i]
+        );
+
     
-    }*/
+    }
 
 }
 
@@ -243,7 +316,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
-    //DrawCurrentOptionBox(curGameState, 0);
+    DrawCurrentOptionBox(curGameState, 0);
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
@@ -298,6 +371,8 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
         AI::AI_DIFFICULTY_HARD};
     short optionValue;
     std::string navigationValue = "PlayerNameView";
+    DrawCurrentOptionBox(curGameState, 3);
+
 
     std::wstring label = Language::GetString(L"LABEL_AI_DIFICULTY");
     std::vector<View::Option> options = {
@@ -464,6 +539,9 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
     std::vector<short> optionValueList = {15 * 60, 5 * 60, 10};
     short optionValue;
     std::string navigationValue = "GameModeVersusView";
+
+    DrawCurrentOptionBox(curGameState, 1);
+
 
     std::wstring label = Language::GetString(L"LABEL_RUSH_TIME");
     std::vector<View::Option> options = {
