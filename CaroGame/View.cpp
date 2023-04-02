@@ -339,26 +339,28 @@ std::vector<std::wstring> View::WrapText(
     std::wistringstream iss(text);
     std::wstring tmp, buff;
     int cnt = 0;
-    while (iss && cnt < maxRow) {
+    while ((!iss.eof() || buff.length()) && cnt < maxRow) {
         res.emplace_back();
+        auto& currentRow = res.back();
         if (buff.length()) {
-            res[cnt].append(buff);
-            res[cnt].append(L" ");
-            buff = L"";
+            currentRow.append(buff);
+            currentRow.append(L" ");
+            buff.clear();
         }
-        while (iss) {
+        while (!iss.eof()) {
             iss >> tmp;
-            if (res[cnt].length() + tmp.length() + 1 <= maxWidth) {
-                res[cnt].append(tmp);
-                res[cnt].append(L" ");
+            if (currentRow.length() + tmp.length() - 1 <= maxWidth) {
+                currentRow.append(tmp);
+                currentRow.append(L" ");
             } else {
+                currentRow.pop_back();
                 buff = tmp;
                 break;
             }
         };
         cnt++;
     }
-    if (iss) {
+    if (!iss.eof()) {
         if (res.back().length() <= maxWidth - overflowStr.length()) {
             res.back().append(overflowStr);
         } else {

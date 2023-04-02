@@ -1,15 +1,17 @@
-﻿#include "GameScreen.h"
+﻿#include "About.h"
+#include "GameScreen.h"
 #include "GameScreenView.h"
 #include "GameSelectionView.h"
-#include "ReplayScreenView.h"
 #include "LoadScreen.h"
 #include "MainMenu.h"
 #include "Navigate.h"
 #include "ReplayLoad.h"
 #include "ReplaySave.h"
+#include "ReplayScreenView.h"
 #include "SaveScreen.h"
 #include "Setting.h"
 #include "StartUp.h"
+#include "Tutorial.h"
 
 int main()
 {
@@ -24,6 +26,7 @@ int main()
         "StartUpScreen",
 #endif
         {
+            {"About",                      About::AboutScreen                   },
             {"AIDifficultyView",           GameSelectionView::AIDifficultyView  },
             {"GameModeTypeView",           GameSelectionView::GameModeTypeView  },
             {"GameModeVersusView",         GameSelectionView::GameModeVersusView},
@@ -40,17 +43,20 @@ int main()
             {"MainMenu",                   MainMenu::ScreenMainMenu             },
             {"ReplayLoad",                 ReplayLoad::ReplayLoad               },
             {"ReplaySave",                 ReplaySave::ReplaySave               },
+            {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
             {"SaveScreen",                 SaveScreen::SaveScreen               },
             {"SaveSuccess",                SaveScreen::SaveSuccess              },
             {"SaveFailed",                 SaveScreen::SaveFailed               },
             {"SettingApplied",             Setting::ApplySuccess                },
+            {"SettingsAppliedFailed",      Setting::ApplyFailed                 },
             {"Setting",                    Setting::SettingScreen               },
             {"ExitScreen",                 StartUp::ExitScreen                  },
             {"FirstTimeLanguageScreen",    StartUp::FirstTimeLanguageScreen     },
             {"FirstTimeMusicScreen",       StartUp::FirstTimeMusicScreen        },
             {"FirstTimeSoundEffectScreen", StartUp::FirstTimeSoundEffectScreen  },
+            {"FirstTimeTutorialScreen",    StartUp::FirstTimeTutorialScreen     },
             {"StartUpScreen",              StartUp::StartUpScreen               },
-            {"ReplayScreenView", ReplayScreenView::ReplayScreenView}
+            {"Tutorial",                   Tutorial::TutorialScreen             },
     }
     );
 }

@@ -2,7 +2,7 @@
 
 void LoadScreen::LoadSceen(NavigationHost& NavHost)
 {
-    static auto currentState = LoadScreenState();
+    auto currentState = LoadScreenState();
     currentState.ReloadAllOptions();
 
     if (currentState.allOptions.size() == 0) {
@@ -33,7 +33,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
             leadingText,
             currentState.searchInput,
             currentState.isSearching,
-            currentState.onSearchValueChange([&drawMain] {
+            currentState.onSearchValueChange([&drawMain, &currentState] {
                 View::ClearRect(currentState.drawnRect);
                 currentState.drawnRect = drawMain();
             })
@@ -101,21 +101,26 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
 void LoadScreen::EmptyLoad(NavigationHost& NavHost)
 {
     View::DrawMenuCenter(
-        Language::GetString(L"EMPTY_SAVE_TITLE"),
+        L"",
         {
-            {Language::GetString(L"EMPTY_SAVE_DESC"),     0   },
-            {Language::GetString(L"NAVIGATE_BACK_TITLE"),
-             Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0]}
-    },
+            {Language::GetString(L"EMPTY_SAVE_DESC"), 0},
+        },
         1
     );
     InputHandle::Get();
     NavHost.Back();
+    return NavHost.Back();
 }
 
 void LoadScreen::LoadFailed(NavigationHost& NavHost)
 {
-    View::DrawMenuCenter(Language::GetString(L"LOAD_FAILED_TITLE"), {}, 0);
+    View::DrawMenuCenter(
+        L"",
+        {
+            {Language::GetString(L"LOAD_FAILED_TITLE"), 0}
+        },
+        0
+    );
     InputHandle::Get();
     return NavHost.Back();
 }

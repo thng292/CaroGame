@@ -10,12 +10,12 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto langList = Language::DiscoverLanguageFile();
 
     int select = 0;
-    int langSelect = [&langList]() {
+    int langSelect = ([&langList] {
         const auto& tmp = Config::GetSetting(L"LanguageFilePath");
         for (int i = 0; i < langList.size(); i++)
             if (langList[i].path == tmp) return i;
         return 0;
-    }();
+    })();
 
     std::vector<std::wstring> titles;
     std::vector<std::wstring> options;
@@ -25,7 +25,9 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto musicCheck = [&musicSetting, &NavHost]() {
         if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
             auto bgmAudio = BackgroundAudioService::getInstance();
-            auto currentBGM = std::any_cast<Audio::Sound>(NavHost.GetFromContext(Constants::CURRENT_BGM));
+            auto currentBGM = std::any_cast<Audio::Sound>(
+                NavHost.GetFromContext(Constants::CURRENT_BGM)
+            );
             if (bgmAudio->getPlayer()->getCurrentSong() != currentBGM) {
                 bgmAudio->ChangeSong(currentBGM);
             }
@@ -106,8 +108,8 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         View::WriteToView(
             posCenter.first,
             posCenter.second + titles.size() + 1,
-            Language::GetString(L"NAVIGATE_BACK_TITLE"),
-            Language::GetString(L"NAVIGATE_BACK_SHORTCUT")[0],
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
+            Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0],
             select == titles.size()
         );
         auto tmp = InputHandle::Get();
@@ -133,12 +135,6 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         }
         if (tmp == L"\r") {
             switch (select) {
-                case 0:
-                    Config::SetSetting(
-                        L"LanguageFilePath", langList[langSelect].path
-                    );
-                    Language::LoadLanguageFromFile(langList[langSelect].path);
-                    break;
                 case 1:
                     musicSetting =
                         (musicSetting == Config::Value_True
@@ -162,9 +158,13 @@ void Setting::SettingScreen(NavigationHost& NavHost)
             }
         }
         if (tmp == L" ") {
+            Config::SetSetting(L"LanguageFilePath", langList[langSelect].path);
             Language::LoadLanguageFromFile(langList[langSelect].path);
-            Config::SaveUserSetting();
-            return NavHost.Navigate("SettingApplied");
+            if (Config::SaveUserSetting()) {
+                return NavHost.Navigate("SettingApplied");
+            } else {
+                return NavHost.Navigate("SettingsAppliedFailed");
+            }
         }
         if (tmp == L"B" || tmp == L"b") {
             return NavHost.Back();
@@ -175,7 +175,26 @@ void Setting::SettingScreen(NavigationHost& NavHost)
 
 void Setting::ApplySuccess(NavigationHost& NavHost)
 {
-    View::DrawMenuCenter(Language::GetString(L"APPLY_SUCCESSFULLY"), {}, 0);
+    View::DrawMenuCenter(
+        L"",
+        {
+            {(Language::GetString(L"APPLY_SUCCESSFULLY")), 0}
+    },
+        0
+    );
+    InputHandle::Get();
+    return NavHost.Back();
+}
+
+void Setting::ApplyFailed(NavigationHost& NavHost)
+{
+    View::DrawMenuCenter(
+        L"",
+        {
+            {(Language::GetString(L"APPLY_FAILED")), 0}
+    },
+        0
+    );
     InputHandle::Get();
     return NavHost.Back();
 }

@@ -1,11 +1,10 @@
 #include "GameScreenView.h"
 
-
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
-
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME));
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        );
 
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
 
@@ -22,7 +21,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     }
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
 
-
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
     gameScreen.DrawToElements(curGameState);
@@ -34,7 +32,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     GameAction::Point prevMove = {-1, -1};
     Constants::Player prevPlayer;
 
-    GameScreenAction::LoadGameToView(gameScreen, gameBoard, moveCount, curGameState, myAI);
+    GameScreenAction::LoadGameToView(
+        gameScreen, gameBoard, moveCount, curGameState, myAI
+    );
 
     short row = 0, col = 0;
     if (curGameState.moveList.size() != 0) {
@@ -43,7 +43,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         prevMove = {
             curGameState.moveList.back().first,
-            curGameState.moveList.back().second};
+            curGameState.moveList.back().second
+        };
 
         gameScreen.logContainer.DrawToLogContainer(
             curGameState.moveList,
@@ -59,8 +60,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     bool endGame = 0;
     bool aiFirst =
-        (curGameState.gameMode == Constants::GAME_MODE_PVE && !isPlayerOneTurn &&
-         curGameState.moveList.size() == 0);
+        (curGameState.gameMode == Constants::GAME_MODE_PVE &&
+         !isPlayerOneTurn && curGameState.moveList.size() == 0);
 
     View::Goto(
         gameScreen.boardContainer.xCoord + BoardContainer::X_OFFSET +
@@ -128,8 +129,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         timerPlayerTwo.Continued();
     }
 
-  
-
     while (!endGame) {
         if (aiFirst) {
             GameAction::Point curMove = myAI.GetFirstMove();
@@ -154,7 +153,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             );
             prevMove = curMove;
             prevPlayer = curPlayer;
-
         }
 
         auto tmp = InputHandle::Get();
@@ -202,13 +200,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 GameAction::Point curMove = {row, col};
 
                 if (isPlayerOneTurn) {
-
                     curPlayer = Constants::PLAYER_ONE;
 
                     timerPlayerOne.Pause();
                 } else {
-
-
                     curPlayer = Constants::PLAYER_TWO;
                     timerPlayerTwo.Pause();
                 }
@@ -236,7 +231,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 );
 
                 // AI's turn
-                if (!endGame && curGameState.gameMode == Constants::GAME_MODE_PVE) {
+                if (!endGame &&
+                    curGameState.gameMode == Constants::GAME_MODE_PVE) {
                     myAI.UpdatePrivateValues(curMove);
                     isPlayerOneTurn = !isPlayerOneTurn;
 
@@ -298,7 +294,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         gameScreen, prevMove, prevPlayer.symbol
                     );
                 }
-                
+
                 prevMove = curMove;
                 prevPlayer = curPlayer;
             }
@@ -316,7 +312,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         curGameState.gameTime;
 
     auto tmp = InputHandle::Get();
-    //curGameState.moveList.clear();
+    // curGameState.moveList.clear();
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate("ReplaySave");
 }

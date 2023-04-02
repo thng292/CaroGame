@@ -28,13 +28,14 @@ void Common::DrawHintsLess() {
         std::format(
             L"A, W, S, D, Arrow Keys: {}, Enter: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-            Language::GetString(L"SELECT_KEY_LABEL")
+            Language::GetString(L"SELECT_KEY_TITLE")
         )
     );
 }
 
 bool Common::ConfirmPrompt(const std::wstring& title)
 {
+    DrawHintsLess();
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_SHORTCUT")[0]},

@@ -22,6 +22,8 @@ namespace StartUp {
     // FirstTimeSoundEffectScreen
     void FirstTimeSoundEffectScreen(NavigationHost& NavHost);
 
+    void FirstTimeTutorialScreen(NavigationHost& NavHost);
+
     void ExitScreen(NavigationHost& NavHost);
 
 }  // namespace StartUp

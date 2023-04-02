@@ -132,14 +132,26 @@ inline bool SaveScreen::SaveScreenState::Save(const GameState& currentGameState)
 
 void SaveScreen::SaveFailed(NavigationHost& NavHost)
 {
-    View::DrawMenuCenter(Language::GetString(L"SAVE_FAILED_TITLE"), {}, 0);
+    View::DrawMenuCenter(
+        L"",
+        {
+            {(Language::GetString(L"SAVE_FAILED_TITLE")), 0}
+    },
+        0
+    );
     InputHandle::Get();
     return NavHost.Back();
 }
 
 void SaveScreen::SaveSuccess(NavigationHost& NavHost)
 {
-    View::DrawMenuCenter(Language::GetString(L"SAVE_SUCCESS_TITLE"), {}, 0);
+    View::DrawMenuCenter(
+        L"",
+        {
+            {(Language::GetString(L"SAVE_SUCCESS_TITLE")), 0}
+    },
+        0
+    );
     InputHandle::Get();
     return NavHost.Back();
 }

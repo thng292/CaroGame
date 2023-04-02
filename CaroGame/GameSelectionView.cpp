@@ -63,6 +63,13 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
 
 void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
 {
+    View::DrawTextCenterdVertically(
+        29 - 2,
+        std::format(
+            L"Enter: {}", Language::GetString(L"STRING_INPUT_DONE_LABEL")
+        )
+    );
+
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
         );
@@ -108,9 +115,14 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         currentGameState.playerAvatarTwo = MaxSelect + 1;
     }
 
-    View::DrawTextCenterdVertically(
-        2, Language::GetString(L"SELECT_AVATAR_TITLE")
-    );
+    if (bool isTutorial =
+            std::any_cast<bool>(NavHost.GetFromContext(Constants::TUTORIAL_MODE)
+            );
+        !isTutorial) {
+        View::DrawTextCenterdVertically(
+            2, Language::GetString(L"SELECT_AVATAR_TITLE")
+        );
+    }
 
     logo_pokemon_red(3, 3);
     logo_pokemon_blue(33, 3);
@@ -142,15 +154,20 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         if (selected < 4) {
             drawnRect = {
                 3, short(selected * 30), short(selected * 30 + 29), 15};
-            View::DrawBorder(drawnRect);
         } else {
             drawnRect = {
                 15,
                 short((selected - 4) * 30),
                 short((selected - 4) * 30 + 29),
                 27};
-            View::DrawBorder(drawnRect);
         }
+        View::DrawBorder(
+            drawnRect,
+            View::Color(
+                player1Selection.Top ? Constants::PLAYER_TWO_COLOR
+                                     : Constants::PLAYER_ONE_COLOR
+            )
+        );
 
         auto tmp = InputHandle::Get();
         if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
@@ -201,9 +218,10 @@ void GameSelectionView::DrawCurrentOptionBox(
     const std::wstring GAME_MODE_LABEL = L"Mode";
     const std::wstring GAME_TIME_LABEL = L"Time";
 
-    /*const std::wstring GAME_NORMAL_LABEL = 
+    /*const std::wstring GAME_NORMAL_LABEL =
 
-    const std::wstring GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+    const std::wstring GAME_TYPE_VALUE = (gameState.gameType ==
+    Constants::GAME_TYPE_NORMAL)
 
     const std::array<std::wstring, 3> LABEL_LIST = {
         GAME_TYPE_LABEL, GAME_MODE_LABEL, GAME_TIME_LABEL};
@@ -216,9 +234,8 @@ void GameSelectionView::DrawCurrentOptionBox(
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
         View::WriteToView(x, y, GAME_TYPE)
-    
-    }*/
 
+    }*/
 }
 
 void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
@@ -244,7 +261,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
-    //DrawCurrentOptionBox(curGameState, 0);
+    // DrawCurrentOptionBox(curGameState, 0);
 
     while (1) {
         View::DrawMenuCenter(label, options, selectedOption);
@@ -276,8 +293,6 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
             break;
         }
     }
-
-
 
     curGameState.gameType = optionValue;
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
@@ -359,10 +374,10 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
     std::string navigationValue;
 
     std::vector<View::Option> options = {
-        {Language::GetString(L"OPTION_YES"),
-         Language::GetString(L"OPTION_YES")[0]},
-        {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0] }
+        {Language::GetString(L"YES_TITLE"),
+         Language::GetString(L"YES_TITLE")[0]},
+        {Language::GetString(L"NO_TITLE"),
+         Language::GetString(L"NO_TITLE")[0] }
     };
 
     Common::DrawHintsLess();
@@ -411,8 +426,8 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 
     std::wstring label = Language::GetString(L"LABEL_PLAY_AGAIN");
     std::vector<View::Option> options = {
-        {Language::GetString(L"OPTION_YES"),
-         Language::GetString(L"OPTION_YES")[0]},
+        {Language::GetString(L"YES_TITLE"),
+         Language::GetString(L"YES_TITLE")[0]},
         {Language::GetString(L"OPTION_NO"),
          Language::GetString(L"OPTION_NO")[0] }
     };

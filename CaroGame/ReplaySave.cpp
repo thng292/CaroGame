@@ -2,7 +2,7 @@
 
 void ReplaySave::ReplaySave(NavigationHost& NavHost)
 {
-    static auto currentState = ReplaySaveState(Constants::REPLAY_PATH);
+    auto currentState = ReplaySaveState(Constants::REPLAY_PATH);
     currentState.ReloadAllOptions();
 
     Common::DrawHints();
@@ -54,7 +54,7 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
             leadingText,
             currentState.searchInput,
             currentState.isSearching,
-            currentState.onSearchValueChange([&drawMain] {
+            currentState.onSearchValueChange([&drawMain, &currentState] {
                 View::ClearRect(currentState.drawnRect);
                 currentState.drawnRect = drawMain();
             })

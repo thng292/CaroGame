@@ -54,5 +54,5 @@ bool Config::SaveUserSetting()
         fout << key << L'=' << val << '\n';
     }
     fout.close();
-    return 1;
+    return !fout.fail();
 }

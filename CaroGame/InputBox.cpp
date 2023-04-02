@@ -1,9 +1,5 @@
 #include "InputBox.h"
 
-#include <format>
-
-#include "Label.h"
-
 std::pair<short, short> InputBox::CalcCenter(short width, short height)
 {
     return {59 - width / 2, 14 - height / 2};
@@ -55,7 +51,7 @@ void InputBox::DrawInputBox(
         CENTER.first + WIDTH,
         CENTER.first,
         CENTER.second + HEIGHT + 1,
-        std::format(L"Username must have a maximum length of {}", maxLength)
+        Language::GetString(L"MAX_NAME_LENGTH_NOTICE") + std::format(L" {}", maxLength)
     );
 
     auto tmp = View::Input(

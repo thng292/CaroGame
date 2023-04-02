@@ -2,7 +2,7 @@
 
 void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 {
-    static auto currentState = ReplayLoadState(Constants::REPLAY_PATH);
+    auto currentState = ReplayLoadState(Constants::REPLAY_PATH);
     currentState.ReloadAllOptions();
 
     if (currentState.allOptions.size() == 0) {
@@ -33,7 +33,7 @@ void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
             leadingText,
             currentState.searchInput,
             currentState.isSearching,
-            currentState.onSearchValueChange([&drawMain] {
+            currentState.onSearchValueChange([&drawMain, &currentState] {
                 View::ClearRect(currentState.drawnRect);
                 currentState.drawnRect = drawMain();
             })

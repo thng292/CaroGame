@@ -14,6 +14,7 @@ namespace Constants {
     };
 
     const std::string CURRENT_BGM = "CurrentBGM";
+    const std::string TUTORIAL_MODE = "TUTORIAL_MODE";
 
     const short BOARD_SIZE = 13;
     const short PAGE_SIZE = 10;

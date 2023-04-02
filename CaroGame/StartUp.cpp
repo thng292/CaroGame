@@ -53,88 +53,27 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
 
 void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost)
 {
-    Common::DrawHints();
-    auto& title = Language::GetString(L"ENABLE_MUSIC_Q");
-    std::vector<View::Option> options = {
-        {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_SHORTCUT")[0]},
-        {Language::GetString(L"NO_TITLE"),
-         Language::GetString(L"NO_SHORTCUT")[0] }
-    };
-    static int select = 0;
-    int num = 2;
-    std::wstring tmp;
-    auto next = [&]() {
-        Config::SetSetting(L"Music", (select == 0 ? L"True" : L"False"));
-        return NavHost.Navigate("FirstTimeSoundEffectScreen");
-    };
-    while (1) {
-        View::DrawMenuCenter(title, options, select);
-        tmp = InputHandle::Get();
-        if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
-            Utils::PlayKeyPressSound();
-        }
-        if (Utils::keyMeanDown(tmp)) {
-            select = Utils::modCycle(select - 1, num);
-            continue;
-        }
-        if (Utils::keyMeanUp(tmp)) {
-            select = Utils::modCycle(select + 1, num);
-            continue;
-        }
-        if (tmp == L"\r") {
-            return next();
-        }
-        for (int i = 0; i < options.size(); i++) {
-            if (tmp[0] == options[i].underline) {
-                select = i;
-                return next();
-            }
-        }
-    }
+    bool userOption =
+        Common::ConfirmPrompt(Language::GetString(L"ENABLE_MUSIC_Q"));
+    Config::SetSetting(L"SoundEffect", (userOption ? L"True" : L"False"));
+    return NavHost.Navigate("FirstTimeSoundEffectScreen");
 }
 
 void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost)
 {
-    Common::DrawHints();
-    auto& title = Language::GetString(L"ENABLE_SOUND_EFFECT_Q");
-    std::vector<View::Option> options = {
-        {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_SHORTCUT")[0]},
-        {Language::GetString(L"NO_TITLE"),
-         Language::GetString(L"NO_SHORTCUT")[0] }
-    };
-    static int select = 0;
-    int num = 2;
-    std::wstring tmp;
-    auto next = [&]() {
-        Config::SetSetting(L"SoundEffect", (select == 0 ? L"True" : L"False"));
-        Config::SaveUserSetting();
-        return NavHost.Navigate("MainMenu");
-    };
-    while (1) {
-        View::DrawMenuCenter(title, options, select);
-        tmp = InputHandle::Get();
-        if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
-            Utils::PlayKeyPressSound();
-        }
-        if (Utils::keyMeanDown(tmp)) {
-            select = Utils::modCycle(select - 1, num);
-            continue;
-        }
-        if (Utils::keyMeanUp(tmp)) {
-            select = Utils::modCycle(select + 1, num);
-            continue;
-        }
-        if (tmp == L"\r") {
-            return next();
-        }
-        for (int i = 0; i < options.size(); i++) {
-            if (tmp.size() == 1 && tmp[0] == options[i].underline) {
-                select = i;
-                return next();
-            }
-        }
+    bool userOption =
+        Common::ConfirmPrompt(Language::GetString(L"ENABLE_SOUND_EFFECT_Q"));
+    Config::SetSetting(L"SoundEffect", (userOption ? L"True" : L"False"));
+    Config::SaveUserSetting();
+    return NavHost.Navigate("FirstTimeTutorialScreen");
+}
+
+void StartUp::FirstTimeTutorialScreen(NavigationHost& NavHost)
+{
+    bool userOption = Common::ConfirmPrompt(Language::GetString(L"TUTORIAL_Q"));
+    NavHost.Navigate("MainMenu");
+    if (userOption) {
+        return NavHost.Navigate("Tutorial");
     }
 }
 
