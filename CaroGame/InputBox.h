@@ -14,7 +14,7 @@ namespace InputBox {
 
     short GetMaxWidth(InputBox::LabelList labelList);
 
-    void DrawInputBox(
+    bool DrawInputBox(
         LabelList labelList,
         size_t& selected,
         InputList& inputList,

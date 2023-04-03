@@ -111,3 +111,5 @@ TUTORIAL_SHORTCUT           =    T
 TUTORIAL_TITLE              =    Tutorial
 UNDO_OPTION_TITLE           =    Undo
 YES_TITLE                   =    Yes
+TIME_OUT					=	 Over!
+SPACE_KEY_CONTINUE			=    Press SPACE to continue...

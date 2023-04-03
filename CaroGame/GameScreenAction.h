@@ -63,7 +63,7 @@ namespace GameScreenAction {
         const Constants::Player& player,
         const bool& isPlayerOneTurn,
         GameState& curGameState,
-        bool& endGame,
+        short& endGame,
         GameScreen& gameScreen
 
     );

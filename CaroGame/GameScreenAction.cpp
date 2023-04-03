@@ -156,7 +156,7 @@ GameAction::Point GameScreenAction::HandleState(
     const Constants::Player& player,
     const bool& isPlayerOneTurn,
     GameState& curGameState,
-    bool& endGame,
+    short& endGame,
     GameScreen& gameScreen
 )
 {
@@ -172,10 +172,10 @@ GameAction::Point GameScreenAction::HandleState(
             else
                 curGameState.playerScoreTwo++;
             HightLightWin(move, winPoint, player.symbol, gameScreen);
-            endGame = 1;
+            endGame = Constants::END_GAME_WIN_NORMAL;
             break;
         case Logic::DRAW_VALUE:
-            endGame = 1;
+            endGame = Constants::END_GAME_DRAW;
             break;
     }
     return winPoint;

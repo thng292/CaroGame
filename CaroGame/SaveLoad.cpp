@@ -66,6 +66,7 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
     short a, b;
     while (!file.eof()) {
         file >> a >> b;
+        if (file.eof()) break;
         if (file.fail() && !file.eof()) {
             return std::nullopt;
         }

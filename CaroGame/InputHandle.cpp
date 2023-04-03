@@ -24,6 +24,7 @@ std::wstring InputHandle::Filter(wchar_t inp)
     if (inp == L'\x1b') {
         return ESC;
     }
+
     if ((inp > 127 || inp < 8)) {
         return L"";
     }

@@ -8,16 +8,20 @@ std::pair<short, short> InputBox::CalcCenter(short width, short height)
 short InputBox::GetMaxWidth(LabelList labelList)
 {
     short res = 0;
-    std::for_each(labelList.begin(), labelList.end(), [&res](const auto& elem) {
+    std::for_each(labelList.begin(), labelList.end(), [&res](const auto &elem) {
         res = max(res, elem.length());
     });
     return res;
 }
 
-void InputBox::DrawInputBox(
-    LabelList labelList, size_t &selected, InputList &inputList,
-    bool maxReached, short maxLength
-) {
+bool InputBox::DrawInputBox(
+    LabelList labelList,
+    size_t &selected,
+    InputList &inputList,
+    bool maxReached,
+    short maxLength
+)
+{
     const short MARGIN = 2, PADDING = 2;
     const short HEIGHT = labelList.size() * MARGIN;
     const short MAX_LABEL_WIDTH = GetMaxWidth(labelList);
@@ -33,10 +37,7 @@ void InputBox::DrawInputBox(
 
     for (size_t i = 0; i < labelList.size(); ++i) {
         View::WriteToView(
-            CENTER.first + 2,
-            CENTER.second + 1 + i * MARGIN,
-            labelList[i],
-            0
+            CENTER.first + 2, CENTER.second + 1 + i * MARGIN, labelList[i], 0
         );
         View::WriteToView(
             CENTER.first + 2 + labelList[i].size() + 1,
@@ -51,7 +52,8 @@ void InputBox::DrawInputBox(
         CENTER.first + WIDTH,
         CENTER.first,
         CENTER.second + HEIGHT + 1,
-        Language::GetString(L"MAX_NAME_LENGTH_NOTICE") + std::format(L" {}", maxLength)
+        Language::GetString(L"MAX_NAME_LENGTH_NOTICE") +
+            std::format(L" {}", maxLength)
     );
 
     auto tmp = View::Input(
@@ -60,20 +62,23 @@ void InputBox::DrawInputBox(
         labelList[selected],
         inputList[selected],
         1,
-        [&](std::wstring newInp) { 
-            if (newInp.size() > 10) return;
-            inputList[selected] = newInp; 
+        [&](std::wstring newInp) {
+            if (newInp.size() > maxLength) return;
+            inputList[selected] = newInp;
         },
         View::defaultToogleFocus,
         L'\0'
     );
-    
+
     switch (tmp) {
         case L'\r':
-            if (labelList[selected].size() != 0) selected++;
-            break;
+            if (inputList[selected].size() != 0) selected++;
+            return true;
         case L'\t':
             selected = Utils::modCycle(selected + 1, labelList.size());
-            break;
+            return true;
+        case L'\x1b':
+            return false;
+
     }
 }

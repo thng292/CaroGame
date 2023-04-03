@@ -25,10 +25,10 @@ void View::Setup()
     );*/
 
     // Hide the cursor
-    CONSOLE_CURSOR_INFO cursorInfo;
+    /*CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
     cursorInfo.bVisible = false;
-    SetConsoleCursorInfo(hOut, &cursorInfo);
+    SetConsoleCursorInfo(hOut, &cursorInfo);*/
 
     // Set font bold
     fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);

@@ -3,7 +3,7 @@
 void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME)
         );
 
     GameState tempGameState = curGameState;
@@ -25,9 +25,9 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
     short row = 0, col = 0;
 
     bool isPlayerOneTurn = curGameState.playerOneFirst;
-    bool endGame = 0;
+    short endGame = 0;
     short index = -1;
-    short moveListSize = curGameState.moveList.size() - 1;
+    short moveListSize = curGameState.moveList.size();
 
     GameAction::Point curMove = {-1, -1};
     GameAction::Point winPoint;

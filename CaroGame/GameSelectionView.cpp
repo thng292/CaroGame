@@ -48,7 +48,7 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
             navigationValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"e" || tmp == L"E") {
+        if (tmp == L"ESC") {
             return NavHost.Back();
         }
 
@@ -95,11 +95,15 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
 
 
     const short MAX_LABEL = labelList.size();
+    bool navBack = false;
 
     while (curLabel < MAX_LABEL) {
-        InputBox::DrawInputBox(
+        if (!InputBox::DrawInputBox(
             labelList, curLabel, inputList, maxReached, MAX_LENGTH
-        );
+            )) {
+            return NavHost.Back();
+        }
+        
     }
     curGameState.playerNameOne = inputList[0];
     curGameState.playerNameTwo = inputList[1];
@@ -182,6 +186,10 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
             Utils::PlayKeyPressSound();
+        }
+
+        if (tmp == L"ESC") {
+            return NavHost.Back();
         }
 
         if (Utils::keyMeanLeft(tmp)) {
@@ -360,7 +368,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
             navigateValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"e" || tmp == L"E") {
+        if (tmp == L"ESC") {
             return NavHost.Back();
         }
 
@@ -428,7 +436,7 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
             optionValue = optionValueList[2];
             break;
         }
-        if (tmp == L"e" || tmp == L"E") {
+        if (tmp == L"ESC") {
             return NavHost.Back();
         }
 
@@ -530,7 +538,7 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
             navigationValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"e" || tmp == L"E") {
+        if (tmp == L"ESC") {
             return NavHost.Back();
         }
 
@@ -558,7 +566,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
     short selectedOption = 0;
     const short MAX_OPTIONS = 3;
 
-    std::vector<short> optionValueList = {15 * 60, 5 * 60, 10};
+    std::vector<short> optionValueList = {15 * 60, 5 * 60, 60};
     short optionValue;
     std::string navigationValue = "GameModeVersusView";
 
@@ -598,7 +606,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
             break;
         }
 
-        if (tmp == L"e" || tmp == L"E") {
+        if (tmp == L"ESC") {
             return NavHost.Back();
         }
 
@@ -684,7 +692,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             navigationValue = navigationValueList[5];
             break;
         }
-        if (tmp == L"e" || tmp == L"E") {
+        if (tmp == L"ESC") {
             return NavHost.Back();
         }
 

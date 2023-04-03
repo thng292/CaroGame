@@ -5,6 +5,8 @@
 #include "View.h"
 #include "Container.h"
 #include "Constants.h"
+#include "Label.h"
+#include "Language.h"
 
 // Container for various elements such as timers, log, win counts,...
 class Container {
@@ -19,7 +21,9 @@ class Container {
         const std::vector<std::pair<short, short>>& valueList,
         const std::wstring& playerNameOne,
         const std::wstring& playerNameTwo,
-        bool playerOneFirst
+        bool playerOneFirst,
+        short winMethod = 0,
+        bool isReplay = false
     );
 
     

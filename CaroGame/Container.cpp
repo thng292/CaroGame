@@ -15,11 +15,16 @@ void Container::DrawToLogContainer(
     const std::vector<std::pair<short, short>> &valueList,
     const std::wstring& playerNameOne,
     const std::wstring& playerNameTwo,
-    bool playerOneFirst
+    bool playerOneFirst,
+    short winMethod,
+    bool isReplay
+
 )
 {
+    short maxRow = 6;
+    short maxDisplay = (winMethod != 0) ? maxRow - 1 - !isReplay : maxRow;
     short valueListSize = valueList.size();
-    short numOfValueDisplay = (valueListSize >= 6) ? 6 : valueListSize;
+    short numOfValueDisplay = (valueListSize >= maxDisplay) ? maxDisplay : valueListSize;
     size_t startIndex = valueListSize - numOfValueDisplay;
 
 
@@ -40,7 +45,7 @@ void Container::DrawToLogContainer(
 
     View::Color color;
 
-    for (short i = 0; i < 6; ++i) {
+    for (short i = 0; i < maxRow; ++i) {
         FillConsoleOutputCharacter(
             StdOut,
             L' ',
@@ -99,6 +104,56 @@ void Container::DrawToLogContainer(
 
         startIndex++;
         isPlayerOneTurn = !isPlayerOneTurn;
+    }
+    if (winMethod != 0) {
+        std::wstring value;
+
+        switch (winMethod) {
+            case Constants::END_GAME_WIN_NORMAL:
+
+                value = std::format(
+                    L"Player {} ({}) has won the game", playerName, playerSymbol
+                );
+                break;
+            case Constants::END_GAME_WIN_TIME:
+                playerName = (isPlayerOneTurn) ? playerNameTwo : playerNameOne;
+                playerSymbol = (isPlayerOneTurn) ? Constants::PLAYER_TWO.symbol
+                                                 : Constants::PLAYER_ONE.symbol;
+                value = std::format(
+                    L"Player {} ({}) has won the game (Through time)", playerName, playerSymbol
+                );
+                break;
+            case Constants::END_GAME_DRAW:
+                value = L"The game ended in a draw";
+                break;
+        }
+
+            
+          
+        short X_CENTER = Label::GetCenterX(xCoord, cellWidth, value.size());
+        View::WriteToView(
+            X_CENTER,
+            yCoord + yOffset + numOfValueDisplay,
+            value,
+            (wchar_t)0U,
+            false,
+            View::Color::YELLOW
+        );
+        if (!isReplay) {
+            value = Language::GetString(L"SPACE_KEY_CONTINUE");
+
+            X_CENTER = Label::GetCenterX(xCoord, cellWidth, value.size());
+            View::WriteToView(
+                X_CENTER,
+                yCoord + yOffset + numOfValueDisplay + 1,
+                value,
+                (wchar_t)0U,
+                false,
+                View::Color::BLACK
+            );
+        }
+        
+        
     }
 }
 
