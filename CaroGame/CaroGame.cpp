@@ -22,7 +22,7 @@ int main()
 #endif
     NavigationHost NavHost(
 #if _DEBUG
-        "StartUpScreen",
+        "GameModeTypeView",
 #else
         "StartUpScreen",
 #endif
@@ -58,7 +58,7 @@ int main()
             {"FirstTimeTutorialScreen",    StartUp::FirstTimeTutorialScreen     },
             {"StartUpScreen",              StartUp::StartUpScreen               },
             {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
-            {"GameEndView",                GameEndView::GameEndView             }
+            {"GameEndView",                GameEndView::GameEndView             },
             {"Tutorial",                   Tutorial::TutorialScreen             },
     }
     );

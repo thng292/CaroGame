@@ -308,11 +308,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         );
     }
 
-    curGameState.playerTimeOne = curGameState.playerTimeTwo =
-        curGameState.gameTime;
 
     auto tmp = InputHandle::Get();
     // curGameState.moveList.clear();
-    NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
+    NavHost.SetContext(Constants::FINISHED_GAME, curGameState);
     return NavHost.Navigate("ReplaySave");
 }

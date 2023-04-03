@@ -537,6 +537,8 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
     if (navigationValue == navigationValueList[0]) {
         curGameState.playerOneFirst = !curGameState.playerOneFirst;
         curGameState.moveList.clear();
+        curGameState.playerTimeOne = curGameState.playerTimeTwo =
+            curGameState.gameTime;
     }
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate(navigationValue);

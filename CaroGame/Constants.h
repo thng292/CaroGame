@@ -19,6 +19,7 @@ namespace Constants {
     const short BOARD_SIZE = 13;
     const short PAGE_SIZE = 10;
     const std::string CURRENT_GAME = "CurrentGame";
+    const std::string FINISHED_GAME = "FinishedGame";
     const Player PLAYER_ONE = {1, L"X"};
     const Player PLAYER_TWO = {2, L"O"};
     const int WIN_VALUE_COUNT = 5;
