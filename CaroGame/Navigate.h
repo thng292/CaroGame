@@ -48,6 +48,7 @@ class NavigationHost {
     NavigationHost& operator=(NavigationHost&&) = delete;
 
     std::any& GetFromContext(const std::string& name);
+    bool CheckContext(const std::string& name);
     void SetContext(const std::string& name, const std::any& data);
     void DeleteContext(const std::string& name);
     void Add(const std::string& path, const ViewFunc& view);
