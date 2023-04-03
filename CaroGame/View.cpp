@@ -22,7 +22,13 @@ void View::Setup()
     );
     /*currMode & ~(ENABLE_QUICK_EDIT_MODE) &
         ~(ENABLE_MOUSE_INPUT) &
-);*/
+    );*/
+
+    // Hide the cursor
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(hOut, &cursorInfo);
+    cursorInfo.bVisible = false;
+    SetConsoleCursorInfo(hOut, &cursorInfo);
 
     // Set font bold
     fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
