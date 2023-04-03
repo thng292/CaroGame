@@ -79,6 +79,18 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                     gameScreen
                 );
 
+                if (index == curGameState.moveList.size() - 1) {
+                    if (endGame == 0) endGame = Constants::END_GAME_WIN_TIME;
+                    gameScreen.logContainer.DrawToLogContainer(
+                        curGameState.moveList,
+                        curGameState.playerNameOne,
+                        curGameState.playerNameTwo,
+                        curGameState.playerOneFirst,
+                        endGame,
+                        true
+                    );
+                }
+
                 GameScreenAction::UnhightlightMove(
                     gameScreen, prevMove, prevPlayer.symbol
                 );
@@ -86,13 +98,16 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
             } else {
                 index--;
                 if (endGame) {
-                    Constants::Player temp = (isPlayerOneTurn)
-                                                 ? Constants::PLAYER_TWO
-                                                 : Constants::PLAYER_ONE;
-                    GameScreenAction::HightLightWin(
-                        winPoint, curMove, temp.symbol, gameScreen, true
-                    );
-                    endGame = false;
+                    if (endGame == Constants::END_GAME_WIN_NORMAL) {
+                        Constants::Player temp = (isPlayerOneTurn)
+                                                     ? Constants::PLAYER_TWO
+                                                     : Constants::PLAYER_ONE;
+                        GameScreenAction::HightLightWin(
+                            winPoint, curMove, temp.symbol, gameScreen, true
+                        );
+                    }
+                    
+                    endGame = 0;
                 }
                 GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
 
@@ -123,7 +138,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                 );
             }
 
-            if (!endGame)
+            if (endGame != Constants::END_GAME_WIN_NORMAL)
                 GameScreenAction::HighlightMove(
                     gameScreen, curMove, curPlayer.symbol
                 );
