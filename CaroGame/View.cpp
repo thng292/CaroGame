@@ -20,16 +20,17 @@ void View::Setup()
         ((currMode | ENABLE_EXTENDED_FLAGS) & ~ENABLE_QUICK_EDIT_MODE &
          ~ENABLE_MOUSE_INPUT)
     );
-    /*currMode & ~(ENABLE_QUICK_EDIT_MODE) &
-        ~(ENABLE_MOUSE_INPUT) &
-    );*/
+/*currMode & ~(ENABLE_QUICK_EDIT_MODE) &
+    ~(ENABLE_MOUSE_INPUT) &
+);*/
 
-    // Hide the cursor
-    /*CONSOLE_CURSOR_INFO cursorInfo;
+// Hide the cursor
+#if _DEBUG
+    CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
     cursorInfo.bVisible = false;
-    SetConsoleCursorInfo(hOut, &cursorInfo);*/
-
+    SetConsoleCursorInfo(hOut, &cursorInfo);
+#endif
     // Set font bold
     fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
     GetCurrentConsoleFontEx(hOut, 0, &fontex);

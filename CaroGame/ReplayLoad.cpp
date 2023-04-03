@@ -83,7 +83,7 @@ void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
         if (tmp == L"\r") {
             auto loaded = currentState.LoadCurrentSelect();
             if (loaded) {
-                NavHost.SetContext(Constants::CURRENT_GAME, loaded.value());
+                NavHost.SetContext(Constants::FINISHED_GAME, loaded.value());
                 return NavHost.Navigate("ReplayScreenView");
             } else {
                 return NavHost.NavigateStack("LoadFailed");

@@ -23,7 +23,7 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
             return NavHost.Navigate("ReplaySave");
         }
         auto currentGameState = std::any_cast<GameState>(
-            NavHost.GetFromContext(Constants::CURRENT_GAME)
+            NavHost.GetFromContext(Constants::FINISHED_GAME)
         );
         if (currentState.Save(currentGameState)) {
             return NavHost.NavigateStack("SaveSuccess");
