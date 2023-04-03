@@ -2,6 +2,13 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
+    /*GameState temp;
+    temp.playerAvatarOne = 1, temp.playerAvatarTwo = 1;
+    temp.gameMode = Constants::GAME_MODE_PVE;
+    temp.aiDifficulty = AI::AI_DIFFICULTY_HARD;
+    temp.playerOneFirst = false;
+    NavHost.SetContext(Constants::CURRENT_GAME, temp);*/
+
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
         );
@@ -19,6 +26,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             bgmAudio->getPlayer()->Play(true, true);
         }
     }
+
+    
+
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
 
     GameScreen gameScreen(7, 2);
@@ -31,6 +41,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     GameAction::Point prevMove = {-1, -1};
     Constants::Player prevPlayer;
+
+    GameAction::Point curMove;
+    Constants::Player curPlayer;
 
     GameScreenAction::LoadGameToView(
         gameScreen, gameBoard, moveCount, curGameState, myAI
@@ -45,6 +58,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             curGameState.moveList.back().first,
             curGameState.moveList.back().second
         };
+
+        curMove = prevMove;
 
         gameScreen.logContainer.DrawToLogContainer(
             curGameState.moveList,
@@ -122,18 +137,22 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     if (isPlayerOneTurn) {
         prevPlayer = Constants::PLAYER_TWO;
+        curPlayer = Constants::PLAYER_ONE;
         timerPlayerOne.Continued();
     } else {
         prevPlayer = Constants::PLAYER_ONE;
+        curPlayer = Constants::PLAYER_TWO;
 
         timerPlayerTwo.Continued();
     }
 
+    
+
     while (!endGame) {
         if (aiFirst) {
-            GameAction::Point curMove = myAI.GetFirstMove();
+            curMove = myAI.GetFirstMove();
             myAI.UpdatePrivateValues(curMove);
-            Constants::Player curPlayer = Constants::PLAYER_TWO;
+            curPlayer = Constants::PLAYER_TWO;
             timerPlayerOne.Continued();
             std::lock_guard guard(lock);
             GameScreenAction::UpdateGame(
@@ -154,6 +173,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             prevMove = curMove;
             prevPlayer = curPlayer;
         }
+      
 
         auto tmp = InputHandle::Get();
         if (endGame) break;
@@ -167,6 +187,51 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             timerPlayerTwo.Stop();
             NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
             return NavHost.NavigateStack("PauseMenuView");
+        }
+
+        if (tmp == L"z" && curGameState.moveList.size() != 0/*&&
+            
+             Config::GetSetting(Config::UndoOption) == Config::Value_True*/) {
+            std::lock_guard guard(lock);
+
+            if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
+                (curGameState.gameMode == Constants::GAME_MODE_PVE &&
+                 (curGameState.moveList.size() > 2 || curGameState.playerOneFirst))) {
+                GameScreenAction::UndoMove(
+                    gameScreen,
+                    gameBoard,
+                    moveCount,
+                    curGameState,
+                    curMove,
+                    prevMove,
+                    curPlayer,
+                    prevPlayer,
+                    isPlayerOneTurn
+                );
+                if (curGameState.gameMode == Constants::GAME_MODE_PVE)
+                    myAI.RevertPrivateValues();
+            }
+            if (curGameState.gameMode == Constants::GAME_MODE_PVE &&
+                (curGameState.moveList.size() > 1 || curGameState.playerOneFirst)) {
+
+                GameScreenAction::UndoMove(
+                    gameScreen,
+                    gameBoard,
+                    moveCount,
+                    curGameState,
+                    curMove,
+                    prevMove,
+                    curPlayer,
+                    prevPlayer,
+                    isPlayerOneTurn
+                );
+
+                if (curGameState.gameMode == Constants::GAME_MODE_PVE)
+                    myAI.RevertPrivateValues();
+
+            }
+
+
         }
 
         if (Utils::keyMeanUp(tmp)) {
@@ -196,15 +261,16 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         if (tmp == L"\r") {
             if (gameBoard[row][col] == 0) {
-                Constants::Player curPlayer;
-                GameAction::Point curMove = {row, col};
+                curMove = {row, col};
 
                 if (isPlayerOneTurn) {
                     curPlayer = Constants::PLAYER_ONE;
-
+                    timerPlayerTwo.Continued();
                     timerPlayerOne.Pause();
                 } else {
                     curPlayer = Constants::PLAYER_TWO;
+                    timerPlayerOne.Continued();
+
                     timerPlayerTwo.Pause();
                 }
 
@@ -236,20 +302,19 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     myAI.UpdatePrivateValues(curMove);
                     isPlayerOneTurn = !isPlayerOneTurn;
 
-                    if (isPlayerOneTurn) {
-                        curPlayer = Constants::PLAYER_ONE;
-                        timerPlayerOne.Pause();
-                    } else {
-                        curPlayer = Constants::PLAYER_TWO;
-                        timerPlayerTwo.Pause();
-                    }
+                    
 
                     curMove = myAI.GetBestMove(gameBoard, moveCount);
 
                     if (isPlayerOneTurn) {
+                        curPlayer = Constants::PLAYER_ONE;
                         timerPlayerOne.Pause();
+                        timerPlayerTwo.Continued();
                     } else {
+                        curPlayer = Constants::PLAYER_TWO;
                         timerPlayerTwo.Pause();
+                        timerPlayerOne.Continued();
+
                     }
 
                     lock.lock();
@@ -278,11 +343,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     );
                 }
 
-                if (isPlayerOneTurn) {
-                    timerPlayerTwo.Continued();
-                } else {
-                    timerPlayerOne.Continued();
-                }
+
 
                 isPlayerOneTurn = !isPlayerOneTurn;
 

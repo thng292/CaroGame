@@ -83,6 +83,8 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
     return moveBest;
 }
 
+
+
 short AI::MiniMax(
     GameAction::Board& board,
     short& moveCount,

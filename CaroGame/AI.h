@@ -12,8 +12,7 @@ class AI {
    public:
     const static short AI_DIFFICULTY_EASY = 1, AI_DIFFICULTY_NORMAL = 2,
                        AI_DIFFICULTY_HARD = 3;
-    GameAction::Point _topLeftPoint = {100, 100},
-                      _bottomRightPoint = {-100, -100};
+    
     short Eval(
         const GameAction::Board& board,
         const short& moveCount,
@@ -35,6 +34,7 @@ class AI {
 
     inline void UpdatePrivateValues(GameAction::Point point)
     {
+        _prevPointList.push_back({_topLeftPoint, _bottomRightPoint});
         if (point.row < _topLeftPoint.row) _topLeftPoint.row = point.row;
         if (point.col < _topLeftPoint.col) _topLeftPoint.col = point.col;
 
@@ -42,6 +42,12 @@ class AI {
             _bottomRightPoint.row = point.row;
         if (point.col > _bottomRightPoint.col)
             _bottomRightPoint.col = point.col;
+    }
+
+    inline void RevertPrivateValues() { 
+        _topLeftPoint = _prevPointList.back().first;
+        _bottomRightPoint = _prevPointList.back().second;
+        _prevPointList.pop_back();
     }
 
     inline void SetDifficulty(const short& difficulty)
@@ -75,4 +81,7 @@ class AI {
     const short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
                 PLAYER_AI = Constants::PLAYER_TWO.value;
     short _range;
+    GameAction::Point _topLeftPoint = {100, 100},
+                      _bottomRightPoint = {-100, -100};
+    std::vector<std::pair<GameAction::Point, GameAction::Point>> _prevPointList;
 };

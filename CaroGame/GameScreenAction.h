@@ -23,6 +23,18 @@ namespace GameScreenAction {
 
     );
 
+    void UndoMove(
+        GameScreen& gameScreen,
+        GameAction::Board& gameBoard,
+        short& moveCount,
+        GameState& curGameState,
+        GameAction::Point& curMove,
+        GameAction::Point& prevMove,
+        Constants::Player& curPlayer,
+        Constants::Player& prevPlayer,
+        bool& isPlayerOneTurn
+    );
+
     void HightLightWin(
         const GameAction::Point& winMoveOne,
         const GameAction::Point& winMoveTwo,

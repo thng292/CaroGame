@@ -31,6 +31,46 @@ void GameScreenAction::UpdateGame(
     }
 }
 
+void GameScreenAction::UndoMove(
+    GameScreen& gameScreen,
+    GameAction::Board& gameBoard,
+    short& moveCount,
+    GameState& curGameState,
+    GameAction::Point& curMove,
+    GameAction::Point& prevMove,
+    Constants::Player& curPlayer,
+    Constants::Player& prevPlayer,
+    bool& isPlayerOneTurn
+)
+{
+    GameAction::UndoMove(gameBoard, moveCount, curMove);
+    GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
+    curGameState.moveList.pop_back();
+    if (curGameState.moveList.size() != 0) {
+        curMove = {
+            curGameState.moveList.back().first,
+            curGameState.moveList.back().second};
+        prevMove = curMove;
+        if (curGameState.moveList.size() != 0) curGameState.moveList.pop_back();
+
+    } else {
+        curMove = {-1, -1};
+        prevMove = {-1, -1};
+    }
+
+    curPlayer =
+        (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
+    prevPlayer = curPlayer;
+
+    GameScreenAction::UpdateGame(
+        gameScreen, gameBoard, moveCount, curMove, curPlayer, curGameState
+    );
+
+    GameScreenAction::HighlightMove(gameScreen, curMove, curPlayer.symbol);
+
+    isPlayerOneTurn = !isPlayerOneTurn;
+}
+
 void GameScreenAction::HightLightWin(
     const GameAction::Point& winMoveOne,
     const GameAction::Point& winMoveTwo,
