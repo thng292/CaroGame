@@ -23,8 +23,7 @@ std::vector<FileHandle::FileDetail> FileHandle::GetAllTextFileInDir(
     std::vector<FileDetail> tmp;
     Ensure(Dir);
     for (const auto& file : std::filesystem::directory_iterator(Dir)) {
-        if (file.is_regular_file() &&
-            file.path().extension().string() == ".txt") {
+        if (file.is_regular_file()) {
             tmp.push_back({file.path(), file.last_write_time()});
         }
     }
