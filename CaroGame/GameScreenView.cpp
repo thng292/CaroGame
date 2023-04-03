@@ -2,15 +2,6 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
-    //GameState temp;
-    //temp.playerAvatarOne = 1, temp.playerAvatarTwo = 1;
-    //temp.gameMode = Constants::GAME_MODE_PVP;
-    //// temp.aiDifficulty = AI::AI_DIFFICULTY_HARD;
-    //temp.playerOneFirst = true;
-    //temp.gameType = Constants::GAME_TYPE_NORMAL;
-    //temp.playerTimeOne = temp.playerTimeTwo = 3;
-    //NavHost.SetContext(Constants::CURRENT_GAME, temp);
-
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
         );
@@ -167,7 +158,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         timerPlayerTwo.Continued();
     }
-    
+
     std::wstring tmp;
 
     while (!endGame) {
@@ -391,12 +382,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             curGameState.playerOneFirst,
             endGame
         );
-        
-
     }
     while (tmp != L" ") {
         tmp = InputHandle::Get();
     }
     NavHost.SetContext(Constants::FINISHED_GAME, curGameState);
-    return NavHost.Navigate("ReplaySave");
+    return NavHost.Navigate("GameEndView");
 }

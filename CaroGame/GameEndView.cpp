@@ -2,20 +2,10 @@
 
 void GameEndView::GameEndView(NavigationHost& NavHost)
 {
-    bool isPlayerOneWin = 1;
-    GameState temp;
-    temp.playerNameOne = L"123456";
-    temp.playerNameTwo = L"1234567899";
-    
-    temp.playerScoreOne = 12;
-    temp.playerScoreTwo = 2;
-
-    NavHost.SetContext(Constants::CURRENT_GAME, temp);
-
     auto gameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
-        );
-    const short WIDTH = 43, HEIGHT = 11;
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
+        ));
+    const short WIDTH = 43, HEIGHT = 2 * 9;
 
     const short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
     View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
@@ -26,7 +16,14 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     std::wstring timeLabel = Language::GetString(L"CUR_TIME") + L":";
     std::wstring scoreLabel = Language::GetString(L"CUR_SCORE") + L":";
     std::wstring movesLabel = Language::GetString(L"CUR_MOVE_COUNT") + L":";
+    std::wstring totalTimeLabel = Language::GetString(L"PLAYER_TIME") + L":";
+    std::wstring gameTypeLabel = Language::GetString(L"CUR_GAME_TYPE") + L":";
+    std::wstring gameModeLabel = Language::GetString(L"CUR_GAME_MODE") + L":";
+    std::wstring aiDifficultyLabel =
+        Language::GetString(L"CUR_DIFFICULTY") + L":";
 
+    int booltmp = (gameState.playerOneFirst + (gameState.moveList.size() % 2));
+    bool isPlayerOneWin = (booltmp == 2 || booltmp == 0);
     if (isPlayerOneWin) {
         playerResultLabel = std::format(
             L"{} ({}) {}",
@@ -50,24 +47,21 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
 
     View::WriteToView(x, y, playerResultLabel);
     x = X_PIVOT + 3, y += 2;
+
+    // Name
     DrawLabelValuesAdjacent(
         x,
         y,
         nameLabel,
-        std::format(L"{} ({})", gameState.playerNameOne, Constants::PLAYER_ONE.symbol),
+        std::format(
+            L"{} ({})", gameState.playerNameOne, Constants::PLAYER_ONE.symbol
+        ),
         std::format(
             L"({}) {}", Constants::PLAYER_TWO.symbol, gameState.playerNameTwo
         )
 
     );
-    y += 2;
-    DrawLabelValuesAdjacent(
-        x,
-        y,
-        timeLabel,
-        Utils::SecondToMMSS(gameState.playerTimeOne),
-        Utils::SecondToMMSS(gameState.playerTimeTwo)
-    );
+    // Score
     y += 2;
     DrawLabelValuesAdjacent(
         x,
@@ -80,19 +74,94 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
             ? std::format(L"0{}", gameState.playerScoreTwo)
             : std::format(L"{}", gameState.playerScoreTwo)
     );
+
+    // Total time
     y += 2;
     DrawLabelValue(
         x,
         y,
-        //movesLabel, std::format(L"{}", gameState.moveList.size()),
+        totalTimeLabel,
+        (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+            ? L"\u221e"
+            : Utils::SecondToMMSS(gameState.gameTime)
+    );
+
+    // Time left
+    y += 2;
+    DrawLabelValuesAdjacent(
+        x,
+        y,
+        timeLabel,
+        Utils::SecondToMMSS(gameState.playerTimeOne),
+        Utils::SecondToMMSS(gameState.playerTimeTwo)
+    );
+
+    // Game type
+    y += 2;
+    DrawLabelValue(
+        x,
+        y,
+        gameTypeLabel,
+        (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+            ? Language::GetString(L"OPTION_TYPE_NORMAL")
+            : Language::GetString(L"OPTION_TYPE_RUSH")
+
+    );
+
+    // Game Mode
+    y += 2;
+    DrawLabelValue(
+        x,
+        y,
+        gameModeLabel,
+        (gameState.gameMode == Constants::GAME_MODE_PVP)
+            ? Language::GetString(L"OPTION_MODE_PVP")
+            : Language::GetString(L"OPTION_MODE_PVE")
+
+    );
+
+    // AI Diff
+    y += 2;
+    std::wstring aiDiffValue;
+    if (gameState.gameMode == Constants::GAME_MODE_PVE) {
+        switch (gameState.aiDifficulty) {
+            case AI::AI_DIFFICULTY_EASY:
+                aiDiffValue = Language::GetString(L"OPTION_AI_EASY");
+                break;
+            case AI::AI_DIFFICULTY_NORMAL:
+                aiDiffValue = Language::GetString(L"OPTION_AI_NORMAL");
+                break;
+            case AI::AI_DIFFICULTY_HARD:
+                aiDiffValue = Language::GetString(L"OPTION_AI_HARD");
+                break;
+        }
+    } else {
+        aiDiffValue = Language::GetString(L"OPTION_NULL");
+    }
+    DrawLabelValue(
+        x, y, aiDifficultyLabel, aiDiffValue
+
+    );
+
+    // Moves
+    y += 2;
+    DrawLabelValue(
+        x,
+        y,
+        // movesLabel, std::format(L"{}", gameState.moveList.size()),
         movesLabel,
         std::format(L"{}", 12)
 
     );
-    
-    
+
+    y += 2;
+    std::wstring exitLabel = Language::GetString(L"ANY_KEY_CONTINUE");
+    View::WriteToView(
+        Label::GetCenterX(x, WIDTH, exitLabel.size()), y, exitLabel
+    );
 
     auto c = InputHandle::Get();
+    return NavHost.Navigate("ReplayMenuView");
 }
 
 void GameEndView::DrawLabelValuesAdjacent(
@@ -106,9 +175,9 @@ void GameEndView::DrawLabelValuesAdjacent(
     View::WriteToView(x, y, label);
     if (playerOneValue.size() > 5) {
         x = x + 17 - (playerOneValue.size() - 5);
-    
-    }
-    else x += 17;
+
+    } else
+        x += 17;
     View::WriteToView(
         x,
         y,
@@ -120,7 +189,8 @@ void GameEndView::DrawLabelValuesAdjacent(
     if (playerOneValue.size() > 5) {
         x += playerOneValue.size() + 1;
 
-    } else x += 6;
+    } else
+        x += 6;
     View::WriteToView(x, y, L"|");
     if (playerOneValue.size() >= 5) {
         x += 2;
@@ -136,16 +206,14 @@ void GameEndView::DrawLabelValuesAdjacent(
     );
 }
 
-void GameEndView::DrawLabelValue(short x, short y, const std::wstring& label, const std::wstring& value) {
+void GameEndView::DrawLabelValue(
+    short x, short y, const std::wstring& label, const std::wstring& value
+)
+{
     View::WriteToView(x, y, label);
     if (value.size() == 1)
         x += 23;
     else
-        x += 22;
-    View::WriteToView(
-        x,
-        y,
-        value
-    );
+        x += 21;
+    View::WriteToView(x, y, value);
 }
-

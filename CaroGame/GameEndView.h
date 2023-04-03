@@ -10,6 +10,7 @@
 #include "Utils.h"
 #include "View.h"
 #include "Label.h"
+#include "AI.h"
 
 namespace GameEndView {
     void GameEndView(NavigationHost& NavHost);

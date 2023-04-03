@@ -38,9 +38,6 @@ GameScreen::GameScreen(short x, short y)
     x = X_PIVOT;
     y += playerInfoContainerOne.cellHeight + timerContainerOne.cellHeight;
     InitElement(logContainer, x, y, 54, 7, 7, 1);
-
-
-
 }
 
 void GameScreen::DrawGameScreen()
@@ -74,7 +71,9 @@ void GameScreen::DrawGameScreen()
 
     Label::DrawLabelCenter(
         timerContainerOne.xCoord,
-        timerContainerOne.xCoord + timerContainerOne.cellWidth * 2 + playerContainerOne.cellWidth * 2 + winCountContainerOne.cellWidth * 2,
+        timerContainerOne.xCoord + timerContainerOne.cellWidth * 2 +
+            playerContainerOne.cellWidth * 2 +
+            winCountContainerOne.cellWidth * 2,
         timerContainerOne.xCoord,
         timerContainerOne.yCoord - 1,
         L"Game Status"
@@ -94,25 +93,16 @@ void GameScreen::DrawGameScreen()
         L"Move History"
     );
 
-    const std::vector<std::wstring> INSTRUCTION_LIST = {
-        L"A: Lorem ispum",
-        L"A: Lorem ispum",
-        L"A: Lorem ispum",
-        L"A: Lorem ispum",
-    };
-    Label::DrawLabelGrid(
-        logContainer.xCoord,
-        logContainer.xCoord + logContainer.cellWidth,
-        logContainer.xCoord,
-        logContainer.yCoord + logContainer.cellHeight + 1,
-        INSTRUCTION_LIST,
-        2
-    );
+    
+    Label::DrawGameScreenHint(logContainer.xCoord, logContainer.yCoord, logContainer.cellWidth, logContainer.cellHeight);
+   
 }
 
 void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
 {
-    playerContainerOne.DrawToContainer(Constants::PLAYER_ONE.symbol, (View::Color)Constants::PLAYER_ONE_COLOR);
+    playerContainerOne.DrawToContainer(
+        Constants::PLAYER_ONE.symbol, (View::Color)Constants::PLAYER_ONE_COLOR
+    );
     playerContainerTwo.DrawToContainer(
         Constants::PLAYER_TWO.symbol, (View::Color)Constants::PLAYER_TWO_COLOR
     );
@@ -166,26 +156,24 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
         timerContainerTwo.xOffset -= 1;
 
         timerContainerOne.DrawToContainer(L"\u221eREPLAY", View::Color::YELLOW);
-        timerContainerTwo.DrawToContainer(
-            L"REPLAY\u221e", View::Color::YELLOW
-        );
+        timerContainerTwo.DrawToContainer(L"REPLAY\u221e", View::Color::YELLOW);
     }
 
     const short avatarOffset[] = {3, 2, 3, 5, 2, 2, 3, 4};
 
     if (gameState.playerAvatarOne != 9)
         avatarMap[gameState.playerAvatarOne](
-            playerInfoContainerOne.xCoord + avatarOffset[gameState.playerAvatarOne],
+            playerInfoContainerOne.xCoord +
+                avatarOffset[gameState.playerAvatarOne],
             playerInfoContainerOne.yCoord
         );
     if (gameState.playerAvatarTwo != 9)
         avatarMap[gameState.playerAvatarTwo](
-        playerInfoContainerTwo.xCoord + avatarOffset[gameState.playerAvatarTwo], playerInfoContainerTwo.yCoord
-    );
-
-
+            playerInfoContainerTwo.xCoord +
+                avatarOffset[gameState.playerAvatarTwo],
+            playerInfoContainerTwo.yCoord
+        );
 }
-
 
 void GameScreen::InitElement(
     Container& element,
