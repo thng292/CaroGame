@@ -12,6 +12,7 @@
 #include "Utils.h"
 #include "View.h"
 #include "Result.h"
+#include "Gura.h"
 namespace MainMenu {
 
     void ScreenMainMenu(NavigationHost& NavHost);

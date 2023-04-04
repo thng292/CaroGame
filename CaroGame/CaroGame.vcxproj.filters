@@ -213,6 +213,9 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Gura.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -379,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="Tutorial.h">
       <Filter>Screens\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gura.h">
+      <Filter>Core\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

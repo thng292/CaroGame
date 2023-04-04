@@ -166,6 +166,7 @@
     <ClCompile Include="GameScreenAction.cpp" />
     <ClCompile Include="GameScreenView.cpp" />
     <ClCompile Include="GameSelectionView.cpp" />
+    <ClCompile Include="Gura.cpp" />
     <ClCompile Include="Hash.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="InputHandle.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="GameScreenAction.h" />
     <ClInclude Include="GameScreenView.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Gura.h" />
     <ClInclude Include="Hash.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="InputHandle.h" />
