@@ -2,13 +2,6 @@
 
 void GameEndView::GameEndView(NavigationHost& NavHost)
 {
-    GameState temp;
-    temp.gameEnd = 3;
-    temp.playerNameOne = L"1237899";
-    temp.playerNameTwo = L"1234567899";
-
-    NavHost.SetContext(Constants::FINISHED_GAME, temp);
-
     auto gameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
         ));

@@ -1,5 +1,6 @@
-#include "View.h"
 #include "Avatar.h"
+#include "Constants.h"
+#include "View.h"
 #include "cstdlib"
 void khung_Among_Us();
 
@@ -33,18 +34,9 @@ void Draw(
     View::Color a5
 );
 
-void Logo_Draw(
-    int x,
-    int y
-);
+void Logo_Draw(int x, int y);
 
-void Logo_Win(
-    int x,
-    int y
-);
+void Logo_Win(int x, int y);
 
-void Logo_Lose(
-    int x,
-    int y
-);
-void Logo_Result(int k);
+void Logo_Lose(int x, int y);
+void Logo_Result(int k, bool &stop);
