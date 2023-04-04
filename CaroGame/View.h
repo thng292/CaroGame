@@ -56,6 +56,8 @@ namespace View {
     const short VPADDING = 1;
     const short BORDER_WIDTH = 1;
 
+    void ShowCursor(bool show);
+
     // Setup console
     void Setup();
 
