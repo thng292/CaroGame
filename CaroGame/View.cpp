@@ -26,10 +26,7 @@ void View::Setup()
 
 // Hide the cursor
 #if _NDEBUG
-    CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(hOut, &cursorInfo);
-    cursorInfo.bVisible = false;
-    SetConsoleCursorInfo(hOut, &cursorInfo);
+    ShowCursor(false);
 #endif
     // Set font bold
     fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
@@ -53,6 +50,14 @@ void View::Setup()
     // Faster UI Update
     std::ios_base::sync_with_stdio(0);
     std::wcout.tie(0);
+}
+
+void View::ShowCursor(bool show) {
+    static HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(hOut, &cursorInfo);
+    cursorInfo.bVisible = !show;
+    SetConsoleCursorInfo(hOut, &cursorInfo);
 }
 
 COORD View::GetCursorPos()
@@ -459,6 +464,10 @@ wchar_t View::Input(
     Color focusBackgroundColor
 )
 {
+    ShowCursor(1);
+    Utils::ON_SCOPE_EXIT([&] {
+        ShowCursor(0);
+    });
     if (hasFocus) {
         bool redraw = 1;
         bool needReservePos = 0;

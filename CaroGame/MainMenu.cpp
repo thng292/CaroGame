@@ -10,7 +10,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     Caro(32, 1);
     Logo_Deadpool(3, 5);
     Logo_Captain(79 + 4, 5);
-    //Logo_Result(0);
+    //logoGura(1,1);
     View::WriteToView(
         119 - Constants::version.size() - 9,
         0,

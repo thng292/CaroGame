@@ -73,3 +73,44 @@ class Timer {
     std::shared_ptr<TimerInternalState> _state =
         std::make_shared<TimerInternalState>();
 };
+
+class setTimeout {
+   public:
+    // delete copy and move constructor
+    setTimeout(const setTimeout&) = delete;
+    setTimeout(setTimeout&&) = delete;
+    // delete copy and move assignment
+    setTimeout& operator=(const setTimeout&) = delete;
+    setTimeout& operator=(setTimeout&&) = delete;
+
+    setTimeout(std::function<void(void)> callback, const long& timeout)
+    {
+        _state->callback = callback;
+        _state->interval = std::chrono::milliseconds{timeout};
+    }
+
+    void Start()
+    {
+        _state->running = true;
+        auto state = _state;
+        _thread = std::thread([state] {
+            auto nextInterval = std::chrono::steady_clock::now() +
+                                std::chrono::milliseconds(state->interval);
+            std::this_thread::sleep_until(nextInterval);
+            if (state->running) {
+                state->callback();
+            }
+        });
+        _thread.detach();
+    }
+
+    inline void Cancel() { _state->running = false; }
+
+    inline ~setTimeout() = default;
+
+   private:
+    std::thread _thread;
+
+    std::shared_ptr<TimerInternalState> _state =
+        std::make_shared<TimerInternalState>();
+};
