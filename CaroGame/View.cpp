@@ -25,7 +25,7 @@ void View::Setup()
 );*/
 
 // Hide the cursor
-#if _DEBUG
+#if _NDEBUG
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
     cursorInfo.bVisible = false;

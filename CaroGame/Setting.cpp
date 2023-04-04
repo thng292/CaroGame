@@ -116,7 +116,7 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         if (soundEffectSetting == Config::Value_True) {
             Utils::PlayKeyPressSound();
         }
-        if (tmp == Language::GetString(L"NAVIGATE_BACK_SHORTCUT")) {
+        if (tmp == Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")) {
             return NavHost.Back();
         }
         if (Utils::keyMeanDown(tmp)) {
