@@ -365,3 +365,4 @@ user_config
 saves/
 replay/
 report/**/*.zip
+report/**/*.exe
