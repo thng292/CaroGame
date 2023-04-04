@@ -1,13 +1,16 @@
 #pragma once
 #include <algorithm>
+#include <chrono>
 #include <format>
 #include <string>
+#include <mutex>
 
 #include "Config.h"
 #include "Constants.h"
 #include "GameState.h"
 #include "Language.h"
 #include "SaveLoad.h"
+#include "Timer.h"
 #include "Utils.h"
 #include "View.h"
 
@@ -56,7 +59,7 @@ namespace Common {
         void NextSelection();
         void PrevSelection();
         void UpdatePage(int page);
-        void Search();
+        bool Search();
         std::function<void(const std::wstring&)> onSearchValueChange(
             const std::function<void(void)>& callback
         );

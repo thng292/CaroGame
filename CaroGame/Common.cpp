@@ -22,7 +22,8 @@ void Common::DrawHints()
     );
 }
 
-void Common::DrawHintsLess() {
+void Common::DrawHintsLess()
+{
     View::DrawTextCenterdVertically(
         29 - 2,
         std::format(
@@ -134,8 +135,19 @@ void Common::SaveLoadScreenViewModel::UpdatePage(int page)
     options.emplace_back(pageIndicator, 0);
 }
 
-void Common::SaveLoadScreenViewModel::Search()
+bool Common::SaveLoadScreenViewModel::Search()
 {
+    static auto cmp = [](const SortTemporary& a, const SortTemporary& b) {
+        if (a.foundIndex != size_t(-1) && b.foundIndex != size_t(-1)) {
+            return a.name > b.name;
+        }
+
+        if (a.foundIndex == b.foundIndex) {
+            return a.name > b.name;
+        }
+
+        return a.foundIndex < b.foundIndex;
+    };
     size_t n = allOptions.size();
     std::vector<SortTemporary> tmp;
     tmp.resize(n);
@@ -145,21 +157,11 @@ void Common::SaveLoadScreenViewModel::Search()
         tmp[i] = {ttt.find(searchInput), std::move(ttt), i};
     }
 
-    std::sort(
-        tmp.begin(),
-        tmp.end(),
-        [](const SortTemporary& a, const SortTemporary& b) {
-            if (a.foundIndex != size_t(-1) && b.foundIndex != size_t(-1)) {
-                return a.name > b.name;
-            }
+    if (std::is_sorted(tmp.begin(), tmp.end(), cmp)) {
+        return 0;
+    }
 
-            if (a.foundIndex == b.foundIndex) {
-                return a.name > b.name;
-            }
-
-            return a.foundIndex < b.foundIndex;
-        }
-    );
+    std::sort(tmp.begin(), tmp.end(), cmp);
 
     OptionList vtmp;
     vtmp.resize(n);
@@ -167,6 +169,7 @@ void Common::SaveLoadScreenViewModel::Search()
         vtmp[i] = allOptions[tmp[i].mapIndex];
     }
     allOptions = vtmp;
+    return 1;
 }
 
 std::function<void(const std::wstring&)>
@@ -179,9 +182,10 @@ Common::SaveLoadScreenViewModel::onSearchValueChange(
             return;
         }
         searchInput = newInp;
-        Search();
-        UpdatePage(0);
-        callback();
+        if (Search()) {
+            UpdatePage(0);
+            callback();
+        }
     };
 }
 
