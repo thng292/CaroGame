@@ -7,10 +7,10 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     static short selectedOption = 0;   // User option
     static const short maxOption = 7;  // Number of option
                                        // Vi tri bat dau ve
-    Caro(32, 1);
-    Logo_Deadpool(3, 5);
-    Logo_Captain(79 + 4, 5);
-    //Logo_Result(0);
+    //Caro(32, 1);
+    //Logo_Deadpool(3, 5);
+    //Logo_Captain(79 + 4, 5);
+    logoGura(1,1);
     View::WriteToView(
         119 - Constants::version.size() - 9,
         0,
@@ -42,7 +42,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     };
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
     while (1) {  // Main while loop
-        View::DrawMenu(50, 13, L"", options, selectedOption);
+        //View::DrawMenu(50, 13, L"", options, selectedOption);
         auto tmp = InputHandle::Get();  // Get input from user
         if (soundEffect == L"True") {
             Utils::PlayKeyPressSound();
