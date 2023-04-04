@@ -56,7 +56,7 @@ void View::ShowCursor(bool show) {
     static HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
-    cursorInfo.bVisible = show;
+    cursorInfo.bVisible = !show;
     SetConsoleCursorInfo(hOut, &cursorInfo);
 }
 
