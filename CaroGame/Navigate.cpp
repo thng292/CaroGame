@@ -7,15 +7,15 @@ NavigationHost::NavigationHost(
     _CurrentScreen = {Start, nullptr};
     _Links = links;
     while (_CurrentScreen.name != Navigate::EXIT) {
-//#if _DEBUG
+#if _DEBUG
         if (!_Links.contains(_CurrentScreen.name)) {
             Draw404(*this);
         } else {
             _Links[_CurrentScreen.name](*this);
         }
-//#else
-//        _Links[_CurrentScreen.name](*this);
-//#endif
+#else
+        _Links[_CurrentScreen.name](*this);
+#endif
     }
 }
 

@@ -8,9 +8,9 @@
 #include <string>
 #include <unordered_map>
 
+#include "View.h"
 #if _DEBUG
 #include "InputHandle.h"
-#include "View.h"
 #endif
 
 #ifndef ViewFunc
@@ -39,7 +39,6 @@ class NavigationHost {
     std::stack<Screen> _History;
     void HistoryPop();
     void HistoryPopAllOverlay();
-    void Draw404(NavigationHost& NavHost);
 
    public:
     NavigationHost() = default;
