@@ -7,8 +7,10 @@ void ExitView(NavigationHost& NavHost)
 {
     static short selectedOption = 1;   // User option
     static const short maxOption = 2;  // Number of option
+    View::DrawMenuPrevState menuPrevState;
     while (1) {                        // Main while loop
         View::DrawMenuCenter(
+            menuPrevState,
             L"Are you sure? ",
             {
                 {L"YES",   L'Y'},
@@ -59,8 +61,11 @@ void TestView1(NavigationHost& NavHost)
         30
     );
     NavHost.SetContext("TestContextValue", L"this is the context value");
+    View::DrawMenuPrevState menuPrevState;
+
     while (1) {  // Main while loop
         View::DrawMenuCenter(
+            menuPrevState,
             L"",
             {
                 {L"TestView2", L'2'},

@@ -118,9 +118,13 @@ void NavigationHost::HistoryPopAllOverlay()
     }
 }
 
+#if _DEBUG
 void NavigationHost::Draw404(NavigationHost& NavHost)
 {
+    View::DrawMenuPrevState menuPrevState;
+
     View::DrawMenuCenter(
+        menuPrevState,
         L"404",
         {
             {L"This screen does not exist", 0},
@@ -135,3 +139,4 @@ void NavigationHost::Draw404(NavigationHost& NavHost)
         }
     }
 }
+#endif

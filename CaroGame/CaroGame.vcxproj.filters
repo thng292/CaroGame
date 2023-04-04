@@ -214,7 +214,7 @@
       <Filter>Screens\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Gura.cpp">
-      <Filter>Core\Source Files</Filter>
+      <Filter>Graphics\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -384,7 +384,7 @@
       <Filter>Screens\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gura.h">
-      <Filter>Core\Header Files</Filter>
+      <Filter>Graphics\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

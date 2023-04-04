@@ -52,7 +52,8 @@ void View::Setup()
     std::wcout.tie(0);
 }
 
-void View::ShowCursor(bool show) {
+void View::ShowCursor(bool show)
+{
     static HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
@@ -68,7 +69,7 @@ COORD View::GetCursorPos()
     return tmp.dwCursorPosition;
 }
 
-void View::WriteToView(
+inline void View::WriteToView(
     short x,
     short y,  // Draw position
     const std::wstring& str,
@@ -253,7 +254,7 @@ void View::DrawRect(const Rect& rect, Color textColor, Color bgColor)
     View::DrawBorder(rect, textColor, bgColor);
 }
 
-inline short CalcWidth(
+constexpr inline short CalcWidth(
     const std::vector<View::Option>& options, const std::wstring& title
 )
 {
@@ -264,7 +265,7 @@ inline short CalcWidth(
     return max(tmp, title.length()) + (View::BORDER_WIDTH * View::HPADDING) * 2;
 }
 
-inline short CalcHeight(
+constexpr inline short CalcHeight(
     const std::vector<View::Option>& options, const std::wstring& title
 )
 {
@@ -273,6 +274,7 @@ inline short CalcHeight(
 }
 
 View::Rect View::DrawMenu(
+    DrawMenuPrevState& prevState,
     short x,
     short y,
     const std::wstring& title,
@@ -284,39 +286,103 @@ View::Rect View::DrawMenu(
     Color backgroundColor
 )
 {
-    SetConsoleTextAttribute(
-        GetStdHandle(STD_OUTPUT_HANDLE),
-        (int(backgroundColor) << 4) | int(textColor)
-    );
     short w = CalcWidth(optionsList, title);
     short h = CalcHeight(optionsList, title);
-    View::Rect res = {y, x, x + w, y + h - 1};
-    View::DrawRect(res);
-    short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
-    short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
-    if (title.length()) {
-        View::WriteToView(leftAlign, topAlign, title);
-        topAlign += 2;
-    }
-    for (int i = 0; i < optionsList.size(); i++) {
-        View::WriteToView(
-            leftAlign,
-            topAlign + i,
-            optionsList[i].option,
-            optionsList[i].underline,
-            selected == i,
-            textColor,
-            highlightColor,
-            highlightTextColor,
-            backgroundColor
+
+    bool redrawAll = x != prevState.x || y != prevState.y ||
+                     textColor != prevState.textColor ||
+                     highlightColor != prevState.highlightColor ||
+                     highlightTextColor != prevState.highlightTextColor ||
+                     backgroundColor != prevState.backgroundColor;
+
+    bool redrawTitle = title != prevState.title;
+    bool redrawBorder =
+        redrawAll || redrawTitle || w != prevState.w || h != prevState.h;
+
+    if (redrawAll) {
+        SetConsoleTextAttribute(
+            GetStdHandle(STD_OUTPUT_HANDLE),
+            (int(backgroundColor) << 4) | int(textColor)
         );
     }
+
+    View::Rect res = {y, x, x + w, y + h - 1};
+    if (redrawBorder) {
+        View::DrawRect(res);
+    }
+
+    short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
+    short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
+
+    if (redrawTitle) {
+        View::WriteToView(leftAlign, topAlign, title);
+    }
+    if (title.size()) {
+        topAlign += 2;
+    }
+
+    bool redrawFlag = 0;
+
+    if (redrawAll) {
+        for (int i = 0; i < optionsList.size(); i++) {
+            View::WriteToView(
+                leftAlign,
+                topAlign + i,
+                optionsList[i].option,
+                optionsList[i].underline,
+                selected == i,
+                textColor,
+                highlightColor,
+                highlightTextColor,
+                backgroundColor
+            );
+        }
+    } else {
+        for (int i = 0; i < optionsList.size(); i++) {
+            if (selected == i || prevState.selected == i ||
+                i >= prevState.optionsList.size() ||
+                optionsList[i] != prevState.optionsList[i]) {
+                View::WriteToView(
+                    leftAlign,
+                    topAlign + i,
+                    optionsList[i].option,
+                    optionsList[i].underline,
+                    selected == i,
+                    textColor,
+                    highlightColor,
+                    highlightTextColor,
+                    backgroundColor
+                );
+            }
+        }
+    }
+    prevState.h = h;
+    prevState.w = w;
+    prevState.x = x;
+    prevState.y = y;
+    prevState.textColor = textColor;
+    prevState.backgroundColor = backgroundColor;
+    prevState.highlightColor = highlightColor;
+    prevState.highlightTextColor = highlightTextColor;
+    prevState.selected = selected;
+    if (redrawFlag) {
+        prevState.optionsList.clear();
+        prevState.optionsList.resize(optionsList.size());
+        for (size_t i = 0; i < optionsList.size(); i++) {
+            prevState.optionsList[i] = optionsList[i];
+        }
+    }
+    if (redrawTitle) {
+        prevState.title = title;
+    }
+
     return res;
 }
 
 View::Rect View::DrawMenuCenter(
-    std::wstring title,
-    std::vector<Option> optionsList,
+    DrawMenuPrevState& prevState,
+    const std::wstring& title,
+    const std::vector<Option>& optionsList,
     size_t selected,
     Color textColor,
     Color highlightColor,
@@ -326,10 +392,12 @@ View::Rect View::DrawMenuCenter(
 {
     short w = CalcWidth(optionsList, title);
     short h = CalcHeight(optionsList, title);
-    auto tmp = CalcCenter(w, h);
-    return View::DrawMenu(
-        tmp.first,
-        tmp.second,
+    auto [x, y] = CalcCenter(w, h);
+
+    return DrawMenu(
+        prevState,
+        x,
+        y,
         title,
         optionsList,
         selected,
@@ -351,14 +419,17 @@ std::vector<std::wstring> View::WrapText(
     std::wistringstream iss(text);
     std::wstring tmp, buff;
     int cnt = 0;
+
     while ((!iss.eof() || buff.length()) && cnt < maxRow) {
         res.emplace_back();
         auto& currentRow = res.back();
+
         if (buff.length()) {
             currentRow.append(buff);
             currentRow.append(L" ");
             buff.clear();
         }
+
         while (!iss.eof()) {
             iss >> tmp;
             if (currentRow.length() + tmp.length() - 1 <= maxWidth) {
@@ -370,6 +441,7 @@ std::vector<std::wstring> View::WrapText(
                 break;
             }
         };
+
         cnt++;
     }
     if (!iss.eof()) {
@@ -384,6 +456,7 @@ std::vector<std::wstring> View::WrapText(
             }
         }
     }
+
     return res;
 }
 
@@ -399,6 +472,7 @@ void View::DrawTextWrapped(
 {
     auto wrappedText = WrapText(text, maxRow, maxWidth, overflowStr);
     int n = wrappedText.size();
+
     for (size_t i = 0; i < n; i++) {
         WriteToView(x, y + i, wrappedText[i], 0, false, textColor);
     }
@@ -465,9 +539,7 @@ wchar_t View::Input(
 )
 {
     ShowCursor(1);
-    Utils::ON_SCOPE_EXIT([&] {
-        ShowCursor(0);
-    });
+    Utils::ON_SCOPE_EXIT([&] { ShowCursor(0); });
     if (hasFocus) {
         bool redraw = 1;
         bool needReservePos = 0;

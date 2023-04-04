@@ -175,7 +175,10 @@ void Setting::SettingScreen(NavigationHost& NavHost)
 
 void Setting::ApplySuccess(NavigationHost& NavHost)
 {
+    View::DrawMenuPrevState menuPrevState;
+
     View::DrawMenuCenter(
+        menuPrevState,
         L"",
         {
             {(Language::GetString(L"APPLY_SUCCESSFULLY")), 0}
@@ -188,7 +191,10 @@ void Setting::ApplySuccess(NavigationHost& NavHost)
 
 void Setting::ApplyFailed(NavigationHost& NavHost)
 {
+    View::DrawMenuPrevState menuPrevState;
+
     View::DrawMenuCenter(
+        menuPrevState,
         L"",
         {
             {(Language::GetString(L"APPLY_FAILED")), 0}

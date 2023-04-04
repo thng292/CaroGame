@@ -44,6 +44,28 @@ namespace View {
     struct Option {
         const std::wstring& option;
         const wchar_t underline;
+
+        bool operator==(const Option& other) const
+        {
+            return option == other.option && underline == other.underline;
+        }
+    };
+
+    struct OptionNoRef {
+        std::wstring option;
+        wchar_t underline;
+
+        bool operator==(const Option& other) const
+        {
+            return option == other.option && underline == other.underline;
+        }
+
+        OptionNoRef operator=(const Option& other)
+        {
+            option = other.option;
+            underline = other.underline;
+            return *this;
+        }
     };
 
     const Color DEFAULT_TEXT_COLOR = Color::BLACK;
@@ -125,7 +147,24 @@ namespace View {
         Color bgColor = DEFAULT_BACKGROUND_COLOR
     );
 
+    struct DrawMenuPrevState {
+        short x = 0;
+        short y = 0;
+        short w = 0;
+        short h = 0;
+        
+        std::wstring title;
+        std::vector<OptionNoRef> optionsList;
+        size_t selected;
+        
+        Color textColor = DEFAULT_TEXT_COLOR;
+        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR;
+        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR;
+        Color backgroundColor = DEFAULT_BACKGROUND_COLOR;
+    };
+
     Rect DrawMenu(
+        DrawMenuPrevState& prevState,
         short x,
         short y,
         const std::wstring& title,
@@ -138,8 +177,9 @@ namespace View {
     );
 
     Rect DrawMenuCenter(
-        std::wstring title,
-        std::vector<Option> optionsList,
+        DrawMenuPrevState& prevState,
+        const std::wstring& title,
+        const std::vector<Option>& optionsList,
         size_t selected,
         Color textColor = DEFAULT_TEXT_COLOR,
         Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,

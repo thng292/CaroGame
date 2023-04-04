@@ -8,6 +8,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         NavHost.SetContext(Constants::TUTORIAL_MODE, false);
     });
 
+    NavigationHost mockNavHost;
     const short maxWidth = 60;
     const short maxHeight = 20;
     GameState mockGameState;
@@ -85,8 +86,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         View::DrawTextCenterdVertically(
             6, Language::GetString(L"HELP_3-1_TITLE"), View::Color::BLUE
         );
-        NavHost.Navigate("Tutorial");
-        Setting::SettingScreen(NavHost);
+        Setting::SettingScreen(mockNavHost);
         View::ClearScreen();
     }
 
@@ -115,15 +115,11 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         for (size_t i = 0; i < tmp.size(); i++) {
             View::DrawTextCenterdVertically(22 + i, tmp[i]);
         }
-        GameSelectionView::GameModeTypeView(NavHost);
-        NavHost.Back();
+        GameSelectionView::GameModeTypeView(mockNavHost);
         View::ClearScreen();
     }
 
-    NavHost.SetContext(Constants::CURRENT_GAME, mockGameState);
-    Utils::ON_SCOPE_EXIT OnScopeExit([&NavHost] {
-        NavHost.DeleteContext(Constants::CURRENT_GAME);
-    });
+    mockNavHost.SetContext(Constants::CURRENT_GAME, mockGameState);
 
     // String input walk through
     {
@@ -131,8 +127,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         for (size_t i = 0; i < tmp.size(); i++) {
             View::DrawTextCenterdVertically(20 + i, tmp[i]);
         }
-        GameSelectionView::PlayerNameView(NavHost);
-        NavHost.Back();
+        GameSelectionView::PlayerNameView(mockNavHost);
         View::ClearScreen();
     }
 
@@ -145,15 +140,14 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         View::DrawTextCenterdVertically(
             2, Language::GetString(L"HELP_6-1_TITLE")
         );
-        GameSelectionView::AvatarSelectView(NavHost);
-        NavHost.Back();
+        GameSelectionView::AvatarSelectView(mockNavHost);
         View::ClearScreen();
     }
 
     // Right side of the game board
     {
         mockGameState = std::any_cast<GameState>(
-            NavHost.GetFromContext(Constants::CURRENT_GAME)
+            mockNavHost.GetFromContext(Constants::CURRENT_GAME)
         );
         mockGameState.playerNameTwo = L"Gura";
         GameScreen gameScreen(7, 2);
@@ -257,8 +251,10 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         tmp = Language::GetString(L"HELP_8-4_TITLE");
         View::WriteToView(89 - tmp.length() / 2, 15, tmp);
 
-        tmp = Language::GetString(L"HELP_8-5_TITLE");
-        View::WriteToView(89 - tmp.length() / 2, 18, tmp);
+        auto tt = View::WrapText(Language::GetString(L"HELP_8-5_TITLE"), 3, 50);
+        for (size_t i = 0; i < tt.size(); i++) {
+            View::WriteToView(89 - tt[i].length() / 2, 20 + i, tt[i]);
+        }
 
         InputHandle::Get();
     }

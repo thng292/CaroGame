@@ -1,7 +1,10 @@
 #include "MainMenu.h"
+#include "Gura.h"
 
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
 {
+    /*logoGura(5, 5);
+    InputHandle::Get();*/
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
     Common::DrawHintsLess();
     static short selectedOption = 0;   // User option
@@ -41,8 +44,10 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
          Language::GetString(L"EXIT_SHORTCUT")[0]    },
     };
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
+    View::DrawMenuPrevState menuPrevState;
+
     while (1) {  // Main while loop
-        View::DrawMenu(50, 13, L"", options, selectedOption);
+        View::DrawMenu(menuPrevState, 50, 13, L"", options, selectedOption);
         auto tmp = InputHandle::Get();  // Get input from user
         if (soundEffect == L"True") {
             Utils::PlayKeyPressSound();

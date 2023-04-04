@@ -38,15 +38,16 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
 
     const short searchX = 59 - (leadingText.length() + 32) / 2;
     std::wstring tmp;
+    View::DrawMenuPrevState menuPrevState;
 
     auto drawMain = [&] {
         return View::DrawMenuCenter(
-            title, currentState.options, currentState.selected
+            menuPrevState, title, currentState.options, currentState.selected
         );
     };
 
     while (1) {
-        currentState.drawnRect = drawMain();
+        drawMain();
 
         wchar_t inp = View::Input(
             searchX,
@@ -54,10 +55,7 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
             leadingText,
             currentState.searchInput,
             currentState.isSearching,
-            currentState.onSearchValueChange([&drawMain, &currentState] {
-                View::ClearRect(currentState.drawnRect);
-                currentState.drawnRect = drawMain();
-            })
+            currentState.onSearchValueChange(drawMain)
         );
 
         if (inp == L'\r') {
@@ -112,13 +110,5 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
         if (tmp == L"\t") {
             currentState.isSearching = 1;
         }
-
-        View::ClearRect(currentState.drawnRect);
-        View::ClearRect(
-            {29 - 5,
-             searchX,
-             searchX + 30 + (short)leadingText.length(),
-             29 - 5}
-        );
     }
 }

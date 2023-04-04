@@ -40,7 +40,6 @@ namespace Common {
         std::vector<View::Option> options;
         std::wstring pageIndicator;
         std::wstring searchInput;
-        View::Rect drawnRect;
 
         SaveLoadScreenViewModel(path dir = Constants::SAVE_PATH)
         {

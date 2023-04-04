@@ -26,10 +26,10 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 2);
-
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
 
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
@@ -93,17 +93,15 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
 
     DrawCurrentOptionBox(curGameState, 4);
 
-
     const short MAX_LABEL = labelList.size();
     bool navBack = false;
 
     while (curLabel < MAX_LABEL) {
         if (!InputBox::DrawInputBox(
-            labelList, curLabel, inputList, maxReached, MAX_LENGTH
+                labelList, curLabel, inputList, maxReached, MAX_LENGTH
             )) {
             return NavHost.Back();
         }
-        
     }
     curGameState.playerNameOne = inputList[0];
     curGameState.playerNameTwo = inputList[1];
@@ -124,9 +122,9 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         currentGameState.playerAvatarTwo = MaxSelect + 1;
     }
     if (NavHost.CheckContext(Constants::TUTORIAL_MODE)) {
-        if (bool isTutorial =
-                std::any_cast<bool>(NavHost.GetFromContext(Constants::TUTORIAL_MODE)
-                );
+        if (bool isTutorial = std::any_cast<bool>(
+                NavHost.GetFromContext(Constants::TUTORIAL_MODE)
+            );
             !isTutorial) {
             View::DrawTextCenterdVertically(
                 2, Language::GetString(L"SELECT_AVATAR_TITLE")
@@ -238,11 +236,10 @@ void GameSelectionView::DrawCurrentOptionBox(
     const std::wstring AI_DIFFICULTY_LABEL =
         Language::GetString(L"CUR_DIFFICULTY");
 
-
     std::wstring GAME_TYPE_VALUE;
     std::wstring GAME_TIME_VALUE;
     std::wstring GAME_MODE_VALUE;
-    std:: wstring AI_DIFFICULTY_VALUE;
+    std::wstring AI_DIFFICULTY_VALUE;
 
     if (selected > 0) {
         GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
@@ -265,7 +262,6 @@ void GameSelectionView::DrawCurrentOptionBox(
         } else {
             GAME_TIME_VALUE = L"\u221e";
         }
-        
     }
     if (selected > 2) {
         GAME_MODE_VALUE = (gameState.gameMode == Constants::GAME_MODE_PVP)
@@ -287,27 +283,17 @@ void GameSelectionView::DrawCurrentOptionBox(
                     AI_DIFFICULTY_VALUE =
                         Language::GetString(L"OPTION_AI_HARD");
                     break;
-
             }
-        }
-        else {
+        } else {
             AI_DIFFICULTY_VALUE = Language::GetString(L"OPTION_NULL");
         }
     }
-       
-
-
 
     const std::array<std::wstring, 4> LABEL_LIST = {
-        GAME_TYPE_LABEL,
-        GAME_TIME_LABEL,
-        GAME_MODE_LABEL,
-        AI_DIFFICULTY_LABEL
-    };
+        GAME_TYPE_LABEL, GAME_TIME_LABEL, GAME_MODE_LABEL, AI_DIFFICULTY_LABEL};
 
     const std::array<std::wstring, 4> VALUE_LIST = {
         GAME_TYPE_VALUE, GAME_TIME_VALUE, GAME_MODE_VALUE, AI_DIFFICULTY_VALUE};
-
 
     short x = X_PIVOT + 10, y = Y_PIVOT + 1, space = 15;
 
@@ -315,12 +301,10 @@ void GameSelectionView::DrawCurrentOptionBox(
         View::WriteToView(
             x + i * space, y, LABEL_LIST[i] + L":", (wchar_t)0U, i == selected
         );
-        View::WriteToView(x + i * space + LABEL_LIST[i].size() + 2, y, VALUE_LIST[i]
+        View::WriteToView(
+            x + i * space + LABEL_LIST[i].size() + 2, y, VALUE_LIST[i]
         );
-
-    
     }
-
 }
 
 void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
@@ -347,9 +331,10 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 0);
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
 
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
@@ -401,7 +386,6 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
     std::string navigationValue = "PlayerNameView";
     DrawCurrentOptionBox(curGameState, 3);
 
-
     std::wstring label = Language::GetString(L"LABEL_AI_DIFICULTY");
     std::vector<View::Option> options = {
         {Language::GetString(L"OPTION_AI_EASY"),
@@ -413,9 +397,10 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
 
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
@@ -468,9 +453,10 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
@@ -516,13 +502,14 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_TITLE")[0]},
         {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0] }
+         Language::GetString(L"OPTION_NO")[0]}
     };
 
     Common::DrawHintsLess();
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
@@ -572,7 +559,6 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
 
     DrawCurrentOptionBox(curGameState, 1);
 
-
     std::wstring label = Language::GetString(L"LABEL_RUSH_TIME");
     std::vector<View::Option> options = {
         {Language::GetString(L"OPTION_15"),
@@ -583,9 +569,10 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
     };
 
     Common::DrawHintsLess();
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
@@ -658,9 +645,10 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         "Back"};
 
     Common::DrawHintsLess();
+    View::DrawMenuPrevState menuPrevState;
 
     while (1) {
-        View::DrawMenuCenter(label, options, selectedOption);
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;

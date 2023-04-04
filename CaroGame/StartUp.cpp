@@ -18,8 +18,11 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
     auto languages = Language::DiscoverLanguageFile();
     static int userSelect = 0;
     std::wstring tmp;
+    View::DrawMenuPrevState menuPrevState;
+
     while (1) {
         auto drawnRect = View::DrawMenuCenter(
+            menuPrevState,
             L"",
             {
                 {std::format(

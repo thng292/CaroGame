@@ -46,8 +46,10 @@ bool Common::ConfirmPrompt(const std::wstring& title)
     int select = 0;
     int num = 2;
     std::wstring tmp;
+    View::DrawMenuPrevState menuPrevState;
+
     while (1) {
-        View::DrawMenuCenter(title, options, select);
+        View::DrawMenuCenter(menuPrevState, title, options, select);
         tmp = InputHandle::Get();
         if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
             Utils::PlayKeyPressSound();

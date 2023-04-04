@@ -8,8 +8,10 @@
 #include <string>
 #include <unordered_map>
 
+#if _DEBUG
 #include "InputHandle.h"
 #include "View.h"
+#endif
 
 #ifndef ViewFunc
 #define ViewFunc std::function<void(NavigationHost&)>
@@ -40,8 +42,9 @@ class NavigationHost {
     void Draw404(NavigationHost& NavHost);
 
    public:
+    NavigationHost() = default;
     NavigationHost(const std::string& Start, const ViewFuncMap& links);
-    //delete other constructor
+    // delete other constructor
     NavigationHost(const NavigationHost&) = delete;
     NavigationHost& operator=(const NavigationHost&) = delete;
     NavigationHost(NavigationHost&&) = delete;

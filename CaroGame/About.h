@@ -2,8 +2,8 @@
 #include "View.h"
 #include "Navigate.h"
 #include "Language.h"
-#include "Avatar.h"
 
+#include "Gura.h"
 #include "PokemonBlue.h"
 #include "PokemonGreen.h"
 #include "PokemonRed.h"

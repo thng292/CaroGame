@@ -11,7 +11,7 @@ void logoGura(int x, int y) {
     View::Color xam1 = View::Color::WHITE;
     View::Color xam2 = View::Color::GRAY;
     View::Color la = View::Color::LIGHT_CYAN;
-    View::Color hong = View::Color::LIGHT_MAGENTA;
+    View::Color hong = View::Color::LIGHT_RED;
 
 
     View::WriteToView(
