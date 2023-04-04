@@ -386,6 +386,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     while (tmp != L" ") {
         tmp = InputHandle::Get();
     }
+    curGameState.gameEnd = endGame;
     NavHost.SetContext(Constants::FINISHED_GAME, curGameState);
     return NavHost.Navigate("GameEndView");
 }

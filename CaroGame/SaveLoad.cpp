@@ -26,6 +26,7 @@ bool SaveLoad::Save(
 
     file << data.gameTime << '\n';
 
+    file << data.gameEnd << '\n';
 
     for (auto& i : data.moveList) {
         file << i.first << ' ' << i.second << '\n';
@@ -58,6 +59,7 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
 
     file >> data.gameTime;
 
+    file >> data.gameEnd;
 
     if (file.fail()) {
         return std::nullopt;

@@ -487,7 +487,7 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
 void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME)
         );
 
     short selectedOption = 0;

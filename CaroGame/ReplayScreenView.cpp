@@ -98,7 +98,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
             } else {
                 index--;
                 if (endGame) {
-                    if (endGame == Constants::END_GAME_WIN_NORMAL) {
+                    if (endGame == Constants::END_GAME_WIN_ONE || endGame == Constants::END_GAME_WIN_TWO) {
                         Constants::Player temp = (isPlayerOneTurn)
                                                      ? Constants::PLAYER_TWO
                                                      : Constants::PLAYER_ONE;
@@ -138,7 +138,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                 );
             }
 
-            if (endGame != Constants::END_GAME_WIN_NORMAL)
+            if (endGame != Constants::END_GAME_WIN_ONE && endGame != Constants::END_GAME_WIN_TWO)
                 GameScreenAction::HighlightMove(
                     gameScreen, curMove, curPlayer.symbol
                 );

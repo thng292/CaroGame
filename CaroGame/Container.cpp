@@ -109,12 +109,6 @@ void Container::DrawToLogContainer(
         std::wstring value;
 
         switch (winMethod) {
-            case Constants::END_GAME_WIN_NORMAL:
-
-                value = std::format(
-                    L"Player {} ({}) has won the game", playerName, playerSymbol
-                );
-                break;
             case Constants::END_GAME_WIN_TIME:
                 playerName = (isPlayerOneTurn) ? playerNameTwo : playerNameOne;
                 playerSymbol = (isPlayerOneTurn) ? Constants::PLAYER_TWO.symbol
@@ -125,6 +119,12 @@ void Container::DrawToLogContainer(
                 break;
             case Constants::END_GAME_DRAW:
                 value = L"The game ended in a draw";
+                break;
+            default:
+
+                value = std::format(
+                    L"Player {} ({}) has won the game", playerName, playerSymbol
+                );
                 break;
         }
 

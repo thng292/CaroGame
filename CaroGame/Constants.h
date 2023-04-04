@@ -38,11 +38,12 @@ namespace Constants {
 
     const char WIN_HIGHLIGHT = 2;  // GREEN
 
-    const short END_GAME_WIN_NORMAL = 1;
-    const short END_GAME_WIN_TIME   = 2;
-    const short END_GAME_DRAW = 3;
+    const short END_GAME_WIN_ONE = 1;
+    const short END_GAME_WIN_TWO = 2;
+    const short END_GAME_WIN_TIME = 3;
+    const short END_GAME_DRAW = 4;
 
-
+    
 
     // AI const
 

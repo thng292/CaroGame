@@ -1,8 +1,8 @@
 #pragma once
-#include "Constants.h"
-
 #include <string>
 #include <vector>
+
+#include "Constants.h"
 
 struct GameState {
     std::vector<std::pair<short, short>> moveList;
@@ -32,4 +32,6 @@ struct GameState {
     bool playerOneFirst = 1;
 
     short gameTime = 0;
+
+    short gameEnd = 0;
 };

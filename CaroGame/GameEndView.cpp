@@ -5,14 +5,13 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     auto gameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
         ));
-    const short WIDTH = 43, HEIGHT = 2 * 9;
+    const short WIDTH = 35, HEIGHT = 2 * 9;
 
     const short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
     View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
     View::DrawRect(rect);
 
     std::wstring playerResultLabel;
-    std::wstring nameLabel = Language::GetString(L"CUR_NAME") + L":";
     std::wstring timeLabel = Language::GetString(L"CUR_TIME") + L":";
     std::wstring scoreLabel = Language::GetString(L"CUR_SCORE") + L":";
     std::wstring movesLabel = Language::GetString(L"CUR_MOVE_COUNT") + L":";
@@ -22,43 +21,48 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     std::wstring aiDifficultyLabel =
         Language::GetString(L"CUR_DIFFICULTY") + L":";
 
-    int booltmp = (gameState.playerOneFirst + (gameState.moveList.size() % 2));
-    bool isPlayerOneWin = (booltmp == 2 || booltmp == 0);
-    if (isPlayerOneWin) {
-        playerResultLabel = std::format(
-            L"{} ({}) {}",
-            gameState.playerNameOne,
-            Constants::PLAYER_ONE.symbol,
-            Language::GetString(L"WIN_TEXT")
+    switch (gameState.gameEnd) {
+        case Constants::END_GAME_WIN_ONE:
+            playerResultLabel = std::format(
+                L"{} ({}) {}",
+                gameState.playerNameOne,
+                Constants::PLAYER_ONE.symbol,
+                Language::GetString(L"WIN_TEXT")
 
-        );
-    } else {
-        playerResultLabel = std::format(
-            L"{} ({}) {}",
-            gameState.playerNameTwo,
-            Constants::PLAYER_TWO.symbol,
-            Language::GetString(L"WIN_TEXT")
+            );
+            break;
+        case Constants::END_GAME_WIN_TWO:
+            playerResultLabel = std::format(
+                L"{} ({}) {}",
+                gameState.playerNameTwo,
+                Constants::PLAYER_TWO.symbol,
+                Language::GetString(L"WIN_TEXT")
 
-        );
+            );
+            break;
+        case Constants::END_GAME_DRAW:
+            playerResultLabel = Language::GetString(L"GAME_DRAW_TEXT");
+            break;
     }
 
     short x = Label::GetCenterX(X_PIVOT, WIDTH, playerResultLabel.size()),
           y = Y_PIVOT + 1;
 
     View::WriteToView(x, y, playerResultLabel);
-    x = X_PIVOT + 3, y += 2;
+    x = X_PIVOT, y += 2;
 
     // Name
     DrawLabelValuesAdjacent(
         x,
         y,
-        nameLabel,
+        L"",
         std::format(
             L"{} ({})", gameState.playerNameOne, Constants::PLAYER_ONE.symbol
         ),
         std::format(
             L"({}) {}", Constants::PLAYER_TWO.symbol, gameState.playerNameTwo
-        )
+        ),
+        WIDTH
 
     );
     // Score
@@ -72,18 +76,8 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
             : std::format(L"{}", gameState.playerScoreOne),
         (gameState.playerScoreTwo < 10)
             ? std::format(L"0{}", gameState.playerScoreTwo)
-            : std::format(L"{}", gameState.playerScoreTwo)
-    );
-
-    // Total time
-    y += 2;
-    DrawLabelValue(
-        x,
-        y,
-        totalTimeLabel,
-        (gameState.gameType == Constants::GAME_TYPE_NORMAL)
-            ? L"\u221e"
-            : Utils::SecondToMMSS(gameState.gameTime)
+            : std::format(L"{}", gameState.playerScoreTwo),
+        WIDTH
     );
 
     // Time left
@@ -93,7 +87,8 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         y,
         timeLabel,
         Utils::SecondToMMSS(gameState.playerTimeOne),
-        Utils::SecondToMMSS(gameState.playerTimeTwo)
+        Utils::SecondToMMSS(gameState.playerTimeTwo),
+        WIDTH
     );
 
     // Game type
@@ -104,7 +99,8 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         gameTypeLabel,
         (gameState.gameType == Constants::GAME_TYPE_NORMAL)
             ? Language::GetString(L"OPTION_TYPE_NORMAL")
-            : Language::GetString(L"OPTION_TYPE_RUSH")
+            : Language::GetString(L"OPTION_TYPE_RUSH"),
+        WIDTH
 
     );
 
@@ -116,8 +112,21 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         gameModeLabel,
         (gameState.gameMode == Constants::GAME_MODE_PVP)
             ? Language::GetString(L"OPTION_MODE_PVP")
-            : Language::GetString(L"OPTION_MODE_PVE")
+            : Language::GetString(L"OPTION_MODE_PVE"),
+        WIDTH
 
+    );
+
+    // Total time
+    y += 2;
+    DrawLabelValue(
+        x,
+        y,
+        totalTimeLabel,
+        (gameState.gameType == Constants::GAME_TYPE_NORMAL)
+            ? L"\u221e"
+            : Utils::SecondToMMSS(gameState.gameTime),
+        WIDTH
     );
 
     // AI Diff
@@ -139,7 +148,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         aiDiffValue = Language::GetString(L"OPTION_NULL");
     }
     DrawLabelValue(
-        x, y, aiDifficultyLabel, aiDiffValue
+        x, y, aiDifficultyLabel, aiDiffValue, WIDTH
 
     );
 
@@ -150,17 +159,25 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         y,
         // movesLabel, std::format(L"{}", gameState.moveList.size()),
         movesLabel,
-        std::format(L"{}", 12)
+        std::format(L"{}", 12),
+        WIDTH
 
     );
 
     y += 2;
     std::wstring exitLabel = Language::GetString(L"ANY_KEY_CONTINUE");
     View::WriteToView(
-        Label::GetCenterX(x, WIDTH, exitLabel.size()), y, exitLabel
+        Label::GetCenterX(x, WIDTH, exitLabel.size()), y + 2, exitLabel
     );
 
-    auto c = InputHandle::Get();
+    bool stop = false;
+    auto logoThread =
+        std::thread(Logo_Result, gameState.gameEnd, std::ref(stop));
+
+    auto tmp = InputHandle::Get();
+    stop = true;
+    logoThread.join();
+
     return NavHost.Navigate("ReplayMenuView");
 }
 
@@ -169,15 +186,17 @@ void GameEndView::DrawLabelValuesAdjacent(
     short y,
     const std::wstring& label,
     const std::wstring& playerOneValue,
-    const std::wstring& playerTwoValue
+    const std::wstring& playerTwoValue,
+    short width
 )
 {
+    x += 2;
     View::WriteToView(x, y, label);
-    if (playerOneValue.size() > 5) {
-        x = x + 17 - (playerOneValue.size() - 5);
 
-    } else
-        x += 17;
+    x += (width - 2) / 2;
+    const short X_MID_PIVOT = x;
+    x -= playerOneValue.size() + 1;
+
     View::WriteToView(
         x,
         y,
@@ -186,16 +205,9 @@ void GameEndView::DrawLabelValuesAdjacent(
         false,
         (View::Color)Constants::PLAYER_ONE_COLOR
     );
-    if (playerOneValue.size() > 5) {
-        x += playerOneValue.size() + 1;
-
-    } else
-        x += 6;
+    x = X_MID_PIVOT;
     View::WriteToView(x, y, L"|");
-    if (playerOneValue.size() >= 5) {
-        x += 2;
-    } else
-        x += 5;
+    x += 2;
     View::WriteToView(
         x,
         y,
@@ -207,13 +219,15 @@ void GameEndView::DrawLabelValuesAdjacent(
 }
 
 void GameEndView::DrawLabelValue(
-    short x, short y, const std::wstring& label, const std::wstring& value
+    short x,
+    short y,
+    const std::wstring& label,
+    const std::wstring& value,
+    short width
 )
 {
+    x += 2;
     View::WriteToView(x, y, label);
-    if (value.size() == 1)
-        x += 23;
-    else
-        x += 21;
-    View::WriteToView(x, y, value);
+    x += width / 2;
+    View::WriteToView(x, y, value, (wchar_t)0U, false, View::Color::GREEN);
 }
