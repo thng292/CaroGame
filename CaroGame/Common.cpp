@@ -5,7 +5,7 @@ void Common::DrawHints()
     View::DrawTextCenterdVertically(
         29 - 3,
         std::format(
-            L"A, W, S, D, \u2190\u2191\u2192\u2193 : {}, X: {}",
+            L"A, W, S, D, \u2190\u2191\u2193\u2192 : {}, X: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
             Language::GetString(L"DELETE_KEY_TITLE")
         )
@@ -27,9 +27,11 @@ void Common::DrawHintsLess()
     View::DrawTextCenterdVertically(
         29 - 2,
         std::format(
-            L"A, W, S, D, Arrow Keys: {}, Enter: {}",
+            L"A, W, S, D, \u2190\u2191\u2193\u2192: {}, Enter: {}, B: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-            Language::GetString(L"SELECT_KEY_TITLE")
+            Language::GetString(L"SELECT_KEY_TITLE"),
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
+
         )
     );
 }

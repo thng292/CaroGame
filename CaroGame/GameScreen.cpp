@@ -154,20 +154,20 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
         timerContainerTwo.DrawToContainer(L"REPLAY\u221e", View::Color::YELLOW);
     }
 
-    const short avatarOffset[] = {3, 2, 3, 5, 2, 2, 3, 4};
+    const short avatarOffset[] = {3, 2, 3, 5, 2, 2, 3, 4, 2};
 
-    if (gameState.playerAvatarOne != 9)
-        avatarMap[gameState.playerAvatarOne](
-            playerInfoContainerOne.xCoord +
-                avatarOffset[gameState.playerAvatarOne],
-            playerInfoContainerOne.yCoord
-        );
-    if (gameState.playerAvatarTwo != 9)
-        avatarMap[gameState.playerAvatarTwo](
-            playerInfoContainerTwo.xCoord +
-                avatarOffset[gameState.playerAvatarTwo],
-            playerInfoContainerTwo.yCoord
-        );
+
+    avatarMap[gameState.playerAvatarOne](
+        playerInfoContainerOne.xCoord +
+            avatarOffset[gameState.playerAvatarOne],
+        playerInfoContainerOne.yCoord
+    );
+    gameState.playerAvatarTwo;
+    avatarMap[gameState.playerAvatarTwo](
+        playerInfoContainerTwo.xCoord +
+            avatarOffset[gameState.playerAvatarTwo],
+        playerInfoContainerTwo.yCoord
+    );
 }
 
 void GameScreen::InitElement(

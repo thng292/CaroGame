@@ -91,8 +91,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     (View::Color)Constants::PLAYER_ONE_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
-                if (curGameState.playerTimeOne == 0) {
-                    endGame = Constants::END_GAME_WIN_TIME;
+                if (curGameState.playerTimeOne == 0 && !endGame) {
+                    endGame = Constants::END_GAME_WIN_TIME_TWO;
                     curGameState.playerScoreTwo++;
                     gameScreen.timerContainerOne.DrawToContainer(
                         Language::GetString(L"TIME_OUT"),
@@ -122,8 +122,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     (View::Color)Constants::PLAYER_TWO_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
-                if (curGameState.playerTimeTwo == 0) {
-                    endGame = Constants::END_GAME_WIN_TIME;
+                if (curGameState.playerTimeTwo == 0 && !endGame) {
+                    endGame = Constants::END_GAME_WIN_TIME_ONE;
 
                     curGameState.playerScoreOne++;
                     gameScreen.timerContainerTwo.DrawToContainer(
@@ -269,7 +269,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             return NavHost.Navigate("ReplayMenuView");
         }
 
-        if (tmp == L"\r") {
+        if (tmp == L"\r" && !endGame) {
             if (gameBoard[row][col] == 0) {
                 curMove = {row, col};
 
@@ -374,7 +374,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         );
     }
 
-    if (endGame != Constants::END_GAME_WIN_TIME) {
+    if (endGame != Constants::END_GAME_WIN_TIME_ONE && endGame != Constants::END_GAME_WIN_TIME_TWO) {
         gameScreen.logContainer.DrawToLogContainer(
             curGameState.moveList,
             curGameState.playerNameOne,

@@ -2281,7 +2281,7 @@ void Logo_Result(int k, bool &stop)
     View::Color a9 = View::Color::LIGHT_BLUE;
     View::Color a10 = View::Color::BLUE;
 
-    if (k == Constants::END_GAME_WIN_ONE) {
+    if (k == Constants::END_GAME_WIN_ONE || k == Constants::END_GAME_WIN_TIME_ONE) {
         X(-1 + x + 30 / 2 - 5, y);
         O(119 - x - 34 / 2 - 5, y);
         while (true) {
@@ -2311,7 +2311,7 @@ void Logo_Result(int k, bool &stop)
             Sleep(250);
         }
     }
-    if (k == Constants::END_GAME_WIN_TWO) {
+    if (k == Constants::END_GAME_WIN_TWO || k == Constants::END_GAME_WIN_TIME_TWO) {
         X(-1 + x + 34 / 2 - 5, y);
         O(119 - x - 30 / 2 - 5, y);
         while (true) {

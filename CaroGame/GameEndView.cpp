@@ -49,6 +49,30 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
             tempColor = (View::Color)Constants::PLAYER_TWO_COLOR;
             X_PIVOT += 1;
             break;
+        case Constants::END_GAME_WIN_TIME_ONE:
+            playerResultLabel = std::format(
+                L"{} {} ({}) {}",
+                playerLabel,
+                gameState.playerNameOne,
+                Constants::PLAYER_ONE.symbol,
+                Language::GetString(L"WIN_TIME_TEXT")
+
+            );
+            tempColor = (View::Color)Constants::PLAYER_ONE_COLOR;
+            X_PIVOT += 1;
+            break;
+        case Constants::END_GAME_WIN_TIME_TWO:
+            playerResultLabel = std::format(
+                L"{} {} ({}) {}",
+                playerLabel,
+                gameState.playerNameTwo,
+                Constants::PLAYER_TWO.symbol,
+                Language::GetString(L"WIN_TIME_TEXT")
+
+            );
+            tempColor = (View::Color)Constants::PLAYER_TWO_COLOR;
+            X_PIVOT += 1;
+            break;
         case Constants::END_GAME_DRAW:
             playerResultLabel = Language::GetString(L"GAME_DRAW_TEXT");
             break;
@@ -172,9 +196,8 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     DrawLabelValue(
         x,
         y,
-        // movesLabel, std::format(L"{}", gameState.moveList.size()),
         movesLabel,
-        std::format(L"{}", 12),
+        std::format(L"{}", gameState.moveList.size()),
         WIDTH
 
     );

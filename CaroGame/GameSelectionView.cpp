@@ -27,7 +27,7 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 2);
     View::DrawMenuPrevState menuPrevState;
-
+    
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
 
@@ -48,7 +48,7 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
             navigationValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 
@@ -68,7 +68,10 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     View::DrawTextCenterdVertically(
         29 - 2,
         std::format(
-            L"Enter: {}", Language::GetString(L"STRING_INPUT_DONE_LABEL")
+            L"Enter: {}, Tab: {}, ESC: {}",
+            Language::GetString(L"STRING_INPUT_DONE_LABEL"),
+            Language::GetString(L"CHANGE_INPUT_LABEL"),
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
         )
     );
 
@@ -121,7 +124,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     int selected = 0;
     const int MaxSelect = 8;
     if (currentGameState.gameMode == Constants::GAME_MODE_PVE) {
-        currentGameState.playerAvatarTwo = MaxSelect + 1;
+        currentGameState.playerAvatarTwo = MaxSelect;
     }
     if (NavHost.CheckContext(Constants::TUTORIAL_MODE)) {
         if (bool isTutorial = std::any_cast<bool>(
@@ -188,7 +191,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
             Utils::PlayKeyPressSound();
         }
 
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 
@@ -313,8 +316,7 @@ void GameSelectionView::DrawCurrentOptionBox(
         );
         x += LABEL_LIST[i].size() + 2;
 
-        View::WriteToView(
-            x, y, VALUE_LIST[i]
+        View::WriteToView(x, y, VALUE_LIST[i], (wchar_t)0U, false, View::Color::GREEN
         );
         x += space;
     }
@@ -366,7 +368,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
             navigateValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 
@@ -399,7 +401,7 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
     std::string navigationValue = "PlayerNameView";
     DrawCurrentOptionBox(curGameState, 3);
 
-    std::wstring label = Language::GetString(L"LABEL_AI_DIFICULTY");
+    std::wstring label = Language::GetString(L"LABEL_AI_DIFFICULTY");
     std::vector<View::Option> options = {
         {Language::GetString(L"OPTION_AI_EASY"),
          Language::GetString(L"OPTION_AI_EASY")[0]  },
@@ -434,7 +436,7 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
             optionValue = optionValueList[2];
             break;
         }
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 
@@ -538,7 +540,7 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
             navigationValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 
@@ -566,7 +568,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
     short selectedOption = 0;
     const short MAX_OPTIONS = 3;
 
-    std::vector<short> optionValueList = {15 * 60, 5 * 60, 60};
+    std::vector<short> optionValueList = {15 * 60, 5 * 60, 3};
     short optionValue;
     std::string navigationValue = "GameModeVersusView";
 
@@ -606,7 +608,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
             break;
         }
 
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 
@@ -693,7 +695,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             navigationValue = navigationValueList[5];
             break;
         }
-        if (tmp == L"ESC") {
+        if (tmp == L"b") {
             return NavHost.Back();
         }
 

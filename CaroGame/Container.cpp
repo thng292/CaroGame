@@ -35,7 +35,7 @@ void Container::DrawToLogContainer(
     std::wstring playedText = Language::GetString(L"PLAYED_TEXT");
     std::wstring winText = Language::GetString(L"WIN_TEXT");
     std::wstring drawText = Language::GetString(L"DRAW_TEXT");
-    std::wstring timeText = Language::GetString(L"THROUGH_TIME_TEXT");
+    std::wstring timeText = Language::GetString(L"WIN_TIME_TEXT");
 
 
 
@@ -120,12 +120,18 @@ void Container::DrawToLogContainer(
         std::wstring value;
 
         switch (winMethod) {
-            case Constants::END_GAME_WIN_TIME:
-                playerName = (isPlayerOneTurn) ? playerNameTwo : playerNameOne;
-                playerSymbol = (isPlayerOneTurn) ? Constants::PLAYER_TWO.symbol
-                                                 : Constants::PLAYER_ONE.symbol;
+            case Constants::END_GAME_WIN_TIME_ONE:
                 value = std::format(
-                    L"{} {} ({}) {} ({})", playerText, playerName, playerSymbol, winText, timeText
+                    L"{} {} ({}) {}", playerText, playerNameOne, Constants::PLAYER_ONE.symbol,timeText
+                );
+                break;
+            case Constants::END_GAME_WIN_TIME_TWO:
+                value = std::format(
+                    L"{} {} ({}) {}",
+                    playerText,
+                    playerNameTwo,
+                    Constants::PLAYER_TWO.symbol,
+                    timeText
                 );
                 break;
             case Constants::END_GAME_DRAW:

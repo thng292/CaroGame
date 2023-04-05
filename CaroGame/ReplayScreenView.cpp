@@ -32,121 +32,143 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
     GameAction::Point curMove = {-1, -1};
     GameAction::Point winPoint;
 
-    while (1) {
-        auto tmp = InputHandle::Get();
-        bool validKey = false, moveBack = false;
-        Constants::Player curPlayer;
-
-        if (Utils::keyMeanLeft(tmp) && index >= 0) {
-            validKey = true;
-            moveBack = true;
-        }
-
-        if (Utils::keyMeanRight(tmp) && index < moveListSize - 1) {
-            validKey = true;
-        }
-
+    if (moveListSize == 0) {
+        gameScreen.logContainer.DrawToLogContainer(
+            curGameState.moveList,
+            curGameState.playerNameOne,
+            curGameState.playerNameTwo,
+            curGameState.playerOneFirst,
+            curGameState.gameEnd,
+            true
+        );
+        while (1) {
+            auto tmp = InputHandle::Get();
+        
         if (tmp == L"ESC") {
-            break;
+                break;
+            }
         }
+    }
 
-        if (validKey) {
-            if (!moveBack) {
-                index++;
-                curMove = {
-                    curGameState.moveList[index].first,
-                    curGameState.moveList[index].second};
+    else {
+        while (1) {
+            auto tmp = InputHandle::Get();
+            bool validKey = false, moveBack = false;
+            Constants::Player curPlayer;
 
-                curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE
-                                              : Constants::PLAYER_TWO;
-                GameScreenAction::UpdateGame(
-                    gameScreen,
-                    gameBoard,
-                    moveCount,
-                    curMove,
-                    curPlayer,
-                    tempGameState
-                );
+            if (Utils::keyMeanLeft(tmp) && index >= 0) {
+                validKey = true;
+                moveBack = true;
+            }
 
-                winPoint = GameScreenAction::HandleState(
-                    gameBoard,
-                    moveCount,
-                    curMove,
-                    curPlayer,
-                    isPlayerOneTurn,
-                    tempGameState,
-                    endGame,
-                    gameScreen
-                );
+            if (Utils::keyMeanRight(tmp) && index < moveListSize - 1) {
+                validKey = true;
+            }
 
-                if (index == curGameState.moveList.size() - 1) {
-                    if (endGame == 0) endGame = Constants::END_GAME_WIN_TIME;
-                    gameScreen.logContainer.DrawToLogContainer(
-                        curGameState.moveList,
-                        curGameState.playerNameOne,
-                        curGameState.playerNameTwo,
-                        curGameState.playerOneFirst,
-                        endGame,
-                        true
-                    );
-                }
+            if (tmp == L"ESC") {
+                break;
+            }
 
-                GameScreenAction::UnhightlightMove(
-                    gameScreen, prevMove, prevPlayer.symbol
-                );
-
-            } else {
-                index--;
-                if (endGame) {
-                    if (endGame == Constants::END_GAME_WIN_ONE || endGame == Constants::END_GAME_WIN_TWO) {
-                        Constants::Player temp = (isPlayerOneTurn)
-                                                     ? Constants::PLAYER_TWO
-                                                     : Constants::PLAYER_ONE;
-                        GameScreenAction::HightLightWin(
-                            winPoint, curMove, temp.symbol, gameScreen, true
-                        );
-                    }
-                    
-                    endGame = 0;
-                }
-                GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
-
-                tempGameState.moveList.pop_back();
-
-                if (index >= 0) {
-                    GameAction::UndoMove(gameBoard, moveCount, curMove);
-                    tempGameState.moveList.pop_back();
-
+            if (validKey) {
+                if (!moveBack) {
+                    index++;
                     curMove = {
                         curGameState.moveList[index].first,
                         curGameState.moveList[index].second};
 
+                    curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE
+                                                  : Constants::PLAYER_TWO;
+                    GameScreenAction::UpdateGame(
+                        gameScreen,
+                        gameBoard,
+                        moveCount,
+                        curMove,
+                        curPlayer,
+                        tempGameState
+                    );
+
+                    winPoint = GameScreenAction::HandleState(
+                        gameBoard,
+                        moveCount,
+                        curMove,
+                        curPlayer,
+                        isPlayerOneTurn,
+                        tempGameState,
+                        endGame,
+                        gameScreen
+                    );
+
+                    if (index == curGameState.moveList.size() - 1) {
+                        if (endGame == 0) endGame = curGameState.gameEnd;
+                        gameScreen.logContainer.DrawToLogContainer(
+                            curGameState.moveList,
+                            curGameState.playerNameOne,
+                            curGameState.playerNameTwo,
+                            curGameState.playerOneFirst,
+                            endGame,
+                            true
+                        );
+                    }
+
+                    GameScreenAction::UnhightlightMove(
+                        gameScreen, prevMove, prevPlayer.symbol
+                    );
+
                 } else {
-                    curMove = {-1, -1};
+                    index--;
+                    if (endGame) {
+                        if (endGame == Constants::END_GAME_WIN_ONE ||
+                            endGame == Constants::END_GAME_WIN_TWO) {
+                            Constants::Player temp =
+                                (isPlayerOneTurn) ? Constants::PLAYER_TWO
+                                                  : Constants::PLAYER_ONE;
+                            GameScreenAction::HightLightWin(
+                                winPoint, curMove, temp.symbol, gameScreen, true
+                            );
+                        }
+
+                        endGame = 0;
+                    }
+                    GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
+
+                    tempGameState.moveList.pop_back();
+
+                    if (index >= 0) {
+                        GameAction::UndoMove(gameBoard, moveCount, curMove);
+                        tempGameState.moveList.pop_back();
+
+                        curMove = {
+                            curGameState.moveList[index].first,
+                            curGameState.moveList[index].second};
+
+                    } else {
+                        curMove = {-1, -1};
+                    }
+
+                    curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE
+                                                  : Constants::PLAYER_TWO;
+
+                    GameScreenAction::UpdateGame(
+                        gameScreen,
+                        gameBoard,
+                        moveCount,
+                        curMove,
+                        curPlayer,
+                        tempGameState
+                    );
                 }
 
-                curPlayer = (isPlayerOneTurn) ? Constants::PLAYER_ONE
-                                              : Constants::PLAYER_TWO;
+                if (endGame != Constants::END_GAME_WIN_ONE &&
+                    endGame != Constants::END_GAME_WIN_TWO)
+                    GameScreenAction::HighlightMove(
+                        gameScreen, curMove, curPlayer.symbol
+                    );
 
-                GameScreenAction::UpdateGame(
-                    gameScreen,
-                    gameBoard,
-                    moveCount,
-                    curMove,
-                    curPlayer,
-                    tempGameState
-                );
+                prevMove = curMove;
+                prevPlayer = curPlayer;
+
+                isPlayerOneTurn = !isPlayerOneTurn;
             }
-
-            if (endGame != Constants::END_GAME_WIN_ONE && endGame != Constants::END_GAME_WIN_TWO)
-                GameScreenAction::HighlightMove(
-                    gameScreen, curMove, curPlayer.symbol
-                );
-
-            prevMove = curMove;
-            prevPlayer = curPlayer;
-
-            isPlayerOneTurn = !isPlayerOneTurn;
         }
     }
     return NavHost.Back();

@@ -40,8 +40,9 @@ namespace Constants {
 
     const short END_GAME_WIN_ONE = 1;
     const short END_GAME_WIN_TWO = 2;
-    const short END_GAME_WIN_TIME = 3;
-    const short END_GAME_DRAW = 4;
+    const short END_GAME_WIN_TIME_ONE = 3;
+    const short END_GAME_WIN_TIME_TWO = 4;
+    const short END_GAME_DRAW = 5;
 
     
 

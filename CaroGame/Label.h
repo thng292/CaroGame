@@ -27,7 +27,7 @@ namespace Label {
     );
 
     void DrawGameScreenHint(
-        short logX, short logY, short logWidth, short logHeight
+        short logX, short logY, short logWidth, short logHeight, bool isReplay = false
     );
 
     std::wstring GetShortcutString(

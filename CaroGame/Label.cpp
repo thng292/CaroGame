@@ -40,7 +40,7 @@ void Label::DrawLabelGrid(
 }
 
 void Label::DrawGameScreenHint(
-    short logX, short logY, short logWidth, short logHeight
+    short logX, short logY, short logWidth, short logHeight, bool isReplay
 )
 {
     const std::vector<std::wstring> INSTRUCTION_LIST = {

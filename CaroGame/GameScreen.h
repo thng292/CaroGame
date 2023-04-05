@@ -5,6 +5,7 @@
 #include "GameState.h"
 #include "Label.h"
 #include "Pokemon.h"
+#include "Gura.h"
 #include <unordered_map>
 
 
@@ -26,7 +27,8 @@ class GameScreen {
         logo_pokemon_pink,
         logo_pokemon_gray,
         logo_pokemon_white,
-        logo_pokemon_black
+        logo_pokemon_black,
+        logoGura
     };
 
     GameScreen(short x, short y);

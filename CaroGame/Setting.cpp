@@ -48,7 +48,7 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         const auto controlHint2 = std::format(
             L"Enter: {}, B: {}",
             Language::GetString(L"SELECT_KEY_TITLE"),
-            Language::GetString(L"NAVIGATE_BACK_TITLE")
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
         );
 
         View::WriteToView(59 - controlHint1.size() / 2, 29 - 4, controlHint1);
