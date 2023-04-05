@@ -30,6 +30,14 @@ void Container::DrawToLogContainer(
 
 
     std::wstring playerName, playerSymbol;
+    std::wstring moveText = Language::GetString(L"MOVE_TEXT");
+    std::wstring playerText = Language::GetString(L"PLAYER_TEXT");
+    std::wstring playedText = Language::GetString(L"PLAYED_TEXT");
+    std::wstring winText = Language::GetString(L"WIN_TEXT");
+    std::wstring drawText = Language::GetString(L"DRAW_TEXT");
+    std::wstring timeText = Language::GetString(L"THROUGH_TIME_TEXT");
+
+
 
     DWORD tmp = 0;
     HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -76,11 +84,14 @@ void Container::DrawToLogContainer(
         }
 
         std::wstring value = std::format(
-            L"Move {}: Player {}{} ({}) played {}{}",
+            L"{} {}: {} {}{} ({}) {} {}{}",
+            moveText,
             startIndex + 1,
+            playerText,
             playerName,
             extraSpace,
             playerSymbol,
+            playedText,
             (wchar_t)(L'A' + valueList[startIndex].second),
             valueList[startIndex].first + 1
         );
@@ -114,16 +125,16 @@ void Container::DrawToLogContainer(
                 playerSymbol = (isPlayerOneTurn) ? Constants::PLAYER_TWO.symbol
                                                  : Constants::PLAYER_ONE.symbol;
                 value = std::format(
-                    L"Player {} ({}) has won the game (Through time)", playerName, playerSymbol
+                    L"{} {} ({}) {} ({})", playerText, playerName, playerSymbol, winText, timeText
                 );
                 break;
             case Constants::END_GAME_DRAW:
-                value = L"The game ended in a draw";
+                value = Language::GetString(L"DRAW_TEXT");
                 break;
             default:
 
                 value = std::format(
-                    L"Player {} ({}) has won the game", playerName, playerSymbol
+                    L"{} {} ({}) {}", playerText, playerName, playerSymbol, winText
                 );
                 break;
         }

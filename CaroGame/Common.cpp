@@ -5,7 +5,7 @@ void Common::DrawHints()
     View::DrawTextCenterdVertically(
         29 - 3,
         std::format(
-            L"A, W, S, D, Arrow Keys: {}, X: {}",
+            L"A, W, S, D, \u2190\u2191\u2192\u2193 : {}, X: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
             Language::GetString(L"DELETE_KEY_TITLE")
         )

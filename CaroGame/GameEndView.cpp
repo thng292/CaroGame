@@ -5,57 +5,72 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     auto gameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
         ));
-    const short WIDTH = 35, HEIGHT = 2 * 9;
+    const short WIDTH = 50, HEIGHT = 2 * 9;
 
-    const short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
-    View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
-    View::DrawRect(rect);
+    short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
 
+    
+    std::wstring endScreenLabel = Language::GetString(L"END_SCREEN_TITLE");
     std::wstring playerResultLabel;
     std::wstring timeLabel = Language::GetString(L"CUR_TIME") + L":";
     std::wstring scoreLabel = Language::GetString(L"CUR_SCORE") + L":";
     std::wstring movesLabel = Language::GetString(L"CUR_MOVE_COUNT") + L":";
-    std::wstring totalTimeLabel = Language::GetString(L"PLAYER_TIME") + L":";
+    std::wstring playerTimeLabel = Language::GetString(L"PLAYER_TIME_TEXT") + L":";
     std::wstring gameTypeLabel = Language::GetString(L"CUR_GAME_TYPE") + L":";
     std::wstring gameModeLabel = Language::GetString(L"CUR_GAME_MODE") + L":";
+    std::wstring nameLabel = Language::GetString(L"CUR_NAME") + L":";
     std::wstring aiDifficultyLabel =
         Language::GetString(L"CUR_DIFFICULTY") + L":";
+    std::wstring playerLabel = Language::GetString(L"PLAYER_TEXT");
 
+    View::Color tempColor;
     switch (gameState.gameEnd) {
         case Constants::END_GAME_WIN_ONE:
             playerResultLabel = std::format(
-                L"{} ({}) {}",
+                L"{} {} ({}) {}",
+                playerLabel,
                 gameState.playerNameOne,
                 Constants::PLAYER_ONE.symbol,
                 Language::GetString(L"WIN_TEXT")
 
             );
+            tempColor = (View::Color)Constants::PLAYER_ONE_COLOR;
+            X_PIVOT -= 2;
             break;
         case Constants::END_GAME_WIN_TWO:
             playerResultLabel = std::format(
-                L"{} ({}) {}",
+                L"{} {} ({}) {}",
+                playerLabel,
                 gameState.playerNameTwo,
                 Constants::PLAYER_TWO.symbol,
                 Language::GetString(L"WIN_TEXT")
 
             );
+            tempColor = (View::Color)Constants::PLAYER_TWO_COLOR;
+            X_PIVOT += 1;
             break;
         case Constants::END_GAME_DRAW:
             playerResultLabel = Language::GetString(L"GAME_DRAW_TEXT");
             break;
     }
 
+    View::WriteToView(
+        Label::GetCenterX(X_PIVOT, WIDTH, endScreenLabel.size()), Y_PIVOT - 1, endScreenLabel
+    );
+    View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
+    View::DrawRect(rect);
+
     short x = Label::GetCenterX(X_PIVOT, WIDTH, playerResultLabel.size()),
           y = Y_PIVOT + 1;
 
-    View::WriteToView(x, y, playerResultLabel);
+    View::WriteToView(x, y, playerResultLabel, (wchar_t)0U, false, tempColor);
     x = X_PIVOT, y += 2;
 
     // Name
     DrawLabelValuesAdjacent(
         x,
         y,
-        L"",
+        nameLabel,
         std::format(
             L"{} ({})", gameState.playerNameOne, Constants::PLAYER_ONE.symbol
         ),
@@ -85,7 +100,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     DrawLabelValuesAdjacent(
         x,
         y,
-        timeLabel,
+        playerTimeLabel,
         Utils::SecondToMMSS(gameState.playerTimeOne),
         Utils::SecondToMMSS(gameState.playerTimeTwo),
         WIDTH
@@ -122,7 +137,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     DrawLabelValue(
         x,
         y,
-        totalTimeLabel,
+        timeLabel,
         (gameState.gameType == Constants::GAME_TYPE_NORMAL)
             ? L"\u221e"
             : Utils::SecondToMMSS(gameState.gameTime),
@@ -181,6 +196,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     return NavHost.Navigate("ReplayMenuView");
 }
 
+
 void GameEndView::DrawLabelValuesAdjacent(
     short x,
     short y,
@@ -193,7 +209,7 @@ void GameEndView::DrawLabelValuesAdjacent(
     x += 2;
     View::WriteToView(x, y, label);
 
-    x += (width - 2) / 2;
+    x += (width - 2) / 2 + 5;
     const short X_MID_PIVOT = x;
     x -= playerOneValue.size() + 1;
 
@@ -228,6 +244,6 @@ void GameEndView::DrawLabelValue(
 {
     x += 2;
     View::WriteToView(x, y, label);
-    x += width / 2;
+    x += width / 2 + 3;
     View::WriteToView(x, y, value, (wchar_t)0U, false, View::Color::GREEN);
 }

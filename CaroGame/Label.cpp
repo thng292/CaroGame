@@ -45,7 +45,7 @@ void Label::DrawGameScreenHint(
 {
     const std::vector<std::wstring> INSTRUCTION_LIST = {
         Label::GetShortcutString(
-            Language::GetString(L"MOVE_SHORTCUT"),
+            L"A, W, S, D, \u2190\u2191\u2192\u2193",
             Language::GetString(L"NAVIGATION_KEYS_TITLE")
         ),
         Label::GetShortcutString(
@@ -63,7 +63,7 @@ void Label::DrawGameScreenHint(
         )
 
     };
-    short spaceVal = 8;
+    short spaceVal = 5;
     std::wstring row1, row2, space(spaceVal, L' ');
     row1 = INSTRUCTION_LIST[0] + space + INSTRUCTION_LIST[1];
     if (INSTRUCTION_LIST[0].size() > INSTRUCTION_LIST[2].size()) {

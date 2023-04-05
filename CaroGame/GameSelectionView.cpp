@@ -84,10 +84,12 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     InputBox::InputList inputList;
 
     if (curGameState.gameMode == Constants::GAME_MODE_PVE) {
-        labelList = {L"Player's name:"};
+        labelList = {Language::GetString(L"PLAYER_NAME_LABEL") + L":"};
         inputList = {L"", L"Gura"};
     } else {
-        labelList = {L"Player 1's name:", L"Player 2's name:"};
+        labelList = {
+            Language::GetString(L"PLAYER_NAME_ONE_LABEL") + L":",
+            Language::GetString(L"PLAYER_NAME_TWO_LABEL") + L":"};
         inputList = {L"", L""};
     }
 
@@ -225,16 +227,19 @@ void GameSelectionView::DrawCurrentOptionBox(
     const GameState& gameState, short selected
 )
 {
-    const short X_PIVOT = 20, Y_PIVOT = 5;
-    const short WIDTH = 80, HEIGHT = 2;
+    const short WIDTH = 95, HEIGHT = 2;
+    const short X_PIVOT = Label::GetCenterX(0, 120, WIDTH), Y_PIVOT = 5;
     View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
     View::DrawRect(rect);
 
-    const std::wstring GAME_TYPE_LABEL = Language::GetString(L"CUR_GAME_TYPE");
-    const std::wstring GAME_MODE_LABEL = Language::GetString(L"CUR_GAME_MODE");
-    const std::wstring GAME_TIME_LABEL = Language::GetString(L"CUR_TIME");
+    const std::wstring GAME_TYPE_LABEL =
+        Language::GetString(L"CUR_GAME_TYPE") + L":";
+    const std::wstring GAME_MODE_LABEL =
+        Language::GetString(L"CUR_GAME_MODE") + L":";
+    const std::wstring GAME_TIME_LABEL =
+        Language::GetString(L"CUR_TIME") + L":";
     const std::wstring AI_DIFFICULTY_LABEL =
-        Language::GetString(L"CUR_DIFFICULTY");
+        Language::GetString(L"CUR_DIFFICULTY") + L":";
 
     std::wstring GAME_TYPE_VALUE;
     std::wstring GAME_TIME_VALUE;
@@ -295,15 +300,23 @@ void GameSelectionView::DrawCurrentOptionBox(
     const std::array<std::wstring, 4> VALUE_LIST = {
         GAME_TYPE_VALUE, GAME_TIME_VALUE, GAME_MODE_VALUE, AI_DIFFICULTY_VALUE};
 
-    short x = X_PIVOT + 10, y = Y_PIVOT + 1, space = 15;
+    short labelListLength = 0, space = 10;
+    for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
+        labelListLength += LABEL_LIST[i].size() + space + 2;
+    }
+    short x = Label::GetCenterX(X_PIVOT, WIDTH, labelListLength), y = Y_PIVOT + 1;
+
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
         View::WriteToView(
-            x + i * space, y, LABEL_LIST[i] + L":", (wchar_t)0U, i == selected
+            x, y, LABEL_LIST[i], (wchar_t)0U, i == selected
         );
+        x += LABEL_LIST[i].size() + 2;
+
         View::WriteToView(
-            x + i * space + LABEL_LIST[i].size() + 2, y, VALUE_LIST[i]
+            x, y, VALUE_LIST[i]
         );
+        x += space;
     }
 }
 

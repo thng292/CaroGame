@@ -76,21 +76,16 @@ void GameScreen::DrawGameScreen()
             winCountContainerOne.cellWidth * 2,
         timerContainerOne.xCoord,
         timerContainerOne.yCoord - 1,
-        L"Game Status"
+        Language::GetString(L"GAME_STATUS_TITLE")
     );
-    /* Label::DrawLabelCenter(
-         logContainer.xCoord,
-         logContainer.xCoord + logContainer.cellWidth,
-         playerInfoContainerOne.xCoord,
-         playerInfoContainerOne.yCoord - 1,
-         L"Player Info"
-     );*/
+
     Label::DrawLabelCenter(
         logContainer.xCoord,
         logContainer.xCoord + logContainer.cellWidth,
         logContainer.xCoord,
         logContainer.yCoord - 1,
-        L"Move History"
+        Language::GetString(L"MOVE_HISTORY_TITLE")
+
     );
 
     
