@@ -1,5 +1,28 @@
 #include "Navigate.h"
 
+#if _DEBUG
+void Draw404(NavigationHost& NavHost)
+{
+    View::DrawMenuPrevState menuPrevState;
+
+    View::DrawMenuCenter(
+        menuPrevState,
+        L"404",
+        {
+            {L"This screen does not exist", 0},
+            {L"Press Enter to back",        0},
+    },
+        0
+    );
+    while (true) {
+        auto tmp = InputHandle::Get();
+        if (tmp == L"\r") {
+            return NavHost.Back();
+        }
+    }
+}
+#endif
+
 NavigationHost::NavigationHost(
     const std::string& Start, const ViewFuncMap& links
 )
@@ -117,26 +140,3 @@ void NavigationHost::HistoryPopAllOverlay()
         HistoryPop();
     }
 }
-
-#if _DEBUG
-void NavigationHost::Draw404(NavigationHost& NavHost)
-{
-    View::DrawMenuPrevState menuPrevState;
-
-    View::DrawMenuCenter(
-        menuPrevState,
-        L"404",
-        {
-            {L"This screen does not exist", 0},
-            {L"Press Enter to back",        0},
-    },
-        0
-    );
-    while (true) {
-        auto tmp = InputHandle::Get();
-        if (tmp == L"\r") {
-            return NavHost.Back();
-        }
-    }
-}
-#endif
