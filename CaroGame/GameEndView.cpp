@@ -9,13 +9,13 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
 
     short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
 
-    
     std::wstring endScreenLabel = Language::GetString(L"END_SCREEN_TITLE");
     std::wstring playerResultLabel;
     std::wstring timeLabel = Language::GetString(L"CUR_TIME") + L":";
     std::wstring scoreLabel = Language::GetString(L"CUR_SCORE") + L":";
     std::wstring movesLabel = Language::GetString(L"CUR_MOVE_COUNT") + L":";
-    std::wstring playerTimeLabel = Language::GetString(L"PLAYER_TIME_TEXT") + L":";
+    std::wstring playerTimeLabel =
+        Language::GetString(L"PLAYER_TIME_TEXT") + L":";
     std::wstring gameTypeLabel = Language::GetString(L"CUR_GAME_TYPE") + L":";
     std::wstring gameModeLabel = Language::GetString(L"CUR_GAME_MODE") + L":";
     std::wstring nameLabel = Language::GetString(L"CUR_NAME") + L":";
@@ -79,7 +79,9 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     }
 
     View::WriteToView(
-        Label::GetCenterX(X_PIVOT, WIDTH, endScreenLabel.size()), Y_PIVOT - 1, endScreenLabel
+        Label::GetCenterX(X_PIVOT, WIDTH, endScreenLabel.size()),
+        Y_PIVOT - 1,
+        endScreenLabel
     );
     View::Rect rect = {Y_PIVOT, X_PIVOT, X_PIVOT + WIDTH, Y_PIVOT + HEIGHT};
     View::DrawRect(rect);
@@ -194,11 +196,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     // Moves
     y += 2;
     DrawLabelValue(
-        x,
-        y,
-        movesLabel,
-        std::format(L"{}", gameState.moveList.size()),
-        WIDTH
+        x, y, movesLabel, std::format(L"{}", gameState.moveList.size()), WIDTH
 
     );
 
@@ -212,13 +210,25 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     auto logoThread =
         std::thread(Logo_Result, gameState.gameEnd, std::ref(stop));
 
+    Audio::AudioPlayer player;
+
+    if (gameState.gameEnd == Constants::END_GAME_DRAW) {
+        player.Open(Audio::Sound::Draw);
+    } else {
+        if (gameState.gameMode == Constants::GAME_MODE_PVE &&
+            (gameState.gameEnd == Constants::END_GAME_WIN_TWO || gameState.gameEnd == Constants::END_GAME_WIN_TIME_TWO)) {
+            player.Open(Audio::Sound::Lose);
+        } else {
+            player.Open(Audio::Sound::Win);
+        }  
+    }
+    player.Play();
     auto tmp = InputHandle::Get();
     stop = true;
     logoThread.join();
     PlaySpecialKeySound();
     return NavHost.Navigate("ReplayMenuView");
 }
-
 
 void GameEndView::DrawLabelValuesAdjacent(
     short x,

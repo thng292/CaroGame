@@ -758,7 +758,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             navigationValue = navigationValueList[5];
             break;
         }
-        if (tmp == L"b") {
+        if (tmp == L"b" || tmp == L"ESC") {
             return NavHost.Back();
         }
 

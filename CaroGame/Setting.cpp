@@ -24,6 +24,9 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto& undoSetting = Config::GetSetting(Config::UndoOption);
     auto musicCheck = [&musicSetting, &NavHost]() {
         if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+            if (!NavHost.CheckContext(Constants::CURRENT_BGM)) {
+                return;
+            }
             auto bgmAudio = BackgroundAudioService::getInstance();
             auto currentBGM = std::any_cast<Audio::Sound>(
                 NavHost.GetFromContext(Constants::CURRENT_BGM)
