@@ -77,7 +77,7 @@ class AI {
     const short INF = 25000;
     const short MAX_SCORE = 10000;
     const short FIRST_LOOKUP_RANGE = 1;
-    const short _DEPTH = 2;
+    const short _DEPTH = 3;
     const short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
                 PLAYER_AI = Constants::PLAYER_TWO.value;
     short _range;

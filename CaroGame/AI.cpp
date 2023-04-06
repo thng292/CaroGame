@@ -53,6 +53,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
                 short valCur;
                 GameAction::Point move = {row, col};
                 GameAction::MakeMove(board, moveCount, move, PLAYER_AI);
+                if ()
                 valCur = MiniMax(
                     board,
                     moveCount,

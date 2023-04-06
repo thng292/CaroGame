@@ -186,25 +186,40 @@ short Evaluation::GetComboEval(
                     short eval = GetHorizontalComboEval(
                         board, comboCheckBoard, {row, col}, board[row][col]
                     );
-
+                    if (eval == score[3] && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost;
+                    else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost * 2;
                     evalValue += eval;
                 }
                 if (comboCheckBoard[row][col] % 3 == 0) {
                     short eval = GetVerticalComboEval(
                         board, comboCheckBoard, {row, col}, board[row][col]
                     );
+                    if (eval == score[3] && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost;
+                    else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost * 2;
                     evalValue += eval;
                 }
                 if (comboCheckBoard[row][col] % 5 == 0) {
                     short eval = GetDiagonalRightComboEval(
                         board, comboCheckBoard, {row, col}, board[row][col]
                     );
+                    if (eval == score[3] && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost;
+                    else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost * 2;
                     evalValue += eval;
                 }
                 if (comboCheckBoard[row][col] % 7 == 0) {
                     short eval = GetDiagonalLeftComboEval(
                         board, comboCheckBoard, {row, col}, board[row][col]
                     );
+                    if (eval == score[3] && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost;
+                    else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
+                        eval = score[3] * tempBoost * 2;
 
                     evalValue += eval;
                 }
