@@ -215,7 +215,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     auto tmp = InputHandle::Get();
     stop = true;
     logoThread.join();
-
+    PlaySpecialKeySound();
     return NavHost.Navigate("ReplayMenuView");
 }
 

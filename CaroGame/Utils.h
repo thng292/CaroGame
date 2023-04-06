@@ -8,13 +8,14 @@
 #include <memory>
 
 #include "Audio.h"
-#include "InputHandle.h"
+
+// Used PlaySound API
+#define PlaySpecialKeySound() Audio::PlayAndForget(Audio::Sound::MenuSelect)
 
 namespace Utils {
 
     class KeyPressSound {
-        Audio::AudioPlayer OnKeyPressSound =
-            Audio::AudioPlayer(Audio::Sound::OnKey);
+        Audio::AudioPlayer player{Audio::Sound::MenuMove};
         static std::unique_ptr<KeyPressSound> singletonInstance;
         static std::mutex locker;
 
@@ -29,9 +30,14 @@ namespace Utils {
             return singletonInstance.get();
         }
 
-        inline void Play() { OnKeyPressSound.Play(); }
+        inline void Play(bool fromStart = 0, bool repeat = 0)
+        {
+            player.Play(fromStart, repeat);
+        }
 
-        inline void Pause() { OnKeyPressSound.Pause(); }
+        inline void Pause() { player.Pause(); }
+
+        inline void ChangeSong(Audio::Sound Song) { player.Open(Song); }
     };
 
     struct ON_SCOPE_EXIT {
@@ -115,9 +121,9 @@ namespace Utils {
 
     inline void PlayKeyPressSound()
     {
-        auto OnKeyPressSound = KeyPressSound::getInstance();
-        OnKeyPressSound->Pause();
-        OnKeyPressSound->Play();
+        static auto player = KeyPressSound::getInstance();
+        player->Pause();
+        player->Play(1);
     }
 
     template <typename T, typename _Elem>

@@ -23,18 +23,21 @@ class BackgroundAudioService {
         return singletonInstance.get();
     }
 
-    AudioPlayer* getPlayer() { 
+    AudioPlayer* getPlayer()
+    {
         if (player == nullptr) {
             player = std::make_unique<AudioPlayer>();
         }
-        return player.get(); 
+        return player.get();
     }
 
     void ChangeSong(Sound song)
     {
         if (player != nullptr) {
-            player->Stop();
+            player->Close();
+            player->Open(song);
+        } else {
+            player = std::make_unique<AudioPlayer>(song);
         }
-        player = std::make_unique<AudioPlayer>(song);
     }
 };

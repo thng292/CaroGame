@@ -114,7 +114,11 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         );
         auto tmp = InputHandle::Get();
         if (soundEffectSetting == Config::Value_True) {
-            Utils::PlayKeyPressSound();
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
         if (tmp == Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")) {
             return NavHost.Back();

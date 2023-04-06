@@ -20,12 +20,11 @@ void View::Setup()
         ((currMode | ENABLE_EXTENDED_FLAGS) & ~ENABLE_QUICK_EDIT_MODE &
          ~ENABLE_MOUSE_INPUT)
     );
-/*currMode & ~(ENABLE_QUICK_EDIT_MODE) &
-    ~(ENABLE_MOUSE_INPUT) &
-);*/
 
 // Hide the cursor
-#if _NDEBUG
+#if _DEBUG
+    ShowCursor(true);
+#else
     ShowCursor(false);
 #endif
     // Set font bold
@@ -57,7 +56,7 @@ void View::ShowCursor(bool show)
     static HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
-    cursorInfo.bVisible = !show;
+    cursorInfo.bVisible = show;
     SetConsoleCursorInfo(hOut, &cursorInfo);
 }
 

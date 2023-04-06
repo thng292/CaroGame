@@ -12,7 +12,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
 
     Common::DrawHints();
 
-    auto& soundSetting = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
     auto& title = Language::GetString(L"LOAD_MENU_TITLE");
     auto& leadingText = Language::GetString(L"SEARCH_FIELD_TITLE");
 
@@ -47,10 +47,13 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
 
         tmp = InputHandle::Get();
 
-        if (soundSetting == Config::Value_True) {
-            Utils::PlayKeyPressSound();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
-
         if (Utils::keyMeanDown(tmp)) {
             currentState.NextSelection();
         }

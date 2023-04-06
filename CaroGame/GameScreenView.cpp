@@ -6,12 +6,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
         );
 
-    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
-
     GameAction::Board gameBoard(
         Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
     );
-
+    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
         if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::GameBGM) {
@@ -19,6 +17,14 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             bgmAudio->getPlayer()->Play(true, true);
         }
     }
+    auto keyPressSound = Utils::KeyPressSound::getInstance();
+    keyPressSound->ChangeSong(Audio::Sound::GameMove);
+    Utils::ON_SCOPE_EXIT on_exit([&NavHost, &keyPressSound] {
+        NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
+        keyPressSound->ChangeSong(Audio::Sound::MenuMove);
+    });
+    
+    Audio::AudioPlayer placeMoveSound(Sound::GamePlace);
 
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
 
@@ -190,8 +196,12 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         tmp = InputHandle::Get();
         if (endGame) break;
 
-        if (soundEffect == L"True") {
-            Utils::PlayKeyPressSound();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                placeMoveSound.Play(1);
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
 
         if (tmp == L"ESC") {
@@ -374,7 +384,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         );
     }
 
-    if (endGame != Constants::END_GAME_WIN_TIME_ONE && endGame != Constants::END_GAME_WIN_TIME_TWO) {
+    if (endGame != Constants::END_GAME_WIN_TIME_ONE &&
+        endGame != Constants::END_GAME_WIN_TIME_TWO) {
         gameScreen.logContainer.DrawToLogContainer(
             curGameState.moveList,
             curGameState.playerNameOne,
