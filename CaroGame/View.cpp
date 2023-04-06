@@ -113,14 +113,14 @@ void View::WriteToView(
     View::Color backgroundColor
 )
 {
-    View::Goto(x, y);
     static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(
         STD_HANDLE,
         highlight ? ((int(highlightColor) << 4) | int(highlightTextColor))
                   : ((int(backgroundColor) << 4) | int(textColor))
     );
-    _putwchar_nolock(str);
+    View::Goto(x, y);
+    std::wcout << str;
 }
 
 void View::ClearScreen()
@@ -545,8 +545,8 @@ wchar_t View::Input(
     Color focusBackgroundColor
 )
 {
-    ShowCursor(1);
-    Utils::ON_SCOPE_EXIT([&] { ShowCursor(0); });
+    ShowCursor(true);
+    Utils::ON_SCOPE_EXIT onScopeExit([&] { ShowCursor(false); });
     if (hasFocus) {
         bool redraw = 1;
         bool needReservePos = 0;

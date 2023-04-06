@@ -139,7 +139,7 @@ namespace Audio {
         inline ~AudioPlayer() { Close(); }
     };
 
-    inline bool PlayAndForget(Sound sound)
+    inline bool PlayAndForget(Sound sound, bool wait = 0)
     {
         return PlaySound(
             std::format(
@@ -147,7 +147,7 @@ namespace Audio {
             )
                 .c_str(),
             0,
-            SND_ASYNC | SND_FILENAME
+            (wait ? SND_SYNC : SND_ASYNC) | SND_FILENAME
         );
     }
 

@@ -15,6 +15,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::GameBGM) {
             bgmAudio->ChangeSong(Sound::GameBGM);
             bgmAudio->getPlayer()->Play(true, true);
+        } else {
+            bgmAudio->getPlayer()->Play(false, true);
         }
     }
     auto keyPressSound = Utils::KeyPressSound::getInstance();
@@ -22,8 +24,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Utils::ON_SCOPE_EXIT on_exit([&NavHost, &keyPressSound] {
         NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
         keyPressSound->ChangeSong(Audio::Sound::MenuMove);
+        BackgroundAudioService::getInstance()->getPlayer()->Stop();
     });
-    
+
     Audio::AudioPlayer placeMoveSound(Sound::GamePlace);
 
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
@@ -91,12 +94,13 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
                 curGameState.playerTimeOne += timeAddition;
-                std::lock_guard guard(lock);
+                lock.lock();
                 gameScreen.timerContainerOne.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeOne),
                     (View::Color)Constants::PLAYER_ONE_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
+                lock.unlock();
                 if (curGameState.playerTimeOne == 0 && !endGame) {
                     endGame = Constants::END_GAME_WIN_TIME_TWO;
                     curGameState.playerScoreTwo++;
@@ -121,13 +125,14 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         [&] {
             if (!endGame) {
                 auto currPos = View::GetCursorPos();
-                std::lock_guard guard(lock);
                 curGameState.playerTimeTwo += timeAddition;
+                lock.lock();
                 gameScreen.timerContainerTwo.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeTwo),
                     (View::Color)Constants::PLAYER_TWO_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
+                lock.unlock();
                 if (curGameState.playerTimeTwo == 0 && !endGame) {
                     endGame = Constants::END_GAME_WIN_TIME_ONE;
 
@@ -210,6 +215,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
                 placeMoveSound.Play(1);
+            } else if (tmp == L"ESC") {
+                Audio::PlayAndForget(Sound::Pause);
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -218,6 +225,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         if (tmp == L"ESC") {
             timerPlayerOne.Stop();
             timerPlayerTwo.Stop();
+            GameScreenAction::UnhighlightCursor(
+                gameScreen, gameBoard, {prevRow, prevCol}, curMove
+            );
             NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
             return NavHost.NavigateStack("PauseMenuView");
         }
@@ -230,7 +240,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                  (curGameState.moveList.size() > 2 ||
                   curGameState.playerOneFirst))) {
                 lock.lock();
-
                 GameScreenAction::UndoMove(
                     gameScreen,
                     gameBoard,
@@ -251,7 +260,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 (curGameState.moveList.size() > 1 || curGameState.playerOneFirst
                 )) {
                 lock.lock();
-
                 GameScreenAction::UndoMove(
                     gameScreen,
                     gameBoard,
@@ -298,8 +306,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 col++;
             }
         }
-        lock.lock();
 
+        lock.lock();
         GameScreenAction::UnhighlightCursor(
             gameScreen, gameBoard, {prevRow, prevCol}, curMove
         );
@@ -405,19 +413,17 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 prevPlayer = curPlayer;
             }
         }
-        lock.lock();
 
+        lock.lock();
         View::Goto(
             gameScreen.boardContainer.xCoord +
                 BoardContainer::CELL_WIDTH * col + BoardContainer::X_OFFSET,
             gameScreen.boardContainer.yCoord +
                 BoardContainer::CELL_HEIGHT * row + BoardContainer::Y_OFFSET
         );
-
         lock.unlock();
 
         lock.lock();
-
         GameScreenAction::HighLightCursor(
             gameScreen, gameBoard, {row, col}, curMove
         );
