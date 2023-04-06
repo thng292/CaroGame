@@ -189,7 +189,7 @@ short Evaluation::GetComboEval(
                     if (eval == score[3] && board[row][col] != playerValue)
                         eval = score[3] * tempBoost;
                     else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
-                        eval = score[3] * tempBoost * 2;
+                        eval = score[3] * tempBoost * 8;
                     evalValue += eval;
                 }
                 if (comboCheckBoard[row][col] % 3 == 0) {
@@ -199,7 +199,7 @@ short Evaluation::GetComboEval(
                     if (eval == score[3] && board[row][col] != playerValue)
                         eval = score[3] * tempBoost;
                     else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
-                        eval = score[3] * tempBoost * 2;
+                        eval = score[3] * tempBoost * 8;
                     evalValue += eval;
                 }
                 if (comboCheckBoard[row][col] % 5 == 0) {
@@ -209,7 +209,7 @@ short Evaluation::GetComboEval(
                     if (eval == score[3] && board[row][col] != playerValue)
                         eval = score[3] * tempBoost;
                     else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
-                        eval = score[3] * tempBoost * 2;
+                        eval = score[3] * tempBoost * 8;
                     evalValue += eval;
                 }
                 if (comboCheckBoard[row][col] % 7 == 0) {
@@ -219,7 +219,7 @@ short Evaluation::GetComboEval(
                     if (eval == score[3] && board[row][col] != playerValue)
                         eval = score[3] * tempBoost;
                     else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
-                        eval = score[3] * tempBoost * 2;
+                        eval = score[3] * tempBoost * 8;
 
                     evalValue += eval;
                 }
