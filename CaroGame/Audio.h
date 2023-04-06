@@ -30,7 +30,7 @@ namespace Audio {
         L"Key.wav",
         L"Draw.mp3",
         L"Win.mp3",
-        L"Lose.wav",
+        L"Lose.mp3",
         L"MenuBGM.mp3",
         L"MenuMove.wav",
         L"MenuSelect.wav",
