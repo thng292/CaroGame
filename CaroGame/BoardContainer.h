@@ -15,7 +15,7 @@ class BoardContainer {
     void DrawBoardCol();
 
     // Draws to the board's cell
-    void DrawToBoardContainerCell(short row, short col, std::wstring value, View::Color color = View::Color::BLACK);
+    void DrawToBoardContainerCell(short row, short col, std::wstring value, View::Color color = View::Color::BLACK, bool highlight=false);
 
     // Draws the horizontal labels (Letters)
     void DrawBoardHorizontalLabels();

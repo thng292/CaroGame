@@ -12,6 +12,7 @@
 #include "View.h"
 
 namespace GameScreenAction {
+
     void UpdateGame(
         GameScreen gameScreen,
         GameAction::Board& board,
@@ -33,6 +34,26 @@ namespace GameScreenAction {
         Constants::Player& curPlayer,
         Constants::Player& prevPlayer,
         bool& isPlayerOneTurn
+    );
+
+    void HighLightCursor(
+        GameScreen& gameScreen,
+        const GameAction::Board& gameBoard,
+        const GameAction::Point& curPos,
+        const GameAction::Point& curMove
+
+ 
+    );
+
+
+    void UnhighlightCursor(
+        GameScreen& gameScreen,
+        const GameAction::Board& gameBoard,
+        const GameAction::Point& curPos,
+        const GameAction::Point& curMove
+
+
+
     );
 
     void HightLightWin(
