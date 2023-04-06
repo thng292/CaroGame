@@ -160,6 +160,11 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     }
 
     std::wstring tmp;
+    short prevRow = 0, prevCol = 0;
+
+    GameScreenAction::HighLightCursor(
+        gameScreen, gameBoard, {row, col}, curMove
+    );
 
     while (!endGame) {
         if (aiFirst) {
@@ -167,7 +172,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             myAI.UpdatePrivateValues(curMove);
             curPlayer = Constants::PLAYER_TWO;
             timerPlayerOne.Continued();
-            std::lock_guard guard(lock);
+
+            lock.lock();
             GameScreenAction::UpdateGame(
                 gameScreen,
                 gameBoard,
@@ -176,13 +182,18 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 curPlayer,
                 curGameState
             );
+            lock.unlock();
+
             timerPlayerTwo.Pause();
             aiFirst = false;
             isPlayerOneTurn = !isPlayerOneTurn;
 
+            lock.lock();
             GameScreenAction::HighlightMove(
                 gameScreen, curMove, curPlayer.symbol
             );
+            lock.unlock();
+
             prevMove = curMove;
             prevPlayer = curPlayer;
         }
@@ -204,12 +215,12 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         if (tmp == L"z" && curGameState.moveList.size() != 0 &&
 
             Config::GetSetting(Config::UndoOption) == Config::Value_True) {
-            std::lock_guard guard(lock);
-
             if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
                 (curGameState.gameMode == Constants::GAME_MODE_PVE &&
                  (curGameState.moveList.size() > 2 ||
                   curGameState.playerOneFirst))) {
+                lock.lock();
+
                 GameScreenAction::UndoMove(
                     gameScreen,
                     gameBoard,
@@ -221,12 +232,16 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     prevPlayer,
                     isPlayerOneTurn
                 );
+                lock.unlock();
+
                 if (curGameState.gameMode == Constants::GAME_MODE_PVE)
                     myAI.RevertPrivateValues();
             }
             if (curGameState.gameMode == Constants::GAME_MODE_PVE &&
                 (curGameState.moveList.size() > 1 || curGameState.playerOneFirst
                 )) {
+                lock.lock();
+
                 GameScreenAction::UndoMove(
                     gameScreen,
                     gameBoard,
@@ -238,6 +253,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     prevPlayer,
                     isPlayerOneTurn
                 );
+                lock.unlock();
 
                 if (curGameState.gameMode == Constants::GAME_MODE_PVE)
                     myAI.RevertPrivateValues();
@@ -246,24 +262,38 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         if (Utils::keyMeanUp(tmp)) {
             if (row - 1 >= 0) {
+                prevCol = col;
+                prevRow = row;
                 row--;
             }
         }
         if (Utils::keyMeanLeft(tmp)) {
             if (col - 1 >= 0) {
+                prevCol = col;
+                prevRow = row;
                 col--;
             }
         }
         if (Utils::keyMeanDown(tmp)) {
             if (row + 1 < Constants::BOARD_SIZE) {
+                prevCol = col;
+                prevRow = row;
                 row++;
             }
         }
         if (Utils::keyMeanRight(tmp)) {
             if (col + 1 < Constants::BOARD_SIZE) {
+                prevCol = col;
+                prevRow = row;
                 col++;
             }
         }
+        lock.lock();
+
+        GameScreenAction::UnhighlightCursor(
+            gameScreen, gameBoard, {prevRow, prevCol}, curMove
+        );
+        lock.unlock();
 
         if (tmp == L"p" || tmp == L"P") {
             return NavHost.Navigate("ReplayMenuView");
@@ -365,16 +395,27 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 prevPlayer = curPlayer;
             }
         }
-        std::lock_guard guard(lock);
+        lock.lock();
+
         View::Goto(
             gameScreen.boardContainer.xCoord +
                 BoardContainer::CELL_WIDTH * col + BoardContainer::X_OFFSET,
             gameScreen.boardContainer.yCoord +
                 BoardContainer::CELL_HEIGHT * row + BoardContainer::Y_OFFSET
         );
+
+        lock.unlock();
+
+        lock.lock();
+
+        GameScreenAction::HighLightCursor(
+            gameScreen, gameBoard, {row, col}, curMove
+        );
+        lock.unlock();
     }
 
-    if (endGame != Constants::END_GAME_WIN_TIME_ONE && endGame != Constants::END_GAME_WIN_TIME_TWO) {
+    if (endGame != Constants::END_GAME_WIN_TIME_ONE &&
+        endGame != Constants::END_GAME_WIN_TIME_TWO) {
         gameScreen.logContainer.DrawToLogContainer(
             curGameState.moveList,
             curGameState.playerNameOne,

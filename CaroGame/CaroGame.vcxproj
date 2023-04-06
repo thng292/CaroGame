@@ -249,6 +249,7 @@
     <ClInclude Include="GameSelectionView.h" />
     <ClInclude Include="Setting.h" />
     <ClInclude Include="StartUp.h" />
+    <ClInclude Include="Theme.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="Utils.h" />

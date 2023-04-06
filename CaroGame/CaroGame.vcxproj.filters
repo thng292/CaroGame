@@ -386,6 +386,9 @@
     <ClInclude Include="Gura.h">
       <Filter>Graphics\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Theme.h">
+      <Filter>Core\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Features.md" />

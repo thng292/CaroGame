@@ -43,7 +43,7 @@ void BoardContainer::DrawBoardCol()
 }
 
 void BoardContainer::DrawToBoardContainerCell(
-    short row, short col, std::wstring value, View::Color color
+    short row, short col, std::wstring value, View::Color color, bool highlight
 )
 {
     View::WriteToView(
@@ -51,7 +51,7 @@ void BoardContainer::DrawToBoardContainerCell(
         yCoord + row * CELL_HEIGHT + Y_OFFSET,
         value,
         (wchar_t)0U,
-        false,
+        highlight,
         color
     );
 }
