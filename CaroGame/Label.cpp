@@ -43,60 +43,78 @@ void Label::DrawGameScreenHint(
     short logX, short logY, short logWidth, short logHeight, bool isReplay
 )
 {
-    const std::vector<std::wstring> INSTRUCTION_LIST = {
-        Label::GetShortcutString(
-            L"A, W, S, D, \u2190\u2191\u2192\u2193",
-            Language::GetString(L"NAVIGATION_KEYS_TITLE")
-        ),
-        Label::GetShortcutString(
-            Language::GetString(L"PLACE_SHORTCUT"),
-            Language::GetString(L"PLACE_TITLE")
-        ),
-        Label::GetShortcutString(
-            Language::GetString(L"UNDO_SHORTCUT"),
-            Language::GetString(L"UNDO_OPTION_TITLE")
-        ),
+    if (!isReplay) {
+        const std::vector<std::wstring> INSTRUCTION_LIST = {
+            Label::GetShortcutString(
+                L"A, W, S, D, \u2190\u2191\u2192\u2193",
+                Language::GetString(L"NAVIGATION_KEYS_TITLE")
+            ),
+            Label::GetShortcutString(
+                Language::GetString(L"PLACE_SHORTCUT"),
+                Language::GetString(L"PLACE_TITLE")
+            ),
+            Label::GetShortcutString(
+                Language::GetString(L"UNDO_SHORTCUT"),
+                Language::GetString(L"UNDO_OPTION_TITLE")
+            ),
 
-        Label::GetShortcutString(
-            Language::GetString(L"PAUSE_SHORTCUT"),
-            Language::GetString(L"PAUSE_TITLE")
-        )
+            Label::GetShortcutString(
+                Language::GetString(L"PAUSE_SHORTCUT"),
+                Language::GetString(L"PAUSE_TITLE")
+            )
 
-    };
-    short spaceVal = 5;
-    std::wstring row1, row2, space(spaceVal, L' ');
-    row1 = INSTRUCTION_LIST[0] + space + INSTRUCTION_LIST[1];
-    if (INSTRUCTION_LIST[0].size() > INSTRUCTION_LIST[2].size()) {
-        std::wstring space(
-            spaceVal + INSTRUCTION_LIST[0].size() - INSTRUCTION_LIST[2].size(),
-            L' '
-        );
-        row2 = INSTRUCTION_LIST[2] + space + INSTRUCTION_LIST[3];
+        };
+        short spaceVal = 5;
+        std::wstring row1, row2, space(spaceVal, L' ');
+        row1 = INSTRUCTION_LIST[0] + space + INSTRUCTION_LIST[1];
+        if (INSTRUCTION_LIST[0].size() > INSTRUCTION_LIST[2].size()) {
+            std::wstring space(
+                spaceVal + INSTRUCTION_LIST[0].size() -
+                    INSTRUCTION_LIST[2].size(),
+                L' '
+            );
+            row2 = INSTRUCTION_LIST[2] + space + INSTRUCTION_LIST[3];
+        } else {
+            std::wstring space(
+                spaceVal -
+                    (INSTRUCTION_LIST[2].size() - INSTRUCTION_LIST[0].size()),
+                L' '
+            );
+            row2 = INSTRUCTION_LIST[2] + space + INSTRUCTION_LIST[3];
+        }
+
+        short maxLen = std::max<short>(row1.size(), row2.size());
+        short centerX = Label::GetCenterX(logX, logWidth, maxLen),
+              y = logY + logHeight + 1;
+
+        View::WriteToView(centerX, y, row1);
+        View::WriteToView(centerX, y + 1, row2);
     } else {
-        std::wstring space(
-            spaceVal -
-                (INSTRUCTION_LIST[2].size() - INSTRUCTION_LIST[0].size()),
-            L' '
+        View::WriteToView(
+            logX,
+            logY + logHeight + 1,
+            Label::GetShortcutString(
+                L"A, D, \u2190\u2192", Language::GetString(L"REPLAY_SEEK_TITLE")
+            )
         );
-        row2 = INSTRUCTION_LIST[2] + space + INSTRUCTION_LIST[3];
+        View::WriteToView(
+            logX,
+            logY + logHeight + 2,
+            Label::GetShortcutString(
+                L"B", Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
+            )
+        );
     }
-
-    short maxLen = std::max<short>(row1.size(), row2.size());
-    short centerX = Label::GetCenterX(logX, logWidth, maxLen),
-          y = logY + logHeight + 1;
-
-    View::WriteToView(centerX, y, row1);
-    View::WriteToView(centerX, y + 1, row2);
 }
 
-std::wstring Label::GetShortcutString(
+inline std::wstring Label::GetShortcutString(
     const std::wstring shortcut, const std::wstring title
 )
 {
     return shortcut + L": " + title;
 }
 
-short Label::GetCenterX(short x, short width, short length)
+inline short Label::GetCenterX(short x, short width, short length)
 {
     short addition = (width - length) % 2 != 0;
     return x + (width - length) / 2 + addition;

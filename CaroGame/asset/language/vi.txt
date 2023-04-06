@@ -108,6 +108,7 @@ PLAYER_TIME_TEXT            =    Thời gian người chơi
 REPLAY_DESC                 =    Phát lại toàn bộ trận đấu
 REPLAY_LOAD_MENU_TITLE      =    Phát lại
 REPLAY_SAVE_MENU_TITLE      =    Phát lại
+REPLAY_SEEK_TITLE           =    Nước trước/tiếp
 REPLAY_SHORTCUT             =    P
 REPLAY_TITLE                =    Phát lại
 SAVE_DESC                   =    Lưu trò chơi hiện tại

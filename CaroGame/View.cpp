@@ -323,8 +323,9 @@ View::Rect View::DrawMenu(
 
     bool redrawFlag = 0;
 
-    if (redrawAll) {
+    if (redrawBorder) {
         for (int i = 0; i < optionsList.size(); i++) {
+            redrawFlag = 1;
             View::WriteToView(
                 leftAlign,
                 topAlign + i,
@@ -342,6 +343,13 @@ View::Rect View::DrawMenu(
             if (selected == i || prevState.selected == i ||
                 i >= prevState.optionsList.size() ||
                 optionsList[i] != prevState.optionsList[i]) {
+                redrawFlag = 1;
+                View::ClearRect(
+                    {short(topAlign + i),
+                     leftAlign,
+                     short(leftAlign + optionsList[i].option.size()),
+                     short(topAlign + i)}
+                );
                 View::WriteToView(
                     leftAlign,
                     topAlign + i,

@@ -108,6 +108,7 @@ PLAYER_TIME_TEXT            =    Player's time
 REPLAY_DESC                 =    FULL MATCH REPLAY
 REPLAY_LOAD_MENU_TITLE      =    Replays
 REPLAY_SAVE_MENU_TITLE      =    Replays
+REPLAY_SEEK_TITLE           =    Previous/Next move
 REPLAY_SHORTCUT             =    R
 REPLAY_TITLE                =    Replay
 SAVE_DESC                   =    SAVE THE CURRENT GAME
