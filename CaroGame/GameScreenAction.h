@@ -29,8 +29,8 @@ namespace GameScreenAction {
         GameAction::Board& gameBoard,
         short& moveCount,
         GameState& curGameState,
-        GameAction::Point& curMove,
-        GameAction::Point& prevMove,
+        GameAction::Point& latestMove,
+        GameAction::Point& previousToLastMove,
         Constants::Player& curPlayer,
         Constants::Player& prevPlayer,
         bool& isPlayerOneTurn
@@ -40,7 +40,7 @@ namespace GameScreenAction {
         GameScreen& gameScreen,
         const GameAction::Board& gameBoard,
         const GameAction::Point& curPos,
-        const GameAction::Point& curMove
+        const GameAction::Point& latestMove
 
  
     );
@@ -50,7 +50,7 @@ namespace GameScreenAction {
         GameScreen& gameScreen,
         const GameAction::Board& gameBoard,
         const GameAction::Point& curPos,
-        const GameAction::Point& curMove
+        const GameAction::Point& latestMove
 
 
 
@@ -99,6 +99,26 @@ namespace GameScreenAction {
 
     void DeleteMoveFromScreen(
         GameScreen& gameScreen, const GameAction::Point& move
+    );
+
+    GameAction::Point GetHintMove(
+        GameAction::Board& board,
+        short moveCount,
+        bool isPlayerOneTurn,
+        AI ai
+    );
+
+    void DrawMove(
+        GameScreen& gameScreen,
+        const GameAction::Point& move,
+        const Constants::Player& player,
+        const View::Color& color
+    );
+
+    void FlipTurn(
+        Constants::Player& prevPlayer,
+        Constants::Player& curPlayer,
+        bool& isPlayerOneTurn
     );
 
 }  // namespace GameScreenAction

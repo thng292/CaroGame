@@ -13,6 +13,9 @@ class AI {
     const static short AI_DIFFICULTY_EASY = 1, AI_DIFFICULTY_NORMAL = 2,
                        AI_DIFFICULTY_HARD = 3;
     
+    short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
+          PLAYER_AI = Constants::PLAYER_TWO.value;
+
     short Eval(
         const GameAction::Board& board,
         const short& moveCount,
@@ -81,8 +84,7 @@ class AI {
     const short MAX_SCORE = 10000;
     const short FIRST_LOOKUP_RANGE = 1;
     short _DEPTH = 2;
-    const short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
-                PLAYER_AI = Constants::PLAYER_TWO.value;
+    
     short _range;
     GameAction::Point _topLeftPoint = {100, 100},
                       _bottomRightPoint = {-100, -100};

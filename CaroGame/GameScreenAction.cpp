@@ -15,9 +15,6 @@ void GameScreenAction::UpdateGame(
                                 ? (View::Color)Constants::PLAYER_ONE_COLOR
                                 : (View::Color)Constants::PLAYER_TWO_COLOR;
         GameAction::MakeMove(board, moveCount, move, player.value);
-        gameScreen.boardContainer.DrawToBoardContainerCell(
-            move.row, move.col, player.symbol, color
-        );
     }
 
     if (!loadFromSave) {
@@ -36,58 +33,62 @@ void GameScreenAction::UndoMove(
     GameAction::Board& gameBoard,
     short& moveCount,
     GameState& curGameState,
-    GameAction::Point& curMove,
-    GameAction::Point& prevMove,
+    GameAction::Point& latestMove,
+    GameAction::Point& previousToLastMove,
     Constants::Player& curPlayer,
     Constants::Player& prevPlayer,
     bool& isPlayerOneTurn
 )
 {
-    GameAction::UndoMove(gameBoard, moveCount, curMove);
-    GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
+    GameAction::UndoMove(gameBoard, moveCount, latestMove);
+    GameScreenAction::DeleteMoveFromScreen(gameScreen, latestMove);
     curGameState.moveList.pop_back();
     if (curGameState.moveList.size() != 0) {
-        curMove = {
+        latestMove = {
             curGameState.moveList.back().first,
             curGameState.moveList.back().second};
-        prevMove = curMove;
         if (curGameState.moveList.size() != 0) curGameState.moveList.pop_back();
+        if (curGameState.moveList.size() != 0)
+            previousToLastMove = {
+                curGameState.moveList.back().first,
+                curGameState.moveList.back().second};
+        else {
+            previousToLastMove = {-1, -1};
+        }
 
     } else {
-        curMove = {-1, -1};
-        prevMove = {-1, -1};
+        latestMove = {-1, -1};
+        previousToLastMove = {-1, -1};
     }
 
-    curPlayer =
-        (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
-    prevPlayer = curPlayer;
+    GameScreenAction::FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
+
 
     GameScreenAction::UpdateGame(
-        gameScreen, gameBoard, moveCount, curMove, curPlayer, curGameState
+        gameScreen, gameBoard, moveCount, latestMove, curPlayer, curGameState
     );
 
-    GameScreenAction::HighlightMove(gameScreen, curMove, curPlayer.symbol);
+    GameScreenAction::HighlightMove(gameScreen, latestMove, prevPlayer.symbol);
 
-    isPlayerOneTurn = !isPlayerOneTurn;
 }
 
 void GameScreenAction::HighLightCursor(
     GameScreen& gameScreen,
     const GameAction::Board& gameBoard,
     const GameAction::Point& curPos,
-    const GameAction::Point& curMove
+    const GameAction::Point& latestMove
 )
 {
     std::wstring value = L" ";
     View::Color color = View::DEFAULT_TEXT_COLOR;
     if (gameBoard[curPos.row][curPos.col] != 0) {
         if (gameBoard[curPos.row][curPos.col] == Constants::PLAYER_ONE.value) {
-            if (curPos.row == curMove.row && curPos.col == curMove.col) {
+            if (curPos.row == latestMove.row && curPos.col == latestMove.col) {
                 color = (View::Color)Constants::PLAYER_ONE_HIGHLIGHT;
             } else color = (View::Color)Constants::PLAYER_ONE_COLOR;
             value = Constants::PLAYER_ONE.symbol;
         } else {
-            if (curPos.row == curMove.row && curPos.col == curMove.col) {
+            if (curPos.row == latestMove.row && curPos.col == latestMove.col) {
                 color = (View::Color)Constants::PLAYER_TWO_HIGHLIGHT;
             } else
                 color = (View::Color)Constants::PLAYER_TWO_COLOR;
@@ -105,14 +106,14 @@ void GameScreenAction::UnhighlightCursor(
     GameScreen& gameScreen,
     const GameAction::Board& gameBoard,
     const GameAction::Point& prevPos,
-    const GameAction::Point& curMove
+    const GameAction::Point& latestMove
 )
 {
     std::wstring value = L" ";
     View::Color color = View::DEFAULT_TEXT_COLOR;
     if (gameBoard[prevPos.row][prevPos.col] == Constants::PLAYER_ONE.value) {
 
-            if (prevPos.row == curMove.row && prevPos.col == curMove.col) {
+            if (prevPos.row == latestMove.row && prevPos.col == latestMove.col) {
                 color = (View::Color)Constants::PLAYER_ONE_HIGHLIGHT;
             } else
                 color = (View::Color)Constants::PLAYER_ONE_COLOR;
@@ -121,7 +122,7 @@ void GameScreenAction::UnhighlightCursor(
         value = Constants::PLAYER_ONE.symbol;
     } else if (gameBoard[prevPos.row][prevPos.col] == Constants::PLAYER_TWO.value) {
 
-            if (prevPos.row == curMove.row && prevPos.col == curMove.col) {
+            if (prevPos.row == latestMove.row && prevPos.col == latestMove.col) {
                 color = (View::Color)Constants::PLAYER_TWO_HIGHLIGHT;
             } else
                 color = (View::Color)Constants::PLAYER_TWO_COLOR;
@@ -283,3 +284,45 @@ void GameScreenAction::DeleteMoveFromScreen(
         move.row, move.col, L" "
     );
 }
+
+GameAction::Point GameScreenAction::GetHintMove(
+    GameAction::Board& board,
+    short moveCount,
+    bool isPlayerOneTurn,
+    AI ai
+)
+{
+    if (isPlayerOneTurn) {
+        ai.PLAYER_AI = Constants::PLAYER_ONE.value;
+        ai.PLAYER_HUMAN = Constants::PLAYER_TWO.value;
+    } else {
+          ai.PLAYER_AI = Constants::PLAYER_TWO.value;
+        ai.PLAYER_HUMAN = Constants::PLAYER_ONE.value;
+    }
+    
+    if (moveCount == 0) return ai.GetFirstMove();
+    return ai.GetBestMove(board, moveCount);
+
+}
+
+void GameScreenAction::DrawMove(
+    GameScreen& gameScreen, const GameAction::Point& move, const Constants::Player &player, const View::Color &color
+)
+{
+    gameScreen.boardContainer.DrawToBoardContainerCell(
+        move.row, move.col, player.symbol, color
+    );
+}
+
+void GameScreenAction::FlipTurn(
+    Constants::Player& prevPlayer,
+    Constants::Player& curPlayer,
+    bool& isPlayerOneTurn
+)
+{
+    isPlayerOneTurn = !isPlayerOneTurn;
+    prevPlayer = curPlayer;
+    curPlayer =
+        (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
+}
+
