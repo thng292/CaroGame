@@ -1,24 +1,10 @@
 #include "MainMenu.h"
+
 #include "Gura.h"
 
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
 {
-    /*logoGura(5, 5);
-    InputHandle::Get();*/
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
-    Common::DrawHintsLess();
-    static short selectedOption = 0;   // User option
-    static const short maxOption = 7;  // Number of option
-                                       // Vi tri bat dau ve
-    Caro(32, 1);
-    Logo_Deadpool(3, 5);
-    Logo_Captain(79 + 4, 5);
-    //logoGura(1,1);
-    View::WriteToView(
-        119 - Constants::version.size() - 9,
-        0,
-        L"Version: " + Constants::version
-    );
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
         if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::MenuBGM) {
@@ -26,6 +12,17 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
             bgmAudio->getPlayer()->Play(true, true);
         }
     }
+    auto keyPressSound = Utils::KeyPressSound::getInstance();
+    keyPressSound->ChangeSong(Audio::Sound::MenuMove);
+
+    static short selectedOption = 0;   // User option
+    static const short maxOption = 7;  // Number of option
+                                       // Vi tri bat dau ve
+    Common::DrawHintsLess();
+    Caro(32, 1);
+    Logo_Deadpool(3, 5);
+    Logo_Captain(79 + 4, 5);
+    View::WriteToView(119 - Constants::version.size(), 0, Constants::version);
 
     std::vector<View::Option> options = {
         {Language::GetString(L"NEW_GAME_TITLE"),
@@ -49,8 +46,12 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
     while (1) {  // Main while loop
         View::DrawMenu(menuPrevState, 50, 13, L"", options, selectedOption);
         auto tmp = InputHandle::Get();  // Get input from user
-        if (soundEffect == L"True") {
-            Utils::PlayKeyPressSound();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
         // Input Handle
         // Normal Navigation

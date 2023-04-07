@@ -54,13 +54,16 @@ class AI {
     {
         switch (difficulty) {
             case AI_DIFFICULTY_EASY:
-                _range = 3;
+                _range = 6;
+                _DEPTH = 2;
                 break;
             case AI_DIFFICULTY_NORMAL:
-                _range = 7;
+                _range = Constants::BOARD_SIZE;
+                _DEPTH = 2;
                 break;
             case AI_DIFFICULTY_HARD:
                 _range = Constants::BOARD_SIZE;
+                _DEPTH = 3;
                 break;
         }
     }
@@ -74,10 +77,10 @@ class AI {
     }
 
    private:
-    const short INF = 25000;
+    const short INF = 30000;
     const short MAX_SCORE = 10000;
     const short FIRST_LOOKUP_RANGE = 1;
-    const short _DEPTH = 2;
+    short _DEPTH = 2;
     const short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
                 PLAYER_AI = Constants::PLAYER_TWO.value;
     short _range;

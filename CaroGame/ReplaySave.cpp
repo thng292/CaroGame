@@ -32,7 +32,7 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
         }
     };
 
-    auto& soundSetting = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
     auto& title = Language::GetString(L"REPLAY_SAVE_MENU_TITLE");
     auto& leadingText = Language::GetString(L"NAMING_FIELD_TITLE");
 
@@ -71,8 +71,12 @@ void ReplaySave::ReplaySave(NavigationHost& NavHost)
 
         tmp = InputHandle::Get();
 
-        if (soundSetting == Config::Value_True) {
-            Utils::PlayKeyPressSound();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
 
         if (Utils::keyMeanDown(tmp)) {

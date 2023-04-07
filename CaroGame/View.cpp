@@ -20,12 +20,11 @@ void View::Setup()
         ((currMode | ENABLE_EXTENDED_FLAGS) & ~ENABLE_QUICK_EDIT_MODE &
          ~ENABLE_MOUSE_INPUT)
     );
-/*currMode & ~(ENABLE_QUICK_EDIT_MODE) &
-    ~(ENABLE_MOUSE_INPUT) &
-);*/
 
 // Hide the cursor
-#if _NDEBUG
+#if _DEBUG
+    ShowCursor(true);
+#else
     ShowCursor(false);
 #endif
     // Set font bold
@@ -57,7 +56,7 @@ void View::ShowCursor(bool show)
     static HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(hOut, &cursorInfo);
-    cursorInfo.bVisible = !show;
+    cursorInfo.bVisible = show;
     SetConsoleCursorInfo(hOut, &cursorInfo);
 }
 
@@ -114,14 +113,14 @@ void View::WriteToView(
     View::Color backgroundColor
 )
 {
-    View::Goto(x, y);
     static auto STD_HANDLE = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(
         STD_HANDLE,
         highlight ? ((int(highlightColor) << 4) | int(highlightTextColor))
                   : ((int(backgroundColor) << 4) | int(textColor))
     );
-    _putwchar_nolock(str);
+    View::Goto(x, y);
+    std::wcout << str;
 }
 
 void View::ClearScreen()
@@ -323,8 +322,9 @@ View::Rect View::DrawMenu(
 
     bool redrawFlag = 0;
 
-    if (redrawAll) {
+    if (redrawBorder) {
         for (int i = 0; i < optionsList.size(); i++) {
+            redrawFlag = 1;
             View::WriteToView(
                 leftAlign,
                 topAlign + i,
@@ -342,6 +342,13 @@ View::Rect View::DrawMenu(
             if (selected == i || prevState.selected == i ||
                 i >= prevState.optionsList.size() ||
                 optionsList[i] != prevState.optionsList[i]) {
+                redrawFlag = 1;
+                View::ClearRect(
+                    {short(topAlign + i),
+                     leftAlign,
+                     short(leftAlign + optionsList[i].option.size()),
+                     short(topAlign + i)}
+                );
                 View::WriteToView(
                     leftAlign,
                     topAlign + i,
@@ -538,8 +545,8 @@ wchar_t View::Input(
     Color focusBackgroundColor
 )
 {
-    ShowCursor(1);
-    Utils::ON_SCOPE_EXIT([&] { ShowCursor(0); });
+    ShowCursor(true);
+    Utils::ON_SCOPE_EXIT onScopeExit([&] { ShowCursor(false); });
     if (hasFocus) {
         bool redraw = 1;
         bool needReservePos = 0;

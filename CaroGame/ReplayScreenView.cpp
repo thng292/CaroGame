@@ -14,7 +14,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
     );
 
     GameScreen gameScreen(7, 2);
-    gameScreen.DrawGameScreen();
+    gameScreen.DrawGameScreen(1);
     gameScreen.DrawToElements(curGameState, true);
 
     short moveCount = 0;
@@ -65,7 +65,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                 validKey = true;
             }
 
-            if (tmp == L"ESC") {
+            if (tmp == L"b" || tmp == L"B") {
                 break;
             }
 

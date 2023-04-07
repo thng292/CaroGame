@@ -10,18 +10,38 @@
 
 namespace Audio {
 
-    enum class Sound : char { NoSound, OnKey, Draw, Win, Lose, MenuBGM, GameBGM };
+    enum class Sound : char {
+        NoSound = 0,
+        OnKey,
+        Draw,
+        Win,
+        Lose,
+        MenuBGM,
+        MenuMove,
+        MenuSelect,
+        GameBGM,
+        GameMove,
+        GamePlace,
+        GameStart,
+        Pause
+    };
+    constexpr std::array SoundName{
+        L"",
+        L"Key.wav",
+        L"Draw.mp3",
+        L"Win.mp3",
+        L"Lose.mp3",
+        L"MenuBGM.mp3",
+        L"MenuMove.wav",
+        L"MenuSelect.wav",
+        L"GameBGM.mp3",
+        L"GameMove.wav",
+        L"GamePlaceMove.mp3",
+        L"GameStart.wav",
+        L"Pause.wav"};
 
     class AudioPlayer {
        private:
-        static constexpr std::array SoundName{
-            L"",
-            L"Key.wav",
-            L"Draw.mp3",
-            L"Win.mp3",
-            L"Lose.wav",
-            L"MenuBGM.mp3",
-            L"GameBGM.mp3"};
         bool isPlaying = 0;
         bool hasStopped = 1;
         bool isRepeat = 0;
@@ -35,13 +55,20 @@ namespace Audio {
         AudioPlayer& operator=(AudioPlayer&&) = delete;
         AudioPlayer& operator=(const AudioPlayer&) = delete;
 
-        AudioPlayer() {}
+        inline AudioPlayer()
+        {
+            currentInstance = instanceCount++;
+            currentSong = Sound::NoSound;
+        }
 
-        inline AudioPlayer(Sound song) { Open(song); }
+        inline AudioPlayer(Sound song)
+        {
+            currentInstance = instanceCount++;
+            Open(song);
+        }
 
         inline int Open(Sound song)
         {
-            currentInstance = instanceCount++;
             currentSong = song;
             if (song == Sound::NoSound) {
                 return 0;
@@ -102,11 +129,26 @@ namespace Audio {
             );
         }
 
-        inline ~AudioPlayer()
+        inline int Close()
         {
-            mciSendString(
+            return mciSendString(
                 std::format(L"close {}", currentInstance).c_str(), 0, 0, 0
             );
         }
+
+        inline ~AudioPlayer() { Close(); }
     };
+
+    inline bool PlayAndForget(Sound sound, bool wait = 0)
+    {
+        return PlaySound(
+            std::format(
+                L"{}{}", Constants::STR_AUDIO_PATH, SoundName[int(sound)]
+            )
+                .c_str(),
+            0,
+            (wait ? SND_SYNC : SND_ASYNC) | SND_FILENAME
+        );
+    }
+
 }  // namespace Audio

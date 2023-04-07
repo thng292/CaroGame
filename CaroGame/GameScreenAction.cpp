@@ -71,6 +71,70 @@ void GameScreenAction::UndoMove(
     isPlayerOneTurn = !isPlayerOneTurn;
 }
 
+void GameScreenAction::HighLightCursor(
+    GameScreen& gameScreen,
+    const GameAction::Board& gameBoard,
+    const GameAction::Point& curPos,
+    const GameAction::Point& curMove
+)
+{
+    std::wstring value = L" ";
+    View::Color color = View::DEFAULT_TEXT_COLOR;
+    if (gameBoard[curPos.row][curPos.col] != 0) {
+        if (gameBoard[curPos.row][curPos.col] == Constants::PLAYER_ONE.value) {
+            if (curPos.row == curMove.row && curPos.col == curMove.col) {
+                color = (View::Color)Constants::PLAYER_ONE_HIGHLIGHT;
+            } else color = (View::Color)Constants::PLAYER_ONE_COLOR;
+            value = Constants::PLAYER_ONE.symbol;
+        } else {
+            if (curPos.row == curMove.row && curPos.col == curMove.col) {
+                color = (View::Color)Constants::PLAYER_TWO_HIGHLIGHT;
+            } else
+                color = (View::Color)Constants::PLAYER_TWO_COLOR;
+            value = Constants::PLAYER_TWO.symbol;
+        }
+            
+    }
+    gameScreen.boardContainer.DrawToBoardContainerCell(
+        curPos.row, curPos.col, value, color, true
+    );
+}
+
+
+void GameScreenAction::UnhighlightCursor(
+    GameScreen& gameScreen,
+    const GameAction::Board& gameBoard,
+    const GameAction::Point& prevPos,
+    const GameAction::Point& curMove
+)
+{
+    std::wstring value = L" ";
+    View::Color color = View::DEFAULT_TEXT_COLOR;
+    if (gameBoard[prevPos.row][prevPos.col] == Constants::PLAYER_ONE.value) {
+
+            if (prevPos.row == curMove.row && prevPos.col == curMove.col) {
+                color = (View::Color)Constants::PLAYER_ONE_HIGHLIGHT;
+            } else
+                color = (View::Color)Constants::PLAYER_ONE_COLOR;
+        
+        
+        value = Constants::PLAYER_ONE.symbol;
+    } else if (gameBoard[prevPos.row][prevPos.col] == Constants::PLAYER_TWO.value) {
+
+            if (prevPos.row == curMove.row && prevPos.col == curMove.col) {
+                color = (View::Color)Constants::PLAYER_TWO_HIGHLIGHT;
+            } else
+                color = (View::Color)Constants::PLAYER_TWO_COLOR;
+        
+       
+        value = Constants::PLAYER_TWO.symbol;
+    }
+    
+    gameScreen.boardContainer.DrawToBoardContainerCell(
+        prevPos.row, prevPos.col, value, color, false
+    );
+}
+
 void GameScreenAction::HightLightWin(
     const GameAction::Point& winMoveOne,
     const GameAction::Point& winMoveTwo,

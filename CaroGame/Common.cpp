@@ -54,7 +54,11 @@ bool Common::ConfirmPrompt(const std::wstring& title)
         View::DrawMenuCenter(menuPrevState, title, options, select);
         tmp = InputHandle::Get();
         if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
-            Utils::PlayKeyPressSound();
+            if (tmp == L"\r") {
+                Audio::PlayAndForget(Audio::Sound::MenuSelect);
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
         if (Utils::keyMeanDown(tmp)) {
             select = Utils::modCycle(select - 1, num);

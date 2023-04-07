@@ -32,7 +32,7 @@ class GameScreen {
     };
 
     GameScreen(short x, short y);
-    void DrawGameScreen();
+    void DrawGameScreen(bool isReplay = 0);
     void DrawToElements(const GameState &gameState, bool isReplay = false);
 
     

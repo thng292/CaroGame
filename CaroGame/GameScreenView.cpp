@@ -6,19 +6,28 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
         );
 
-    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
-
     GameAction::Board gameBoard(
         Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
     );
-
+    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
         auto bgmAudio = BackgroundAudioService::getInstance();
         if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::GameBGM) {
             bgmAudio->ChangeSong(Sound::GameBGM);
             bgmAudio->getPlayer()->Play(true, true);
+        } else {
+            bgmAudio->getPlayer()->Play(false, true);
         }
     }
+    auto keyPressSound = Utils::KeyPressSound::getInstance();
+    keyPressSound->ChangeSong(Audio::Sound::GameMove);
+    Utils::ON_SCOPE_EXIT on_exit([&NavHost, &keyPressSound] {
+        NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
+        keyPressSound->ChangeSong(Audio::Sound::MenuMove);
+        BackgroundAudioService::getInstance()->getPlayer()->Stop();
+    });
+
+    Audio::AudioPlayer placeMoveSound(Sound::GamePlace);
 
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
 
@@ -83,21 +92,26 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Timer timerPlayerOne(
         [&] {
             if (!endGame) {
-                auto currPos = View::GetCursorPos();
                 curGameState.playerTimeOne += timeAddition;
-                std::lock_guard guard(lock);
+                lock.lock();
+                auto currPos = View::GetCursorPos();
                 gameScreen.timerContainerOne.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeOne),
                     (View::Color)Constants::PLAYER_ONE_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
+                lock.unlock();
                 if (curGameState.playerTimeOne == 0 && !endGame) {
                     endGame = Constants::END_GAME_WIN_TIME_TWO;
                     curGameState.playerScoreTwo++;
+                    lock.lock();
                     gameScreen.timerContainerOne.DrawToContainer(
                         Language::GetString(L"TIME_OUT"),
                         (View::Color)Constants::PLAYER_ONE_COLOR
                     );
+                    lock.unlock();
+
+                    lock.lock();
                     gameScreen.logContainer.DrawToLogContainer(
                         curGameState.moveList,
                         curGameState.playerNameOne,
@@ -105,6 +119,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         curGameState.playerOneFirst,
                         endGame
                     );
+                    lock.unlock();
+
                 }
             }
         },
@@ -114,22 +130,27 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Timer timerPlayerTwo(
         [&] {
             if (!endGame) {
-                auto currPos = View::GetCursorPos();
-                std::lock_guard guard(lock);
                 curGameState.playerTimeTwo += timeAddition;
+                lock.lock();
+                auto currPos = View::GetCursorPos();
                 gameScreen.timerContainerTwo.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeTwo),
                     (View::Color)Constants::PLAYER_TWO_COLOR
                 );
                 View::Goto(currPos.X, currPos.Y);
+                lock.unlock();
                 if (curGameState.playerTimeTwo == 0 && !endGame) {
                     endGame = Constants::END_GAME_WIN_TIME_ONE;
 
                     curGameState.playerScoreOne++;
+                    lock.lock();
                     gameScreen.timerContainerTwo.DrawToContainer(
                         Language::GetString(L"TIME_OUT"),
                         (View::Color)Constants::PLAYER_TWO_COLOR
                     );
+                    lock.unlock();
+
+                    lock.lock();
                     gameScreen.logContainer.DrawToLogContainer(
                         curGameState.moveList,
                         curGameState.playerNameOne,
@@ -137,6 +158,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         curGameState.playerOneFirst,
                         endGame
                     );
+                    lock.unlock();
                 }
             }
         },
@@ -160,56 +182,69 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     }
 
     std::wstring tmp;
+    short prevRow = 0, prevCol = 0;
 
+    GameScreenAction::HighLightCursor(
+        gameScreen, gameBoard, {row, col}, curMove
+    );
+
+    if (aiFirst) {
+        curMove = myAI.GetFirstMove();
+        myAI.UpdatePrivateValues(curMove);
+        curPlayer = Constants::PLAYER_TWO;
+        timerPlayerOne.Continued();
+
+        lock.lock();
+        GameScreenAction::UpdateGame(
+            gameScreen, gameBoard, moveCount, curMove, curPlayer, curGameState
+        );
+        lock.unlock();
+
+        timerPlayerTwo.Pause();
+        aiFirst = false;
+        isPlayerOneTurn = !isPlayerOneTurn;
+
+        lock.lock();
+        GameScreenAction::HighlightMove(gameScreen, curMove, curPlayer.symbol);
+        lock.unlock();
+
+        prevMove = curMove;
+        prevPlayer = curPlayer;
+    }
     while (!endGame) {
-        if (aiFirst) {
-            curMove = myAI.GetFirstMove();
-            myAI.UpdatePrivateValues(curMove);
-            curPlayer = Constants::PLAYER_TWO;
-            timerPlayerOne.Continued();
-            std::lock_guard guard(lock);
-            GameScreenAction::UpdateGame(
-                gameScreen,
-                gameBoard,
-                moveCount,
-                curMove,
-                curPlayer,
-                curGameState
-            );
-            timerPlayerTwo.Pause();
-            aiFirst = false;
-            isPlayerOneTurn = !isPlayerOneTurn;
-
-            GameScreenAction::HighlightMove(
-                gameScreen, curMove, curPlayer.symbol
-            );
-            prevMove = curMove;
-            prevPlayer = curPlayer;
-        }
-
         tmp = InputHandle::Get();
         if (endGame) break;
 
-        if (soundEffect == L"True") {
-            Utils::PlayKeyPressSound();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                placeMoveSound.Play(1);
+            } else if (tmp == L"ESC") {
+                Audio::PlayAndForget(Sound::Pause);
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
 
         if (tmp == L"ESC") {
             timerPlayerOne.Stop();
             timerPlayerTwo.Stop();
+            lock.lock();
+            GameScreenAction::UnhighlightCursor(
+                gameScreen, gameBoard, {prevRow, prevCol}, curMove
+            );
+            lock.unlock();
             NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
             return NavHost.NavigateStack("PauseMenuView");
         }
 
-        if (tmp == L"z" && curGameState.moveList.size() != 0 &&
+        if ((tmp == L"z" || tmp == L"Z") && curGameState.moveList.size() != 0 &&
 
             Config::GetSetting(Config::UndoOption) == Config::Value_True) {
-            std::lock_guard guard(lock);
-
             if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
                 (curGameState.gameMode == Constants::GAME_MODE_PVE &&
                  (curGameState.moveList.size() > 2 ||
                   curGameState.playerOneFirst))) {
+                lock.lock();
                 GameScreenAction::UndoMove(
                     gameScreen,
                     gameBoard,
@@ -221,12 +256,15 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     prevPlayer,
                     isPlayerOneTurn
                 );
+                lock.unlock();
+
                 if (curGameState.gameMode == Constants::GAME_MODE_PVE)
                     myAI.RevertPrivateValues();
             }
             if (curGameState.gameMode == Constants::GAME_MODE_PVE &&
                 (curGameState.moveList.size() > 1 || curGameState.playerOneFirst
                 )) {
+                lock.lock();
                 GameScreenAction::UndoMove(
                     gameScreen,
                     gameBoard,
@@ -238,6 +276,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     prevPlayer,
                     isPlayerOneTurn
                 );
+                lock.unlock();
 
                 if (curGameState.gameMode == Constants::GAME_MODE_PVE)
                     myAI.RevertPrivateValues();
@@ -246,24 +285,38 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         if (Utils::keyMeanUp(tmp)) {
             if (row - 1 >= 0) {
+                prevCol = col;
+                prevRow = row;
                 row--;
             }
         }
         if (Utils::keyMeanLeft(tmp)) {
             if (col - 1 >= 0) {
+                prevCol = col;
+                prevRow = row;
                 col--;
             }
         }
         if (Utils::keyMeanDown(tmp)) {
             if (row + 1 < Constants::BOARD_SIZE) {
+                prevCol = col;
+                prevRow = row;
                 row++;
             }
         }
         if (Utils::keyMeanRight(tmp)) {
             if (col + 1 < Constants::BOARD_SIZE) {
+                prevCol = col;
+                prevRow = row;
                 col++;
             }
         }
+
+        lock.lock();
+        GameScreenAction::UnhighlightCursor(
+            gameScreen, gameBoard, {prevRow, prevCol}, curMove
+        );
+        lock.unlock();
 
         if (tmp == L"p" || tmp == L"P") {
             return NavHost.Navigate("ReplayMenuView");
@@ -295,6 +348,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 );
                 lock.unlock();
 
+                lock.lock();
                 GameScreenAction::HandleState(
                     gameBoard,
                     moveCount,
@@ -305,6 +359,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     endGame,
                     gameScreen
                 );
+                lock.unlock();
 
                 // AI's turn
                 if (!endGame &&
@@ -337,6 +392,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     lock.unlock();
                     myAI.UpdatePrivateValues(curMove);
 
+                    lock.lock();
                     GameScreenAction::HandleState(
                         gameBoard,
                         moveCount,
@@ -348,33 +404,47 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         gameScreen
 
                     );
+                    lock.unlock();
                 }
 
                 isPlayerOneTurn = !isPlayerOneTurn;
 
                 if (!endGame) {
-                    GameScreenAction::HighlightMove(
-                        gameScreen, curMove, curPlayer.symbol
-                    );
+                    lock.lock();
                     GameScreenAction::UnhightlightMove(
                         gameScreen, prevMove, prevPlayer.symbol
                     );
+                    lock.unlock();
+                    lock.lock();
+                    GameScreenAction::HighlightMove(
+                        gameScreen, curMove, curPlayer.symbol
+                    );
+                    lock.unlock();
                 }
 
                 prevMove = curMove;
                 prevPlayer = curPlayer;
             }
         }
-        std::lock_guard guard(lock);
+
+        lock.lock();
         View::Goto(
             gameScreen.boardContainer.xCoord +
                 BoardContainer::CELL_WIDTH * col + BoardContainer::X_OFFSET,
             gameScreen.boardContainer.yCoord +
                 BoardContainer::CELL_HEIGHT * row + BoardContainer::Y_OFFSET
         );
+        lock.unlock();
+
+        lock.lock();
+        GameScreenAction::HighLightCursor(
+            gameScreen, gameBoard, {row, col}, curMove
+        );
+        lock.unlock();
     }
 
-    if (endGame != Constants::END_GAME_WIN_TIME_ONE && endGame != Constants::END_GAME_WIN_TIME_TWO) {
+    if (endGame != Constants::END_GAME_WIN_TIME_ONE &&
+        endGame != Constants::END_GAME_WIN_TIME_TWO) {
         gameScreen.logContainer.DrawToLogContainer(
             curGameState.moveList,
             curGameState.playerNameOne,

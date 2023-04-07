@@ -27,11 +27,20 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 2);
     View::DrawMenuPrevState menuPrevState;
-    
+    auto soundEffect = Config::GetSetting(Config::SoundEffect);
+
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
-
         auto tmp = InputHandle::Get();
+
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
+
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = Utils::modCycle(selectedOption - 1, MAX_OPTIONS);
         }
@@ -111,6 +120,8 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     curGameState.playerNameOne = inputList[0];
     curGameState.playerNameTwo = inputList[1];
 
+    PlaySpecialKeySound();
+
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate("AvatarSelectView");
 }
@@ -161,6 +172,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     );
 
     View::Rect drawnRect, player1Selection;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (currentGameState.playerAvatarOne == -1 ||
            currentGameState.playerAvatarTwo == -1) {
@@ -187,8 +199,12 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         );
 
         auto tmp = InputHandle::Get();
-        if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
-            Utils::PlayKeyPressSound();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
         }
 
         if (tmp == L"b") {
@@ -307,16 +323,15 @@ void GameSelectionView::DrawCurrentOptionBox(
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
         labelListLength += LABEL_LIST[i].size() + space + 2;
     }
-    short x = Label::GetCenterX(X_PIVOT, WIDTH, labelListLength), y = Y_PIVOT + 1;
-
+    short x = Label::GetCenterX(X_PIVOT, WIDTH, labelListLength),
+          y = Y_PIVOT + 1;
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
-        View::WriteToView(
-            x, y, LABEL_LIST[i], (wchar_t)0U, i == selected
-        );
+        View::WriteToView(x, y, LABEL_LIST[i], (wchar_t)0U, i == selected);
         x += LABEL_LIST[i].size() + 2;
 
-        View::WriteToView(x, y, VALUE_LIST[i], (wchar_t)0U, false, View::Color::GREEN
+        View::WriteToView(
+            x, y, VALUE_LIST[i], (wchar_t)0U, false, View::Color::GREEN
         );
         x += space;
     }
@@ -347,11 +362,19 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 0);
     View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
 
         auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
         }
@@ -413,11 +436,19 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
 
         auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
         }
@@ -469,10 +500,18 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
         }
@@ -502,8 +541,8 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
 void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 {
     GameState curGameState =
-        std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME)
-        );
+        std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
+        ));
 
     short selectedOption = 0;
     const short MAX_OPTIONS = 2;
@@ -522,10 +561,18 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
         }
@@ -585,10 +632,18 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
         }
@@ -661,10 +716,18 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
         auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
         if (Utils::keyMeanUp(tmp)) {
             selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
         }
@@ -695,7 +758,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             navigationValue = navigationValueList[5];
             break;
         }
-        if (tmp == L"b") {
+        if (tmp == L"b" || tmp == L"ESC") {
             return NavHost.Back();
         }
 

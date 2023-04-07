@@ -40,7 +40,7 @@ GameScreen::GameScreen(short x, short y)
     InitElement(logContainer, x, y, 54, 7, 7, 1);
 }
 
-void GameScreen::DrawGameScreen()
+void GameScreen::DrawGameScreen(bool isReplay)
 {
     boardContainer.DrawBoardContainer();
     timerContainerOne.DrawContainer();
@@ -88,9 +88,13 @@ void GameScreen::DrawGameScreen()
 
     );
 
-    
-    Label::DrawGameScreenHint(logContainer.xCoord, logContainer.yCoord, logContainer.cellWidth, logContainer.cellHeight);
-   
+    Label::DrawGameScreenHint(
+        logContainer.xCoord,
+        logContainer.yCoord,
+        logContainer.cellWidth,
+        logContainer.cellHeight,
+        isReplay
+    );
 }
 
 void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
@@ -156,16 +160,13 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
 
     const short avatarOffset[] = {3, 2, 3, 5, 2, 2, 3, 4, 2};
 
-
     avatarMap[gameState.playerAvatarOne](
-        playerInfoContainerOne.xCoord +
-            avatarOffset[gameState.playerAvatarOne],
+        playerInfoContainerOne.xCoord + avatarOffset[gameState.playerAvatarOne],
         playerInfoContainerOne.yCoord
     );
     gameState.playerAvatarTwo;
     avatarMap[gameState.playerAvatarTwo](
-        playerInfoContainerTwo.xCoord +
-            avatarOffset[gameState.playerAvatarTwo],
+        playerInfoContainerTwo.xCoord + avatarOffset[gameState.playerAvatarTwo],
         playerInfoContainerTwo.yCoord
     );
 }
