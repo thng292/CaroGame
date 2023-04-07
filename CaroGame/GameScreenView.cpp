@@ -414,13 +414,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     GameScreenAction::UnhightlightMove(
                         gameScreen, prevMove, prevPlayer.symbol
                     );
+                    lock.unlock();
                     lock.lock();
                     GameScreenAction::HighlightMove(
                         gameScreen, curMove, curPlayer.symbol
-                    );
-                    lock.unlock();
-                    GameScreenAction::UnhightlightMove(
-                        gameScreen, prevMove, prevPlayer.symbol
                     );
                     lock.unlock();
                 }
