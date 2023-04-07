@@ -100,7 +100,6 @@ void logoGura(int x, int y) {
     View::Color hong = View::Color::LIGHT_RED;
 
     
-    luot(x , y);
     View::WriteToView(
         x + 8,
         y + 1,
