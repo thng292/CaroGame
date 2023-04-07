@@ -92,9 +92,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Timer timerPlayerOne(
         [&] {
             if (!endGame) {
-                auto currPos = View::GetCursorPos();
                 curGameState.playerTimeOne += timeAddition;
                 lock.lock();
+                auto currPos = View::GetCursorPos();
                 gameScreen.timerContainerOne.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeOne),
                     (View::Color)Constants::PLAYER_ONE_COLOR
@@ -124,9 +124,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Timer timerPlayerTwo(
         [&] {
             if (!endGame) {
-                auto currPos = View::GetCursorPos();
                 curGameState.playerTimeTwo += timeAddition;
                 lock.lock();
+                auto currPos = View::GetCursorPos();
                 gameScreen.timerContainerTwo.DrawToContainer(
                     Utils::SecondToMMSS(curGameState.playerTimeTwo),
                     (View::Color)Constants::PLAYER_TWO_COLOR
@@ -177,38 +177,30 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         gameScreen, gameBoard, {row, col}, curMove
     );
 
+    if (aiFirst) {
+        curMove = myAI.GetFirstMove();
+        myAI.UpdatePrivateValues(curMove);
+        curPlayer = Constants::PLAYER_TWO;
+        timerPlayerOne.Continued();
+
+        lock.lock();
+        GameScreenAction::UpdateGame(
+            gameScreen, gameBoard, moveCount, curMove, curPlayer, curGameState
+        );
+        lock.unlock();
+
+        timerPlayerTwo.Pause();
+        aiFirst = false;
+        isPlayerOneTurn = !isPlayerOneTurn;
+
+        lock.lock();
+        GameScreenAction::HighlightMove(gameScreen, curMove, curPlayer.symbol);
+        lock.unlock();
+
+        prevMove = curMove;
+        prevPlayer = curPlayer;
+    }
     while (!endGame) {
-        if (aiFirst) {
-            curMove = myAI.GetFirstMove();
-            myAI.UpdatePrivateValues(curMove);
-            curPlayer = Constants::PLAYER_TWO;
-            timerPlayerOne.Continued();
-
-            lock.lock();
-            GameScreenAction::UpdateGame(
-                gameScreen,
-                gameBoard,
-                moveCount,
-                curMove,
-                curPlayer,
-                curGameState
-            );
-            lock.unlock();
-
-            timerPlayerTwo.Pause();
-            aiFirst = false;
-            isPlayerOneTurn = !isPlayerOneTurn;
-
-            lock.lock();
-            GameScreenAction::HighlightMove(
-                gameScreen, curMove, curPlayer.symbol
-            );
-            lock.unlock();
-
-            prevMove = curMove;
-            prevPlayer = curPlayer;
-        }
-
         tmp = InputHandle::Get();
         if (endGame) break;
 
@@ -232,7 +224,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             return NavHost.NavigateStack("PauseMenuView");
         }
 
-        if (tmp == L"z" && curGameState.moveList.size() != 0 &&
+        if ((tmp == L"z" || tmp == L"Z") && curGameState.moveList.size() != 0 &&
 
             Config::GetSetting(Config::UndoOption) == Config::Value_True) {
             if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
@@ -401,12 +393,14 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 isPlayerOneTurn = !isPlayerOneTurn;
 
                 if (!endGame) {
-                    GameScreenAction::HighlightMove(
-                        gameScreen, curMove, curPlayer.symbol
-                    );
+                    lock.lock();
                     GameScreenAction::UnhightlightMove(
                         gameScreen, prevMove, prevPlayer.symbol
                     );
+                    GameScreenAction::HighlightMove(
+                        gameScreen, curMove, curPlayer.symbol
+                    );
+                    lock.unlock();
                 }
 
                 prevMove = curMove;
