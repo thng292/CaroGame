@@ -1,8 +1,8 @@
 #pragma once
 
-#include <random>
-#include <queue>
 #include <functional>
+#include <queue>
+#include <random>
 
 #include "Constants.h"
 #include "Evaluation.h"
@@ -10,13 +10,13 @@
 #include "Hash.h"
 #include "Logic.h"
 
-
-
 class AI {
    public:
     const static short AI_DIFFICULTY_EASY = 1, AI_DIFFICULTY_NORMAL = 2,
                        AI_DIFFICULTY_HARD = 3;
-    
+
+    int cnt = 0;
+
     short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
           PLAYER_AI = Constants::PLAYER_TWO.value;
 
@@ -24,6 +24,27 @@ class AI {
         GameAction::Point move;
         short eval;
     };
+
+    inline GameAction::Point NewBottomRightPoint(
+        const GameAction::Point& bottomRightPoint,
+        const GameAction::Point& point
+    )
+    {
+        GameAction::Point newPoint = bottomRightPoint;
+        if (point.row > bottomRightPoint.row) newPoint.row = point.row;
+        if (point.col > bottomRightPoint.col) newPoint.col = point.col;
+        return newPoint;
+    }
+
+    inline GameAction::Point NewTopLeftPoint(
+        const GameAction::Point& topLeftPoint, const GameAction::Point& point
+    )
+    {
+        GameAction::Point newPoint = topLeftPoint;
+        if (point.row < topLeftPoint.row) newPoint.row = point.row;
+        if (point.col < topLeftPoint.col) newPoint.col = point.col;
+        return newPoint;
+    }
 
     short Eval(
         const GameAction::Board& board,
@@ -39,7 +60,10 @@ class AI {
         short alpha,
         short beta,
         const bool& isMaximizingPlayer,
-        const short& depth
+        const short& depth,
+        const GameAction::Point topLeftPoint,
+        const GameAction::Point bottomRightPoint,
+        Hash& hash
     );
 
     GameAction::Point GetBestMove(GameAction::Board& board, short& moveCount);
@@ -54,9 +78,11 @@ class AI {
             _bottomRightPoint.row = point.row;
         if (point.col > _bottomRightPoint.col)
             _bottomRightPoint.col = point.col;
+        cnt = 0;
     }
 
-    inline void RevertPrivateValues() { 
+    inline void RevertPrivateValues()
+    {
         _topLeftPoint = _prevPointList.back().first;
         _bottomRightPoint = _prevPointList.back().second;
         _prevPointList.pop_back();
@@ -96,53 +122,105 @@ class AI {
         );
     }
 
-    bool IsGoodMove(
+    class Compare {
+       public:
+        inline bool operator()(PointEval below, PointEval above)
+        {
+            if (below.eval < above.eval) return true;
+            return false;
+        }
+    };
+
+    short IteratePoints(
         const GameAction::Board& board,
         const GameAction::Point& move,
-        const short& playerValue
+        short rowDirection,
+        short colDirection,
+        bool isPositivePoint,
+        short value
     )
     {
-        for (short row = move.row - 1; row <= move.row + 1; ++row) {
-            for (short col = move.col - 1; col <= move.col + 1; ++col) {
-                if (isValidPoint(row, col)) {
-                    if (board[row][col] != 0) return 1;
+        short row = move.row, col = move.col, index = 1;
+        short point = 1;
+        while (index < 5) {
+            row += rowDirection;
+            col += colDirection;
+            if (isValidPoint(row, col)) {
+                if (board[row][col] == 0 && isPositivePoint == true) {
+                    point++;
+                }
+                else if (isPositivePoint && board[row][col] == value) {
+                    point += index * 2;
+                } else if (!isPositivePoint && board[row][col] != value && board[row][col] != 0) {
+                    point += index * 2;
+                } 
+
+                else
+                    break;
+            } else
+                break;
+
+            ++index;
+        }
+        return point;
+    }
+
+    short GetNodePoint(
+        const GameAction::Board& board,
+        const GameAction::Point& move,
+        short value
+    )
+    {
+        int point = 0;
+        for (short rowDirection = -1; rowDirection <= 1; ++rowDirection) {
+            for (short colDirection = -1; colDirection <= 1; ++colDirection) {
+                if (!(rowDirection == 0 && colDirection == 0)) {
+                    point +=
+                        IteratePoints(
+                            board, move, rowDirection, colDirection, true, value
+                        ) +
+                        IteratePoints(
+                            board,
+                            move,
+                            rowDirection,
+                            colDirection,
+                            false,
+                            value
+                        );
                 }
             }
         }
-
-        return 0;
+        return point;
     }
 
-    class Compare {
-       public:
-        bool operator()(PointEval a, PointEval b) { return a.eval < b.eval; }
-    };
-    
-    typedef std::priority_queue<PointEval, std::vector<PointEval>, Compare> MoveQueue;
+    typedef std::priority_queue<PointEval, std::vector<PointEval>, Compare>
+        MoveQueue;
 
-     MoveQueue GetMoveList(short rowLowerLimit, short rowUpperLimit, short colLowerLimit, short colUpperLimit, short moveCount, GameAction::Board&board){
-        short searchSize = (rowUpperLimit - rowLowerLimit + 1) *
-                           (colUpperLimit - colLowerLimit + 1);
-
-        short moveListSize = searchSize - moveCount;
-        std::vector<GameAction::Point> moveList;
-        moveList.resize(moveListSize);
-        short right = 0, left = moveListSize - 1;
-
+    MoveQueue GetMoveList(
+        short rowLowerLimit,
+        short rowUpperLimit,
+        short colLowerLimit,
+        short colUpperLimit,
+        short moveCount,
+        GameAction::Board& board,
+        bool isMaximizingPlayer
+    )
+    {
         MoveQueue moveQueue;
+        short player = (isMaximizingPlayer) ? PLAYER_AI : PLAYER_HUMAN;
 
         for (short row = rowLowerLimit; row <= rowUpperLimit; ++row) {
-            for (short col = colLowerLimit; col <= colUpperLimit; ++col)  {
-                GameAction::MakeMove(board, moveCount, {row, col}, PLAYER_AI);
-                moveQueue.push({
-                    {row, col},
-                    Eval(board, moveCount, {row, col},
-                    true)
-                });
+            for (short col = colLowerLimit; col <= colUpperLimit; ++col) {
+                if (board[row][col] == 0) {
+                    GameAction::MakeMove(board, moveCount, {row, col}, player);
+                    moveQueue.push({
+                        {row, col},
+                        GetNodePoint(board, {row, col},
+                        player)
+                    });
 
-               
-                GameAction::UndoMove(board, moveCount, {row, col});
-
+                    GameAction::UndoMove(board, moveCount, {row, col});
+                }
             }
         }
         return moveQueue;
@@ -153,7 +231,7 @@ class AI {
     const short MAX_SCORE = 10000;
     const short FIRST_LOOKUP_RANGE = 1;
     short _DEPTH = 2;
-    
+
     short _range;
     GameAction::Point _topLeftPoint = {100, 100},
                       _bottomRightPoint = {-100, -100};

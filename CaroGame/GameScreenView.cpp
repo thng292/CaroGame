@@ -3,9 +3,10 @@
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
     GameState temp;
-    temp.aiDifficulty = AI::AI_DIFFICULTY_NORMAL;
+    temp.aiDifficulty = AI::AI_DIFFICULTY_HARD;
     temp.playerAvatarOne = temp.playerAvatarTwo = 1;
     temp.gameMode = Constants::GAME_MODE_PVE;
+    temp.playerOneFirst = false;
 
     NavHost.SetContext(Constants::CURRENT_GAME, temp);
 
@@ -199,16 +200,23 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         timerPlayerTwo.Pause();
 
         latestMove = myAI.GetFirstMove();
-        myAI.UpdatePrivateValues(latestMove);  
+        myAI.UpdatePrivateValues(latestMove);
 
         lock.lock();
         GameScreenAction::UpdateGame(
-            gameScreen, gameBoard, moveCount, latestMove, curPlayer, curGameState
+            gameScreen,
+            gameBoard,
+            moveCount,
+            latestMove,
+            curPlayer,
+            curGameState
         );
         lock.unlock();
 
         lock.lock();
-        GameScreenAction::HighlightMove(gameScreen, latestMove, curPlayer.symbol);
+        GameScreenAction::HighlightMove(
+            gameScreen, latestMove, curPlayer.symbol
+        );
         lock.unlock();
 
         GameScreenAction::FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
@@ -384,14 +392,12 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     prevPlayer, curPlayer, isPlayerOneTurn
                 );
 
-                
-
                 myAI.UpdatePrivateValues(latestMove);
 
                 // AI's turn
                 if (!endGame &&
                     curGameState.gameMode == Constants::GAME_MODE_PVE) {
-                    previousToLastMove = latestMove;             
+                    previousToLastMove = latestMove;
                     latestMove = myAI.GetBestMove(gameBoard, moveCount);
 
                     lock.lock();
@@ -427,7 +433,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     );
                     lock.unlock();
 
-
                     lock.lock();
                     GameScreenAction::HandleState(
                         gameBoard,
@@ -446,9 +451,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         prevPlayer, curPlayer, isPlayerOneTurn
                     );
                 }
-
-            
-
             }
         }
 

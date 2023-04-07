@@ -1,5 +1,7 @@
 #include "AI.h"
 
+#include "View.h"
+
 short AI::Eval(
     const GameAction::Board& board,
     const short& moveCount,
@@ -16,6 +18,7 @@ short AI::Eval(
 
 GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
 {
+
     short rowLowerLimit = (_topLeftPoint.row - FIRST_LOOKUP_RANGE >= 0)
                               ? _topLeftPoint.row - FIRST_LOOKUP_RANGE
                               : 0;
@@ -41,7 +44,8 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
         colLowerLimit,
         colUpperLimit,
         moveCount,
-        board
+        board,
+        true
     );
 
     for (short row = rowLowerLimit; row <= rowUpperLimit; ++row) {
@@ -54,47 +58,61 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
     }
 
     srand(time(NULL));
+    
+    Hash hash;
 
-    for (short row = rowLowerLimit; row <= rowUpperLimit; ++row) {
-        for (short col = colLowerLimit; col <= colUpperLimit; ++col) {
-            if (board[row][col] == 0) {
-                short valCur;
-                GameAction::Point move = {row, col};
-                GameAction::MakeMove(board, moveCount, move, PLAYER_AI);
-                if (Logic::GetGameState(board, moveCount, move, PLAYER_AI) == Logic::WIN_VALUE) {
-                    return move;
-                }
-                valCur = MiniMax(
-                    board,
-                    moveCount,
-                    move,
-                    alpha,
-                    beta,
-                    false,
-                    _DEPTH - 1
-                );
+    while (!moveQueue.empty()) {
+        PointEval node = moveQueue.top();
+        GameAction::Point move = node.move;
+        GameAction::MakeMove(board, moveCount, move, PLAYER_AI);
+        if (Logic::GetGameState(board, moveCount, move, PLAYER_AI) ==
+            Logic::WIN_VALUE) {
+            return move;
+        }
+        short valCur;
+        Ulli hashKey = hash.computeHash(board);
+        if (hash.checkTable[hashKey]) {
+            valCur = hash.evalTable[hashKey];
+        } else {
+            valCur = MiniMax(
+                board,
+                moveCount,
+                move,
+                alpha,
+                beta,
+                false,
+                _DEPTH - 1,
+                _topLeftPoint,
+                _bottomRightPoint,
+                hash
+            );
+            hash.checkTable[hashKey] = 1;
+            hash.evalTable[hashKey] = valCur;
+        }
 
-                if (valCur > valBest) {
-                    valBest = valCur;
-                    moveBest = move;
-                } else if (valCur == valBest) {
-                    if (rand() % 2) {
-                        moveBest = move;
-                    }
-                }
+     
 
-                GameAction::UndoMove(board, moveCount, move);
-
-                alpha = (valCur > alpha) ? valCur : alpha;
-                if (beta < alpha) break;
+        if (valCur > valBest) {
+            valBest = valCur;
+            moveBest = move;
+        } else if (valCur == valBest) {
+            if (rand() % 2) {
+                moveBest = move;
             }
         }
+
+        GameAction::UndoMove(board, moveCount, move);
+
+        alpha = (valCur > alpha) ? valCur : alpha;
+        if (beta < alpha) break;
+
+        moveQueue.pop();
     }
+
+    cnt;
 
     return moveBest;
 }
-
-
 
 short AI::MiniMax(
     GameAction::Board& board,
@@ -103,10 +121,14 @@ short AI::MiniMax(
     short alpha,
     short beta,
     const bool& isMaximizingPlayer,
-    const short& depth
+    const short& depth,
+    const GameAction::Point topLeftPoint,
+    const GameAction::Point bottomRightPoint,
+    Hash &hash
 )
 
 {
+    cnt++;
 
     const short playerValue = (!isMaximizingPlayer) ? PLAYER_AI : PLAYER_HUMAN;
 
@@ -124,19 +146,19 @@ short AI::MiniMax(
         return evalValue;
     }
 
-    short rowLowerLimit = (lastMove.row - _range >= 0)
-                              ? lastMove.row - _range
+      short rowLowerLimit = (topLeftPoint.row - FIRST_LOOKUP_RANGE >= 0)
+                              ? topLeftPoint.row - FIRST_LOOKUP_RANGE
                               : 0;
     short rowUpperLimit =
-        (lastMove.row + _range < Constants::BOARD_SIZE)
-            ? lastMove.row + _range
+        (bottomRightPoint.row + FIRST_LOOKUP_RANGE < Constants::BOARD_SIZE)
+            ? bottomRightPoint.row + FIRST_LOOKUP_RANGE
             : Constants::BOARD_SIZE - 1;
-    short colLowerLimit = (lastMove.col - _range >= 0)
-                              ? lastMove.col - _range
+    short colLowerLimit = (topLeftPoint.col - FIRST_LOOKUP_RANGE >= 0)
+                              ? topLeftPoint.col - FIRST_LOOKUP_RANGE
                               : 0;
     short colUpperLimit =
-        (lastMove.col + _range < Constants::BOARD_SIZE)
-            ? lastMove.col + _range
+        (bottomRightPoint.col + FIRST_LOOKUP_RANGE < Constants::BOARD_SIZE)
+            ? bottomRightPoint.col + FIRST_LOOKUP_RANGE
             : Constants::BOARD_SIZE - 1;
 
     MoveQueue moveQueue = GetMoveList(
@@ -145,60 +167,78 @@ short AI::MiniMax(
         colLowerLimit,
         colUpperLimit,
         moveCount,
-        board
+        board,
+        isMaximizingPlayer
     );
-
 
     if (isMaximizingPlayer) {
         short valBest = -INF;
-        for (short row = rowLowerLimit; row < rowUpperLimit; ++row) {
-            for (short col = colLowerLimit; col < colUpperLimit; ++col) {
-                if (board[row][col] == 0) {
-                    GameAction::MakeMove(
-                        board, moveCount, {row, col}, PLAYER_AI
-                    );
-                    short valCur = MiniMax(
-                        board,
-                        moveCount,
-                        {row, col},
-                        alpha,
-                        beta,
-                        false,
-                        depth - 1
-                    );
-                    valBest = (valCur > valBest) ? valCur : valBest;
-                    GameAction::UndoMove(board, moveCount, {row, col});
+        while (!moveQueue.empty()) {
+            GameAction::Point move = moveQueue.top().move;
+            GameAction::MakeMove(board, moveCount, move, PLAYER_AI);
 
-                    alpha = (valCur > alpha) ? valCur : alpha;
-                    if (beta < alpha) break;
-                }
+            short valCur;
+            Ulli hashKey = hash.computeHash(board);
+            if (hash.checkTable[hashKey]) {
+                valCur = hash.evalTable[hashKey];
+            } else {
+                valCur = MiniMax(
+                    board,
+                    moveCount,
+                    move,
+                    alpha,
+                    beta,
+                    false,
+                    depth - 1,
+                    NewTopLeftPoint({rowLowerLimit, colLowerLimit}, move),
+                    NewBottomRightPoint({rowUpperLimit, colUpperLimit}, move),
+                    hash
+                );
+                hash.checkTable[hashKey] = 1;
+                hash.evalTable[hashKey] = valCur;
             }
+
+            valBest = (valCur > valBest) ? valCur : valBest;
+            GameAction::UndoMove(board, moveCount, move);
+
+            alpha = (valCur > alpha) ? valCur : alpha;
+            if (beta < alpha) break;
+            moveQueue.pop();
         }
         return valBest;
     } else {
         short valBest = INF;
-        for (short row = rowLowerLimit; row < rowUpperLimit; ++row) {
-            for (short col = colLowerLimit; col < colUpperLimit; ++col) {
-                if (board[row][col] == 0) {
-                    GameAction::MakeMove(
-                        board, moveCount, {row, col}, PLAYER_HUMAN
-                    );
-                    short valCur = MiniMax(
-                        board,
-                        moveCount,
-                        {row, col},
-                        alpha,
-                        beta,
-                        true,
-                        depth - 1
-                    );
-                    valBest = (valCur < valBest) ? valCur : valBest;
-                    GameAction::UndoMove(board, moveCount, {row, col});
-
-                    beta = (valCur < beta) ? valCur : beta;
-                    if (beta < alpha) break;
-                }
+        while (!moveQueue.empty()) {
+            GameAction::Point move = moveQueue.top().move;
+            GameAction::MakeMove(board, moveCount, move, PLAYER_HUMAN);
+            short valCur;
+            Ulli hashKey = hash.computeHash(board);
+            if (hash.checkTable[hashKey]) {
+                valCur = hash.evalTable[hashKey];
+            } else {
+                valCur = MiniMax(
+                    board,
+                    moveCount,
+                    move,
+                    alpha,
+                    beta,
+                    true,
+                    depth - 1,
+                    NewTopLeftPoint({rowLowerLimit, colLowerLimit}, move),
+                    NewBottomRightPoint({rowUpperLimit, colUpperLimit}, move),
+                    hash
+                );
+                hash.checkTable[hashKey] = 1;
+                hash.evalTable[hashKey] = valCur;
             }
+            
+
+            valBest = (valCur < valBest) ? valCur : valBest;
+            GameAction::UndoMove(board, moveCount, move);
+
+            beta = (valCur < beta) ? valCur : beta;
+            if (beta < alpha) break;
+            moveQueue.pop();
         }
         return valBest;
     }
