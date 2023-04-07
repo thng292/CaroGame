@@ -35,6 +35,14 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
     short alpha = -INF, beta = INF;
     GameAction::Point moveBest;
 
+    MoveQueue moveQueue = GetMoveList(
+        rowLowerLimit,
+        rowUpperLimit,
+        colLowerLimit,
+        colUpperLimit,
+        moveCount,
+        board
+    );
 
     for (short row = rowLowerLimit; row <= rowUpperLimit; ++row) {
         for (short col = colLowerLimit; col <= colUpperLimit; ++col) {
@@ -130,6 +138,15 @@ short AI::MiniMax(
         (lastMove.col + _range < Constants::BOARD_SIZE)
             ? lastMove.col + _range
             : Constants::BOARD_SIZE - 1;
+
+    MoveQueue moveQueue = GetMoveList(
+        rowLowerLimit,
+        rowUpperLimit,
+        colLowerLimit,
+        colUpperLimit,
+        moveCount,
+        board
+    );
 
 
     if (isMaximizingPlayer) {

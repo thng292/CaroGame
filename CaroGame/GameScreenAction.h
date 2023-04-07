@@ -121,4 +121,13 @@ namespace GameScreenAction {
         bool& isPlayerOneTurn
     );
 
+    void AIMove(
+        GameScreen& gameScreen,
+        GameAction::Board& board,
+        short& moveCount,
+        bool& isAIthinking,
+        AI& ai,
+        GameState& gameState
+    );
+
 }  // namespace GameScreenAction

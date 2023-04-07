@@ -326,3 +326,15 @@ void GameScreenAction::FlipTurn(
         (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
 }
 
+void GameScreenAction::AIMove(
+    GameScreen& gameScreen, GameAction::Board& board, short&moveCount, bool& isAIthinking, AI& ai, GameState& gameState
+)
+{
+    GameAction::Point move = ai.GetBestMove(board, moveCount);
+    GameScreenAction::HighlightMove(gameScreen, move, L"X");
+    UpdateGame(
+        gameScreen, board, moveCount, move, Constants::PLAYER_ONE, gameState
+    );
+    isAIthinking = false;
+}
+

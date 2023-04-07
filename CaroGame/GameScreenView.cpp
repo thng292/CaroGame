@@ -5,7 +5,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     GameState temp;
     temp.aiDifficulty = AI::AI_DIFFICULTY_NORMAL;
     temp.playerAvatarOne = temp.playerAvatarTwo = 1;
-    temp.gameMode = Constants::GAME_MODE_PVP;
+    temp.gameMode = Constants::GAME_MODE_PVE;
 
     NavHost.SetContext(Constants::CURRENT_GAME, temp);
 

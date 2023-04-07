@@ -1,12 +1,16 @@
 #pragma once
 
 #include <random>
+#include <queue>
+#include <functional>
 
 #include "Constants.h"
 #include "Evaluation.h"
 #include "GameAction.h"
 #include "Hash.h"
 #include "Logic.h"
+
+
 
 class AI {
    public:
@@ -15,6 +19,11 @@ class AI {
     
     short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
           PLAYER_AI = Constants::PLAYER_TWO.value;
+
+    static struct PointEval {
+        GameAction::Point move;
+        short eval;
+    };
 
     short Eval(
         const GameAction::Board& board,
@@ -78,6 +87,66 @@ class AI {
         short col = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
         return {row, col};
     }
+
+    inline bool isValidPoint(short row, short col)
+    {
+        return !(
+            row < 0 || col < 0 || row >= Constants::BOARD_SIZE ||
+            col >= Constants::BOARD_SIZE
+        );
+    }
+
+    bool IsGoodMove(
+        const GameAction::Board& board,
+        const GameAction::Point& move,
+        const short& playerValue
+    )
+    {
+        for (short row = move.row - 1; row <= move.row + 1; ++row) {
+            for (short col = move.col - 1; col <= move.col + 1; ++col) {
+                if (isValidPoint(row, col)) {
+                    if (board[row][col] != 0) return 1;
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    class Compare {
+       public:
+        bool operator()(PointEval a, PointEval b) { return a.eval < b.eval; }
+    };
+    
+    typedef std::priority_queue<PointEval, std::vector<PointEval>, Compare> MoveQueue;
+
+     MoveQueue GetMoveList(short rowLowerLimit, short rowUpperLimit, short colLowerLimit, short colUpperLimit, short moveCount, GameAction::Board&board){
+        short searchSize = (rowUpperLimit - rowLowerLimit + 1) *
+                           (colUpperLimit - colLowerLimit + 1);
+
+        short moveListSize = searchSize - moveCount;
+        std::vector<GameAction::Point> moveList;
+        moveList.resize(moveListSize);
+        short right = 0, left = moveListSize - 1;
+
+        MoveQueue moveQueue;
+
+        for (short row = rowLowerLimit; row <= rowUpperLimit; ++row) {
+            for (short col = colLowerLimit; col <= colUpperLimit; ++col)  {
+                GameAction::MakeMove(board, moveCount, {row, col}, PLAYER_AI);
+                moveQueue.push({
+                    {row, col},
+                    Eval(board, moveCount, {row, col},
+                    true)
+                });
+
+               
+                GameAction::UndoMove(board, moveCount, {row, col});
+
+            }
+        }
+        return moveQueue;
+    };
 
    private:
     const short INF = 30000;

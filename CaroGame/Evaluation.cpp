@@ -8,7 +8,7 @@
 // Don't change this please it'll break everything
 const short score[4] = {1, 10, 50, 200};
 
-short GetHorizontalComboEval(
+inline short GetHorizontalComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -45,7 +45,7 @@ short GetHorizontalComboEval(
     return evalValue;
 }
 
-short GetVerticalComboEval(
+inline short GetVerticalComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -82,7 +82,7 @@ short GetVerticalComboEval(
     return evalValue;
 }
 
-short GetDiagonalRightComboEval(
+inline short GetDiagonalRightComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -126,7 +126,7 @@ short GetDiagonalRightComboEval(
     return evalValue;
 }
 
-short GetDiagonalLeftComboEval(
+inline short GetDiagonalLeftComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
