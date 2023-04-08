@@ -1,14 +1,9 @@
 #include "Evaluation.h"
 
-#include <vector>
-
-#include "Constants.h"
-#include "Logic.h"
-
 // Don't change this please it'll break everything
 const short score[4] = {1, 10, 50, 200};
 
-short GetHorizontalComboEval(
+inline short GetHorizontalComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -45,7 +40,7 @@ short GetHorizontalComboEval(
     return evalValue;
 }
 
-short GetVerticalComboEval(
+inline short GetVerticalComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -82,7 +77,7 @@ short GetVerticalComboEval(
     return evalValue;
 }
 
-short GetDiagonalRightComboEval(
+inline short GetDiagonalRightComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -126,7 +121,7 @@ short GetDiagonalRightComboEval(
     return evalValue;
 }
 
-short GetDiagonalLeftComboEval(
+inline short GetDiagonalLeftComboEval(
     const GameAction::Board& board,
     GameAction::Board& comboCheckBoard,
     const GameAction::Point& move,
@@ -186,8 +181,7 @@ short Evaluation::GetComboEval(
                     short eval = GetHorizontalComboEval(
                         board, comboCheckBoard, {row, col}, board[row][col]
                     );
-                    if (eval == score[3] / 2 &&
-                        board[row][col] != playerValue)
+                    if (eval == score[3] / 2 && board[row][col] != playerValue)
                         eval = score[3] * tempBoost * 5;
                     else if (eval == score[3] * tempBoost && board[row][col] != playerValue)
                         eval = score[3] * tempBoost * 5;

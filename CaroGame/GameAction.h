@@ -1,6 +1,5 @@
 #pragma once
-#include <vector>
-
+#include "Constants.h"
 #include "GameState.h"
 
 namespace GameAction {
@@ -17,15 +16,18 @@ namespace GameAction {
         const short& playerValue
     );
 
+    inline bool isValidPoint(short row, short col)
+    {
+        return !(
+            row < 0 || col < 0 || row >= Constants::BOARD_SIZE ||
+            col >= Constants::BOARD_SIZE
+        );
+    }
+
     void UndoMove(Board& board, short& moveCount, const Point& move);
 
-    void ResetGameState(GameState& gameState);
-
-    void InitBoard(
-        Board& board,
-        short& moveCount,
-        Point& topLeftCorner,
-        Point& bottomRightCorner
+    std::vector<Point> GetWarningPoints(
+        const Board& board, const Point& move, const short& player
     );
-    // void InitBoard(vector<vector<short>>& boardGameMatrix, short& moveCount);
+
 }  // namespace GameAction
