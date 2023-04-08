@@ -13,25 +13,26 @@ short AI::Eval(
     short totalEval = 0;
 
     totalEval += Evaluation::GetComboEval(board, playerValue);
+
     return (isMaximizingPlayer) ? totalEval : -totalEval;
 }
 
 GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
 {
 
-    short rowLowerLimit = (_topLeftPoint.row - FIRST_LOOKUP_RANGE >= 0)
-                              ? _topLeftPoint.row - FIRST_LOOKUP_RANGE
+    short rowLowerLimit = (_topLeftPoint.row - _RANGE >= 0)
+                              ? _topLeftPoint.row - _RANGE
                               : 0;
     short rowUpperLimit =
-        (_bottomRightPoint.row + FIRST_LOOKUP_RANGE < Constants::BOARD_SIZE)
-            ? _bottomRightPoint.row + FIRST_LOOKUP_RANGE
+        (_bottomRightPoint.row + _RANGE < Constants::BOARD_SIZE)
+            ? _bottomRightPoint.row + _RANGE
             : Constants::BOARD_SIZE - 1;
-    short colLowerLimit = (_topLeftPoint.col - FIRST_LOOKUP_RANGE >= 0)
-                              ? _topLeftPoint.col - FIRST_LOOKUP_RANGE
+    short colLowerLimit = (_topLeftPoint.col - _RANGE >= 0)
+                              ? _topLeftPoint.col - _RANGE
                               : 0;
     short colUpperLimit =
-        (_bottomRightPoint.col + FIRST_LOOKUP_RANGE < Constants::BOARD_SIZE)
-            ? _bottomRightPoint.col + FIRST_LOOKUP_RANGE
+        (_bottomRightPoint.col + _RANGE < Constants::BOARD_SIZE)
+            ? _bottomRightPoint.col + _RANGE
             : Constants::BOARD_SIZE - 1;
 
     short valBest = -INF;
@@ -67,6 +68,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
         GameAction::MakeMove(board, moveCount, move, PLAYER_AI);
         if (Logic::GetGameState(board, moveCount, move, PLAYER_AI) ==
             Logic::WIN_VALUE) {
+            GameAction::UndoMove(board, moveCount, move);
             return move;
         }
         short valCur;
@@ -81,7 +83,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
                 alpha,
                 beta,
                 false,
-                _DEPTH - 1,
+                _depth - 1,
                 _topLeftPoint,
                 _bottomRightPoint,
                 hash
@@ -109,7 +111,6 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
         moveQueue.pop();
     }
 
-    cnt;
 
     return moveBest;
 }
@@ -128,7 +129,6 @@ short AI::MiniMax(
 )
 
 {
-    cnt++;
 
     const short playerValue = (!isMaximizingPlayer) ? PLAYER_AI : PLAYER_HUMAN;
 
@@ -146,19 +146,19 @@ short AI::MiniMax(
         return evalValue;
     }
 
-      short rowLowerLimit = (topLeftPoint.row - FIRST_LOOKUP_RANGE >= 0)
-                              ? topLeftPoint.row - FIRST_LOOKUP_RANGE
-                              : 0;
+    short rowLowerLimit = (topLeftPoint.row - _RANGE >= 0)
+                            ? topLeftPoint.row - _RANGE
+                            : 0;
     short rowUpperLimit =
-        (bottomRightPoint.row + FIRST_LOOKUP_RANGE < Constants::BOARD_SIZE)
-            ? bottomRightPoint.row + FIRST_LOOKUP_RANGE
+        (bottomRightPoint.row + _RANGE < Constants::BOARD_SIZE)
+            ? bottomRightPoint.row + _RANGE
             : Constants::BOARD_SIZE - 1;
-    short colLowerLimit = (topLeftPoint.col - FIRST_LOOKUP_RANGE >= 0)
-                              ? topLeftPoint.col - FIRST_LOOKUP_RANGE
+    short colLowerLimit = (topLeftPoint.col - _RANGE >= 0)
+                              ? topLeftPoint.col - _RANGE
                               : 0;
     short colUpperLimit =
-        (bottomRightPoint.col + FIRST_LOOKUP_RANGE < Constants::BOARD_SIZE)
-            ? bottomRightPoint.col + FIRST_LOOKUP_RANGE
+        (bottomRightPoint.col + _RANGE < Constants::BOARD_SIZE)
+            ? bottomRightPoint.col + _RANGE
             : Constants::BOARD_SIZE - 1;
 
     MoveQueue moveQueue = GetMoveList(

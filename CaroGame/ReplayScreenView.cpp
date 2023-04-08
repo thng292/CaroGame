@@ -6,6 +6,8 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME)
         );
 
+    GameScreenAction::ColorMatrix colorMatrix(Constants::BOARD_SIZE, std::vector<View::Color>(Constants::BOARD_SIZE, (View::Color)0));
+
     GameState tempGameState = curGameState;
     tempGameState.moveList.clear();
 
@@ -111,7 +113,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                     }
 
                     GameScreenAction::UnhightlightMove(
-                        gameScreen, prevMove, prevPlayer.symbol
+                        gameScreen, prevMove, prevPlayer.symbol, colorMatrix
                     );
 
                 } else {
@@ -129,7 +131,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
 
                         endGame = 0;
                     }
-                    GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove);
+                    GameScreenAction::DeleteMoveFromScreen(gameScreen, curMove, colorMatrix);
 
                     tempGameState.moveList.pop_back();
 
@@ -161,7 +163,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                 if (endGame != Constants::END_GAME_WIN_ONE &&
                     endGame != Constants::END_GAME_WIN_TWO)
                     GameScreenAction::HighlightMove(
-                        gameScreen, curMove, curPlayer.symbol
+                        gameScreen, curMove, curPlayer.symbol, colorMatrix
                     );
 
                 prevMove = curMove;

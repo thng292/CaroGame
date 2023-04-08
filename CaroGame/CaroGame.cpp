@@ -22,7 +22,7 @@ int main()
 #endif
     NavigationHost NavHost(
 #if _DEBUG
-        "GameScreenView",
+        "GameModeTypeView",
 #else
         "StartUpScreen",
 #endif

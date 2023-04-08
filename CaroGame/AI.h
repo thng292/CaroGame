@@ -92,16 +92,13 @@ class AI {
     {
         switch (difficulty) {
             case AI_DIFFICULTY_EASY:
-                _range = 6;
-                _DEPTH = 2;
+                _depth = 1;
                 break;
             case AI_DIFFICULTY_NORMAL:
-                _range = Constants::BOARD_SIZE;
-                _DEPTH = 2;
+                _depth = 2;
                 break;
             case AI_DIFFICULTY_HARD:
-                _range = Constants::BOARD_SIZE;
-                _DEPTH = 3;
+                _depth = 3;
                 break;
         }
     }
@@ -112,14 +109,6 @@ class AI {
         short row = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
         short col = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
         return {row, col};
-    }
-
-    inline bool isValidPoint(short row, short col)
-    {
-        return !(
-            row < 0 || col < 0 || row >= Constants::BOARD_SIZE ||
-            col >= Constants::BOARD_SIZE
-        );
     }
 
     class Compare {
@@ -141,18 +130,20 @@ class AI {
     )
     {
         short row = move.row, col = move.col, index = 1;
-        short point = 1;
+        short point = 1, nodeCount = 1;
         while (index < 5) {
             row += rowDirection;
             col += colDirection;
-            if (isValidPoint(row, col)) {
+            if (GameAction::isValidPoint(row, col)) {
                 if (board[row][col] == 0 && isPositivePoint == true) {
                     point++;
                 }
                 else if (isPositivePoint && board[row][col] == value) {
-                    point += index * 2;
+                    point += nodeCount * 2;
+                    nodeCount++;
                 } else if (!isPositivePoint && board[row][col] != value && board[row][col] != 0) {
-                    point += index * 2;
+                    point += nodeCount * 2;
+                    nodeCount++;
                 } 
 
                 else
@@ -229,10 +220,9 @@ class AI {
    private:
     const short INF = 30000;
     const short MAX_SCORE = 10000;
-    const short FIRST_LOOKUP_RANGE = 1;
-    short _DEPTH = 2;
+    short _depth = 2;
 
-    short _range;
+    const short _RANGE = 1;
     GameAction::Point _topLeftPoint = {100, 100},
                       _bottomRightPoint = {-100, -100};
     std::vector<std::pair<GameAction::Point, GameAction::Point>> _prevPointList;

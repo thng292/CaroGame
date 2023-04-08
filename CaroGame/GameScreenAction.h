@@ -1,6 +1,5 @@
 #pragma once
 #include <format>
-#include <vector>
 
 #include "AI.h"
 #include "Constants.h"
@@ -13,6 +12,8 @@
 
 namespace GameScreenAction {
 
+    typedef std::vector<std::vector<View::Color>> ColorMatrix;
+
     void UpdateGame(
         GameScreen gameScreen,
         GameAction::Board& board,
@@ -21,7 +22,6 @@ namespace GameScreenAction {
         const Constants::Player& player,
         GameState& gameState,
         bool loadFromSave = false
-
     );
 
     void UndoMove(
@@ -33,14 +33,17 @@ namespace GameScreenAction {
         GameAction::Point& previousToLastMove,
         Constants::Player& curPlayer,
         Constants::Player& prevPlayer,
-        bool& isPlayerOneTurn
+        bool& isPlayerOneTurn,
+        ColorMatrix& colorMatrix
     );
 
     void HighLightCursor(
         GameScreen& gameScreen,
         const GameAction::Board& gameBoard,
         const GameAction::Point& curPos,
-        const GameAction::Point& latestMove
+        const ColorMatrix& colorMatrix,
+        std::mutex& lock
+
 
  
     );
@@ -50,7 +53,9 @@ namespace GameScreenAction {
         GameScreen& gameScreen,
         const GameAction::Board& gameBoard,
         const GameAction::Point& curPos,
-        const GameAction::Point& latestMove
+        const ColorMatrix& colorMatrix,
+        std::mutex& lock
+
 
 
 
@@ -68,13 +73,15 @@ namespace GameScreenAction {
     void HighlightMove(
         GameScreen& gameScreen,
         const GameAction::Point& move,
-        const std::wstring value
+        const std::wstring value,
+        ColorMatrix& colorMatrix
     );
 
     void UnhightlightMove(
         GameScreen& gameScreen,
         const GameAction::Point& move,
-        const std::wstring value
+        const std::wstring value,
+        ColorMatrix& colorMatrix
     );
 
     GameAction::Point HandleState(
@@ -93,12 +100,15 @@ namespace GameScreenAction {
         GameScreen& gameScreen,
         GameAction::Board& board,
         short& moveCount,
-        GameState gameState,
-        AI& ai
+        GameState &gameState,
+        AI& ai,
+        ColorMatrix &colorMatrix
     );
 
     void DeleteMoveFromScreen(
-        GameScreen& gameScreen, const GameAction::Point& move
+        GameScreen& gameScreen,
+        const GameAction::Point& move,
+        ColorMatrix& colorMatrix
     );
 
     GameAction::Point GetHintMove(
@@ -108,11 +118,94 @@ namespace GameScreenAction {
         AI ai
     );
 
+    void DeleteHintMove(
+        GameScreen& gameScreen,
+        GameAction::Point& move,
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
+    );
+
+    void DrawHintMove(
+        GameScreen& gameScreen,
+        const GameAction::Point& move,
+        const Constants::Player& player,
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
+    );
+
+    void DeleteGhostMoves(
+        GameScreen& gameScreen,
+
+        std::vector<GameAction::Point>& moveList,
+        bool& isPlayerOneTurn,
+        Constants::Player& prevPlayer,
+        Constants::Player& curPlayer,
+        ColorMatrix& colorMatrix
+
+    );
+
+    void TurnOffGhostMode(
+       GameScreen& gameScreen,
+        GameAction::Board &currentBoard,
+        const GameAction::Board gameBoard,
+        std::vector<GameAction::Point>& moveList,
+        bool& isGhostMode,
+        bool& isPlayerOneTurn,
+        Constants::Player& prevPlayer,
+        Constants::Player& curPlayer,
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
+    );
+
+    void MakeGhostMove(
+        GameScreen& gameScreen,
+        GameAction::Board& board,
+
+        std::vector<GameAction::Point>& moveList,
+        const GameAction::Point& move,
+        bool& isPlayerOneTurn,
+        Constants::Player& prevPlayer,
+        Constants::Player& curPlayer,
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
+    );
+
+    void HandlePlayerMove(
+        GameScreen& gameScreen,
+        GameAction::Board& currentBoard,
+        GameAction::Board& gameBoard,
+        short& moveCount,
+        GameAction::Point& prevMove,
+        GameAction::Point& curMove,
+        const GameAction::Point& move,
+        bool& isPlayerOneTurn,
+        Constants::Player& prevPlayer,
+        Constants::Player& curPlayer,
+        AI& myAI,
+        GameState& curGameState,
+        short& endGame,
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
+    );
+
+    void DrawGhostMove(
+        GameScreen& gameScreen,
+        const GameAction::Point& move,
+        const Constants::Player& player,
+        ColorMatrix& colorMatrix
+    );
+
     void DrawMove(
         GameScreen& gameScreen,
         const GameAction::Point& move,
         const Constants::Player& player,
-        const View::Color& color
+        ColorMatrix& colorMatrix,
+        View::Color color
     );
 
     void FlipTurn(
@@ -121,13 +214,12 @@ namespace GameScreenAction {
         bool& isPlayerOneTurn
     );
 
-    void AIMove(
+    void HighlightWarning(
         GameScreen& gameScreen,
-        GameAction::Board& board,
-        short& moveCount,
-        bool& isAIthinking,
-        AI& ai,
-        GameState& gameState
+        const GameAction::Board& board,
+        const GameAction::Point& move,
+        const Constants::Player& player
     );
+
 
 }  // namespace GameScreenAction
