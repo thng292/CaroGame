@@ -102,6 +102,8 @@ namespace GameScreenAction {
         short& moveCount,
         GameState &gameState,
         AI& ai,
+        std::vector<GameAction::Point>& warningPointList,
+
         ColorMatrix &colorMatrix
     );
 
@@ -218,8 +220,20 @@ namespace GameScreenAction {
         GameScreen& gameScreen,
         const GameAction::Board& board,
         const GameAction::Point& move,
-        const Constants::Player& player
+        const Constants::Player& player,
+        std::vector<GameAction::Point>& pointList,
+        ColorMatrix& colorMatrix
+
+
     );
 
+    void UnhighlightWarning(
+        GameScreen& gameScreen,
+        const Constants::Player& player,
+        std::vector<GameAction::Point>& pointList,
+        ColorMatrix& colorMatrix
+    );
+
+   
 
 }  // namespace GameScreenAction

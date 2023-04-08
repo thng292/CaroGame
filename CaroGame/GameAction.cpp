@@ -27,7 +27,7 @@ namespace GameAction {
     )
     {
         short index = 1, row = move.row, col = move.col;
-        while (index < 5) {
+        while (index <= 4) {
             row += rowDirection;
             col += colDirection;
             index++;
@@ -35,11 +35,12 @@ namespace GameAction {
             if (board[row][col] == 0) continue;
             if (board[row][col] != player) break;
             pointList.push_back({row, col});
+            if (pointList.size() == 3) break;
         }
     }
 
     std::vector<Point> GetWarningPoints(
-        const Board& board, const Point& move, const short player
+        const Board& board, const Point& move, const short &player
     )
     {
         std::vector<Point> pointList;
@@ -48,7 +49,7 @@ namespace GameAction {
                 if (!(rowDirection == 0 && colDirection == 0)) {
                     pointList.clear();
                     IteratePoints(board, move, player, pointList, rowDirection, colDirection);
-                    if (pointList.size() == 4) break;
+                    if (pointList.size() == 3) return pointList;
                     IteratePoints(
                         board,
                         move,
@@ -57,11 +58,15 @@ namespace GameAction {
                         -rowDirection,
                         -colDirection
                     );
-                    if (pointList.size() == 4) break;
+                    if (pointList.size() == 3) return pointList;
 
                 }
             }
         }
+        pointList.clear();
+        IteratePoints(board, move, player, pointList, -1, 1);
+        if (pointList.size() == 3) return pointList;
+        IteratePoints(board, move, player, pointList, 1, -1);
         return pointList;
     }
 

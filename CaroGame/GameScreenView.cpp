@@ -2,10 +2,10 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
-   /* GameState temp;
+  /*  GameState temp;
     temp.aiDifficulty = AI::AI_DIFFICULTY_HARD;
     temp.playerAvatarOne = temp.playerAvatarTwo = 1;
-    temp.gameMode = Constants::GAME_MODE_PVE;
+    temp.gameMode = Constants::GAME_MODE_PVP;
     temp.playerOneFirst = false;
 
     NavHost.SetContext(Constants::CURRENT_GAME, temp);*/
@@ -13,6 +13,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     GameScreenAction::ColorMatrix colorMatrix(
         Constants::BOARD_SIZE, std::vector<View::Color>(Constants::BOARD_SIZE, View::DEFAULT_TEXT_COLOR)
     );
+
+    std::vector<GameAction::Point> ghostMoveList, warningPointList;
+
 
     GameState curGameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::CURRENT_GAME)
@@ -58,7 +61,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Constants::Player curPlayer;
 
     GameScreenAction::LoadGameToView(
-        gameScreen, gameBoard, moveCount, curGameState, myAI, colorMatrix
+        gameScreen, gameBoard, moveCount, curGameState, myAI, warningPointList, colorMatrix
     );
 
     short row = 0, col = 0;
@@ -229,8 +232,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     GameAction::Point hintMove = {-1, -1};
     GameAction::Board currentBoard = gameBoard;
     bool isGhostMode = false;
-    std::vector<GameAction::Point> ghostMoveList;
 
+
+    // Game loop
     while (!endGame) {
         tmp = InputHandle::Get();
         if (endGame) break;
@@ -287,6 +291,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 lock
             );
             GameScreenAction::DeleteHintMove(gameScreen, hintMove, colorMatrix, lock);
+            GameScreenAction::UnhighlightWarning(
+                gameScreen, prevPlayer, warningPointList, colorMatrix
+            );
 
             if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
                 (curGameState.gameMode == Constants::GAME_MODE_PVE &&
@@ -331,6 +338,15 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 
                 myAI.RevertPrivateValues();
             }
+
+            GameScreenAction::HighlightWarning(
+                gameScreen,
+                gameBoard,
+                latestMove,
+                prevPlayer,
+                warningPointList,
+                colorMatrix
+            );
             currentBoard = gameBoard;
         }
 
@@ -432,6 +448,9 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     GameScreenAction::DeleteHintMove(
                         gameScreen, hintMove, colorMatrix, lock
                     );                 
+                    GameScreenAction::UnhighlightWarning(
+                        gameScreen, prevPlayer, warningPointList, colorMatrix
+                    );
 
                     GameScreenAction::HandlePlayerMove(
                         gameScreen,
@@ -451,6 +470,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         lock
                     );
 
+                    
+
                     if (isPlayerOneTurn) {
                         timerPlayerOne.Continued();
                         timerPlayerTwo.Pause();
@@ -462,9 +483,18 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     
 
                     if (endGame) break;
+                    GameScreenAction::HighlightWarning(
+                        gameScreen,
+                        gameBoard,
+                        latestMove,
+                        prevPlayer,
+                        warningPointList,
+                        colorMatrix
+                    );
 
                     // AI's turn
-                    if (curGameState.gameMode == Constants::GAME_MODE_PVE) {                       
+                    if (curGameState.gameMode == Constants::GAME_MODE_PVE) {           
+                       
                         GameScreenAction::HandlePlayerMove(
                             gameScreen,
                             currentBoard,
@@ -483,6 +513,13 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                             lock
                         );
 
+                         GameScreenAction::UnhighlightWarning(
+                            gameScreen,
+                            curPlayer,
+                            warningPointList,
+                            colorMatrix
+                        );
+
                         if (isPlayerOneTurn) {
                             timerPlayerOne.Continued();
                             timerPlayerTwo.Pause();
@@ -492,6 +529,15 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         }
 
                         if (endGame) break;
+
+                        GameScreenAction::HighlightWarning(
+                            gameScreen,
+                            gameBoard,
+                            latestMove,
+                            prevPlayer,
+                            warningPointList,
+                            colorMatrix
+                        );
                     }
 
                 }

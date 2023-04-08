@@ -240,6 +240,7 @@ void GameScreenAction::LoadGameToView(
     short& moveCount,
     GameState &gameState,
     AI& ai,
+    std::vector<GameAction::Point>&warningPointList,
     ColorMatrix& colorMatrix
 )
 {
@@ -253,7 +254,7 @@ void GameScreenAction::LoadGameToView(
         if (isPlayerOne) {
             player = Constants::PLAYER_ONE;
             color = (View::Color)Constants::PLAYER_ONE_COLOR;
-        
+
         } else {
             player = Constants::PLAYER_TWO;
             color = (View::Color)Constants::PLAYER_TWO_COLOR;
@@ -265,8 +266,13 @@ void GameScreenAction::LoadGameToView(
         ai.UpdatePrivateValues(move);
         UpdateGame(gameScreen, board, moveCount, move, player, gameState, true);
         DrawMove(gameScreen, move, player, colorMatrix, color);
-        if (i == moveListSize - 1)
+        if (i == moveListSize - 1) {
+            HighlightWarning(
+                gameScreen, board, move, player, warningPointList, colorMatrix
+            );
             HighlightMove(gameScreen, move, player.symbol, colorMatrix);
+        
+        }
         isPlayerOne = !isPlayerOne;
     }
 }
@@ -494,3 +500,37 @@ void GameScreenAction::FlipTurn(
     curPlayer =
         (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
 }
+
+void GameScreenAction::HighlightWarning(
+    GameScreen& gameScreen,
+    const GameAction::Board& board,
+    const GameAction::Point& move,
+    const Constants::Player& player,
+    std::vector<GameAction::Point>&pointList,
+    ColorMatrix& colorMatrix
+)
+{
+    pointList = GameAction::GetWarningPoints(board, move, player.value);
+    if (pointList.size() != 3) return;
+    for (auto& point : pointList) {
+        DrawMove(gameScreen, point, player, colorMatrix, View::Color::MAGENTA);
+    }
+}
+
+void GameScreenAction::UnhighlightWarning(
+    GameScreen& gameScreen,
+    const Constants::Player& player,
+    std::vector<GameAction::Point>& pointList,
+    ColorMatrix& colorMatrix
+)
+{
+    if (pointList.size() != 3) return;
+    View::Color color = (player.value == Constants::PLAYER_ONE.value)
+                            ? (View::Color)Constants::PLAYER_ONE_COLOR
+                            : (View::Color)Constants::PLAYER_TWO_COLOR;
+    for (auto& point : pointList) {
+        DrawMove(gameScreen, point, player, colorMatrix, color);
+    }
+    pointList.clear();
+}
+
