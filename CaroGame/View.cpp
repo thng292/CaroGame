@@ -123,17 +123,15 @@ void View::WriteToView(
     std::wcout << str;
 }
 
-void View::ClearScreen()
+void View::ClearScreen(short ScreenAttribute)
 {
     DWORD tmp = 0;
     HANDLE StdOut = GetStdHandle(STD_OUTPUT_HANDLE);
     FillConsoleOutputCharacter(StdOut, L' ', 120 * 30, {0, 0}, &tmp);
-    FillConsoleOutputAttribute(
-        StdOut, DEFAULT_SCREEN_ATTRIBUTE, 120 * 30, {0, 0}, &tmp
-    );
+    FillConsoleOutputAttribute(StdOut, ScreenAttribute, 120 * 30, {0, 0}, &tmp);
 }
 
-void View::ClearRect(Rect area)
+void View::ClearRect(Rect area, short ScreenAttribute)
 {
     DWORD tmp = 0;
     auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -143,7 +141,7 @@ void View::ClearRect(Rect area)
         );
         FillConsoleOutputAttribute(
             stdHandle,
-            DEFAULT_SCREEN_ATTRIBUTE,
+            ScreenAttribute,
             area.Right - area.Left + 1,
             {area.Left, i},
             &tmp
@@ -247,9 +245,11 @@ void View::DrawBorder(const Rect& rect, Color textColor, Color bgColor)
     }
 }
 
-void View::DrawRect(const Rect& rect, Color textColor, Color bgColor)
+void View::DrawRect(
+    const Rect& rect, Color textColor, Color bgColor, short ScreenAttribute
+)
 {
-    View::ClearRect(rect);
+    View::ClearRect(rect, ScreenAttribute);
     View::DrawBorder(rect, textColor, bgColor);
 }
 
@@ -282,19 +282,21 @@ View::Rect View::DrawMenu(
     Color textColor,
     Color highlightColor,
     Color highlightTextColor,
-    Color backgroundColor
+    Color backgroundColor,
+    Color titleColor
 )
 {
     short w = CalcWidth(optionsList, title);
     short h = CalcHeight(optionsList, title);
 
-    bool redrawAll = x != prevState.x || y != prevState.y ||
-                     textColor != prevState.textColor ||
+    bool redrawAll = x != prevState.x || y != prevState.y || w != prevState.w ||
+                     h != prevState.h || textColor != prevState.textColor ||
                      highlightColor != prevState.highlightColor ||
                      highlightTextColor != prevState.highlightTextColor ||
                      backgroundColor != prevState.backgroundColor;
 
-    bool redrawTitle = title != prevState.title;
+    bool redrawTitle =
+        title != prevState.title || prevState.titleColor != titleColor;
     bool redrawBorder =
         redrawAll || redrawTitle || w != prevState.w || h != prevState.h;
 
@@ -314,7 +316,17 @@ View::Rect View::DrawMenu(
     short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
 
     if (redrawTitle) {
-        View::WriteToView(leftAlign, topAlign, title);
+        View::WriteToView(
+            leftAlign,
+            topAlign,
+            title,
+            0,
+            false,
+            titleColor,
+            highlightColor,
+            highlightTextColor,
+            backgroundColor
+        );
     }
     if (title.size()) {
         topAlign += 2;
@@ -394,7 +406,8 @@ View::Rect View::DrawMenuCenter(
     Color textColor,
     Color highlightColor,
     Color highlightTextColor,
-    Color backgroundColor
+    Color backgroundColor,
+    Color titleColor
 )
 {
     short w = CalcWidth(optionsList, title);

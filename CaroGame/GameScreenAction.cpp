@@ -79,7 +79,7 @@ void GameScreenAction::HighLightCursor(
 )
 {
     std::wstring value = L" ";
-    View::Color color = View::DEFAULT_TEXT_COLOR;
+    View::Color color = Theme::GetColor(ThemeColor::TEXT_COLOR);
     if (gameBoard[curPos.row][curPos.col] != 0) {
         if (gameBoard[curPos.row][curPos.col] == Constants::PLAYER_ONE.value) {
             if (curPos.row == curMove.row && curPos.col == curMove.col) {
@@ -109,7 +109,7 @@ void GameScreenAction::UnhighlightCursor(
 )
 {
     std::wstring value = L" ";
-    View::Color color = View::DEFAULT_TEXT_COLOR;
+    View::Color color = Theme::GetColor(ThemeColor::TEXT_COLOR);
     if (gameBoard[prevPos.row][prevPos.col] == Constants::PLAYER_ONE.value) {
 
             if (prevPos.row == curMove.row && prevPos.col == curMove.col) {

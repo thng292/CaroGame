@@ -30,13 +30,17 @@ namespace FileHandle {
 
     inline std::ofstream OpenOutFileA(const std::filesystem::path& fileName)
     {
-        Ensure(fileName.parent_path());
+        if (fileName.has_parent_path()) {
+            Ensure(fileName.parent_path());
+        }
         return std::ofstream(fileName);
     }
 
     inline std::ifstream OpenInFileA(const std::filesystem::path& fileName)
     {
-        Ensure(fileName.parent_path());
+        if (fileName.has_parent_path()) {
+            Ensure(fileName.parent_path());
+        }
         return std::ifstream(fileName);
     }
 

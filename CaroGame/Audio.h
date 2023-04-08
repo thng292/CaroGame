@@ -44,7 +44,6 @@ namespace Audio {
        private:
         bool isPlaying = 0;
         bool hasStopped = 1;
-        bool isRepeat = 0;
         Sound currentSong = Sound::NoSound;
         static int instanceCount;
         int currentInstance;
@@ -57,18 +56,17 @@ namespace Audio {
 
         inline AudioPlayer()
         {
-            currentInstance = instanceCount++;
             currentSong = Sound::NoSound;
         }
 
         inline AudioPlayer(Sound song)
         {
-            currentInstance = instanceCount++;
             Open(song);
         }
 
         inline int Open(Sound song)
         {
+            currentInstance = instanceCount++;
             currentSong = song;
             if (song == Sound::NoSound) {
                 return 0;
@@ -93,11 +91,10 @@ namespace Audio {
             return mciSendString(command.c_str(), 0, 0, 0);
         }
 
-        inline Sound getCurrentSong() { return currentSong; }
+        inline Sound getCurrentSong() const { return currentSong; }
 
-        inline int Play(bool fromStart = true, bool repeat = false)
+        inline int Play(bool fromStart = true, bool repeat = false) const
         {
-            isRepeat = repeat;
             auto command = std::format(L"play {}", currentInstance);
             if (fromStart) {
                 command += L" from 0";
@@ -108,21 +105,21 @@ namespace Audio {
             return mciSendString(command.c_str(), 0, 0, 0);
         }
 
-        inline int Pause()
+        inline int Pause() const
         {
             return mciSendString(
                 std::format(L"pause {}", currentInstance).c_str(), 0, 0, 0
             );
         }
 
-        inline int Resume()
+        inline int Resume() const
         {
             return mciSendString(
                 std::format(L"resume {}", currentInstance).c_str(), 0, 0, 0
             );
         }
 
-        inline int Stop()
+        inline int Stop() const
         {
             return mciSendString(
                 std::format(L"stop {}", currentInstance).c_str(), 0, 0, 0

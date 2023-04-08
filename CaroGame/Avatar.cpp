@@ -8,8 +8,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -18,8 +18,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -28,8 +28,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -38,8 +38,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -48,8 +48,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -58,8 +58,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -68,8 +68,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -78,8 +78,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -88,8 +88,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -98,8 +98,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -108,8 +108,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -118,8 +118,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -128,8 +128,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -138,8 +138,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -148,8 +148,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -158,8 +158,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -168,8 +168,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -178,8 +178,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -188,8 +188,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -198,8 +198,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -208,8 +208,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -218,8 +218,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         mau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -228,8 +228,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -238,8 +238,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -248,8 +248,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -258,8 +258,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -268,8 +268,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -278,8 +278,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int i = 0; i < 4; i++) {
@@ -289,8 +289,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
             L'\u2580',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             mau
         );
     }
@@ -301,8 +301,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
             L'\u2580',
             0,
             mat,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -313,8 +313,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
             L'\u2580',
             0,
             mau,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -325,8 +325,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
             L'\u2580',
             0,
             mau,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -337,8 +337,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
             L'\u2580',
             0,
             mau,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -348,8 +348,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mau
     );
     View::WriteToView(
@@ -358,8 +358,8 @@ void Logo_AmongUs(int x, int y, View::Color mat, View::Color mau)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         mat
     );
 }

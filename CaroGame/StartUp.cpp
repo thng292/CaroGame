@@ -3,11 +3,26 @@
 void StartUp::StartUpScreen(NavigationHost& NavHost)
 {
     View::Setup();
-    if (!Config::LoadUserSetting() ||
+    bool settingLoadSuccess = Config::LoadUserSetting();
+    auto themePath = Config::GetSetting(Config::ThemeFilePath);
+    if (!Theme::LoadThemeOrDefault(themePath)) {
+        Config::SetSetting(Config::ThemeFilePath, themePath);
+        View::DrawMenuPrevState menuPrevState;
+        View::DrawMenuCenter(
+            menuPrevState,
+            L"",
+            {{std::format(L"Can't load theme {}", themePath), 0}},
+            -1
+        );
+        InputHandle::Get();
+    }
+    if (!settingLoadSuccess ||
         !Config::GetSetting(L"LanguageFilePath").length()) {
         return NavHost.Navigate("FirstTimeLanguageScreen");
     } else {
-        Language::LoadLanguageFromFile(Config::GetSetting(L"LanguageFilePath"));
+        Language::LoadLanguageFromFile(
+            Config::GetSetting(Config::LanguageFilePath)
+        );
         return NavHost.Navigate("MainMenu");
     }
 }
@@ -44,7 +59,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
         }
         if (tmp == L"\r") {
             Config::SetSetting(
-                L"LanguageFilePath",
+                Config::LanguageFilePath,
                 languages[userSelect].path.generic_wstring()
             );
             Language::LoadLanguageFromFile(languages[userSelect].path);
@@ -58,7 +73,7 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost)
 {
     bool userOption =
         Common::ConfirmPrompt(Language::GetString(L"ENABLE_MUSIC_Q"));
-    Config::SetSetting(L"SoundEffect", (userOption ? L"True" : L"False"));
+    Config::SetSetting(Config::BGMusic, (userOption ? L"True" : L"False"));
     return NavHost.Navigate("FirstTimeSoundEffectScreen");
 }
 
@@ -66,7 +81,7 @@ void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost)
 {
     bool userOption =
         Common::ConfirmPrompt(Language::GetString(L"ENABLE_SOUND_EFFECT_Q"));
-    Config::SetSetting(L"SoundEffect", (userOption ? L"True" : L"False"));
+    Config::SetSetting(Config::SoundEffect, (userOption ? L"True" : L"False"));
     Config::SaveUserSetting();
     return NavHost.Navigate("FirstTimeTutorialScreen");
 }

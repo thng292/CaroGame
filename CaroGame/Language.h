@@ -10,19 +10,7 @@
 namespace Language {
     typedef std::unordered_map<std::wstring, std::wstring> Dict;
 
-    class LanguageDict {
-        static std::unique_ptr<LanguageDict> instance;
-
-       public:
-        Dict dict;
-        static LanguageDict* getInstance()
-        {
-            if (instance == nullptr) {
-                instance = std::make_unique<LanguageDict>();
-            }
-            return instance.get();
-        }
-    };
+    extern Dict languageDict;
 
     struct LanguageOption {
         Dict meta;

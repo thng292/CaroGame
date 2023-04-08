@@ -18,8 +18,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -28,8 +28,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo2
     );
     View::WriteToView(
@@ -38,8 +38,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong1
     );
     View::WriteToView(
@@ -48,8 +48,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong1
     );
     View::WriteToView(
@@ -58,8 +58,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -68,8 +68,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -78,8 +78,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong1
     );
     View::WriteToView(
@@ -88,8 +88,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -98,8 +98,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         doo2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo2
     );
     View::WriteToView(
@@ -108,8 +108,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong1
     );
     View::WriteToView(
@@ -118,8 +118,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong1
     );
     View::WriteToView(
@@ -128,8 +128,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     for (int i = 0; i < 3; i++) {
@@ -139,8 +139,8 @@ void logo_pokemon_green(int x, int y)
             L'\u2580',
             0,
             trang,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             den
         );
     }
@@ -150,8 +150,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -160,8 +160,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -170,8 +170,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -180,8 +180,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -190,8 +190,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -200,8 +200,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -210,8 +210,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         doo2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo2
     );
     View::WriteToView(
@@ -220,8 +220,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -230,8 +230,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -240,8 +240,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -250,8 +250,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -260,8 +260,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -270,8 +270,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -280,8 +280,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -290,8 +290,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -300,8 +300,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -310,8 +310,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -320,8 +320,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -330,8 +330,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -340,8 +340,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -350,8 +350,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -360,8 +360,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -370,8 +370,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -380,8 +380,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         doo2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -390,8 +390,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong2
     );
     View::WriteToView(
@@ -400,8 +400,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -410,8 +410,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         hong2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -420,8 +420,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -430,8 +430,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -440,8 +440,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -450,8 +450,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -460,8 +460,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -470,8 +470,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -480,8 +480,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -490,8 +490,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -500,8 +500,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -510,8 +510,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -520,8 +520,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -530,8 +530,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -540,8 +540,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -550,8 +550,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -560,8 +560,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -570,8 +570,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -580,8 +580,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -590,8 +590,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -600,8 +600,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -610,8 +610,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -620,8 +620,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -630,8 +630,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -640,8 +640,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -650,8 +650,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -660,8 +660,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -670,8 +670,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -680,8 +680,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -690,8 +690,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo1
     );
     View::WriteToView(
@@ -700,8 +700,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -710,8 +710,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -720,8 +720,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -730,8 +730,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -740,8 +740,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -750,8 +750,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -760,8 +760,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     for (int i = 0; i < 3; i++) {
@@ -771,8 +771,8 @@ void logo_pokemon_green(int x, int y)
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -782,8 +782,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -792,8 +792,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -802,8 +802,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -812,8 +812,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -822,8 +822,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -832,8 +832,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -842,8 +842,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -852,8 +852,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -862,8 +862,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -872,8 +872,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -882,8 +882,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         doo1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     for (int i = 0; i < 3; i++) {
@@ -893,8 +893,8 @@ void logo_pokemon_green(int x, int y)
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -904,8 +904,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -914,8 +914,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -924,8 +924,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -934,8 +934,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -944,8 +944,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -954,8 +954,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -964,8 +964,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -974,8 +974,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -984,8 +984,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -994,8 +994,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1004,8 +1004,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1014,8 +1014,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1024,8 +1024,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1034,8 +1034,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1044,8 +1044,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1054,8 +1054,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1064,8 +1064,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1074,8 +1074,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1084,8 +1084,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -1094,8 +1094,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -1104,8 +1104,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1114,8 +1114,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo1
     );
     View::WriteToView(
@@ -1124,8 +1124,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo1
     );
     View::WriteToView(
@@ -1134,8 +1134,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1144,8 +1144,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1154,8 +1154,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1164,8 +1164,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1174,8 +1174,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1184,8 +1184,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1194,8 +1194,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1204,8 +1204,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1214,8 +1214,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1224,8 +1224,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1234,8 +1234,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1244,8 +1244,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1254,8 +1254,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 3; i++) {
@@ -1265,8 +1265,8 @@ void logo_pokemon_green(int x, int y)
             L'\u2580',
             0,
             xanh2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             den
         );
     }
@@ -1276,8 +1276,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1286,8 +1286,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1296,8 +1296,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1306,8 +1306,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     for (int i = 0; i < 3; i++) {
@@ -1317,8 +1317,8 @@ void logo_pokemon_green(int x, int y)
             L'\u2580',
             0,
             xanh2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh2
         );
     }
@@ -1328,8 +1328,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1338,8 +1338,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1348,8 +1348,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1358,8 +1358,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1368,8 +1368,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1378,8 +1378,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1388,8 +1388,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1398,8 +1398,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1408,8 +1408,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1418,8 +1418,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1428,8 +1428,8 @@ void logo_pokemon_green(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
 }

@@ -48,7 +48,7 @@ void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }

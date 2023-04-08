@@ -14,8 +14,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -24,8 +24,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -34,8 +34,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -44,8 +44,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -54,8 +54,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -64,8 +64,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -74,8 +74,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -84,8 +84,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -94,8 +94,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -104,8 +104,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -114,8 +114,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -124,8 +124,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -134,8 +134,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -144,8 +144,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -154,8 +154,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -164,8 +164,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -174,8 +174,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -184,8 +184,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -194,8 +194,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -204,8 +204,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -214,8 +214,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -224,8 +224,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -234,8 +234,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -244,8 +244,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -254,8 +254,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -264,8 +264,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -274,8 +274,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -284,8 +284,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -294,8 +294,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -304,8 +304,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -314,8 +314,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -324,8 +324,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     for (int i = 0; i < 3; i++) {
@@ -335,8 +335,8 @@ void logo_pokemon_pink(int x, int y)
             L'\u2580',
             0,
             den,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             den
         );
     }
@@ -346,8 +346,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -356,8 +356,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -366,8 +366,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -376,8 +376,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -386,8 +386,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -396,8 +396,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -406,8 +406,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -416,8 +416,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -426,8 +426,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -436,8 +436,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         doo
     );
     for (int i = 0; i < 3; i++) {
@@ -447,8 +447,8 @@ void logo_pokemon_pink(int x, int y)
             L'\u2580',
             0,
             hong,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             hong
         );
     }
@@ -458,8 +458,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -468,8 +468,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -478,8 +478,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -488,8 +488,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 5; i++) {
@@ -499,8 +499,8 @@ void logo_pokemon_pink(int x, int y)
             L'\u2580',
             0,
             trang,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             den
         );
     }
@@ -510,8 +510,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -520,8 +520,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -530,8 +530,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -540,8 +540,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -550,8 +550,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -560,8 +560,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -570,8 +570,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -580,8 +580,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         doo,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -590,8 +590,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         doo,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -600,8 +600,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -610,8 +610,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -620,8 +620,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -630,8 +630,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -640,8 +640,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -650,8 +650,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -660,8 +660,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -670,8 +670,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -680,8 +680,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -690,8 +690,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -700,8 +700,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -710,8 +710,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     for (int i = 0; i < 3; i++) {
@@ -721,8 +721,8 @@ void logo_pokemon_pink(int x, int y)
             L'\u2580',
             0,
             den,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             tim
         );
     }
@@ -732,8 +732,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -742,8 +742,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -752,8 +752,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -762,8 +762,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -772,8 +772,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -782,8 +782,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -792,8 +792,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -802,8 +802,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -812,8 +812,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -822,8 +822,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -832,8 +832,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -842,8 +842,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -852,8 +852,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -862,8 +862,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -872,8 +872,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -882,8 +882,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -892,8 +892,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -902,8 +902,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -912,8 +912,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -922,8 +922,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -932,8 +932,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -942,8 +942,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -952,8 +952,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -962,8 +962,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -972,8 +972,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -982,8 +982,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -992,8 +992,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     for (int i = 0; i < 3; i++) {
@@ -1003,8 +1003,8 @@ void logo_pokemon_pink(int x, int y)
             L'\u2580',
             0,
             tim,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             tim
         );
     }
@@ -1014,8 +1014,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1024,8 +1024,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1034,8 +1034,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1044,8 +1044,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1054,8 +1054,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
 
@@ -1065,8 +1065,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1075,8 +1075,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1085,8 +1085,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1095,8 +1095,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1105,8 +1105,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1115,8 +1115,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1125,8 +1125,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
 
@@ -1136,8 +1136,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1146,8 +1146,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1156,8 +1156,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1166,8 +1166,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1176,8 +1176,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1186,8 +1186,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1196,8 +1196,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1206,8 +1206,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1216,8 +1216,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1226,8 +1226,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1236,8 +1236,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1246,8 +1246,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1256,8 +1256,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1266,8 +1266,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1276,8 +1276,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1286,8 +1286,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1296,8 +1296,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1306,8 +1306,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1316,8 +1316,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1326,8 +1326,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         tim
     );
     View::WriteToView(
@@ -1336,8 +1336,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1346,8 +1346,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1356,8 +1356,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1366,8 +1366,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1376,8 +1376,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1386,8 +1386,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         tim,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1396,8 +1396,8 @@ void logo_pokemon_pink(int x, int y)
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
 }

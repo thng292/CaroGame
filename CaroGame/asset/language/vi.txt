@@ -127,6 +127,7 @@ SETTINGS_TITLE              =    Cài đặt
 SOUND_EFFECT_TITLE          =    Hiệu ứng âm thanh
 SPACE_KEY_CONTINUE          =    Nhấn SPACE để tiếp tục...
 STRING_INPUT_DONE_LABEL     =    Xong!
+THEME_SELECT_TITLE          =    Chủ đề
 TIME_OUT                    =    Xong!
 TUTORIAL_DESC               =    Hướng dẫn chơi.
 TUTORIAL_Q                  =    Bạn có muốn xem qua hướng dẫn của trò chơi?

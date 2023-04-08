@@ -151,15 +151,20 @@
 == Giới thiệu về trò chơi
 
 === Gomoku
+Nguyên
 
 === Mục tiêu đề ra
+Thông
 
 === Thông tin chung về trò chơi
+Nguyên
 Link souce code, chạy trên nền tảng nào, ...
 
 == Sơ lược về các tính năng của game
+Thông
 
 == Sơ dồ di chuyển
+Phước
 
 = Chi tiết các chức năng
 
@@ -241,3 +246,4 @@ Phước
 Nguyên
 
 == Hướng phát triển ứng dụng
+4 người suy nghĩ

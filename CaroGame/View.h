@@ -14,29 +14,12 @@
 #include <vector>
 
 #include "InputHandle.h"
+#include "FileHandle.h"
 #include "Utils.h"
+#include "Theme.h"
 
 namespace View {
     // All posible color
-    enum class Color : char {
-        BLACK = 0,
-        BLUE = 1,
-        GREEN = 2,
-        CYAN = 3,
-        RED = 4,
-        MAGENTA = 5,
-        YELLOW = 6,
-        WHITE = 7,
-        GRAY = 8,
-        LIGHT_BLUE = 9,
-        LIGHT_GREEN = 10,
-        LIGHT_CYAN = 11,
-        LIGHT_RED = 12,
-        LIGHT_MAGENTA = 13,
-        LIGHT_YELLOW = 14,
-        BRIGHT_WHITE = 15
-    };
-
     struct Rect {
         short Top = 0, Left = 0, Right = 0, Bottom = 0;
     };
@@ -51,29 +34,6 @@ namespace View {
         }
     };
 
-    struct OptionNoRef {
-        std::wstring option;
-        wchar_t underline;
-
-        bool operator==(const Option& other) const
-        {
-            return option == other.option && underline == other.underline;
-        }
-
-        OptionNoRef operator=(const Option& other)
-        {
-            option = other.option;
-            underline = other.underline;
-            return *this;
-        }
-    };
-
-    const Color DEFAULT_TEXT_COLOR = Color::BLACK;
-    const Color DEFAULT_HIGHLIGHT_COLOR = Color::BLACK;
-    const Color DEFAULT_HIGHLIGHT_TEXT_COLOR = Color::BRIGHT_WHITE;
-    const Color DEFAULT_BACKGROUND_COLOR = Color::BRIGHT_WHITE;
-    const short DEFAULT_SCREEN_ATTRIBUTE =
-        (int(DEFAULT_BACKGROUND_COLOR) << 4) | int(DEFAULT_TEXT_COLOR);
     const short HPADDING = 3;
     const short VPADDING = 1;
     const short BORDER_WIDTH = 1;
@@ -98,10 +58,10 @@ namespace View {
         const std::wstring& str,
         wchar_t shortcut = 0,  // Character want to underline
         bool highlight = false,
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR),
+        Color highlightColor = Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR),
+        Color highlightTextColor = Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
+        Color backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR)
     );
 
     // Print character to console
@@ -110,10 +70,10 @@ namespace View {
         short y,  // Draw position
         wchar_t str,
         bool highlight = false,
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR),
+        Color highlightColor = Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR),
+        Color highlightTextColor = Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
+        Color backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR)
     );
 
     inline std::pair<short, short> CalcCenter(short width, short height)
@@ -131,36 +91,66 @@ namespace View {
         return L"\033[4m" + std::wstring(1, str) + L"\033[24m";
     }
 
-    void ClearScreen();
+    void ClearScreen(short ScreenAttribute = Theme::GetScreenAttribute());
 
-    void ClearRect(Rect area);
+    void ClearRect(Rect area, short ScreenAttribute = Theme::GetScreenAttribute());
 
     void DrawBorder(
         const Rect& rect,
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color bgColor = DEFAULT_BACKGROUND_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::BORDER_COLOR),
+        Color bgColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR)
     );
 
     void DrawRect(
         const Rect& rect,
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color bgColor = DEFAULT_BACKGROUND_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::BORDER_COLOR),
+        Color bgColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR),
+        short ScreenAttribute = Theme::GetScreenAttribute()
     );
+
+    struct OptionNoRef {
+        std::wstring option;
+        wchar_t underline;
+
+        bool operator==(const Option& other) const
+        {
+            return option == other.option && underline == other.underline;
+        }
+
+        OptionNoRef operator=(const Option& other)
+        {
+            option = other.option;
+            underline = other.underline;
+            return *this;
+        }
+    };
 
     struct DrawMenuPrevState {
         short x = 0;
         short y = 0;
         short w = 0;
         short h = 0;
-        
+
         std::wstring title;
         std::vector<OptionNoRef> optionsList;
         size_t selected;
-        
-        Color textColor = DEFAULT_TEXT_COLOR;
-        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR;
-        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR;
-        Color backgroundColor = DEFAULT_BACKGROUND_COLOR;
+
+        Color textColor;
+        Color highlightColor;
+        Color highlightTextColor;
+        Color backgroundColor;
+        Color titleColor;
+
+        DrawMenuPrevState() {
+            textColor = Theme::GetColor(ThemeColor::TEXT_COLOR);
+            highlightColor =
+                Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR);
+            highlightTextColor =
+                Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR);
+            backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR);
+            titleColor = Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR);
+
+        }
     };
 
     Rect DrawMenu(
@@ -170,10 +160,11 @@ namespace View {
         const std::wstring& title,
         const std::vector<Option>& optionsList,
         size_t selected,
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR),
+        Color highlightColor = Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR),
+        Color highlightTextColor = Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
+        Color backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR),
+        Color titleColor = Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR)
     );
 
     Rect DrawMenuCenter(
@@ -181,10 +172,11 @@ namespace View {
         const std::wstring& title,
         const std::vector<Option>& optionsList,
         size_t selected,
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color highlightColor = DEFAULT_HIGHLIGHT_COLOR,
-        Color highlightTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-        Color backgroundColor = DEFAULT_BACKGROUND_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR),
+        Color highlightColor = Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR),
+        Color highlightTextColor = Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
+        Color backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR),
+        Color titleColor = Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR)
     );
 
     std::vector<std::wstring> WrapText(
@@ -201,14 +193,27 @@ namespace View {
         short maxRow,
         short maxWidth,
         const std::wstring& overflowStr = L"...",
-        Color textColor = DEFAULT_TEXT_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR)
     );
 
     inline void DrawTextCenterdVertically(
-        short y, const std::wstring& text, Color textColor = DEFAULT_TEXT_COLOR
+        short y,
+        const std::wstring& text,
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR),
+        Color backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR)
     )
     {
-        WriteToView((119 - text.size()) / 2, y, text, 0, 0, textColor);
+        WriteToView(
+            (119 - text.size()) / 2,
+            y,
+            text,
+            0,
+            0,
+            textColor,
+            backgroundColor,
+            textColor,
+            backgroundColor
+        );
     }
 
     inline bool defaultToogleFocus(wchar_t inp)
@@ -226,9 +231,10 @@ namespace View {
             [](const std::wstring&) {},
         const std::function<bool(wchar_t)>& toogleFocus = defaultToogleFocus,
         const wchar_t delimiter = L':',
-        Color textColor = DEFAULT_TEXT_COLOR,
-        Color backgroundColor = DEFAULT_BACKGROUND_COLOR,
-        Color focusTextColor = DEFAULT_HIGHLIGHT_TEXT_COLOR,
-        Color focusBackgroundColor = DEFAULT_HIGHLIGHT_COLOR
+        Color textColor = Theme::GetColor(ThemeColor::TEXT_COLOR),
+        Color backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR),
+        Color focusTextColor = Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
+        Color focusBackgroundColor =
+            Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR)
     );
 }  // namespace View

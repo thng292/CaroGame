@@ -1,19 +1,14 @@
 #include "MainMenu.h"
 
-#include "Gura.h"
-
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
 {
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
-        auto bgmAudio = BackgroundAudioService::getInstance();
-        if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::MenuBGM) {
-            bgmAudio->ChangeSong(Sound::MenuBGM);
-            bgmAudio->getPlayer()->Play(true, true);
+        if (BackgroundAudioService::GetCurrentSong() != Audio::Sound::MenuBGM) {
+            BackgroundAudioService::ChangeSong(Audio::Sound::MenuBGM);
+            BackgroundAudioService::Play(true, true);
         }
     }
-    auto keyPressSound = Utils::KeyPressSound::getInstance();
-    keyPressSound->ChangeSong(Audio::Sound::MenuMove);
 
     static short selectedOption = 0;   // User option
     static const short maxOption = 7;  // Number of option
@@ -48,7 +43,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();  // Get input from user
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }

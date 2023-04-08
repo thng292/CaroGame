@@ -5,120 +5,134 @@ short CalcMenuHeight(short noLine, bool hasTitle = true);
 short CalcMenuWidth(short titlesMaxWidth, short optionsMaxWidth);
 std::pair<short, short> CalcPosCenter(short menuWidth, short menuHeight);
 
+View::Rect DrawSettingMenu(
+    const std::vector<std::wstring>& titles,
+    const std::vector<std::wstring>& options,
+    int select
+)
+{
+    short titlesWidth = CalcMaxWidth(titles);
+    short menuWidth = CalcMenuWidth(titlesWidth, CalcMaxWidth(options));
+    short menuHeight = CalcMenuHeight(titles.size(), true) + 2;
+    auto posCenter = CalcPosCenter(menuWidth, menuHeight);
+    View::Rect DrawnRect = {
+        posCenter.second,
+        posCenter.first,
+        posCenter.first + menuWidth - 1,
+        posCenter.second + menuHeight - 1};
+    View::DrawRect(DrawnRect);
+    posCenter.first += View::BORDER_WIDTH + View::HPADDING;
+    posCenter.second += View::BORDER_WIDTH + View::VPADDING;
+    View::WriteToView(
+        posCenter.first,
+        posCenter.second,
+        Language::GetString(L"SETTINGS_TITLE")
+    );
+    posCenter.second += 2;
+    titlesWidth += 2;
+    for (size_t i = 0; i < titles.size(); i++) {
+        View::WriteToView(posCenter.first, posCenter.second + i, titles[i]);
+        View::WriteToView(
+            posCenter.first + titlesWidth - 2, posCenter.second + i, L":"
+        );
+        View::WriteToView(
+            posCenter.first + titlesWidth,
+            posCenter.second + i,
+            options[i],
+            0,
+            i == select
+        );
+    }
+    View::WriteToView(
+        posCenter.first,
+        posCenter.second + titles.size() + 1,
+        Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
+        Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0],
+        select == titles.size()
+    );
+    return DrawnRect;
+}
+
 void Setting::SettingScreen(NavigationHost& NavHost)
 {
     auto langList = Language::DiscoverLanguageFile();
+    auto themeList = Theme::DiscoverThemeFiles();
+    themeList.insert(themeList.begin(), {L"Default"});
 
-    int select = 0;
-    int langSelect = ([&langList] {
-        const auto& tmp = Config::GetSetting(L"LanguageFilePath");
-        for (int i = 0; i < langList.size(); i++)
-            if (langList[i].path == tmp) return i;
-        return 0;
-    })();
-
-    std::vector<std::wstring> titles;
-    std::vector<std::wstring> options;
+    auto& currentLanguagePath = Config::GetSetting(Config::LanguageFilePath);
+    auto& currentThemePath = Config::GetSetting(Config::ThemeFilePath);
     auto& musicSetting = Config::GetSetting(Config::BGMusic);
     auto& soundEffectSetting = Config::GetSetting(Config::SoundEffect);
     auto& undoSetting = Config::GetSetting(Config::UndoOption);
+
+    int select = 0;
+    int langSelect = std::find_if(
+                         langList.begin(),
+                         langList.end(),
+                         [&currentLanguagePath](const auto& lang) {
+                             return lang.path == currentLanguagePath;
+                         }
+                     ) -
+                     langList.begin();
+    int themeSelect = 0;
+    if (currentThemePath.length()) {
+        themeSelect = std::find_if(
+                          themeList.begin(),
+                          themeList.end(),
+                          [&currentThemePath](const auto& theme) {
+                              return theme.filePath == currentThemePath;
+                          }
+                      ) -
+                      themeList.begin();
+    }
+    std::vector<std::wstring> titles = {
+        Language::GetMeta(L"[LANG_SELECT]"),
+        Language::GetString(L"THEME_SELECT_TITLE"),
+        Language::GetString(L"BG_MUSIC_TITLE"),
+        Language::GetString(L"SOUND_EFFECT_TITLE"),
+        Language::GetString(L"UNDO_OPTION_TITLE"),
+    };
+
+    std::vector<std::wstring> options = {
+        L"< " + langList[langSelect].meta[L"[LANGUAGE]"] + L" >",
+        L"< " + themeList[themeSelect].filePath.filename().wstring() + L" >",
+        musicSetting == Config::Value_True ? Language::GetString(L"ON_TITLE")
+                                           : Language::GetString(L"OFF_TITLE"),
+        soundEffectSetting == Config::Value_True
+            ? Language::GetString(L"ON_TITLE")
+            : Language::GetString(L"OFF_TITLE"),
+        undoSetting == Config::Value_True ? Language::GetString(L"ON_TITLE")
+                                          : Language::GetString(L"OFF_TITLE"),
+    };
+
     auto musicCheck = [&musicSetting, &NavHost]() {
         if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
             if (!NavHost.CheckContext(Constants::CURRENT_BGM)) {
                 return;
             }
-            auto bgmAudio = BackgroundAudioService::getInstance();
             auto currentBGM = std::any_cast<Audio::Sound>(
                 NavHost.GetFromContext(Constants::CURRENT_BGM)
             );
-            if (bgmAudio->getPlayer()->getCurrentSong() != currentBGM) {
-                bgmAudio->ChangeSong(currentBGM);
+            if (BackgroundAudioService::GetCurrentSong() != currentBGM) {
+                BackgroundAudioService::ChangeSong(currentBGM);
             }
-            bgmAudio->getPlayer()->Play(false, true);
+            BackgroundAudioService::Play(false, true);
         } else {
-            BackgroundAudioService::getInstance()->getPlayer()->Stop();
+            BackgroundAudioService::Stop();
         }
     };
     musicCheck();
     auto onExit = Utils::ON_SCOPE_EXIT(musicCheck);
-    {
-        const auto controlHint1 = std::format(
-            L"A, W, S, D, Arrow Keys: {}, Space: {}",
-            Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-            Language::GetString(L"APPLY_KEY_TITLE")
-        );
 
-        const auto controlHint2 = std::format(
-            L"Enter: {}, B: {}",
-            Language::GetString(L"SELECT_KEY_TITLE"),
-            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
-        );
+    DrawHints();
+    View::Rect DrawnRect;
 
-        View::WriteToView(59 - controlHint1.size() / 2, 29 - 4, controlHint1);
-        View::WriteToView(59 - controlHint2.size() / 2, 29 - 3, controlHint2);
-    }
     while (true) {
-        titles = {
-            Language::GetMeta(L"[LANG_SELECT]"),
-            Language::GetString(L"BG_MUSIC_TITLE"),
-            Language::GetString(L"SOUND_EFFECT_TITLE"),
-            Language::GetString(L"UNDO_OPTION_TITLE"),
-        };
-        options = {
-            L"< " + langList[langSelect].meta[L"[LANGUAGE]"] + L" >",
-            musicSetting == Config::Value_True
-                ? Language::GetString(L"ON_TITLE")
-                : Language::GetString(L"OFF_TITLE"),
-            soundEffectSetting == Config::Value_True
-                ? Language::GetString(L"ON_TITLE")
-                : Language::GetString(L"OFF_TITLE"),
-            undoSetting == Config::Value_True
-                ? Language::GetString(L"ON_TITLE")
-                : Language::GetString(L"OFF_TITLE"),
-        };
-        short titlesWidth = CalcMaxWidth(titles);
-        short menuWidth = CalcMenuWidth(titlesWidth, CalcMaxWidth(options));
-        short menuHeight = CalcMenuHeight(titles.size(), true) + 2;
-        auto posCenter = CalcPosCenter(menuWidth, menuHeight);
-        View::Rect DrawnRect = {
-            posCenter.second,
-            posCenter.first,
-            posCenter.first + menuWidth - 1,
-            posCenter.second + menuHeight - 1};
-        View::DrawRect(DrawnRect);
-        posCenter.first += View::BORDER_WIDTH + View::HPADDING;
-        posCenter.second += View::BORDER_WIDTH + View::VPADDING;
-        View::WriteToView(
-            posCenter.first,
-            posCenter.second,
-            Language::GetString(L"SETTINGS_TITLE")
-        );
-        posCenter.second += 2;
-        titlesWidth += 2;
-        for (size_t i = 0; i < titles.size(); i++) {
-            View::WriteToView(posCenter.first, posCenter.second + i, titles[i]);
-            View::WriteToView(
-                posCenter.first + titlesWidth - 2, posCenter.second + i, L":"
-            );
-            View::WriteToView(
-                posCenter.first + titlesWidth,
-                posCenter.second + i,
-                options[i],
-                0,
-                i == select
-            );
-        }
-        View::WriteToView(
-            posCenter.first,
-            posCenter.second + titles.size() + 1,
-            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
-            Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0],
-            select == titles.size()
-        );
+        DrawnRect = DrawSettingMenu(titles, options, select);
         auto tmp = InputHandle::Get();
         if (soundEffectSetting == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -139,34 +153,67 @@ void Setting::SettingScreen(NavigationHost& NavHost)
             if (Utils::keyMeanRight(tmp)) {
                 langSelect = Utils::modCycle(langSelect + 1, langList.size());
             }
+            options[0] =
+                L"< " + langList[langSelect].meta[L"[LANGUAGE]"] + L" >";
+        }
+        if (select == 1) {
+            if (Utils::keyMeanLeft(tmp)) {
+                themeSelect =
+                    Utils::modCycle(themeSelect - 1, themeList.size());
+            }
+            if (Utils::keyMeanRight(tmp)) {
+                themeSelect =
+                    Utils::modCycle(themeSelect + 1, themeList.size());
+            }
+            options[1] = L"< " +
+                         themeList[themeSelect].filePath.filename().wstring() +
+                         L" >";
         }
         if (tmp == L"\r") {
             switch (select) {
-                case 1:
+                case 2:
                     musicSetting =
                         (musicSetting == Config::Value_True
                              ? Config::Value_False
                              : Config::Value_True);
+                    options[2] = musicSetting == Config::Value_True
+                                     ? Language::GetString(L"ON_TITLE")
+                                     : Language::GetString(L"OFF_TITLE");
                     break;
-                case 2:
+                case 3:
                     soundEffectSetting =
                         (soundEffectSetting == Config::Value_True
                              ? Config::Value_False
                              : Config::Value_True);
+                    options[3] = soundEffectSetting == Config::Value_True
+                                     ? Language::GetString(L"ON_TITLE")
+                                     : Language::GetString(L"OFF_TITLE");
                     break;
-                case 3:
+                case 4:
                     undoSetting =
                         (undoSetting == Config::Value_True
                              ? Config::Value_False
                              : Config::Value_True);
+                    options[4] = undoSetting == Config::Value_True
+                                     ? Language::GetString(L"ON_TITLE")
+                                     : Language::GetString(L"OFF_TITLE");
                     break;
-                case 4:
+                case 5:
                     return NavHost.Back();
             }
         }
         if (tmp == L" ") {
+            Config::SetSetting(
+                Config::ThemeFilePath,
+                themeList[themeSelect].filePath
+            );
             Config::SetSetting(L"LanguageFilePath", langList[langSelect].path);
             Language::LoadLanguageFromFile(langList[langSelect].path);
+            if (themeSelect) {
+                Theme::LoadTheme(themeList[themeSelect].filePath);
+            } else {
+                Theme::LoadDefaultTheme();
+            }
             if (Config::SaveUserSetting()) {
                 return NavHost.Navigate("SettingApplied");
             } else {
@@ -178,6 +225,24 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         }
         View::ClearRect(DrawnRect);
     }
+}
+
+void Setting::DrawHints()
+{
+    const auto controlHint1 = std::format(
+        L"A, W, S, D, Arrow Keys: {}, Space: {}",
+        Language::GetString(L"NAVIGATION_KEYS_TITLE"),
+        Language::GetString(L"APPLY_KEY_TITLE")
+    );
+
+    const auto controlHint2 = std::format(
+        L"Enter: {}, B: {}",
+        Language::GetString(L"SELECT_KEY_TITLE"),
+        Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
+    );
+
+    View::WriteToView(59 - controlHint1.size() / 2, 29 - 4, controlHint1);
+    View::WriteToView(59 - controlHint2.size() / 2, 29 - 3, controlHint2);
 }
 
 void Setting::ApplySuccess(NavigationHost& NavHost)

@@ -11,6 +11,8 @@
 namespace Setting {
     void SettingScreen(NavigationHost& NavHost);
 
+    void DrawHints();
+
     void ApplySuccess(NavigationHost& NavHost);
 
     void ApplyFailed(NavigationHost& NavHost);

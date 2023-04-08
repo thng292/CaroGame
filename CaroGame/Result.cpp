@@ -10,8 +10,8 @@ void tao_khoang_trang(int x, int y, int length, int height)
                 L'\u2584',
                 0,
                 View::Color::BRIGHT_WHITE,
-                View::DEFAULT_HIGHLIGHT_COLOR,
-                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BLACK,
+                View::Color::BLACK,
                 View::Color::BRIGHT_WHITE
             );
         }
@@ -85,8 +85,8 @@ void Win(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -97,8 +97,8 @@ void Win(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -109,8 +109,8 @@ void Win(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -121,8 +121,8 @@ void Win(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -133,8 +133,8 @@ void Win(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -145,8 +145,8 @@ void Win(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -157,8 +157,8 @@ void Win(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -169,8 +169,8 @@ void Win(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -181,8 +181,8 @@ void Win(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -193,8 +193,8 @@ void Win(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -205,8 +205,8 @@ void Win(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -217,8 +217,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -229,8 +229,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -241,8 +241,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -252,8 +252,8 @@ void Win(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a3
     );
     View::WriteToView(
@@ -262,8 +262,8 @@ void Win(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a3
     );
     for (int i = 0; i < 2; i++) {
@@ -273,8 +273,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -285,8 +285,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -297,8 +297,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -309,8 +309,8 @@ void Win(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -320,8 +320,8 @@ void Win(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -330,8 +330,8 @@ void Win(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -340,8 +340,8 @@ void Win(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -350,8 +350,8 @@ void Win(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -360,8 +360,8 @@ void Win(
         L'\u2584',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -370,8 +370,8 @@ void Win(
         L'\u2584',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -380,8 +380,8 @@ void Win(
         L'\u2584',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -390,8 +390,8 @@ void Win(
         L'\u2584',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     for (int i = 0; i < 2; i++) {
@@ -401,8 +401,8 @@ void Win(
             L'\u2580',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -413,8 +413,8 @@ void Win(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -425,8 +425,8 @@ void Win(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -437,8 +437,8 @@ void Win(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -449,8 +449,8 @@ void Win(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -461,8 +461,8 @@ void Win(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -473,8 +473,8 @@ void Win(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -485,8 +485,8 @@ void Win(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -497,8 +497,8 @@ void Win(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -509,8 +509,8 @@ void Win(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -533,8 +533,8 @@ void Lose(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -544,8 +544,8 @@ void Lose(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a1
     );
     View::WriteToView(
@@ -554,8 +554,8 @@ void Lose(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a1
     );
     for (int i = 0; i < 4; i++) {
@@ -565,8 +565,8 @@ void Lose(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -576,8 +576,8 @@ void Lose(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a1
     );
     View::WriteToView(
@@ -586,8 +586,8 @@ void Lose(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a1
     );
     for (int i = 0; i < 4; i++) {
@@ -597,8 +597,8 @@ void Lose(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -609,8 +609,8 @@ void Lose(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -621,8 +621,8 @@ void Lose(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -632,8 +632,8 @@ void Lose(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -642,8 +642,8 @@ void Lose(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int i = 0; i < 4; i++) {
@@ -653,8 +653,8 @@ void Lose(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -664,8 +664,8 @@ void Lose(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -674,8 +674,8 @@ void Lose(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int i = 0; i < 5; i++) {
@@ -685,8 +685,8 @@ void Lose(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -697,8 +697,8 @@ void Lose(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -709,8 +709,8 @@ void Lose(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -721,8 +721,8 @@ void Lose(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -733,8 +733,8 @@ void Lose(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -745,8 +745,8 @@ void Lose(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -757,8 +757,8 @@ void Lose(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -769,8 +769,8 @@ void Lose(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -781,8 +781,8 @@ void Lose(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -793,8 +793,8 @@ void Lose(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -805,8 +805,8 @@ void Lose(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -817,8 +817,8 @@ void Lose(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -829,8 +829,8 @@ void Lose(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -841,8 +841,8 @@ void Lose(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -853,8 +853,8 @@ void Lose(
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -865,8 +865,8 @@ void Lose(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -877,8 +877,8 @@ void Lose(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -889,8 +889,8 @@ void Lose(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -900,8 +900,8 @@ void Lose(
         L'\u2580',
         0,
         a3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -910,8 +910,8 @@ void Lose(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a3
     );
     for (int i = 0; i < 2; i++) {
@@ -921,8 +921,8 @@ void Lose(
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -933,8 +933,8 @@ void Lose(
             L'\u2580',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -957,8 +957,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -969,8 +969,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -981,8 +981,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -993,8 +993,8 @@ void Draw(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -1005,8 +1005,8 @@ void Draw(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1017,8 +1017,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1029,8 +1029,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1041,8 +1041,8 @@ void Draw(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -1053,8 +1053,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1065,8 +1065,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1077,8 +1077,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1089,8 +1089,8 @@ void Draw(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -1101,8 +1101,8 @@ void Draw(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1113,8 +1113,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1125,8 +1125,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1137,8 +1137,8 @@ void Draw(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -1149,8 +1149,8 @@ void Draw(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1161,8 +1161,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1173,8 +1173,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1185,8 +1185,8 @@ void Draw(
             L'\u2584',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -1197,8 +1197,8 @@ void Draw(
             L'\u2584',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1209,8 +1209,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1221,8 +1221,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1233,8 +1233,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1245,8 +1245,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1257,8 +1257,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1269,8 +1269,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1281,8 +1281,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1293,8 +1293,8 @@ void Draw(
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1305,8 +1305,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1317,8 +1317,8 @@ void Draw(
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1328,8 +1328,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a1
     );
     View::WriteToView(
@@ -1338,8 +1338,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a1
     );
     for (int i = 0; i < 4; i++) {
@@ -1349,8 +1349,8 @@ void Draw(
             L'\u2584',
             0,
             a1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a1
         );
     }
@@ -1360,8 +1360,8 @@ void Draw(
         L'\u2580',
         0,
         a2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1370,8 +1370,8 @@ void Draw(
         L'\u2580',
         0,
         a2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1380,8 +1380,8 @@ void Draw(
         L'\u2580',
         0,
         a2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1390,8 +1390,8 @@ void Draw(
         L'\u2580',
         0,
         a2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int i = 0; i < 2; i++) {
@@ -1401,8 +1401,8 @@ void Draw(
             L'\u2584',
             0,
             a2,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a2
         );
     }
@@ -1413,8 +1413,8 @@ void Draw(
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1425,8 +1425,8 @@ void Draw(
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1437,8 +1437,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1449,8 +1449,8 @@ void Draw(
             L'\u2580',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -1461,8 +1461,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1473,8 +1473,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1485,8 +1485,8 @@ void Draw(
             L'\u2584',
             0,
             a3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a3
         );
     }
@@ -1496,8 +1496,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a3
     );
     View::WriteToView(
@@ -1506,8 +1506,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a3
     );
     View::WriteToView(
@@ -1516,8 +1516,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -1526,8 +1526,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int i = 0; i < 2; i++) {
@@ -1537,8 +1537,8 @@ void Draw(
             L'\u2580',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a4
         );
     }
@@ -1548,8 +1548,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     for (int i = 0; i < 4; i++) {
@@ -1559,8 +1559,8 @@ void Draw(
             L'\u2580',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -1570,8 +1570,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1580,8 +1580,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1590,8 +1590,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -1600,8 +1600,8 @@ void Draw(
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -1610,8 +1610,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -1620,8 +1620,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -1630,8 +1630,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     View::WriteToView(
@@ -1640,8 +1640,8 @@ void Draw(
         L'\u2580',
         0,
         a4,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         a4
     );
     for (int i = 0; i < 2; i++) {
@@ -1651,8 +1651,8 @@ void Draw(
             L'\u2580',
             0,
             a4,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -1663,8 +1663,8 @@ void Draw(
             L'\u2580',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1675,8 +1675,8 @@ void Draw(
             L'\u2580',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -1686,8 +1686,8 @@ void Draw(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int i = 0; i < 2; i++) {
@@ -1697,8 +1697,8 @@ void Draw(
             L'\u2580',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1709,8 +1709,8 @@ void Draw(
             L'\u2580',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1721,8 +1721,8 @@ void Draw(
             L'\u2580',
             0,
             a5,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a5
         );
     }
@@ -1732,8 +1732,8 @@ void Draw(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1742,8 +1742,8 @@ void Draw(
         L'\u2580',
         0,
         a5,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
 }
@@ -2026,8 +2026,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2038,8 +2038,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2050,8 +2050,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2062,8 +2062,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2074,8 +2074,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2086,8 +2086,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2098,8 +2098,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2110,8 +2110,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2122,8 +2122,8 @@ void X(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2139,8 +2139,8 @@ void O(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2151,8 +2151,8 @@ void O(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2163,8 +2163,8 @@ void O(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }
@@ -2175,8 +2175,8 @@ void O(int x, int y)
             L'\u2580',
             0,
             a,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             a
         );
     }

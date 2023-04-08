@@ -36,7 +36,3 @@ std::wstring Utils::SecondToMMSS(short seconds)
         (sec < 10) ? std::format(L"0{}", sec) : std::format(L"{}", sec);
     return std::format(L"{}:{}", minStr, secStr);
 }
-
-std::mutex Utils::KeyPressSound::locker{};
-std::unique_ptr<Utils::KeyPressSound> Utils::KeyPressSound::singletonInstance =
-    nullptr;
