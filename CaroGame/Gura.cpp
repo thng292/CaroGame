@@ -1,5 +1,91 @@
 #include "Gura.h"
 
+void luot(int x, int y)
+{
+    View::WriteToView(
+        x + 1,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 4,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 2,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 3,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 2,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::RED
+    );
+    View::WriteToView(
+        x + 3,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::RED
+    );
+    View::WriteToView(
+        x + 1,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::RED
+    );
+    View::WriteToView(
+        x + 4,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::DEFAULT_HIGHLIGHT_COLOR,
+        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::RED
+    );
+}
+
+
+
 void logoGura(int x, int y) {
     View::Color xanh2 = View::Color::CYAN;
     View::Color xanh1 = View ::Color::LIGHT_BLUE;
@@ -13,7 +99,7 @@ void logoGura(int x, int y) {
     View::Color la = View::Color::LIGHT_CYAN;
     View::Color hong = View::Color::LIGHT_RED;
 
-
+    
     View::WriteToView(
         x + 8,
         y + 1,
@@ -1652,3 +1738,4 @@ void logoGura(int x, int y) {
         );
     }
 }
+

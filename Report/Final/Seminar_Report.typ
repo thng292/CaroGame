@@ -211,7 +211,63 @@ Thông
 Thông
 
 === Màn hình chính
-Phước
+==== Logo 
+
+- Height: 6
+- Width: 54
+- Color: Đen, đỏ, xanh
+- Căn giữa
+#figure(
+  image("asset/logo_caro.PNG", width: 70%),
+  caption: [
+    Logo Caro.
+  ],
+)
+
+==== Main Menu
+
+- Height: 11
+- Width: 21
+- Color: Đen
+- Căn giữa
+#figure(
+  image("asset/main_menu.PNG", width: 70%),
+  caption: [
+    Main Menu
+  ],
+)
+
+==== Trang trí
+
+- Logo Deadpool
+	- Height: 24
+	- Width: 27
+	- Color: Đỏ, đen, xám, vàng, nâu, trắng
+	- Căn trái
+
+- Logo Captain America
+	- Height: 24
+	- Width: 33
+	- Color: Xanh, đỏ, xám, đen, nâu, vàng
+	- Căn phải
+
+
+#grid(
+	columns: (50%, 50%),
+	rows: (auto),
+	figure(
+	image("asset/logo_deadpool.PNG", height: 50%),
+	caption: [
+		Logo Deadpool
+	],
+	),
+	figure(
+	image("asset/logo_captain_american.PNG", height: 50%),
+	caption: [
+		Logo Captain America
+	],
+	)
+)
 
 === Giới thiệu
 Nguyên
@@ -232,7 +288,14 @@ Vũ
 == Kết quả đạt được
 
 === Ưu điểm của trò chơi
-Phước
+- Avatar pokemon quen thuộc tạo cảm giác quay về tuổi thơ cho người chơi
+- Chế độ đánh game có tính thời gian, thoải mái lựa chọn thời gian giới hạn
+- Đồ họa xịn xò, có nhiều sự đầu tư, màu sắc hài hòa, dễ nhìn, dễ sử dụng
+- Hướng dẫn cụ thể, chi tiết, dễ đọc - dễ hiểu - dễ sử dụng
+- Nhiều chế độ đánh với máy: dễ, vừa, khó
+- Có thể xem lại lịch sử trò chơi
+- Hiệu ứng âm thanh sống động
+
 === Khuyết điểm của trò chơi
 Phước
 
