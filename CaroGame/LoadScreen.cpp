@@ -12,7 +12,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
 
     Common::DrawHints();
 
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
     auto& title = Language::GetString(L"LOAD_MENU_TITLE");
     auto& leadingText = Language::GetString(L"SEARCH_FIELD_TITLE");
 

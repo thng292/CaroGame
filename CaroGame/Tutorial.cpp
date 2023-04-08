@@ -2,13 +2,9 @@
 
 void Tutorial::TutorialScreen(NavigationHost& NavHost)
 {
-    // Into Tutorial mode
-    NavHost.SetContext(Constants::TUTORIAL_MODE, true);
-    Utils::ON_SCOPE_EXIT OnScopeExit1([&NavHost] {
-        NavHost.SetContext(Constants::TUTORIAL_MODE, false);
-    });
-
     NavigationHost mockNavHost;
+    mockNavHost.SetContext(Constants::TUTORIAL_MODE, true);
+
     const short maxWidth = 60;
     const short maxHeight = 20;
     GameState mockGameState;

@@ -11,7 +11,7 @@ void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 
     Common::DrawHints();
 
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
     auto& title = Language::GetString(L"REPLAY_LOAD_MENU_TITLE");
     auto& leadingText = Language::GetString(L"SEARCH_FIELD_TITLE");
 

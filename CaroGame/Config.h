@@ -13,6 +13,8 @@ namespace Config {
     const std::wstring UndoOption = L"UndoOption";
     const std::wstring ThemeFilePath = L"ThemeFilePath";
     const std::wstring LanguageFilePath = L"LanguageFilePath";
+    const std::wstring Hint = L"Hint";
+    const std::wstring FourWarning = L"FourWarning";
 
     const std::wstring Value_True = L"True";
     const std::wstring Value_False = L"False";
@@ -22,9 +24,9 @@ namespace Config {
     // Return if the setting is previously exist(first time or not)
     bool LoadUserSetting();
 
-    std::wstring& GetSetting(const std::wstring& name);
+    std::wstring& GetConfig(const std::wstring& name);
 
-    void SetSetting(const std::wstring& name, const std::wstring& data);
+    void SetConfig(const std::wstring& name, const std::wstring& data);
 
     bool SaveUserSetting();
 };  // namespace Config

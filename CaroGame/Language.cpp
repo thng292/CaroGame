@@ -24,8 +24,6 @@ Dict Language::ExtractMetaFromFile(
 void Language::LoadLanguageFromFile(const std::filesystem::path& filePath)
 {
     //languageDict.clear();
-    auto metaDict = ExtractMetaFromFile(filePath);
-    languageDict.insert(metaDict.begin(), metaDict.end());
     auto fin = FileHandle::OpenInFile(filePath);
     std::wstring inp;
     while (!fin.eof()) {
@@ -33,7 +31,7 @@ void Language::LoadLanguageFromFile(const std::filesystem::path& filePath)
         auto tmp = Utils::LineSplitter(inp);
         Utils::trim(tmp.first);
         Utils::trim(tmp.second);
-        languageDict.insert(tmp);
+        languageDict[tmp.first] = tmp.second;
     }
     fin.close();
 }

@@ -10,7 +10,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         Constants::BOARD_SIZE, std::vector<short>(Constants::BOARD_SIZE, 0)
     );
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
-    if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+    if (Config::GetConfig(Config::BGMusic) == Config::Value_True) {
         if (BackgroundAudioService::GetCurrentSong() != Audio::Sound::GameBGM) {
             BackgroundAudioService::ChangeSong(Audio::Sound::GameBGM);
             BackgroundAudioService::Play(true, true);
@@ -23,7 +23,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         BackgroundAudioService::Stop();
     });
 
-    auto& soundEffect = Config::GetSetting(L"SoundEffect");
+    auto& soundEffect = Config::GetConfig(L"SoundEffect");
 
     GameScreen gameScreen(7, 2);
     gameScreen.DrawGameScreen();
@@ -236,7 +236,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         if ((tmp == L"z" || tmp == L"Z") && curGameState.moveList.size() != 0 &&
 
-            Config::GetSetting(Config::UndoOption) == Config::Value_True) {
+            Config::GetConfig(Config::UndoOption) == Config::Value_True) {
             if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
                 (curGameState.gameMode == Constants::GAME_MODE_PVE &&
                  (curGameState.moveList.size() > 2 ||

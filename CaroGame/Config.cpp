@@ -21,12 +21,12 @@ bool Config::LoadUserSetting()
     return 1;
 }
 
-std::wstring& Config::GetSetting(const std::wstring& name)
+std::wstring& Config::GetConfig(const std::wstring& name)
 {
     return configDict[name];
 }
 
-void Config::SetSetting(const std::wstring& name, const std::wstring& data)
+void Config::SetConfig(const std::wstring& name, const std::wstring& data)
 {
     configDict[name] = data;
 }

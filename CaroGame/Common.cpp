@@ -53,7 +53,7 @@ bool Common::ConfirmPrompt(const std::wstring& title)
     while (1) {
         View::DrawMenuCenter(menuPrevState, title, options, select);
         tmp = InputHandle::Get();
-        if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
+        if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
             if (tmp == L"\r") {
                 Audio::PlayAndForget(Audio::Sound::MenuSelect);
             } else {
