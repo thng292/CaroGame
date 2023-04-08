@@ -4,40 +4,26 @@
 
 #include "Audio.h"
 
-using Audio::AudioPlayer;
-using Audio::Sound;
+namespace BackgroundAudioService {
+    extern Audio::AudioPlayer player;
 
-class BackgroundAudioService {
-    static std::mutex locker;
-    std::unique_ptr<AudioPlayer> player = nullptr;
-    static std::unique_ptr<BackgroundAudioService> singletonInstance;
-
-   public:
-    static BackgroundAudioService* getInstance()
+    inline int ChangeSong(Audio::Sound song)
     {
-        locker.lock();
-        if (singletonInstance == nullptr) {
-            singletonInstance = std::make_unique<BackgroundAudioService>();
-        }
-        locker.unlock();
-        return singletonInstance.get();
+        player.Close();
+        return player.Open(song);
     }
 
-    AudioPlayer* getPlayer()
+    inline int Pause() { return player.Pause(); }
+
+    inline int Resume() { return player.Resume(); }
+
+    inline int Stop() { return player.Stop(); }
+
+    inline int Play(bool fromStart = 0, bool repeat = 1)
     {
-        if (player == nullptr) {
-            player = std::make_unique<AudioPlayer>();
-        }
-        return player.get();
+        return player.Play(fromStart, repeat);
     }
 
-    void ChangeSong(Sound song)
-    {
-        if (player != nullptr) {
-            player->Close();
-            player->Open(song);
-        } else {
-            player = std::make_unique<AudioPlayer>(song);
-        }
-    }
-};
+    inline Audio::Sound GetCurrentSong() { return player.getCurrentSong(); }
+
+};  // namespace BackgroundAudioService

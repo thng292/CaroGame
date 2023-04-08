@@ -14,11 +14,13 @@
 #include "GameEndView.h"
 #include "Tutorial.h"
 
+#include "Theme.h"
 int main()
 {
 #if _DEBUG
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
+    //Theme::LoadTheme("themes/TestTheme");
 #endif
     NavigationHost NavHost(
 #if _DEBUG

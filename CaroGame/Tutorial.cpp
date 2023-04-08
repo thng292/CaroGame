@@ -46,7 +46,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             maxWidth
         );
         InputHandle::Get();
-        PlaySpecialKeySound();
+        Utils::PlaySpecialKeySound();
         View::ClearScreen();
     }
 
@@ -75,7 +75,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         );
 
         InputHandle::Get();
-        PlaySpecialKeySound();
+        Utils::PlaySpecialKeySound();
         View::ClearScreen();
     }
 
@@ -180,7 +180,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         );
 
         InputHandle::Get();
-        PlaySpecialKeySound();
+        Utils::PlaySpecialKeySound();
         View::ClearScreen();
     }
 
@@ -219,7 +219,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         );
 
         InputHandle::Get();
-        PlaySpecialKeySound();
+        Utils::PlaySpecialKeySound();
 
         View::DrawTextWrapped(
             63, 8, Language::GetString(L"HELP_8-2_TITLE"), 4, 50
@@ -248,7 +248,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         );
 
         InputHandle::Get();
-        PlaySpecialKeySound();
+        Utils::PlaySpecialKeySound();
 
         auto& tmp = Language::GetString(L"HELP_8-3_TITLE");
         View::WriteToView(89 - tmp.length() / 2, 14, tmp);
@@ -261,7 +261,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             View::WriteToView(89 - tt[i].length() / 2, 20 + i, tt[i]);
         }
 
-        PlaySpecialKeySound();
+        Utils::PlaySpecialKeySound();
         InputHandle::Get();
     }
     return NavHost.Back();

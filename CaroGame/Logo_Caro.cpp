@@ -9,8 +9,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -21,8 +21,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -33,8 +33,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -45,8 +45,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -57,8 +57,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -69,8 +69,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -81,8 +81,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -93,8 +93,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -105,8 +105,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -117,8 +117,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -129,8 +129,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -142,8 +142,8 @@ void Caro(int x, int y)
                 L'\u2588',
                 0,
                 View::Color::BLACK,
-                View::DEFAULT_HIGHLIGHT_COLOR,
-                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BLACK,
+                View::Color::BLACK,
                 View::Color::BLACK
             );
         }
@@ -154,8 +154,8 @@ void Caro(int x, int y)
                 L'\u2588',
                 0,
                 View::Color::BLACK,
-                View::DEFAULT_HIGHLIGHT_COLOR,
-                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BLACK,
+                View::Color::BLACK,
                 View::Color::BLACK
             );
         }
@@ -167,8 +167,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -180,8 +180,8 @@ void Caro(int x, int y)
                 L'\u2588',
                 0,
                 View::Color::BLACK,
-                View::DEFAULT_HIGHLIGHT_COLOR,
-                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BLACK,
+                View::Color::BLACK,
                 View::Color::BLACK
             );
         }
@@ -193,8 +193,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -205,8 +205,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -217,8 +217,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -229,8 +229,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -241,8 +241,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -253,8 +253,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -265,8 +265,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -277,8 +277,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -290,8 +290,8 @@ void Caro(int x, int y)
                 L'\u2588',
                 0,
                 View::Color::BLACK,
-                View::DEFAULT_HIGHLIGHT_COLOR,
-                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BLACK,
+                View::Color::BLACK,
                 View::Color::BLACK
             );
         }
@@ -304,8 +304,8 @@ void Caro(int x, int y)
                 L'\u2588',
                 0,
                 View::Color::BLACK,
-                View::DEFAULT_HIGHLIGHT_COLOR,
-                View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+                View::Color::BLACK,
+                View::Color::BLACK,
                 View::Color::BLACK
             );
         }
@@ -317,8 +317,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::LIGHT_CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -329,8 +329,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::LIGHT_CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -344,8 +344,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::LIGHT_CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -356,8 +356,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::LIGHT_CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -368,8 +368,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::LIGHT_CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -380,8 +380,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::LIGHT_CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -391,8 +391,8 @@ void Caro(int x, int y)
         L'\u2588',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int k = 0; k <= 1; k++) {
@@ -402,8 +402,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -413,8 +413,8 @@ void Caro(int x, int y)
         L'\u2588',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -423,8 +423,8 @@ void Caro(int x, int y)
         L'\u2588',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     for (int k = 0; k <= 3; k++) {
@@ -437,8 +437,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -449,8 +449,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -464,8 +464,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -479,8 +479,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -491,8 +491,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -503,8 +503,8 @@ void Caro(int x, int y)
             L'\u2588',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -514,8 +514,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -524,8 +524,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -534,8 +534,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -544,8 +544,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -554,8 +554,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -564,8 +564,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -574,8 +574,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -584,8 +584,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -594,8 +594,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -604,8 +604,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -614,8 +614,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -624,8 +624,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -634,8 +634,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -644,8 +644,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -654,8 +654,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -664,8 +664,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -674,8 +674,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -684,8 +684,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -694,8 +694,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -704,8 +704,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -714,8 +714,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -724,8 +724,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -734,8 +734,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -744,8 +744,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -754,8 +754,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -764,8 +764,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -774,8 +774,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -784,8 +784,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::LIGHT_CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -794,8 +794,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -804,8 +804,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -814,8 +814,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -824,8 +824,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -834,8 +834,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -844,8 +844,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -854,8 +854,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -864,8 +864,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -874,8 +874,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -884,8 +884,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -894,8 +894,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -904,8 +904,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -914,8 +914,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -924,8 +924,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -934,8 +934,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -944,8 +944,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -954,8 +954,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -964,8 +964,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -974,8 +974,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -984,8 +984,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -994,8 +994,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1004,8 +1004,8 @@ void Caro(int x, int y)
         L'\u2584',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1014,8 +1014,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1024,8 +1024,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1034,8 +1034,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1044,8 +1044,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1054,8 +1054,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1064,8 +1064,8 @@ void Caro(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
 }

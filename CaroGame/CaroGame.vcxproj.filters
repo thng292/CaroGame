@@ -216,6 +216,9 @@
     <ClCompile Include="Gura.cpp">
       <Filter>Graphics\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Theme.cpp">
+      <Filter>Core\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">

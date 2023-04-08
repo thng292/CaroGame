@@ -20,23 +20,17 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     );
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::GameBGM);
     if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
-        auto bgmAudio = BackgroundAudioService::getInstance();
-        if (bgmAudio->getPlayer()->getCurrentSong() != Audio::Sound::GameBGM) {
-            bgmAudio->ChangeSong(Sound::GameBGM);
-            bgmAudio->getPlayer()->Play(true, true);
+        if (BackgroundAudioService::GetCurrentSong() != Audio::Sound::GameBGM) {
+            BackgroundAudioService::ChangeSong(Audio::Sound::GameBGM);
+            BackgroundAudioService::Play(true, true);
         } else {
-            bgmAudio->getPlayer()->Play(false, true);
+            BackgroundAudioService::Play(false, true);
         }
     }
-    auto keyPressSound = Utils::KeyPressSound::getInstance();
-    keyPressSound->ChangeSong(Audio::Sound::GameMove);
-    Utils::ON_SCOPE_EXIT on_exit([&NavHost, &keyPressSound] {
+    Utils::ON_SCOPE_EXIT on_exit([&NavHost] {
         NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
-        keyPressSound->ChangeSong(Audio::Sound::MenuMove);
-        BackgroundAudioService::getInstance()->getPlayer()->Stop();
+        BackgroundAudioService::Stop();
     });
-
-    Audio::AudioPlayer placeMoveSound(Sound::GamePlace);
 
     auto& soundEffect = Config::GetSetting(L"SoundEffect");
 
@@ -240,11 +234,11 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                placeMoveSound.Play(1);
+                gamePlaceSound.Play(1);
             } else if (tmp == L"ESC") {
-                Audio::PlayAndForget(Sound::Pause);
+                Audio::PlayAndForget(Audio::Sound::Pause);
             } else {
-                Utils::PlayKeyPressSound();
+                Audio::PlayAndForget(Audio::Sound::GameMove);
             }
         }
 

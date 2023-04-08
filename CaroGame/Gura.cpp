@@ -1,5 +1,91 @@
 #include "Gura.h"
 
+void luot(int x, int y)
+{
+    View::WriteToView(
+        x + 1,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 4,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 2,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 3,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::RED,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::BLUE
+    );
+    View::WriteToView(
+        x + 2,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::RED
+    );
+    View::WriteToView(
+        x + 3,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::RED
+    );
+    View::WriteToView(
+        x + 1,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::RED
+    );
+    View::WriteToView(
+        x + 4,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::BLUE,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::RED
+    );
+}
+
+
+
 void logoGura(int x, int y) {
     View::Color xanh2 = View::Color::CYAN;
     View::Color xanh1 = View ::Color::LIGHT_BLUE;
@@ -13,15 +99,15 @@ void logoGura(int x, int y) {
     View::Color la = View::Color::LIGHT_CYAN;
     View::Color hong = View::Color::LIGHT_RED;
 
-
+    
     View::WriteToView(
         x + 8,
         y + 1,
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -30,8 +116,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     for (int i = 0; i < 5; i++) {
@@ -41,8 +127,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             den,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -52,8 +138,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -62,8 +148,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -72,8 +158,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -82,8 +168,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     x++;
@@ -93,8 +179,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     
@@ -105,8 +191,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -116,8 +202,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 2; i++) {
@@ -127,8 +213,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -138,8 +224,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -148,8 +234,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -158,8 +244,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     x--;
@@ -169,8 +255,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -179,8 +265,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -189,8 +275,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -199,8 +285,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -209,8 +295,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -219,8 +305,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -229,8 +315,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -239,8 +325,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -249,8 +335,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 7; i++) {
@@ -260,8 +346,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -271,8 +357,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -281,8 +367,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -291,8 +377,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -301,8 +387,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
        trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -311,8 +397,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -321,8 +407,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     for (int i = 0; i < 5; i++) {
@@ -332,8 +418,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xam1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xam1
         );
     }
@@ -343,8 +429,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -353,8 +439,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 6; i++) {
@@ -364,8 +450,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -375,8 +461,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -385,8 +471,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -395,8 +481,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -405,8 +491,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -415,8 +501,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -425,8 +511,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -435,8 +521,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         la
     );
     View::WriteToView(
@@ -445,8 +531,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -455,8 +541,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -465,8 +551,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         la
     );
     for (int i = 0; i < 6; i++) {
@@ -476,8 +562,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xam1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xam1
         );
     }
@@ -487,8 +573,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 7; i++) {
@@ -498,8 +584,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -509,8 +595,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -519,8 +605,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -529,8 +615,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -539,8 +625,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -549,8 +635,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -559,8 +645,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -569,8 +655,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -579,8 +665,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam2
     );
     View::WriteToView(
@@ -589,8 +675,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -599,8 +685,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     for (int i = 0; i < 3; i++) {
@@ -610,8 +696,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xam1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xam1
         );
     }
@@ -621,8 +707,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam2
     );
     View::WriteToView(
@@ -631,8 +717,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam2
     );
     View::WriteToView(
@@ -641,8 +727,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -651,8 +737,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -661,8 +747,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -671,8 +757,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     for (int i = 0; i < 7; i++) {
@@ -682,8 +768,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh3
         );
     }
@@ -693,8 +779,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -703,8 +789,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -713,8 +799,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -723,8 +809,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         la
     );
     View::WriteToView(
@@ -733,8 +819,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -743,8 +829,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         nau
     );
     View::WriteToView(
@@ -753,8 +839,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         nau
     );
     View::WriteToView(
@@ -763,8 +849,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -773,8 +859,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -783,8 +869,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -793,8 +879,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -803,8 +889,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         nau
     );
     View::WriteToView(
@@ -813,8 +899,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         nau
     );
     View::WriteToView(
@@ -823,8 +909,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         nau
     );
     View::WriteToView(
@@ -833,8 +919,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         la
     );
     View::WriteToView(
@@ -843,8 +929,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -853,8 +939,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -863,8 +949,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -873,8 +959,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -883,8 +969,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -893,8 +979,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -903,8 +989,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -913,8 +999,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -923,8 +1009,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -933,8 +1019,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -943,8 +1029,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -953,8 +1039,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -963,8 +1049,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -973,8 +1059,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -983,8 +1069,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -993,8 +1079,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     for (int i = 0; i < 4; i++) {
@@ -1004,8 +1090,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             vang,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             vang
         );
     }
@@ -1015,8 +1101,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1025,8 +1111,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1035,8 +1121,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         nau,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1045,8 +1131,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1055,8 +1141,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1065,8 +1151,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         trang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1075,8 +1161,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1085,8 +1171,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     for (int i = 0; i < 3; i++) {
@@ -1096,8 +1182,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh1,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xanh1
         );
     }
@@ -1108,8 +1194,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             xanh3,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             den
         );
     }
@@ -1119,8 +1205,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1129,8 +1215,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1139,8 +1225,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1149,8 +1235,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1159,8 +1245,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1169,8 +1255,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1179,8 +1265,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1189,8 +1275,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1199,8 +1285,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     for (int i = 0; i < 4; i++) {
@@ -1210,8 +1296,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             vang,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             vang
         );
     }
@@ -1221,8 +1307,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1231,8 +1317,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1241,8 +1327,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1251,8 +1337,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -1261,8 +1347,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -1271,8 +1357,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -1281,8 +1367,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -1291,8 +1377,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1301,8 +1387,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1311,8 +1397,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1321,8 +1407,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1331,8 +1417,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1341,8 +1427,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1351,8 +1437,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1361,8 +1447,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1371,8 +1457,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1381,8 +1467,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1391,8 +1477,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1401,8 +1487,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1411,8 +1497,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         hong
     );
     View::WriteToView(
@@ -1421,8 +1507,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1431,8 +1517,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1441,8 +1527,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         hong,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         vang
     );
     View::WriteToView(
@@ -1451,8 +1537,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     View::WriteToView(
@@ -1461,8 +1547,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1471,8 +1557,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         vang,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -1481,8 +1567,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -1491,8 +1577,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -1501,8 +1587,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh1
     );
     View::WriteToView(
@@ -1511,8 +1597,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1521,8 +1607,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1531,8 +1617,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         den,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1541,8 +1627,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1551,8 +1637,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         trang
     );
     View::WriteToView(
@@ -1561,8 +1647,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh2
     );
     for (int i = 0; i < 4; i++) {
@@ -1572,8 +1658,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             vang,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             trang
         );
     }
@@ -1584,8 +1670,8 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             vang,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             xam1
         );
     }
@@ -1595,8 +1681,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         la,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         la
     );
     View::WriteToView(
@@ -1605,8 +1691,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xam1,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xam1
     );
     View::WriteToView(
@@ -1615,8 +1701,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         xanh3
     );
     View::WriteToView(
@@ -1625,8 +1711,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh3,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     View::WriteToView(
@@ -1635,8 +1721,8 @@ void logoGura(int x, int y) {
         L'\u2580',
         0,
         xanh2,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         den
     );
     for (int i = 0; i < 2; i++) {
@@ -1646,9 +1732,10 @@ void logoGura(int x, int y) {
             L'\u2580',
             0,
             den,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             trang
         );
     }
 }
+

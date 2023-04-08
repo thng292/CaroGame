@@ -35,7 +35,7 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
 
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -120,7 +120,7 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     curGameState.playerNameOne = inputList[0];
     curGameState.playerNameTwo = inputList[1];
 
-    PlaySpecialKeySound();
+    Utils::PlaySpecialKeySound();
 
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate("AvatarSelectView");
@@ -201,7 +201,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -235,7 +235,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
             }
         }
         View::DrawBorder(
-            drawnRect, View::Color::BRIGHT_WHITE, View::Color::BRIGHT_WHITE
+            drawnRect, Theme::GetColor(ThemeColor::CONSOLE_COLOR), Theme::GetColor(ThemeColor::CONSOLE_COLOR)
         );
     }
     NavHost.SetContext(Constants::CURRENT_GAME, currentGameState);
@@ -370,7 +370,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -444,7 +444,7 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -507,7 +507,7 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -568,7 +568,7 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -639,7 +639,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }
@@ -723,7 +723,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
             if (tmp == L"\r") {
-                PlaySpecialKeySound();
+                Utils::PlaySpecialKeySound();
             } else {
                 Utils::PlayKeyPressSound();
             }

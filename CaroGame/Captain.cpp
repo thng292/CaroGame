@@ -9,8 +9,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -21,8 +21,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -32,8 +32,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -42,8 +42,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -52,8 +52,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -62,8 +62,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     for (int i = 0; i < 7; i++) {
@@ -73,8 +73,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -85,8 +85,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -96,8 +96,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -106,8 +106,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -116,8 +116,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -126,8 +126,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -136,8 +136,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -146,8 +146,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 4; i++) {
@@ -157,8 +157,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -168,8 +168,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -178,8 +178,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     for (int i = 0; i < 3; i++) {
@@ -189,8 +189,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -201,8 +201,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -212,8 +212,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -222,8 +222,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -232,8 +232,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -242,8 +242,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -252,8 +252,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -262,8 +262,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 2; i++) {
@@ -273,8 +273,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -284,8 +284,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -294,8 +294,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     for (int i = 0; i < 5; i++) {
@@ -305,8 +305,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLUE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -316,8 +316,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -326,8 +326,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -336,8 +336,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -346,8 +346,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -356,8 +356,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -366,8 +366,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -376,8 +376,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -386,8 +386,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -396,8 +396,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -406,8 +406,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -416,8 +416,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 3; i++) {
@@ -427,8 +427,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLUE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -438,8 +438,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -448,8 +448,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -458,8 +458,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -468,8 +468,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -478,8 +478,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -488,8 +488,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -498,8 +498,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -508,8 +508,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -518,8 +518,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -528,8 +528,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -538,8 +538,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::LIGHT_YELLOW
     );
     View::WriteToView(
@@ -548,8 +548,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 2; i++) {
@@ -559,8 +559,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLUE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::RED
         );
     }
@@ -570,8 +570,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::LIGHT_YELLOW
     );
     View::WriteToView(
@@ -580,8 +580,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::LIGHT_YELLOW
     );
     View::WriteToView(
@@ -590,8 +590,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -600,8 +600,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -610,8 +610,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -620,8 +620,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::LIGHT_YELLOW
     );
     View::WriteToView(
@@ -630,8 +630,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     for (int i = 0; i < 3; i++) {
@@ -641,8 +641,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -653,8 +653,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::LIGHT_YELLOW
         );
     }
@@ -664,8 +664,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::LIGHT_YELLOW
     );
     View::WriteToView(
@@ -674,8 +674,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -684,8 +684,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -694,8 +694,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -704,8 +704,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -714,8 +714,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -724,8 +724,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -734,8 +734,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     for (int i = 0; i < 4; i++) {
@@ -745,8 +745,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::LIGHT_YELLOW,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::LIGHT_YELLOW
         );
     }
@@ -756,8 +756,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -766,8 +766,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::LIGHT_YELLOW
     );
     View::WriteToView(
@@ -776,8 +776,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::LIGHT_YELLOW,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -786,8 +786,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -796,8 +796,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -806,8 +806,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     for (int i = 0; i < 2; i++) {
@@ -817,8 +817,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLACK
         );
     }
@@ -828,8 +828,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -838,8 +838,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -848,8 +848,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -858,8 +858,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -868,8 +868,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -878,8 +878,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -888,8 +888,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     for (int i = 0; i < 3; i++) {
@@ -899,8 +899,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -910,8 +910,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -920,8 +920,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -930,8 +930,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -940,8 +940,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -950,8 +950,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -960,8 +960,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -970,8 +970,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -980,8 +980,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -990,8 +990,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1000,8 +1000,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1010,8 +1010,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1020,8 +1020,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1030,8 +1030,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1040,8 +1040,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1050,8 +1050,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1060,8 +1060,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1070,8 +1070,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1080,8 +1080,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1090,8 +1090,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1100,8 +1100,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1110,8 +1110,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1120,8 +1120,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1130,8 +1130,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1140,8 +1140,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1150,8 +1150,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1160,8 +1160,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1170,8 +1170,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1180,8 +1180,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1190,8 +1190,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1200,8 +1200,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1210,8 +1210,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1220,8 +1220,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
 
@@ -1231,8 +1231,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1241,8 +1241,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1251,8 +1251,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1261,8 +1261,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1271,8 +1271,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1281,8 +1281,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1291,8 +1291,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1301,8 +1301,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1311,8 +1311,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1321,8 +1321,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1331,8 +1331,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1341,8 +1341,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1351,8 +1351,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1361,8 +1361,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 3; i++) {
@@ -1372,8 +1372,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BRIGHT_WHITE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BLUE
         );
     }
@@ -1383,8 +1383,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 3; i++) {
@@ -1394,8 +1394,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLUE,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -1405,8 +1405,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1415,8 +1415,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1425,8 +1425,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1435,8 +1435,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     for (int i = 0; i < 3; i++) {
@@ -1446,8 +1446,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::RED
         );
     }
@@ -1457,8 +1457,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1467,8 +1467,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1477,8 +1477,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1487,8 +1487,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1497,8 +1497,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1507,8 +1507,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1517,8 +1517,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1527,8 +1527,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 2; i++) {
@@ -1538,8 +1538,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -1549,8 +1549,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     for (int i = 0; i < 2; i++) {
@@ -1560,8 +1560,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::CYAN,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::CYAN
         );
     }
@@ -1571,8 +1571,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1581,8 +1581,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1591,8 +1591,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1601,8 +1601,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1611,8 +1611,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1621,8 +1621,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1631,8 +1631,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1641,8 +1641,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1651,8 +1651,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1661,8 +1661,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1671,8 +1671,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1681,8 +1681,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1691,8 +1691,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1701,8 +1701,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1711,8 +1711,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1721,8 +1721,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1731,8 +1731,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1741,8 +1741,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1751,8 +1751,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1761,8 +1761,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1771,8 +1771,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1781,8 +1781,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1791,8 +1791,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1801,8 +1801,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1811,8 +1811,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1821,8 +1821,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1831,8 +1831,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1841,8 +1841,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1851,8 +1851,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -1861,8 +1861,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
 
@@ -1872,8 +1872,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1882,8 +1882,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1892,8 +1892,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1902,8 +1902,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1912,8 +1912,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -1922,8 +1922,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1932,8 +1932,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -1942,8 +1942,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -1952,8 +1952,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1962,8 +1962,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -1972,8 +1972,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
 
@@ -1983,8 +1983,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     for (int i = 0; i < 4; i++) {
@@ -1994,8 +1994,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::RED
         );
     }
@@ -2006,8 +2006,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::RED
         );
     }
@@ -2017,8 +2017,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2027,8 +2027,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2037,8 +2037,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2047,8 +2047,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2057,8 +2057,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2067,8 +2067,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2077,8 +2077,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2087,8 +2087,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2097,8 +2097,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2107,8 +2107,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2117,8 +2117,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2127,8 +2127,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2137,8 +2137,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2147,8 +2147,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2157,8 +2157,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2167,8 +2167,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2177,8 +2177,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2187,8 +2187,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2197,8 +2197,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2207,8 +2207,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2217,8 +2217,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2227,8 +2227,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2237,8 +2237,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2247,8 +2247,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2257,8 +2257,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2267,8 +2267,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2277,8 +2277,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2287,8 +2287,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2297,8 +2297,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2307,8 +2307,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2317,8 +2317,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2327,8 +2327,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2337,8 +2337,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2347,8 +2347,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2357,8 +2357,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2367,8 +2367,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2377,8 +2377,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2387,8 +2387,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2397,8 +2397,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2407,8 +2407,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2417,8 +2417,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2427,8 +2427,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2437,8 +2437,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2447,8 +2447,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2457,8 +2457,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2467,8 +2467,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2477,8 +2477,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2487,8 +2487,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2497,8 +2497,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2507,8 +2507,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2517,8 +2517,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2527,8 +2527,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2537,8 +2537,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2547,8 +2547,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2557,8 +2557,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2567,8 +2567,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2577,8 +2577,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2587,8 +2587,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2597,8 +2597,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2607,8 +2607,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2617,8 +2617,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2627,8 +2627,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2637,8 +2637,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2647,8 +2647,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2657,8 +2657,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2667,8 +2667,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2677,8 +2677,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2687,8 +2687,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2697,8 +2697,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2707,8 +2707,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2717,8 +2717,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2727,8 +2727,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2737,8 +2737,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2747,8 +2747,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2757,8 +2757,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2767,8 +2767,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2777,8 +2777,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2787,8 +2787,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2797,8 +2797,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2807,8 +2807,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2817,8 +2817,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2827,8 +2827,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2837,8 +2837,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2847,8 +2847,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2857,8 +2857,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2867,8 +2867,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2877,8 +2877,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2887,8 +2887,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2897,8 +2897,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2907,8 +2907,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2917,8 +2917,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2927,8 +2927,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -2937,8 +2937,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -2947,8 +2947,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -2957,8 +2957,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2967,8 +2967,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2977,8 +2977,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -2987,8 +2987,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -2997,8 +2997,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -3007,8 +3007,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -3017,8 +3017,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -3027,8 +3027,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -3037,8 +3037,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3047,8 +3047,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -3057,8 +3057,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -3067,8 +3067,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3077,8 +3077,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3087,8 +3087,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3097,8 +3097,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -3107,8 +3107,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -3117,8 +3117,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -3127,8 +3127,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3137,8 +3137,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3147,8 +3147,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3157,8 +3157,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BRIGHT_WHITE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3167,8 +3167,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3177,8 +3177,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::CYAN,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -3187,8 +3187,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -3197,8 +3197,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::CYAN
     );
     View::WriteToView(
@@ -3207,8 +3207,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3217,8 +3217,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     for (int i = 0; i < 4; i++) {
@@ -3228,8 +3228,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::RED
         );
     }
@@ -3239,8 +3239,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3249,8 +3249,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3259,8 +3259,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     for (int i = 0; i < 4; i++) {
@@ -3270,8 +3270,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::RED,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::RED
         );
     }
@@ -3281,8 +3281,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3291,8 +3291,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3301,8 +3301,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3311,8 +3311,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -3321,8 +3321,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3331,8 +3331,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -3341,8 +3341,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3351,8 +3351,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3361,8 +3361,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -3371,8 +3371,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3381,8 +3381,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -3391,8 +3391,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3401,8 +3401,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3411,8 +3411,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3421,8 +3421,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -3431,8 +3431,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3441,8 +3441,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3451,8 +3451,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3461,8 +3461,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
     View::WriteToView(
@@ -3471,8 +3471,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3481,8 +3481,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3491,8 +3491,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -3501,8 +3501,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3511,8 +3511,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     View::WriteToView(
@@ -3521,8 +3521,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::GRAY,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::GRAY
     );
     View::WriteToView(
@@ -3531,8 +3531,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -3541,8 +3541,8 @@ void Logo_Captain(int x, int y)
         L'\u2580',
         0,
         View::Color::BLACK,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLACK
     );
     for (int i = 0; i < 4; i++) {
@@ -3552,8 +3552,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }
@@ -3564,8 +3564,8 @@ void Logo_Captain(int x, int y)
             L'\u2580',
             0,
             View::Color::BLACK,
-            View::DEFAULT_HIGHLIGHT_COLOR,
-            View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+            View::Color::BLACK,
+            View::Color::BLACK,
             View::Color::BRIGHT_WHITE
         );
     }

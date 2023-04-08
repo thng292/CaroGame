@@ -2,7 +2,9 @@
 
 std::wofstream FileHandle::OpenOutFile(const std::filesystem::path& fileName)
 {
-    Ensure(fileName.parent_path());
+    if (fileName.has_parent_path()) {
+        Ensure(fileName.parent_path());
+    }
     std::wofstream fout(fileName);
     fout.imbue(LOCALE);
     return fout;
@@ -10,7 +12,9 @@ std::wofstream FileHandle::OpenOutFile(const std::filesystem::path& fileName)
 
 std::wifstream FileHandle::OpenInFile(const std::filesystem::path& fileName)
 {
-    Ensure(fileName.parent_path());
+    if (fileName.has_parent_path()) {
+        Ensure(fileName.parent_path());
+    }
     std::wifstream fin(fileName);
     fin.imbue(LOCALE);
     return fin;

@@ -10,36 +10,8 @@
 #include "Audio.h"
 
 // Used PlaySound API
-#define PlaySpecialKeySound() Audio::PlayAndForget(Audio::Sound::MenuSelect)
 
 namespace Utils {
-
-    class KeyPressSound {
-        Audio::AudioPlayer player{Audio::Sound::MenuMove};
-        static std::unique_ptr<KeyPressSound> singletonInstance;
-        static std::mutex locker;
-
-       public:
-        static KeyPressSound* getInstance()
-        {
-            locker.lock();
-            if (singletonInstance == nullptr) {
-                singletonInstance = std::make_unique<KeyPressSound>();
-            }
-            locker.unlock();
-            return singletonInstance.get();
-        }
-
-        inline void Play(bool fromStart = 0, bool repeat = 0)
-        {
-            player.Play(fromStart, repeat);
-        }
-
-        inline void Pause() { player.Pause(); }
-
-        inline void ChangeSong(Audio::Sound Song) { player.Open(Song); }
-    };
-
     struct ON_SCOPE_EXIT {
         std::function<void(void)> func;
 
@@ -119,14 +91,17 @@ namespace Utils {
         rtrim(str);
     }
 
-    inline void PlayKeyPressSound()
+    inline void PlaySpecialKeySound(Audio::Sound sound = Audio::Sound::MenuSelect)
     {
-        static auto player = KeyPressSound::getInstance();
-        player->Pause();
-        player->Play(1);
+        Audio::PlayAndForget(sound);
     }
 
-    template <typename T, typename _Elem>
+    inline void PlayKeyPressSound(Audio::Sound sound = Audio::Sound::MenuMove)
+    {
+        Audio::PlayAndForget(sound);
+    }
+
+    template <typename T = std::wstring, typename _Elem = wchar_t>
     inline std::pair<T, T> LineSplitter(const T& line, _Elem delim = L'=')
     {
         size_t tmp = line.find_first_of(delim);

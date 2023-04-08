@@ -67,7 +67,11 @@ namespace Constants {
     const std::wstring STR_SAVE_PATH = L"saves/";
     const std::filesystem::path SAVE_PATH = STR_SAVE_PATH;
 
-    // Save/Load path
-    const std::wstring STR_REPLAY_PATH = L"replay/";
+    // Replay Save/Load path
+    const std::wstring STR_REPLAY_PATH = L"replays/";
     const std::filesystem::path REPLAY_PATH = STR_REPLAY_PATH;
+
+    // Theme path
+    const std::wstring STR_THEME_PATH = L"themes/";
+    const std::filesystem::path THEME_PATH = STR_THEME_PATH;
 }  // namespace Constants

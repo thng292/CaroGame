@@ -193,6 +193,7 @@
     <ClCompile Include="SaveScreen.cpp" />
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="StartUp.cpp" />
+    <ClCompile Include="Theme.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="Utils.cpp" />

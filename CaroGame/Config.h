@@ -4,30 +4,20 @@
 
 #include "Constants.h"
 #include "FileHandle.h"
+#include "Utils.h"
 
 namespace Config {
 
     const std::wstring SoundEffect = L"SoundEffect";
     const std::wstring BGMusic = L"Music";
     const std::wstring UndoOption = L"UndoOption";
+    const std::wstring ThemeFilePath = L"ThemeFilePath";
+    const std::wstring LanguageFilePath = L"LanguageFilePath";
 
     const std::wstring Value_True = L"True";
     const std::wstring Value_False = L"False";
 
-    class Configs {
-        static std::unique_ptr<Configs> instance;
-
-       public:
-        std::unordered_map<std::wstring, std::wstring> dict;
-
-        static Configs* getInstance()
-        {
-            if (instance == nullptr) {
-                instance = std::make_unique<Configs>();
-            }
-            return instance.get();
-        }
-    };
+    extern std::unordered_map<std::wstring, std::wstring> configDict;
 
     // Return if the setting is previously exist(first time or not)
     bool LoadUserSetting();
