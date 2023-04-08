@@ -5,7 +5,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     GameScreenAction::ColorMatrix colorMatrix(
         Constants::BOARD_SIZE,
         std::vector<View::Color>(
-            Constants::BOARD_SIZE, View::DEFAULT_TEXT_COLOR
+            Constants::BOARD_SIZE, View::Color::BLACK
         )
     );
 
@@ -226,6 +226,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     GameAction::Point hintMove = {-1, -1};
     GameAction::Board currentBoard = gameBoard;
     bool isGhostMode = false;
+
+    Audio::AudioPlayer gamePlaceSound(Audio::Sound::GamePlace);
 
     // Game loop
     while (!endGame) {
