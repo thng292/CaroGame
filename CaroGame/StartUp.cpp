@@ -6,15 +6,18 @@ void StartUp::StartUpScreen(NavigationHost& NavHost)
     bool settingLoadSuccess = Config::LoadUserSetting();
     auto themePath = Config::GetSetting(Config::ThemeFilePath);
     if (!Theme::LoadThemeOrDefault(themePath)) {
-        Config::SetSetting(Config::ThemeFilePath, themePath);
-        View::DrawMenuPrevState menuPrevState;
-        View::DrawMenuCenter(
-            menuPrevState,
-            L"",
-            {{std::format(L"Can't load theme {}", themePath), 0}},
-            -1
-        );
-        InputHandle::Get();
+        Config::SetSetting(Config::ThemeFilePath, L"");
+        Config::SaveUserSetting();
+        if (themePath.length()) {
+            View::DrawMenuPrevState menuPrevState;
+            View::DrawMenuCenter(
+                menuPrevState,
+                L"",
+                {{std::format(L"Can't load theme {}", themePath), 0}},
+                -1
+            );
+            InputHandle::Get();
+        }
     }
     if (!settingLoadSuccess ||
         !Config::GetSetting(L"LanguageFilePath").length()) {

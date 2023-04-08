@@ -57,7 +57,8 @@ class Theme {
     static std::wstring currentThemeName;
 
    public:
-    static short GetScreenAttribute()
+    Theme() = delete;
+    static inline short GetScreenAttribute()
     {
         return (int(CurrentTheme[int(ThemeColor::CONSOLE_COLOR)]) << 4) |
                int(CurrentTheme[int(ThemeColor::TEXT_COLOR)]);

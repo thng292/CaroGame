@@ -7,25 +7,39 @@
 #include "FileHandle.h"
 #include "Utils.h"
 
-namespace Language {
-    typedef std::unordered_map<std::wstring, std::wstring> Dict;
+typedef std::unordered_map<std::wstring, std::wstring> Dict;
 
-    extern Dict languageDict;
+struct LanguageOption {
+    Dict meta;
+    std::filesystem::path path;
+};
 
-    struct LanguageOption {
-        Dict meta;
-        std::filesystem::path path;
-    };
+class Language {
+    static Dict languageDict;
 
-    Dict ExtractMetaFromFile(const std::filesystem::path& filePath);
+   public:
+    Language() = delete;
 
-    void LoadLanguageFromFile(const std::filesystem::path& filePath);
+    static Dict ExtractMetaFromFile(const std::filesystem::path& filePath);
 
-    std::vector<LanguageOption> DiscoverLanguageFile(
+    static void LoadLanguageFromFile(const std::filesystem::path& filePath);
+
+    static std::vector<LanguageOption> DiscoverLanguageFile(
         const std::filesystem::path& dirPath = Constants::LANGUAGE_PATH
     );
 
-    std::wstring& GetString(const std::wstring& Label);
+    static inline std::wstring& GetString(const std::wstring& Label)
+    {
+#ifdef LANGUAGE_LABEL_FALLBACK
+        if (!languageDict.contains(Label)) {
+            languageDict[Label] = Label;
+        }
+#endif
+        return languageDict[Label];
+    }
 
-    std::wstring& GetMeta(const std::wstring& Label);
-}  // namespace Language
+    static inline std::wstring& GetMeta(const std::wstring& Label)
+    {
+        return GetString(Label);
+    }
+};

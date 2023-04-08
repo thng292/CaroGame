@@ -20,7 +20,7 @@ int main()
 #if _DEBUG
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
-    Theme::LoadTheme("themes/TestTheme");
+    //Theme::LoadTheme("themes/TestTheme");
 #endif
     NavigationHost NavHost(
 #if _DEBUG

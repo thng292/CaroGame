@@ -309,13 +309,19 @@ View::Rect View::DrawMenu(
 
     View::Rect res = {y, x, x + w, y + h - 1};
     if (redrawBorder) {
+        View::ClearRect(
+            {prevState.y,
+             prevState.x,
+             prevState.x + prevState.w,
+             prevState.y + prevState.h - 1}
+        );
         View::DrawRect(res);
     }
 
     short leftAlign = View::BORDER_WIDTH + View::HPADDING + x;
     short topAlign = View::BORDER_WIDTH + View::VPADDING + y;
 
-    if (redrawTitle) {
+    if (redrawTitle || redrawBorder) {
         View::WriteToView(
             leftAlign,
             topAlign,

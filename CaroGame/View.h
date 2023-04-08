@@ -133,7 +133,7 @@ namespace View {
 
         std::wstring title;
         std::vector<OptionNoRef> optionsList;
-        size_t selected;
+        size_t selected = -1;
 
         Color textColor;
         Color highlightColor;
@@ -149,7 +149,6 @@ namespace View {
                 Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR);
             backgroundColor = Theme::GetColor(ThemeColor::CONSOLE_COLOR);
             titleColor = Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR);
-
         }
     };
 

@@ -8,8 +8,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -18,8 +18,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -28,8 +28,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -38,8 +38,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::RED,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::BLUE
     );
     View::WriteToView(
@@ -48,8 +48,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -58,8 +58,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -68,8 +68,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
     View::WriteToView(
@@ -78,8 +78,8 @@ void luot(int x, int y)
         L'\u2580',
         0,
         View::Color::BLUE,
-        View::DEFAULT_HIGHLIGHT_COLOR,
-        View::DEFAULT_HIGHLIGHT_TEXT_COLOR,
+        View::Color::BLACK,
+        View::Color::BLACK,
         View::Color::RED
     );
 }

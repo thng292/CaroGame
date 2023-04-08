@@ -1,8 +1,8 @@
 #include "Language.h"
 
-Language::Dict Language::languageDict{};
+Dict Language::languageDict{};
 
-Language::Dict Language::ExtractMetaFromFile(
+Dict Language::ExtractMetaFromFile(
     const std::filesystem::path& filePath
 )
 {
@@ -38,7 +38,7 @@ void Language::LoadLanguageFromFile(const std::filesystem::path& filePath)
     fin.close();
 }
 
-std::vector<Language::LanguageOption> Language::DiscoverLanguageFile(
+std::vector<LanguageOption> Language::DiscoverLanguageFile(
     const std::filesystem::path& dirPath
 )
 {
@@ -48,19 +48,4 @@ std::vector<Language::LanguageOption> Language::DiscoverLanguageFile(
         res.push_back({ExtractMetaFromFile(i.filePath), i.filePath});
     }
     return res;
-}
-
-std::wstring& Language::GetString(const std::wstring& Label)
-{
-#ifdef LANGUAGE_LABEL_FALLBACK
-    if (!languageDict.contains(Label)) {
-        languageDict[Label] = Label;
-    }
-#endif
-    return languageDict[Label];
-}
-
-std::wstring& Language::GetMeta(const std::wstring& Label)
-{
-    return languageDict[Label];
 }
