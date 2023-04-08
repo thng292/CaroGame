@@ -271,7 +271,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         // Undo move
         if ((tmp == L"z" || tmp == L"Z") && curGameState.moveList.size() != 0 &&
-            Config::GetSetting(Config::UndoOption) == Config::Value_True) {
+            Config::GetConfig(Config::UndoOption) == Config::Value_True) {
             GameScreenAction::TurnOffGhostMode(
                 gameScreen,
                 currentBoard,
