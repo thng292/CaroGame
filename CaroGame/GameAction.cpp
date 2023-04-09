@@ -80,7 +80,6 @@ namespace GameAction {
             for (short colDirection = -1; colDirection <= 0; ++colDirection) {
                 if (!(rowDirection == 0 && colDirection == 0)) {
                     pointList.clear();
-                    bool block1 = false, block2 = false;
                     IteratePoints(
                         board,
                         move,
@@ -89,7 +88,7 @@ namespace GameAction {
                         rowDirection,
                         colDirection
                     );
-                    if (pointList.size() == 3 && !block1) {
+                    if (pointList.size() == 3) {
                         AddToList(warningList, pointList);
                     }
 
