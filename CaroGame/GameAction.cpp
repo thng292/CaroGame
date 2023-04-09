@@ -54,22 +54,6 @@ namespace GameAction {
         }
     }
 
-    bool Blocked(
-        const Board& board,
-        const std::vector<Point>& pointList,
-        short rowDirection,
-        short colDirection
-    )
-    {
-        short row = pointList[0].row, col = pointList[0].col;
-        short index = 1;
-        while (index <= 4) {
-            row += rowDirection;
-            col += colDirection;
-        }
-
-    }
-
     std::vector<Point> GetWarningPoints(
         const Board& board, const Point& move, const short& player
     )
