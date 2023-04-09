@@ -400,7 +400,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         );
 
         // Get hint
-        if (tmp == L"h") {
+        if (tmp == L"h" && Config::GetConfig(Config::Hint) == Config::Value_True) {
             GameScreenAction::TurnOffGhostMode(
                 gameScreen,
                 currentBoard,

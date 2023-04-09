@@ -10,6 +10,7 @@
 #include "Logic.h"
 #include "View.h"
 #include "Theme.h"
+#include "Config.h"
 
 namespace GameScreenAction {
 

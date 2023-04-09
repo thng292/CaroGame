@@ -41,7 +41,33 @@ namespace GameAction {
             if (board[row][col] != player) break;
             pointList.push_back({row, col});
             if (pointList.size() == 3) break;
+          
         }
+    }
+
+    void AddToList(
+        std::vector<Point>& warningList, const std::vector<Point> &pointList
+    )
+    {
+        for (size_t i = 0; i < pointList.size(); ++i) {
+            warningList.push_back(pointList[i]);
+        }
+    }
+
+    bool Blocked(
+        const Board& board,
+        const std::vector<Point>& pointList,
+        short rowDirection,
+        short colDirection
+    )
+    {
+        short row = pointList[0].row, col = pointList[0].col;
+        short index = 1;
+        while (index <= 4) {
+            row += rowDirection;
+            col += colDirection;
+        }
+
     }
 
     std::vector<Point> GetWarningPoints(
@@ -49,10 +75,12 @@ namespace GameAction {
     )
     {
         std::vector<Point> pointList;
+        std::vector<Point> warningList;
         for (short rowDirection = -1; rowDirection <= 0; ++rowDirection) {
             for (short colDirection = -1; colDirection <= 0; ++colDirection) {
                 if (!(rowDirection == 0 && colDirection == 0)) {
                     pointList.clear();
+                    bool block1 = false, block2 = false;
                     IteratePoints(
                         board,
                         move,
@@ -61,7 +89,10 @@ namespace GameAction {
                         rowDirection,
                         colDirection
                     );
-                    if (pointList.size() == 3) return pointList;
+                    if (pointList.size() == 3 && !block1) {
+                        AddToList(warningList, pointList);
+                    }
+
                     IteratePoints(
                         board,
                         move,
@@ -70,15 +101,17 @@ namespace GameAction {
                         -rowDirection,
                         -colDirection
                     );
-                    if (pointList.size() == 3) return pointList;
+                    if (pointList.size() == 3)
+                        AddToList(warningList, pointList);
                 }
             }
         }
         pointList.clear();
         IteratePoints(board, move, player, pointList, -1, 1);
-        if (pointList.size() == 3) return pointList;
+        if (pointList.size() == 3) AddToList(warningList, pointList);
         IteratePoints(board, move, player, pointList, 1, -1);
-        return pointList;
+        if (pointList.size() == 3) AddToList(warningList, pointList);
+        return warningList;
     }
 
 }  // namespace GameAction

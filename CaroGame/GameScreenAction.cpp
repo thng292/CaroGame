@@ -301,7 +301,7 @@ GameAction::Point GameScreenAction::GetHintMove(
         ai.PLAYER_AI = Constants::PLAYER_TWO.value;
         ai.PLAYER_HUMAN = Constants::PLAYER_ONE.value;
     }
-
+    ai.SetDifficulty(AI::AI_DIFFICULTY_HARD);
     if (moveCount == 0) return ai.GetFirstMove();
     return ai.GetBestMove(board, moveCount);
 }
@@ -504,8 +504,9 @@ void GameScreenAction::HighlightWarning(
     std::mutex&lock
 )
 {
+    if (Config::GetConfig(Config::FourWarning) != Config::Value_True) return;
     pointList = GameAction::GetWarningPoints(board, move, player.value);
-    if (pointList.size() != 3) return;
+    if (pointList.size() % 3 != 0) return;
     View::Color color = Theme::GetColor(ThemeColor::WARNING_COLOR);
     lock.lock();
     for (auto& point : pointList) {
@@ -523,7 +524,7 @@ void GameScreenAction::UnhighlightWarning(
 
 )
 {
-    if (pointList.size() != 3) return;
+    if (pointList.size() % 3 != 0) return;
     View::Color color = (player.value == Constants::PLAYER_ONE.value)
                             ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
                             : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
