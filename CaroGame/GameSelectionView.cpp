@@ -27,7 +27,7 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 2);
     View::DrawMenuPrevState menuPrevState;
-    auto soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
@@ -172,7 +172,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     );
 
     View::Rect drawnRect, player1Selection;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (currentGameState.playerAvatarOne == -1 ||
            currentGameState.playerAvatarTwo == -1) {
@@ -362,7 +362,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
     Common::DrawHintsLess();
     DrawCurrentOptionBox(curGameState, 0);
     View::DrawMenuPrevState menuPrevState;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
@@ -436,7 +436,7 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
@@ -500,7 +500,7 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
@@ -561,7 +561,7 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
@@ -632,7 +632,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
@@ -716,7 +716,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
 
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
     while (1) {
         View::DrawMenuCenter(menuPrevState, label, options, selectedOption);

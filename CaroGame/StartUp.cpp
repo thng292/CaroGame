@@ -4,27 +4,29 @@ void StartUp::StartUpScreen(NavigationHost& NavHost)
 {
     View::Setup();
     bool settingLoadSuccess = Config::LoadUserSetting();
-    auto themePath = Config::GetSetting(Config::ThemeFilePath);
-    if (!Theme::LoadThemeOrDefault(themePath)) {
-        Config::SetSetting(Config::ThemeFilePath, L"");
+    auto themePath = Config::GetConfig(Config::ThemeFilePath);
+    if (!Theme::LoadThemeOrDefault(themePath) && themePath != L"Default") {
+        Config::SetConfig(Config::ThemeFilePath, L"Default");
         Config::SaveUserSetting();
         if (themePath.length()) {
             View::DrawMenuPrevState menuPrevState;
             View::DrawMenuCenter(
                 menuPrevState,
                 L"",
-                {{std::format(L"Can't load theme {}", themePath), 0}},
+                {
+                    {std::format(L"Can't load theme {}", themePath), 0}
+            },
                 -1
             );
             InputHandle::Get();
         }
     }
     if (!settingLoadSuccess ||
-        !Config::GetSetting(L"LanguageFilePath").length()) {
+        !Config::GetConfig(L"LanguageFilePath").length()) {
         return NavHost.Navigate("FirstTimeLanguageScreen");
     } else {
         Language::LoadLanguageFromFile(
-            Config::GetSetting(Config::LanguageFilePath)
+            Config::GetConfig(Config::LanguageFilePath)
         );
         return NavHost.Navigate("MainMenu");
     }
@@ -51,7 +53,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
             -1
         );
         tmp = InputHandle::Get();
-        if (Config::GetSetting(Config::SoundEffect) == Config::Value_True) {
+        if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
             Utils::PlayKeyPressSound();
         }
         if (Utils::keyMeanLeft(tmp)) {
@@ -61,7 +63,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
             userSelect = Utils::modCycle(userSelect + 1, languages.size());
         }
         if (tmp == L"\r") {
-            Config::SetSetting(
+            Config::SetConfig(
                 Config::LanguageFilePath,
                 languages[userSelect].path.generic_wstring()
             );
@@ -76,7 +78,7 @@ void StartUp::FirstTimeMusicScreen(NavigationHost& NavHost)
 {
     bool userOption =
         Common::ConfirmPrompt(Language::GetString(L"ENABLE_MUSIC_Q"));
-    Config::SetSetting(Config::BGMusic, (userOption ? L"True" : L"False"));
+    Config::SetConfig(Config::BGMusic, (userOption ? L"True" : L"False"));
     return NavHost.Navigate("FirstTimeSoundEffectScreen");
 }
 
@@ -84,7 +86,7 @@ void StartUp::FirstTimeSoundEffectScreen(NavigationHost& NavHost)
 {
     bool userOption =
         Common::ConfirmPrompt(Language::GetString(L"ENABLE_SOUND_EFFECT_Q"));
-    Config::SetSetting(Config::SoundEffect, (userOption ? L"True" : L"False"));
+    Config::SetConfig(Config::SoundEffect, (userOption ? L"True" : L"False"));
     Config::SaveUserSetting();
     return NavHost.Navigate("FirstTimeTutorialScreen");
 }

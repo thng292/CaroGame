@@ -1,29 +1,30 @@
 #pragma once
-#include <memory>
-#include <mutex>
 
 #include "Audio.h"
 
-namespace BackgroundAudioService {
-    extern Audio::AudioPlayer player;
+static class BackgroundAudioService {
+    static Audio::AudioPlayer player;
 
-    inline int ChangeSong(Audio::Sound song)
+   public:
+    BackgroundAudioService() = delete;
+
+    static inline int ChangeSong(Audio::Sound song)
     {
         player.Close();
         return player.Open(song);
     }
 
-    inline int Pause() { return player.Pause(); }
+    static inline int Pause() { return player.Pause(); }
 
-    inline int Resume() { return player.Resume(); }
+    static inline int Resume() { return player.Resume(); }
 
-    inline int Stop() { return player.Stop(); }
+    static inline int Stop() { return player.Stop(); }
 
-    inline int Play(bool fromStart = 0, bool repeat = 1)
+    static inline int Play(bool fromStart = 0, bool repeat = 1)
     {
         return player.Play(fromStart, repeat);
     }
 
-    inline Audio::Sound GetCurrentSong() { return player.getCurrentSong(); }
+    static inline Audio::Sound GetCurrentSong() { return player.getCurrentSong(); }
 
-};  // namespace BackgroundAudioService
+};

@@ -3,7 +3,7 @@
 void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
 {
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
-    if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+    if (Config::GetConfig(Config::BGMusic) == Config::Value_True) {
         if (BackgroundAudioService::GetCurrentSong() != Audio::Sound::MenuBGM) {
             BackgroundAudioService::ChangeSong(Audio::Sound::MenuBGM);
             BackgroundAudioService::Play(true, true);
@@ -35,7 +35,7 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
         {Language::GetString(L"EXIT_TITLE"),
          Language::GetString(L"EXIT_SHORTCUT")[0]    },
     };
-    auto& soundEffect = Config::GetSetting(L"SoundEffect");
+    auto& soundEffect = Config::GetConfig(L"SoundEffect");
     View::DrawMenuPrevState menuPrevState;
 
     while (1) {  // Main while loop

@@ -8,7 +8,9 @@ std::pair<short, short> CalcPosCenter(short menuWidth, short menuHeight);
 View::Rect DrawSettingMenu(
     const std::vector<std::wstring>& titles,
     const std::vector<std::wstring>& options,
-    int select
+    int select,
+    int prevSelect,
+    bool updateSelectOnly
 )
 {
     short titlesWidth = CalcMaxWidth(titles);
@@ -20,17 +22,22 @@ View::Rect DrawSettingMenu(
         posCenter.first,
         posCenter.first + menuWidth - 1,
         posCenter.second + menuHeight - 1};
-    View::DrawRect(DrawnRect);
+    if (!updateSelectOnly) {
+        View::DrawRect(DrawnRect);
+    }
     posCenter.first += View::BORDER_WIDTH + View::HPADDING;
     posCenter.second += View::BORDER_WIDTH + View::VPADDING;
-    View::WriteToView(
-        posCenter.first,
-        posCenter.second,
-        Language::GetString(L"SETTINGS_TITLE")
-    );
+    if (!updateSelectOnly) {
+        View::WriteToView(
+            posCenter.first,
+            posCenter.second,
+            Language::GetString(L"SETTINGS_TITLE")
+        );
+    }
     posCenter.second += 2;
     titlesWidth += 2;
     for (size_t i = 0; i < titles.size(); i++) {
+        if (updateSelectOnly && !(select == i || prevSelect == i)) continue;
         View::WriteToView(posCenter.first, posCenter.second + i, titles[i]);
         View::WriteToView(
             posCenter.first + titlesWidth - 2, posCenter.second + i, L":"
@@ -59,12 +66,15 @@ void Setting::SettingScreen(NavigationHost& NavHost)
     auto themeList = Theme::DiscoverThemeFiles();
     themeList.insert(themeList.begin(), {L"Default"});
 
-    auto& currentLanguagePath = Config::GetSetting(Config::LanguageFilePath);
-    auto& currentThemePath = Config::GetSetting(Config::ThemeFilePath);
-    auto& musicSetting = Config::GetSetting(Config::BGMusic);
-    auto& soundEffectSetting = Config::GetSetting(Config::SoundEffect);
-    auto& undoSetting = Config::GetSetting(Config::UndoOption);
+    auto& currentLanguagePath = Config::GetConfig(Config::LanguageFilePath);
+    auto& currentThemePath = Config::GetConfig(Config::ThemeFilePath);
+    auto& musicSetting = Config::GetConfig(Config::BGMusic);
+    auto& soundEffectSetting = Config::GetConfig(Config::SoundEffect);
+    auto& undoSetting = Config::GetConfig(Config::UndoOption);
+    auto& hintSetting = Config::GetConfig(Config::Hint);
+    auto& fourWarningSetting = Config::GetConfig(Config::FourWarning);
 
+    int prevSelect = 0;
     int select = 0;
     int langSelect = std::find_if(
                          langList.begin(),
@@ -91,6 +101,8 @@ void Setting::SettingScreen(NavigationHost& NavHost)
         Language::GetString(L"BG_MUSIC_TITLE"),
         Language::GetString(L"SOUND_EFFECT_TITLE"),
         Language::GetString(L"UNDO_OPTION_TITLE"),
+        Language::GetString(L"HINT_OPTION_TITLE"),
+        Language::GetString(L"FOUR_WARNING_TITLE"),
     };
 
     std::vector<std::wstring> options = {
@@ -103,10 +115,15 @@ void Setting::SettingScreen(NavigationHost& NavHost)
             : Language::GetString(L"OFF_TITLE"),
         undoSetting == Config::Value_True ? Language::GetString(L"ON_TITLE")
                                           : Language::GetString(L"OFF_TITLE"),
+        hintSetting == Config::Value_True ? Language::GetString(L"ON_TITLE")
+                                          : Language::GetString(L"OFF_TITLE"),
+        fourWarningSetting == Config::Value_True
+            ? Language::GetString(L"ON_TITLE")
+            : Language::GetString(L"OFF_TITLE"),
     };
 
     auto musicCheck = [&musicSetting, &NavHost]() {
-        if (Config::GetSetting(Config::BGMusic) == Config::Value_True) {
+        if (Config::GetConfig(Config::BGMusic) == Config::Value_True) {
             if (!NavHost.CheckContext(Constants::CURRENT_BGM)) {
                 return;
             }
@@ -126,9 +143,13 @@ void Setting::SettingScreen(NavigationHost& NavHost)
 
     DrawHints();
     View::Rect DrawnRect;
+    bool updateSelection = 0;
 
     while (true) {
-        DrawnRect = DrawSettingMenu(titles, options, select);
+        DrawnRect = DrawSettingMenu(
+            titles, options, select, prevSelect, updateSelection
+        );
+        updateSelection = 0;
         auto tmp = InputHandle::Get();
         if (soundEffectSetting == Config::Value_True) {
             if (tmp == L"\r") {
@@ -141,10 +162,14 @@ void Setting::SettingScreen(NavigationHost& NavHost)
             return NavHost.Back();
         }
         if (Utils::keyMeanDown(tmp)) {
+            prevSelect = select;
             select = Utils::modCycle(select + 1, titles.size() + 1);
+            updateSelection = 1;
         }
         if (Utils::keyMeanUp(tmp)) {
+            prevSelect = select;
             select = Utils::modCycle(select - 1, titles.size() + 1);
+            updateSelection = 1;
         }
         if (select == 0) {
             if (Utils::keyMeanLeft(tmp)) {
@@ -199,31 +224,52 @@ void Setting::SettingScreen(NavigationHost& NavHost)
                                      : Language::GetString(L"OFF_TITLE");
                     break;
                 case 5:
+                    hintSetting =
+                        (hintSetting == Config::Value_True
+                             ? Config::Value_False
+                             : Config::Value_True);
+                    options[5] = hintSetting == Config::Value_True
+                                     ? Language::GetString(L"ON_TITLE")
+                                     : Language::GetString(L"OFF_TITLE");
+                    break;
+                case 6:
+                    fourWarningSetting =
+                        (fourWarningSetting == Config::Value_True
+                             ? Config::Value_False
+                             : Config::Value_True);
+                    options[6] = fourWarningSetting == Config::Value_True
+                                     ? Language::GetString(L"ON_TITLE")
+                                     : Language::GetString(L"OFF_TITLE");
+                    break;
+                case 7:
                     return NavHost.Back();
             }
         }
         if (tmp == L" ") {
-            Config::SetSetting(
-                Config::ThemeFilePath,
-                themeList[themeSelect].filePath
+            Config::SetConfig(
+                Config::ThemeFilePath, themeList[themeSelect].filePath
             );
-            Config::SetSetting(L"LanguageFilePath", langList[langSelect].path);
+            Config::SetConfig(L"LanguageFilePath", langList[langSelect].path);
+
             Language::LoadLanguageFromFile(langList[langSelect].path);
             if (themeSelect) {
                 Theme::LoadTheme(themeList[themeSelect].filePath);
             } else {
                 Theme::LoadDefaultTheme();
             }
+
             if (Config::SaveUserSetting()) {
-                return NavHost.Navigate("SettingApplied");
+                return NavHost.NavigateStack("SettingApplied");
             } else {
-                return NavHost.Navigate("SettingsAppliedFailed");
+                return NavHost.NavigateStack("SettingsAppliedFailed");
             }
         }
         if (tmp == L"B" || tmp == L"b") {
             return NavHost.Back();
         }
-        View::ClearRect(DrawnRect);
+        if (!updateSelection) {
+            View::ClearRect(DrawnRect);
+        }
     }
 }
 

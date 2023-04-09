@@ -31,7 +31,7 @@ void SaveScreen::SaveScreen(NavigationHost& NavHost)
         }
     };
 
-    auto& soundEffect = Config::GetSetting(Config::SoundEffect);
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
     auto& title = Language::GetString(L"SAVE_MENU_TITLE");
     auto& leadingText = Language::GetString(L"NAMING_FIELD_TITLE");
 

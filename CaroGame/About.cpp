@@ -38,7 +38,11 @@ void About::AboutScreen(NavigationHost& NavHost)
 
     View::DrawTextCenterdVertically(
         27,
-        std::format(L"B: {}", Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")),
+        std::format(
+            L"Enter: {}, B: {}",
+            Language::GetString(L"OPEN_SOURCE_CODE_LINK_TITLE"),
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
+        ),
         View::Color::LIGHT_RED
     );
     while (1) {
