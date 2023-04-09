@@ -5,7 +5,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     auto gameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
         ));
-    const short WIDTH = 50, HEIGHT = 2 * 9;
+    const short WIDTH = 47, HEIGHT = 2 * 9;
 
     short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
 

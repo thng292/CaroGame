@@ -507,9 +507,11 @@ void GameScreenAction::HighlightWarning(
     pointList = GameAction::GetWarningPoints(board, move, player.value);
     if (pointList.size() != 3) return;
     View::Color color = Theme::GetColor(ThemeColor::WARNING_COLOR);
+    lock.lock();
     for (auto& point : pointList) {
         DrawMove(gameScreen, point, player, colorMatrix, color);
     }
+    lock.unlock();
 }
 
 void GameScreenAction::UnhighlightWarning(
@@ -525,8 +527,10 @@ void GameScreenAction::UnhighlightWarning(
     View::Color color = (player.value == Constants::PLAYER_ONE.value)
                             ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
                             : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
+    lock.lock();
     for (auto& point : pointList) {
         DrawMove(gameScreen, point, player, colorMatrix, color);
     }
+    lock.unlock();
     pointList.clear();
 }
