@@ -1,7 +1,8 @@
 #pragma once
-#include <string>
-
+#include <Windows.h>
 #include "Container.h"
+#include "Constants.h"
+#include "Theme.h"
 
 // Container for the actual game's board
 class BoardContainer {

@@ -9,6 +9,7 @@
 #include "Language.h"
 #include "Logic.h"
 #include "View.h"
+#include "Theme.h"
 
 namespace GameScreenAction {
 
@@ -98,7 +99,9 @@ namespace GameScreenAction {
         AI& ai,
         std::vector<GameAction::Point>& warningPointList,
 
-        ColorMatrix& colorMatrix
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
     );
 
     void DeleteMoveFromScreen(
@@ -213,7 +216,9 @@ namespace GameScreenAction {
         const GameAction::Point& move,
         const Constants::Player& player,
         std::vector<GameAction::Point>& pointList,
-        ColorMatrix& colorMatrix
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
 
     );
 
@@ -221,7 +226,9 @@ namespace GameScreenAction {
         GameScreen& gameScreen,
         const Constants::Player& player,
         std::vector<GameAction::Point>& pointList,
-        ColorMatrix& colorMatrix
+        ColorMatrix& colorMatrix,
+        std::mutex& lock
+
     );
 
 }  // namespace GameScreenAction

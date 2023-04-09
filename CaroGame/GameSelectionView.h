@@ -13,6 +13,7 @@
 #include "Pokemon.h"
 #include "Utils.h"
 #include "View.h"
+#include "Theme.h"
 
 namespace GameSelectionView {
     // View when choosing PvP / PvE

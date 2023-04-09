@@ -1,8 +1,5 @@
 #include "BoardContainer.h"
 
-#include <Windows.h>
-
-#include "Constants.h"
 
 void BoardContainer::DrawBoardContainer()
 {
@@ -14,17 +11,20 @@ void BoardContainer::DrawBoardContainer()
 
 void BoardContainer::DrawBoardRow()
 {
-    auto stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    DWORD tmp = 0;
     for (short row = 0; row < Constants::BOARD_SIZE + 1; ++row) {
-        FillConsoleOutputCharacter(
-            stdHandle,
-            L'\u2550',
-            CELL_WIDTH * Constants::BOARD_SIZE,
-            {xCoord, yCoord + row * CELL_HEIGHT},
-            &tmp
-        );
+        for (short i = 0; i < Constants::BOARD_SIZE; ++i) {
+            for (short j = 0; j < CELL_WIDTH; j++) {
+                View::WriteToView(
+                    xCoord + i * CELL_WIDTH + j,
+                    yCoord + row * CELL_HEIGHT,
+                    L'\u2550',
+                    false,
+                    Theme::GetColor(ThemeColor::BORDER_COLOR)
+                );
+            }
+        }
     }
+
 }
 
 void BoardContainer::DrawBoardCol()
@@ -35,7 +35,9 @@ void BoardContainer::DrawBoardCol()
                 View::WriteToView(
                     xCoord + col * CELL_WIDTH,
                     yCoord + i * CELL_HEIGHT + j,
-                    L'\u2551'
+                    L'\u2551',
+                    false,
+                    Theme::GetColor(ThemeColor::BORDER_COLOR)
                 );
             }
         }

@@ -34,7 +34,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
                 Language::GetString(L"WIN_TEXT")
 
             );
-            tempColor = (View::Color)Constants::PLAYER_ONE_COLOR;
+            tempColor = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
             X_PIVOT -= 2;
             break;
         case Constants::END_GAME_WIN_TWO:
@@ -46,7 +46,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
                 Language::GetString(L"WIN_TEXT")
 
             );
-            tempColor = (View::Color)Constants::PLAYER_TWO_COLOR;
+            tempColor = Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
             X_PIVOT += 1;
             break;
         case Constants::END_GAME_WIN_TIME_ONE:
@@ -58,7 +58,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
                 Language::GetString(L"WIN_TIME_TEXT")
 
             );
-            tempColor = (View::Color)Constants::PLAYER_ONE_COLOR;
+            tempColor = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
             X_PIVOT += 1;
             break;
         case Constants::END_GAME_WIN_TIME_TWO:
@@ -70,7 +70,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
                 Language::GetString(L"WIN_TIME_TEXT")
 
             );
-            tempColor = (View::Color)Constants::PLAYER_TWO_COLOR;
+            tempColor = Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
             X_PIVOT += 1;
             break;
         case Constants::END_GAME_DRAW:
@@ -173,23 +173,27 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     // AI Diff
     y += 2;
     std::wstring aiDiffValue;
+    View::Color aiColor = Theme::GetColor(ThemeColor::TEXT_COLOR);
     if (gameState.gameMode == Constants::GAME_MODE_PVE) {
         switch (gameState.aiDifficulty) {
             case AI::AI_DIFFICULTY_EASY:
                 aiDiffValue = Language::GetString(L"OPTION_AI_EASY");
+                aiColor = Theme::GetColor(ThemeColor::AI_EASY_COLOR);
                 break;
             case AI::AI_DIFFICULTY_NORMAL:
                 aiDiffValue = Language::GetString(L"OPTION_AI_NORMAL");
+                aiColor = Theme::GetColor(ThemeColor::AI_NORMAL_COLOR);
                 break;
             case AI::AI_DIFFICULTY_HARD:
                 aiDiffValue = Language::GetString(L"OPTION_AI_HARD");
+                aiColor = Theme::GetColor(ThemeColor::AI_HARD_COLOR);
                 break;
         }
     } else {
         aiDiffValue = Language::GetString(L"OPTION_NULL");
     }
     DrawLabelValue(
-        x, y, aiDifficultyLabel, aiDiffValue, WIDTH
+        x, y, aiDifficultyLabel, aiDiffValue, WIDTH, aiColor
 
     );
 
@@ -252,7 +256,7 @@ void GameEndView::DrawLabelValuesAdjacent(
         playerOneValue,
         (wchar_t)0U,
         false,
-        (View::Color)Constants::PLAYER_ONE_COLOR
+        Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
     );
     x = X_MID_PIVOT;
     View::WriteToView(x, y, L"|");
@@ -263,7 +267,7 @@ void GameEndView::DrawLabelValuesAdjacent(
         playerTwoValue,
         (wchar_t)0U,
         false,
-        (View::Color)Constants::PLAYER_TWO_COLOR
+        Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
     );
 }
 
@@ -272,11 +276,12 @@ void GameEndView::DrawLabelValue(
     short y,
     const std::wstring& label,
     const std::wstring& value,
-    short width
+    short width,
+    View::Color color
 )
 {
     x += 2;
     View::WriteToView(x, y, label);
     x += width / 2 + 3;
-    View::WriteToView(x, y, value, (wchar_t)0U, false, View::Color::GREEN);
+    View::WriteToView(x, y, value, (wchar_t)0U, false, color);
 }

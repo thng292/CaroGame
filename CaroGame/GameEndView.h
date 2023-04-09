@@ -33,6 +33,8 @@ namespace GameEndView {
         short y,
         const std::wstring& label,
         const std::wstring& value,
-        short width
+        short width,
+        View::Color color = Theme::GetColor(ThemeColor::TEXT_COLOR)
+
     );
 }  // namespace GameEndView

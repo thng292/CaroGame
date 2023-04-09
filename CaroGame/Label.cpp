@@ -11,32 +11,7 @@ void Label::DrawLabelCenter(
     const short X_CENTER = ((X_RIGHT - X_LEFT + 1) % 2 == 0)
                                ? (X_RIGHT - X_LEFT - VALUE.size()) / 2
                                : (X_RIGHT - X_LEFT - VALUE.size()) / 2 + 1;
-    View::WriteToView(X + X_CENTER, Y, VALUE);
-}
-
-void Label::DrawLabelGrid(
-    const short& X,
-    const short& Y,
-    const std::vector<std::wstring>& VALUE_LIST,
-    const short& COL_NUM
-)
-{
-    const short X_SPACE = 2, Y_SPACE = 1;
-    short ind = 0;
-    const short LIST_LENGTH = VALUE_LIST.size();
-
-    short row = 0, col = 0;
-    while (ind < LIST_LENGTH) {
-        View::WriteToView(
-            X + X_SPACE * col, Y + Y_SPACE * row, VALUE_LIST[ind]
-        );
-        ind++;
-        col++;
-        if (col >= COL_NUM) {
-            row++;
-            col = 0;
-        }
-    }
+    View::WriteToView(X + X_CENTER, Y, VALUE, (wchar_t)0U, false, Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR));
 }
 
 void Label::DrawGameScreenHint(
@@ -46,7 +21,7 @@ void Label::DrawGameScreenHint(
     if (!isReplay) {
         const std::vector<std::wstring> INSTRUCTION_LIST = {
             Label::GetShortcutString(
-                L"A, W, S, D, \u2190\u2191\u2192\u2193",
+                L"A, W, D, S, \u2190\u2191\u2192\u2193",
                 Language::GetString(L"NAVIGATION_KEYS_TITLE")
             ),
             Label::GetShortcutString(
@@ -61,34 +36,47 @@ void Label::DrawGameScreenHint(
             Label::GetShortcutString(
                 Language::GetString(L"PAUSE_SHORTCUT"),
                 Language::GetString(L"PAUSE_TITLE")
+            ),
+            Label::GetShortcutString(
+                Language::GetString(L"HINT_SHORTCUT"),
+                Language::GetString(L"HINT_OPTION_TITLE")
+            ),
+            Label::GetShortcutString(
+                Language::GetString(L"GHOST_SHORTCUT"),
+                Language::GetString(L"GHOST_TITLE")
             )
 
         };
-        short spaceVal = 5;
-        std::wstring row1, row2, space(spaceVal, L' ');
-        row1 = INSTRUCTION_LIST[0] + space + INSTRUCTION_LIST[1];
-        if (INSTRUCTION_LIST[0].size() > INSTRUCTION_LIST[2].size()) {
-            std::wstring space(
-                spaceVal + INSTRUCTION_LIST[0].size() -
-                    INSTRUCTION_LIST[2].size(),
-                L' '
+        short spaceVal = 3;
+        std::vector<std::wstring> hintRows;
+
+        short maxLeftHintLength = std::max<short>(
+            INSTRUCTION_LIST[0].size(),
+            std::max<short>(
+            INSTRUCTION_LIST[2].size(),
+            INSTRUCTION_LIST[4].size())
+        );
+
+        short maxLen = 0;
+
+        for (size_t i = 0; i < 6; i += 2) {
+            hintRows.push_back(
+                INSTRUCTION_LIST[i] +
+                ExtraSpace(INSTRUCTION_LIST[i], maxLeftHintLength, spaceVal) +
+                INSTRUCTION_LIST[i + 1]
             );
-            row2 = INSTRUCTION_LIST[2] + space + INSTRUCTION_LIST[3];
-        } else {
-            std::wstring space(
-                spaceVal -
-                    (INSTRUCTION_LIST[2].size() - INSTRUCTION_LIST[0].size()),
-                L' '
-            );
-            row2 = INSTRUCTION_LIST[2] + space + INSTRUCTION_LIST[3];
+            maxLen = std::max<short>(maxLen, hintRows[hintRows.size()-1].size());
         }
 
-        short maxLen = std::max<short>(row1.size(), row2.size());
+
         short centerX = Label::GetCenterX(logX, logWidth, maxLen),
               y = logY + logHeight + 1;
 
-        View::WriteToView(centerX, y, row1);
-        View::WriteToView(centerX, y + 1, row2);
+        for (size_t i = 0; i < 3; ++i) {
+            View::WriteToView(centerX, y + i, hintRows[i]);
+        }
+
+       
     } else {
         View::WriteToView(
             logX,
@@ -111,7 +99,15 @@ inline std::wstring Label::GetShortcutString(
     const std::wstring shortcut, const std::wstring title
 )
 {
+
     return shortcut + L": " + title;
+}
+
+std::wstring Label::ExtraSpace(
+    const std::wstring& hint, short maxLeftLength, short space
+)
+{
+    return std::wstring(space + maxLeftLength - hint.size(), L' ');
 }
 
 inline short Label::GetCenterX(short x, short width, short length)

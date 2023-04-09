@@ -21,7 +21,7 @@ void Container::DrawToLogContainer(
 
 )
 {
-    short maxRow = 6;
+    short maxRow = 5;
     short maxDisplay = (winMethod != 0) ? maxRow - 1 - !isReplay : maxRow;
     short valueListSize = valueList.size();
     short numOfValueDisplay = (valueListSize >= maxDisplay) ? maxDisplay : valueListSize;
@@ -69,7 +69,7 @@ void Container::DrawToLogContainer(
         if (isPlayerOneTurn) {
             playerName = playerNameOne;
             playerSymbol = Constants::PLAYER_ONE.symbol;
-            color = View::Color::RED;
+            color = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
             if (playerNameOne.size() < playerNameTwo.size()) {
                 extraSpace = temp;
             }
@@ -77,7 +77,7 @@ void Container::DrawToLogContainer(
         } else {
             playerName = playerNameTwo;
             playerSymbol = Constants::PLAYER_TWO.symbol;
-            color = View::Color::BLUE;
+            color = Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
             if (playerNameTwo.size() < playerNameOne.size()) {
                 extraSpace = temp;
             }
@@ -154,7 +154,7 @@ void Container::DrawToLogContainer(
             value,
             (wchar_t)0U,
             false,
-            View::Color::YELLOW
+            Theme::GetColor(ThemeColor::RESULT_TEXT_COLOR)
         );
         if (!isReplay) {
             value = Language::GetString(L"SPACE_KEY_CONTINUE");
@@ -163,10 +163,7 @@ void Container::DrawToLogContainer(
             View::WriteToView(
                 X_CENTER,
                 yCoord + yOffset + numOfValueDisplay + 1,
-                value,
-                (wchar_t)0U,
-                false,
-                View::Color::BLACK
+                value
             );
         }
         

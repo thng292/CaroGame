@@ -148,11 +148,11 @@ void GameScreenAction::HightLightWin(
     View::Color color;
     if (unhighlight) {
         if (playerValue == Constants::PLAYER_ONE.symbol)
-            color = (View::Color)Constants::PLAYER_ONE_COLOR;
+            color = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
         else
-            color = (View::Color)Constants::PLAYER_TWO_COLOR;
+            color = Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
     } else
-        color = (View::Color)Constants::WIN_HIGHLIGHT;
+        color = Theme::GetColor(ThemeColor::WIN_HIGHLIGHT_COLOR);
 
     while (cnt < 5) {
         gameScreen.boardContainer.DrawToBoardContainerCell(
@@ -173,8 +173,8 @@ void GameScreenAction::HighlightMove(
 {
     if (move.row == -1) return;
     View::Color color = (value == Constants::PLAYER_ONE.symbol)
-                            ? (View::Color)Constants::PLAYER_ONE_HIGHLIGHT
-                            : (View::Color)Constants::PLAYER_TWO_HIGHLIGHT;
+                            ? Theme::GetColor(ThemeColor::PLAYER_ONE_HIGHLIGHT_COLOR)
+                            : Theme::GetColor(ThemeColor::PLAYER_TWO_HIGHLIGHT_COLOR);
     colorMatrix[move.row][move.col] = color;
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, value, color
@@ -190,8 +190,8 @@ void GameScreenAction::UnhightlightMove(
 {
     if (move.row == -1) return;
     View::Color color = (value == Constants::PLAYER_ONE.symbol)
-                            ? (View::Color)Constants::PLAYER_ONE_COLOR
-                            : (View::Color)Constants::PLAYER_TWO_COLOR;
+                            ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
+                            : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
     colorMatrix[move.row][move.col] = color;
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, value, color
@@ -239,7 +239,9 @@ void GameScreenAction::LoadGameToView(
     GameState& gameState,
     AI& ai,
     std::vector<GameAction::Point>& warningPointList,
-    ColorMatrix& colorMatrix
+    ColorMatrix& colorMatrix,
+    std::mutex& lock
+
 )
 {
     bool isPlayerOne = gameState.playerOneFirst;
@@ -251,11 +253,11 @@ void GameScreenAction::LoadGameToView(
     for (size_t i = 0; i < moveListSize; ++i) {
         if (isPlayerOne) {
             player = Constants::PLAYER_ONE;
-            color = (View::Color)Constants::PLAYER_ONE_COLOR;
+            color = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
 
         } else {
             player = Constants::PLAYER_TWO;
-            color = (View::Color)Constants::PLAYER_TWO_COLOR;
+            color = Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
         }
         move = {gameState.moveList[i].first, gameState.moveList[i].second};
         board[move.row][move.col] = player.value;
@@ -266,7 +268,7 @@ void GameScreenAction::LoadGameToView(
         DrawMove(gameScreen, move, player, colorMatrix, color);
         if (i == moveListSize - 1) {
             HighlightWarning(
-                gameScreen, board, move, player, warningPointList, colorMatrix
+                gameScreen, board, move, player, warningPointList, colorMatrix, lock
             );
             HighlightMove(gameScreen, move, player.symbol, colorMatrix);
         }
@@ -329,7 +331,7 @@ void GameScreenAction::DrawHintMove(
 
 )
 {
-    View::Color color = View::Color::YELLOW;
+    View::Color color = Theme::GetColor(ThemeColor::HINT_COLOR);
     lock.lock();
     DrawMove(gameScreen, move, player, colorMatrix, color);
     lock.unlock();
@@ -462,7 +464,7 @@ void GameScreenAction::DrawGhostMove(
     ColorMatrix& colorMatrix
 )
 {
-    View::Color color = View::Color::GRAY;
+    View::Color color = Theme::GetColor(ThemeColor::GHOST_MOVE_COLOR);
     DrawMove(gameScreen, move, player, colorMatrix, color);
 }
 
@@ -498,13 +500,15 @@ void GameScreenAction::HighlightWarning(
     const GameAction::Point& move,
     const Constants::Player& player,
     std::vector<GameAction::Point>& pointList,
-    ColorMatrix& colorMatrix
+    ColorMatrix& colorMatrix,
+    std::mutex&lock
 )
 {
     pointList = GameAction::GetWarningPoints(board, move, player.value);
     if (pointList.size() != 3) return;
+    View::Color color = Theme::GetColor(ThemeColor::WARNING_COLOR);
     for (auto& point : pointList) {
-        DrawMove(gameScreen, point, player, colorMatrix, View::Color::MAGENTA);
+        DrawMove(gameScreen, point, player, colorMatrix, color);
     }
 }
 
@@ -512,13 +516,15 @@ void GameScreenAction::UnhighlightWarning(
     GameScreen& gameScreen,
     const Constants::Player& player,
     std::vector<GameAction::Point>& pointList,
-    ColorMatrix& colorMatrix
+    ColorMatrix& colorMatrix,
+    std::mutex& lock
+
 )
 {
     if (pointList.size() != 3) return;
     View::Color color = (player.value == Constants::PLAYER_ONE.value)
-                            ? (View::Color)Constants::PLAYER_ONE_COLOR
-                            : (View::Color)Constants::PLAYER_TWO_COLOR;
+                            ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
+                            : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
     for (auto& point : pointList) {
         DrawMove(gameScreen, point, player, colorMatrix, color);
     }

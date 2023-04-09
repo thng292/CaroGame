@@ -2,6 +2,8 @@
 
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
+    std::mutex lock;
+
     GameScreenAction::ColorMatrix colorMatrix(
         Constants::BOARD_SIZE,
         std::vector<View::Color>(
@@ -55,7 +57,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         curGameState,
         myAI,
         warningPointList,
-        colorMatrix
+        colorMatrix,
+        lock
     );
 
     short row = 0, col = 0;
@@ -96,7 +99,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     const short timeAddition =
         (curGameState.gameType == Constants::GAME_TYPE_NORMAL) ? 1 : -1;
 
-    std::mutex lock;
 
     Timer timerPlayerOne(
         [&] {
@@ -288,7 +290,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 gameScreen, hintMove, colorMatrix, lock
             );
             GameScreenAction::UnhighlightWarning(
-                gameScreen, prevPlayer, warningPointList, colorMatrix
+                gameScreen, prevPlayer, warningPointList, colorMatrix, lock
             );
 
             if ((curGameState.gameMode == Constants::GAME_MODE_PVP) ||
@@ -339,7 +341,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 latestMove,
                 prevPlayer,
                 warningPointList,
-                colorMatrix
+                colorMatrix,
+                lock
             );
             currentBoard = gameBoard;
         }
@@ -443,7 +446,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         gameScreen, hintMove, colorMatrix, lock
                     );
                     GameScreenAction::UnhighlightWarning(
-                        gameScreen, prevPlayer, warningPointList, colorMatrix
+                        gameScreen, prevPlayer, warningPointList, colorMatrix, lock
                     );
 
                     GameScreenAction::HandlePlayerMove(
@@ -479,7 +482,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         latestMove,
                         prevPlayer,
                         warningPointList,
-                        colorMatrix
+                        colorMatrix,
+                        lock
                     );
 
                     // AI's turn
@@ -503,7 +507,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         );
 
                         GameScreenAction::UnhighlightWarning(
-                            gameScreen, curPlayer, warningPointList, colorMatrix
+                            gameScreen, curPlayer, warningPointList, colorMatrix, lock
                         );
 
                         if (isPlayerOneTurn) {
@@ -522,7 +526,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                             latestMove,
                             prevPlayer,
                             warningPointList,
-                            colorMatrix
+                            colorMatrix,
+                            lock
                         );
                     }
                 }

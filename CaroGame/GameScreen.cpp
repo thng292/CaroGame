@@ -37,7 +37,7 @@ GameScreen::GameScreen(short x, short y)
 
     x = X_PIVOT;
     y += playerInfoContainerOne.cellHeight + timerContainerOne.cellHeight;
-    InitElement(logContainer, x, y, 54, 7, 7, 1);
+    InitElement(logContainer, x, y, 54, 6, 7, 1);
 }
 
 void GameScreen::DrawGameScreen(bool isReplay)
@@ -100,10 +100,10 @@ void GameScreen::DrawGameScreen(bool isReplay)
 void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
 {
     playerContainerOne.DrawToContainer(
-        Constants::PLAYER_ONE.symbol, (View::Color)Constants::PLAYER_ONE_COLOR
+        Constants::PLAYER_ONE.symbol, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
     );
     playerContainerTwo.DrawToContainer(
-        Constants::PLAYER_TWO.symbol, (View::Color)Constants::PLAYER_TWO_COLOR
+        Constants::PLAYER_TWO.symbol, Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
     );
 
     short temp =
@@ -118,10 +118,10 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
         (gameState.playerNameTwo.size() % 2 == 0) ? temp + 1 : temp;
 
     playerInfoContainerOne.DrawToContainer(
-        gameState.playerNameOne, (View::Color)Constants::PLAYER_ONE_COLOR
+        gameState.playerNameOne, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
     );
     playerInfoContainerTwo.DrawToContainer(
-        gameState.playerNameTwo, (View::Color)Constants::PLAYER_TWO_COLOR
+        gameState.playerNameTwo, Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
     );
 
     std::wstring playerScoreOne =
@@ -135,27 +135,27 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
             : std::format(L"{}", gameState.playerScoreTwo);
 
     winCountContainerOne.DrawToContainer(
-        playerScoreOne, View::Color::LIGHT_RED
+        playerScoreOne, Theme::GetColor(ThemeColor::PLAYER_ONE_HIGHLIGHT_COLOR)
     );
     winCountContainerTwo.DrawToContainer(
-        playerScoreTwo, View::Color::LIGHT_BLUE
+        playerScoreTwo, Theme::GetColor(ThemeColor::PLAYER_TWO_HIGHLIGHT_COLOR)
     );
 
     if (!isReplay) {
         timerContainerOne.DrawToContainer(
             Utils::SecondToMMSS(gameState.playerTimeOne),
-            (View::Color)Constants::PLAYER_ONE_COLOR
+            Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
         );
         timerContainerTwo.DrawToContainer(
             Utils::SecondToMMSS(gameState.playerTimeTwo),
-            (View::Color)Constants::PLAYER_TWO_COLOR
+            Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
         );
     } else {
         timerContainerOne.xOffset -= 1;
         timerContainerTwo.xOffset -= 1;
 
-        timerContainerOne.DrawToContainer(L"\u221eREPLAY", View::Color::YELLOW);
-        timerContainerTwo.DrawToContainer(L"REPLAY\u221e", View::Color::YELLOW);
+        timerContainerOne.DrawToContainer(L"\u221eREPLAY", Theme::GetColor(ThemeColor::RESULT_TEXT_COLOR));
+        timerContainerTwo.DrawToContainer(L"REPLAY\u221e", Theme::GetColor(ThemeColor::RESULT_TEXT_COLOR));
     }
 
     const short avatarOffset[] = {3, 2, 3, 5, 2, 2, 3, 4, 2};

@@ -192,11 +192,10 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         }
         View::DrawBorder(
             drawnRect,
-            View::Color(
-                player1Selection.Top ? Constants::PLAYER_TWO_COLOR
-                                     : Constants::PLAYER_ONE_COLOR
-            )
+            player1Selection.Top ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
+                                 : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
         );
+        
 
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
@@ -265,6 +264,10 @@ void GameSelectionView::DrawCurrentOptionBox(
     std::wstring GAME_MODE_VALUE;
     std::wstring AI_DIFFICULTY_VALUE;
 
+    View::Color titleColor = Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR);
+    View::Color valueColor = Theme::GetColor(ThemeColor::TEXT_COLOR);
+    View::Color aiColor = Theme::GetColor(ThemeColor::TEXT_COLOR);
+
     if (selected > 0) {
         GAME_TYPE_VALUE = (gameState.gameType == Constants::GAME_TYPE_NORMAL)
                               ? Language::GetString(L"OPTION_TYPE_NORMAL")
@@ -298,14 +301,17 @@ void GameSelectionView::DrawCurrentOptionBox(
                 case AI::AI_DIFFICULTY_EASY:
                     AI_DIFFICULTY_VALUE =
                         Language::GetString(L"OPTION_AI_EASY");
+                    aiColor = Theme::GetColor(ThemeColor::AI_EASY_COLOR);
                     break;
                 case AI::AI_DIFFICULTY_NORMAL:
                     AI_DIFFICULTY_VALUE =
                         Language::GetString(L"OPTION_AI_NORMAL");
+                    aiColor = Theme::GetColor(ThemeColor::AI_NORMAL_COLOR);
                     break;
                 case AI::AI_DIFFICULTY_HARD:
                     AI_DIFFICULTY_VALUE =
                         Language::GetString(L"OPTION_AI_HARD");
+                    aiColor = Theme::GetColor(ThemeColor::AI_HARD_COLOR);
                     break;
             }
         } else {
@@ -327,12 +333,15 @@ void GameSelectionView::DrawCurrentOptionBox(
           y = Y_PIVOT + 1;
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
-        View::WriteToView(x, y, LABEL_LIST[i], (wchar_t)0U, i == selected);
+        View::WriteToView(x, y, LABEL_LIST[i], (wchar_t)0U, i == selected, titleColor);
         x += LABEL_LIST[i].size() + 2;
 
-        View::WriteToView(
-            x, y, VALUE_LIST[i], (wchar_t)0U, false, View::Color::GREEN
-        );
+        if (i != 3)
+            View::WriteToView(
+                x, y, VALUE_LIST[i], (wchar_t)0U, false, valueColor
+            );
+        else
+            View::WriteToView(x, y, VALUE_LIST[i], (wchar_t)0U, false, aiColor);
         x += space;
     }
 }
