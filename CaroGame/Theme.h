@@ -49,11 +49,13 @@ enum class ThemeColor : char {
     WARNING_COLOR,
     GHOST_MOVE_COLOR,
     CURSOR_COLOR,
+    SWITCH_ON,
+    SWITCH_OFF
 };
 
 class Theme {
-    static std::array<View::Color, 19> CurrentTheme;
-    static std::array<View::Color, 19> defaultTheme;
+    static std::array<View::Color, 21> CurrentTheme;
+    static std::array<View::Color, 21> defaultTheme;
     static std::wstring currentThemeName;
 
    public:

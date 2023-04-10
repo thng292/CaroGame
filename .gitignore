@@ -363,6 +363,7 @@ FodyWeavers.xsd
 config/
 user_config
 saves/
+replays/
 replay/
 report/**/*.zip
 report/**/*.exe

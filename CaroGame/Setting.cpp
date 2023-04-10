@@ -31,7 +31,10 @@ View::Rect DrawSettingMenu(
         View::WriteToView(
             posCenter.first,
             posCenter.second,
-            Language::GetString(L"SETTINGS_TITLE")
+            Language::GetString(L"SETTINGS_TITLE"),
+            0,
+            0,
+            Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR)
         );
     }
     posCenter.second += 2;
@@ -47,7 +50,11 @@ View::Rect DrawSettingMenu(
             posCenter.second + i,
             options[i],
             0,
-            i == select
+            i == select,
+            i > 1 ? (options[i] == Language::GetString(L"ON_TITLE")
+                         ? Theme::GetColor(ThemeColor::SWITCH_ON)
+                         : Theme::GetColor(ThemeColor::SWITCH_OFF))
+                  : Theme::GetColor(ThemeColor::TEXT_COLOR)
         );
     }
     View::WriteToView(
@@ -68,11 +75,11 @@ void Setting::SettingScreen(NavigationHost& NavHost)
 
     auto& currentLanguagePath = Config::GetConfig(Config::LanguageFilePath);
     auto& currentThemePath = Config::GetConfig(Config::ThemeFilePath);
-    auto& musicSetting = Config::GetConfig(Config::BGMusic);
-    auto& soundEffectSetting = Config::GetConfig(Config::SoundEffect);
-    auto& undoSetting = Config::GetConfig(Config::UndoOption);
-    auto& hintSetting = Config::GetConfig(Config::Hint);
-    auto& fourWarningSetting = Config::GetConfig(Config::FourWarning);
+    auto musicSetting = Config::GetConfig(Config::BGMusic);
+    auto soundEffectSetting = Config::GetConfig(Config::SoundEffect);
+    auto undoSetting = Config::GetConfig(Config::UndoOption);
+    auto hintSetting = Config::GetConfig(Config::Hint);
+    auto fourWarningSetting = Config::GetConfig(Config::FourWarning);
 
     int prevSelect = 0;
     int select = 0;
@@ -250,6 +257,11 @@ void Setting::SettingScreen(NavigationHost& NavHost)
                 Config::ThemeFilePath, themeList[themeSelect].filePath
             );
             Config::SetConfig(L"LanguageFilePath", langList[langSelect].path);
+            Config::SetConfig(Config::BGMusic, musicSetting);
+            Config::SetConfig(Config::SoundEffect, soundEffectSetting);
+            Config::SetConfig(Config::UndoOption, undoSetting);
+            Config::SetConfig(Config::Hint, hintSetting);
+            Config::SetConfig(Config::FourWarning, fourWarningSetting);
 
             Language::LoadLanguageFromFile(langList[langSelect].path);
             if (themeSelect) {
@@ -259,9 +271,9 @@ void Setting::SettingScreen(NavigationHost& NavHost)
             }
 
             if (Config::SaveUserSetting()) {
-                return NavHost.NavigateStack("SettingApplied");
+                return NavHost.Navigate("SettingApplied");
             } else {
-                return NavHost.NavigateStack("SettingsAppliedFailed");
+                return NavHost.Navigate("SettingsAppliedFailed");
             }
         }
         if (tmp == L"B" || tmp == L"b") {

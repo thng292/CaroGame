@@ -211,7 +211,7 @@ namespace GameScreenAction {
         bool& isPlayerOneTurn
     );
 
-    void HighlightWarning(
+    bool HighlightWarning(
         GameScreen& gameScreen,
         const GameAction::Board& board,
         const GameAction::Point& move,

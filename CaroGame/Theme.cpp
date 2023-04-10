@@ -2,7 +2,7 @@
 
 std::wstring Theme::currentThemeName = L"Default";
 
-std::array<View::Color, 19> Theme::CurrentTheme{
+std::array<View::Color, 21> Theme::CurrentTheme{
     View::Color::BLACK,
     View::Color::BLACK,
     View::Color::BRIGHT_WHITE,
@@ -21,11 +21,15 @@ std::array<View::Color, 19> Theme::CurrentTheme{
     View::Color::YELLOW,
     View::Color::MAGENTA,
     View::Color::GRAY,
-    View::Color::BLACK};
+    View::Color::BLACK,
+    View::Color::RED,
+    View::Color::BLUE
+};
 
-std::array<View::Color,19> Theme::defaultTheme = Theme::CurrentTheme;
+std::array<View::Color, 21> Theme::defaultTheme = Theme::CurrentTheme;
 
-void Theme::LoadDefaultTheme() {
+void Theme::LoadDefaultTheme()
+{
     CurrentTheme = defaultTheme;
     currentThemeName = L"Default";
 }
@@ -86,6 +90,10 @@ bool Theme::LoadTheme(std::filesystem::path themePath)
             CurrentTheme[17] = readColor;
         } else if (tmp.first == L"CURSOR_COLOR") {
             CurrentTheme[18] = readColor;
+        } else if (tmp.first == L"SWITCH_ON") {
+            CurrentTheme[19] = readColor;
+        } else if (tmp.first == L"SWITCH_OFF") {
+            CurrentTheme[20] = readColor;
         }
     }
     return true;

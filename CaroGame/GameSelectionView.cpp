@@ -177,7 +177,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     while (currentGameState.playerAvatarOne == -1 ||
            currentGameState.playerAvatarTwo == -1) {
         if (currentGameState.playerAvatarOne != -1) {
-            View::DrawBorder(player1Selection);
+            View::DrawBorder(player1Selection, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR));
         }
 
         if (selected < 4) {
@@ -192,8 +192,8 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         }
         View::DrawBorder(
             drawnRect,
-            player1Selection.Top ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
-                                 : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
+            player1Selection.Top ? Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
+                                 : Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
         );
         
 
@@ -686,7 +686,7 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
     short selectedOption = 0;
     const short MAX_OPTIONS = 3;
 
-    std::vector<short> optionValueList = {15 * 60, 5 * 60, 3};
+    std::vector<short> optionValueList = {15 * 60, 5 * 60, 60};
     short optionValue;
     std::string navigationValue = "GameModeVersusView";
 
