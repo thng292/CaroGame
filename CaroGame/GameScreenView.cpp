@@ -364,11 +364,11 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             currentBoard = gameBoard;
         }
 
-        if (tmp == L"o") {
+        if (tmp == L"o" || tmp == L"O") {
             GameScreenAction::ScrollLogUp(gameScreen, goBack, curGameState, lock);
         }
 
-        if (tmp == L"p") {
+        if (tmp == L"p" || tmp == L"P") {
             GameScreenAction::ScrollLogDown(
                 gameScreen, goBack, curGameState, lock
             );
@@ -472,7 +472,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 }
 
                 else {
-                } else {
                     goBack = 0;
                     GameScreenAction::DeleteHintMove(
                         gameScreen, hintMove, colorMatrix, lock
