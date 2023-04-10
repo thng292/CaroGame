@@ -239,7 +239,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     Audio::AudioPlayer gamePlaceSound(Audio::Sound::GamePlace);
 
-    
+    short goBack = 0;
 
     // Game loop
     while (!endGame) {
@@ -357,6 +357,15 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             currentBoard = gameBoard;
         }
 
+        if (tmp == L"o") {
+            GameScreenAction::ScrollLogUp(gameScreen, goBack, curGameState, lock);
+        }
+
+        if (tmp == L"p") {
+            GameScreenAction::ScrollLogDown(
+                gameScreen, goBack, curGameState, lock
+            );
+        }
         // Turn on/off ghost mode
         if (tmp == L"g") {
             if (isGhostMode) {
@@ -452,6 +461,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         lock
                     );
                 } else {
+                    goBack = 0;
                     GameScreenAction::DeleteHintMove(
                         gameScreen, hintMove, colorMatrix, lock
                     );

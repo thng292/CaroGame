@@ -232,4 +232,12 @@ namespace GameScreenAction {
 
     );
 
+    void ScrollLogUp(GameScreen& gameScreen, short& goBack, const GameState& gameState, std::mutex& lock);
+    void ScrollLogDown(
+        GameScreen& gameScreen,
+        short& goBack,
+        const GameState& gameState,
+        std::mutex& lock
+    );
+
 }  // namespace GameScreenAction

@@ -539,3 +539,53 @@ void GameScreenAction::UnhighlightWarning(
     lock.unlock();
     pointList.clear();
 }
+
+void GameScreenAction::ScrollLogUp(
+    GameScreen& gameScreen,
+    short& goBack,
+    const GameState& gameState,
+    std::mutex& lock
+)
+{
+    if (gameState.moveList.size() <= 5)
+        return;
+    if (-goBack < gameState.moveList.size() - 5) {
+        goBack--;
+        lock.lock();
+        gameScreen.logContainer.DrawToLogContainer(
+            gameState.moveList,
+            gameState.playerNameOne,
+            gameState.playerNameTwo,
+            gameState.playerOneFirst,
+            0,
+            false,
+            goBack
+        );
+        lock.unlock();
+      }
+    
+}
+
+void GameScreenAction::ScrollLogDown(
+    GameScreen& gameScreen,
+    short& goBack,
+    const GameState& gameState,
+    std::mutex& lock
+)
+{
+    if (goBack == 0) return;
+
+    goBack++;
+    lock.lock();
+    gameScreen.logContainer.DrawToLogContainer(
+        gameState.moveList,
+        gameState.playerNameOne,
+        gameState.playerNameTwo,
+        gameState.playerOneFirst,
+        0,
+        false,
+        goBack
+    );
+    lock.unlock();
+      
+}
