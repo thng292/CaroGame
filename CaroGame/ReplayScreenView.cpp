@@ -10,7 +10,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
         Constants::BOARD_SIZE,
         std::vector<View::Color>(
             Constants::BOARD_SIZE, Theme::GetColor(ThemeColor::BORDER_COLOR)
-        );
+        )
     );
 
     GameState tempGameState = curGameState;

@@ -31,7 +31,10 @@ View::Rect DrawSettingMenu(
         View::WriteToView(
             posCenter.first,
             posCenter.second,
-            Language::GetString(L"SETTINGS_TITLE")
+            Language::GetString(L"SETTINGS_TITLE"),
+            0,
+            0,
+            Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR)
         );
     }
     posCenter.second += 2;
@@ -47,7 +50,11 @@ View::Rect DrawSettingMenu(
             posCenter.second + i,
             options[i],
             0,
-            i == select
+            i == select,
+            i > 1 ? (options[i] == Language::GetString(L"ON_TITLE")
+                         ? Theme::GetColor(ThemeColor::SWITCH_ON)
+                         : Theme::GetColor(ThemeColor::SWITCH_OFF))
+                  : Theme::GetColor(ThemeColor::TEXT_COLOR)
         );
     }
     View::WriteToView(
