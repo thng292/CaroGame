@@ -17,15 +17,15 @@ void Container::DrawToLogContainer(
     const std::wstring& playerNameTwo,
     bool playerOneFirst,
     short winMethod,
-    bool isReplay
-
+    bool isReplay,
+    short goBack
 )
 {
     short maxRow = 5;
     short maxDisplay = (winMethod != 0) ? maxRow - 1 - !isReplay : maxRow;
     short valueListSize = valueList.size();
     short numOfValueDisplay = (valueListSize >= maxDisplay) ? maxDisplay : valueListSize;
-    size_t startIndex = valueListSize - numOfValueDisplay;
+    size_t startIndex = valueListSize - numOfValueDisplay + goBack;
 
 
 

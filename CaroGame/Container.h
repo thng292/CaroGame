@@ -23,7 +23,8 @@ class Container {
         const std::wstring& playerNameTwo,
         bool playerOneFirst,
         short winMethod = 0,
-        bool isReplay = false
+        bool isReplay = false,
+        short goBack = 0
     );
 
     
