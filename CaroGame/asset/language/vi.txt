@@ -143,3 +143,5 @@ UNDO_SHORTCUT               =    Z
 WIN_TEXT                    =    đã thắng
 WIN_TIME_TEXT               =    đã thắng (Thời gian)
 YES_TITLE                   =    Có
+ARE_YOU_SURE = Lưu ván đấu hiện tại?
+LABEL_PAUSE = Tạm dừng

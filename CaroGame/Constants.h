@@ -20,6 +20,10 @@ namespace Constants {
     const short PAGE_SIZE = 10;
     const std::string CURRENT_GAME = "CurrentGame";
     const std::string FINISHED_GAME = "FinishedGame";
+    const std::string NEXT_VIEW = "NextView";
+    const std::string NULL_VIEW = "Null";
+    const std::string IS_SAVED = "IsSaved";
+
     const Player PLAYER_ONE = {1, L"X"};
     const Player PLAYER_TWO = {2, L"O"};
     const int WIN_VALUE_COUNT = 5;

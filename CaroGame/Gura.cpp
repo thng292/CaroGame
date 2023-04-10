@@ -7,84 +7,95 @@ void luot(int x, int y)
         y + 1,
         L'\u2580',
         0,
-        View::Color::RED,
+        View::Color::LIGHT_RED,
         View::Color::BLACK,
         View::Color::BLACK,
-        View::Color::BLUE
-    );
-    View::WriteToView(
-        x + 4,
-        y + 1,
-        L'\u2580',
-        0,
-        View::Color::RED,
-        View::Color::BLACK,
-        View::Color::BLACK,
-        View::Color::BLUE
-    );
-    View::WriteToView(
-        x + 2,
-        y + 2,
-        L'\u2580',
-        0,
-        View::Color::RED,
-        View::Color::BLACK,
-        View::Color::BLACK,
-        View::Color::BLUE
-    );
-    View::WriteToView(
-        x + 3,
-        y + 2,
-        L'\u2580',
-        0,
-        View::Color::RED,
-        View::Color::BLACK,
-        View::Color::BLACK,
-        View::Color::BLUE
-    );
-    View::WriteToView(
-        x + 2,
-        y + 1,
-        L'\u2580',
-        0,
-        View::Color::BLUE,
-        View::Color::BLACK,
-        View::Color::BLACK,
-        View::Color::RED
+        View::Color::LIGHT_BLUE
     );
     View::WriteToView(
         x + 3,
         y + 1,
         L'\u2580',
         0,
-        View::Color::BLUE,
+        View::Color::LIGHT_RED,
         View::Color::BLACK,
         View::Color::BLACK,
-        View::Color::RED
+        View::Color::LIGHT_BLUE
     );
+    View::WriteToView(
+        x + 2,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::LIGHT_BLUE,
+        View::Color::BLACK,
+        View::Color::BLACK
+    );
+    View::WriteToView(
+        x + 3,
+        y + 2,
+        L'\u2580',
+        0,
+        View::Color::LIGHT_RED,
+        View::Color::BLACK,
+        View::Color::BLACK
+    );
+    View::WriteToView(
+        x + 2,
+        y + 1,
+        L'\u2580',
+        0,
+        View::Color::LIGHT_BLUE,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::LIGHT_RED
+    );
+
     View::WriteToView(
         x + 1,
         y + 2,
         L'\u2580',
         0,
-        View::Color::BLUE,
+        View::Color::LIGHT_RED,
         View::Color::BLACK,
-        View::Color::BLACK,
-        View::Color::RED
-    );
-    View::WriteToView(
-        x + 4,
-        y + 2,
-        L'\u2580',
-        0,
-        View::Color::BLUE,
-        View::Color::BLACK,
-        View::Color::BLACK,
-        View::Color::RED
+        View::Color::BLACK
     );
 }
 
+void xoaluot(int x, int y)
+{
+    View::WriteToView(
+        x + 1,
+        y + 1,
+        L' '
+    );
+    View::WriteToView(
+        x + 3,
+        y + 1,
+        L' '
+    );
+    View::WriteToView(
+        x + 2,
+        y + 2,
+        L' '
+    );
+    View::WriteToView(
+        x + 3,
+        y + 2,
+        L' '
+    );
+    View::WriteToView(
+        x + 2,
+        y + 1,
+        L' '
+    );
 
+    View::WriteToView(
+        x + 1,
+        y + 2,
+        L' '
+    );
+}
 
 void logoGura(int x, int y) {
     View::Color xanh2 = View::Color::CYAN;

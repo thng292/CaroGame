@@ -22,7 +22,7 @@ namespace GameAction {
         moveCount--;
     }
 
-    void IteratePoints(
+    inline void IteratePoints(
         const Board& board,
         const Point& move,
         const short player,
@@ -45,7 +45,7 @@ namespace GameAction {
         }
     }
 
-    void AddToList(
+    inline void AddToList(
         std::vector<Point>& warningList, const std::vector<Point> &pointList
     )
     {
@@ -54,46 +54,114 @@ namespace GameAction {
         }
     }
 
+    inline bool IsBlocked(
+        const std::vector<Point>& pointList,
+        const Board& board,
+        const short &rowDirection,
+        const short &colDirection,
+        const Point& firstPoint,
+        const Point& secondPoint
+    )
+    {
+        short row = firstPoint.row, col = firstPoint.col;
+        while (row != secondPoint.row || col != secondPoint.col) {
+            row += rowDirection;
+            col += colDirection;
+            if (board[row][col] == 0) return false;
+        } 
+        bool block1 = false, block2 = false;
+        row = firstPoint.row + -rowDirection;
+        col = firstPoint.col + -colDirection;
+        short value = board[firstPoint.row][firstPoint.col];
+
+        if (isValidPoint(row, col)) {
+            if (board[row][col] == 0) return false;
+            if (board[row][col] == value) return false;
+            block1 = true;
+        } else {
+            block1 = true;
+        }
+
+        row = secondPoint.row + rowDirection;
+        col = secondPoint.col + colDirection;
+        if (isValidPoint(row, col)) {
+            if (board[row][col] == 0) return false;
+            if (board[row][col] == value) return false;
+            block2 = true;
+        } else {
+            block2 = true;
+        }
+
+        return (block1 && block2);
+    }
+
     std::vector<Point> GetWarningPoints(
         const Board& board, const Point& move, const short& player
     )
     {
         std::vector<Point> pointList;
         std::vector<Point> warningList;
-        for (short rowDirection = -1; rowDirection <= 0; ++rowDirection) {
-            for (short colDirection = -1; colDirection <= 0; ++colDirection) {
-                if (!(rowDirection == 0 && colDirection == 0)) {
-                    pointList.clear();
-                    IteratePoints(
-                        board,
-                        move,
-                        player,
-                        pointList,
-                        rowDirection,
-                        colDirection
-                    );
-                    if (pointList.size() == 3) {
-                        AddToList(warningList, pointList);
-                    }
+        std::vector<std::vector<Point>> directions = {
+            {{-1, -1}, {1, 1} },
+            {{-1, 0},  {1, 0} },
+            {{-1, 1},  {1, -1}},
+            {{0, -1},  {0, 1} },
+        };
+        for (auto& directionPair : directions) {
+            pointList.clear();
+            bool missing = false;
+            Point firstPoint;
 
-                    IteratePoints(
-                        board,
-                        move,
-                        player,
+            IteratePoints(
+                board,
+                move,
+                player,
+                pointList,
+                directionPair[0].row,
+                directionPair[0].col
+            );
+            if (pointList.size() == 3) {
+                if (!IsBlocked(
                         pointList,
-                        -rowDirection,
-                        -colDirection
-                    );
-                    if (pointList.size() == 3)
-                        AddToList(warningList, pointList);
+                        board,
+                        directionPair[0].row,
+                        directionPair[0].col,
+                        move,
+                        pointList.back()
+                    ))
+                    AddToList(warningList, pointList);
+
+                pointList.clear();
+
+            } else {
+                if (pointList.size() != 0) {
+                    firstPoint = pointList.back();
+                    missing = true;
                 }
             }
+            IteratePoints(
+                board,
+                move,
+                player,
+                pointList,
+                directionPair[1].row,
+                directionPair[1].col
+            );
+            if (pointList.size() == 3) {
+                if (!missing) firstPoint = move;
+                if (!IsBlocked(
+                        pointList,
+                        board,
+                        directionPair[1].row,
+                        directionPair[1].col,
+                        firstPoint,
+                        pointList.back()
+                    ))
+                    AddToList(warningList, pointList);
+            }
+
         }
-        pointList.clear();
-        IteratePoints(board, move, player, pointList, -1, 1);
-        if (pointList.size() == 3) AddToList(warningList, pointList);
-        IteratePoints(board, move, player, pointList, 1, -1);
-        if (pointList.size() == 3) AddToList(warningList, pointList);
+      
         return warningList;
     }
 

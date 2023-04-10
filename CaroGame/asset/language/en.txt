@@ -143,3 +143,5 @@ UNDO_SHORTCUT               =    Z
 WIN_TEXT                    =    won the game
 WIN_TIME_TEXT               =    won the game (Through time)
 YES_TITLE                   =    Yes
+ARE_YOU_SURE = Save the current game?
+LABEL_PAUSE = Pause

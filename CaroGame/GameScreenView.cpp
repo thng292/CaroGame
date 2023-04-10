@@ -3,13 +3,14 @@
 void GameScreenView::GameScreenView(NavigationHost& NavHost)
 {
     std::mutex lock;
-
     GameScreenAction::ColorMatrix colorMatrix(
         Constants::BOARD_SIZE,
         std::vector<View::Color>(
             Constants::BOARD_SIZE, View::Color::BLACK
         )
     );
+    NavHost.SetContext(Constants::NEXT_VIEW, Constants::NULL_VIEW);
+    NavHost.SetContext(Constants::IS_SAVED, false);
 
     std::vector<GameAction::Point> ghostMoveList, warningPointList;
 
@@ -137,6 +138,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         1000
     );
 
+
+    
     Timer timerPlayerTwo(
         [&] {
             if (!endGame) {
@@ -175,6 +178,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         1000
     );
 
+    lock.lock();
+    gameScreen.SwitchAndDrawCurrentTurn(curPlayer.value);
+    lock.unlock();
+
     timerPlayerOne.Start();
     timerPlayerOne.Pause();
     timerPlayerTwo.Start();
@@ -190,6 +197,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         timerPlayerTwo.Continued();
     }
+    
 
     std::wstring tmp;
     short prevRow = 0, prevCol = 0;
@@ -231,6 +239,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     Audio::AudioPlayer gamePlaceSound(Audio::Sound::GamePlace);
 
+    
+
     // Game loop
     while (!endGame) {
         tmp = InputHandle::Get();
@@ -268,7 +278,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             );
 
             NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
-            return NavHost.NavigateStack("PauseMenuView");
+            return NavHost.Navigate("PauseMenuView");
         }
 
         // Undo move
@@ -466,6 +476,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         colorMatrix,
                         lock
                     );
+
 
                     if (isPlayerOneTurn) {
                         timerPlayerOne.Continued();

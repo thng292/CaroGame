@@ -1,3 +1,4 @@
+#pragma once
 #include "Avatar.h"
 #include "Constants.h"
 #include "View.h"
@@ -33,10 +34,4 @@ void Draw(
     View::Color a4,
     View::Color a5
 );
-
-void Logo_Draw(int x, int y);
-
-void Logo_Win(int x, int y);
-
-void Logo_Lose(int x, int y);
 void Logo_Result(int k, bool &stop);

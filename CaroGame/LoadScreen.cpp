@@ -26,6 +26,7 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
         );
     };
 
+
     while (1) {
         drawMain();
 
@@ -71,7 +72,8 @@ void LoadScreen::LoadSceen(NavigationHost& NavHost)
         }
 
         if (tmp == L"B" || tmp == L"b") {
-            return NavHost.Back();
+            
+            return NavHost.Navigate("MainMenu");
         }
 
         if (tmp == L"x" || tmp == L"X") {

@@ -171,6 +171,27 @@ void GameScreen::DrawToElements(const GameState& gameState, bool isReplay)
     );
 }
 
+void GameScreen::SwitchAndDrawCurrentTurn(const short& currentPlayer) { 
+    Container& playerToDelete = (currentPlayer == Constants::PLAYER_ONE.value)
+                                    ? playerInfoContainerOne
+                                    : playerInfoContainerTwo;
+    Container& playerToDraw = (currentPlayer == Constants::PLAYER_ONE.value)
+                             ? playerInfoContainerTwo
+                             : playerInfoContainerOne;
+    DeleteCurrentTurn(playerToDelete);
+    DrawCurrentTurn(playerToDraw);
+}
+
+void GameScreen::DeleteCurrentTurn(Container& playerInfoContainer)
+{
+    xoaluot(playerInfoContainer.xCoord, playerInfoContainer.yCoord);
+}
+
+void GameScreen::DrawCurrentTurn(Container& playerInfoContainer)
+{
+    luot(playerInfoContainer.xCoord, playerInfoContainer.yCoord);
+}
+
 void GameScreen::InitElement(
     Container& element,
     short x,

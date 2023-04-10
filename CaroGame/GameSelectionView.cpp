@@ -346,10 +346,72 @@ void GameSelectionView::DrawCurrentOptionBox(
     }
 }
 
+void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
+    std::string nextView =
+        std::any_cast<std::string>(NavHost.GetFromContext(Constants::NEXT_VIEW));
+
+    bool isSaved =
+        std::any_cast<bool>(NavHost.GetFromContext(Constants::IS_SAVED)
+        );
+
+    if (isSaved) return NavHost.Navigate(nextView);
+
+    short selectedOption = 0;
+    const short MAX_OPTIONS = 2;
+
+    std::wstring label = Language::GetString(L"ARE_YOU_SURE");
+    std::vector<View::Option> options = {
+        {Language::GetString(L"YES_TITLE"),
+         Language::GetString(L"YES_TITLE")[0]},
+        {Language::GetString(L"OPTION_NO"),
+         Language::GetString(L"OPTION_NO")[0]}
+    };
+
+    Common::DrawHintsLess();
+    View::DrawMenuPrevState menuPrevState;
+    auto& soundEffect = Config::GetConfig(Config::SoundEffect);
+
+    while (1) {
+        View::DrawMenuCenter(menuPrevState, label, options, selectedOption);
+        auto tmp = InputHandle::Get();
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                Utils::PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
+        if (Utils::keyMeanUp(tmp)) {
+            selectedOption = (selectedOption - 1 + MAX_OPTIONS) % MAX_OPTIONS;
+        }
+        if (Utils::keyMeanDown(tmp)) {
+            selectedOption = (selectedOption + 1) % MAX_OPTIONS;
+        }
+        if (tmp == L"1") {
+            return NavHost.Navigate("SaveScreen");
+        }
+        if (tmp == L"2") {
+            return NavHost.Navigate(nextView);
+        }
+        if (tmp == L"b") {
+            return NavHost.Back();
+        }
+
+        if (tmp == L"\r") {
+            switch (selectedOption) {
+                case 0:
+                    return NavHost.Navigate("SaveScreen");
+                case 1:
+                    return NavHost.Navigate(nextView);
+            }
+        }
+    }
+}
+
+// First view when choosing game options
 void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
 {
     GameState curGameState;
-
     short selectedOption = 0;
     const short MAX_OPTIONS = 2;
 
@@ -401,7 +463,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
             break;
         }
         if (tmp == L"b") {
-            return NavHost.Back();
+            return NavHost.Navigate("MainMenu");
         }
 
         if (tmp == L"\r") {
@@ -693,6 +755,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
     const short MAX_OPTIONS = 6;
 
     std::string navigationValue;
+    NavHost.SetContext(Constants::NEXT_VIEW, Constants::NULL_VIEW);
 
     std::wstring label = Language::GetString(L"LABEL_PAUSE");
     std::vector<View::Option> options = {
@@ -752,7 +815,6 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             break;
         }
         if (tmp == L"3") {
-            navigationValue = navigationValueList[2];
             break;
         }
         if (tmp == L"4") {
@@ -772,10 +834,13 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         }
 
         if (tmp == L"\r") {
-            navigationValue = navigationValueList[selectedOption];
+            navigationValue = navigationValueList[selectedOption];           
             break;
         }
     }
     if (selectedOption == 5) return NavHost.Back();
-    return NavHost.Navigate(navigationValue);
+    if (navigationValue == "SaveScreen" || navigationValue == "Setting")
+        return NavHost.Navigate(navigationValue);
+    NavHost.SetContext(Constants::NEXT_VIEW, navigationValue);
+    return NavHost.Navigate("AreYouSureView");
 }

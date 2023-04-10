@@ -452,6 +452,10 @@ void GameScreenAction::HandlePlayerMove(
 
     lock.unlock();
 
+    lock.lock();
+    gameScreen.SwitchAndDrawCurrentTurn(curPlayer.value);
+    lock.unlock();
+
     myAI.UpdatePrivateValues(latestMove);
     FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
     currentBoard = gameBoard;

@@ -43,6 +43,7 @@ namespace GameSelectionView {
 
     void DrawCurrentOptionBox(const GameState& gameState, short selected);
 
+    void AreYouSureView(NavigationHost& NavHost);
 
 }  // namespace GameSelectionView
 

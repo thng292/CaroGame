@@ -6,7 +6,7 @@
 #include "Label.h"
 #include "Pokemon.h"
 #include "Gura.h"
-#include <unordered_map>
+#include "Constants.h"
 
 
 // Class for the game's UI
@@ -34,7 +34,9 @@ class GameScreen {
     GameScreen(short x, short y);
     void DrawGameScreen(bool isReplay = 0);
     void DrawToElements(const GameState &gameState, bool isReplay = false);
-
+    void SwitchAndDrawCurrentTurn(const short& currentPlayer);
+    void DeleteCurrentTurn(Container& playerInfoContainer);
+    void DrawCurrentTurn(Container& playerInfoContainer);
     
 
    private:

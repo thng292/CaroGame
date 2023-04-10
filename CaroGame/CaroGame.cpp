@@ -62,6 +62,7 @@ int main()
             {"StartUpScreen",              StartUp::StartUpScreen               },
             {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
             {"Tutorial",                   Tutorial::TutorialScreen             },
+            {"AreYouSureView", GameSelectionView::AreYouSureView}
     }
     );
 }

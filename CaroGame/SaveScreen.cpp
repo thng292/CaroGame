@@ -153,5 +153,10 @@ void SaveScreen::SaveSuccess(NavigationHost& NavHost)
         0
     );
     InputHandle::Get();
+    std::string nextView =
+        std::any_cast<std::string>(NavHost.GetFromContext(Constants::NEXT_VIEW)
+        );
+    NavHost.SetContext(Constants::IS_SAVED, true);
+    if (nextView != Constants::NULL_VIEW) return NavHost.Navigate(nextView);
     return NavHost.Back();
 }
