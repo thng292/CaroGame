@@ -82,7 +82,9 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             View::DrawTextCenterdVertically(2 + i, tmp[i]);
         }
         View::DrawTextCenterdVertically(
-            6, Language::GetString(L"HELP_3-1_TITLE"), View::Color::BLUE
+            6,
+            Language::GetString(L"HELP_3-1_TITLE"),
+            Theme::GetColor(ThemeColor::WIN_HIGHLIGHT_COLOR)
         );
         Setting::SettingScreen(mockNavHost);
         View::ClearScreen();
@@ -99,7 +101,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             5,
             30,
             L"...",
-            View::Color::RED
+            Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
         );
         View::DrawTextWrapped(
             5,
@@ -108,7 +110,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             5,
             30,
             L"...",
-            View::Color::BLUE
+            Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
         );
         for (size_t i = 0; i < tmp.size(); i++) {
             View::DrawTextCenterdVertically(22 + i, tmp[i]);
@@ -197,13 +199,13 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
                 i,
                 0,
                 Constants::PLAYER_ONE.symbol,
-                View::Color(Constants::PLAYER_ONE_COLOR)
+                Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
             );
             gameScreen.boardContainer.DrawToBoardContainerCell(
                 i,
                 1,
                 Constants::PLAYER_TWO.symbol,
-                View::Color(Constants::PLAYER_TWO_COLOR)
+                Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
             );
         }
 
@@ -211,7 +213,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             3,
             1,
             Constants::PLAYER_TWO.symbol,
-            View::Color(Constants::PLAYER_TWO_HIGHLIGHT)
+            Theme::GetColor(ThemeColor::PLAYER_TWO_HIGHLIGHT_COLOR)
         );
 
         InputHandle::Get();
@@ -226,13 +228,13 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
                 i,
                 0,
                 Constants::PLAYER_ONE.symbol,
-                View::Color(Constants::WIN_HIGHLIGHT)
+                Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
             );
             gameScreen.boardContainer.DrawToBoardContainerCell(
                 i,
                 1,
                 Constants::PLAYER_TWO.symbol,
-                View::Color(Constants::PLAYER_TWO_COLOR)
+                Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
             );
         }
 
@@ -240,7 +242,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             4,
             0,
             Constants::PLAYER_ONE.symbol,
-            View::Color(Constants::WIN_HIGHLIGHT)
+            Theme::GetColor(ThemeColor::WIN_HIGHLIGHT_COLOR)
         );
 
         InputHandle::Get();

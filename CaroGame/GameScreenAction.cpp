@@ -296,7 +296,7 @@ void GameScreenAction::DeleteMoveFromScreen(
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, L" "
     );
-    colorMatrix[move.row][move.col] = View::Color::BLACK;
+    colorMatrix[move.row][move.col] = Theme::GetColor(ThemeColor::CONSOLE_COLOR);
 }
 
 GameAction::Point GameScreenAction::GetHintMove(

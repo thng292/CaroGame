@@ -3,28 +3,17 @@
 std::wstring Theme::currentThemeName = L"Default";
 
 std::array<View::Color, 21> Theme::CurrentTheme{
-    View::Color::BLACK,
-    View::Color::BLACK,
-    View::Color::BRIGHT_WHITE,
-    View::Color::BLACK,
-    View::Color::BRIGHT_WHITE,
-    View::Color::BLACK,
-    View::Color::RED,
-    View::Color::BLUE,
-    View::Color::LIGHT_MAGENTA,
-    View::Color::LIGHT_CYAN,
-    View::Color::LIGHT_GREEN,
-    View::Color::BLUE,
-    View::Color::RED,
-    View::Color::YELLOW,
-    View::Color::GREEN,
-    View::Color::YELLOW,
-    View::Color::MAGENTA,
-    View::Color::GRAY,
-    View::Color::BLACK,
-    View::Color::RED,
-    View::Color::BLUE
-};
+    View::Color::BLACK,         View::Color::BLACK,
+    View::Color::BRIGHT_WHITE,  View::Color::BLACK,
+    View::Color::BRIGHT_WHITE,  View::Color::BLACK,
+    View::Color::RED,           View::Color::BLUE,
+    View::Color::LIGHT_MAGENTA, View::Color::LIGHT_CYAN,
+    View::Color::LIGHT_GREEN,   View::Color::BLUE,
+    View::Color::RED,           View::Color::YELLOW,
+    View::Color::GREEN,         View::Color::YELLOW,
+    View::Color::MAGENTA,       View::Color::GRAY,
+    View::Color::BLACK,         View::Color::RED,
+    View::Color::BLUE};
 
 std::array<View::Color, 21> Theme::defaultTheme = Theme::CurrentTheme;
 
@@ -42,16 +31,17 @@ bool Theme::LoadTheme(std::filesystem::path themePath)
     }
     currentThemeName = themePath.filename();
     std::wstring inp;
+    View::Color readColor = View::Color::BLACK;
     while (!fin.fail() || !fin.eof()) {
         std::getline(fin, inp);
         auto tmp = Utils::LineSplitter(inp);
         Utils::trim(tmp.first);
         Utils::trim(tmp.second);
-
-        if (!iswdigit(tmp.second[0])) {
+        try {
+            readColor = View::Color(std::stoi(tmp.second));
+        } catch (std::invalid_argument) {
             continue;
         }
-        View::Color readColor = View::Color(tmp.second[0] - L'0');
         if (tmp.first == L"TITLE_TEXT_COLOR") {
             CurrentTheme[0] = readColor;
         } else if (tmp.first == L"TEXT_COLOR") {
