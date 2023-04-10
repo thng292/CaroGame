@@ -8,7 +8,9 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
 
     GameScreenAction::ColorMatrix colorMatrix(
         Constants::BOARD_SIZE,
-        std::vector<View::Color>(Constants::BOARD_SIZE, (View::Color)0)
+        std::vector<View::Color>(
+            Constants::BOARD_SIZE, Theme::GetColor(ThemeColor::BORDER_COLOR)
+        );
     );
 
     GameState tempGameState = curGameState;
@@ -54,7 +56,7 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
             }
         }
     }
-
+    
     else {
         while (1) {
             auto tmp = InputHandle::Get();

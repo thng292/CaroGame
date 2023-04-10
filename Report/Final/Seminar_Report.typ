@@ -78,17 +78,20 @@
 
 #pagebreak()
 
-#heading(numbering: none)[Lời cảm ơn]
+#align(center, heading(numbering: none)[Lời nói đầu])
 #pagebreak()
 
-= Mục lục
+#align(center, heading(numbering: none)[Lời cảm ơn])
+#pagebreak()
+
+#heading(numbering: none)[Mục lục]
 #outline(
 	title: none,
     indent: true
 )
 #pagebreak()
 
-= Mục lục hình
+#heading(numbering: none)[Mục lục hình]
 #locate(loc => {
 	let figures = query(figure, loc)
 	let res = ()
@@ -154,14 +157,48 @@
 Nguyên
 
 === Mục tiêu đề ra
-Thông
+	- Game có nhiều ngôn ngữ, người dùng có thể thêm được ngôn ngữ mới
+	- Có thể load được các theme(chủ đề) bên ngoài
+	- Lưu được các thiết lập của người chơi
+	- Có thể save, load game đang chơi
+	- Có thể lưu và phát lại các game đã hoàn thành
+	- Có nhiều chế độ chơi
+	- Có thể chơi với máy, máy có nhiều mức độ
+	- Game có thể phát nhạc nền, hiệu ứng. Có thể bật tắt được
 
 === Thông tin chung về trò chơi
 Nguyên
 Link souce code, chạy trên nền tảng nào, ...
 
-== Sơ lược về các tính năng của game
-Thông
+== Mô tả về các tính năng của game
+
+=== Đa ngôn ngữ
+
+=== Thay đổi Theme(Chủ đề)
+
+=== Lưu thiết lập của người chơi
+
+=== Save/Load game đang chơi, replay game đã chơi xong
+
+=== Chế độ chơi Thường
+
+=== Chế độ chơi Rush
+	
+=== Đánh với máy
+
+=== Đánh với người
+
+=== Các hỗ trợ trong lúc chơi game
+
+==== Gợi ý
+
+==== Nổi bật nước mới đi
+
+==== Cảnh báo nước 4 
+
+==== Hoàn tác nước đi
+
+==== Đi nháp
 
 == Sơ dồ di chuyển
 Phước
@@ -171,7 +208,7 @@ Phước
 == Logic
 
 === Chơi hiệu ứng, nhạc nền
-Thông
+
 
 === Đọc, ghi, tìm file
 Thông
@@ -204,82 +241,16 @@ sdhfiuashksj
 
 == Giao diện
 
-=== Các bước thiết lập ban đầu
-Thông
-
-=== Hướng dẫn
-Thông
-
-=== Màn hình chính
-==== Logo 
-
-- Height: 6
-- Width: 54
-- Color: Đen, đỏ, xanh
-- Căn giữa
-#figure(
-  image("asset/logo_caro.PNG", width: 70%),
-  caption: [
-    Logo Caro.
-  ],
-)
-
-==== Main Menu
-
-- Height: 11
-- Width: 21
-- Color: Đen
-- Căn giữa
-#figure(
-  image("asset/main_menu.PNG", width: 70%),
-  caption: [
-    Main Menu
-  ],
-)
-
-==== Trang trí
-
-- Logo Deadpool
-	- Height: 24
-	- Width: 27
-	- Color: Đỏ, đen, xám, vàng, nâu, trắng
-	- Căn trái
-
-- Logo Captain America
-	- Height: 24
-	- Width: 33
-	- Color: Xanh, đỏ, xám, đen, nâu, vàng
-	- Căn phải
-
-
-#grid(
-	columns: (50%, 50%),
-	rows: (auto),
-	figure(
-	image("asset/logo_deadpool.PNG", height: 50%),
-	caption: [
-		Logo Deadpool
-	],
-	),
-	figure(
-	image("asset/logo_captain_american.PNG", height: 50%),
-	caption: [
-		Logo Captain America
-	],
-	)
-)
-
-=== Giới thiệu
-Nguyên
-
 === Cài đặt
 Thông
 
 === Các màn hình lưu, tải game và replay
 Thông
 
-=== Các màn hình liên quan đến trò chơi chính
+=== Màn hình trò chơi chính
 Vũ
+
+=== Các màn hình hỗ trợ khác
 
 = Đánh giá thành viên
 
@@ -288,14 +259,7 @@ Vũ
 == Kết quả đạt được
 
 === Ưu điểm của trò chơi
-- Avatar pokemon quen thuộc tạo cảm giác quay về tuổi thơ cho người chơi
-- Chế độ đánh game có tính thời gian, thoải mái lựa chọn thời gian giới hạn
-- Đồ họa xịn xò, có nhiều sự đầu tư, màu sắc hài hòa, dễ nhìn, dễ sử dụng
-- Hướng dẫn cụ thể, chi tiết, dễ đọc - dễ hiểu - dễ sử dụng
-- Nhiều chế độ đánh với máy: dễ, vừa, khó
-- Có thể xem lại lịch sử trò chơi
-- Hiệu ứng âm thanh sống động
-
+Phước
 === Khuyết điểm của trò chơi
 Phước
 

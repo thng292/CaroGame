@@ -23,7 +23,8 @@ namespace Audio {
         GameMove,
         GamePlace,
         GameStart,
-        Pause
+        Pause,
+        WarningSound
     };
     constexpr std::array SoundName{
         L"",
@@ -38,7 +39,9 @@ namespace Audio {
         L"GameMove.wav",
         L"GamePlaceMove.mp3",
         L"GameStart.wav",
-        L"Pause.wav"};
+        L"Pause.wav",
+        L"Warning.mp3"
+    };
 
     class AudioPlayer {
        private:
@@ -54,19 +57,21 @@ namespace Audio {
         AudioPlayer& operator=(AudioPlayer&&) = delete;
         AudioPlayer& operator=(const AudioPlayer&) = delete;
 
-        inline AudioPlayer()
-        {
-            currentSong = Sound::NoSound;
+        inline AudioPlayer() { 
+            currentInstance = instanceCount++;
         }
 
         inline AudioPlayer(Sound song)
         {
+            currentInstance = instanceCount++;
             Open(song);
         }
 
         inline int Open(Sound song)
         {
-            currentInstance = instanceCount++;
+            if (currentSong != Sound::NoSound) {
+                Close();
+            }
             currentSong = song;
             if (song == Sound::NoSound) {
                 return 0;
@@ -138,11 +143,11 @@ namespace Audio {
 
     inline bool PlayAndForget(Sound sound, bool wait = 0)
     {
+        //PlaySound(0, 0, 0); // Stop playing sounds
         return PlaySound(
             std::format(
                 L"{}{}", Constants::STR_AUDIO_PATH, SoundName[int(sound)]
-            )
-                .c_str(),
+            ).c_str(),
             0,
             (wait ? SND_SYNC : SND_ASYNC) | SND_FILENAME
         );

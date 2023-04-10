@@ -70,7 +70,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
             Language::LoadLanguageFromFile(languages[userSelect].path);
             return NavHost.Navigate("FirstTimeMusicScreen");
         }
-        View::ClearRect(drawnRect);
+        //View::ClearRect(drawnRect);
     }
 }
 

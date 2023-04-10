@@ -172,9 +172,10 @@ void GameScreenAction::HighlightMove(
 )
 {
     if (move.row == -1) return;
-    View::Color color = (value == Constants::PLAYER_ONE.symbol)
-                            ? Theme::GetColor(ThemeColor::PLAYER_ONE_HIGHLIGHT_COLOR)
-                            : Theme::GetColor(ThemeColor::PLAYER_TWO_HIGHLIGHT_COLOR);
+    View::Color color =
+        (value == Constants::PLAYER_ONE.symbol)
+            ? Theme::GetColor(ThemeColor::PLAYER_ONE_HIGHLIGHT_COLOR)
+            : Theme::GetColor(ThemeColor::PLAYER_TWO_HIGHLIGHT_COLOR);
     colorMatrix[move.row][move.col] = color;
     gameScreen.boardContainer.DrawToBoardContainerCell(
         move.row, move.col, value, color
@@ -267,9 +268,17 @@ void GameScreenAction::LoadGameToView(
         UpdateGame(gameScreen, board, moveCount, move, player, gameState, true);
         DrawMove(gameScreen, move, player, colorMatrix, color);
         if (i == moveListSize - 1) {
-            HighlightWarning(
-                gameScreen, board, move, player, warningPointList, colorMatrix, lock
-            );
+            if (Config::GetConfig(Config::Hint) == Config::Value_True) {
+                HighlightWarning(
+                    gameScreen,
+                    board,
+                    move,
+                    player,
+                    warningPointList,
+                    colorMatrix,
+                    lock
+                );
+            }
             HighlightMove(gameScreen, move, player.symbol, colorMatrix);
         }
         isPlayerOne = !isPlayerOne;
@@ -498,25 +507,25 @@ void GameScreenAction::FlipTurn(
         (isPlayerOneTurn) ? Constants::PLAYER_ONE : Constants::PLAYER_TWO;
 }
 
-void GameScreenAction::HighlightWarning(
+bool GameScreenAction::HighlightWarning(
     GameScreen& gameScreen,
     const GameAction::Board& board,
     const GameAction::Point& move,
     const Constants::Player& player,
     std::vector<GameAction::Point>& pointList,
     ColorMatrix& colorMatrix,
-    std::mutex&lock
+    std::mutex& lock
 )
 {
-    if (Config::GetConfig(Config::FourWarning) != Config::Value_True) return;
     pointList = GameAction::GetWarningPoints(board, move, player.value);
-    if (pointList.size() % 3 != 0) return;
+    if (pointList.size() % 3 != 0 || pointList.size() == 0) return false;
     View::Color color = Theme::GetColor(ThemeColor::WARNING_COLOR);
     lock.lock();
     for (auto& point : pointList) {
         DrawMove(gameScreen, point, player, colorMatrix, color);
     }
     lock.unlock();
+    return true;
 }
 
 void GameScreenAction::UnhighlightWarning(
