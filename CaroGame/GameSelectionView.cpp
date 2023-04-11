@@ -120,7 +120,9 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     curGameState.playerNameOne = inputList[0];
     curGameState.playerNameTwo = inputList[1];
 
-    Utils::PlaySpecialKeySound();
+    if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
+        Utils::PlaySpecialKeySound();
+    }
 
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate("AvatarSelectView");
@@ -177,7 +179,9 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     while (currentGameState.playerAvatarOne == -1 ||
            currentGameState.playerAvatarTwo == -1) {
         if (currentGameState.playerAvatarOne != -1) {
-            View::DrawBorder(player1Selection, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR));
+            View::DrawBorder(
+                player1Selection, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
+            );
         }
 
         if (selected < 4) {
@@ -195,7 +199,6 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
             player1Selection.Top ? Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
                                  : Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
         );
-        
 
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
@@ -234,7 +237,9 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
             }
         }
         View::DrawBorder(
-            drawnRect, Theme::GetColor(ThemeColor::CONSOLE_COLOR), Theme::GetColor(ThemeColor::CONSOLE_COLOR)
+            drawnRect,
+            Theme::GetColor(ThemeColor::CONSOLE_COLOR),
+            Theme::GetColor(ThemeColor::CONSOLE_COLOR)
         );
     }
     NavHost.SetContext(Constants::CURRENT_GAME, currentGameState);
@@ -333,7 +338,9 @@ void GameSelectionView::DrawCurrentOptionBox(
           y = Y_PIVOT + 1;
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
-        View::WriteToView(x, y, LABEL_LIST[i], (wchar_t)0U, i == selected, titleColor);
+        View::WriteToView(
+            x, y, LABEL_LIST[i], (wchar_t)0U, i == selected, titleColor
+        );
         x += LABEL_LIST[i].size() + 2;
 
         if (i != 3)
@@ -346,13 +353,14 @@ void GameSelectionView::DrawCurrentOptionBox(
     }
 }
 
-void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
+void GameSelectionView::AreYouSureView(NavigationHost& NavHost)
+{
     std::string nextView =
-        std::any_cast<std::string>(NavHost.GetFromContext(Constants::NEXT_VIEW));
+        std::any_cast<std::string>(NavHost.GetFromContext(Constants::NEXT_VIEW)
+        );
 
     bool isSaved =
-        std::any_cast<bool>(NavHost.GetFromContext(Constants::IS_SAVED)
-        );
+        std::any_cast<bool>(NavHost.GetFromContext(Constants::IS_SAVED));
 
     if (isSaved) return NavHost.Navigate(nextView);
 
@@ -841,7 +849,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         }
 
         if (tmp == L"\r") {
-            navigationValue = navigationValueList[selectedOption];           
+            navigationValue = navigationValueList[selectedOption];
             break;
         }
     }
