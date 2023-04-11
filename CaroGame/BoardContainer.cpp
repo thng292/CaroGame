@@ -54,7 +54,9 @@ void BoardContainer::DrawToBoardContainerCell(
         value,
         (wchar_t)0U,
         highlight,
-        color
+        color,
+        Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
+        Theme::GetColor(ThemeColor::CURSOR_COLOR)
     );
 }
 
