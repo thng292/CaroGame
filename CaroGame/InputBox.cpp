@@ -37,7 +37,13 @@ bool InputBox::DrawInputBox(
 
     for (size_t i = 0; i < labelList.size(); ++i) {
         View::WriteToView(
-            CENTER.first + 2, CENTER.second + 1 + i * MARGIN, labelList[i], 0
+            CENTER.first + 2,
+            CENTER.second + 1 + i * MARGIN,
+            labelList[i],
+            0,
+            false,
+            Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR)
+
         );
         View::WriteToView(
             CENTER.first + 2 + labelList[i].size() + 1,

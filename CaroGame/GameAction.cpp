@@ -64,11 +64,13 @@ namespace GameAction {
     )
     {
         short row = firstPoint.row, col = firstPoint.col;
+        short spaceCount = 0;
         while (row != secondPoint.row || col != secondPoint.col) {
             row += rowDirection;
             col += colDirection;
-            if (board[row][col] == 0) return false;
+            if (board[row][col] == 0) spaceCount++;
         } 
+        if (spaceCount > 1) return true;
         bool block1 = false, block2 = false;
         row = firstPoint.row + -rowDirection;
         col = firstPoint.col + -colDirection;

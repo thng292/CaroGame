@@ -9,12 +9,4 @@
 
 namespace ReplayScreenView {
     void ReplayScreenView(NavigationHost &NavHost);
-    void UpdateScreen(
-        GameScreen gameScreen,
-        const GameAction::Point &move,
-        const Constants::Player &player,
-        const std::vector<std::pair<short, short>> &moveList,
-        const GameState &gameState
-
-    );
 }  // namespace ReplayScreenView

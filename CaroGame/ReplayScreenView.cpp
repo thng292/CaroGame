@@ -35,9 +35,11 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
     short endGame = 0;
     short index = -1;
     short moveListSize = curGameState.moveList.size();
+    short goBack = 0;
 
     GameAction::Point curMove = {-1, -1};
     GameAction::Point winPoint;
+    std::mutex lock;
 
     if (moveListSize == 0) {
         gameScreen.logContainer.DrawToLogContainer(
@@ -76,7 +78,31 @@ void ReplayScreenView::ReplayScreenView(NavigationHost& NavHost)
                 break;
             }
 
+            if (tmp == L"o" || tmp == L"O") {
+                GameScreenAction::ScrollLogUp(
+                    gameScreen, goBack, tempGameState, lock
+                );
+            }
+
+            if (tmp == L"p" || tmp == L"P") {
+                GameScreenAction::ScrollLogDown(
+                    gameScreen, goBack, tempGameState, lock
+                );
+                if (goBack == 0 && endGame) {
+                    gameScreen.logContainer.DrawToLogContainer(
+                        curGameState.moveList,
+                        curGameState.playerNameOne,
+                        curGameState.playerNameTwo,
+                        curGameState.playerOneFirst,
+                        endGame,
+                        true
+                    );
+                }
+
+            }
+
             if (validKey) {
+                goBack = 0;
                 if (!moveBack) {
                     index++;
                     curMove = {
