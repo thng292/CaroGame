@@ -3,6 +3,7 @@
 #include <wchar.h>
 
 #include <array>
+#include <cwctype>
 #include <format>
 
 #include "Constants.h"
@@ -40,13 +41,10 @@ namespace Audio {
         L"GamePlaceMove.mp3",
         L"GameStart.wav",
         L"Pause.wav",
-        L"Warning.mp3"
-    };
+        L"Warning.mp3"};
 
     class AudioPlayer {
        private:
-        bool isPlaying = 0;
-        bool hasStopped = 1;
         Sound currentSong = Sound::NoSound;
         static int instanceCount;
         int currentInstance;
@@ -57,9 +55,7 @@ namespace Audio {
         AudioPlayer& operator=(AudioPlayer&&) = delete;
         AudioPlayer& operator=(const AudioPlayer&) = delete;
 
-        inline AudioPlayer() { 
-            currentInstance = instanceCount++;
-        }
+        inline AudioPlayer() { currentInstance = instanceCount++; }
 
         inline AudioPlayer(Sound song)
         {
@@ -143,11 +139,12 @@ namespace Audio {
 
     inline bool PlayAndForget(Sound sound, bool wait = 0)
     {
-        //PlaySound(0, 0, 0); // Stop playing sounds
+        // PlaySound(0, 0, 0); // Stop playing sounds
         return PlaySound(
             std::format(
                 L"{}{}", Constants::STR_AUDIO_PATH, SoundName[int(sound)]
-            ).c_str(),
+            )
+                .c_str(),
             0,
             (wait ? SND_SYNC : SND_ASYNC) | SND_FILENAME
         );
