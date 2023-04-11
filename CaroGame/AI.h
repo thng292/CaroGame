@@ -20,7 +20,7 @@ class AI {
     short PLAYER_HUMAN = Constants::PLAYER_ONE.value,
           PLAYER_AI = Constants::PLAYER_TWO.value;
 
-    static struct PointEval {
+    struct PointEval {
         GameAction::Point move;
         short eval;
     };

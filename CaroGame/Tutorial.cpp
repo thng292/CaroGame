@@ -251,8 +251,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         auto& tmp = Language::GetString(L"HELP_8-3_TITLE");
         View::WriteToView(89 - tmp.length() / 2, 14, tmp);
 
-        tmp = Language::GetString(L"HELP_8-4_TITLE");
-        View::WriteToView(89 - tmp.length() / 2, 15, tmp);
+        View::WriteToView(89 - tmp.length() / 2, 15, Language::GetString(L"HELP_8-4_TITLE"));
 
         auto tt = View::WrapText(Language::GetString(L"HELP_8-5_TITLE"), 3, 50);
         for (size_t i = 0; i < tt.size(); i++) {
