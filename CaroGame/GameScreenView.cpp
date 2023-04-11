@@ -512,7 +512,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     }
 
                     if (endGame) break;
-                    if (Config::GetConfig(Config::FourWarning) !=
+                    if (Config::GetConfig(Config::FourWarning) ==
                         Config::Value_True && curGameState.gameMode == Constants::GAME_MODE_PVP) {
                         bool hasWarning = GameScreenAction::HighlightWarning(
                             gameScreen,
@@ -566,7 +566,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
                         if (endGame) break;
 
-                        if (Config::GetConfig(Config::FourWarning) !=
+                        if (Config::GetConfig(Config::FourWarning) ==
                             Config::Value_True) {
                             bool hasWarning = GameScreenAction::HighlightWarning(
                                 gameScreen,

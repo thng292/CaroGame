@@ -215,22 +215,27 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         std::thread(Logo_Result, gameState.gameEnd, std::ref(stop));
 
     Audio::AudioPlayer player;
-
-    if (gameState.gameEnd == Constants::END_GAME_DRAW) {
-        player.Open(Audio::Sound::Draw);
-    } else {
-        if (gameState.gameMode == Constants::GAME_MODE_PVE &&
-            (gameState.gameEnd == Constants::END_GAME_WIN_TWO || gameState.gameEnd == Constants::END_GAME_WIN_TIME_TWO)) {
-            player.Open(Audio::Sound::Lose);
+    if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
+        if (gameState.gameEnd == Constants::END_GAME_DRAW) {
+            player.Open(Audio::Sound::Draw);
         } else {
-            player.Open(Audio::Sound::Win);
-        }  
+            if (gameState.gameMode == Constants::GAME_MODE_PVE &&
+                (gameState.gameEnd == Constants::END_GAME_WIN_TWO ||
+                 gameState.gameEnd == Constants::END_GAME_WIN_TIME_TWO)) {
+                player.Open(Audio::Sound::Lose);
+            } else {
+                player.Open(Audio::Sound::Win);
+            }
+        }
+
+        player.Play();
     }
-    player.Play();
     auto tmp = InputHandle::Get();
     stop = true;
     logoThread.join();
-    Utils::PlaySpecialKeySound();
+    if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
+        Utils::PlaySpecialKeySound();
+    }
     return NavHost.Navigate("ReplayMenuView");
 }
 
