@@ -357,14 +357,16 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
     if (isSaved) return NavHost.Navigate(nextView);
 
     short selectedOption = 0;
-    const short MAX_OPTIONS = 2;
+    const short MAX_OPTIONS = 3;
 
     std::wstring label = Language::GetString(L"ARE_YOU_SURE");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_TITLE")[0]},
         {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0]}
+         Language::GetString(L"OPTION_NO")[0]},
+        {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
+         Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0]}
     };
 
     Common::DrawHintsLess();
@@ -393,6 +395,9 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
         if (tmp == L"2") {
             return NavHost.Navigate(nextView);
         }
+        if (tmp == L"3") {
+            return NavHost.Back();
+        }
         if (tmp == L"b") {
             return NavHost.Back();
         }
@@ -403,6 +408,8 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
                     return NavHost.Navigate("SaveScreen");
                 case 1:
                     return NavHost.Navigate(nextView);
+                case 2:
+                    return NavHost.Back();
             }
         }
     }

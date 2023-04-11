@@ -44,7 +44,8 @@ namespace GameScreenAction {
         const GameAction::Board& gameBoard,
         const GameAction::Point& curPos,
         const ColorMatrix& colorMatrix,
-        std::mutex& lock
+        std::mutex& lock,
+        bool isGhostMode
 
     );
 

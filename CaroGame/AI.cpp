@@ -46,14 +46,7 @@ GameAction::Point AI::GetBestMove(GameAction::Board& board, short& moveCount)
         true
     );
 
-    for (short row = rowLowerLimit; row <= rowUpperLimit; ++row) {
-        for (short col = colLowerLimit; col <= colUpperLimit; ++col) {
-            if (board[row][col] == 0) {
-                moveBest = {row, col};
-                break;
-            }
-        }
-    }
+    moveBest = moveQueue.top().move;
 
     srand(time(NULL));
 

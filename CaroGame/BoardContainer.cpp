@@ -1,6 +1,5 @@
 #include "BoardContainer.h"
 
-
 void BoardContainer::DrawBoardContainer()
 {
     DrawBoardRow();
@@ -24,7 +23,6 @@ void BoardContainer::DrawBoardRow()
             }
         }
     }
-
 }
 
 void BoardContainer::DrawBoardCol()
@@ -45,31 +43,38 @@ void BoardContainer::DrawBoardCol()
 }
 
 void BoardContainer::DrawToBoardContainerCell(
-    short row, short col, std::wstring value, View::Color color, bool highlight
+    short row, short col, std::wstring value, View::Color color, bool highlight, bool isGhostMode
 )
 {
-    if (highlight)
-    View::WriteToView(
-        xCoord + col * CELL_WIDTH + X_OFFSET,
-        yCoord + row * CELL_HEIGHT + Y_OFFSET,
-        value,
-        (wchar_t)0U,
-        highlight,
-        color,
-        Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR),       
-        Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
-        Theme::GetColor(ThemeColor::CURSOR_COLOR)
+    View::Color textHighlightColor =
+        (color == Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR) || color == Theme::GetColor(ThemeColor::PLAYER_ONE_HIGHLIGHT_COLOR))
+            ? Theme::GetColor(ThemeColor::PLAYER_ONE_HIGHLIGHT_COLOR)
+            : Theme::GetColor(ThemeColor::PLAYER_TWO_HIGHLIGHT_COLOR);
+    if (highlight) {
+        View::Color highColor = Theme::GetColor(ThemeColor::CURSOR_COLOR);
+        if (isGhostMode)
+            highColor = Theme::GetColor(ThemeColor::GHOST_MOVE_COLOR);
+        View::WriteToView(
+            xCoord + col * CELL_WIDTH + X_OFFSET,
+            yCoord + row * CELL_HEIGHT + Y_OFFSET,
+            value,
+            (wchar_t)0U,
+            highlight,
+            color,
+            highColor,
+            textHighlightColor,
+            highColor
 
-    );
-    else {
-    View::WriteToView(
-        xCoord + col * CELL_WIDTH + X_OFFSET,
-        yCoord + row * CELL_HEIGHT + Y_OFFSET,
-        value,
-        (wchar_t)0U,
-        highlight,
-        color
-    );
+        );
+    } else {
+        View::WriteToView(
+            xCoord + col * CELL_WIDTH + X_OFFSET,
+            yCoord + row * CELL_HEIGHT + Y_OFFSET,
+            value,
+            (wchar_t)0U,
+            highlight,
+            color
+        );
     }
 }
 

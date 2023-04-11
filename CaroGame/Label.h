@@ -4,6 +4,7 @@
 
 #include "Language.h"
 #include "View.h"
+#include "Config.h"
 
 // Draws labels for containers or for instructions
 namespace Label {
