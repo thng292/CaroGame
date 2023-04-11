@@ -48,6 +48,7 @@ void BoardContainer::DrawToBoardContainerCell(
     short row, short col, std::wstring value, View::Color color, bool highlight
 )
 {
+    if (highlight)
     View::WriteToView(
         xCoord + col * CELL_WIDTH + X_OFFSET,
         yCoord + row * CELL_HEIGHT + Y_OFFSET,
@@ -55,9 +56,21 @@ void BoardContainer::DrawToBoardContainerCell(
         (wchar_t)0U,
         highlight,
         color,
+        Theme::GetColor(ThemeColor::CONSOLE_HIGHLIGHT_COLOR),       
         Theme::GetColor(ThemeColor::TEXT_HIGHLIGHT_COLOR),
         Theme::GetColor(ThemeColor::CURSOR_COLOR)
+
     );
+    else {
+    View::WriteToView(
+        xCoord + col * CELL_WIDTH + X_OFFSET,
+        yCoord + row * CELL_HEIGHT + Y_OFFSET,
+        value,
+        (wchar_t)0U,
+        highlight,
+        color
+    );
+    }
 }
 
 void BoardContainer::DrawBoardHorizontalLabels()

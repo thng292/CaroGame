@@ -45,7 +45,7 @@ void Label::DrawGameScreenHint(
                 Language::GetString(L"GHOST_SHORTCUT"),
                 Language::GetString(L"GHOST_TITLE")
             )
-
+         
         };
         short spaceVal = 3;
         std::vector<std::wstring> hintRows;
@@ -68,11 +68,10 @@ void Label::DrawGameScreenHint(
             maxLen = std::max<short>(maxLen, hintRows[hintRows.size()-1].size());
         }
 
-
         short centerX = Label::GetCenterX(logX, logWidth, maxLen),
               y = logY + logHeight + 1;
 
-        for (size_t i = 0; i < 3; ++i) {
+        for (size_t i = 0; i < hintRows.size(); ++i) {
             View::WriteToView(centerX, y + i, hintRows[i]);
         }
 

@@ -145,3 +145,5 @@ WIN_TIME_TEXT               =    đã thắng (Thời gian)
 YES_TITLE                   =    Có
 ARE_YOU_SURE = Lưu ván đấu hiện tại?
 LABEL_PAUSE = Tạm dừng
+SCROLL_SHORTCUT = O, P
+SCROLL_TITLE = Cuộn lên, xuống
