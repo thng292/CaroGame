@@ -75,7 +75,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     });
 
     Audio::AudioPlayer gamePlaceSound(Audio::Sound::GamePlace);
-    Audio::AudioPlayer gameMoveSound(Audio::Sound::GameMove);
+    Audio::AudioPlayer gameWinSound(Audio::Sound::WinSound);
     Audio::AudioPlayer warningSound(Audio::Sound::WarningSound);
 
     auto& soundEffect = Config::GetConfig(L"SoundEffect");
@@ -251,9 +251,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 gamePlaceSound.Play(1);
             } else if (tmp == L"ESC") {
                 Audio::PlayAndForget(Audio::Sound::Pause);
-            } else {
-                // Audio::PlayAndForget(Audio::Sound::GameMove);
-                gameMoveSound.Play();
             }
         }
 
@@ -615,6 +612,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         );
         lock.unlock();
     }
+
+    gameWinSound.Play();
 
     while (tmp != L" ") {
         tmp = InputHandle::Get();
