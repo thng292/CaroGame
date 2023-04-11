@@ -84,7 +84,16 @@ void GameScreen::DrawGameScreen(bool isReplay)
         logContainer.xCoord + logContainer.cellWidth,
         logContainer.xCoord,
         logContainer.yCoord - 1,
-        Language::GetString(L"MOVE_HISTORY_TITLE")
+        std::format(
+            L"{} ({})",
+            Language::GetString(L"MOVE_HISTORY_TITLE"),
+            
+            Label::GetShortcutString(
+                Language::GetString(L"SCROLL_SHORTCUT"),
+                Language::GetString(L"SCROLL_TITLE")
+            )
+        )
+        
 
     );
 

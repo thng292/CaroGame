@@ -145,3 +145,5 @@ WIN_TIME_TEXT               =    won the game (Through time)
 YES_TITLE                   =    Yes
 ARE_YOU_SURE = Save the current game?
 LABEL_PAUSE = Pause
+SCROLL_SHORTCUT = O, P
+SCROLL_TITLE = Scroll up, down
