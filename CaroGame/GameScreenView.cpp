@@ -266,23 +266,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         if (tmp == L"ESC") {
             timerPlayerOne.Stop();
             timerPlayerTwo.Stop();
-            GameScreenAction::UnhighlightCursor(
-                gameScreen, currentBoard, {row, col}, colorMatrix, lock
-            );
-
-            GameScreenAction::TurnOffGhostMode(
-                gameScreen,
-                currentBoard,
-                gameBoard,
-                ghostMoveList,
-                isGhostMode,
-                isPlayerOneTurn,
-                prevPlayer,
-                curPlayer,
-                colorMatrix,
-                lock
-            );
-
             NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
             return NavHost.Navigate("PauseMenuView");
         }
