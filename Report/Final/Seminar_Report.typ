@@ -708,9 +708,27 @@ GameAction::UndoMove(board, moveCount, latestMove, currentPlayer);
 ```
 
 === AI
-Vũ
+Việc thiết kết chương trình cho chế độ `Đánh với máy` là một trong những thách thức lớn nhất của đồ án. Khác với những tính năng khác của chương trình, tính năng này đòi hỏi những mảng kiến thức chuyên biệt về các thuật toán, kĩ thuật lập trình cụ thể. Ngoài ra, việc đánh giá độ đúng/sai của chương trình, hay nói cách khác là nước đi máy tính tìm được là tốt hay xấu, sẽ phần lớn phụ thuộc vào cảm tính và sự hiểu biết của người viết. Chính vì vậy, chương trình có thể đánh hay đối với người này, nhưng đánh không tốt đối với người khác. Phần tiếp theo sẽ trình bày những kĩ thuật mà nhóm đã sử dụng cho chương tình AI.
 
-sdhfiuashksj
+==== Thuật toán Minimax
+
+==== Đánh giá bàn cờ
+
+==== Cải thiện tốc độ
+
+===== Alpha-Beta pruning
+
+===== Sắp xếp nước đi tìm kiếm
+
+===== Transposition table (Bảng hoán vị)
+
+===== So sánh tốc độ
+
+==== Phân độ khó
+
+==== Chức năng "Gợi ý"
+
+==== Những mặt cần cải thiện
 
 == Giao diện
 
