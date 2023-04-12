@@ -4,25 +4,23 @@
 )
 
 #set text(
-  font: "Linux Libertine",
+  font: "Time News Roman",
   size: 14pt,
-  lang: "vi"
+  lang: "vi",
+  ligatures: true
 )
 
 #set page(
   paper: "a4",
-  header: align(right)[
-    Đồ án kĩ thuật lập trình nhóm 11
-  ],
-  numbering: "1"
+  numbering: "1",
+  margin: (top: 3cm, bottom: 2.5cm, left: 3cm, right: 2cm)
 )
 
 #set par(
     linebreaks: "optimized",
-    justify: true
+    justify: true,
 )
-
-#show par: set block(spacing: 1em)
+show par: set block(above: 1.4em, below: 1.4em)
 
 #set heading(
   numbering: "1.1."
@@ -53,6 +51,7 @@
   radius: 2pt,
   breakable: false
 )
+
 #show raw.where(block: false): box.with(
   fill: luma(240),
   inset: (x: 3pt, y: 0pt),
@@ -61,59 +60,102 @@
 )
  
 #page(numbering: none)[
-#place(
-    center + horizon,
-    block(
-        width: 100%,
-        height: 100%,
-        stroke: 2pt,
-        [
-        #align(center + top)[
-            #pad(top: 16pt)[
-                *TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN\
-                KHOA CÔNG NGHỆ THÔNG TIN*
-            ]
-        ],
-        #place(
-            center + horizon,
+    #place(
+        center + horizon,
+        block(
+            width: 100%,
+            height: 100%,
+            stroke: 2pt,
             [
-
-            #image("HCMUS_Logo.png", width: 40%),
-
-            #align(center, text(20pt, pad(rest: 32pt)[
-                *ĐỒ ÁN MÔN HỌC\
-                KĨ THUẬT LẬP TRÌNH\
-                ĐỀ TÀI: XÂY DỰNG GAME CỜ CARO*
-            ]))
-
-            #align(center)[
-                *Nhóm 11*\
-                22127401 - Nguyễn Quang Thông\
-                22127298 - Hoàng Trung Nguyên\
-                22127339 - Võ Nhật Phước\
-                22127463 - Nguyễn Anh Vũ
+            #align(center + top)[
+                #pad(top: 16pt)[
+                    *TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN\
+                    KHOA CÔNG NGHỆ THÔNG TIN*
+                ]
             ]
-
-            #pad(
-                rest: 32pt,
-                align(center)[
-                *Giáo Viên Hướng Dẫn: Trương Toàn Thịnh*
-            ])
+            #place(
+                center + horizon,
+                [
+                    
+                #align(center)[
+                    *Nguyễn Quang Thông\
+                    Nguyễn Anh Vũ\
+                    Võ Nhật Phước\
+                    Hoàng Trung Nguyên*
+                ]
+                
+                #align(center, text(20pt, pad(rest: 52pt)[
+                    *XÂY DỰNG GAME CỜ CARO*
+                ]))
+                
+                #pad(top :32pt, align(center)[*ĐỒ ÁN MÔN HỌC\
+                    KĨ THUẬT LẬP TRÌNH*
+                    
+                ])
+                ]
+            )
+            #align(center + bottom)[
+                #pad(bottom: 16pt, text(size: 10pt)[
+                    *Thành Phố Hồ Chí Minh, Tháng 04 năm 2023*
+                ])
             ]
-        ),
-        #align(center + bottom)[
-            #pad(bottom: 16pt, text(size: 10pt)[
-                *Thành Phố Hồ Chí Minh, Ngày 03 tháng 04 năm 2023*
-            ])
-        ]
-        ]
+            ]
+        )
     )
-)
 ]
 
-#pagebreak()
+#page(numbering: none)[
+    #place(
+        center + horizon,
+        block(
+            width: 100%,
+            height: 100%,
+            stroke: 2pt,
+            [
+            #align(center + top)[
+                #pad(top: 16pt)[
+                    *TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN\
+                    KHOA CÔNG NGHỆ THÔNG TIN*
+                ]
+            ]
+            #place(
+                center + horizon,
+                [
 
-#align(center, heading(numbering: none)[Lời nói đầu])
+                #image("HCMUS_Logo.png", width: 40%)
+
+                #align(center, text(20pt, pad(rest: 32pt)[
+                    *ĐỒ ÁN MÔN HỌC\
+                    KĨ THUẬT LẬP TRÌNH\
+                    ĐỀ TÀI:\
+                    XÂY DỰNG GAME CỜ CARO*
+                ]))
+
+                #align(center)[
+                    *Nhóm 11*\
+                    22127401 - Nguyễn Quang Thông\
+                    22127298 - Hoàng Trung Nguyên\
+                    22127339 - Võ Nhật Phước\
+                    22127463 - Nguyễn Anh Vũ
+                ]
+
+                #pad(
+                    rest: 32pt,
+                    align(center)[
+                    *Giáo Viên Hướng Dẫn: Trương Toàn Thịnh*
+                ])
+                ]
+            )
+            #align(center + bottom)[
+                #pad(bottom: 16pt, text(size: 10pt)[
+                    *Thành Phố Hồ Chí Minh, Tháng 04 năm 2023*
+                ])
+            ]
+            ]
+        )
+    )
+]
+
 #pagebreak()
 
 #align(center, heading(numbering: none)[Lời cảm ơn])
@@ -126,7 +168,7 @@
 )
 #pagebreak()
 
-#heading(numbering: none)[Mục lục hình]
+#heading(numbering: none)[Danh sách hình]
 #locate(loc => {
     let figures = query(figure, loc)
     let res = ()
@@ -244,7 +286,7 @@ Phước
 
 === Chơi hiệu ứng, nhạc nền
 
-Các file âm thanh được đặt trong thư mục asset/audio và có thể truy cập bằng các `enum`. Các `enum` được map sang một mảng chứa tên các file âm thanh
+Các file âm thanh được đặt trong thư mục asset/audio và có thể truy cập bằng các `enum`. Các `enum` được map sang một mảng chứa tên các file âm thanh. Các hàm và class nằm trong `namespace Audio`, file `Audio.h`, `Audio.cpp`
 
 #grid(
     rows: (auto), 
@@ -289,7 +331,7 @@ constexpr std::array SoundName{
 )
 
 ==== Hàm PlayAndForget 
-Hàm này sử dụng API PlaySound để chơi nhạc. Được dùng để chơi những âm thanh ngắn, dung lượng nhỏ dưới 100kb. Khi gọi hàm sẽ tự load file vào memory, chơi và đóng file. Do phải load cả file vào bộ nhớ nên khi chơi có độ delay cao và chỉ có thể mở được file `wav`. Được ứng dụng để chơi các âm thanh liên quan tới giao diện, các âm thanh không quan tâm tới độ trễ. Hàm nằm trong `namespace Audio`, file `Audio.h`, `Audio.cpp`
+Hàm này sử dụng hàm PlaySound @PlaySound để chơi nhạc. Được dùng để chơi những âm thanh ngắn, dung lượng nhỏ dưới 100kb. Khi gọi hàm sẽ tự load file vào memory, chơi và đóng file. Do phải load cả file vào bộ nhớ nên khi chơi có độ delay cao và chỉ có thể mở được file `wav`. Được ứng dụng để chơi các âm thanh liên quan tới giao diện, các âm thanh không quan tâm tới độ trễ.
 
 Interface:
 ```Cpp
@@ -309,7 +351,7 @@ Usage:
 
 ==== Class AudioPlayer
 
-Class này sử dụng #strong(`Media Control Interface`) (`MCI`) để chơi nhạc, chơi được các file âm thanh định dạng `mp3` và `wav`. Chơi được các file lớn, ít delay do không cần load hết file vào bộ nhớ. Được dùng để chơi nhạc nền hoặc file `mp3`.
+Class này sử dụng #strong(`Media Control Interface`) (`MCI`) @MCI  để chơi nhạc nên giải quyết được các vấn đề của hàm `PlayAndForget`. Chơi được các file âm thanh định dạng `mp3` và `wav`, chơi được các file lớn, ít delay do không cần load hết file vào bộ nhớ. Nhược điểm là cần phải quan tâm đến tuổi thọ của class nên không tiện dụng như `PlayAndForget`. Được dùng để chơi nhạc nền, những đoạn nhạc cần độ trễ thấp hoặc file `mp3`.
 
 Interface:
 ```
@@ -361,7 +403,7 @@ Usage:
 
 ==== Static class BackgroundAudioService
 
-Class này được dùng để chơi nhạc nền, sử dụng class AudioPlayer để chơi nhạc.
+Class này được dùng để chơi nhạc nền, sử dụng class AudioPlayer để chơi nhạc vì có tuổi thọ dài.
 
 Interface:
 ```
@@ -395,6 +437,13 @@ Usage:
     BackgroundAudioService::Play(true, true);
 }
 ```
+
+=== Điều hướng trong ứng dụng
+Thông
+
+=== Đồng hồ
+Thông
+
 === Đọc, ghi, tìm file
 Các hàm nằm trong `namespace FileHandle`, file `FileHandle.h`, `FileHandle.cpp`
 
@@ -511,6 +560,7 @@ Usage:
 
 === Ngôn ngữ
 Các văn bản trong trò chơi sẽ được load từ một file riêng, điều này kiến cho phần ngôn ngữ trong game dễ tùy biến và thêm các ngôn ngữ mới.
+
 File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=", các nhãn có nằm bên trong cặp ngoặc `[]` là `meta` được dùng để chứa thông tin về file ngôn ngữ
 
 Ví dụ file ngôn ngữ:
@@ -584,12 +634,6 @@ Thông
 === Chủ đề
 Thông
 
-=== Điều hướng trong ứng dụng
-Thông
-
-=== Đồng hồ
-Thông
-
 === Hàm trung gian hỗ trợ vẽ giao diện
 Thông
 
@@ -637,16 +681,15 @@ Vũ
     - Hướng dẫn dễ hiểu, có gợi ý ở mỗi màn hình
 
 === Khuyết điểm của trò chơi
-Phước
+    -
 
 == Những gì đã học được
     - Cách làm việc nhóm với git và GitHub
-    - Cách sử dụng các tính năng mới của C++
+    - Cách sử dụng các tính năng mới của C++ 20
     - Cách sử dụng các tính năng liên quan tới đo hiệu năng, format code và debug trong Visual Studio
     - Cách làm việc nhóm hiệu quả
     - Cách lên kế hoạch, phân chia công việc
     - Học được cách vẽ biểu đồ di chuyển cho ứng dụng
-
 
 == Các kinh nghiệm rút ra
     - Không nên viết code mà không thiết kế trước
@@ -661,3 +704,5 @@ Nguyên
     - Thêm nhiều chủ đề hơn
     - Hiện lợi thế của 2 bên
     - Đưa game lên nhiều nền tảng khác
+
+#bibliography(title: "Tài liệu tham khảo", "ReportBib.yml")
