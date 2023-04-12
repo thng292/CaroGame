@@ -77,6 +77,11 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     Audio::AudioPlayer gamePlaceSound(Audio::Sound::GamePlace);
     Audio::AudioPlayer gameWinSound(Audio::Sound::WinSound);
     Audio::AudioPlayer warningSound(Audio::Sound::WarningSound);
+    Audio::AudioPlayer hintSound(Audio::Sound::Hint);
+    Audio::AudioPlayer undoSound(Audio::Sound::Undo);
+    Audio::AudioPlayer ghostSound(Audio::Sound::Ghost);
+    Audio::AudioPlayer ghostOffSound(Audio::Sound::GhostOff);
+
 
     auto& soundEffect = Config::GetConfig(L"SoundEffect");
 
@@ -218,6 +223,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
     // Make AI's first move
     if (aiFirst) {
+        Sleep(500);
         timerPlayerOne.Continued();
         timerPlayerTwo.Pause();
 
@@ -239,6 +245,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             colorMatrix,
             lock
         );
+        if (soundEffect == Config::Value_True) gamePlaceSound.Play();
+
     }
 
     // Game loop
@@ -282,6 +290,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
         // Undo move
         if ((tmp == L"z" || tmp == L"Z") && curGameState.moveList.size() != 0 &&
             Config::GetConfig(Config::UndoOption) == Config::Value_True) {
+            goBack = 0;
             GameScreenAction::TurnOffGhostMode(
                 gameScreen,
                 currentBoard,
@@ -294,7 +303,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 colorMatrix,
                 lock
             );
-            goBack = 0;
+            
             GameScreenAction::DeleteHintMove(
                 gameScreen, hintMove, colorMatrix, lock
             );
@@ -356,6 +365,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             }
 
             currentBoard = gameBoard;
+            if (soundEffect == Config::Value_True) undoSound.Play();
         }
 
         if (tmp == L"o" || tmp == L"O") {
@@ -384,8 +394,12 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     colorMatrix,
                     lock
                 );
-            } else
+                if (soundEffect == Config::Value_True) ghostOffSound.Play();
+            } else {
                 isGhostMode = true;
+                if (soundEffect == Config::Value_True) ghostSound.Play();
+            }
+                
         }
 
         if (Utils::keyMeanUp(tmp)) {
@@ -448,6 +462,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             GameScreenAction::DrawHintMove(
                 gameScreen, hintMove, curPlayer, colorMatrix, lock
             );
+            if (soundEffect == Config::Value_True) hintSound.Play();
         }
 
         // Makes move
@@ -544,6 +559,8 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                             lock
                         );
 
+                        if (soundEffect == Config::Value_True) gamePlaceSound.Play();
+
                         GameScreenAction::UnhighlightWarning(
                             gameScreen,
                             curPlayer,
@@ -611,9 +628,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
             endGame
         );
         lock.unlock();
+        if (soundEffect == Config::Value_True) gameWinSound.Play();
     }
 
-    gameWinSound.Play();
+    
 
     while (tmp != L" ") {
         tmp = InputHandle::Get();

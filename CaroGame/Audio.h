@@ -25,7 +25,11 @@ namespace Audio {
         GamePlace,
         GameStart,
         Pause,
-        WarningSound
+        WarningSound,
+        Hint,
+        Undo,
+        Ghost,
+        GhostOff
     };
     constexpr std::array SoundName{
         L"",
@@ -41,7 +45,11 @@ namespace Audio {
         L"GamePlaceMove.mp3",
         L"GameStart.wav",
         L"Pause.wav",
-        L"Warning.mp3"};
+        L"Warning.mp3",
+        L"Hint.mp3",
+        L"Undo.mp3",
+        L"GhostOn.mp3",
+        L"GhostOff.mp3"};
 
     class AudioPlayer {
        private:

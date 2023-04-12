@@ -288,7 +288,7 @@ void Setting::SettingScreen(NavigationHost& NavHost)
 void Setting::DrawHints()
 {
     const auto controlHint1 = std::format(
-        L"A, W, S, D, Arrow Keys: {}, Space: {}",
+        L"A, W, S, D, \u2190\u2191\u2193\u2192: {}, Space: {}",
         Language::GetString(L"NAVIGATION_KEYS_TITLE"),
         Language::GetString(L"APPLY_KEY_TITLE")
     );

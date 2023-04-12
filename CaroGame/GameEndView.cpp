@@ -76,7 +76,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         case Constants::END_GAME_DRAW:
             playerResultLabel = Language::GetString(L"DRAW_TEXT");
             tempColor = Theme::GetColor(ThemeColor::RESULT_TEXT_COLOR);
-            WIDTH = 40;
+            WIDTH = 39;
             X_PIVOT += 4;
             break;
     }

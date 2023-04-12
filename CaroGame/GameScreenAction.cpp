@@ -53,6 +53,7 @@ void GameScreenAction::UndoMove(
         else {
             previousToLastMove = {-1, -1};
         }
+        GameAction::UndoMove(gameBoard, moveCount, latestMove);
 
     } else {
         latestMove = {-1, -1};
@@ -60,7 +61,7 @@ void GameScreenAction::UndoMove(
     }
 
     GameScreenAction::FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
-
+    
     GameScreenAction::UpdateGame(
         gameScreen, gameBoard, moveCount, latestMove, prevPlayer, curGameState
     );

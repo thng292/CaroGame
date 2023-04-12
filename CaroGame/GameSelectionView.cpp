@@ -166,12 +166,14 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     View::DrawTextCenterdVertically(
         28,
         std::format(
-            L"A, W, S, D, Arrow Keys: {}, Enter: {}",
+            L"A, W, S, D, \u2190\u2191\u2193\u2192: {}, Enter: {}, B: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-            Language::GetString(L"SELECT_KEY_TITLE")
+            Language::GetString(L"SELECT_KEY_TITLE"),
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
 
         )
     );
+
 
     View::Rect drawnRect, player1Selection;
     auto& soundEffect = Config::GetConfig(Config::SoundEffect);
