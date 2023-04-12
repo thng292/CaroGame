@@ -17,5 +17,5 @@ SWITCH_ON                   =    2
 TEXT_COLOR                  =    12
 TEXT_HIGHLIGHT_COLOR        =    13
 TITLE_TEXT_COLOR            =    13
-WARNING_COLOR               =    9
+WARNING_COLOR               =    6
 WIN_HIGHLIGHT_COLOR         =    2
