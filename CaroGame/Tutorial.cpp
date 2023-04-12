@@ -163,9 +163,6 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             mockGameState.playerOneFirst
         );
 
-        View::DrawTextWrapped(
-            20, 12, Language::GetString(L"HELP_7-1_TITLE"), 6, 40
-        );
 
         auto tmp =
             View::WrapText(Language::GetString(L"HELP_7-2_TITLE"), 5, 40);
@@ -238,12 +235,15 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
             );
         }
 
-        gameScreen.boardContainer.DrawToBoardContainerCell(
-            4,
-            0,
-            Constants::PLAYER_ONE.symbol,
-            Theme::GetColor(ThemeColor::WIN_HIGHLIGHT_COLOR)
-        );
+        for (size_t i = 0; i < 5; ++i) {
+            gameScreen.boardContainer.DrawToBoardContainerCell(
+                i,
+                0,
+                Constants::PLAYER_ONE.symbol,
+                Theme::GetColor(ThemeColor::WIN_HIGHLIGHT_COLOR)
+            );
+        }
+        
 
         InputHandle::Get();
         Utils::PlaySpecialKeySound();
@@ -251,8 +251,7 @@ void Tutorial::TutorialScreen(NavigationHost& NavHost)
         auto& tmp = Language::GetString(L"HELP_8-3_TITLE");
         View::WriteToView(89 - tmp.length() / 2, 14, tmp);
 
-        tmp = Language::GetString(L"HELP_8-4_TITLE");
-        View::WriteToView(89 - tmp.length() / 2, 15, tmp);
+        View::WriteToView(89 - tmp.length() / 2, 15, Language::GetString(L"HELP_8-4_TITLE"));
 
         auto tt = View::WrapText(Language::GetString(L"HELP_8-5_TITLE"), 3, 50);
         for (size_t i = 0; i < tt.size(); i++) {

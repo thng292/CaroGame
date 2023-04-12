@@ -28,7 +28,7 @@ class Language {
         const std::filesystem::path& dirPath = Constants::LANGUAGE_PATH
     );
 
-    static inline std::wstring& GetString(const std::wstring& Label)
+    static inline const std::wstring& GetString(const std::wstring& Label)
     {
 #ifdef LANGUAGE_LABEL_FALLBACK
         if (!languageDict.contains(Label)) {
@@ -38,7 +38,7 @@ class Language {
         return languageDict[Label];
     }
 
-    static inline std::wstring& GetMeta(const std::wstring& Label)
+    static inline const std::wstring& GetMeta(const std::wstring& Label)
     {
         return GetString(Label);
     }

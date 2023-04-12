@@ -2,7 +2,7 @@
 
 #include "Audio.h"
 
-static class BackgroundAudioService {
+class BackgroundAudioService {
     static Audio::AudioPlayer player;
 
    public:

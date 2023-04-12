@@ -19,7 +19,7 @@ void Label::DrawGameScreenHint(
 )
 {
     if (!isReplay) {
-        const std::vector<std::wstring> INSTRUCTION_LIST = {
+        std::vector<std::wstring> INSTRUCTION_LIST = {
             Label::GetShortcutString(
                 L"A, W, D, S, \u2190\u2191\u2192\u2193",
                 Language::GetString(L"NAVIGATION_KEYS_TITLE")
@@ -30,7 +30,7 @@ void Label::DrawGameScreenHint(
             ),
             Label::GetShortcutString(
                 Language::GetString(L"UNDO_SHORTCUT"),
-                Language::GetString(L"UNDO_OPTION_TITLE")
+                Language::GetString(L"UNDO_OPTION_TITLE_ON")
             ),
 
             Label::GetShortcutString(
@@ -39,14 +39,30 @@ void Label::DrawGameScreenHint(
             ),
             Label::GetShortcutString(
                 Language::GetString(L"HINT_SHORTCUT"),
-                Language::GetString(L"HINT_OPTION_TITLE")
+                Language::GetString(L"HINT_OPTION_TITLE_ON")
             ),
             Label::GetShortcutString(
                 Language::GetString(L"GHOST_SHORTCUT"),
                 Language::GetString(L"GHOST_TITLE")
             )
-
+         
         };
+
+        if (Config::GetConfig(Config::UndoOption) != Config::Value_True) {
+            INSTRUCTION_LIST[2] = Label::GetShortcutString(
+                Language::GetString(L"UNDO_SHORTCUT"),
+                Language::GetString(L"UNDO_OPTION_TITLE_OFF")
+            );
+        }
+
+        if (Config::GetConfig(Config::Hint) != Config::Value_True) {
+            INSTRUCTION_LIST[4] = Label::GetShortcutString(
+                Language::GetString(L"HINT_SHORTCUT"),
+                Language::GetString(L"HINT_OPTION_TITLE_OFF")
+            );
+        }
+
+
         short spaceVal = 3;
         std::vector<std::wstring> hintRows;
 
@@ -68,11 +84,10 @@ void Label::DrawGameScreenHint(
             maxLen = std::max<short>(maxLen, hintRows[hintRows.size()-1].size());
         }
 
-
         short centerX = Label::GetCenterX(logX, logWidth, maxLen),
               y = logY + logHeight + 1;
 
-        for (size_t i = 0; i < 3; ++i) {
+        for (size_t i = 0; i < hintRows.size(); ++i) {
             View::WriteToView(centerX, y + i, hintRows[i]);
         }
 

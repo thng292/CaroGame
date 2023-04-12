@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning(disable : 4996)
+//#pragma warning(disable : 4996)
 #include <codecvt>
 #include <filesystem>
 #include <fstream>
@@ -9,8 +9,7 @@
 #include <vector>
 
 namespace FileHandle {
-    const static std::locale
-        LOCALE(std::locale::empty(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::generate_header>);
+    const static std::locale LOCALE("vi_Vi.utf8");
 
     struct FileDetail {
         std::filesystem::path filePath;
@@ -24,25 +23,9 @@ namespace FileHandle {
         }
     }
 
-    std::wofstream OpenOutFile(const std::filesystem::path& fileName);
+    std::wofstream OpenOutFile(const std::filesystem::path& filePath);
 
-    std::wifstream OpenInFile(const std::filesystem::path& fileName);
-
-    inline std::ofstream OpenOutFileA(const std::filesystem::path& fileName)
-    {
-        if (fileName.has_parent_path()) {
-            Ensure(fileName.parent_path());
-        }
-        return std::ofstream(fileName);
-    }
-
-    inline std::ifstream OpenInFileA(const std::filesystem::path& fileName)
-    {
-        if (fileName.has_parent_path()) {
-            Ensure(fileName.parent_path());
-        }
-        return std::ifstream(fileName);
-    }
+    std::wifstream OpenInFile (const std::filesystem::path& filePath);
 
     std::vector<FileDetail> GetAllTextFileInDir(
         const std::filesystem::path& Dir

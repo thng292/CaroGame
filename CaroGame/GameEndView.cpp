@@ -5,7 +5,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
     auto gameState =
         std::any_cast<GameState>(NavHost.GetFromContext(Constants::FINISHED_GAME
         ));
-    const short WIDTH = 47, HEIGHT = 2 * 9;
+    short WIDTH = 47, HEIGHT = 2 * 9;
 
     short X_PIVOT = (120 - WIDTH) / 2, Y_PIVOT = (29 - HEIGHT) / 2;
 
@@ -74,7 +74,10 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
             X_PIVOT += 1;
             break;
         case Constants::END_GAME_DRAW:
-            playerResultLabel = Language::GetString(L"GAME_DRAW_TEXT");
+            playerResultLabel = Language::GetString(L"DRAW_TEXT");
+            tempColor = Theme::GetColor(ThemeColor::RESULT_TEXT_COLOR);
+            WIDTH = 39;
+            X_PIVOT += 4;
             break;
     }
 
@@ -215,22 +218,27 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
         std::thread(Logo_Result, gameState.gameEnd, std::ref(stop));
 
     Audio::AudioPlayer player;
-
-    if (gameState.gameEnd == Constants::END_GAME_DRAW) {
-        player.Open(Audio::Sound::Draw);
-    } else {
-        if (gameState.gameMode == Constants::GAME_MODE_PVE &&
-            (gameState.gameEnd == Constants::END_GAME_WIN_TWO || gameState.gameEnd == Constants::END_GAME_WIN_TIME_TWO)) {
-            player.Open(Audio::Sound::Lose);
+    if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
+        if (gameState.gameEnd == Constants::END_GAME_DRAW) {
+            player.Open(Audio::Sound::Draw);
         } else {
-            player.Open(Audio::Sound::Win);
-        }  
+            if (gameState.gameMode == Constants::GAME_MODE_PVE &&
+                (gameState.gameEnd == Constants::END_GAME_WIN_TWO ||
+                 gameState.gameEnd == Constants::END_GAME_WIN_TIME_TWO)) {
+                player.Open(Audio::Sound::Lose);
+            } else {
+                player.Open(Audio::Sound::Win);
+            }
+        }
+
+        player.Play();
     }
-    player.Play();
     auto tmp = InputHandle::Get();
     stop = true;
     logoThread.join();
-    Utils::PlaySpecialKeySound();
+    if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
+        Utils::PlaySpecialKeySound();
+    }
     return NavHost.Navigate("ReplayMenuView");
 }
 
@@ -244,9 +252,16 @@ void GameEndView::DrawLabelValuesAdjacent(
 )
 {
     x += 2;
-    View::WriteToView(x, y, label);
+    View::WriteToView(
+        x,
+        y,
+        label,
+        (wchar_t)0U,
+        false,
+        Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR)
+    );
 
-    x += (width - 2) / 2 + 5;
+    x += (width - 2) / 2 + 2;
     const short X_MID_PIVOT = x;
     x -= playerOneValue.size() + 1;
 
@@ -281,7 +296,7 @@ void GameEndView::DrawLabelValue(
 )
 {
     x += 2;
-    View::WriteToView(x, y, label);
-    x += width / 2 + 3;
+    View::WriteToView(x, y, label, (wchar_t)0U, false, Theme::GetColor(ThemeColor::TITLE_TEXT_COLOR));
+    x += width / 2;
     View::WriteToView(x, y, value, (wchar_t)0U, false, color);
 }

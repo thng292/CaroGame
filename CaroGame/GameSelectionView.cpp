@@ -120,7 +120,9 @@ void GameSelectionView::PlayerNameView(NavigationHost& NavHost)
     curGameState.playerNameOne = inputList[0];
     curGameState.playerNameTwo = inputList[1];
 
-    Utils::PlaySpecialKeySound();
+    if (Config::GetConfig(Config::SoundEffect) == Config::Value_True) {
+        Utils::PlaySpecialKeySound();
+    }
 
     NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
     return NavHost.Navigate("AvatarSelectView");
@@ -164,12 +166,14 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     View::DrawTextCenterdVertically(
         28,
         std::format(
-            L"A, W, S, D, Arrow Keys: {}, Enter: {}",
+            L"A, W, S, D, \u2190\u2191\u2193\u2192: {}, Enter: {}, B: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
-            Language::GetString(L"SELECT_KEY_TITLE")
+            Language::GetString(L"SELECT_KEY_TITLE"),
+            Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
 
         )
     );
+
 
     View::Rect drawnRect, player1Selection;
     auto& soundEffect = Config::GetConfig(Config::SoundEffect);
@@ -177,7 +181,9 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     while (currentGameState.playerAvatarOne == -1 ||
            currentGameState.playerAvatarTwo == -1) {
         if (currentGameState.playerAvatarOne != -1) {
-            View::DrawBorder(player1Selection, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR));
+            View::DrawBorder(
+                player1Selection, Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
+            );
         }
 
         if (selected < 4) {
@@ -195,7 +201,6 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
             player1Selection.Top ? Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR)
                                  : Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
         );
-        
 
         auto tmp = InputHandle::Get();
         if (soundEffect == Config::Value_True) {
@@ -234,7 +239,9 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
             }
         }
         View::DrawBorder(
-            drawnRect, Theme::GetColor(ThemeColor::CONSOLE_COLOR), Theme::GetColor(ThemeColor::CONSOLE_COLOR)
+            drawnRect,
+            Theme::GetColor(ThemeColor::CONSOLE_COLOR),
+            Theme::GetColor(ThemeColor::CONSOLE_COLOR)
         );
     }
     NavHost.SetContext(Constants::CURRENT_GAME, currentGameState);
@@ -333,7 +340,9 @@ void GameSelectionView::DrawCurrentOptionBox(
           y = Y_PIVOT + 1;
 
     for (size_t i = 0; i < LABEL_LIST.size(); ++i) {
-        View::WriteToView(x, y, LABEL_LIST[i], (wchar_t)0U, i == selected, titleColor);
+        View::WriteToView(
+            x, y, LABEL_LIST[i], (wchar_t)0U, i == selected, titleColor
+        );
         x += LABEL_LIST[i].size() + 2;
 
         if (i != 3)
@@ -346,25 +355,28 @@ void GameSelectionView::DrawCurrentOptionBox(
     }
 }
 
-void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
+void GameSelectionView::AreYouSureView(NavigationHost& NavHost)
+{
     std::string nextView =
-        std::any_cast<std::string>(NavHost.GetFromContext(Constants::NEXT_VIEW));
+        std::any_cast<std::string>(NavHost.GetFromContext(Constants::NEXT_VIEW)
+        );
 
     bool isSaved =
-        std::any_cast<bool>(NavHost.GetFromContext(Constants::IS_SAVED)
-        );
+        std::any_cast<bool>(NavHost.GetFromContext(Constants::IS_SAVED));
 
     if (isSaved) return NavHost.Navigate(nextView);
 
     short selectedOption = 0;
-    const short MAX_OPTIONS = 2;
+    const short MAX_OPTIONS = 3;
 
     std::wstring label = Language::GetString(L"ARE_YOU_SURE");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_TITLE")[0]},
         {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0]}
+         Language::GetString(L"OPTION_NO")[0]},
+        {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
+         Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0]}
     };
 
     Common::DrawHintsLess();
@@ -393,6 +405,9 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
         if (tmp == L"2") {
             return NavHost.Navigate(nextView);
         }
+        if (tmp == L"3") {
+            return NavHost.Back();
+        }
         if (tmp == L"b") {
             return NavHost.Back();
         }
@@ -403,6 +418,8 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost) {
                     return NavHost.Navigate("SaveScreen");
                 case 1:
                     return NavHost.Navigate(nextView);
+                case 2:
+                    return NavHost.Back();
             }
         }
     }
@@ -834,7 +851,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         }
 
         if (tmp == L"\r") {
-            navigationValue = navigationValueList[selectedOption];           
+            navigationValue = navigationValueList[selectedOption];
             break;
         }
     }

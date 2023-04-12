@@ -53,6 +53,7 @@ void GameScreenAction::UndoMove(
         else {
             previousToLastMove = {-1, -1};
         }
+        GameAction::UndoMove(gameBoard, moveCount, latestMove);
 
     } else {
         latestMove = {-1, -1};
@@ -60,7 +61,7 @@ void GameScreenAction::UndoMove(
     }
 
     GameScreenAction::FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
-
+    
     GameScreenAction::UpdateGame(
         gameScreen, gameBoard, moveCount, latestMove, prevPlayer, curGameState
     );
@@ -75,7 +76,8 @@ void GameScreenAction::HighLightCursor(
     const GameAction::Board& gameBoard,
     const GameAction::Point& curPos,
     const ColorMatrix& colorMatrix,
-    std::mutex& lock
+    std::mutex& lock,
+    bool isGhostMode
 
 )
 {
@@ -88,7 +90,7 @@ void GameScreenAction::HighLightCursor(
 
     lock.lock();
     gameScreen.boardContainer.DrawToBoardContainerCell(
-        curPos.row, curPos.col, value, color, true
+        curPos.row, curPos.col, value, color, true, isGhostMode
     );
     lock.unlock();
 }
@@ -246,7 +248,6 @@ void GameScreenAction::LoadGameToView(
 )
 {
     bool isPlayerOne = gameState.playerOneFirst;
-
     const short moveListSize = gameState.moveList.size();
     Constants::Player player;
     GameAction::Point move;
@@ -268,7 +269,7 @@ void GameScreenAction::LoadGameToView(
         UpdateGame(gameScreen, board, moveCount, move, player, gameState, true);
         DrawMove(gameScreen, move, player, colorMatrix, color);
         if (i == moveListSize - 1) {
-            if (Config::GetConfig(Config::Hint) == Config::Value_True) {
+            if (Config::GetConfig(Config::FourWarning) == Config::Value_True) {
                 HighlightWarning(
                     gameScreen,
                     board,
@@ -323,10 +324,9 @@ void GameScreenAction::DeleteHintMove(
 
 )
 {
+    std::lock_guard guard(lock);
     if (move.row != -1) {
-        lock.lock();
         GameScreenAction::DeleteMoveFromScreen(gameScreen, move, colorMatrix);
-        lock.unlock();
     }
     move = {-1, -1};
 }
@@ -341,9 +341,8 @@ void GameScreenAction::DrawHintMove(
 )
 {
     View::Color color = Theme::GetColor(ThemeColor::HINT_COLOR);
-    lock.lock();
+    std::lock_guard guard(lock);
     DrawMove(gameScreen, move, player, colorMatrix, color);
-    lock.unlock();
 }
 
 void GameScreenAction::DeleteGhostMoves(
@@ -377,7 +376,7 @@ void GameScreenAction::TurnOffGhostMode(
 )
 {
     isGhostMode = false;
-    lock.lock();
+    std::lock_guard guard(lock);
     DeleteGhostMoves(
         gameScreen,
         moveList,
@@ -386,7 +385,6 @@ void GameScreenAction::TurnOffGhostMode(
         curPlayer,
         colorMatrix
     );
-    lock.unlock();
     currentBoard = gameBoard;
 }
 
@@ -404,9 +402,8 @@ void GameScreenAction::MakeGhostMove(
 {
     board[move.row][move.col] = curPlayer.value;
     moveList.push_back(move);
-    lock.lock();
+    std::lock_guard guard(lock);
     DrawGhostMove(gameScreen, move, curPlayer, colorMatrix);
-    lock.unlock();
     FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
 }
 
@@ -431,23 +428,17 @@ void GameScreenAction::HandlePlayerMove(
     previousToLastMove = latestMove;
     latestMove = move;
 
-    lock.lock();
+    std::lock_guard guard(lock);
     UnhightlightMove(
         gameScreen, previousToLastMove, prevPlayer.symbol, colorMatrix
     );
-    lock.unlock();
 
-    lock.lock();
     HighlightMove(gameScreen, latestMove, curPlayer.symbol, colorMatrix);
-    lock.unlock();
 
-    lock.lock();
     UpdateGame(
         gameScreen, gameBoard, moveCount, latestMove, curPlayer, curGameState
     );
-    lock.unlock();
 
-    lock.lock();
     HandleState(
         gameBoard,
         moveCount,
@@ -459,11 +450,7 @@ void GameScreenAction::HandlePlayerMove(
         gameScreen
     );
 
-    lock.unlock();
-
-    lock.lock();
     gameScreen.SwitchAndDrawCurrentTurn(curPlayer.value);
-    lock.unlock();
 
     myAI.UpdatePrivateValues(latestMove);
     FlipTurn(prevPlayer, curPlayer, isPlayerOneTurn);
@@ -537,7 +524,7 @@ void GameScreenAction::UnhighlightWarning(
 
 )
 {
-    if (pointList.size() % 3 != 0) return;
+    if (pointList.size() % 3 != 0 || pointList.size() == 0) return;
     View::Color color = (player.value == Constants::PLAYER_ONE.value)
                             ? Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
                             : Theme::GetColor(ThemeColor::PLAYER_TWO_COLOR);
