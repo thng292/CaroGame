@@ -41,12 +41,11 @@ namespace GameAction {
             if (board[row][col] != player) break;
             pointList.push_back({row, col});
             if (pointList.size() == 3) break;
-          
         }
     }
 
     inline void AddToList(
-        std::vector<Point>& warningList, const std::vector<Point> &pointList
+        std::vector<Point>& warningList, const std::vector<Point>& pointList
     )
     {
         for (size_t i = 0; i < pointList.size(); ++i) {
@@ -57,8 +56,8 @@ namespace GameAction {
     inline bool IsBlocked(
         const std::vector<Point>& pointList,
         const Board& board,
-        const short &rowDirection,
-        const short &colDirection,
+        const short& rowDirection,
+        const short& colDirection,
         const Point& firstPoint,
         const Point& secondPoint
     )
@@ -69,8 +68,9 @@ namespace GameAction {
             row += rowDirection;
             col += colDirection;
             if (board[row][col] == 0) spaceCount++;
-        } 
+        }
         if (spaceCount > 1) return true;
+        if (spaceCount == 1) return false;
         bool block1 = false, block2 = false;
         row = firstPoint.row + -rowDirection;
         col = firstPoint.col + -colDirection;
@@ -161,9 +161,8 @@ namespace GameAction {
                     ))
                     AddToList(warningList, pointList);
             }
-
         }
-      
+
         return warningList;
     }
 

@@ -36,10 +36,29 @@
     lang: "cpp"
 )
 
+#set list(
+    indent: 16pt,
+    tight: false
+)
+
 #show "Interface" : strong
 #show "Usage" : strong
 #show "Parameters" : strong
 #show "Return" : strong
+#show raw.where(block: true): block.with(
+  width: 100%,
+  fill: luma(240),
+  inset: 2pt,
+  outset: (y: 3pt),
+  radius: 2pt,
+  breakable: false
+)
+#show raw.where(block: false): box.with(
+  fill: luma(240),
+  inset: (x: 3pt, y: 0pt),
+  outset: (y: 3pt),
+  radius: 2pt,
+)
  
 #page(numbering: none)[
 #place(
@@ -236,13 +255,13 @@ enum class Sound : char {
     NoSound = 0,
     OnKey,
     Draw,
-    Win,
+    Win,    
     Lose,
     MenuBGM,
     MenuMove,
     MenuSelect,
     GameBGM,
-    GameMove,
+    WinSound,
     GamePlace,
     GameStart,
     Pause,
@@ -251,21 +270,21 @@ enum class Sound : char {
 ```,
 ```Cpp
 constexpr std::array SoundName{
-        L"",
-        L"Key.wav",
-        L"Draw.mp3",
-        L"Win.mp3",
-        L"Lose.mp3",
-        L"MenuBGM.mp3",
-        L"MenuMove.wav",
-        L"MenuSelect.wav",
-        L"GameBGM.mp3",
-        L"GameMove.wav",
-        L"GamePlaceMove.mp3",
-        L"GameStart.wav",
-        L"Pause.wav",
-        L"Warning.mp3"
-    };
+    L"",
+    L"Key.wav",
+    L"Draw.mp3",
+    L"Win.mp3",
+    L"Lose.mp3",
+    L"MenuBGM.mp3",
+    L"MenuMove.wav",
+    L"MenuSelect.wav",
+    L"GameBGM.mp3",
+    L"WinSound.mp3",
+    L"GamePlaceMove.mp3",
+    L"GameStart.wav",
+    L"Pause.wav",
+    L"Warning.mp3"
+};
 ```
 )
 
@@ -280,8 +299,8 @@ Interface:
 Parameters:
     - `Sound`: âm thanh cần chơi
     - `wait`:\ 
-        `true`  => phát âm thanh một cách đồng bộ (synchronous)\
-        `false` => phát âm thanh một cách bất đồng bộ (asynchronous)
+        - `true`  => phát âm thanh một cách đồng bộ (synchronous)\
+        - `false` => phát âm thanh một cách bất đồng bộ (asynchronous)
 
 Usage:
 ```Cpp
@@ -321,10 +340,10 @@ class AudioPlayer {
 Parameters:
     - `song`: âm thanh cần chơi
     - `fromStart`:\
-        `true`  => chơi từ đầu\
-        `false` => chơi tiếp tại vị trí con trỏ
+        - `true`  => chơi từ đầu\
+        - `false` => chơi tiếp tại vị trí con trỏ
     - `repeat`: \
-        `true` => lặp lại khi kết thúc
+        - `true` => lặp lại khi kết thúc
 
 Return:
     - Các phương thức sẽ trả về `MCI code` của lệnh MCI tương ứng
@@ -363,10 +382,10 @@ class BackgroundAudioService {
 Parameters:
     - `song`: âm thanh cần chơi
     - `fromStart`:\
-        `true`  => chơi từ đầu\
-        `false` => chơi tiếp tại vị trí con trỏ
+        - `true`  => chơi từ đầu\
+        - `false` => chơi tiếp tại vị trí con trỏ
     - `repeat`: \
-        `true` => lặp lại khi kết thúc
+        - `true` => lặp lại khi kết thúc
 
 
 Usage:
@@ -384,8 +403,9 @@ Hỗ trợ mở các file văn bản `utf-8`
 
 Interface:
 ```
-    std::wofstream OpenOutFile(const std::filesystem::path& filePath);
-    std::wifstream OpenInFile (const std::filesystem::path& filePath);  
+    typedef std::filesystem::path fsPath;
+    std::wofstream OpenOutFile(const fsPath& filePath);
+    std::wifstream OpenInFile (const fsPath& filePath);  
 ```
 
 Parameters:
@@ -478,8 +498,11 @@ Return:
 Usage:
 ```
 {
-    // Tìm các file văn bản trong đường dẫn tương đối "asset/language"
-    auto files = FileHandle::GetAllTextFileInDir("asset/language");
+    // Tìm các file văn bản trong đường dẫn
+    // tương đối "asset/language"
+    auto files = FileHandle::GetAllTextFileInDir(
+        "asset/language"
+    );
     for (auto& file:files) {
         std::cout << file.filePath.filename() << '\n';
     }
@@ -488,7 +511,7 @@ Usage:
 
 === Ngôn ngữ
 Các văn bản trong trò chơi sẽ được load từ một file riêng, điều này kiến cho phần ngôn ngữ trong game dễ tùy biến và thêm các ngôn ngữ mới.
-File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=".
+File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=", các nhãn có nằm bên trong cặp ngoặc `[]` là `meta` được dùng để chứa thông tin về file ngôn ngữ
 
 Ví dụ file ngôn ngữ:
 ```text
@@ -541,7 +564,19 @@ public:
 };
 ```
 
+Parameters:
+    - `filePath`: đường dẫn tới file cần mở
+    - `dirPath`: đường dẫn tới thư mục cần tìm
+    - `Label`: nhãn của văn bản cần lấy
 
+Usage:
+```
+{
+    Language::LoadLanguageFromFile("asset/language/en.txt");
+    std::cout << Language::GetMeta(L"[LANGUAGE]");
+    std::cout << Language::GetMeta(L"ABOUT_TITLE");
+}
+```
 
 === Cài đặt
 Thông
