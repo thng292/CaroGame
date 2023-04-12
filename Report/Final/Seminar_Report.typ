@@ -3,160 +3,11 @@
     author: "Nhóm 11 - 22CLC01"
 )
 
-#set text(
-  font: "Time News Roman",
-  size: 14pt,
-  lang: "vi",
-  ligatures: true
-)
+#import "style.typ": template
 
-#set page(
-  paper: "a4",
-  numbering: "1",
-  margin: (top: 3cm, bottom: 2.5cm, left: 3cm, right: 2cm)
-)
-
-#set par(
-    linebreaks: "optimized",
-    justify: true,
-)
-show par: set block(above: 1.4em, below: 1.4em)
-
-#set heading(
-  numbering: "1.1."
-)
-
-#set figure(
-    numbering: "1.1"
-)
-
-#set raw(
-    lang: "cpp"
-)
-
-#set list(
-    indent: 16pt,
-    tight: false
-)
-
-#show "Interface" : strong
-#show "Usage" : strong
-#show "Parameters" : strong
-#show "Return" : strong
-#show raw.where(block: true): block.with(
-  width: 100%,
-  fill: luma(240),
-  inset: 2pt,
-  outset: (y: 3pt),
-  radius: 2pt,
-  breakable: false
-)
-
-#show raw.where(block: false): box.with(
-  fill: luma(240),
-  inset: (x: 3pt, y: 0pt),
-  outset: (y: 3pt),
-  radius: 2pt,
-)
+#show: template
  
-#page(numbering: none)[
-    #place(
-        center + horizon,
-        block(
-            width: 100%,
-            height: 100%,
-            stroke: 2pt,
-            [
-            #align(center + top)[
-                #pad(top: 16pt)[
-                    *TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN\
-                    KHOA CÔNG NGHỆ THÔNG TIN*
-                ]
-            ]
-            #place(
-                center + horizon,
-                [
-                    
-                #align(center)[
-                    *Nguyễn Quang Thông\
-                    Nguyễn Anh Vũ\
-                    Võ Nhật Phước\
-                    Hoàng Trung Nguyên*
-                ]
-                
-                #align(center, text(20pt, pad(rest: 52pt)[
-                    *XÂY DỰNG GAME CỜ CARO*
-                ]))
-                
-                #pad(top :32pt, align(center)[*ĐỒ ÁN MÔN HỌC\
-                    KĨ THUẬT LẬP TRÌNH*
-                    
-                ])
-                ]
-            )
-            #align(center + bottom)[
-                #pad(bottom: 16pt, text(size: 10pt)[
-                    *Thành Phố Hồ Chí Minh, Tháng 04 năm 2023*
-                ])
-            ]
-            ]
-        )
-    )
-]
-
-#page(numbering: none)[
-    #place(
-        center + horizon,
-        block(
-            width: 100%,
-            height: 100%,
-            stroke: 2pt,
-            [
-            #align(center + top)[
-                #pad(top: 16pt)[
-                    *TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN\
-                    KHOA CÔNG NGHỆ THÔNG TIN*
-                ]
-            ]
-            #place(
-                center + horizon,
-                [
-
-                #image("HCMUS_Logo.png", width: 40%)
-
-                #align(center, text(20pt, pad(rest: 32pt)[
-                    *ĐỒ ÁN MÔN HỌC\
-                    KĨ THUẬT LẬP TRÌNH\
-                    ĐỀ TÀI:\
-                    XÂY DỰNG GAME CỜ CARO*
-                ]))
-
-                #align(center)[
-                    *Nhóm 11*\
-                    22127401 - Nguyễn Quang Thông\
-                    22127298 - Hoàng Trung Nguyên\
-                    22127339 - Võ Nhật Phước\
-                    22127463 - Nguyễn Anh Vũ
-                ]
-
-                #pad(
-                    rest: 32pt,
-                    align(center)[
-                    *Giáo Viên Hướng Dẫn: Trương Toàn Thịnh*
-                ])
-                ]
-            )
-            #align(center + bottom)[
-                #pad(bottom: 16pt, text(size: 10pt)[
-                    *Thành Phố Hồ Chí Minh, Tháng 04 năm 2023*
-                ])
-            ]
-            ]
-        )
-    )
-]
-
-#pagebreak()
+#include "title.typ"
 
 #align(center, heading(numbering: none)[Lời cảm ơn])
 #pagebreak()
@@ -182,48 +33,6 @@ show par: set block(above: 1.4em, below: 1.4em)
         )
     ]
 })
-#pagebreak()
-
-= Hướng dẫn sử dụng
-
-== Hiển thị hình ảnh
-```typst
-#figure(
-    image("HCMUS_Logo.png", width: 40%),
-    caption: [Test fig]
-)
-```
-
-*Nhớ bỏ caption vô không là cái mục lục hình bị lỗi*
-#figure(
-    image("HCMUS_Logo.png", width: 40%),
-    caption: [Test fig]
-)
-
-== Code có highlight (Paste code ít thôi, lấy cái nào quan trọng á)
-```Cpp
-    while (1) {
-        auto tmp = InputHandle::Get();
-        if (tmp == L"b" || tmp == L"B") {
-            return NavHost.Back();
-        }
-        if (tmp == L"\r") {
-            system(
-                "rundll32 url.dll,FileProtocolHandler "
-                "https://github.com/thng292/CaroGame"
-            );
-        }
-    }
-```
-
-= Table
-#table(
-    columns: (1fr, 1fr),
-    inset: 5pt,
-    align: horizon,
-    [*Thành viên*], [*Đánh giá*],
-    [#lorem(10)], [#lorem(10)],
-)
 #pagebreak()
 
 = Tổng quan về trò chơi
@@ -643,7 +452,7 @@ Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu
 ==== Hàm GetGameState
 Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sau nước đi mới nhất. Cụ thể hơn, hàm xem xét nước đi mới nhất có dẫn đến một *kết quả thắng* hay *kết quả hòa*. Một nước đi sẽ dẫn đến kết quả thắng nếu nước đi đó tạo nên một chuỗi 5 nước đi liên tiếp đồng chất, và một nước đi sẽ dẫn đến kết quả hòa nếu nước đi đó không phải là nước đi thắng, đồng thời là nước đi hợp lệ cuối cùng của bàn đấu. 
 
-*Interface*
+Interface:
 ```Cpp
     short GetGameState(
         const GameAction::Board& board,
@@ -654,7 +463,7 @@ Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sa
         bool getWinPoint
     );
 ```
-*Parameters*
+Parameters:
     - `board`: Bàn đấu hiện tại.
     - `moveCount`: Số nước đi đã thực hiện. 
     - `move`: Nước đi mới nhất.
@@ -664,12 +473,12 @@ Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sa
         - `true` => lấy đầu mút của chuỗi thắng (nếu có).
         - `false` => không lấy đầu mút của chuỗi thắng.
 
-*Returns*
+Returns:
     - ```Cpp Logic::WIN_VALUE```: Giá trị tượng trưng kết quả thắng.
     - ```Cpp Logic::DRAW_VALUE```: Giá trị tượng trưng kết quả hòa.
     - ```Cpp Logic::NULL_VALUE```: Giá trị tượng trưng kết quả vô định.
 
-*Usage*
+Usage:
 ```Cpp
 short gameState = Logic::GetGameState(gameBoard, moveCount, latestMove, currentPlayer, winPoint, true);
 ```
@@ -678,7 +487,7 @@ short gameState = Logic::GetGameState(gameBoard, moveCount, latestMove, currentP
 Trạng thái bàn cờ có thể được thay đổi qua hai hình thức: *thực hiện nước đi* và *xóa nước đi*. Hàm `MakeMove` và `UndoMove` đảm nhiệm việc thực hiện hai chức năng ấy. Hai hàm này tuy đơn giản nhưng nắm vai trò quan trọng xuyên suốt quá trình chơi, vì các thao tác người chơi chỉ thực sự được ghi lại trên bàn cờ khi hai hàm này được gọi đến. Việc xóa nước đi là để phục vụ cho chức năng `Hoàn tác` của trò chơi, và là một phần không thể thiếu đối với thuật toán `Minimax` được sử dụng cho AI của trò chơi.
 
 
-*Interface*
+Interface:
  ```
  // Thực hiện nước đi lên bàn cờ
  void MakeMove(
@@ -695,13 +504,13 @@ void UndoMove(
     const Point& move
 );
  ```
-*Parameters*
+Parameters:
     - `board`: Bàn đấu hiện tại.
     - `moveCount`: Số nước đi đã thực hiện. 
     - `move`: Nước đi được thực hiện.
     - `playerValue`: Người chơi thực hiện nước đi.
 
-*Usage*
+Usage:
 ```Cpp
 GameAction::MakeMove(board, moveCount, latestMove, currentPlayer);
 GameAction::UndoMove(board, moveCount, latestMove, currentPlayer);
@@ -747,17 +556,29 @@ Vũ
 === Khuyết điểm của trò chơi
     -
 
+== Các khó khăn gặp phải
+    - Một vài thành viên không có kinh nghiệm sử dụng git và GitHub
+    - Khó khăn khi lập trình đa luồng do không có kinh nghiệm
+    - Màn hình terminal vẽ các kí tự chậm
+
+
 == Những gì đã học được
     - Cách làm việc nhóm với git và GitHub
     - Cách sử dụng các tính năng mới của C++ 20
     - Cách sử dụng các tính năng liên quan tới đo hiệu năng, format code và debug trong Visual Studio
     - Cách làm việc nhóm hiệu quả
     - Cách lên kế hoạch, phân chia công việc
-    - Học được cách vẽ biểu đồ di chuyển cho ứng dụng
+    - Cách lập trình hướng đối tượng cơ bản
+    
 
 == Các kinh nghiệm rút ra
+    - Khi code, nên tách nhỏ các hàm ra, không nên viết hàm dài
+    - Code xong một hàm phải kiểm tra kĩ, tránh phát sinh lỗi về sau
     - Không nên viết code mà không thiết kế trước
     - Nên viết code theo một quy chuẩn nhất định và đồng bộ trong 1 dự án
+    - Nên viết code có tính tái sử dụng cao
+    - Cần có kế hoạch và phân chia công việc rõ ràng
+    - Code xong phải có người review lại
 
 == Lí do hoàn thành mục tiêu
 Nguyên
