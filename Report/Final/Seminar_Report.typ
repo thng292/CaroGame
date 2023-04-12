@@ -638,10 +638,74 @@ Thông
 Thông
 
 === Nhận biết thắng thua
-Vũ
+Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong ```Cpp namespace Logic``` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
+
+==== Hàm GetGameState
+Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sau nước đi mới nhất. Cụ thể hơn, hàm xem xét nước đi mới nhất có dẫn đến một *kết quả thắng* hay *kết quả hòa*. Một nước đi sẽ dẫn đến kết quả thắng nếu nước đi đó tạo nên một chuỗi 5 nước đi liên tiếp đồng chất, và một nước đi sẽ dẫn đến kết quả hòa nếu nước đi đó không phải là nước đi thắng, đồng thời là nước đi hợp lệ cuối cùng của bàn đấu. 
+
+*Interface*
+```Cpp
+    short GetGameState(
+        const GameAction::Board& board,
+        const short& moveCount,
+        const GameAction::Point& move,
+        const short& playerValue,
+        GameAction::Point& winPoint = temp,
+        bool getWinPoint
+    );
+```
+*Parameters*
+    - `board`: Bàn đấu hiện tại.
+    - `moveCount`: Số nước đi đã thực hiện. 
+    - `move`: Nước đi mới nhất.
+    - `playerValue`: Người chơi thực hiện nước đi.
+    - `winPoint`: Đầu mút của chuỗi thắng (nếu có).
+    - `getWinPoint`:
+        - `true` => lấy đầu mút của chuỗi thắng (nếu có).
+        - `false` => không lấy đầu mút của chuỗi thắng.
+
+*Returns*
+    - ```Cpp Logic::WIN_VALUE```: Giá trị tượng trưng kết quả thắng.
+    - ```Cpp Logic::DRAW_VALUE```: Giá trị tượng trưng kết quả hòa.
+    - ```Cpp Logic::NULL_VALUE```: Giá trị tượng trưng kết quả vô định.
+
+*Usage*
+```Cpp
+short gameState = Logic::GetGameState(gameBoard, moveCount, latestMove, currentPlayer, winPoint, true);
+```
 
 === Các tương tác với bàn cờ
-Vũ
+Trạng thái bàn cờ có thể được thay đổi qua hai hình thức: *thực hiện nước đi* và *xóa nước đi*. Hàm `MakeMove` và `UndoMove` đảm nhiệm việc thực hiện hai chức năng ấy. Hai hàm này tuy đơn giản nhưng nắm vai trò quan trọng xuyên suốt quá trình chơi, vì các thao tác người chơi chỉ thực sự được ghi lại trên bàn cờ khi hai hàm này được gọi đến. Việc xóa nước đi là để phục vụ cho chức năng `Hoàn tác` của trò chơi, và là một phần không thể thiếu đối với thuật toán `Minimax` được sử dụng cho AI của trò chơi.
+
+
+*Interface*
+ ```
+ // Thực hiện nước đi lên bàn cờ
+ void MakeMove(
+    Board& board,
+    short& moveCount,
+    const Point& move,
+    const short& playerValue
+);
+
+// Xóa nước đi khỏi bàn cờ
+void UndoMove(
+    Board& board, 
+    short& moveCount, 
+    const Point& move
+);
+ ```
+*Parameters*
+    - `board`: Bàn đấu hiện tại.
+    - `moveCount`: Số nước đi đã thực hiện. 
+    - `move`: Nước đi được thực hiện.
+    - `playerValue`: Người chơi thực hiện nước đi.
+
+*Usage*
+```Cpp
+GameAction::MakeMove(board, moveCount, latestMove, currentPlayer);
+GameAction::UndoMove(board, moveCount, latestMove, currentPlayer);
+```
 
 === AI
 Vũ
