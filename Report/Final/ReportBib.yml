@@ -1,0 +1,9 @@
+MCI:
+  type: Web
+  title: MCI
+  url: https://learn.microsoft.com/vi-vn/windows/win32/multimedia/mci
+
+PlaySound:
+  type: Web
+  title: PlaySound function
+  url: https://learn.microsoft.com/en-us/previous-versions/dd743680(v=vs.85)
