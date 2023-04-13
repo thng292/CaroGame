@@ -86,8 +86,6 @@ Link souce code, chạy trên nền tảng nào, ...
 
 ==== Đi nháp
 
-== Sơ dồ di chuyển
-Phước
 
 = Chi tiết các chức năng
 
