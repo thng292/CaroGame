@@ -7,3 +7,33 @@ PlaySound:
   type: Web
   title: PlaySound function
   url: https://learn.microsoft.com/en-us/previous-versions/dd743680(v=vs.85)
+
+mciSendString:
+  type: Web
+  title: mciSendString function
+  url: https://learn.microsoft.com/en-us/previous-versions//dd757161(v=vs.85)
+
+ComposeNavigation:
+  type: Web
+  title: Navigating with Compose
+  url: https://developer.android.com/jetpack/compose/navigation
+
+Jetpack:
+  type: Web
+  title: Android Jetpack
+  url: https://developer.android.com/jetpack
+
+filesystem:
+  type: Web
+  title: Filesystem library
+  url: https://en.cppreference.com/w/cpp/filesystem
+
+thread:
+  type: Web
+  title: std::thread
+  url: https://en.cppreference.com/w/cpp/thread/thread
+
+mutex:
+  type: Web
+  title: std::mutex
+  url: https://en.cppreference.com/w/cpp/thread/mutex

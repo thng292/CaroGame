@@ -208,12 +208,12 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     if (isPlayerOneTurn) {
         prevPlayer = Constants::PLAYER_TWO;
         curPlayer = Constants::PLAYER_ONE;
-        timerPlayerOne.Continued();
+        timerPlayerOne.Continue();
     } else {
         prevPlayer = Constants::PLAYER_ONE;
         curPlayer = Constants::PLAYER_TWO;
 
-        timerPlayerTwo.Continued();
+        timerPlayerTwo.Continue();
     }
 
     // Highlight cursor's first posistion
@@ -224,7 +224,7 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
     // Make AI's first move
     if (aiFirst) {
         Sleep(500);
-        timerPlayerOne.Continued();
+        timerPlayerOne.Continue();
         timerPlayerTwo.Pause();
 
 
@@ -264,8 +264,6 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
 
         // Pauses the game
         if (tmp == L"ESC") {
-            timerPlayerOne.Stop();
-            timerPlayerTwo.Stop();
             NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
             return NavHost.Navigate("PauseMenuView");
         }
@@ -497,10 +495,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                     );
 
                     if (isPlayerOneTurn) {
-                        timerPlayerOne.Continued();
+                        timerPlayerOne.Continue();
                         timerPlayerTwo.Pause();
                     } else {
-                        timerPlayerTwo.Continued();
+                        timerPlayerTwo.Continue();
                         timerPlayerOne.Pause();
                     }
 
@@ -553,10 +551,10 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                         );
 
                         if (isPlayerOneTurn) {
-                            timerPlayerOne.Continued();
+                            timerPlayerOne.Continue();
                             timerPlayerTwo.Pause();
                         } else {
-                            timerPlayerTwo.Continued();
+                            timerPlayerTwo.Continue();
                             timerPlayerOne.Pause();
                         }
 

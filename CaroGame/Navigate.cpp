@@ -29,7 +29,7 @@ NavigationHost::NavigationHost(
 {
     _CurrentScreen = {Start, nullptr};
     _Links = links;
-    while (_CurrentScreen.name != Navigate::EXIT) {
+    while (_CurrentScreen.name != EXIT) {
 #if _DEBUG
         if (!_Links.contains(_CurrentScreen.name)) {
             Draw404(*this);
@@ -47,7 +47,10 @@ std::any& NavigationHost::GetFromContext(const std::string& name)
     return Context[name];
 }
 
-bool NavigationHost::CheckContext(const std::string& name) { return Context.contains(name); }
+bool NavigationHost::CheckContext(const std::string& name)
+{
+    return Context.contains(name);
+}
 
 void NavigationHost::SetContext(const std::string& name, const std::any& data)
 {
@@ -75,8 +78,7 @@ void NavigationHost::NavigateStack(const std::string& path)
 {
     // Save current screen
     HANDLE StdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    PCHAR_INFO buffer =
-        new CHAR_INFO[Navigate::CONSOLE_WIDTH * Navigate::CONSOLE_HEIGHT];
+    PCHAR_INFO buffer = new CHAR_INFO[CONSOLE_WIDTH * CONSOLE_HEIGHT];
     SMALL_RECT readRegion = {0, 0, 119, 29};
     ReadConsoleOutput(StdHandle, buffer, {120, 30}, {0, 0}, &readRegion);
     _History.push(_CurrentScreen);
@@ -94,17 +96,16 @@ void NavigationHost::Navigate(const std::string& path)
 void NavigationHost::Back()
 {
     if (_History.empty()) {
-        _CurrentScreen = {Navigate::EXIT, nullptr};
+        _CurrentScreen = {EXIT, nullptr};
         return;
     }
     View::ClearScreen();
     if (_CurrentScreen.prevScreenBuffer != nullptr) {
-        SMALL_RECT tmp = {
-            0, 0, Navigate::CONSOLE_WIDTH - 1, Navigate::CONSOLE_HEIGHT - 1};
+        SMALL_RECT tmp = {0, 0, CONSOLE_WIDTH - 1, CONSOLE_HEIGHT - 1};
         WriteConsoleOutput(
             GetStdHandle(STD_OUTPUT_HANDLE),
             _CurrentScreen.prevScreenBuffer,
-            {Navigate::CONSOLE_WIDTH, Navigate::CONSOLE_HEIGHT},
+            {CONSOLE_WIDTH, CONSOLE_HEIGHT},
             {0, 0},
             &tmp
         );
@@ -124,7 +125,7 @@ void NavigationHost::BackToLastNotOverlay()
     Back();
 }
 
-void NavigationHost::NavigateExit() { _CurrentScreen.name = Navigate::EXIT; }
+void NavigationHost::NavigateExit() { _CurrentScreen.name = EXIT; }
 
 NavigationHost::~NavigationHost()
 {

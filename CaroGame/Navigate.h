@@ -20,11 +20,11 @@
 #define ViewFuncMap std::unordered_map<std::string, ViewFunc>
 #endif
 
-namespace Navigate {
+namespace {
     const int CONSOLE_WIDTH = 120;
     const int CONSOLE_HEIGHT = 30;
     const std::string EXIT = "EXITCODE";
-}  // namespace Navigate
+}  // namespace
 
 class NavigationHost {
    private:
@@ -53,9 +53,11 @@ class NavigationHost {
     bool CheckContext(const std::string& name);
     void SetContext(const std::string& name, const std::any& data);
     void DeleteContext(const std::string& name);
+
     void Add(const std::string& path, const ViewFunc& view);
     void NavigateStack(const std::string& path);
     void Navigate(const std::string& path);
+
     void Back();
     void BackToLastNotOverlay();
     void NavigateExit();

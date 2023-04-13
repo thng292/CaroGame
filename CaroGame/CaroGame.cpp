@@ -22,7 +22,7 @@ int main()
     View::Setup();
     //Theme::LoadTheme("themes/TestTheme");
 #endif
-    NavigationHost NavHost(
+    NavigationHost(
 #if _DEBUG
         "StartUpScreen",
 #else

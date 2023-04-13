@@ -12,6 +12,11 @@ struct TimerInternalState {
 
 // Reference: https://gist.github.com/zekroTJA/00317b41aa69f38090071b6c8065272b
 class Timer {
+    std::thread _thread;
+    std::shared_ptr<TimerInternalState> _state{
+        new TimerInternalState
+    };
+
    public:
     // delete copy and move constructor
     Timer(const Timer&) = delete;
@@ -53,7 +58,7 @@ class Timer {
 
     inline void Pause() { _state->pause = true; }
 
-    inline void Continued() { _state->pause = false; }
+    inline void Continue() { _state->pause = false; }
 
     inline bool isRunning() { return _state->running && !_state->pause; }
 
@@ -66,51 +71,4 @@ class Timer {
     }
 
     inline ~Timer() { Stop(); }
-
-   private:
-    std::thread _thread;
-
-    std::shared_ptr<TimerInternalState> _state =
-        std::make_shared<TimerInternalState>();
-};
-
-class setTimeout {
-   public:
-    // delete copy and move constructor
-    setTimeout(const setTimeout&) = delete;
-    setTimeout(setTimeout&&) = delete;
-    // delete copy and move assignment
-    setTimeout& operator=(const setTimeout&) = delete;
-    setTimeout& operator=(setTimeout&&) = delete;
-
-    setTimeout(std::function<void(void)> callback, const long& timeout)
-    {
-        _state->callback = callback;
-        _state->interval = std::chrono::milliseconds{timeout};
-    }
-
-    void Start()
-    {
-        _state->running = true;
-        auto state = _state;
-        _thread = std::thread([state] {
-            auto nextInterval = std::chrono::steady_clock::now() +
-                                std::chrono::milliseconds(state->interval);
-            std::this_thread::sleep_until(nextInterval);
-            if (state->running) {
-                state->callback();
-            }
-        });
-        _thread.detach();
-    }
-
-    inline void Cancel() { _state->running = false; }
-
-    inline ~setTimeout() = default;
-
-   private:
-    std::thread _thread;
-
-    std::shared_ptr<TimerInternalState> _state =
-        std::make_shared<TimerInternalState>();
 };

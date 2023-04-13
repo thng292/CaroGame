@@ -3,8 +3,7 @@
     author: "Nhóm 11 - 22CLC01"
 )
 
-#import "style.typ": template
-
+#import "style.typ": template, figureOutline
 #show: template
  
 #include "title.typ"
@@ -13,27 +12,13 @@
 #pagebreak()
 
 #heading(numbering: none)[Mục lục]
-#outline(
-    title: none,
-    indent: true
-)
+#outline()
 #pagebreak()
 
 #heading(numbering: none)[Danh sách hình]
-#locate(loc => {
-    let figures = query(figure, loc)
-    let res = ()
-    for index, fig in figures [
-        #grid(
-            columns: (auto, 1fr, auto),
-            rows: (auto),
-            [Hình #(index+1). ] + fig.caption,
-            repeat[.],
-            [#fig.location().page()]
-        )
-    ]
-})
-#pagebreak()
+#figureOutline()
+
+#include "readme.typ"
 
 = Tổng quan về trò chơi
 
@@ -42,11 +27,15 @@
 === Gomoku
 Nguyên
 
-=== Mục tiêu đề ra
+=== Các yêu cầu về tính năng
+    - Có thể save, load trò chơi
+    - Nhận biết được thắng, thua, hòa
+    - Xử lí hiệu ứng thắng, thua, hòa
+    - Xử lí giao diện màn hình khi chơi
+    - Xử lí màn hình chính
     - Game có nhiều ngôn ngữ, người dùng có thể thêm được ngôn ngữ mới
     - Có thể load được các theme(chủ đề) bên ngoài
     - Lưu được các thiết lập của người chơi
-    - Có thể save, load game đang chơi
     - Có thể lưu và phát lại các game đã hoàn thành
     - Có nhiều chế độ chơi
     - Có thể chơi với máy, máy có nhiều mức độ
@@ -58,13 +47,19 @@ Link souce code, chạy trên nền tảng nào, ...
 
 == Mô tả về các tính năng của game
 
+=== Màn hình chính
+
+=== Save/Load game đang chơi, replay game đã chơi xong
+
+=== Xử lí, hiệu ứng thắng, thua, hòa
+
+=== Giao diện màn hình khi chơi
+
 === Đa ngôn ngữ
 
 === Thay đổi Theme(Chủ đề)
 
 === Lưu thiết lập của người chơi
-
-=== Save/Load game đang chơi, replay game đã chơi xong
 
 === Chế độ chơi Thường
 
@@ -95,7 +90,9 @@ Phước
 
 === Chơi hiệu ứng, nhạc nền
 
-Các file âm thanh được đặt trong thư mục asset/audio và có thể truy cập bằng các `enum`. Các `enum` được map sang một mảng chứa tên các file âm thanh. Các hàm và class nằm trong `namespace Audio`, file `Audio.h`, `Audio.cpp`
+Âm thanh là một phần không thể thiếu trong các trò chơi điện tử, nó khiến cho trò chơi thêm sinh động và chân thực, nâng cao trải ngiệm thi chơi. Dưới đây là những phương pháp mà chúng em đã áp dụng để chơi âm thanh và những khó khăn mà chúng em đã gặp phải.
+
+Các file âm thanh được đặt trong thư mục asset/audio và có thể truy cập bằng các `enum`. Các `enum` được map sang một mảng chứa tên các file âm thanh. Các hàm và class sau đây nằm trong `namespace Audio`, file `Audio.h`, `Audio.cpp`
 
 #grid(
     rows: (auto), 
@@ -139,38 +136,122 @@ constexpr std::array SoundName{
 ```
 )
 
-==== Hàm PlayAndForget 
-Hàm này sử dụng hàm PlaySound @PlaySound để chơi nhạc. Được dùng để chơi những âm thanh ngắn, dung lượng nhỏ dưới 100kb. Khi gọi hàm sẽ tự load file vào memory, chơi và đóng file. Do phải load cả file vào bộ nhớ nên khi chơi có độ delay cao và chỉ có thể mở được file `wav`. Được ứng dụng để chơi các âm thanh liên quan tới giao diện, các âm thanh không quan tâm tới độ trễ.
+==== Giải pháp để chơi các âm thanh của giao diện 
+
+Để chơi các âm thanh của giao diện, giải pháp của chúng em là sử dụng hàm `PlaySound` @PlaySound. Hàm này có thể chơi các tài nguyên âm thanh thông qua tên file, con trỏ đến tài nguyên âm thanh trong bộ nhớ hoặc chơi âm thanh của một sự kiện hệ thống
+
+Interface:
+```
+BOOL PlaySound(
+    LPCTSTR pszSound,
+    HMODULE hmod,
+    DWORD   fdwSound
+);
+```
+Parameter:
+    - `pszSound`: Con trỏ đến tên file âm thanh, tài nguyên âm thanh trong bộ nhớ hoặc tên sự kiện hệ thống
+    - `hmod`: Handle của chương trình chứa tài nguyên âm thanh, nếu chơi bằng tài nguyên âm thanh trong bộ nhớ
+    - `fdwSound`: Các flag để chỉ định cách chơi âm thanh
+
+*Return:*
+    - `true`  #sym.arrow.r.double phát âm thanh thành công
+    - `false` #sym.arrow.r.double phát âm thanh thất bại
+
+Ví dụ sử dụng hàm `PlaySound`:
+```
+    // Chơi âm thanh từ file "recycle.wav"
+    PlaySound(TEXT("recycle.wav"), NULL, SND_FILENAME);
+    // Chơi âm thanh của 1 sự kiện hệ thống
+    PlaySound(TEXT("SystemStart"), NULL, SND_ALIAS);
+```
+
+Ưu điểm:
+    - Khi gọi hàm sẽ tự load file vào memory, đọc và phát
+    - Sau khi gọi xong thì không cần quan tâm đến nữa nên có độ linh hoạt cao
+
+Nhược điểm:
+    - Phải load cả file vào bộ nhớ khi chơi nên chỉ chơi những âm thanh ngắn, dung lượng nhỏ, vừa memory
+    - Khi chơi có độ delay cao (có thể đươc khắc phục bằng cách load trước file cần chơi)
+    - Chỉ có thể mở được file có định dạng `wav`.
+    - Không thể chơi cùng lúc nhiều âm thanh
+
+Vì những âm thanh giao diện là những file ngắn, nhỏ, nên khắc phục được những điểm yếu của hàm và tận dụng tốt sự linh hoạt cao của hàm `PlaySound`. Nên chúng em đã chọn giải pháp này.
+
+Để thuận tiện hơn trong việc sử dụng, chúng em đã viết hàm `PlayAndForget`.
 
 Interface:
 ```Cpp
     bool PlayAndForget(Sound sound, bool wait)
 ```
 
-Parameters:
+*Parameters:*
     - `Sound`: âm thanh cần chơi
     - `wait`:\ 
-        - `true`  => phát âm thanh một cách đồng bộ (synchronous)\
-        - `false` => phát âm thanh một cách bất đồng bộ (asynchronous)
+        - `true`  #sym.arrow.r.double phát âm thanh một cách đồng bộ (synchronous)\
+        - `false` #sym.arrow.r.double phát âm thanh một cách bất đồng bộ (asynchronous)
 
-Usage:
+*Return:*
+    - `true`  #sym.arrow.r.double phát âm thanh thành công
+    - `false` #sym.arrow.r.double phát âm thanh thất bại
+
+*Usage:*
 ```Cpp
+    // Chơi âm thanh "MenuSelect.wav" bất đồng bộ
     Audio::PlayAndForget(Audio::Sound::MenuSelect);
 ```
 
-==== Class AudioPlayer
+==== Giải pháp để chơi nhạc nền
 
-Class này sử dụng #strong(`Media Control Interface`) (`MCI`) @MCI  để chơi nhạc nên giải quyết được các vấn đề của hàm `PlayAndForget`. Chơi được các file âm thanh định dạng `mp3` và `wav`, chơi được các file lớn, ít delay do không cần load hết file vào bộ nhớ. Nhược điểm là cần phải quan tâm đến tuổi thọ của class nên không tiện dụng như `PlayAndForget`. Được dùng để chơi nhạc nền, những đoạn nhạc cần độ trễ thấp hoặc file `mp3`.
+Với những nhược điểm trên thì hàm `PlaySound` không phù hợp để chơi những file dung lượng lớn như nhạc nền và những âm thanh yêu cầu độ trễ thấp. Vì vậy chúng em đã sử dụng một giải pháp khác là sử dụng `Media Control Interface` @MCI.
+Media Control Interface là một chuẩn giao tiếp giữa các ứng dụng và các thiết bị âm thanh, video, hình ảnh, v.v... Nó cho phép các ứng dụng giao tiếp với các thiết bị âm thanh, video, hình ảnh thông qua chuỗi lệnh đơn giản.
+
+Để gửi lệnh đến thiết bị âm thanh, chúng em sử dụng hàm `mciSendString` @mciSendString. Hàm này có thể gửi chuỗi lệnh đến thiết bị âm thanh và nhận kết quả trả về.
+
+Interface:
+```
+    MCIERROR mciSendString(
+        LPCTSTR lpszCommand,
+        LPTSTR  lpszReturnString,
+        UINT    cchReturn,
+        HANDLE  hwndCallback
+    );
+```
+
+*Parameters:*
+    - `lpszCommand`: Con trỏ đến chuỗi lệnh cần gửi đến thiết bị âm thanh
+    - `lpszReturnString`: Con trỏ đến mảng chứa chuỗi nhận thông tin trả về
+    - `cchReturn`: Độ dài của chuỗi trả về
+    - `hwndCallback`: Handle của cửa sổ sẽ nhận thông báo khi thiết bị âm thanh hoàn thành công việc
+
+*Return:*
+    - Nếu gửi thành công sẽ trả về `0`, nếu lỗi trả về một giá trị biểu thị lỗi 
+
+*Usage:*
+```
+    // Mở file "song.mp3"
+    mciSendString("open song.mp3 type mpegvideo alias song", NULL, 0, NULL);
+    // Chơi file "song.mp3"
+    mciSendString("play song from 0 repeat", NULL, 0, NULL);
+    // Dừng file "song.mp3"
+    mciSendString("stop song", NULL, 0, NULL);
+    // Đóng file "song.mp3"
+    mciSendString("close song", NULL, 0, NULL);
+```
+
+Ưu điểm:
+    - Chơi được nhiều định dạng âm thanh khác nhau
+    - Chơi được các file lớn
+    - Khi chơi ít bị delay do không cần load hết file vào memory
+    - Có thể chơi cùng lúc nhiều âm thanh
+Nhược điểm:
+    - Phải sử dụng chuỗi để giao tiếp 
+    - Phải tự quản lí các file âm thanh đã mở nên không có độ linh hoạt cao
+
+Để khắc phục nhược điểm trên, chúng em đã tạo `class AudioPlayer` để việc sử dụng và quản lí tài nguyên thuận tiện, dễ dàng hơn
 
 Interface:
 ```
 class AudioPlayer {
-    // Ngăn copy hay move class
-    AudioPlayer(AudioPlayer&&) = delete;
-    AudioPlayer(const AudioPlayer&) = delete;
-    AudioPlayer& operator=(AudioPlayer&&) = delete;
-    AudioPlayer& operator=(const AudioPlayer&) = delete;
-
     AudioPlayer();
     AudioPlayer(Sound song); // Khởi tạo và mở file
 
@@ -188,31 +269,26 @@ class AudioPlayer {
 }
 ```
 
-Parameters:
+*Parameters:*
     - `song`: âm thanh cần chơi
     - `fromStart`:\
-        - `true`  => chơi từ đầu\
-        - `false` => chơi tiếp tại vị trí con trỏ
+        - `true`  #sym.arrow.r.double chơi từ đầu\
+        - `false` #sym.arrow.r.double chơi tiếp tại vị trí con trỏ
     - `repeat`: \
-        - `true` => lặp lại khi kết thúc
+        - `true` #sym.arrow.r.double lặp lại khi kết thúc
 
-Return:
+*Return:*
     - Các phương thức sẽ trả về `MCI code` của lệnh MCI tương ứng
 
-Usage:
+*Usage:*
 ```
 {
     Audio::AudioPlayer player(Audio::Sound::Draw);
     player.play(true, true);
-    player.pause();
-    player.resume();
-    player.close();
 }
 ```
 
-==== Static class BackgroundAudioService
-
-Class này được dùng để chơi nhạc nền, sử dụng class AudioPlayer để chơi nhạc vì có tuổi thọ dài.
+`class AudioPlayer` có một nhược điểm lớn là tuổi thọ phụ thuộc vào thời gian sống của biến cục bộ và không thể được truy cập được từ các thành phần bên ngoài. Để khắc phục điểm yếu ấy chúng em đã tạo ra `class BackgroundAudioService` để tăng tuổi thọ của `class AudioPlayer`, đồng thời khiến cho nhạc nền có thể được điều khiển những nơi khác.
 
 Interface:
 ```
@@ -230,16 +306,16 @@ class BackgroundAudioService {
 };
 ```
 
-Parameters:
+*Parameters:*
     - `song`: âm thanh cần chơi
     - `fromStart`:\
-        - `true`  => chơi từ đầu\
-        - `false` => chơi tiếp tại vị trí con trỏ
+        - `true`  #sym.arrow.r.double chơi từ đầu\
+        - `false` #sym.arrow.r.double chơi tiếp tại vị trí con trỏ
     - `repeat`: \
-        - `true` => lặp lại khi kết thúc
+        - `true` #sym.arrow.r.double lặp lại khi kết thúc
 
 
-Usage:
+*Usage:*
 ```
 {    
     BackgroundAudioService::ChangeSong(Audio::Sound::MenuBGM);
@@ -248,15 +324,177 @@ Usage:
 ```
 
 === Điều hướng trong ứng dụng
-Thông
 
-=== Đồng hồ
-Thông
+Việc chuyển đổi giữa các màn hình khác nhau trong trò chơi là một thách thức lớn đối với chúng em, vì đây là lần đầu chúng em gặp phải vấn đề này. Để giải quyết vấn đề này, ban đầu chúng em gọi các hàm trực tiếp từ main, muốn chuyển tới màn hình nào thì gọi hàm của màn hình đó. Nhưng phương pháp này nhanh chóng để lộ nhiều điểm yếu:
+    - Cần phải biết chữ kí hàm của màn hình cần chuyển đến
+    - Khó quản lí các màn hình và các đích đến của chúng
+    - Có thể bị tràn stack khi chuyển màn hình nhiều lần
+    - Nếu muốn sửa lại code phải sửa ở nhiều nơi
+    - Khó mở rộng, dễ lỗi
 
-=== Đọc, ghi, tìm file
-Các hàm nằm trong `namespace FileHandle`, file `FileHandle.h`, `FileHandle.cpp`
+Để khắc phục điểm yếu đó, chúng em đã tạo ra một hệ thống để quản lí các màn hình, lấy ý tưởng từ thư viện `navigation-compose` @ComposeNavigation (thư viện điều hướng của Jetpack @Jetpack). Hệ thống này giúp chúng em có thể chuyển đổi giữa các màn hình một cách dễ dàng, linh hoạt và có thể mở rộng dễ dàng hơn.
 
-==== Các hàm hỗ trợ mở file
+Hệ thống này gồm 2 thanh phần:
+    - `class NavigationHost`: class trung tâm để quản lí các màn hình
+    - Các màn hình: là các hàm có chữ kí như sau:
+        - `void ScreenName(NavigationHost& host)`
+        
+Mỗi màn hình sẽ được gán một nhãn độc nhất, nhãn này sẽ được sử dụng để chuyển đến màn hình đó. Các màn hình muốn chuyển đến màn hình khác sẽ gọi phương thức `Navigate("Nhãn")` để chuyển đến màn hình đó hoặc `NavigateStack("Nhãn")` để chuyển đến màn hình đó nhưng không xóa đi màn hình hiện tại.
+Ngoài ra, hệ thống còn có xử lí việc xóa màn hình trước khi chuyển đến màn hình mới, lưu lịch sử di chuyển giữa các màn hình để có thể quay lại màn hình trước đó và cung cấp một số phương thức để hỗ trợ việc truyền dữ liệu giữa các màn hình.
+
+Interface:
+```
+#define ViewFunc std::function<void(NavigationHost&)>
+#define ViewFuncMap std::unordered_map<std::string, ViewFunc>
+
+class NavigationHost {
+
+    NavigationHost() = default;
+    NavigationHost(
+        const std::string& Start, 
+        const ViewFuncMap& links
+    );
+
+    // Các phương thức hỗ trợ truyền dữ liệu giữa các màn hình
+    std::any& GetFromContext(const std::string& name);
+    bool CheckContext(const std::string& name);
+    void SetContext(
+        const std::string& name, 
+        const std::any& data
+    );
+    void DeleteContext(const std::string& name);
+
+    // Thêm màn hình khi đang chạy
+    void Add(const std::string& path, const ViewFunc& view);
+
+    // Các phương thức hỗ trợ điều hướng
+    void NavigateStack(const std::string& path);
+    void Navigate(const std::string& path);
+    void Back();
+    void BackToLastNotOverlay();
+    void NavigateExit();
+
+    ~NavigationHost();
+};
+```
+
+*Parameters:*
+    - `Start`: nhãn của màn hình bắt đầu
+    - `links`: danh sách các màn hình có trong ứng dụng và nhãn của chúng
+    - `path`: nhãn của màn hình cần chuyển đến
+    - `view`: hàm của màn hình cần chuyển đến
+    - `name`: nhãn của dữ liệu cần truyền
+    - `data`: dữ liệu cần truyền
+
+*Usage:*
+```
+#include <iostream>
+
+void GameScreen(NavigationHost& NavHost) {
+    // Lấy dữ liệu đã truyền
+    int a = std::any_cast<int>(NavHost.GetFromContext("Context"));
+    std::cout << a;
+    // ...
+    // Thoát chương trình
+    return NavHost.NavigateExit();
+}
+
+void StartScreen(NavigationHost& NavHost) {
+    // Truyền dữ liệu giữa các màn hình
+    NavHost.SetContext("Context", 90);
+    // ...
+    return NavHost.Navigate("Game");
+}
+
+int main() {
+    // Khởi tạo hệ thống điều hướng
+    NavigationHost(
+        "Start", 
+        {
+            {"Start", StartScreen},
+            {"Game", GameScreen},
+        }
+    );
+    return 0;
+}
+```
+
+Ưu điểm:
+    - Dễ mở rộng
+    - Không cần phải biết tên hàm để chuyển màn hình
+    - Khi thay đổi chỉ cần sửa ở một nơi
+Nhược điểm:
+    - Khó chuyển dữ liệu giữa các màn hình
+    - Dễ đánh sai nhãn màn hình
+
+
+=== Phương pháp lưu và tải game(save/load game)
+
+Để lưu game, chúng em đã chọn lưu trạng thái của game vào một file văn bản thuần và lưu trong một thư mục riêng. Để tải game, chúng em sẽ đọc file văn bản đó và khởi tạo lại trạng thái của game. 
+Khi người dùng muốn tải game, chúng em muốn hiển thị một danh sách các file lưu game để người dùng có thể chọn file cần tải. Có nhiều phương pháp để thực hiện việc này. Một trong những giải pháp mà chúng em đã cân nhắc là lưu tên file lưu game vào một file văn bản thuần, khi cần tải, chúng em sẽ đọc file đó và hiển thị cho người dùng. Tuy nhiên, chúng em đã quyết định không sử dụng phương pháp này do nó có nhiều khuyết điểm như:
+    - Tạo ra một file không cần thiết
+    - Người dùng không thể tải game nếu file đó bị xóa/lỗi
+    - Người dùng không thể load các file copy từ máy khác
+
+Một cách tiếp cận khác là mỗi khi người dùng muốn tải game thì sẽ duyệt qua các file trong thư mục lưu game và hiển thị cho người dùng. Điều này có nhiều ưu điểm như:
+    - Không cần tạo ra file không cần thiết
+    - Người dùng có thể tải game từ máy khác
+
+Để quét các file trong thư mục, chúng em đã sử dụng thư viện `filesystem` @filesystem. Đây là một thư viện mới xuất hiện trong phiên bản C++17. Nó cung cấp các tiện ích để thực hiện các thao tác trên hệ thống tập tin và các thành phần của chúng, chẳng hạn như đường dẫn, tập tin thông thường và thư mục. Để việc sử dụng thư viện thuận tiện hơn, chúng em đã viết hàm `GetAllTextFileInDir`.
+
+*Implementation:*
+```
+namespace FileHandle {
+struct FileDetail {
+    std::filesystem::path               filePath;
+    std::filesystem::file_time_type     lastModified;
+};
+
+std::vector<FileHandle::FileDetail> 
+GetAllTextFileInDir(
+    const std::filesystem::path& Dir
+)
+{
+    std::vector<FileDetail> res;
+    Ensure(Dir);
+    for (auto& file : std::filesystem::directory_iterator(Dir)) {
+        if (file.is_regular_file()) {
+            res.emplace_back(
+                file.path(), 
+                file.last_write_time()
+            );
+        }
+    }
+    return res;
+}
+} // namespace FileHandle
+```
+_*Note:*_ Chi tiết về hàm `Ensure` nằm ở @EnsureFunc
+
+*Parameters:*
+    - `Dir`: đường dẫn đến thư mục muốn tìm
+
+*Return:*
+    - Trả về một `vector` chứa các thông tin của các file đã tìm được
+
+*Usage:*
+```
+{
+    // Tìm các file văn bản trong đường dẫn
+    // tương đối "saves"
+    auto files = FileHandle::GetAllTextFileInDir(
+        "saves"
+    );
+    for (auto& file:files) {
+        std::cout << file.filePath.filename() << '\n';
+    }
+}
+```
+
+==== Các hàm hỗ trợ khác
+Các hàm sau nằm trong `namespace FileHandle`, file `FileHandle.h`, `FileHandle.cpp`
+
+===== Các hàm hỗ trợ mở file
 Hỗ trợ mở các file văn bản `utf-8`
 
 Interface:
@@ -266,10 +504,10 @@ Interface:
     std::wifstream OpenInFile (const fsPath& filePath);  
 ```
 
-Parameters:
+*Parameters:*
     - `filePath`: đường dẫn đến file cần mở
 
-Usage:
+*Usage:*
 ```
 #include <string>
 {
@@ -282,7 +520,7 @@ Usage:
 }
 ```
 
-==== Hàm Ensure
+===== Hàm Ensure <EnsureFunc>
 Dùng để đảm bảo đường dẫn đến file muốn mở có tồn tại, nếu không tồn tại, nếu không tồn tại thì tạo đường dẫn đó.
 
 Interface:
@@ -290,13 +528,13 @@ Interface:
     void Ensure(const std::filesystem::path& Dir);
 ```
 
-Parameters:
+*Parameters:*
     - `Dir`: đường dẫn muốn kiểm tra/tạo
 
-Return:
+*Return:*
     - Các fstream tương ứng với thao tác In/Out
 
-Usage:
+*Usage:*
 ```
 {
     // Đảm bảo đường dẫn tương đối "asset/language" tồn tại
@@ -304,7 +542,7 @@ Usage:
 }
 ```
 
-==== Hàm Delete
+===== Hàm Delete
 Dùng để xóa file
 
 Interface:
@@ -312,13 +550,13 @@ Interface:
     bool Delete(const std::filesystem::path& target)
 ```
 
-Paramterers:
+*Parameters:*
     - target: đường dẫn tới file cần xóa
 
-Return:
+*Return:*
     - Trả về `true` nếu xóa thành công, `false` khi lỗi
 
-Usage:
+*Usage:*
 ```
 {
     // Xóa file tmp.cpp
@@ -331,46 +569,96 @@ Usage:
 }
 ```
 
-==== Hàm GetAllTextFileInDir
-Tìm các file văn bản thuần trong thư mục
+=== Đếm giờ trong khi chơi game
 
-Interface:
+Việc đếm và hiển thị thời gian trực tiếp trong lúc chơi khá phức tạp vì luồng chính trong game luôn phải chời đợi và xử lí đầu vào của người dùng, nên việc sử dụng luồng chính để  nó phụ thuộc vào việc người chơi có thực hiện các thao tác trong game hay không. Nếu người chơi không thực hiện các thao tác trong game thì thời gian sẽ không được cập nhật lên màn hình. Để giải quyết vấn đề này, chúng em đã tạo thêm một luồng riêng để đếm thời gian và cập nhật lên màn hình. Sử dụng thư viện `thread` @thread để tạo luồng mới, chúng em đã có giải pháp để chạy một hàm sau một khoảng thời gian nhất định.
+
+*Implementation:*
 ```
-struct FileDetail {
-    std::filesystem::path               filePath;
-    std::filesystem::file_time_type     lastModified;
+using namespace std::chrono;
+
+struct TimerInternalState {
+    std::function<void(void)> callback;
+    milliseconds interval;
+    bool running = false;
+    bool pause = false;
 };
 
-std::vector<FileHandle::FileDetail> 
-FileHandle::GetAllTextFileInDir(
-    const std::filesystem::path& Dir
-);
-```
+class Timer {
+    std::thread _thread;
+    std::shared_ptr<TimerInternalState> _state { 
+        new TimerInternalState };
 
-Parameters:
-    - `Dir`: đường dẫn đến thư mục muốn tìm
-
-Return:
-    - Trả về một `vector` chứa các thông tin của các file đã tìm được
-
-Usage:
-```
-{
-    // Tìm các file văn bản trong đường dẫn
-    // tương đối "asset/language"
-    auto files = FileHandle::GetAllTextFileInDir(
-        "asset/language"
-    );
-    for (auto& file:files) {
-        std::cout << file.filePath.filename() << '\n';
+   public:
+    Timer(
+        std::function<void(void)> callback, 
+        const long& interval = 1000
+    ) {
+        _state->callback = callback;
+        _state->interval = milliseconds{interval};
     }
+
+    inline void Start()
+    {
+        _state->running = true;
+        auto state = _state;
+        _thread = std::thread([state] {
+            while (state->running) {
+                auto nextInterval = steady_clock::now();
+                nextInterval += state->interval;
+                if (!state->pause) { state->callback(); }
+                std::this_thread::sleep_until(nextInterval);
+            }
+        });
+        _thread.detach();
+    }
+
+    inline void Pause() { _state->pause = true; }
+    inline void Continue() { _state->pause = false; }
+    inline void Stop() { _state->running = false; }
+    inline ~Timer() { Stop(); }
+};
+```
+
+*Parameters:*
+    - `callback`: hàm sẽ được gọi sau mỗi khoảng thời gian `interval`
+    - `interval`: khoảng thời gian giữa các lần gọi hàm `callback` tính bằng mili giây
+
+Việc lập trình đa luồng trong C++ khá phức tạp, và cũng là phần dễ gây lỗi nhất trong trò chơi, do việc vẽ lên màn hình phải được đồng bộ giữa các luồng với nhau. Nếu không đồng bộ thì có thể dẫn đến việc các phần tử trên màn hình bị vẽ sai vị trí. Để việc đó không xảy ra, chúng em đã sử dụng một khóa `mutex` @mutex chung để đồng bộ các luồng với nhau.
+
+Đoạn code sử dụng `Timer` và `mutex` trích từ trò chơi:
+```
+void GameScreenView::GameScreenView(NavigationHost& NavHost) {
+// ...
+std::mutex lock;
+// ...
+Timer timerPlayerOne(
+    [&] {
+        if (!endGame) {
+            curGameState.playerTimeOne += timeAddition;
+            std::lock_guard guard(lock);
+            auto currPos = View::GetCursorPos();
+            // Vẽ thời gian lên màn hình
+            gameScreen.timerContainerOne.DrawToContainer(
+                Utils::SecondToMMSS(curGameState.playerTimeOne),
+                Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
+            );
+            View::Goto(currPos.X, currPos.Y);
+            if (curGameState.playerTimeOne == 0 && !endGame) {
+                // Xử lí khi hết thời gian
+            }
+        }
+    }
+);
 }
 ```
 
-=== Ngôn ngữ
-Các văn bản trong trò chơi sẽ được load từ một file riêng, điều này kiến cho phần ngôn ngữ trong game dễ tùy biến và thêm các ngôn ngữ mới.
 
-File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=", các nhãn có nằm bên trong cặp ngoặc `[]` là `meta` được dùng để chứa thông tin về file ngôn ngữ
+
+=== Giải pháp cho đa ngôn ngữ
+Các văn bản trong trò chơi thay vì được code cứng vào trò chơi thì sẽ được load từ một file riêng, điều này kiến cho phần ngôn ngữ trong game có thể được chỉnh sửa một cách dễ dàng và khiến cho việc thêm các ngôn ngữ mới dễ dàng hơn.
+
+File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=", các nhãn có nằm bên trong cặp ngoặc `[]` là `meta` được dùng để chứa thông tin về file ngôn ngữ. Sau khi load xong, các nhãn và văn bản sẽ được lưu vào một bảng để có thể dễ dàng truy xuất.
 
 Ví dụ file ngôn ngữ:
 ```text
@@ -382,11 +670,7 @@ ABOUT_TITLE                 =    About us
 ABOUT_US_TITLE              =    About us
 ```
 
-Các phần văn bản sẽ được truy xuất thông qua nhãn tương ứng.
-Các phần liên quan tới ngôn ngữ nằm trong file `Language.h` và `Language.cpp`
-
-==== Static class Language
-Hàm chứa các phương thức và các văn bản ngôn ngữ
+Các nhãn và văn bản trong trò chơi được quản lí, truy xuất và load thông qua class `Language` nằm trong file `Language.h` và `Language.cpp`
 
 Interface:
 ```
@@ -423,12 +707,12 @@ public:
 };
 ```
 
-Parameters:
+*Parameters:*
     - `filePath`: đường dẫn tới file cần mở
     - `dirPath`: đường dẫn tới thư mục cần tìm
     - `Label`: nhãn của văn bản cần lấy
 
-Usage:
+*Usage:*
 ```
 {
     Language::LoadLanguageFromFile("asset/language/en.txt");
@@ -447,7 +731,7 @@ Thông
 Thông
 
 === Nhận biết thắng thua
-Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong ```Cpp namespace Logic``` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
+Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong `Cpp namespace Logic` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
 
 ==== Hàm GetGameState
 Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sau nước đi mới nhất. Cụ thể hơn, hàm xem xét nước đi mới nhất có dẫn đến một *kết quả thắng* hay *kết quả hòa*. Một nước đi sẽ dẫn đến kết quả thắng nếu nước đi đó tạo nên một chuỗi 5 nước đi liên tiếp đồng chất, và một nước đi sẽ dẫn đến kết quả hòa nếu nước đi đó không phải là nước đi thắng, đồng thời là nước đi hợp lệ cuối cùng của bàn đấu. 
@@ -463,22 +747,22 @@ Interface:
         bool getWinPoint
     );
 ```
-Parameters:
+*Parameters:*
     - `board`: Bàn đấu hiện tại.
     - `moveCount`: Số nước đi đã thực hiện. 
     - `move`: Nước đi mới nhất.
     - `playerValue`: Người chơi thực hiện nước đi.
     - `winPoint`: Đầu mút của chuỗi thắng (nếu có).
     - `getWinPoint`:
-        - `true` => lấy đầu mút của chuỗi thắng (nếu có).
-        - `false` => không lấy đầu mút của chuỗi thắng.
+        - `true` #sym.arrow.r.double lấy đầu mút của chuỗi thắng (nếu có).
+        - `false` #sym.arrow.r.double không lấy đầu mút của chuỗi thắng.
 
 Returns:
     - ```Cpp Logic::WIN_VALUE```: Giá trị tượng trưng kết quả thắng.
     - ```Cpp Logic::DRAW_VALUE```: Giá trị tượng trưng kết quả hòa.
     - ```Cpp Logic::NULL_VALUE```: Giá trị tượng trưng kết quả vô định.
 
-Usage:
+*Usage:*
 ```Cpp
 short gameState = Logic::GetGameState(gameBoard, moveCount, latestMove, currentPlayer, winPoint, true);
 ```
@@ -504,20 +788,20 @@ void UndoMove(
     const Point& move
 );
  ```
-Parameters:
+*Parameters:*
     - `board`: Bàn đấu hiện tại.
     - `moveCount`: Số nước đi đã thực hiện. 
     - `move`: Nước đi được thực hiện.
     - `playerValue`: Người chơi thực hiện nước đi.
 
-Usage:
+*Usage:*
 ```Cpp
 GameAction::MakeMove(board, moveCount, latestMove, currentPlayer);
 GameAction::UndoMove(board, moveCount, latestMove, currentPlayer);
 ```
 
 === AI
-Việc thiết kết chương trình cho chế độ `Đánh với máy` là một trong những thách thức lớn nhất của đồ án. Khác với những tính năng khác của chương trình, tính năng này đòi hỏi những mảng kiến thức chuyên biệt về các thuật toán, kĩ thuật lập trình cụ thể. Ngoài ra, việc đánh giá độ đúng/sai của chương trình, hay nói cách khác là nước đi máy tính tìm được là tốt hay xấu, sẽ phần lớn phụ thuộc vào cảm tính và sự hiểu biết của người viết. Chính vì vậy, chương trình có thể đánh hay đối với người này, nhưng đánh không tốt đối với người khác. Phần tiếp theo sẽ trình bày những kĩ thuật mà nhóm đã sử dụng cho chương tình AI.
+Việc thiết kết chương trình cho chế độ _Đánh với máy_ là một trong những thách thức lớn nhất của đồ án. Khác với những tính năng khác của chương trình, tính năng này đòi hỏi những mảng kiến thức chuyên biệt về các thuật toán, kĩ thuật lập trình cụ thể. Ngoài ra, việc đánh giá độ đúng/sai của chương trình, hay nói cách khác là nước đi máy tính tìm được là tốt hay xấu, sẽ phần lớn phụ thuộc vào cảm tính và sự hiểu biết của người viết. Chính vì vậy, chương trình có thể đánh hay đối với người này, nhưng đánh không tốt đối với người khác. Phần tiếp theo sẽ trình bày những kĩ thuật mà nhóm đã sử dụng cho chương tình AI.
 
 ==== Thuật toán Minimax
 
@@ -540,6 +824,8 @@ Việc thiết kết chương trình cho chế độ `Đánh với máy` là m�
 ==== Những mặt cần cải thiện
 
 == Giao diện
+
+=== Màn hình chính
 
 === Cài đặt
 Thông
@@ -578,7 +864,8 @@ Vũ
     - Một vài thành viên không có kinh nghiệm sử dụng git và GitHub
     - Khó khăn khi lập trình đa luồng do không có kinh nghiệm
     - Màn hình terminal vẽ các kí tự chậm
-
+    - Khó khăn trong việc thiết kế AI do có nhiều kiến thức mới, lạ
+    - Chưa có kinh nghiệm trong việc thiết kế giao diện, viết ứng dụng có giao diện
 
 == Những gì đã học được
     - Cách làm việc nhóm với git và GitHub
@@ -586,7 +873,7 @@ Vũ
     - Cách sử dụng các tính năng liên quan tới đo hiệu năng, format code và debug trong Visual Studio
     - Cách làm việc nhóm hiệu quả
     - Cách lên kế hoạch, phân chia công việc
-    - Cách lập trình hướng đối tượng cơ bản
+    - Cách lập trình hướng đối tượng, lâp trình đa luồng cơ bản
     
 
 == Các kinh nghiệm rút ra

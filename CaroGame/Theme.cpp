@@ -50,8 +50,8 @@ bool Theme::LoadTheme(std::filesystem::path themePath)
             CurrentTheme[2] = readColor;
         } else if (tmp.first == L"BORDER_COLOR") {
             CurrentTheme[3] = readColor;
-        } else if (tmp.first == L"CONSOLE_COLOR") {
-            CurrentTheme[4] = readColor;
+        // } else if (tmp.first == L"CONSOLE_COLOR") {
+        //     CurrentTheme[4] = readColor;
         } else if (tmp.first == L"CONSOLE_HIGHLIGHT_COLOR") {
             CurrentTheme[5] = readColor;
         } else if (tmp.first == L"PLAYER_ONE_COLOR") {

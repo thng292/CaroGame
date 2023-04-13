@@ -24,12 +24,12 @@ std::vector<FileHandle::FileDetail> FileHandle::GetAllTextFileInDir(
     const std::filesystem::path& Dir
 )
 {
-    std::vector<FileDetail> tmp;
+    std::vector<FileDetail> res;
     Ensure(Dir);
-    for (const auto& file : std::filesystem::directory_iterator(Dir)) {
+    for (auto& file : std::filesystem::directory_iterator(Dir)) {
         if (file.is_regular_file()) {
-            tmp.push_back({file.path(), file.last_write_time()});
+            res.emplace_back(file.path(), file.last_write_time());
         }
     }
-    return tmp;
+    return res;
 }

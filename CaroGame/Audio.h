@@ -154,7 +154,7 @@ namespace Audio {
             )
                 .c_str(),
             0,
-            (wait ? SND_SYNC : SND_ASYNC) | SND_FILENAME
+            (wait ? SND_SYNC : SND_ASYNC) | SND_FILENAME | SND_NODEFAULT
         );
     }
 
