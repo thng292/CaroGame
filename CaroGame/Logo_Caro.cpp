@@ -2,6 +2,7 @@
 
 void Caro(int x, int y)
 {  // function paint logo
+    View::Color theme = Theme::GetColor(ThemeColor::CONSOLE_COLOR);
     for (int i = 1; i <= 6; i++) {
         View::WriteToView(
             x + 3 + i,
@@ -1068,4 +1069,285 @@ void Caro(int x, int y)
         View::Color::BLACK,
         View::Color::BRIGHT_WHITE
     );
+
+   View::WriteToView(
+        x +2,
+        y +1,
+        L'\u2580',
+        0,
+        theme,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::LIGHT_CYAN
+    );
+    View::WriteToView(
+        x + 11,
+        y + 1,
+        L'\u2580',
+        0,
+        theme,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::RED
+    );
+   View::WriteToView(
+       x + 17,
+       y + 1,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::LIGHT_CYAN
+   );
+    View::WriteToView(
+        x + 24,
+        y + 1,
+        L'\u2580',
+        0,
+        theme,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::RED
+    );
+   View::WriteToView(
+       x + 39,
+       y + 1,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::RED
+   );
+    View::WriteToView(
+        x + 44,
+        y + 1,
+        L'\u2580',
+        0,
+        theme,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        View::Color::LIGHT_CYAN
+    );
+   View::WriteToView(
+       x + 53,
+       y + 1,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::RED
+   );
+    View::WriteToView(
+        x + 6,
+        y + 2,
+        L'\u2580',
+        0,
+       View::Color::RED,
+        View::Color::BLACK,
+        View::Color::BLACK,
+        theme
+    );
+   View::WriteToView(
+       x + 7,
+       y + 2,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+    View::WriteToView(
+        x + 15,
+        y + 2,
+        L'\u2580',
+        0,
+        theme,
+        View::Color::BLACK,
+        View::Color::BLACK,
+       View::Color::LIGHT_CYAN
+    );
+   View::WriteToView(
+       x + 20,
+       y + 2,
+       L'\u2580',
+       0,
+       View::Color::RED,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 21,
+       y + 2,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 26,
+       y + 2,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::RED
+   );
+   View::WriteToView(
+       x + 35,
+       y + 2,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 48,
+       y + 2,
+       L'\u2580',
+       0,
+       View::Color::RED,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 49,
+       y + 2,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 35,
+       y + 3,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::LIGHT_CYAN
+   );
+   View::WriteToView(
+       x + 39,
+       y + 4,
+       L'\u2580',
+       0,
+       View::Color::RED,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 6,
+       y + 5,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::RED
+   );
+   View::WriteToView(
+       x + 7,
+       y + 5,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::LIGHT_CYAN
+   );
+   View::WriteToView(
+       x + 34,
+       y + 5,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+      theme
+   );
+   View::WriteToView(
+       x + 40,
+       y + 5,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::RED
+   );
+   View::WriteToView(
+       x + 48,
+       y + 5,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::RED
+   );
+   View::WriteToView(
+       x + 49,
+       y + 5,
+       L'\u2580',
+       0,
+       theme,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       View::Color::LIGHT_CYAN
+   );
+   View::WriteToView(
+       x + 2,
+       y + 6,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 11,
+       y + 6,
+       L'\u2580',
+       0,
+       View::Color::RED,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 44,
+       y + 6,
+       L'\u2580',
+       0,
+       View::Color::LIGHT_CYAN,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
+   View::WriteToView(
+       x + 53,
+       y + 6,
+       L'\u2580',
+       0,
+       View::Color::RED,
+       View::Color::BLACK,
+       View::Color::BLACK,
+       theme
+   );
 }
