@@ -23,32 +23,45 @@
 #outline(title: none, target: table)
 #pagebreak()
 
-#include "readme.typ"
 
-= Tổng quan về trò chơi
+= Tổng quan về game
 
-== Giới thiệu về trò chơi
+== Giới thiệu về game
 
-=== Gomoku
-Nguyên
+=== Trò chơi Cờ Caro (Gomoku)
+
+Cờ Caro @Caro hay còn gọi là Gomoku @Gomoku là một trò chơi đối kháng có tính chiến thuật cao. Trò chơi được chơi trên một bàn cờ vuông với kích thước tiêu chuẩn là 15x15 ô (trong trò chơi này, do một vài giới hạn kĩ thuật nên bàn cờ sẽ có kích thước là 13x13).
+
+Trò chơi có nhiều phiên bản khác nhau với các luật chơi khác nhau. Trong game này, chúng em đã sử dụng luật chơi như sau:
+    - Hai người chơi lần lượt đặt các quân cờ của mình trên bàn cờ. 
+    - Người chơi nào đặt được 5 quân cờ liên tiếp theo chiều ngang, dọc hoặc chéo sẽ thắng cuộc. 
+    - Nếu không có ai thắng khi không còn nước đi khả thi thì trò chơi kết thúc với kết quả hòa.
 
 === Các yêu cầu về tính năng
-    - Có thể save, load trò chơi
+    - Có thể lưu, tải game
     - Nhận biết được thắng, thua, hòa
     - Xử lí hiệu ứng thắng, thua, hòa
     - Xử lí giao diện màn hình khi chơi
     - Xử lí màn hình chính
     - Game có nhiều ngôn ngữ, người dùng có thể thêm được ngôn ngữ mới
-    - Có thể load được các theme(chủ đề) bên ngoài
+    - Có thể tải được các theme(chủ đề) bên ngoài
     - Lưu được các thiết lập của người chơi
     - Có thể lưu và phát lại các game đã hoàn thành
     - Có nhiều chế độ chơi
     - Có thể chơi với máy, máy có nhiều mức độ
     - Game có thể phát nhạc nền, hiệu ứng. Có thể bật tắt được
 
-=== Thông tin chung về trò chơi
-Nguyên
-Link souce code, chạy trên nền tảng nào, ...
+=== Thông tin chung về game
+#table(
+    columns: (1fr, 1fr),
+    inset: 8pt,
+    [*Tên game*], [Cờ Caro],
+    [*Môi trường phát triển, thử nghiệm*], [Visual Studio 2022],
+    [*Khả dụng trên nền tảng*], [Windows],
+    [*Source code*], [https://github.com/thng292/CaroGame]
+)
+
+=== Sơ đồ di chuyển của game
 
 == Mô tả về các tính năng của game
 
@@ -93,7 +106,7 @@ Link souce code, chạy trên nền tảng nào, ...
 
 === Chơi hiệu ứng, nhạc nền
 
-Âm thanh là một phần không thể thiếu trong các trò chơi điện tử, nó khiến cho trò chơi thêm sinh động và chân thực, nâng cao trải ngiệm thi chơi. Dưới đây là những phương pháp mà chúng em đã áp dụng để chơi âm thanh và những khó khăn mà chúng em đã gặp phải.
+Âm thanh là một phần không thể thiếu trong các game điện tử, nó khiến cho game thêm sinh động và chân thực, nâng cao trải ngiệm thi chơi. Dưới đây là những phương pháp mà chúng em đã áp dụng để chơi âm thanh và những khó khăn mà chúng em đã gặp phải.
 
 Các file âm thanh được đặt trong thư mục asset/audio và có thể truy cập bằng các `enum`. Các `enum` được map sang một mảng chứa tên các file âm thanh. Các hàm và class sau đây nằm trong `namespace Audio`, file `Audio.h`, `Audio.cpp`
 
@@ -169,12 +182,12 @@ Ví dụ sử dụng hàm `PlaySound`:
 ```
 
 Ưu điểm:
-    - Khi gọi hàm sẽ tự load file vào memory, đọc và phát
+    - Khi gọi hàm sẽ tự tải file vào bộ nhớ trong, đọc và phát
     - Sau khi gọi xong thì không cần quan tâm đến nữa nên có độ linh hoạt cao
 
 Nhược điểm:
-    - Phải load cả file vào bộ nhớ khi chơi nên chỉ chơi những âm thanh ngắn, dung lượng nhỏ, vừa memory
-    - Khi chơi có độ delay cao (có thể đươc khắc phục bằng cách load trước file cần chơi)
+    - Phải tải cả file vào bộ nhớ khi chơi nên chỉ chơi những âm thanh ngắn, dung lượng nhỏ, vừa bộ nhớ trong
+    - Khi chơi có độ delay cao (có thể đươc khắc phục bằng cách tải trước file cần chơi)
     - Chỉ có thể mở được file có định dạng `wav`.
     - Không thể chơi cùng lúc nhiều âm thanh
 
@@ -244,7 +257,7 @@ Interface:
 Ưu điểm:
     - Chơi được nhiều định dạng âm thanh khác nhau
     - Chơi được các file lớn
-    - Khi chơi ít bị delay do không cần load hết file vào memory
+    - Khi chơi ít bị delay do không cần tải hết file vào bộ nhớ trong
     - Có thể chơi cùng lúc nhiều âm thanh
 Nhược điểm:
     - Phải sử dụng chuỗi để giao tiếp 
@@ -328,7 +341,7 @@ class BackgroundAudioService {
 
 === Điều hướng trong ứng dụng
 
-Việc chuyển đổi giữa các màn hình khác nhau trong trò chơi là một thách thức lớn đối với chúng em, vì đây là lần đầu chúng em gặp phải vấn đề này. Để giải quyết vấn đề này, ban đầu chúng em gọi các hàm trực tiếp từ main, muốn chuyển tới màn hình nào thì gọi hàm của màn hình đó. Nhưng phương pháp này nhanh chóng để lộ nhiều điểm yếu:
+Việc chuyển đổi giữa các màn hình khác nhau trong game là một thách thức lớn đối với chúng em, vì đây là lần đầu chúng em gặp phải vấn đề này. Để giải quyết vấn đề này, ban đầu chúng em gọi các hàm trực tiếp từ main, muốn chuyển tới màn hình nào thì gọi hàm của màn hình đó. Nhưng phương pháp này nhanh chóng để lộ nhiều điểm yếu:
     - Cần phải biết chữ kí hàm của màn hình cần chuyển đến
     - Khó quản lí các màn hình và các đích đến của chúng
     - Có thể bị tràn stack khi chuyển màn hình nhiều lần
@@ -437,13 +450,15 @@ Nhược điểm:
 Khi người dùng muốn tải game, chúng em muốn hiển thị một danh sách các file lưu game để người dùng có thể chọn file cần tải. Có nhiều phương pháp để thực hiện việc này. Một trong những giải pháp mà chúng em đã cân nhắc là lưu tên file lưu game vào một file văn bản thuần, khi cần tải, chúng em sẽ đọc file đó và hiển thị cho người dùng. Tuy nhiên, chúng em đã quyết định không sử dụng phương pháp này do nó có nhiều khuyết điểm như:
     - Tạo ra một file không cần thiết
     - Người dùng không thể tải game nếu file đó bị xóa/lỗi
-    - Người dùng không thể load các file copy từ máy khác
+    - Người dùng không thể tải các file copy từ máy khác
 
 Một cách tiếp cận khác là mỗi khi người dùng muốn tải game thì sẽ duyệt qua các file trong thư mục lưu game và hiển thị cho người dùng. Điều này có nhiều ưu điểm như:
     - Không cần tạo ra file không cần thiết
     - Người dùng có thể tải game từ máy khác
 
-Để quét các file trong thư mục, chúng em đã sử dụng thư viện `filesystem` @filesystem. Đây là một thư viện mới xuất hiện trong phiên bản C++17. Nó cung cấp các tiện ích để thực hiện các thao tác trên hệ thống tập tin và các thành phần của chúng, chẳng hạn như đường dẫn, tập tin thông thường và thư mục. Để việc sử dụng thư viện thuận tiện hơn, chúng em đã viết hàm `GetAllTextFileInDir`.
+Để quét các file trong thư mục, chúng em đã sử dụng thư viện `filesystem` @filesystem. Đây là một thư viện mới xuất hiện trong phiên bản C++17. Nó cung cấp các tiện ích để thực hiện các thao tác trên hệ thống tập tin và các thành phần của chúng, chẳng hạn như đường dẫn, tập tin thông thường và thư mục. 
+
+Sau đây là cách mà chúng em đã dùng để quét các file trong thư mục lưu game:
 
 *Implementation:*
 ```
@@ -459,7 +474,7 @@ GetAllTextFileInDir(
 )
 {
     std::vector<FileDetail> res;
-    Ensure(Dir);
+    Ensure(Dir); // Đảm bảo đường dẫn tồn tại
     for (auto& file : std::filesystem::directory_iterator(Dir)) {
         if (file.is_regular_file()) {
             res.emplace_back(
@@ -472,7 +487,6 @@ GetAllTextFileInDir(
 }
 } // namespace FileHandle
 ```
-_*Note:*_ Chi tiết về hàm `Ensure` nằm ở @EnsureFunc
 
 *Parameters:*
     - `Dir`: đường dẫn đến thư mục muốn tìm
@@ -490,84 +504,6 @@ _*Note:*_ Chi tiết về hàm `Ensure` nằm ở @EnsureFunc
     );
     for (auto& file:files) {
         std::cout << file.filePath.filename() << '\n';
-    }
-}
-```
-
-==== Các hàm hỗ trợ khác
-Các hàm sau nằm trong `namespace FileHandle`, file `FileHandle.h`, `FileHandle.cpp`
-
-===== Các hàm hỗ trợ mở file
-Hỗ trợ mở các file văn bản `utf-8`
-
-Interface:
-```
-    typedef std::filesystem::path fsPath;
-    std::wofstream OpenOutFile(const fsPath& filePath);
-    std::wifstream OpenInFile (const fsPath& filePath);  
-```
-
-*Parameters:*
-    - `filePath`: đường dẫn đến file cần mở
-
-*Usage:*
-```
-#include <string>
-{
-    std::wstring str = L"Tiếng Việt";
-    auto outFile = FileHandle::OpenOutFile("test.txt");
-    outFile <<  str;
-    outFile.close();
-    auto inFile  = FileHandle::OpenInFile ("test.txt");
-    infile  >> str;
-}
-```
-
-===== Hàm Ensure <EnsureFunc>
-Dùng để đảm bảo đường dẫn đến file muốn mở có tồn tại, nếu không tồn tại, nếu không tồn tại thì tạo đường dẫn đó.
-
-Interface:
-```
-    void Ensure(const std::filesystem::path& Dir);
-```
-
-*Parameters:*
-    - `Dir`: đường dẫn muốn kiểm tra/tạo
-
-*Return:*
-    - Các fstream tương ứng với thao tác In/Out
-
-*Usage:*
-```
-{
-    // Đảm bảo đường dẫn tương đối "asset/language" tồn tại
-    FileHandle::Ensure("asset/language"); 
-}
-```
-
-===== Hàm Delete
-Dùng để xóa file
-
-Interface:
-```
-    bool Delete(const std::filesystem::path& target)
-```
-
-*Parameters:*
-    - target: đường dẫn tới file cần xóa
-
-*Return:*
-    - Trả về `true` nếu xóa thành công, `false` khi lỗi
-
-*Usage:*
-```
-{
-    // Xóa file tmp.cpp
-    bool res = FileHandle::Delete("tmp.cpp");
-    if (res) {
-        std::cout << "Success";
-    } else {
-        std::cout << "Failed";
     }
 }
 ```
@@ -627,9 +563,9 @@ class Timer {
     - `callback`: hàm sẽ được gọi sau mỗi khoảng thời gian `interval`
     - `interval`: khoảng thời gian giữa các lần gọi hàm `callback` tính bằng mili giây
 
-Việc lập trình đa luồng trong C++ khá phức tạp, và cũng là phần dễ gây lỗi nhất trong trò chơi, do việc vẽ lên màn hình phải được đồng bộ giữa các luồng với nhau. Nếu không đồng bộ thì có thể dẫn đến việc các phần tử trên màn hình bị vẽ sai vị trí. Để việc đó không xảy ra, chúng em đã sử dụng một khóa `mutex` @mutex chung để đồng bộ các luồng với nhau.
+Việc lập trình đa luồng trong C++ khá phức tạp, và cũng là phần dễ gây lỗi nhất trong game, do việc vẽ lên màn hình phải được đồng bộ giữa các luồng với nhau. Nếu không đồng bộ thì có thể dẫn đến việc các phần tử trên màn hình bị vẽ sai vị trí. Để việc đó không xảy ra, chúng em đã sử dụng một khóa `mutex` @mutex chung để đồng bộ các luồng với nhau.
 
-Đoạn code sử dụng `Timer` và `mutex` trích từ trò chơi:
+Đoạn code sử dụng `Timer` và `mutex` trích từ game:
 ```
 void GameScreenView::GameScreenView(NavigationHost& NavHost) {
 // ...
@@ -656,12 +592,10 @@ Timer timerPlayerOne(
 }
 ```
 
-
-
 === Giải pháp cho đa ngôn ngữ
-Các văn bản trong trò chơi thay vì được code cứng vào trò chơi thì sẽ được load từ một file riêng, điều này kiến cho phần ngôn ngữ trong game có thể được chỉnh sửa một cách dễ dàng và khiến cho việc thêm các ngôn ngữ mới dễ dàng hơn.
+Các văn bản trong game thay vì được code cứng vào game thì sẽ được tải từ một file riêng, điều này kiến cho phần ngôn ngữ trong game có thể được chỉnh sửa một cách dễ dàng và khiến cho việc thêm các ngôn ngữ mới dễ dàng hơn.
 
-File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=", các nhãn có nằm bên trong cặp ngoặc `[]` là `meta` được dùng để chứa thông tin về file ngôn ngữ. Sau khi load xong, các nhãn và văn bản sẽ được lưu vào một bảng để có thể dễ dàng truy xuất.
+File ngôn ngữ là một file văn bản thuần chứa các nhãn và phần văn bản ngăn cách bởi dấu "=", các nhãn có nằm bên trong cặp ngoặc `[]` là `meta` được dùng để chứa thông tin về file ngôn ngữ. Sau khi tải xong, các nhãn và văn bản sẽ được lưu vào một bảng để có thể dễ dàng truy xuất.
 
 Ví dụ file ngôn ngữ:
 ```text
@@ -673,7 +607,7 @@ ABOUT_TITLE                 =    About us
 ABOUT_US_TITLE              =    About us
 ```
 
-Các nhãn và văn bản trong trò chơi được quản lí, truy xuất và load thông qua class `Language` nằm trong file `Language.h` và `Language.cpp`
+Các nhãn và văn bản trong game được quản lí, truy xuất và tải vào bộ nhớ thông qua class `Language` nằm trong file `Language.h` và `Language.cpp`
 
 Interface:
 ```
@@ -724,17 +658,54 @@ public:
 }
 ```
 
-=== Cài đặt
-Thông
-
 === Chủ đề
-Thông
+Nhằm tăng trải nghiệm khi chơi game và đáp ứng nhu cầu cá nhân hóa của người dùng, chúng em đã thêm chức năng thay đổi chủ đề màu sắc của game. Khi sử dụng tính năng này, người dùng có thể đôi màu sắc của một vài thành phần giao diện trong game theo ý mình.
+Các file chủ đề được lưu trong thư mục "theme", được quản lí và truy xuất thông qua class `Theme` nằm trong file `Theme.h` và `Theme.cpp`
 
-=== Hàm trung gian hỗ trợ vẽ giao diện
+File chứa chủ đề là một file văn bản thuần chứa các nhãn và màu ngăn cách bởi dấu "=", tên của chủ đề là tên của file. Sau khi tải xong, các màu sẽ được lưu vào một mảng để dễ dàng truy xuất. Việc tải và và truy xuất các màu sắc hoạt động tương tự như việc tải và truy xuất các văn bản trong game.
+
+Ví dụ file chủ đề:
+```text
+PLAYER_ONE_COLOR            =    1
+PLAYER_ONE_HIGHLIGHT_COLOR  =    9
+PLAYER_TWO_COLOR            =    4
+PLAYER_TWO_HIGHLIGHT_COLOR  =    12
+RESULT_TEXT_COLOR           =    6
+SWITCH_OFF                  =    4
+SWITCH_ON                   =    2
+TEXT_COLOR                  =    12
+TEXT_HIGHLIGHT_COLOR        =    13
+TITLE_TEXT_COLOR            =    13
+```
+
+Các màu sắc trong game được đánh dấu bằng số từ 0 đến 15, mỗi số tương ứng với một màu nhất định. 
+
+```
+enum class Color : char {
+    BLACK = 0,
+    BLUE = 1,
+    GREEN = 2,
+    CYAN = 3,
+    RED = 4,
+    MAGENTA = 5,
+    YELLOW = 6,
+    WHITE = 7,
+    GRAY = 8,
+    LIGHT_BLUE = 9,
+    LIGHT_GREEN = 10,
+    LIGHT_CYAN = 11,
+    LIGHT_RED = 12,
+    LIGHT_MAGENTA = 13,
+    LIGHT_YELLOW = 14,
+    BRIGHT_WHITE = 15
+};
+```
+
+=== Các hàm liên quan đến phần giao diện
 Thông
 
 === Nhận biết thắng thua
-Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong ```Cpp namespace Logic``` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
+Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong `namespace Logic` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của game đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
 
 ==== Hàm GetGameState
 Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sau nước đi mới nhất. Cụ thể hơn, hàm xem xét nước đi mới nhất có dẫn đến một *kết quả thắng* hay *kết quả hòa*. Một nước đi sẽ dẫn đến kết quả thắng nếu nước đi đó tạo nên một chuỗi 5 nước đi liên tiếp đồng chất, và một nước đi sẽ dẫn đến kết quả hòa nếu nước đi đó không phải là nước đi thắng, đồng thời là nước đi hợp lệ cuối cùng của bàn đấu. 
@@ -966,7 +937,7 @@ Thông
 === Các màn hình lưu, tải game và replay
 Thông
 
-=== Màn hình trò chơi chính
+=== Màn hình game chính
 Vũ
 
 === Các màn hình khác
@@ -977,9 +948,9 @@ Vũ
 
 == Kết quả đạt được
 
-=== Ưu điểm của trò chơi
+=== Ưu điểm của game
 
-    - Có thể thêm nhiều ngôn ngữ và theme vào trò chơi
+    - Có thể thêm nhiều ngôn ngữ và theme vào game
     - Có nhạc hay, hiệu ứng sống động
     - Có chế độ tính thời gian
     - AI chạy tương đối tốt, đánh nhanh
@@ -990,7 +961,7 @@ Vũ
     - Màn hình save/load có khả năng tương tác tốt
     - Hướng dẫn dễ hiểu, có gợi ý ở mỗi màn hình
 
-=== Khuyết điểm của trò chơi
+=== Khuyết điểm của game
     -
 
 == Các khó khăn gặp phải
