@@ -1,4 +1,5 @@
 ﻿#include "About.h"
+#include "GameEndView.h"
 #include "GameScreen.h"
 #include "GameScreenView.h"
 #include "GameSelectionView.h"
@@ -11,16 +12,15 @@
 #include "SaveScreen.h"
 #include "Setting.h"
 #include "StartUp.h"
-#include "GameEndView.h"
+#include "Theme.h"
 #include "Tutorial.h"
 
-#include "Theme.h"
 int main()
 {
 #if _DEBUG
     Language::LoadLanguageFromFile("asset/language/en.txt");
     View::Setup();
-    //Theme::LoadTheme("themes/TestTheme");
+    // Theme::LoadTheme("themes/TestTheme");
 #endif
     NavigationHost(
 #if _DEBUG
@@ -33,6 +33,8 @@ int main()
             {"GameEndView",                GameEndView::GameEndView             },
             {"GameScreenView",             GameScreenView::GameScreenView       },
             {"AIDifficultyView",           GameSelectionView::AIDifficultyView  },
+            {"AreYouSureView",             GameSelectionView::AreYouSureView    },
+            {"AvatarSelectView",           GameSelectionView::AvatarSelectView  },
             {"GameModeTypeView",           GameSelectionView::GameModeTypeView  },
             {"GameModeVersusView",         GameSelectionView::GameModeVersusView},
             {"PauseMenuView",              GameSelectionView::PauseMenuView     },
@@ -40,7 +42,6 @@ int main()
             {"PlayAgainView",              GameSelectionView::PlayAgainView     },
             {"ReplayMenuView",             GameSelectionView::ReplayMenuView    },
             {"RushTimeView",               GameSelectionView::RushTimeView      },
-            {"AvatarSelectView",           GameSelectionView::AvatarSelectView  },
             {"LoadScreen",                 LoadScreen::LoadSceen                },
             {"LoadFailed",                 LoadScreen::LoadFailed               },
             {"EmptyLoad",                  LoadScreen::EmptyLoad                },
@@ -62,7 +63,6 @@ int main()
             {"StartUpScreen",              StartUp::StartUpScreen               },
             {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
             {"Tutorial",                   Tutorial::TutorialScreen             },
-            {"AreYouSureView", GameSelectionView::AreYouSureView}
     }
     );
 }

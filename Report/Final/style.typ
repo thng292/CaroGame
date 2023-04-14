@@ -53,10 +53,6 @@
         Hình #counter(figure).display(it.numbering): #it.caption
     ]
 
-    #set raw(
-        lang: "cpp"
-    )
-
     #set list(
         indent: 16pt,
         tight: false
@@ -66,9 +62,12 @@
     // #show "Usage" : it => [*#it*]
     // #show "Parameters" : it => [*#it*]
     // #show "Return" : it => [*#it*]
+    #set raw(
+        lang: "cpp"
+    )
 
     #show raw : it => [
-        #par(leading: 0.65em, justify: false)[
+        #par(leading: 0.65em, justify: false, linebreaks: "simple")[
             #text(style: "normal", weight: "medium", it)
         ]
     ]
@@ -76,7 +75,7 @@
     #show raw.where(block: true): block.with(
         width: 100%,
         fill: luma(240),
-        inset: 2pt,
+        inset: 4pt,
         outset: (y: 3pt),
         radius: 2pt,
         breakable: false
@@ -104,22 +103,10 @@
         },
     )
 
+    #show bibliography : it => par(justify: false, linebreaks: "simple")[
+        #text(style: "normal", weight: "medium", it)
+    ]
+
     #doc
 
 ]
-
-#let figureOutline() = locate(loc => {
-        let figures = query(figure, loc)
-        let res = ()
-        for index, fig in figures [
-            #grid(
-                columns: (auto, auto, 1fr, auto, auto),
-                rows: (auto),
-                link(fig.location(), [Hình #(index+1). ] + fig.caption),
-                h(4pt),
-                repeat[.],
-                h(4pt), 
-                link(fig.location(), [#fig.location().page()])
-            )
-        ]
-    })
