@@ -738,13 +738,10 @@ Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sa
 
 *Interface*
 ```Cpp
-
-/*
 typedef std::vector<std::vector<short>> Board;
 struct Point {
     int row, col;
 }
-*/
 
 short GetGameState(
     const GameAction::Board& board,
@@ -937,7 +934,9 @@ GameAction::Point GetBestMove(
 *Usage*
 ```Cpp
 {
+    // Tìm nước đi tốt nhất của AI
     GameAction::Point aiMove = AI::GetBestMove(board, moveCount);
+    // Thực hiện nước đi AI
     GameAction::MakeMove(board, moveCount, aiMove);
 }
 ```
@@ -986,6 +985,7 @@ short Evaluation::GetComboEval(
                         {row, col},
                          board[row][col]
                     );
+                    // Cộng vào tổng điểm của nước đi này
                     evalValue += eval;
                 }
 ```
@@ -1028,8 +1028,10 @@ short Evaluation::GetComboEval(
                 }
 
                 if (board[row][col] == playerValue)
+                    // Cộng vào tổng điểm đánh giá của bàn cờ
                     evalResult += evalValue;
                 else
+                    // Trừ đi tổng điểm đánh giá của bàn cờ
                     evalResult -= evalValue;
             }
         }
@@ -1040,7 +1042,7 @@ short Evaluation::GetComboEval(
 *Usage*
 ```Cpp
 {
-    // Kết thúc quá trình tìm kiếm
+    // Kết thúc một lần tìm kiếm của Minimax
     if (depth == 0) {
         return GetComboEval(board, playerValue);
     }
@@ -1058,6 +1060,7 @@ Khi áp dụng hàm đánh giá ấy vào thuật toán Minimax, với độ sâ
 inline GameAction::Point GetFirstMove()
 {
     srand(time(NULL));
+    // Tạo nước đi nằm ở khoảng giữa bàn cờ 
     short row = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
     short col = Constants::BOARD_SIZE / 2 - 2 + (rand() % 3);
     return {row, col};
@@ -1067,6 +1070,7 @@ inline GameAction::Point GetFirstMove()
 *Usage*
 ```Cpp
 {
+    // Lượt đầu tiên là của AI
     if (isAIFirst) {
         aiMove = GetFirstMove();
     }
@@ -1091,7 +1095,7 @@ Một phương pháp hiệu quả để tăng tốc thuật toán Minimax là k�
     caption: text()[Quá trình cắt tỉa thông qua Alpha-Beta pruning]
 )
 ===== Sắp xếp nước đi tìm kiếm
-Phương pháp Alpha-Beta pruning chỉ thực sự phát huy hiệu quả khi ta kiểm tra những nước đi tốt trước. Hiện giờ, thuật toán chỉ kiểm tra từng nước đi theo thứ tự tuần tự trên bàn cờ (từ trái sang phải, từ trên xuống dưới). Ta cần truy xét những nước đi theo một trật tự sao cho nước đi tốt được xét trước và nước đi xấu được xét sau. Thế nhưng, làm thế nào để biết một nước đi là nước đi tốt? Không phải chúng ta thực hiện thuật toán Minimax cũng là để tìm nước đi đó hay sao? Trong cờ vua, những nước đi như cho một quân có giá trị thấp ăn một quân có giá trị cao hơn có thể nói là một nước đi tốt, mặc dù ta không biết nó có ảnh hưởng lâu dài đến lúc sau hay không. Dựa vào ý tưởng đó, ta có thể viết một hàm phỏng đoán một nước đi có phải là nước đi tốt hay không. Sau đó, ta sắp xếp các nước đi có thể thực hiện vào một danh sách theo thứ tự *nước đi tốt nhất đến nước đi xấu nhất*, và cho thuật toán Minimax kiểm tra danh sách ấy. 
+Phương pháp Alpha-Beta pruning chỉ thực sự phát huy hiệu quả khi ta kiểm tra những nước đi tốt trước. Hiện giờ, thuật toán chỉ kiểm tra từng nước đi theo thứ tự tuần tự trên bàn cờ (từ trái sang phải, từ trên xuống dưới). Ta cần truy xét những nước đi theo một trật tự sao cho nước đi tốt được xét trước và nước đi xấu được xét sau. Thế nhưng, làm thế nào để biết một nước đi là nước đi tốt? Không phải chúng ta thực hiện thuật toán Minimax cũng là để tìm nước đi đó hay sao? Trong cờ vua, những nước đi như cho một quân có giá trị thấp ăn một quân có giá trị cao hơn có thể nói là một nước đi tốt, mặc dù ta không biết nó có ảnh hưởng lâu dài đến lúc sau hay không. Dựa vào ý tưởng đó, ta có thể viết một hàm phỏng đoán một nước đi có phải là nước đi tốt hay không. Sau đó, ta sắp xếp các nước đi có thể thực hiện vào một danh sách theo thứ tự *nước đi tốt nhất đến nước đi xấu nhất*, và cho thuật toán Minimax kiểm tra danh sách ấy. Hàm đảm nhiệm việc lập nên danh sách nước đi thỏa yêu cầu trên là hàm `GetMoveList`.
 Ý tưởng đánh giá một nước đi tốt trong cờ Caro có thể được miêu tả như sau:
   - Xét vị trí của một nước đi, ta kiểm tra xem trên một phương nhất định, còn thiếu bao nhiêu quân cờ để tạo nên một chuỗi 5 nước đồng chất.
   - Nếu số quân cờ thiếu càng ít, thì số điểm gán cho nước đi đang xét sẽ càng cao, và ngược lại. 
@@ -1102,14 +1106,55 @@ Phương pháp Alpha-Beta pruning chỉ thực sự phát huy hiệu quả khi t
   - Kết quả cuối cùng gán cho nước đi sẽ là tổng của việc xét quân cờ đồng chất và xét quân cờ đối phương.
 
 Lí do tại sao không đánh giá điểm của nước đi theo cách đánh giá bàn cờ trong hàm ```Cpp GetComboEval``` là vì một nước đi tốt không nhất thiết phải là nước tạo nên chuỗi quân cờ đồng chất dài nhất. Nếu đối phương có 4 quân cờ liền kề nhau bị chặn một đầu, thì việc ta chặn đầu còn lại của chuỗi quân cờ ấy là một nước đi rất tốt. 
-Độ sâu:
-Số nước đi xét:
-Thời gian trung bình:
+
+*Interface*
+```Cpp
+MoveQueue GetMoveList(
+    short rowLowerLimit,
+    short rowUpperLimit,
+    short colLowerLimit,
+    short colUpperLimit,
+    short moveCount,
+    GameAction::Board& board,
+    short playerValue
+)
+```
+*Parameters*
+- rowLowerLimit: giới hạn tìm kiếm dưới của dòng
+- rowUpperLimit: giới hạn tìm kiếm trên của dòng
+- colLowerLimit: giới hạn tìm kiếm trái của cột
+- colUpperLimit: giới hạn tìm kiếm phải của cột
+- moveCount: số nước đi đã thực hiện
+- board: bàn cờ hiện tại
+- playerValue: giá trị người chơi đang Xét
+
+*Usage*
+```Cpp
+{
+    MoveQueue moveList = GetMoveList(
+        rowLowerLimit, 
+        rowUpperLimit, 
+        colLowerLimit,
+        colUpperLimit,
+        moveCount,
+        board,
+        currentPlayer);
+    while (!moveList.empty()) {
+        GameAction::Point move = moveList.top();
+        // Thực hiện tìm kiếm Minimax với move
+        //...
+    }
+}
+```
 ===== Transposition table (Bảng hoán vị)
-Trong quá trình tìm kiếm của thuật toán Minimax, sẽ có nhiều trường hợp một trạng thái bàn cờ bị lặp lại theo thứ tự nước đi khác nhau. Việc này sẽ gây lãng phí thời gian truy xét, vì ta đang thực hiện lại phép tính đã có kết quả từ trước. Để khắc phục được việc này, ta cần một bảng lưu trữ những kết quả đánh giá có được của các bàn cờ đã xét, để khi gặp lại những bàn cờ ấy, ta trả về giá trị lưu trong bảng, từ đó tránh việc phải lặp lại phép tính. Một bảng lưu trữ như vậy được gọi là *bảng hoán vị* (Transposition table)@Transposition_Table. Để thực hiện yêu cầu ấy, ta sử dụng cấu trúc dữ liệu ```Cpp unordered_map```@unordered_map trong C++. Cấu trúc dữ liệu này lưu trữ dữ liệu theo hình thức *key-value pair*, với mỗi key là một giá trị đơn nhất. Dựa vào tính chất ấy, giả sử key trong trường hợp này là một bàn cờ nhất định, thì value lúc này sẽ là kết quả đánh giá của bàn cờ ấy. Tuy nhiên, bàn cờ trong chương trình được lưu dưới dạng một mảng hai chiều, ```Cpp vector<vector<short>>```,```Cpp unordered_map``` không hỗ trợ key với cấu trúc dữ liệu ấy. Vì vậy, ta cần mã hóa bàn cờ thành một giá trị mà có thể sử dụng để làm key. Việc này có thể được thực hiện thông qua kĩ thuật *Zobrist Hashing*@Zobrist_Hashing. Kĩ thuật này giúp chúng ta chuyển hóa một bàn cờ hai chiều thành một con số đơn nhất, từ đó có thể sử dụng con số ấy làm key cho bảng lưu. Những con bot cờ vua, cờ vây cũng sử dụng kĩ thuật này để mã hóa bàn cờ.   
-Độ sâu:
-Số nước đi xét:
-Thời gian trung bình:
+Trong quá trình tìm kiếm của thuật toán Minimax, sẽ có nhiều trường hợp một trạng thái bàn cờ bị lặp lại theo thứ tự nước đi khác nhau. Việc này sẽ gây lãng phí thời gian truy xét, vì ta đang thực hiện lại phép tính đã có kết quả từ trước. 
+
+#figure(
+    image("asset\move_order_example.png", width: 80%),
+    caption: text()[Hai thứ tự nước đi khác nhau cùng đạt một bàn cờ]
+)
+
+Để khắc phục được việc này, ta cần một bảng lưu trữ những kết quả đánh giá có được của các bàn cờ đã xét, để khi gặp lại những bàn cờ ấy, ta trả về giá trị lưu trong bảng, từ đó tránh việc phải lặp lại phép tính. Một bảng lưu trữ như vậy được gọi là *bảng hoán vị* (Transposition table)@Transposition_Table. Để thực hiện yêu cầu ấy, ta sử dụng cấu trúc dữ liệu ```Cpp unordered_map```@unordered_map trong C++. Cấu trúc dữ liệu này lưu trữ dữ liệu theo hình thức *key-value pair*, với mỗi key là một giá trị đơn nhất. Dựa vào tính chất ấy, giả sử key trong trường hợp này là một bàn cờ nhất định, thì value lúc này sẽ là kết quả đánh giá của bàn cờ ấy. Tuy nhiên, bàn cờ trong chương trình được lưu dưới dạng một mảng hai chiều, ```Cpp vector<vector<short>>```,```Cpp unordered_map``` không hỗ trợ key với cấu trúc dữ liệu ấy. Vì vậy, ta cần mã hóa bàn cờ thành một giá trị mà có thể sử dụng để làm key. Việc này có thể được thực hiện thông qua kĩ thuật *Zobrist Hashing*@Zobrist_Hashing. Kĩ thuật này giúp chúng ta chuyển hóa một bàn cờ hai chiều thành một con số đơn nhất, từ đó có thể sử dụng con số ấy làm key cho bảng lưu. Những con bot cờ vua, cờ vây cũng sử dụng kĩ thuật này để mã hóa bàn cờ@zobrist_chess.   
 ===== So sánh tốc độ
 
 
