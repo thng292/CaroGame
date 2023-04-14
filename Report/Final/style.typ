@@ -111,15 +111,17 @@
 #let figureOutline() = locate(loc => {
         let figures = query(figure, loc)
         let res = ()
-        for index, fig in figures [
+        let index = state("ind", 0)
+        for fig in figures [
             #grid(
                 columns: (auto, auto, 1fr, auto, auto),
                 rows: (auto),
-                link(fig.location(), [Hình #(index+1). ] + fig.caption),
+                link(fig.location(), [Hình #(index.display()). ] + fig.caption),
                 h(4pt),
                 repeat[.],
                 h(4pt), 
                 link(fig.location(), [#fig.location().page()])
             )
+            #index.update(ind => ind + 1)
         ]
     })

@@ -16,7 +16,12 @@
 #pagebreak()
 
 #heading(numbering: none)[Danh sách hình]
-#figureOutline()
+#outline(title: none, target: figure.where(kind: image))
+#pagebreak()
+
+#heading(numbering: none)[Danh sách bảng]
+#outline(title: none, target: table)
+#pagebreak()
 
 #include "readme.typ"
 
@@ -881,7 +886,7 @@ Việc thiết kết chương trình cho chế độ *Đánh với máy* là m�
 *Thuật toán Minimax* là một thuật toán phổ biến được áp dụng trong việc tìm kiếm một nước đi tốt trong các trò chơi đối kháng giữa hai người. Chính vì vậy, nhóm đã quyết định sử dụng thuật toán này để viết nên chương trình "AI" cho trò chơi. Giải thích một cách đơn giản, thuật toán sẽ tìm nước đi tốt nhất thông qua việc đánh giá tất cả các nước đi có thể trong mỗi lượt đi. Ví dụ, đối với cờ Caro, nếu hiện tại là lượt của người chơi O, thuật toán sẽ tìm mọi nước đi có thể của người chơi O. Sau khi đã thực hiện lượt chơi của O, thuật toán sẽ tìm mọi nước đi có thể của người chơi X. Quá trình này sẽ lặp lại đến một độ sâu nhất định, và khi đã đến độ sâu cuối cùng, một phép đánh giá tương đối sẽ được thực hiện để đánh giá "điểm" của bàn cờ. Người chơi "tối đa hóa" sẽ cố gắng đạt được bàn cờ có điểm số cao nhất, ngược lại, người chơi "tối thiểu hóa" sẽ cố gắng đạt được bàn cờ có điểm số thấp nhất. 
 #figure(
     image("asset\minimax_tree.png", width: 80%),
-    caption: text()[Sơ đồ tìm kiếm của thuật toán Minimax đối với trò chơi Tic-Tac-Toe]
+    caption: [Sơ đồ tìm kiếm của thuật toán Minimax đối với trò chơi Tic-Tac-Toe]
 )
 ==== Đánh giá bàn cờ
 Thành phần quan trọng nhất trong thuật toán Minimax là *hàm đánh giá trạng thái*. Cần phải biết được trong một bàn cờ nhất định, lợi thế đang thuộc về người chơi nào. Trong cờ Caro, ta thấy rằng mục tiêu của mỗi nước đánh đều sẽ cố đạt được chuỗi 5 nước liên tiếp. Ta gọi đó là chuỗi ấy là chuỗi *5 combo*. Để có thể đạt được 5 combo, ta phải có được chuỗi 4 nước liên tiếp, gọi là chuỗi 4 combo. Và tương tự, muốn được "4 combo" ta phải có 3 combo, muốn có 3 combo ta phải có nước 2 combo,... Nhìn chung, có thể thấy người chơi có được combo với độ dài càng gần với 5, họ sẽ có tỉ lệ thắng cao hơn. Ngoài ra, giả sử hai người chơi có *số lương combo* 1 và combo 2 như nhau, thì người có số lượng combo 3 hay combo 4 lớn hơn sẽ có lợi thế cao hơn. Cuối cùng, một combo *bị chặn* (có một quân cờ của đối phương ở một hoặc cả hai đầu mút của combo) càng ít sẽ cho lợi thế càng cao. Vậy, dựa vào những tính chất ấy, ta xây dựng được thuật toán đánh giá như sau:
