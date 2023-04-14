@@ -25,7 +25,7 @@
     )
 
     #set heading(
-    numbering: "1.1."
+        numbering: "1.1."
     )
 
     #show heading.where(level: 1, numbering: "1.1."): it => [
@@ -48,9 +48,14 @@
     #set figure(
         numbering: "1.1",
     )
+
     #show figure: it => align(center)[
-        #it.body
-        Hình #counter(figure).display(it.numbering): #it.caption
+        #block(
+            breakable: false,
+        )[
+            #it.body
+            Hình #counter(figure).display(it.numbering): #it.caption
+        ]
     ]
 
     #set list(
@@ -101,6 +106,15 @@
                 return [Hình]
             }
         },
+    )
+
+    #set table(
+        align: left,
+    )
+
+    #show table : par.with(
+        linebreaks: "simple",
+        justify: false,
     )
 
     #show bibliography : it => par(justify: false, linebreaks: "simple")[

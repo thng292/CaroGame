@@ -85,6 +85,7 @@ bool InputBox::DrawInputBox(
             return true;
         case L'\x1b':
             return false;
-
+        default:
+            return true;
     }
 }
