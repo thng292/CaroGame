@@ -72,3 +72,8 @@ zobrist_chess:
   type: Web
   title: Zobrist hashing in chess
   url: https://www.chessprogramming.org/Zobrist_Hashing
+
+Move_Ordering:
+  type: Web
+  title: Move ordering
+  url: https://www.chessprogramming.org/Move_Ordering
