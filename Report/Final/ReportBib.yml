@@ -37,3 +37,13 @@ mutex:
   type: Web
   title: std::mutex
   url: https://en.cppreference.com/w/cpp/thread/mutex
+
+Minimax:
+  type: Web
+  title: Minimax
+  url: https://vi.wikipedia.org/wiki/Minimax
+
+Minimax-Figure:
+  type: Web
+  title: Minimax
+  url: https://vi.wikipedia.org/wiki/Minimax

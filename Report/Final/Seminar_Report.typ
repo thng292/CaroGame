@@ -729,48 +729,119 @@ Thông
 Thông
 
 === Nhận biết thắng thua
-Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong `Cpp namespace Logic` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
+Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong ```Cpp namespace Logic``` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
 
 ==== Hàm GetGameState
 Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sau nước đi mới nhất. Cụ thể hơn, hàm xem xét nước đi mới nhất có dẫn đến một *kết quả thắng* hay *kết quả hòa*. Một nước đi sẽ dẫn đến kết quả thắng nếu nước đi đó tạo nên một chuỗi 5 nước đi liên tiếp đồng chất, và một nước đi sẽ dẫn đến kết quả hòa nếu nước đi đó không phải là nước đi thắng, đồng thời là nước đi hợp lệ cuối cùng của bàn đấu. 
 
 Interface:
 ```Cpp
-    short GetGameState(
-        const GameAction::Board& board,
-        const short& moveCount,
-        const GameAction::Point& move,
-        const short& playerValue,
-        GameAction::Point& winPoint = temp,
-        bool getWinPoint
-    );
+/*
+    Trong namespace GameAction:
+    typedef std::vector<std::vector<short>>Board;
+    struct Point {
+        int row, col;
+    }
+*/
+short GetGameState(
+    const GameAction::Board& board,
+    const short& moveCount,
+    const GameAction::Point& move,
+    const short& playerValue,
+    GameAction::Point& winPoint = temp,
+    bool getWinPoint
+);
 ```
-*Parameters:*
+Parameters:
     - `board`: Bàn đấu hiện tại.
     - `moveCount`: Số nước đi đã thực hiện. 
     - `move`: Nước đi mới nhất.
     - `playerValue`: Người chơi thực hiện nước đi.
     - `winPoint`: Đầu mút của chuỗi thắng (nếu có).
     - `getWinPoint`:
-        - `true` #sym.arrow.r.double lấy đầu mút của chuỗi thắng (nếu có).
-        - `false` #sym.arrow.r.double không lấy đầu mút của chuỗi thắng.
+        - `true` => lấy đầu mút của chuỗi thắng (nếu có).
+        - `false` => không lấy đầu mút của chuỗi thắng.
 
-Returns:
-    - ```Cpp Logic::WIN_VALUE```: Giá trị tượng trưng kết quả thắng.
+Return:
+    - ```Cpp Logic::WIN_VALUE```: Giá trị tượng trưng kết quả thắng (người thắng là playerValue).
     - ```Cpp Logic::DRAW_VALUE```: Giá trị tượng trưng kết quả hòa.
     - ```Cpp Logic::NULL_VALUE```: Giá trị tượng trưng kết quả vô định.
 
-*Usage:*
+Usage:
 ```Cpp
 short gameState = Logic::GetGameState(gameBoard, moveCount, latestMove, currentPlayer, winPoint, true);
 ```
 
-=== Các tương tác với bàn cờ
-Trạng thái bàn cờ có thể được thay đổi qua hai hình thức: *thực hiện nước đi* và *xóa nước đi*. Hàm `MakeMove` và `UndoMove` đảm nhiệm việc thực hiện hai chức năng ấy. Hai hàm này tuy đơn giản nhưng nắm vai trò quan trọng xuyên suốt quá trình chơi, vì các thao tác người chơi chỉ thực sự được ghi lại trên bàn cờ khi hai hàm này được gọi đến. Việc xóa nước đi là để phục vụ cho chức năng `Hoàn tác` của trò chơi, và là một phần không thể thiếu đối với thuật toán `Minimax` được sử dụng cho AI của trò chơi.
+==== Cách phát hiện nước đi thắng
+Nước đi thắng là một nước đi dẫn đến một chuỗi 5 quân cờ liền kề đồng chất, dựa vào đặc điểm này, ta viết nên các hàm xử lý đáp ứng việc kiểm tra ấy. Cụ thể, bên trong hàm ```Cpp GetGameState```, việc kiểm tra nước thắng sẽ được thực hiện qua bốn hàm ```Cpp CheckVerticalWin```, ```Cpp CheckHorizontalWin```, ```Cpp CheckLeftDiagonalWin```, và ```Cpp CheckRightDiagonalWin```. Các hàm ấy sẽ kiểm tra nước thắng cho 4 hướng tương ứng là: dọc, ngang, chéo từ trái sang phải, chéo từ phải sang trái. Tuy khác về hướng kiểm tra, nhưng bốn hàm đều có chung một phương pháp kiểm tra. Ví dụ, đối với hàm ```Cpp CheckVerticalWin```, việc kiểm tra sẽ diễn ra như sau:
+ - Từ vị trí của nước đi mới nhất, ta cho kiểm tra nước ngay cạnh, theo hướng của chiều dọc, có *đồng chất* hay không:
+    - *Nếu có* => tiếp tục kiểm tra nước ngay cạnh nước ấy.
+    - *Nếu không* => ngưng kiểm tra.
+ - Nếu số nước đồng chất tính được bằng số nước đi thắng (trong trường hợp này là 5) thì trả về *true*, ngược lại trả về *false*.
 
+ #pagebreak()
+
+ *Implementation*
+ ```Cpp
+bool CheckVerticalWin(
+    const GameAction::Board& boardGameMatrix,
+    const GameAction::Point& move,
+    const short& playerValue
+) 
+{
+    short sameValueCount = 1;
+    for (short row = move.row + 1; row < Constants::BOARD_SIZE; ++row) {
+        if (boardGameMatrix[row][move.col] == playerValue) {
+            sameValueCount++;
+            if (sameValueCount == Constants::WIN_VALUE_COUNT) {
+                return true;
+            }
+        } else {
+            break;
+        }
+    }
+
+    for (short row = move.row - 1; row >= 0; --row) {
+        if (boardGameMatrix[row][move.col] == playerValue) {
+            sameValueCount++;
+            if (sameValueCount == Constants::WIN_VALUE_COUNT) {
+                return true;
+            }
+        } else {
+            break;
+        }
+    }
+
+    return false;
+}
+ ```
+
+==== Cách phát hiện nước đi hòa
+Trận đấu sẽ đạt kết quả hòa nếu:
+  - Không có người chơi nào thắng
+  - Không còn vị trí trống để thực hiện nước đi kế tiếp
+Từ đó, ngay sau việc kiểm tra nước thắng, nếu không có người thắng, ta sẽ có gọi hàm kiểm tra nước hòa thỏa mãn các điều kiện trên.
+
+*Implementation*
+```Cpp
+bool CheckDraw(const short& moveCount) {
+    return (moveCount == BOARD_SIZE * BOARD_SIZE);
+}
+```
+
+
+
+=== Các tương tác với bàn cờ
+Trạng thái bàn cờ có thể được thay đổi qua hai hình thức: *thực hiện nước đi* và *xóa nước đi*. Hàm `MakeMove` và `UndoMove` đảm nhiệm việc thực hiện hai chức năng ấy. Hai hàm này tuy đơn giản nhưng nắm vai trò quan trọng xuyên suốt quá trình chơi, vì các thao tác người chơi chỉ thực sự được ghi lại trên bàn cờ khi hai hàm này được gọi đến. Việc xóa nước đi là để phục vụ cho chức năng *Hoàn tác* của trò chơi, và là một phần không thể thiếu đối với thuật toán Minimax@Minimax được sử dụng cho chế độ đánh với máy.
+#pagebreak()
 
 Interface:
  ```
+typedef std::vector<std::vector<short>> Board;
+struct Point {
+    int row, col;
+}
+
  // Thực hiện nước đi lên bàn cờ
  void MakeMove(
     Board& board,
@@ -786,40 +857,99 @@ void UndoMove(
     const Point& move
 );
  ```
-*Parameters:*
+Parameters:
     - `board`: Bàn đấu hiện tại.
     - `moveCount`: Số nước đi đã thực hiện. 
     - `move`: Nước đi được thực hiện.
     - `playerValue`: Người chơi thực hiện nước đi.
 
-*Usage:*
+Usage:
 ```Cpp
 GameAction::MakeMove(board, moveCount, latestMove, currentPlayer);
 GameAction::UndoMove(board, moveCount, latestMove, currentPlayer);
 ```
 
-=== AI
-Việc thiết kết chương trình cho chế độ _Đánh với máy_ là một trong những thách thức lớn nhất của đồ án. Khác với những tính năng khác của chương trình, tính năng này đòi hỏi những mảng kiến thức chuyên biệt về các thuật toán, kĩ thuật lập trình cụ thể. Ngoài ra, việc đánh giá độ đúng/sai của chương trình, hay nói cách khác là nước đi máy tính tìm được là tốt hay xấu, sẽ phần lớn phụ thuộc vào cảm tính và sự hiểu biết của người viết. Chính vì vậy, chương trình có thể đánh hay đối với người này, nhưng đánh không tốt đối với người khác. Phần tiếp theo sẽ trình bày những kĩ thuật mà nhóm đã sử dụng cho chương tình AI.
+==== Chức năng "Nháp"
+Chính vì đặc điểm người chơi chỉ có thể tương tác với bàn cờ qua hai hàm trên, ta có thể tạo nên một chế độ mà người chơi có thể đánh thoải mái những nước đi mà không lo gây ảnh hưởng đến bàn cờ. Trong trò chơi, chức năng này được gọi là chức năng "Nháp". Mỗi khi chức năng "Nháp" được kích hoạt, mọi nước đi của người chơi thực hiện tuy vẫn hiện lên qua màn hình chơi, các nước đi ấy không bao giờ được cho vào hàm ```Cpp MakeMove``` và ```Cpp UndoMove``` nêu trên, từ đó chúng không gây tác động đến trạng thái bàn cờ.
+
+=== Bot
+Việc thiết kết chương trình cho chế độ *Đánh với máy* là một trong những thách thức lớn nhất của đồ án. Khác với những tính năng khác của chương trình, tính năng này đòi hỏi những mảng kiến thức chuyên biệt về các thuật toán, kĩ thuật cụ thể. Ngoài ra, việc đánh giá độ đúng/sai của chương trình, hay nói cách khác là nước đi máy tính tìm được là tốt hay xấu, sẽ phần lớn phụ thuộc vào cảm tính và sự hiểu biết của người viết. Chính vì vậy, chương trình có thể đánh hay đối với người này, nhưng đánh không tốt đối với người khác. Phần tiếp theo sẽ trình bày những kĩ thuật mà nhóm đã sử dụng cho chức năng này.
 
 ==== Thuật toán Minimax
+Đối với những trò chơi đối kháng hai người như cờ vua, cờ caro,... Để có thể tìm được một nước tốt qua code, ta không thể lập trình cứng để xét thế nào là nước đi tốt, thế nào là nước đi xấu được. Đơn thuần là vì có quá nhiều trường hợp để xét, và làm như thế chưa thể đảm bảo có thực sự đạt hiệu quả hay không. Thay vào đó, ta cần phải dựa vào thế mạnh của máy tính. Tuy không thể tư duy như con người, nhưng máy tính có khả năng thực hiện hàng chục nghìn phép tính trong một khoảng thời gian rất ngắn. Dựa vào đặc tính ấy, ta phát triển được phương pháp tìm một nước đi tốt cho cờ Caro.
 
+*Thuật toán Minimax* là một thuật toán phổ biến được áp dụng trong việc tìm kiếm một nước đi tốt trong các trò chơi đối kháng giữa hai người. Chính vì vậy, nhóm đã quyết định sử dụng thuật toán này để viết nên chương trình "AI" cho trò chơi. Giải thích một cách đơn giản, thuật toán sẽ tìm nước đi tốt nhất thông qua việc đánh giá tất cả các nước đi có thể trong mỗi lượt đi. Ví dụ, đối với cờ Caro, nếu hiện tại là lượt của người chơi O, thuật toán sẽ tìm mọi nước đi có thể của người chơi O. Sau khi đã thực hiện lượt chơi của O, thuật toán sẽ tìm mọi nước đi có thể của người chơi X. Quá trình này sẽ lặp lại đến một độ sâu nhất định, và khi đã đến độ sâu cuối cùng, một phép đánh giá tương đối sẽ được thực hiện để đánh giá "điểm" của bàn cờ. Người chơi "tối đa hóa" sẽ cố gắng đạt được bàn cờ có điểm số cao nhất, ngược lại, người chơi "tối thiểu hóa" sẽ cố gắng đạt được bàn cờ có điểm số thấp nhất. 
+#figure(
+    image("asset\minimax_tree.png", width: 80%),
+    caption: text()[Sơ đồ tìm kiếm của thuật toán Minimax đối với trò chơi Tic-Tac-Toe]
+)
 ==== Đánh giá bàn cờ
+Thành phần quan trọng nhất trong thuật toán Minimax là *hàm đánh giá trạng thái*. Cần phải biết được trong một bàn cờ nhất định, lợi thế đang thuộc về người chơi nào. Trong cờ Caro, ta thấy rằng mục tiêu của mỗi nước đánh đều sẽ cố đạt được chuỗi 5 nước liên tiếp. Ta gọi đó là chuỗi ấy là chuỗi *5 combo*. Để có thể đạt được 5 combo, ta phải có được chuỗi 4 nước liên tiếp, gọi là chuỗi 4 combo. Và tương tự, muốn được "4 combo" ta phải có 3 combo, muốn có 3 combo ta phải có nước 2 combo,... Nhìn chung, có thể thấy người chơi có được combo với độ dài càng gần với 5, họ sẽ có tỉ lệ thắng cao hơn. Ngoài ra, giả sử hai người chơi có *số lương combo* 1 và combo 2 như nhau, thì người có số lượng combo 3 hay combo 4 lớn hơn sẽ có lợi thế cao hơn. Cuối cùng, một combo *bị chặn* (có một quân cờ của đối phương ở một hoặc cả hai đầu mút của combo) càng ít sẽ cho lợi thế càng cao. Vậy, dựa vào những tính chất ấy, ta xây dựng được thuật toán đánh giá như sau:
+  - Với một bàn cờ cho trước, ta duyệt qua tất cả những nước đi đã được thực hiện.
+  - Tại vị trí của mỗi nước đi, ta tính số điểm combo nước đó mang lại:
+    - Ta gán cho mỗi combo một số điểm, combo có độ dài càng cao sẽ cho số điểm càng lớn.
+      - Trong chương trình, combo 1, 2, 3, 4 không bị chặn có số điểm tương ứng là 1, 10, 50, 200.
+    - Combo bị chặn một đầu sẽ bị giảm một nửa số điểm, bị chặn hai đầu sẽ không có điểm.
+    - Combo sẽ được tính theo ba hướng: dọc, ngang và chéo. Ta lấy tổng số điểm của các hướng này trả lại.
+  - Nếu nước đi đang xét có cùng giá trị với người chơi đang xét, ta cộng số điểm combo tính được vào tổng điểm đánh giá. Ngược lại, nếu nước đi đang xét khác với người chơi đang xét, ta trừ giá trị điểm tính được khỏi tổng điểm đánh giá.
+  - Mỗi combo chỉ được xét một lần, . 
+
+```
+
+```
+Khi áp dụng hàm đánh giá ấy vào thuật toán Minimax, với độ sâu tìm kiếm bằng 2, ta đã thu được một AI có khả năng đánh Caro tương đối tốt. AI sẽ cố gắng tạo ra combo càng dài, và càng nhiều. AI đồng thời sẽ gây khó khăn cho đối thủ qua việc chặn những combo đối thủ. 
 
 ==== Cải thiện tốc độ
+Tuy nhiên, một vẫn đề có thể thấy rõ với AI hiện tại là thời gian tìm kiếm còn dài. Với độ sâu bằng 2, cần xét đến ... bàn cờ khác nhau, và thời gian trung bình là ... . Với độ sâu bằng 3, cần xét ... bàn cờ, và thời gian trung bình là ... . Cần có những biện pháp cải thiện tốc độ.
 
+===== Giới hạn phạm vi tìm kiếm
+Hiện giờ, thuật toán Minimax trên đang xét tất cả nước đi có thể thực hiện của toàn bộ bàn cờ, nhưng việc làm này rất tốn kém và mất thời gian.
+Trong cờ Caro, các nước đi thường sẽ nằm liền kề nhau, tạo nên một phạm vi mà phần lớn các quân cờ đều nằm bên trong. Lí do là vì những nước đi tách biệt quá xa khỏi phạm vi ấy thường là những nước đi không tốt, không mang lại lợi thế cho người chơi. Dựa vào việc này, ta sẽ giới hạn phạm vi tìm kiếm của thuật toán Minimax để có thể giảm thời gian xử lí. Gọi ```topLeftPoint``` là vị trí của quân cờ gốc trái trên cùng hiện có, ```bottomRightPoint``` là vị trí của quân cờ gốc phải dưới cùng hiện có. Khi ấy, phạm vi tìm kiếm của chúng ta sẽ là một hình chữ nhật như hình...
+Tuy nhiên, thời gian xử lý rút ngắn được sau khi áp dụng biện pháp trên không đáng kể, chưa kể người chơi có thể thực hiện hai nước đi ở hai góc đối của bàn cờ, từ đó khiến cho việc giới hạn phạm vi trở nên vô ích. Cần phải có thêm biện pháp để cải thiện tốc độ xử lí.
+
+Độ sâu:
+Số nước đi xét:
+Thời gian trung bình:
 ===== Alpha-Beta pruning
-
+Một phương pháp hiệu quả để tăng tốc thuật toán Minimax là kĩ thuật Alpha-Beta pruning. Ý tưởng phương pháp là khi ta đã tìm được một nước đi có số điểm cao thì sẽ không cần phải kiểm tra các nước đi có số điểm thấp hơn. Việc này giúp giảm số lượng nước đi phải kiểm tra, từ đó tăng tốc độ xử lý của thuật toán. 
+Độ sâu:
+Số nước đi xét:
+Thời gian trung bình:
 ===== Sắp xếp nước đi tìm kiếm
+Phương pháp Alpha-Beta pruning chỉ thực sự phát huy hiệu quả khi ta kiểm tra những nước đi tốt trước. Hiện giờ, thuật toán chỉ kiểm tra từng nước đi theo thứ tự tuần tự trên bàn cờ (từ trái sang phải, từ trên xuống dưới). Thế nhưng, làm thế nào để biết một nước đi là nước đi tốt? Không phải chúng ta thực hiện thuật toán Minimax cũng là để tìm nước đi đó hay sao? Trong cờ vua, những nước đi như cho một quân có giá trị thấp ăn một quân có giá trị cao hơn có thể nói là một nước đi tốt, mặc dù ta không biết nó có ảnh hưởng lâu dài đến lúc sau hay không. Dựa vào ý tưởng đó, ta có thể viết một hàm phỏng đoán một nước đi có phải là nước đi tốt hay không. Sau đó, ta sắp xếp các nước đi có thể thực hiện vào một danh sách theo thứ tự nước đi tốt nhất đến nước đi xấu nhất, và cho thuật toán Minimax kiểm tra danh sách ấy. 
+Ý tưởng đánh giá một nước đi tốt trong cờ Caro có thể được miêu tả như sau:
+  - Xét vị trí của một nước đi nhất định, ta kiểm tra xem trên một phía nhất định, còn thiếu bao nhiêu nước để tạo nên một chuỗi 5 nước đồng chất.
+  - Nếu số nước thiếu càng ít, thì điểm gán cho nước đi đang xét sẽ càng cao, và ngược lại. 
+  - Ta thực hiện việc kiểm tra đối với cả 8 phía xung quanh nước đi ấy, và lấy tổng của từng kết quả.
+  - Tiếp đến, ta kiểm tra trên một phía nhất định có bao nhiêu quân cờ của đối phương.
+  - Nếu số quân cờ của đối phương càng nhiều, thì điểm gán cho nước đang xét sẽ càng cao, và ngược lại.
+  - Ta thực hiện việc kiểm tra đối với cả 8 phía xung quanh nước đi ấy, và lấy tổng của từng kết quả.
+  - Kết quả cuối cùng gán cho nước đi sẽ là tổng của việc xét quân cờ đồng chất và xét quân cờ đối phương.
 
+Lí do tại sao không đánh giá điểm của nước đi theo cách đánh giá bàn cờ đã nêu trên là vì một nước đi tốt không nhất thiết phải là nước tạo nên chuỗi quân cờ đồng chất dài nhất. Nếu đối phương có 4 quân cờ liền kề nhau bị chặn một đầu, thì việc ta chặn đầu còn lại của chuỗi quân cờ ấy là một nước đi rất tốt. 
+Độ sâu:
+Số nước đi xét:
+Thời gian trung bình:
 ===== Transposition table (Bảng hoán vị)
-
+Trong quá trình tìm kiếm của thuật toán Minimax, sẽ có nhiều trường hợp một trạng thái bàn cờ bị lặp lại theo thứ tự nước đi khác nhau. Việc này sẽ gây lãng phí thời gian truy xét, vì ta đang thực hiện lại phép tính đã có kết quả từ trước. Để khắc phục được việc này, ta cần một bảng lưu trữ những kết quả đánh giá có được của các bàn cờ đã xét, để khi gặp lại bàn cờ ấy, ta trả về giá trị lưu trong bảng, từ đó tránh việc phải lặp lại phép tính. Một bảng lưu trữ như vậy được gọi là một bảng hoán vị (Transposition table). Để cài đặt được một cấu trúc dữ liệu như vậy, ta sử dụng cấu trúc dữ liệu ```Cpp unordered_map``` trong C++. Cấu trúc dữ liệu này lưu trữ dữ liệu theo hình thức *key-value pair*, với mỗi key là một giá trị đơn nhất. Dựa vào tính chất ấy, giả sử key trong trường hợp này là một bàn cờ nhất định, thì value lúc này sẽ là kết quả đánh giá của bàn cờ ấy. Tuy nhiên, bàn cờ trong chương trình được lưu dưới dạng một mảng hai chiều, ```Cpp vector<vector<short>>```,```Cpp unordered_map``` không hỗ trợ key với cấu trúc dữ liệu ấy. Vì vậy, ta cần mã hóa bàn cờ thành một giá trị mà có thể sử dụng để làm key. Việc này có thể được thực hiện thông qua kĩ thuật *Zobrist Hashing*. Kĩ thuật này giúp chúng ta chuyển hóa một bàn cờ hai chiều thành một con số đơn nhất, từ đó có thể sử dụng con số ấy làm key cho bảng lưu. Những con bot cờ vua, cờ vây cũng sử dụng kĩ thuật này để mã hóa bàn cờ.   
+Độ sâu:
+Số nước đi xét:
+Thời gian trung bình:
 ===== So sánh tốc độ
 
+
 ==== Phân độ khó
-
+Sau khi áp dụng những kĩ thuật để tối ưu hóa thuật toán, độ sâu tối đa mà chương trình có thể thực hiện trong một khoảng thời gian hợp lý là 3. Vì vậy, ta có thể phân độ khó của chế độ đánh với máy với những độ khó:
+  - Dễ: chiều sâu 1
+  - Trung bình: chiều sâu 2
+  - Khó: chiều sâu 3
+Với độ sâu bằng 1, thuật toán chỉ kiểm tra tất cả nước đi của 1 lượt duy nhất, vì vậy, tuy các nước đi vẫn sẽ cố gắng tạo nên các combo dẫn đến chuỗi thắng, máy không thể nhìn trước được những đòn tấn công do đối phương gây nên. 
+Với độ sâu bằng 2, thuật toán sẽ có thể kiểm tra thêm những nước đi của đối phương, vì vậy, máy có thể ngăn chặn những mối nguy do đối phương gây nên, như là những nước tạo nên combo 3, combo 4.
+Với độ sâu bằng 3, không chỉ gây khó dễ cho đối phương qua việc phòng thủ, vì 2 trong 3 lượt kiểm trà là lượt của máy, nên thuật toán sẽ tìm được nhiều nước đi tấn công hơn, và trong cờ Caro, người chơi có thế chủ động thường sẽ có lợi thế cao hơn.
 ==== Chức năng "Gợi ý"
-
+Ngoài chức năng đánh với máy, ta có thể tận dụng tốc độ xử lý nhanh của AI vào một chức năng khác của trò chơi, đó là chức năng "Gợi ý". Thay vì cố định giá trị người chơi như trong chế độ đánh với máy (người là người chơi X, máy là người chơi O), mỗi khi đến lượt đánh của một người chơi nào đó, khi sử dụng chức năng "Gợi ý", ta sẽ gán giá trị người chơi máy trong thuật toán là người chơi hiện tại, và người chơi người là người chơi còn lại, từ đó, máy sẽ tìm ra nước đi tốt với giá trị của lượt người hiện tại.
 ==== Những mặt cần cải thiện
+Tuy chương trình hiện tại đã có thể đánh tương đối như một người chơi bình thường, vẫn còn nhiều mặt ta có thể cải thiện. Trong đó, việc tìm ra một hàm đánh giá để đưa ra được những đánh giá chính xác hơn của trạng thái bàn cờ là điều quan trọng nhất. 
 
 == Giao diện
 
