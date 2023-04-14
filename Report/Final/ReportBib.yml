@@ -53,7 +53,37 @@ Minimax:
   title: Minimax
   url: https://vi.wikipedia.org/wiki/Minimax
 
-MiniMaxFig:
+Minimax-Figure:
   type: Web
-  title: MiniMax image
-  url: https://google.com
+  title: Minimax
+  url: https://vi.wikipedia.org/wiki/Minimax
+
+Transposition_Table:
+  type: Web
+  title: Tranposition table
+  url: https://en.wikipedia.org/wiki/Transposition_table
+
+unordered_map:
+  type: Web
+  title: Unordered map
+  url: https://en.cppreference.com/w/cpp/container/unordered_map
+
+Zobrist_Hashing:
+  type: Web
+  title: Zobrist hashing
+  url: https://en.wikipedia.org/wiki/Zobrist_hashing
+
+Alpha_Beta_Pruning:
+  type: Web
+  title: Alpha-Beta pruning
+  url: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
+
+zobrist_chess:
+  type: Web
+  title: Zobrist hashing in chess
+  url: https://www.chessprogramming.org/Zobrist_Hashing
+
+Move_Ordering:
+  type: Web
+  title: Move ordering
+  url: https://www.chessprogramming.org/Move_Ordering
