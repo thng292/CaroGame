@@ -38,6 +38,16 @@ mutex:
   title: std::mutex
   url: https://en.cppreference.com/w/cpp/thread/mutex
 
+Gomoku:
+  type: Web
+  title: Gomoku
+  url: https://en.wikipedia.org/wiki/Gomoku
+
+Caro:
+  type: Web
+  title: Cờ ca-rô
+  url: https://vi.wikipedia.org/wiki/C%E1%BB%9D_ca-r%C3%B4
+
 Minimax:
   type: Web
   title: Minimax
