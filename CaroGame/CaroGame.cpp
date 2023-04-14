@@ -33,7 +33,7 @@ int main()
             {"GameEndView",                GameEndView::GameEndView             },
             {"GameScreenView",             GameScreenView::GameScreenView       },
             {"AIDifficultyView",           GameSelectionView::AIDifficultyView  },
-            {"AreYouSureView",             GameSelectionView::AreYouSureView    }
+            {"AreYouSureView",             GameSelectionView::AreYouSureView    },
             {"AvatarSelectView",           GameSelectionView::AvatarSelectView  },
             {"GameModeTypeView",           GameSelectionView::GameModeTypeView  },
             {"GameModeVersusView",         GameSelectionView::GameModeVersusView},

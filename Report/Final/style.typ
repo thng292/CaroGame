@@ -103,24 +103,10 @@
         },
     )
 
+    #show bibliography : it => par(justify: false, linebreaks: "simple")[
+        #text(style: "normal", weight: "medium", it)
+    ]
+
     #doc
 
 ]
-
-#let figureOutline() = locate(loc => {
-        let figures = query(figure, loc)
-        let res = ()
-        let index = state("ind", 0)
-        for fig in figures [
-            #grid(
-                columns: (auto, auto, 1fr, auto, auto),
-                rows: (auto),
-                link(fig.location(), [Hình #(index.display()). ] + fig.caption),
-                h(4pt),
-                repeat[.],
-                h(4pt), 
-                link(fig.location(), [#fig.location().page()])
-            )
-            #index.update(ind => ind + 1)
-        ]
-    })
