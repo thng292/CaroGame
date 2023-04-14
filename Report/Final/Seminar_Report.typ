@@ -9,6 +9,10 @@
 #include "title.typ"
 
 #align(center, heading(numbering: none)[Lời cảm ơn])
+Lời đầu tiên, nhóm chúng em xin gửi lời cảm ơn sâu sắc nhất đến Thầy Trương Toàn Thịnh. Ngoài những cố gắng của các thành viên
+trong nhóm, nhóm chúng em sẽ không hoàn thiện đồ án này nếu không có sự chỉ bảo của Thầy. Thầy luôn giúp đỡ tận tình, cung cấp tài liệu để nhóm chúng em có thể hoàn thành đồ án trọn vẹn. Trong suốt quá trình làm đồ án, nhóm chúng em ắt hẳn sẽ có những sai sót kính mong thầy bỏ qua. Thông qua đồ án, nhóm chúng em đã học được một số kiến thức mới, có thêm kinh nghiệm để có thể áp dụng sau này.
+
+Cuối cùng, nhóm chúng em kính chúc thầy nhiều sức khỏe, luôn thành công trên nhiều lĩnh vực để có thể cống hiến cho nền khoa học và giáo dục nước nhà.
 #pagebreak()
 
 #heading(numbering: none)[Mục lục]
@@ -79,9 +83,48 @@ Trò chơi có nhiều phiên bản khác nhau với các luật chơi khác nha
 
 === Đa ngôn ngữ
 
+Khi vào game lần đầu sẽ có bảng thông báo xuất hiện yêu cầu bạn lựa chọn ngôn ngữ cho trò chơi. Ngôn ngữ trong trò chơi gồm tiếng Việt và tiếng Anh. Người chơi có thể thêm file ngôn ngữ khác ở mục asset/language để có thể lựa chọn thêm ngôn ngữ đó.
+#figure(
+    image("asset/language.png", width: 40%),
+    caption: [Lựa chọn ngôn ngữ]
+)
+
+Ngoài ra người chơi còn có thể chỉnh ngôn ngữ trong phần cài đặt của game.
+#figure(
+    image("asset/language1.png", width: 60%),
+    caption: [Lựa chọn ngôn ngữ ở phần cài đặt]
+)
+
 === Thay đổi Theme(Chủ đề)
 
+Để thay đổi chủ đề của trò chơi, vào phần cài đặt, ở mục Theme(Chủ đề) hãy lựa chọn chủ đề cho trò chơi mà bạn yêu thích. Chủ đề trong trò chơi gồm Default, Mystic, Nature. Ngoài ra người chơi còn có thể thêm file theme khác ở mục themes để có thể lựa chọn thêm chủ đề yêu thích nhằm đa dạng hóa giao diện trò chơi.
+#figure(
+    image("asset/theme.png", width: 60%),
+    caption: [Lựa chọn chủ đề]
+)
+
+#figure(
+    image("asset/defaulttheme.png", width: 80%),
+    caption: [Default Theme]
+)
+
+#figure(
+    image("asset/mystictheme.png", width: 80%),
+    caption: [Mystic Theme]
+)
+
+#figure(
+    image("asset/naturetheme.png", width: 80%),
+    caption: [Nature Theme]
+)
+
 === Lưu thiết lập của người chơi
+
+Sau khi thiết lập các chức năng, người dùng có thể lưu lại những thiết lập của mình cho các lần sau. Sau khi nhấn lưu, sẽ có thông báo lưu thành công hay thất bại.
+#figure(
+    image("asset/luuthietlap.png", width: 70%),
+    caption: [Lưu thiết lập của người chơi]
+)
 
 === Chế độ chơi Thường
 
@@ -861,7 +904,7 @@ Việc thiết kết chương trình cho chế độ *Đánh với máy* là m�
 *Thuật toán Minimax* là một thuật toán phổ biến được áp dụng trong việc tìm kiếm một nước đi tốt trong các trò chơi đối kháng giữa hai người. Chính vì vậy, nhóm đã quyết định sử dụng thuật toán này để viết nên chương trình "AI" cho trò chơi. Giải thích một cách đơn giản, thuật toán sẽ tìm nước đi tốt nhất thông qua việc đánh giá tất cả các nước đi có thể trong mỗi lượt đi. Ví dụ, đối với cờ Caro, nếu hiện tại là lượt của người chơi O, thuật toán sẽ tìm mọi nước đi có thể của người chơi O. Sau khi đã thực hiện lượt chơi của O, thuật toán sẽ tìm mọi nước đi có thể của người chơi X. Quá trình này sẽ lặp lại đến một độ sâu nhất định, và khi đã đến độ sâu cuối cùng, một phép đánh giá tương đối sẽ được thực hiện để đánh giá "điểm" của bàn cờ. Người chơi "tối đa hóa" sẽ cố gắng đạt được bàn cờ có điểm số cao nhất, ngược lại, người chơi "tối thiểu hóa" sẽ cố gắng đạt được bàn cờ có điểm số thấp nhất. 
 #figure(
     image("asset\minimax_tree.png", width: 80%),
-    caption: [Minimax tree #cite("Minimax")]
+    caption: [Sơ đồ tìm kiếm của thuật toán Minimax đối với trò chơi Tic-Tac-Toe]
 )
 ==== Đánh giá bàn cờ
 Thành phần quan trọng nhất trong thuật toán Minimax là *hàm đánh giá trạng thái*. Cần phải biết được trong một bàn cờ nhất định, lợi thế đang thuộc về người chơi nào. Trong cờ Caro, ta thấy rằng mục tiêu của mỗi nước đánh đều sẽ cố đạt được chuỗi 5 nước liên tiếp. Ta gọi đó là chuỗi ấy là chuỗi *5 combo*. Để có thể đạt được 5 combo, ta phải có được chuỗi 4 nước liên tiếp, gọi là chuỗi 4 combo. Và tương tự, muốn được "4 combo" ta phải có 3 combo, muốn có 3 combo ta phải có nước 2 combo,... Nhìn chung, có thể thấy người chơi có được combo với độ dài càng gần với 5, họ sẽ có tỉ lệ thắng cao hơn. Ngoài ra, giả sử hai người chơi có *số lương combo* 1 và combo 2 như nhau, thì người có số lượng combo 3 hay combo 4 lớn hơn sẽ có lợi thế cao hơn. Cuối cùng, một combo *bị chặn* (có một quân cờ của đối phương ở một hoặc cả hai đầu mút của combo) càng ít sẽ cho lợi thế càng cao. Vậy, dựa vào những tính chất ấy, ta xây dựng được thuật toán đánh giá như sau:
