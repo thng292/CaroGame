@@ -84,8 +84,8 @@ Trò chơi có nhiều phiên bản khác nhau với các luật chơi khác nha
 === Đa ngôn ngữ
 
 Khi vào game lần đầu sẽ có bảng thông báo xuất hiện yêu cầu bạn lựa chọn ngôn ngữ cho trò chơi. Ngôn ngữ trong trò chơi gồm tiếng Việt và tiếng Anh. Người chơi có thể thêm file ngôn ngữ khác ở mục asset/language để có thể lựa chọn thêm ngôn ngữ đó.
-#figure(
-    image("asset/language.png", width: 40%),
+/*#figure(
+    image("asset", width: 40%),
     caption: [Lựa chọn ngôn ngữ]
 )
 
@@ -124,7 +124,7 @@ Sau khi thiết lập các chức năng, người dùng có thể lưu lại nh�
 #figure(
     image("asset/luuthietlap.png", width: 70%),
     caption: [Lưu thiết lập của người chơi]
-)
+)*/
 
 === Chế độ chơi Thường
 
@@ -1116,7 +1116,7 @@ Một vẫn đề có thể thấy rõ với AI hiện tại là thời gian tì
 
 ===== Giới hạn phạm vi tìm kiếm
 Hiện giờ, thuật toán Minimax đang xét tất cả nước đi có thể thực hiện của toàn bộ bàn cờ, nhưng việc làm này rất tốn kém và mất thời gian.
-Trong cờ Caro, các nước đi thường sẽ nằm liền kề nhau, tạo nên một phạm vi mà phần lớn các quân cờ đều nằm bên trong. Lí do là vì những nước đi tách biệt quá xa khỏi phạm vi ấy thường là những nước đi không tốt, không mang lại lợi thế cho người chơi. Dựa vào việc này, ta sẽ giới hạn phạm vi tìm kiếm của thuật toán Minimax để có thể giảm thời gian xử lí. Gọi ```Cpp topLeftPoint``` là vị trí có row bằng row của quân cờ cao nhất, col bằng col của quân cờ trái cùng nhất, ```Cpp bottomRightPoint``` là vị trí có row bằng row của quân cờ thấp nhất, col bằng col của quân cờ phải cùng nhất. Khi ấy, phạm vi tìm kiếm của chúng ta sẽ là một hình chữ nhật như *hình 4*.
+Trong cờ Caro, các nước đi thường sẽ nằm liền kề nhau, tạo nên một phạm vi mà phần lớn các quân cờ đều nằm bên trong. Lí do là vì những nước đi tách biệt quá xa khỏi phạm vi ấy thường là những nước đi không tốt, không mang lại lợi thế cho người chơi. Dựa vào việc này, ta sẽ giới hạn phạm vi tìm kiếm của thuật toán Minimax để có thể giảm thời gian xử lí. Gọi ```Cpp topLeftPoint``` là vị trí có row bằng row của quân cờ cao nhất, col bằng col của quân cờ trái cùng nhất, ```Cpp bottomRightPoint``` là vị trí có row bằng row của quân cờ thấp nhất, col bằng col của quân cờ phải cùng nhất. Khi ấy, phạm vi tìm kiếm của chúng ta sẽ là một hình chữ nhật như *hình 4*. Lưu ý, `topLeftPoint` và `bottomRightPoint` không cố định, mà sẽ biến đổi trong quá trình tìm kiếm của Minimax. Tức nếu nước đi thử của Minimax nằm ngoài khu vực tìm kiếm hiện có, thì hai giá trị trên sẽ được cập nhật để mở rộng khu vực tìm kiếm.
 #figure(
     image("asset\\range_example.png", width: 50%),
     caption: text()[Giới hạn tìm kiếm minh họa qua khung màu xanh]
@@ -1255,7 +1255,188 @@ Thông
 Thông
 
 === Màn hình game chính
-Vũ
+Trong tất cả các màn hình được cài đặt trong chương trình, màn hình game chính là màn hình có cấu trúc phức tạp nhất. Ngoài việc xử lý giao diện của các nước đi và các tính năng bổ trợ (cảnh báo nước 4, nháp, gợi ý) trên bàn cờ, còn phải chú tâm đến các thành phần khác như khung trạng thái (chứa thời gian, số trận thắng của người chơi), khung avatar và khung lịch sử nước đi. Ngoài ra, vì trong quá trình chơi, người chơi có thể tạm ngừng ván đấu, và tiếp tục ngay sau đó, nên việc lưu trữ trạng thái và hiển thị bàn cờ hiện tại cũng trở thành một vấn đề phải đề cập đến.
+
+==== GameScreenView
+Phần chương trình đảm nhiệm cho giao diện của màn hình game nằm trong view `GameScreenView`. Đoạn code nằm trong đây có thể được chia làm 3 phần:
+  - Phần 1: khai báo các biến cần thiết, tiền xử lý và khởi động các thao tác trước khi bắt đầu vào vòng lặp chính.
+  - Phần 2: vòng lặp chính, mọi sự tương tác của người chơi đều được xử lý trong đây.
+  - Phần 3: xử lý các nghiệp vụ sau khi ván đấu kết thúc.
+#pagebreak()
+*Showcase*
+```Cpp
+void GameScreenView::GameScreenView(NavigationHost& NavHost) {
+    // Phần 1
+    // + Khu vực tiền xử lý
+    NavHost.SetContext(
+        Constants::NEXT_VIEW, 
+        Constants::NULL_VIEW
+    );
+    NavHost.SetContext(
+        Constants::IS_SAVED,
+        false
+    );
+    NavHost.SetContext(
+        Constants::CURRENT_BGM, 
+        Audio::Sound::GameBGM
+    );
+    /*...*/
+    // + Khu vực khai báo
+    GameAction::Board gameBoard(
+        Constants::BOARD_SIZE, 
+        std::vector<short>(Constants::BOARD_SIZE, 0)
+    );
+    /*...*/
+    // + Khu vực khởi động
+    GameScreen gameScreen(7, 2);
+    gameScreen.DrawGameScreen();
+    gameScreen.DrawToElements(curGameState);
+    /*...*/
+    // Phần 2
+    // Vòng lặp chính
+    while (!endGame) {
+        /*...*/
+    }
+    // Phần 3
+    // Xử lý hậu ván đấu
+    /*...*/
+    curGameState.gameEnd = endGame;
+    NavHost.SetContext(Constants::FINISHED_GAME, curGameState);
+    return NavHost.Navigate("GameEndView");
+}
+```
+Ngoài ra, mọi thao tác được xử dụng trong `GameScreenView` như xử lý nước đi của người chơi, thực hiện các tính năng bổ trợ, xử lý kết thúc ván đấu,... đều nằm trong `namespace GameScreenAction`. Việc tách ra như vậy sẽ giúp chương trình dễ dàng được kiểm soát hơn. Nếu gộp hết tất cả vào một nơi, thì phần code cho đoạn này sẽ dài hơn 1000 dòng.
+
+*Showcase*
+```Cpp
+namespace GameScreenAction {
+    // Cập nhật cả frontend và backend của ván đấu
+    void UpdateGame(
+        GameScreen gameScreen,
+        GameAction::Board& board,
+        short& moveCount,
+        const GameAction::Point& move,
+        const Constants::Player& player,
+        GameState& gameState,
+        bool loadFromSave = false
+    );
+    // Nổi bật con trỏ di chuyển
+    void HighLightCursor(
+        GameScreen& gameScreen,
+        const GameAction::Board& gameBoard,
+        const GameAction::Point& curPos,
+        const ColorMatrix& colorMatrix,
+        std::mutex& lock,
+        bool isGhostMode
+
+    );
+    /*...*/
+}
+```
+
+==== Class GameScreen
+Giao diện của trò chơi được dựng nên và xử lý qua `class GameScreen`, và được cấu thành bởi 2 thành phần là: bàn cờ và các khung bổ trợ. Tương ứng, ta có `class BoardContainer` và `class Container`. 
+===== Class Container
+Đối với thành phần sau, các "container" đơn thuần là những khung hình chữ nhật được vẽ qua hàm `View::DrawRect` tại một tọa độ, với chiều dài và chiều rộng lúc khai báo, và có vai trò "chứa" những thông tin của bàn cờ. Để có thể điền vào những container này, ta gọi method `DrawToContainer`, với tham số là giá trị muốn được hiển thị. Ví dụ, container `timerContainerOne` sẽ hiển thị thời gian hiện tại của người chơi 1, còn container `winCountContainerOne` sẽ hiển thị số trận thắng của người chơi 1. Mỗi container thường chỉ hiển thị một giá trị nhất định, nhưng đối với `logContainer`, vì số lượng thông tin hiển thị nhiều và phức tạp hơn, ta cần một method riêng tên `DrawToLogContainer`.
+#pagebreak()
+*Interface*
+```Cpp
+class Container {
+   public:
+    // Số ô thục vào tính từ gốc trái trên của container (để vẽ giá trị ở giữa container)
+    short xOffset, yOffset;
+    // Tọa độ gốc trái trên, kích thước của container
+    short xCoord, yCoord, cellWidth, cellHeight;
+
+    // Vẽ khung của container
+    void DrawContainer();
+
+    // Vẽ giá trị bên trong container
+    void DrawToContainer(std::wstring value, View::Color color = Theme::GetColor(ThemeColor::TEXT_COLOR));
+
+    // Vẽ giá trị bên trong container lịch sử nước đi
+    void DrawToLogContainer(
+        const std::vector<std::pair<short, short>>& moveList,
+        const std::wstring& playerNameOne,
+        const std::wstring& playerNameTwo,
+        bool playerOneFirst,
+        short winMethod = 0,
+        bool isReplay = false,
+        short goBack = 0
+    );
+
+};
+```
+
+*Parameter*
+- *value*: giá trị hiển thị trong container
+- *color*: màu sắc vẽ giá trị
+- *moveList*: danh sách nước đi hiện tại
+- *playerNameOne*, *playerNameTwo*: tên người chơi 1, người chơi 2
+- *playerOneFirst*: xác nhận lượt đầu tiên là của người chơi 1
+- *winMethod*: kết quả ván đấu
+- *isReplay*: xác nhận đang vẽ trong màn hình phát lại
+- *goBack*: số lần cuộn lên của container
+
+*Usage*
+```Cpp
+{
+    Container timerPlayerOne, logContainer;
+    /*Thực hiện gán giá trị xCoord, yCoord,... cho container...*/
+
+    // Vẽ thời gian người chơi 1
+    timerPlayerOne.DrawToContainer(
+        L"05:00", 
+        Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR));
+
+    // Vẽ danh sách các nước đi đã thực hiện
+    logContainer.DrawToLogContainer(
+        moveList, 
+        L"Adam", 
+        L"Bob", 
+        true, 
+        Constants::ENd_GAME_WIN_ONE);
+}
+```
+
+===== Class BoardContainer
+Tương tự như các container, bàn cờ cũng sẽ có hai phần là: vẽ giao diện của bàn cờ và hiển thị giá trị của quân cờ. Vì các quân cờ đều có những vị trí khác nhau, nên ta cần thực hiện phép tính để quân cờ hiện vào đúng vị trí tương ứng trên bàn cờ.
+
+*Interface*
+```Cpp
+class BoardContainer {
+   public:
+    // Kích thước mỗi ô cờ
+    static const short CELL_WIDTH = 4, CELL_HEIGHT = 2;
+    // Số ô thục vào tính từ góc trái trên của ô cờ (để vẽ giá trị vào giữa ô cờ)
+    static const short X_OFFSET = 2, Y_OFFSET = 1;
+    // Vị trí gốc trái trên bàn cờ
+    short xCoord, yCoord;
+
+    // Vẽ giao diện bàn cờ
+    void DrawBoardContainer();
+    void DrawBoardRow();
+    void DrawBoardCol();
+
+    // Vẽ quân cờ vào ô cờ
+    void DrawToBoardContainerCell(
+        short row, 
+        short col,
+        std::wstring value, 
+        View::Color color = View::Color::BLACK,
+        bool highlight=false, 
+        bool isGhostMode = false
+        );
+    // Vẽ các label theo chiều ngang bàn cờ
+    void DrawBoardHorizontalLabels();
+    // Vẽ các label theo chiều dọc bàn cờ
+    void DrawBoardVerticalLabels();
+};
+```
+
+==== Xử lí con trỏ 
+
+==== Lưu và load trạng thái ván đấu
 
 === Các màn hình khác
 
