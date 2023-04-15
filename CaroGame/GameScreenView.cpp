@@ -301,6 +301,13 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 );
                 lock.unlock();
                 myAI.RevertPrivateValues();
+                if (isPlayerOneTurn) {
+                    timerPlayerOne.Continue();
+                    timerPlayerTwo.Pause();
+                } else {
+                    timerPlayerTwo.Continue();
+                    timerPlayerOne.Pause();
+                }
             }
 
             if (curGameState.gameMode == Constants::GAME_MODE_PVE &&
@@ -322,6 +329,13 @@ void GameScreenView::GameScreenView(NavigationHost& NavHost)
                 lock.unlock();
 
                 myAI.RevertPrivateValues();
+                if (isPlayerOneTurn) {
+                    timerPlayerOne.Continue();
+                    timerPlayerTwo.Pause();
+                } else {
+                    timerPlayerTwo.Continue();
+                    timerPlayerOne.Pause();
+                }
             }
             if (Config::GetConfig(Config::FourWarning) == Config::Value_True) {
                 GameScreenAction::HighlightWarning(
