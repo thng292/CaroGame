@@ -87,3 +87,8 @@ Move_Ordering:
   type: Web
   title: Move ordering
   url: https://www.chessprogramming.org/Move_Ordering
+
+Terminal:
+  type: Web
+  title: Windows terminal
+  url: https://en.wikipedia.org/wiki/Windows_Terminal

@@ -1334,7 +1334,7 @@ namespace GameScreenAction {
 }
 ```
 
-==== Class GameScreen
+===== Class GameScreen
 Giao diện của trò chơi được dựng nên và xử lý qua `class GameScreen`, và được cấu thành bởi 2 thành phần là: bàn cờ và các khung bổ trợ. Tương ứng, ta có `class BoardContainer` và `class Container`. 
 ===== Class Container
 Đối với thành phần sau, các "container" đơn thuần là những khung hình chữ nhật được vẽ qua hàm `View::DrawRect` tại một tọa độ, với chiều dài và chiều rộng lúc khai báo, và có vai trò "chứa" những thông tin của bàn cờ. Để có thể điền vào những container này, ta gọi method `DrawToContainer`, với tham số là giá trị muốn được hiển thị. Ví dụ, container `timerContainerOne` sẽ hiển thị thời gian hiện tại của người chơi 1, còn container `winCountContainerOne` sẽ hiển thị số trận thắng của người chơi 1. Mỗi container thường chỉ hiển thị một giá trị nhất định, nhưng đối với `logContainer`, vì số lượng thông tin hiển thị nhiều và phức tạp hơn, ta cần một method riêng tên `DrawToLogContainer`.
@@ -1433,10 +1433,130 @@ class BoardContainer {
     void DrawBoardVerticalLabels();
 };
 ```
+==== Xử lý nước đi 
+Mọi tương tác của người chơi đều sẽ được xử lý trong vòng lặp chính của `GameScreenView`. Cụ thể hơn, khi người chơi ấn một phím *lệnh* (phím di chuyển, phím chức năng, phím tạm ngừng,...) thì các thao tác tương ứng sẽ được thực hiện trong `GameScreenAction`. Đặc biệt, khi người chơi thực hiện nước đi (phím Enter), hàm `HandlePlayerMove` sẽ được gọi, đây là hàm xử lý nước đi của người chơi. Mỗi khi hàm trên được sử dụng, các hàm xử lý con như `HighLightMove`, `UnhighlightMove`, `FlipTurn` sẽ được kích hoạt để xử lý giao diện cho nước đi và logic của ván đấu. Nhưng quan trọng nhất là hai hàm con `UpdateGame` và `HandleState`:
+- `UpdateGame`: đây là nơi duy nhất có quyền sử dụng đến hàm `MakeMove` được đề cập ở những mục trên. Hay nói cách khác, chỉ khi hàm này được gọi thì nước đi của người chơi mới được lưu lại trên bàn cờ. Ngoài ra, hàm cũng lưu nước đi đó vào danh sách nước đi hiện tại của bàn cờ, nhằm phục vụ việc lưu trữ sau này.
+- `HandleState`: mỗi khi một nước đi được thưc hiện, hàm `HandleState` sẽ có vai trò kiểm tra nước đi đó có phải là nước đi kết thúc ván đấu hay không (nước đi thắng hoặc nước đi hòa). Nếu có, hàm sẽ thực hiện những thao tác kết thúc ván đấu, từ đó chuyển `GameScreenView` sang phần hậu xử lý.
+Nếu không có hai hàm này, tuy vẫn có giao diện, trò chơi sẽ không thể hoạt động.
+#pagebreak()
+*Bên trong hàm HandleState*
+```Cpp
+{
+    // Lấy trạng thái ván đấu
+    short state = Logic::GetGameState(
+        board, moveCount, move, player.value, winPoint, true
+    );
+    switch (state) {
+        // Xử lý các trạng thái tương ứng
+        case Logic::WIN_VALUE:
+            if (isPlayerOneTurn) {
+                curGameState.playerScoreOne++;
+                endGame = Constants::END_GAME_WIN_ONE;
+            } else {
+                curGameState.playerScoreTwo++;
+                endGame = Constants::END_GAME_WIN_TWO;
+            }
+            HightLightWin(move, winPoint, player.symbol, gameScreen);
+            break;
+        case Logic::DRAW_VALUE:
+            endGame = Constants::END_GAME_DRAW;
+            break;
+    }
+    /*...*/ 
+}
+```
+#pagebreak()
+*Bên trong hàm UpdateGame*
+```Cpp
+{
+    // Thực hiện nước đi
+    GameAction::MakeMove(board, moveCount, move, player.value);
 
-==== Xử lí con trỏ 
-
+    if (!loadFromSave) {
+        // Lưu nước đi vào danh sách nước đi
+        if (move.row != -1) gameState.moveList.push_back({move.row, move.col});
+        gameScreen.logContainer.DrawToLogContainer(
+            gameState.moveList,
+            gameState.playerNameOne,
+            gameState.playerNameTwo,
+            gameState.playerOneFirst
+        );
+    }
+}
+```
 ==== Lưu và load trạng thái ván đấu
+Trong quá trình chơi, sẽ có lúc người chơi tạm ngưng ván đấu, và quay lại một lúc sau đó. Khi ấy, màn hình game sẽ chuyển sang màn hình tạm ngưng, tức đã thoát khỏi scope của `GameScreenView`, và khi người chơi quay lại, một `GameScreenView` mới sẽ được tạo nên, với dữ liệu khác dữ liệu ván đấu đang diễn ra. Vì vậy, cần phải xử lý việc lưu trữ và load ván đấu hiện tại. Đối với việc lưu, ngay khi người chơi tạm ngưng, trạng thái ván đấu hiện tại sẽ được lưu qua đoạn code bên dưới:
+```Cpp
+// Tạm ngưng ván đấu
+if (tmp == L"ESC") {
+    // Lưu trạng thái ván đấu vào context tương ứng
+    NavHost.SetContext(Constants::CURRENT_GAME, curGameState);
+    // Chuyển sang màn hình tạm ngưng
+    return NavHost.Navigate("PauseMenuView");
+}
+```
+Từ đó, khi qua một `GameScreenView` mới, ta chỉ cần lấy trạng thái ván đấu qua context `Constants::CURRENT_GAME`
+```Cpp
+// Bên trong phần 1 của GameScreenView
+{
+    /*...*/
+    GameState curGameState =
+    std::any_cast<GameState>
+    (NavHost.GetFromContext(Constants::CURRENT_GAME));
+    /*...*/
+}
+```
+Sau khi đã có trạng thái của ván đấu, việc tiếp theo là hiển thị các nước đi đã thực hiện lên bàn cờ, và cập nhật những biến cần thiết. Việc này được thực hiện trước khi vào vòng lặp chính của `GameScreenView`, qua hàm `LoadGameToView`
+*Interface*
+```Cpp
+void GameScreenAction::LoadGameToView(
+    GameScreen& gameScreen,
+    GameAction::Board& board,
+    short& moveCount,
+    GameState& gameState,
+    AI& ai,
+    std::vector<GameAction::Point>& warningPointList,
+    ColorMatrix& colorMatrix,
+    std::mutex& lock
+);
+```
+
+*Parameters*
+- gameScreen: màn hình game.
+- board: bàn cờ hiện tại.
+- moveCount: số nước đi đã thực hiện.
+- gameState: trạng trái ván đấu hiện tại.
+- ai: AI sử dụng cho ván đấu.
+- warningPointList: danh sách các nước cảnh báo 4.
+- colorMatrix: bảng màu sắc của bàn cờ.
+- lock: khóa mutex.
+
+#pagebreak()
+
+*Usage*
+```Cpp
+{
+    /* Sau khi có được trạng thái ván đấu, khai báo các biến cần thiết*/
+    
+    // Vẽ màn hình game
+    gameScreen(7, 2);
+    gameScreen.DrawGameScreen();
+    gameScreen.DrawToElements(curGameState);
+
+    // Load trạng thái game hiện tại vào các biến và màn hình game
+    GameScreenAction::LoadGameToView(
+        gameScreen,
+        gameBoard,
+        moveCount,
+        curGameState,
+        myAI,
+        warningPointList,
+        colorMatrix,
+        lock
+    );
+    /*...*/
+}
+```
 
 === Các màn hình khác
 
