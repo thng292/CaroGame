@@ -49,14 +49,15 @@
         numbering: "1.1",
     )
 
-    #show figure: it => align(center)[
-        #block(
-            breakable: false,
-        )[
-            #it.body
-            Hình #counter(figure).display(it.numbering): #it.caption
-        ]
-    ]
+    #show figure: block.with(
+        breakable: false,
+        width: 100%,
+    )
+
+    #show grid: block.with(
+        breakable: false,
+        width: 100%,
+    )
 
     #set list(
         indent: 16pt,

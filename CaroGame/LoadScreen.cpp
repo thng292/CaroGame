@@ -2,7 +2,7 @@
 
 void LoadScreen::LoadSceen(NavigationHost& NavHost)
 {
-    std::mutex lock;
+    View::ClearScreen();
     auto currentState = LoadScreenState();
     currentState.ReloadAllOptions();
 
