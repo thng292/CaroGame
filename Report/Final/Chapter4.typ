@@ -44,7 +44,10 @@
     - Code xong phải có người review lại
 
 == Lí do hoàn thành mục tiêu
-Nguyên
+    - Hoàn thành đồ án được giao
+    - Có thêm nhiều kinh nghiệm được rút ra
+    - Học được các kĩ năng, kĩ thuật lập trình
+    - Học cách làm việc nhóm, lên kế hoạch, phân chia công việc
 
 == Hướng phát triển ứng dụng
     - Có thể chơi 2 người qua mạng lan
