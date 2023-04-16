@@ -1189,7 +1189,22 @@ Trong quá trình tìm kiếm của thuật toán Minimax, sẽ có nhiều trư
 
 Để khắc phục được việc này, ta cần một bảng lưu trữ những kết quả đánh giá có được của các bàn cờ đã xét, để khi gặp lại những bàn cờ ấy, ta trả về giá trị lưu trong bảng, từ đó tránh việc phải lặp lại phép tính. Một bảng lưu trữ như vậy được gọi là *bảng hoán vị* (Transposition table)@Transposition_Table. Để thực hiện yêu cầu ấy, ta sử dụng cấu trúc dữ liệu ```Cpp unordered_map```@unordered_map trong C++. Cấu trúc dữ liệu này lưu trữ dữ liệu theo hình thức *key-value pair*, với mỗi key là một giá trị đơn nhất. Dựa vào tính chất ấy, giả sử key trong trường hợp này là một bàn cờ nhất định, thì value lúc này sẽ là kết quả đánh giá của bàn cờ ấy. Tuy nhiên, bàn cờ trong chương trình được lưu dưới dạng một mảng hai chiều, ```Cpp vector<vector<short>>```,```Cpp unordered_map``` không hỗ trợ key với cấu trúc dữ liệu ấy. Vì vậy, ta cần mã hóa bàn cờ thành một giá trị mà có thể sử dụng để làm key. Việc này có thể được thực hiện thông qua kĩ thuật *Zobrist Hashing*@Zobrist_Hashing. Kĩ thuật này giúp chúng ta chuyển hóa một bàn cờ hai chiều thành một con số đơn nhất, từ đó có thể sử dụng con số ấy làm key cho bảng lưu. Những con bot cờ vua, cờ vây cũng sử dụng kĩ thuật này để mã hóa bàn cờ@zobrist_chess.   
 ===== So sánh tốc độ
+Sau khi áp dụng những phương pháp trên, chương trình hiện giờ đã có thể truy xét với độ sâu bằng 3 trong một khoảng thời gian rất ngắn. Tuy việc tìm hiểu và cài đặt những phương pháp này đã mất rất nhiều thời gian, nhưng so với tốc độ ban đầu của chương trình, thì sự đầu tư này thực sự rất thỏa đáng.
 
+*Bảng thống kê tốc độ (độ sâu 3)*
+#table(
+    columns: (1fr, 1fr, 1fr, 1fr, 1fr),
+    inset: 5pt,
+    align: center,
+    [*Phương pháp*], [*1*], [*1 + 2*], [*1 + 2 + 3*], [*1 + 2 + 3 + 4*],
+    [Thời gian trung bình], [~30 giây], [~15 giây], [~3 giây], [Gần như tức thì],
+    [Số bàn cờ truy xét], [~100000], [~30000-60000], [~5000-10000], [~1000-3000]
+)
+*Chú thích*:
+- *1*: Phương pháp giới hạn bàn cờ.
+- *2*: Phương pháp Alpha-Beta pruning.
+- *3*: Phương pháp sắp xếp thứ tự tìm kiếm.
+- *4*: Phương pháp bảng hoán vị.
 
 ==== Phân độ khó
 Sau khi áp dụng những kĩ thuật để tối ưu hóa thuật toán, độ sâu tối đa mà chương trình có thể thực hiện trong một khoảng thời gian hợp lý là 3. Vì vậy, ta có thể phân độ khó của chế độ đánh với máy với những độ khó:
@@ -1223,8 +1238,6 @@ GameAction::Point GameScreenAction::GetHintMove(
     return ai.GetBestMove(board, moveCount);
 }
 ```
-#pagebreak()
-
 *Usage*
 ```Cpp
 {
@@ -1242,7 +1255,12 @@ GameAction::Point GameScreenAction::GetHintMove(
 ```
 
 ==== Những mặt cần cải thiện
-Tuy chương trình hiện tại đã có thể đánh tương đối như một người chơi bình thường, vẫn còn nhiều mặt ta có thể cải thiện. Trong đó, việc tìm ra một hàm đánh giá để đưa ra được những đánh giá chính xác hơn của trạng thái bàn cờ là điều quan trọng nhất. 
+Tuy chương trình hiện tại đã có thể đánh tương đối như một người chơi bình thường, vẫn còn nhiều mặt ta có thể cải thiện. Trong đó, việc tìm ra một hàm đánh giá để đưa ra được những đánh giá chính xác hơn của trạng thái bàn cờ là điều quan trọng nhất. Hàm đánh giá hiện tại có một khuyết điểm lớn là không đưa ra đánh giá đúng đắn đối với những trạng thái "đặc biệt" như *hình 7*. Các trạng thái này mang đến lợi thế rất lớn cho người chơi, nói thẳng hơn là họ gần như đã giành được chiến thắng. Hàm đánh giá hiện có chỉ coi những trạng thái trên như những combo tách biệt, từ đó đưa ra những đánh giá không chính xác. Ngoài ra, việc cài đặt các hàm trong chương trình còn rườm rà, thiếu hiệu quả, chỉ mang tính chất hoạt động tức thời, không được tính toán kĩ càng. Ngoài những phương pháp cải thiện tốc độ nêu trên, một điều người lập trình cần chú ý là việc cài đặt chương trình sao cho mọi thứ hoạt động nhanh và hiệu quả nhất. 
+
+#figure(
+    image("asset\killer_move.png", width: 50%),
+    caption: text()[Lợi thế thắng của đỏ qua hai combo 3 nối liền]
+)
 
 == Giao diện
 
@@ -1474,7 +1492,9 @@ Nếu không có hai hàm này, tuy vẫn có giao diện, trò chơi sẽ khôn
 
     if (!loadFromSave) {
         // Lưu nước đi vào danh sách nước đi
-        if (move.row != -1) gameState.moveList.push_back({move.row, move.col});
+        if (move.row != -1) {
+            gameState.moveList.push_back({move.row, move.col});
+        }
         gameScreen.logContainer.DrawToLogContainer(
             gameState.moveList,
             gameState.playerNameOne,
