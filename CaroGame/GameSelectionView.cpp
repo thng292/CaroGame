@@ -17,11 +17,15 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
     std::string navigationValue;
 
     std::wstring label = Language::GetString(L"LABEL_GAME_MODE");
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"PVP_SHORTCUT"),
+        Language::GetString(L"PVE_SHORTCUT"),
+
+    };
+
     std::vector<View::Option> options = {
-        {Language::GetString(L"OPTION_MODE_PVP"),
-         Language::GetString(L"OPTION_MODE_PVP")[0]},
-        {Language::GetString(L"OPTION_MODE_PVE"),
-         Language::GetString(L"OPTION_MODE_PVE")[0]}
+        {Language::GetString(L"OPTION_MODE_PVP"), shortcuts[0][0]},
+        {Language::GetString(L"OPTION_MODE_PVE"), shortcuts[1][0] }
     };
 
     Common::DrawHintsLess();
@@ -47,17 +51,17 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = Utils::modCycle(selectedOption + 1, MAX_OPTIONS);
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             optionValue = optionValueList[0];
             navigationValue = navigationValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             optionValue = optionValueList[1];
             navigationValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"b") {
+        if (Utils::ShortcutCompare(tmp, L"b")) {
             return NavHost.Back();
         }
 
@@ -365,13 +369,17 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost)
     const short MAX_OPTIONS = 3;
 
     std::wstring label = Language::GetString(L"ARE_YOU_SURE");
+
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"YES_TITLE_SHORTCUT"),
+        Language::GetString(L"NO_TITLE_SHORTCUT"),
+        Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")
+    };
+
     std::vector<View::Option> options = {
-        {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_TITLE")[0]                 },
-        {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0]                 },
-        {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
-         Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0]}
+        {Language::GetString(L"YES_TITLE"),               shortcuts[0][0]},
+        {Language::GetString(L"OPTION_NO"),               shortcuts[1][0] },
+        {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"), shortcuts[2][0] }
     };
 
     Common::DrawHintsLess();
@@ -394,16 +402,14 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             return NavHost.Navigate("SaveScreen");
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             return NavHost.Navigate(nextView);
         }
-        if (tmp == L"3") {
-            return NavHost.Back();
-        }
-        if (tmp == L"b") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[2]) ||
+            Utils::ShortcutCompare(tmp, L"b")) {
             return NavHost.Back();
         }
 
@@ -435,11 +441,16 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
         "RushTimeView", "GameModeVersusView"};
 
     std::wstring label = Language::GetString(L"LABEL_GAME_TYPE");
+
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"TYPE_RUSH_SHORTCUT"),
+        Language::GetString(L"TYPE_NORMAL_SHORTCUT"),
+
+    };
+
     std::vector<View::Option> options = {
-        {Language::GetString(L"OPTION_TYPE_RUSH"),
-         Language::GetString(L"OPTION_TYPE_RUSH")[0]  },
-        {Language::GetString(L"OPTION_TYPE_NORMAL"),
-         Language::GetString(L"OPTION_TYPE_NORMAL")[0]}
+        {Language::GetString(L"OPTION_TYPE_RUSH"),   shortcuts[0][0]},
+        {Language::GetString(L"OPTION_TYPE_NORMAL"), shortcuts[1][0] }
     };
 
     Common::DrawHintsLess();
@@ -464,17 +475,17 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             optionValue = optionValueList[0];
             navigateValue = navigationValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             optionValue = optionValueList[1];
             navigateValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"b") {
+        if (Utils::ShortcutCompare(tmp, L"b")) {
             return NavHost.Navigate("MainMenu");
         }
 
@@ -508,13 +519,16 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
     DrawCurrentOptionBox(curGameState, 3);
 
     std::wstring label = Language::GetString(L"LABEL_AI_DIFFICULTY");
+
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"OPTION_AI_EASY_SHORTCUT"),
+        Language::GetString(L"OPTION_AI_NORMAL_SHORTCUT"),
+        Language::GetString(L"OPTION_AI_HARD_SHORTCUT")};
+
     std::vector<View::Option> options = {
-        {Language::GetString(L"OPTION_AI_EASY"),
-         Language::GetString(L"OPTION_AI_EASY")[0]  },
-        {Language::GetString(L"OPTION_AI_NORMAL"),
-         Language::GetString(L"OPTION_AI_NORMAL")[0]},
-        {Language::GetString(L"OPTION_AI_HARD"),
-         Language::GetString(L"OPTION_AI_HARD")[0]  }
+        {Language::GetString(L"OPTION_AI_EASY"),   shortcuts[0][0]},
+        {Language::GetString(L"OPTION_AI_NORMAL"), shortcuts[1][0]},
+        {Language::GetString(L"OPTION_AI_HARD"),   shortcuts[2][0]}
     };
 
     Common::DrawHintsLess();
@@ -538,15 +552,15 @@ void GameSelectionView::AIDifficultyView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             optionValue = optionValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             optionValue = optionValueList[1];
             break;
         }
-        if (tmp == L"3") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[2])) {
             optionValue = optionValueList[2];
             break;
         }
@@ -574,11 +588,13 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
         "ReplaySave", "PlayAgainView"};
     std::string navigationValue;
 
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"YES_TITLE_SHORTCUT"),
+        Language::GetString(L"NO_TITLE_SHORTCUT")};
+
     std::vector<View::Option> options = {
-        {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_TITLE")[0]},
-        {Language::GetString(L"NO_TITLE"),
-         Language::GetString(L"NO_TITLE")[0] }
+        {Language::GetString(L"YES_TITLE"), shortcuts[0][0]},
+        {Language::GetString(L"NO_TITLE"),  shortcuts[1][0]}
     };
 
     Common::DrawHintsLess();
@@ -601,11 +617,11 @@ void GameSelectionView::ReplayMenuView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             navigationValue = navigationValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             navigationValue = navigationValueList[1];
             break;
         }
@@ -635,13 +651,14 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
     std::string navigationValue;
 
     std::wstring label = Language::GetString(L"LABEL_PLAY_AGAIN");
-    std::vector<View::Option> options = {
-        {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_TITLE")[0]},
-        {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0]}
-    };
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"YES_TITLE_SHORTCUT"),
+        Language::GetString(L"NO_TITLE_SHORTCUT")};
 
+    std::vector<View::Option> options = {
+        {Language::GetString(L"YES_TITLE"), shortcuts[0][0]},
+        {Language::GetString(L"NO_TITLE"),  shortcuts[1][0]}
+    };
     Common::DrawHintsLess();
     View::DrawMenuPrevState menuPrevState;
     auto& soundEffect = Config::GetConfig(Config::SoundEffect);
@@ -662,11 +679,11 @@ void GameSelectionView::PlayAgainView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             navigationValue = navigationValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             navigationValue = navigationValueList[1];
             break;
         }
@@ -705,12 +722,16 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
     DrawCurrentOptionBox(curGameState, 1);
 
     std::wstring label = Language::GetString(L"LABEL_RUSH_TIME");
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"OPTION_15_SHORTCUT"),
+        Language::GetString(L"OPTION_5_SHORTCUT"),
+        Language::GetString(L"OPTION_1_SHORTCUT")
+
+    };
     std::vector<View::Option> options = {
-        {Language::GetString(L"OPTION_15"),
-         Language::GetString(L"OPTION_15")[0]                                  },
-        {Language::GetString(L"OPTION_5"),  Language::GetString(L"OPTION_5")[0]},
-        {Language::GetString(L"OPTION_1"),
-         Language::GetString(L"OPTION_1")[0]                                   }
+                {Language::GetString(L"OPTION_15"), shortcuts[0][0]},
+                {Language::GetString(L"OPTION_5"), shortcuts[1][0]},
+                {Language::GetString(L"OPTION_1"), shortcuts[2][0]}
     };
 
     Common::DrawHintsLess();
@@ -733,15 +754,15 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             optionValue = optionValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             optionValue = optionValueList[1];
             break;
         }
-        if (tmp == L"3") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[2])) {
             optionValue = optionValueList[2];
             break;
         }
@@ -770,24 +791,29 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
     NavHost.SetContext(Constants::NEXT_VIEW, Constants::NULL_VIEW);
 
     std::wstring label = Language::GetString(L"LABEL_PAUSE");
+
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"SAVE_SHORTCUT"),
+        Language::GetString(L"NEW_GAME_SHORTCUT"),
+        Language::GetString(L"LOAD_SHORTCUT"),
+        Language::GetString(L"SETTINGS_SHORTCUT"),
+        Language::GetString(L"MAIN_MENU_SHORTCUT"),
+        Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT"),
+
+    };
+
     std::vector<View::Option> options = {
-        {Language::GetString(L"SAVE_TITLE"),
-         Language::GetString(L"SAVE_SHORTCUT")[0]     },
+        {Language::GetString(L"SAVE_TITLE"),      shortcuts[0][0]},
 
-        {Language::GetString(L"NEW_GAME_TITLE"),
-         Language::GetString(L"NEW_GAME_SHORTCUT")[0] },
+        {Language::GetString(L"NEW_GAME_TITLE"),  shortcuts[1][0]},
 
-        {Language::GetString(L"LOAD_TITLE"),
-         Language::GetString(L"LOAD_SHORTCUT")[0]     },
+        {Language::GetString(L"LOAD_TITLE"),      shortcuts[2][0] },
 
-        {Language::GetString(L"SETTINGS_TITLE"),
-         Language::GetString(L"SETTINGS_SHORTCUT")[0] },
+        {Language::GetString(L"SETTINGS_TITLE"),  shortcuts[3][0] },
 
-        {Language::GetString(L"MAIN_MENU_TITLE"),
-         Language::GetString(L"MAIN_MENU_SHORTCUT")[0]},
+        {Language::GetString(L"MAIN_MENU_TITLE"), shortcuts[4][0] },
 
-        {Language::GetString(L"BACK_TITLE"),
-         Language::GetString(L"BACK_TITLE")[0]        }
+        {Language::GetString(L"BACK_TITLE"),      shortcuts[5][0] }
     };
 
     std::array<std::string, MAX_OPTIONS> navigationValueList = {
@@ -818,31 +844,29 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
         if (Utils::keyMeanDown(tmp)) {
             selectedOption = (selectedOption + 1) % MAX_OPTIONS;
         }
-        if (tmp == L"1") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
             navigationValue = navigationValueList[0];
             break;
         }
-        if (tmp == L"2") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[1])) {
             navigationValue = navigationValueList[1];
             break;
         }
-        if (tmp == L"3") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[2])) {
+            navigationValue = navigationValueList[2];
             break;
         }
-        if (tmp == L"4") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[3])) {
             navigationValue = navigationValueList[3];
             break;
         }
-        if (tmp == L"5") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[4])) {
             navigationValue = navigationValueList[4];
             break;
         }
-        if (tmp == L"6") {
+        if (Utils::ShortcutCompare(tmp, shortcuts[5])) {
             navigationValue = navigationValueList[5];
             break;
-        }
-        if (tmp == L"b" || tmp == L"ESC") {
-            return NavHost.Back();
         }
 
         if (tmp == L"\r") {
@@ -850,7 +874,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             break;
         }
     }
-    if (selectedOption == 5) return NavHost.Back();
+    if (selectedOption == 5 || navigationValue == "Back") return NavHost.Back();
     if (navigationValue == "SaveScreen" || navigationValue == "Setting")
         return NavHost.Navigate(navigationValue);
     NavHost.SetContext(Constants::NEXT_VIEW, navigationValue);

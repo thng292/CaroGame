@@ -165,7 +165,7 @@ void Setting::SettingScreen(NavigationHost& NavHost)
                 Utils::PlayKeyPressSound();
             }
         }
-        if (tmp == Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")) {
+        if (Utils::ShortcutCompare(tmp, Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT"))) {
             return NavHost.Back();
         }
         if (Utils::keyMeanDown(tmp)) {

@@ -129,4 +129,12 @@ namespace Utils {
     );
 
     std::wstring SecondToMMSS(short seconds);
+
+    inline bool ShortcutCompare(
+        std::wstring input, std::wstring shortcut
+    ){
+        std::transform(input.begin(), input.end(), input.begin(), ::tolower);
+        std::transform(shortcut.begin(), shortcut.end(), shortcut.begin(), ::tolower);
+        return input == shortcut;
+    }
 };  // namespace Utils
