@@ -7,7 +7,282 @@ Thông
 Thông
 
 === Các màn hình lưu, tải và phát lại ván đấu
-Thông
+Các màn hình này đều có cấu trúc tương tự nhau, gồm:
+    - Danh sách các file: hiển thị danh sách các file đã lưu, trang hiện tại và tổng số trang.
+    - Ô nhập văn bản: cho phép người chơi nhập tên file cần lưu, tải hoặc phát lại hoặc tìm kiếm trong danh sách các file đã lưu.
+    - Các hướng dẫn: hiện các nút và chức năng tương ứng.
+Vì sự tương tự này, em đã tạo một class chung là `SaveLoadScreenViewModel` bao gồm các trạng thái và chức năng chung của các màn hình này. class nằm trong ```Cpp namespace Common``` trong file `Common.h` và `Common.cpp`.
+
+*Interface(Đã loại bỏ một số hàm nhỏ):*
+```
+using namespace std::filesystem::path;
+typedef std::vector<std::pair<std::wstring, path>> OptionList;
+
+class SaveLoadScreenViewModel {
+    // Các trạng thái chung
+    path allOptionsDir;
+    int selected = 0;
+    int currentPage = 0;
+    bool isSearching = 0;
+    int maxPage = 0;
+    // Các file đã tìm được trong thư mục
+    OptionList allOptions;
+    // Dữ liệu để hiển thị lên màn hình
+    std::vector<View::Option> options;
+    std::wstring pageIndicator; // Hiện số trang
+    std::wstring searchInput; // Nội dung của ô tìm kiếm
+    SaveLoadScreenViewModel(path dir = Constants::SAVE_PATH)
+    {
+        allOptionsDir = dir;
+    }
+
+    void ReloadAllOptions()
+    { // Tải lại danh sách các file
+        LoadAllOptions(allOptionsDir);
+        UpdatePage(currentPage);
+    }
+
+    void LoadAllOptions(path dir); // Đọc tất cả các file trong thư mục
+    bool Search(); // Tìm kiếm các file có tên chứa chuỗi searchInput
+    // Tạo ra một hàm để chạy khi người chơi thay đổi nội dung ô tìm kiếm
+    std::function<void(const std::wstring&)> onSearchValueChange(
+        const std::function<void(void)>& callback
+    );
+};
+```
+
+*Usage:*
+```
+// Sử dụng class trong màn hình lưu
+class SaveScreenState : public Common::SaveLoadScreenViewModel {
+  public:
+    bool Save(const GameState& currentGameState);
+};
+```
+
+==== Hiển thị danh sách các file đã lưu
+Để hiển thị danh sách các file đã lưu, trò chơi cần tải danh sách các file đã lưu trong một thư mục nhất định, sau đó sắp xếp tăng dần theo thời gian rồi chỉnh sửa một chút để hiển thị lên phần "Danh sách các file".
+
+*Implementation:*
+```
+void Common::SaveLoadScreenViewModel::LoadAllOptions(path dir)
+{
+    auto availableLoadFiles 
+        = SaveLoad::DiscoverSaveFiles(dir);
+    std::sort(
+        availableLoadFiles.begin(),
+        availableLoadFiles.end(),
+        [](const FileHandle::FileDetail& a, 
+           const FileHandle::FileDetail& b) {
+            return a.lastModified > b.lastModified;
+        }
+    );
+
+    allOptions.clear();
+    allOptions.reserve(availableLoadFiles.size());
+
+    for (auto& file : availableLoadFiles) {
+        allOptions.emplace_back(
+            Utils::CatStringSpaceBetween(
+                50,
+                file.filePath.filename(),
+                Utils::filesystem_time_to_wstr_local
+                                    (file.lastModified)
+            ),
+            file.filePath
+        );
+    }
+
+    maxPage = allOptions.size() / 10 
+            + bool(allOptions.size() % 10);
+}
+```
+
+==== Ô tìm kiếm hoặc nhập tên
+Ô tìm kiếm sử dụng thành phần giao diện Input để đọc đầu vào của người dùng. Mỗi khi người dùng thay đổi nội dung ô tìm kiếm, trò chơi sẽ sắp xếp các file có tên chứa chuỗi mà người dùng đã nhập lên đầu và cập nhật lại danh sách các file hiển thị lên màn hình. Để làm được điều đó, em đã tạo một hàm để tìm kiếm các file có tên chứa chuỗi mà người dùng đã nhập, hàm sẽ duyệt qua danh sách các file đã lưu, rồi sắp xếp đưa các file phù hợp lên đầu danh sách rồi cập nhật lên màn hình. Việc tìm kiếm mỗi lần người dùng nhập một ký tự sẽ làm chậm trò chơi do phải liên tục vẽ lại danh sách lên màn hình, để giảm thiểu điều này, trước khi thực hiện việc sắp xếp, kiểm tra xem danh sách đã được sắp xếp hay chưa, nếu chưa thì mới sắp xếp.
+
+*Implementation:*
+```
+struct SortTemporary {
+    size_t foundIndex = 0;
+    std::wstring name;
+    size_t mapIndex = 0;
+}
+
+bool Common::SaveLoadScreenViewModel::Search()
+{
+    static auto cmp = [](
+        const SortTemporary& a, 
+        const SortTemporary& b
+    ) {
+        if (a.foundIndex != size_t(-1) 
+            && b.foundIndex != size_t(-1)) 
+        {
+            return a.name > b.name;
+        }
+
+        if (a.foundIndex == b.foundIndex) {
+            return a.name > b.name;
+        }
+
+        return a.foundIndex < b.foundIndex;
+    };
+
+    size_t n = allOptions.size();
+    std::vector<SortTemporary> tmp;
+    tmp.resize(n);
+
+    for (size_t i = 0; i < n; i++) {
+        auto ttt = allOptions[i].second.filename().wstring();
+        tmp[i] = {ttt.find(searchInput), std::move(ttt), i};
+    }
+    // Kiểm tra xem danh sách có cần sắp xếp hay không
+    if (std::is_sorted(tmp.begin(), tmp.end(), cmp)) {
+        return 0;
+    }
+
+    std::sort(tmp.begin(), tmp.end(), cmp);
+
+    OptionList vtmp;
+    vtmp.resize(n);
+    for (size_t i = 0; i < n; i++) {
+        vtmp[i] = allOptions[tmp[i].mapIndex];
+    }
+    allOptions = vtmp;
+    return 1;
+}
+```
+
+==== Cách lưu và tải ván đấu
+Trạng thái của một ván đấu trong trò chơi bao gồm các thông tin sau:
+    - Thời gian chơi hoặc thời gian còn lại của mỗi người chơi, thời gian đã trôi qua
+    - Thông tin của 2 người chơi: tên, avatar, điểm số
+    - Chế độ, loại trò chơi, độ khó của AI, ai đi trước, kết cục của trò chơi
+    - Các nước đi đã được thực hiện trong ván đấu
+Các trạng thái ấy được gộp chung vào một `struct` như sau:
+```
+struct GameState {
+    std::wstring playerNameOne;
+    short playerTimeOne = 0;
+    short playerScoreOne = 0;
+    short playerAvatarOne = -1;
+
+    std::wstring playerNameTwo;
+    short playerTimeTwo = 0;
+    short playerScoreTwo = 0;
+    short playerAvatarTwo = -1;
+    
+    short gameType = 0;
+    short gameMode = 0;
+    short aiDifficulty = 0;
+    bool playerOneFirst = 1;
+    short gameTime = 0;
+    short gameEnd = 0;
+    std::vector<std::pair<short, short>> moveList;
+};
+```
+Với những thông tin ấy, chúng em đã chọn cách lưu ván đấu dưới dạng file văn bản do sự tiện dụng của cách lưu này. Tuy nhiên, khi lưu bằng cách này thì người chơi có thể dễ dàng can thiệp vào file lưu gây ra một số tính huống không mong muốn, một điều khó tránh khỏi kể cả khi lưu bằng file nhị phân. 
+
+Khi lưu ván đấu, hàm sẽ mở file với tên được người chơi nhập vào, sau đó ghi các thông tin của ván đấu vào file. Khi tải ván đấu, hàm sẽ mở file với tên được người chơi chọn, sau đó đọc các thông tin của ván đấu từ file.
+
+Sau đây là chi tiết hàm lưu ván đấu:
+*Implementation:*
+```
+bool SaveLoad::Save(
+    const GameState& data,
+    const std::wstring& name,
+    const std::filesystem::path& dir
+)
+{
+    auto file = FileHandle::OpenOutFile(dir.generic_wstring() + name);
+    if (file.fail()) {
+        return false;
+    }
+    file << data.playerNameOne << '\n';
+    file << data.playerScoreOne << '\n';
+    file << data.playerTimeOne << '\n';
+    file << data.playerAvatarOne << '\n';
+
+    file << data.playerNameTwo << '\n';
+    file << data.playerScoreTwo << '\n';
+    file << data.playerTimeTwo << '\n';
+    file << data.playerAvatarTwo << '\n';
+
+    file << data.gameMode << '\n';
+    file << data.aiDifficulty << '\n';
+    file << data.playerOneFirst << '\n';
+    file << data.gameTime << '\n';
+    file << data.gameEnd << '\n';
+
+    for (auto& i : data.moveList) {
+        file << i.first << ' ' << i.second << '\n';
+    }
+
+    if (file.fail()) {
+        std::filesystem::remove(dir.generic_wstring() + name);
+    }
+
+    return !file.fail();
+}
+```
+*Parameters:*
+    - `data`: Trạng thái của ván đấu cần lưu
+    - `name`: Tên của file lưu
+    - `dir`: Đường dẫn của thư mục chứa file lưu
+
+*Return:*
+    - `true` #sym.arrow.r Lưu thành công
+    - `false` #sym.arrow.r Lưu thất bại
+
+Sau đây là chi tiết hàm tải ván đấu:
+
+*Implementation:*
+```
+std::optional<GameState> 
+SaveLoad::Load(
+    const std::filesystem::path& filePath
+)
+{
+    auto file = FileHandle::OpenInFile(filePath);
+    GameState data;
+    file >> data.playerNameOne;
+    file >> data.playerScoreOne;
+    file >> data.playerTimeOne;
+    file >> data.playerAvatarOne;
+
+    file >> data.playerNameTwo;
+    file >> data.playerScoreTwo;
+    file >> data.playerTimeTwo;
+    file >> data.playerAvatarTwo;
+
+    file >> data.gameMode;
+    file >> data.aiDifficulty;
+    file >> data.playerOneFirst;
+    file >> data.gameTime;
+    file >> data.gameEnd;
+
+    if (file.fail()) {
+        return std::nullopt;
+    }
+
+    short a, b;
+    while (!file.eof()) {
+        file >> a >> b;
+        if (file.eof()) break;
+        if (file.fail() && !file.eof()) {
+            return std::nullopt;
+        }
+        data.moveList.emplace_back(a, b);
+    }
+    return data;
+}
+```
+
+*Parameters:*
+    - `filePath`: Đường dẫn của file lưu
+
+*Return:*
+    - Trạng thái của ván đấu được tải
 
 === Màn hình game chính
 Trong tất cả các màn hình được cài đặt trong chương trình, màn hình game chính là màn hình có cấu trúc phức tạp nhất. Ngoài việc xử lý giao diện của các nước đi và các tính năng bổ trợ (cảnh báo nước 4, nháp, gợi ý) trên bàn cờ, còn phải chú tâm đến các thành phần khác như khung trạng thái (chứa thời gian, số trận thắng của người chơi), khung avatar và khung lịch sử nước đi. Ngoài ra, vì trong quá trình chơi, người chơi có thể tạm ngừng ván đấu, và tiếp tục ngay sau đó, nên việc lưu trữ trạng thái và hiển thị bàn cờ hiện tại cũng trở thành một vấn đề phải đề cập đến.

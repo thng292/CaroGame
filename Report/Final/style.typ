@@ -74,7 +74,7 @@
 
     #show raw : it => [
         #par(leading: 0.65em, justify: false, linebreaks: "simple")[
-            #text(style: "normal", weight: "medium", it)
+            #text(style: "normal", weight: "medium", font: ("Cascadia Code", "Consolas"), it)
         ]
     ]
 

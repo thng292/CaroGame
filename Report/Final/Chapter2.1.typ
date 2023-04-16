@@ -107,7 +107,7 @@ Vì những âm thanh giao diện là những file ngắn, nhỏ, nên khắc ph
 *Usage:*
 ```Cpp
     // Chơi âm thanh "MenuSelect.wav" bất đồng bộ
-    Audio::PlayAndForget(Audio::Sound::MenuSelect);
+    PlayAndForget(Sound::MenuSelect);
 ```
 
 ==== Giải pháp để chơi nhạc nền
@@ -192,7 +192,7 @@ class AudioPlayer {
 *Usage:*
 ```
 {
-    Audio::AudioPlayer player(Audio::Sound::Draw);
+    AudioPlayer player(Audio::Sound::Draw);
     player.play(true, true);
 }
 ```
@@ -390,9 +390,7 @@ GetAllTextFileInDir(
 {
     // Tìm các file văn bản trong đường dẫn
     // tương đối "saves"
-    auto files = FileHandle::GetAllTextFileInDir(
-        "saves"
-    );
+    auto files = GetAllTextFileInDir("saves");
     for (auto& file:files) {
         std::cout << file.filePath.filename() << '\n';
     }
@@ -591,6 +589,180 @@ enum class Color : char {
 };
 ```
 
+=== Các hàm hỗ trợ về giao diện
+Các hàm hỗ trợ về giao diện được định nghĩa trong ```Cpp namespace View``` file `View.h` và `View.cpp`. Các hàm này được sử dụng để vẽ giao diện cho trò chơi. Nó cung cấp các hàm để vẽ các thành phần giao diện như: văn bản, hình chữ nhật, menu, ô nhập liêu, và các hàm để xóa màn hình. Các thành phần được vẽ bởi các hàm này sẽ có màu sắc mặc định tuân theo hệ thống chủ để mà không cần can thiệp từ người sử dụng. Ngoài ra nó còn được tối ưu để vẽ lên màn hình ít hơn, tạo cho người chơi cảm giác mượt mà cho người chơi. Dưới đây là một vài hàm sử dụng nhiều trong trò chơi.
+
+==== Hàm DrawToView
+Hỗ trợ vẽ văn bản lên màn hình. Hàm có 2 phiên bản, một phiên bản với tham số là chuỗi ký tự, và một phiên bản với tham số là ký tự.
+
+*Interface:*
+```
+void WriteToView(
+    short x, short y,
+    const std::wstring& str,
+    wchar_t shortcut, 
+    bool highlight,
+    Color textColor,
+    Color highlightColor,
+    Color highlightTextColor,
+    Color backgroundColor
+);
+
+void WriteToView(
+    short x, short y,
+    wchar_t str,
+    bool highlight,
+    Color textColor,
+    Color highlightColor,
+    Color highlightTextColor,
+    Color backgroundColor
+);
+```
+
+*Parameters*
+    - `x`: tọa độ x của văn bản
+    - `y`: tọa độ y của văn bản
+    - `str`: văn bản cần vẽ
+    - `shortcut`: phím tắt của văn bản (được gạch chân)
+    - `highlight`: văn bản có được làm nổi bật hay không
+    - `textColor`: màu sắc của văn bản
+    - `highlightColor`: màu sắc của nền khi được làm nổi bật
+    - `highlightTextColor`: màu sắc của văn bản khi được làm nổi bật
+    - `backgroundColor`: màu sắc nền
+
+*Usage:*
+```
+{ // Vẽ văn bản "Hello World" ở tọa độ 10, 10 lên màn hình
+    // Các tham số còn lại đã được định nghĩa lúc khai báo hàm
+    WriteToView(10, 10, "Hello World");
+}
+```
+==== Hàm DrawMenu
+Hỗ trợ vẽ menu lên màn hình. Hàm này còn có một phiên bản khác là `DrawMenuCenter` dùng để vẽ menu được căn ở giữa màn hình.
+
+*Interface:*
+```
+struct Rect {
+    short Top = 0, Left = 0, Right = 0, Bottom = 0;
+};
+
+struct Option {
+    const std::wstring& option;
+    const wchar_t underline;
+};
+
+Rect DrawMenu(
+    DrawMenuPrevState& prevState,
+    short x,
+    short y,
+    const std::wstring& title,
+    const std::vector<Option>& optionsList,
+    size_t selected,
+    Color textColor,
+    Color highlightColor,
+    Color highlightTextColor,
+    Color backgroundColor,
+    Color titleColor
+);
+
+Rect DrawMenuCenter(
+    DrawMenuPrevState& prevState,
+    const std::wstring& title,
+    const std::vector<Option>& optionsList,
+    size_t selected,
+    Color textColor,
+    Color highlightColor,
+    Color highlightTextColor,
+    Color backgroundColor,
+    Color titleColor
+);
+```
+
+*Parameters:*
+    - `prevState`: trạng thái trước đó của menu (dùng cho việc tối ưu hóa)
+    - `x`: tọa độ x của menu
+    - `y`: tọa độ y của menu
+    - `title`: tiêu đề của menu
+    - `optionsList`: danh sách các tùy chọn của menu
+    - `selected`: tùy chọn được chọn
+    - `textColor`: màu sắc của văn bản
+    - `highlightColor`: màu sắc của nền khi được làm nổi bật
+    - `highlightTextColor`: màu sắc của văn bản khi được làm nổi bật
+    - `backgroundColor`: màu sắc nền
+    - `titleColor`: màu sắc của tiêu đề
+
+*Return:*
+    - Phần diện tích của menu đã được vẽ
+
+*Usage:*
+```
+{ // Vẽ menu có 2 tùy chọn lên màn hình
+    // Các tham số còn lại đã được định nghĩa lúc khai báo hàm
+    DrawMenuPrevState prevState;
+    DrawMenuCenter(prevState, "Menu", {
+        { "Option 1", '1' },
+        { "Option 2", '2' }
+    }, 0);
+}
+```
+
+==== Hàm Input
+Hàm hỗ trợ lấy chuỗi mà người dùng nhập vào từ bàn phím. Đây là một thành phần giao diện đặc biệt và có cấu trúc phức tạp do bên trong hàm có một vòng lặp để đọc đầu vào từ người chơi. Khi người chơi chỉnh sửa nội dung, nó sẽ gọi hàm `onSearchValueChange` được đưa vào từ màn hình đã gọi nó, nhờ đó, người sử dụng hàm có thể can thiệp nhiều hơn vào đầu vào của người chơi. Từ đó, có thể xây dựng nhiều tính năng như giới hạn độ dài của đầu vào hay tìm kiếm ngay khi người dùng nhập vào một ký tự.
+
+*Interface:*
+```
+wchar_t Input(
+    short x, short y,
+    const std::wstring& leadingText,
+    std::wstring& inputText,
+    bool hasFocus,
+    const std::function<void(const std::wstring&)>& onValueChange,
+    const std::function<bool(wchar_t)>& toogleFocus,
+    const wchar_t delimiter,
+    Color textColor,
+    Color backgroundColor,
+    Color focusTextColor,
+    Color focusBackgroundColor
+);
+```
+
+*Parameters:*
+- `leadingText`: Chữ hiển thị trước ô nhập văn bản.
+- `inputText`: Nội dung của ô nhập văn bản.
+- `hasFocus`: Trạng thái focus của ô nhập văn bản.
+- `onValueChange`: Hàm được gọi khi người dùng thay đổi nội dung của ô nhập văn bản.
+- `toogleFocus`: Hàm được gọi mỗi khi người dùng thay đổi đầu vào, nếu hàm trả về `true` thì sẽ trả lại điều khiển cho màn hình đã gọi hàm.
+- `delimiter`: Ký tự phân cách giữa chữ hiển thị trước ô nhập văn bản và ô nhập văn bản.
+- `textColor`: Màu chữ của ô nhập văn bản.
+- `backgroundColor`: Màu nền của ô nhập văn bản.
+- `focusTextColor`: Màu chữ của ô nhập văn bản khi được focus.
+- `focusBackgroundColor`: Màu nền của ô nhập văn bản khi được focus.
+
+*Return:*
+- `wchar_t`: Ký tự được nhập vào khiến cho hàm trả lại điều khiểu cho màn hình đã gọi hàm.
+
+*Usage:*
+```
+{
+    std::wstring searchValue;
+    // Các tham số còn lại đã được định nghĩa lúc khai báo hàm
+    Input(
+        10, 10,
+        L"Search",
+        searchValue,
+        hasFocus,
+        [&](const std::wstring& value) {
+            // Hàm này được gọi mỗi khi người dùng thay đổi nội dung của ô nhập văn bản
+            if (value.length() > 30) {
+                // Giới hạn độ dài của đầu vào ở mức 30 kí tự
+                return;
+            }
+            searchValue = value;
+        }
+    );
+}
+```
+
 === Nhận biết thắng thua
 Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu được thực hiện trong ```Cpp namespace Logic``` của chương trình. Các kết quả này là điều kiện để chương trình quyết định kết thúc ván đấu. Ngoài ra, việc biết được kết quả thắng, thua, và hòa sẽ giúp AI của trò chơi đưa ra đánh giá về trạng thái bàn cờ một cách đúng đắn.
 
@@ -653,7 +825,7 @@ Nước đi thắng là một nước đi dẫn đến một chuỗi 5 quân c�
     - *Nếu có* => tiếp tục kiểm tra nước ngay cạnh nước ấy.
     - *Nếu không* => ngưng kiểm tra.
  - Nếu số nước đồng chất tính được bằng số nước đi thắng (trong trường hợp này là 5) thì trả về `true`, ngược lại trả về `false`.
-
+#pagebreak()
 *Implementation:*
  ```Cpp
 bool CheckVerticalWin(
@@ -666,7 +838,11 @@ bool CheckVerticalWin(
     short sameValueCount = 1;
 
     // Kiểm tra theo chiều dọc trên
-    for (short row = move.row + 1; row < Constants::BOARD_SIZE; ++row) {
+    for (
+        short row = move.row + 1; 
+        row < Constants::BOARD_SIZE;
+        ++row
+    ) {
         if (board[row][move.col] == playerValue) {
             // Tăng số quân đồng chất tìm được
             sameValueCount++;
@@ -694,6 +870,7 @@ bool CheckVerticalWin(
     return false;
 }
  ```
+#pagebreak()
 *Usage:*
 ```Cpp
 {
@@ -822,6 +999,7 @@ Thành phần quan trọng nhất trong thuật toán Minimax là *hàm đánh g
     caption: text()[Minh họa combo mỗi người chơi qua đường nối liền]
 )
 
+#pagebreak()
 *Implementation:*
 ```
 short Evaluation::GetComboEval(
@@ -1038,7 +1216,7 @@ Với độ sâu bằng 2, thuật toán sẽ có thể kiểm tra thêm những
 Với độ sâu bằng 3, không chỉ gây khó dễ cho đối phương qua việc phòng thủ, vì 2 trong 3 lượt kiểm trà là lượt của máy, nên thuật toán sẽ tìm được nhiều nước đi tấn công hơn, và trong cờ Caro, người chơi có thế chủ động thường sẽ có lợi thế cao hơn.
 ==== Chức năng "Gợi ý"
 Ngoài chế độ đánh với máy, ta có thể tận dụng tốc độ xử lý nhanh của AI vào một chức năng khác của trò chơi, đó là chức năng *"Gợi ý"*. Thay vì cố định giá trị người chơi như trong chế độ đánh với máy (người là người chơi X, máy là người chơi O), mỗi khi đến lượt đánh của một người chơi nào đó, khi sử dụng chức năng "Gợi ý", ta sẽ gán giá trị người chơi AI là người chơi hiện tại, từ đó, tìm ra một nước đi tốt cho người chơi ấy.
-
+#pagebreak()
 *Implementation:*
 ```Cpp
 GameAction::Point GameScreenAction::GetHintMove(

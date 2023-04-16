@@ -25,7 +25,6 @@ bool SaveLoad::Save(
     file << data.playerOneFirst << '\n';
 
     file << data.gameTime << '\n';
-
     file << data.gameEnd << '\n';
 
     for (auto& i : data.moveList) {
