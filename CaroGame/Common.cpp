@@ -41,9 +41,9 @@ bool Common::ConfirmPrompt(const std::wstring& title)
     DrawHintsLess();
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_SHORTCUT")[0]},
+         Language::GetString(L"YES_TITLE_SHORTCUT")[0]},
         {Language::GetString(L"NO_TITLE"),
-         Language::GetString(L"NO_SHORTCUT")[0] }
+         Language::GetString(L"NO_TITLE_SHORTCUT")[0] }
     };
     int select = 0;
     int num = 2;
@@ -66,6 +66,19 @@ bool Common::ConfirmPrompt(const std::wstring& title)
         if (Utils::keyMeanUp(tmp)) {
             select = Utils::modCycle(select + 1, num);
         }
+
+        if (Utils::ShortcutCompare(
+                tmp, Language::GetString(L"YES_TITLE_SHORTCUT")
+            )) {
+            return 1;
+        }
+
+        if (Utils::ShortcutCompare(
+                tmp, Language::GetString(L"NO_TITLE_SHORTCUT")
+            )) {
+            return 0;
+        }
+
         if (tmp == L"\r") {
             return !select;
         }
