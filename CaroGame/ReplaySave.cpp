@@ -2,6 +2,7 @@
 
 void ReplaySave::ReplaySave(NavigationHost& NavHost)
 {
+    View::ClearScreen();
     auto currentState = ReplaySaveState(Constants::REPLAY_PATH);
     currentState.ReloadAllOptions();
 

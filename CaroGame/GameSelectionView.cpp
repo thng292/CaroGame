@@ -139,25 +139,20 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
     if (currentGameState.gameMode == Constants::GAME_MODE_PVE) {
         currentGameState.playerAvatarTwo = MaxSelect;
     }
-    if (NavHost.CheckContext(Constants::TUTORIAL_MODE)) {
-        if (bool isTutorial = std::any_cast<bool>(
-                NavHost.GetFromContext(Constants::TUTORIAL_MODE)
-            );
-            !isTutorial) {
-            View::DrawTextCenterdVertically(
-                2, Language::GetString(L"SELECT_AVATAR_TITLE")
-            );
-        }
-    } else {
+
+    bool tutorialFlag =
+        NavHost.CheckContext(Constants::TUTORIAL_MODE) &&
+        std::any_cast<bool>(NavHost.GetFromContext(Constants::TUTORIAL_MODE));
+    if (!tutorialFlag) {
         View::DrawTextCenterdVertically(
-            2, Language::GetString(L"SELECT_AVATAR_TITLE")
+            1, Language::GetString(L"SELECT_AVATAR_TITLE")
         );
     }
 
-    logo_pokemon_red(3, 3);
-    logo_pokemon_blue(33, 3);
-    logo_pokemon_green(63, 3);
-    logo_pokemon_yellow(93, 3);
+    logo_pokemon_red(3, 2 + tutorialFlag);
+    logo_pokemon_blue(33, 2 + tutorialFlag);
+    logo_pokemon_green(63, 2 + tutorialFlag);
+    logo_pokemon_yellow(93, 2 + tutorialFlag);
     logo_pokemon_pink(3, 15);
     logo_pokemon_gray(33, 15);
     logo_pokemon_white(63, 15);
@@ -174,7 +169,6 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         )
     );
 
-
     View::Rect drawnRect, player1Selection;
     auto& soundEffect = Config::GetConfig(Config::SoundEffect);
 
@@ -188,7 +182,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
 
         if (selected < 4) {
             drawnRect = {
-                3, short(selected * 30), short(selected * 30 + 29), 15};
+                2 + tutorialFlag, short(selected * 30), short(selected * 30 + 29), 14 + tutorialFlag};
         } else {
             drawnRect = {
                 15,
@@ -233,6 +227,7 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
         if (tmp == L"\r") {
             if (currentGameState.playerAvatarOne == -1) {
                 currentGameState.playerAvatarOne = selected;
+                selected = Utils::modCycle(selected + MaxSelect / 2, MaxSelect);
                 player1Selection = drawnRect;
             } else {
                 currentGameState.playerAvatarTwo = selected;
@@ -372,9 +367,9 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost)
     std::wstring label = Language::GetString(L"ARE_YOU_SURE");
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
-         Language::GetString(L"YES_TITLE")[0]},
+         Language::GetString(L"YES_TITLE")[0]                 },
         {Language::GetString(L"OPTION_NO"),
-         Language::GetString(L"OPTION_NO")[0]},
+         Language::GetString(L"OPTION_NO")[0]                 },
         {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
          Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")[0]}
     };

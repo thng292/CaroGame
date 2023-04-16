@@ -2,7 +2,8 @@
 
 void SaveScreen::SaveScreen(NavigationHost& NavHost)
 {
-    static auto currentState = SaveScreenState();
+    View::ClearScreen();
+    auto currentState = SaveScreenState();
     currentState.ReloadAllOptions();
 
     Common::DrawHints();

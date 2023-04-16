@@ -2,6 +2,7 @@
 
 void ReplayLoad::ReplayLoad(NavigationHost& NavHost)
 {
+    View::ClearScreen();
     auto currentState = ReplayLoadState(Constants::REPLAY_PATH);
     currentState.ReloadAllOptions();
 

@@ -34,7 +34,6 @@ void StartUp::StartUpScreen(NavigationHost& NavHost)
 
 void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
 {
-    Common::DrawHints();
     auto languages = Language::DiscoverLanguageFile();
     static int userSelect = 0;
     std::wstring tmp;
@@ -63,9 +62,12 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
             userSelect = Utils::modCycle(userSelect + 1, languages.size());
         }
         if (tmp == L"\r") {
+            Config::SetConfig(Config::FourWarning, Config::Value_True);
+            Config::SetConfig(Config::Hint, Config::Value_True);
+            Config::SetConfig(Config::UndoOption, Config::Value_True);
             Config::SetConfig(
                 Config::LanguageFilePath,
-                languages[userSelect].path.generic_wstring()
+                languages[userSelect].path.wstring()
             );
             Language::LoadLanguageFromFile(languages[userSelect].path);
             return NavHost.Navigate("FirstTimeMusicScreen");

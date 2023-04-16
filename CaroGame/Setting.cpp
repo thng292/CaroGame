@@ -313,7 +313,7 @@ void Setting::ApplySuccess(NavigationHost& NavHost)
         {
             {(Language::GetString(L"APPLY_SUCCESSFULLY")), 0}
     },
-        0
+        -1
     );
     InputHandle::Get();
     return NavHost.Back();
@@ -329,7 +329,7 @@ void Setting::ApplyFailed(NavigationHost& NavHost)
         {
             {(Language::GetString(L"APPLY_FAILED")), 0}
     },
-        0
+        -1
     );
     InputHandle::Get();
     return NavHost.Back();
