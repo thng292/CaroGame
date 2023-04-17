@@ -29,11 +29,6 @@
 
 #include "Chapter3.typ"
 
-#include "Chapter4.typ"
-
 #pagebreak()
-#set par(
-    justify: false,
-    linebreaks: "simple"
-)
+
 #bibliography(title: "Tài liệu tham khảo", "ReportBib.yml")

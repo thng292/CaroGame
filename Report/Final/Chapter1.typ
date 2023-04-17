@@ -16,6 +16,7 @@ Ngoài ra, để tăng tính đa dạng và thêm phần thú vị cho trò chơ
     - Nếu người chơi không đánh được nước đi trong thời gian giới hạn thì người chơi đó sẽ thua cuộc.
     - Có ba khoảng thời gian khác nhau để người chơi lựa chọn: 1 phút, 5 phút và 15 phút.
 
+#pagebreak()
 === Các yêu cầu về tính năng
     - Có thể lưu, tải trò chơi đang chơi
     - Nhận biết được thắng, thua, hòa
@@ -30,7 +31,6 @@ Ngoài ra, để tăng tính đa dạng và thêm phần thú vị cho trò chơ
 
 === Thông tin chung về trò chơi
 #figure(
-    kind: table,
     caption: "Thông tin chung về trò chơi",
     table(
         columns: (auto, auto),
@@ -53,7 +53,7 @@ Ngoài ra, để tăng tính đa dạng và thêm phần thú vị cho trò chơ
 == Mô tả về các tính năng của trò chơi
 
 === Menu chính
-Đây là menu chính của trò chơi. Người chơi có thể chọn các chức năng khác nhau bằng cách chọn vào các mục tương ứng. Các mục chức năng bao gồm:
+Đây là "Menu Chính" của trò chơi. Người chơi có thể chọn các chức năng khác nhau bằng cách chọn vào các mục tương ứng. Các mục chức năng bao gồm:
     - Trò chơi mới: Bắt đầu một ván đấu mới.
     - Ván đấu đã lưu: Tải lại một ván đấu đã lưu.
     - Phát lại: Phát lại một ván đấu đã hoàn thành.
@@ -62,7 +62,7 @@ Ngoài ra, để tăng tính đa dạng và thêm phần thú vị cho trò chơ
     - Thông tin: Thông tin về tác giả.
     - Thoát: Thoát trò chơi.
 
-Phía trên bên phải của menu chính là phiên bản của trò chơi.
+Phía trên bên phải của "Menu Chính" là phiên bản của trò chơi.
 #figure(
     image("asset/MainMenu.png", width: 100%),
     caption: [Menu chính]
@@ -271,7 +271,7 @@ Trong trường hợp người chơi nhập tên bản lưu trùng với tên c�
 )
 
 ==== Tải trò chơi đã lưu
-Người chơi có thể tải ván đấu đã lưu bằng cách truy cập vào menu chính và chọn mục "Ván đấu đã lưu". Giao diện của menu này tương tự như menu "Lưu", để tải bản lưu, người chơi tìm và chọn bản lưu đó. Để thuận tiện hơn cho người chơi, chúng em đã thêm vào ô tìm kiếm ở dưới menu, khi người chơi nhập vào ô tìm kiếm, trò chơi sẽ đưa các bản lưu có tên liên quan tới đầu vào của người chơi lên trên. Khi tải bản lưu, nếu việc tải bản lưu bị lỗi, trò chơi sẽ thông báo lỗi và người chơi có thể chọn bản lưu khác. Nếu tải thành công, trò chơi sẽ chuyển sang màn hình chơi và người chơi có thể tiếp tục ván đấu. Ngoài ra người chơi cũng có thể xóa bản lưu như ở menu "Lưu".
+Người chơi có thể tải ván đấu đã lưu bằng cách truy cập vào "Menu Chính" và chọn mục "Ván đấu đã lưu". Giao diện của menu này tương tự như menu "Lưu", để tải bản lưu, người chơi tìm và chọn bản lưu đó. Để thuận tiện hơn cho người chơi, chúng em đã thêm vào ô tìm kiếm ở dưới menu, khi người chơi nhập vào ô tìm kiếm, trò chơi sẽ đưa các bản lưu có tên liên quan tới đầu vào của người chơi lên trên. Khi tải bản lưu, nếu việc tải bản lưu bị lỗi, trò chơi sẽ thông báo lỗi và người chơi có thể chọn bản lưu khác. Nếu tải thành công, trò chơi sẽ chuyển sang màn hình chơi và người chơi có thể tiếp tục ván đấu. Ngoài ra người chơi cũng có thể xóa bản lưu như ở menu "Lưu".
 
 #figure(
     image("asset/LoadGame.png", width: 60%),
@@ -282,7 +282,7 @@ Người chơi có thể tải ván đấu đã lưu bằng cách truy cập và
 Chức năng này cũng tương tự như tính năng lưu và tải trò chơi. Sau khi chơi xong, người chơi có thể muốn lưu lại quá trình chơi của ván đấu để sau này phát lại, nên chúng em đã thêm bào tính năng lưu và phát lại các ván đấu đã chơi.
 Sau khi kết thúc ván đấu, trò chơi sẽ hỏi người chơi có muốn lưu bản phát lại hay không. Nếu chọn có, người chơi sẽ được dẫn tới menu "Phát lại", menu này tương tự như menu "Ván đấu đã lưu", người chơi có thể lưu, xóa các bản phát lại của mình.
 
-Để phát bản phát lại, tại menu chính, người chơi chọn vào mục "Phát lại" và chọn bản phát lại cần phát. Nếu tải bản phát lại thành công, trò chơi sẽ chuyển sang màn hình phát lại và người chơi có thể phát lại ván đấu, nếu thất bại sẽ có thông báo lỗi và người chơi có thể chọn bản phát lại khác.
+Để phát bản phát lại, tại "Menu Chính", người chơi chọn vào mục "Phát lại" và chọn bản phát lại cần phát. Nếu tải bản phát lại thành công, trò chơi sẽ chuyển sang màn hình phát lại và người chơi có thể phát lại ván đấu, nếu thất bại sẽ có thông báo lỗi và người chơi có thể chọn bản phát lại khác.
 
 #figure(
     image("asset/ReplaySave.png", width: 60%),

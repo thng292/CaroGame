@@ -1,6 +1,6 @@
 #include "MainMenu.h"
 
-void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
+void MainMenu::MainMenuScreen(NavigationHost& NavHost)
 {
     NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
     if (Config::GetConfig(Config::BGMusic) == Config::Value_True) {
@@ -10,9 +10,8 @@ void MainMenu::ScreenMainMenu(NavigationHost& NavHost)
         }
     }
 
-    static short selectedOption = 0;   // User option
-    static const short maxOption = 7;  // Number of option
-                                       // Vi tri bat dau ve
+    static short selectedOption = 0;
+    static const short maxOption = 7;
     Common::DrawHintsLess();
     Caro(32, 1);
     Logo_Deadpool(3, 5);

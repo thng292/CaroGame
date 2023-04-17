@@ -87,9 +87,9 @@ inline void View::WriteToView(
                   : ((int(backgroundColor) << 4) | int(textColor))
     );
 
-    if (shortcut) {
-        int shortcutIndex = str.find_first_of(shortcut);
-        View::Goto(x, y);
+    int shortcutIndex = str.find_first_of(shortcut);
+    View::Goto(x, y);
+    if (shortcut && shortcutIndex >= 0) {
         std::wcout << std::format(
             L"{}{}{}",
             str.substr(0, shortcutIndex),
@@ -97,7 +97,6 @@ inline void View::WriteToView(
             str.c_str() + shortcutIndex + 1
         );
     } else {
-        View::Goto(x, y);
         std::wcout << str;
     }
 }

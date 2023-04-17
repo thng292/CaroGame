@@ -350,7 +350,7 @@ Một cách tiếp cận khác là mỗi khi người chơi muốn tải trò ch
 Để quét các file trong thư mục, chúng em đã sử dụng thư viện `filesystem` @filesystem. Đây là một thư viện mới xuất hiện trong phiên bản `C++17`. Nó cung cấp các tiện ích để thực hiện các thao tác trên hệ thống tập tin và các thành phần của chúng, chẳng hạn như đường dẫn, tập tin thông thường và thư mục. 
 
 Sau đây là cách mà chúng em đã dùng để quét các file trong thư mục lưu trò chơi:
-
+#pagebreak()
 *Implementation:*
 ```
 namespace FileHandle {
@@ -397,6 +397,201 @@ GetAllTextFileInDir(
 }
 ```
 
+
+Trạng thái của một ván đấu trong trò chơi bao gồm các thông tin sau:
+    - Thời gian chơi hoặc thời gian còn lại của mỗi người chơi, thời gian đã trôi qua
+    - Thông tin của 2 người chơi: tên, avatar, điểm số
+    - Chế độ, loại trò chơi, độ khó của AI, ai đi trước, kết cục của trò chơi
+    - Các nước đi đã được thực hiện trong ván đấu
+Các trạng thái ấy được gộp chung vào một `struct` như sau:
+```
+struct GameState {
+    std::wstring playerNameOne;
+    short playerTimeOne = 0;
+    short playerScoreOne = 0;
+    short playerAvatarOne = -1;
+
+    std::wstring playerNameTwo;
+    short playerTimeTwo = 0;
+    short playerScoreTwo = 0;
+    short playerAvatarTwo = -1;
+    
+    short gameType = 0;
+    short gameMode = 0;
+    short aiDifficulty = 0;
+    bool playerOneFirst = 1;
+    short gameTime = 0;
+    short gameEnd = 0;
+    std::vector<std::pair<short, short>> moveList;
+};
+```
+Với những thông tin ấy, chúng em đã chọn cách lưu ván đấu dưới dạng file văn bản do sự tiện dụng của cách lưu này. Tuy nhiên, khi lưu bằng cách này thì người chơi có thể dễ dàng can thiệp vào file lưu gây ra một số tính huống không mong muốn, một điều khó tránh khỏi kể cả khi lưu bằng file nhị phân. 
+
+Khi lưu ván đấu, hàm sẽ mở file với tên được người chơi nhập vào, sau đó ghi các thông tin của ván đấu vào file. Khi tải ván đấu, hàm sẽ mở file với tên được người chơi chọn, sau đó đọc các thông tin của ván đấu từ file.
+
+Sau đây là chi tiết hàm lưu ván đấu:
+
+*Implementation:*
+```
+bool SaveLoad::Save(
+    const GameState& data,
+    const std::wstring& name,
+    const std::filesystem::path& dir
+)
+{
+    auto file = FileHandle::OpenOutFile(dir.generic_wstring() + name);
+    if (file.fail()) {
+        return false;
+    }
+    file << data.playerNameOne << '\n';
+    file << data.playerScoreOne << '\n';
+    file << data.playerTimeOne << '\n';
+    file << data.playerAvatarOne << '\n';
+
+    file << data.playerNameTwo << '\n';
+    file << data.playerScoreTwo << '\n';
+    file << data.playerTimeTwo << '\n';
+    file << data.playerAvatarTwo << '\n';
+
+    file << data.gameMode << '\n';
+    file << data.aiDifficulty << '\n';
+    file << data.playerOneFirst << '\n';
+    file << data.gameTime << '\n';
+    file << data.gameEnd << '\n';
+
+    for (auto& i : data.moveList) {
+        file << i.first << ' ' << i.second << '\n';
+    }
+
+    if (file.fail()) {
+        std::filesystem::remove(dir.generic_wstring() + name);
+    }
+
+    return !file.fail();
+}
+```
+*Parameters:*
+    - `data`: Trạng thái của ván đấu cần lưu
+    - `name`: Tên của file lưu
+    - `dir`: Đường dẫn của thư mục chứa file lưu
+
+*Return:*
+    - `true` #sym.arrow.r Lưu thành công
+    - `false` #sym.arrow.r Lưu thất bại
+
+Sau đây là chi tiết hàm tải ván đấu:
+
+*Implementation:*
+```
+std::optional<GameState> 
+SaveLoad::Load(
+    const std::filesystem::path& filePath
+)
+{
+    auto file = FileHandle::OpenInFile(filePath);
+    GameState data;
+    file >> data.playerNameOne;
+    file >> data.playerScoreOne;
+    file >> data.playerTimeOne;
+    file >> data.playerAvatarOne;
+
+    file >> data.playerNameTwo;
+    file >> data.playerScoreTwo;
+    file >> data.playerTimeTwo;
+    file >> data.playerAvatarTwo;
+
+    file >> data.gameMode;
+    file >> data.aiDifficulty;
+    file >> data.playerOneFirst;
+    file >> data.gameTime;
+    file >> data.gameEnd;
+
+    short a, b;
+    while (!file.fail()) {
+        file >> a >> b;
+        data.moveList.emplace_back(a, b);
+    }
+
+    if (file.fail() && !file.eof()) {
+        return std::nullopt;
+    }
+    return data;
+}
+```
+
+*Parameters:*
+    - `filePath`: Đường dẫn của file lưu
+
+*Return:*
+    - Trạng thái của ván đấu được tải
+
+=== Lưu lại thiết lập của người chơi
+Nếu mỗi khi mở trò chơi lên, người chơi lại phải chỉnh sửa các thiết lập theo ý muốn thì rất bất tiện và mất thời gian. Do đó, chúng em đã lưu lại các thiết lập của người chơi vào file để khi mở trò chơi lên, người chơi không cần phải chỉnh sửa lại các thiết lập. Các thiết lập được lưu dưới dạng file văn bản có đường dẫn là `config/user_config` và được  lưu trữ trong một bảng để dễ dàng truy xuất và chỉnh sửa. Các hàm nằm trong ```Cpp namespace Config``` được định nghĩa trong file `Config.h` và `Config.cpp`.
+
+*Interface:*
+```
+namespace Config {
+    typedef std::unordered_map<std::wstring, std::wstring> Dict;
+    extern Dict configDict;
+
+    // Lưu, tải thiết lập của người chơi từ file
+    bool LoadUserSetting();
+    bool SaveUserSetting();
+
+    // Xem và sửa thiết lập của người chơi
+    std::wstring& GetConfig(const std::wstring& name);
+    void SetConfig(
+        const std::wstring& name, 
+        const std::wstring& data
+    );
+}; // namespace Config
+```
+#pagebreak()
+Đây là chi tiết hàm lưu thiết lập của người chơi:
+
+*Implementation:*
+```
+bool Config::SaveUserSetting()
+{
+    auto fout = FileHandle
+        ::OpenOutFile(Constants::USERCONFIG_FILE_PATH);
+    for (const auto& [key, val] : configDict) {
+        fout << key << L'=' << val << '\n';
+    }
+    return !fout.fail();
+}
+```
+
+*Return:*
+    - `true` #sym.arrow.r Lưu thành công
+    - `false` #sym.arrow.r Lưu thất bại
+
+Đây là chi tiết hàm tải thiết lập của người chơi:
+
+*Implementation:*
+```
+bool Config::LoadUserSetting()
+{
+    auto fin = FileHandle
+        ::OpenInFile(Constants::USERCONFIG_FILE_PATH);
+    if (fin.fail()) {
+        return 0;
+    }
+    std::wstring buffer;
+    while (!fin.eof()) {
+        fin >> buffer;
+        auto tmp = Utils::LineSplitter(buffer);
+        Utils::trim(tmp.first); Utils::trim(tmp.second);
+        configDict[tmp.first] = tmp.second;
+    }
+    return 1;
+}
+```
+
+*Rerturn:*
+    - `true` #sym.arrow.r Tải thành công
+    - `false` #sym.arrow.r Tải thất bại
+
 === Đếm giờ trong khi chơi trò chơi
 Việc đếm và hiển thị thời gian trực tiếp trong lúc chơi khá phức tạp vì luồng chính trong trò chơi luôn phải chời đợi và xử lí đầu vào của người chơi, nên việc sử dụng luồng chính để  nó phụ thuộc vào việc người chơi có thực hiện các thao tác trong trò chơi hay không. Nếu người chơi không thực hiện các thao tác trong trò chơi thì thời gian sẽ không được cập nhật lên màn hình. Để giải quyết vấn đề này, chúng em đã tạo thêm một luồng riêng để đếm thời gian và cập nhật lên màn hình. Sử dụng thư viện `thread` @thread để tạo luồng mới, chúng em đã có giải pháp để chạy một hàm sau một khoảng thời gian nhất định.
 
@@ -424,7 +619,8 @@ class Timer {
         _state->callback = callback;
         _state->interval = milliseconds{interval};
     }
-
+```
+```
     inline void Start()
     {
         _state->running = true;
@@ -446,31 +642,22 @@ class Timer {
     inline ~Timer() { Stop(); }
 };
 ```
-
 *Parameters:*
     - `callback`: hàm sẽ được gọi sau mỗi khoảng thời gian `interval`
     - `interval`: khoảng thời gian giữa các lần gọi hàm `callback` tính bằng mili giây
 
 Việc lập trình đa luồng trong C++ khá phức tạp, và cũng là phần dễ gây lỗi nhất trong trò chơi, do việc vẽ lên màn hình phải được đồng bộ giữa các luồng với nhau. Nếu không đồng bộ thì có thể dẫn đến việc các phần tử trên màn hình bị vẽ sai vị trí. Để việc đó không xảy ra, chúng em đã sử dụng một khóa `mutex` @mutex chung để đồng bộ các luồng với nhau.
-
+#pagebreak()
 Đoạn code sử dụng `Timer` và `mutex` trích từ trò chơi:
 ```
 void GameScreenView::GameScreenView(NavigationHost& NavHost) {
-// ...
 std::mutex lock;
-// ...
 Timer timerPlayerOne(
     [&] {
         if (!endGame) {
             curGameState.playerTimeOne += timeAddition;
             std::lock_guard guard(lock);
-            auto currPos = View::GetCursorPos();
-            // Vẽ thời gian lên màn hình
-            gameScreen.timerContainerOne.DrawToContainer(
-                Utils::SecondToMMSS(curGameState.playerTimeOne),
-                Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR)
-            );
-            View::Goto(currPos.X, currPos.Y);
+            // Vẽ thời gian lên màn hình ...
             if (curGameState.playerTimeOne == 0 && !endGame) {
                 // Xử lí khi hết thời gian
             }
@@ -508,9 +695,6 @@ struct LanguageOption {
 };
 
 class Language {
-  static Dict languageDict;
-
-public:
   Language() = delete;
 
   // Chỉ đọc các phần thông tin về ngôn ngữ
@@ -536,7 +720,7 @@ public:
     - `filePath`: đường dẫn tới file cần mở
     - `dirPath`: đường dẫn tới thư mục cần tìm
     - `Label`: nhãn của văn bản cần lấy
-
+#pagebreak()
 *Usage:*
 ```
 {
@@ -594,7 +778,7 @@ Các hàm hỗ trợ về giao diện được định nghĩa trong ```Cpp names
 
 ==== Hàm DrawToView
 Hỗ trợ vẽ văn bản lên màn hình. Hàm có 2 phiên bản, một phiên bản với tham số là chuỗi ký tự, và một phiên bản với tham số là ký tự.
-
+#pagebreak()
 *Interface:*
 ```
 void WriteToView(
@@ -607,7 +791,6 @@ void WriteToView(
     Color highlightTextColor,
     Color backgroundColor
 );
-
 void WriteToView(
     short x, short y,
     wchar_t str,
@@ -620,8 +803,7 @@ void WriteToView(
 ```
 
 *Parameters*
-    - `x`: tọa độ x của văn bản
-    - `y`: tọa độ y của văn bản
+    - `x`, `y`: tọa độ x,y của văn bản
     - `str`: văn bản cần vẽ
     - `shortcut`: phím tắt của văn bản (được gạch chân)
     - `highlight`: văn bản có được làm nổi bật hay không
@@ -680,8 +862,7 @@ Rect DrawMenuCenter(
 
 *Parameters:*
     - `prevState`: trạng thái trước đó của menu (dùng cho việc tối ưu hóa)
-    - `x`: tọa độ x của menu
-    - `y`: tọa độ y của menu
+    - `x`, `y`: tọa độ x, y của menu
     - `title`: tiêu đề của menu
     - `optionsList`: danh sách các tùy chọn của menu
     - `selected`: tùy chọn được chọn
@@ -708,11 +889,12 @@ Rect DrawMenuCenter(
 
 ==== Hàm Input
 Hàm hỗ trợ lấy chuỗi mà người dùng nhập vào từ bàn phím. Đây là một thành phần giao diện đặc biệt và có cấu trúc phức tạp do bên trong hàm có một vòng lặp để đọc đầu vào từ người chơi. Khi người chơi chỉnh sửa nội dung, nó sẽ gọi hàm `onSearchValueChange` được đưa vào từ màn hình đã gọi nó, nhờ đó, người sử dụng hàm có thể can thiệp nhiều hơn vào đầu vào của người chơi. Từ đó, có thể xây dựng nhiều tính năng như giới hạn độ dài của đầu vào hay tìm kiếm ngay khi người dùng nhập vào một ký tự.
-
+#pagebreak()
 *Interface:*
 ```
 wchar_t Input(
-    short x, short y,
+    short x, 
+    short y,
     const std::wstring& leadingText,
     std::wstring& inputText,
     bool hasFocus,
@@ -740,7 +922,7 @@ wchar_t Input(
 
 *Return:*
 - `wchar_t`: Ký tự được nhập vào khiến cho hàm trả lại điều khiểu cho màn hình đã gọi hàm.
-
+#pagebreak()
 *Usage:*
 ```
 {
@@ -768,7 +950,7 @@ Việc nhận biết kết quả thắng, thua, và hòa của một ván đấu
 
 ==== Hàm GetGameState
 Hàm `GetGameState` có vai trò đánh giá hiện trạng của ván đấu sau nước đi mới nhất. Cụ thể hơn, hàm xem xét nước đi mới nhất có dẫn đến một *kết quả thắng* hay *kết quả hòa*. Một nước đi sẽ dẫn đến kết quả thắng nếu nước đi đó tạo nên một chuỗi 5 nước đi liên tiếp đồng chất, và một nước đi sẽ dẫn đến kết quả hòa nếu nước đi đó không phải là nước đi thắng, đồng thời là nước đi hợp lệ cuối cùng của bàn đấu. 
-
+#pagebreak()
 *Interface:*
 ```Cpp
 typedef std::vector<std::vector<short>> Board;
@@ -781,7 +963,7 @@ short GetGameState(
     const short& moveCount,
     const GameAction::Point& move,
     const short& playerValue,
-    GameAction::Point& winPoint = temp,
+    GameAction::Point& winPoint,
     bool getWinPoint
 );
 ```
@@ -792,14 +974,15 @@ short GetGameState(
     - `playerValue`: Người chơi thực hiện nước đi.
     - `winPoint`: Đầu mút của chuỗi thắng (nếu có).
     - `getWinPoint`:
-        - `true` => lấy đầu mút của chuỗi thắng (nếu có).
-        - `false` => không lấy đầu mút của chuỗi thắng.
+        - `true` #sym.arrow.r lấy đầu mút của chuỗi thắng (nếu có).
+        - `false` #sym.arrow.r không lấy đầu mút của chuỗi thắng.
 
 *Return*
     - ```Cpp Logic::WIN_VALUE```: Giá trị tượng trưng kết quả thắng (người thắng là playerValue).
     - ```Cpp Logic::DRAW_VALUE```: Giá trị tượng trưng kết quả hòa.
     - ```Cpp Logic::NULL_VALUE```: Giá trị tượng trưng kết quả vô định.
 
+#pagebreak()
 *Usage:*
 ```Cpp
 {

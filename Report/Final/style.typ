@@ -84,7 +84,7 @@
         inset: 4pt,
         outset: (y: 3pt),
         radius: 2pt,
-        breakable: false
+        breakable: false,
     )
 
     #show raw.where(block: false): box.with(

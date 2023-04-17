@@ -1,18 +1,13 @@
 == Giao diện
 
-=== Màn hình chính
-Thông
-
-=== Cài đặt
-Thông
-
 === Các màn hình lưu, tải và phát lại ván đấu
 Các màn hình này đều có cấu trúc tương tự nhau, gồm:
     - Danh sách các file: hiển thị danh sách các file đã lưu, trang hiện tại và tổng số trang.
     - Ô nhập văn bản: cho phép người chơi nhập tên file cần lưu, tải hoặc phát lại hoặc tìm kiếm trong danh sách các file đã lưu.
     - Các hướng dẫn: hiện các nút và chức năng tương ứng.
-Vì sự tương tự này, em đã tạo một class chung là `SaveLoadScreenViewModel` bao gồm các trạng thái và chức năng chung của các màn hình này. class nằm trong ```Cpp namespace Common``` trong file `Common.h` và `Common.cpp`.
 
+Vì sự tương tự này, em đã tạo một class chung là `SaveLoadScreenViewModel` bao gồm các trạng thái và chức năng chung của các màn hình này. class nằm trong ```Cpp namespace Common``` trong file `Common.h` và `Common.cpp`.
+#pagebreak()
 *Interface(Đã loại bỏ một số hàm nhỏ):*
 ```
 using namespace std::filesystem::path;
@@ -25,32 +20,39 @@ class SaveLoadScreenViewModel {
     int currentPage = 0;
     bool isSearching = 0;
     int maxPage = 0;
+
     // Các file đã tìm được trong thư mục
     OptionList allOptions;
     // Dữ liệu để hiển thị lên màn hình
     std::vector<View::Option> options;
     std::wstring pageIndicator; // Hiện số trang
     std::wstring searchInput; // Nội dung của ô tìm kiếm
-    SaveLoadScreenViewModel(path dir = Constants::SAVE_PATH)
+    
+    SaveLoadScreenViewModel(path dir)
     {
         allOptionsDir = dir;
     }
 
+    // Tải lại danh sách các file
     void ReloadAllOptions()
-    { // Tải lại danh sách các file
+    {
         LoadAllOptions(allOptionsDir);
         UpdatePage(currentPage);
     }
 
-    void LoadAllOptions(path dir); // Đọc tất cả các file trong thư mục
-    bool Search(); // Tìm kiếm các file có tên chứa chuỗi searchInput
-    // Tạo ra một hàm để chạy khi người chơi thay đổi nội dung ô tìm kiếm
+    // Đọc tất cả các file trong thư mục
+    void LoadAllOptions(path dir); 
+    // Tìm kiếm các file có tên chứa chuỗi searchInput
+    bool Search(); 
+    
+    // Tạo ra một hàm để chạy 
+    // khi người chơi thay đổi nội dung ô tìm kiếm
     std::function<void(const std::wstring&)> onSearchValueChange(
         const std::function<void(void)>& callback
     );
 };
 ```
-
+#pagebreak()
 *Usage:*
 ```
 // Sử dụng class trong màn hình lưu
@@ -80,19 +82,15 @@ void Common::SaveLoadScreenViewModel::LoadAllOptions(path dir)
 
     allOptions.clear();
     allOptions.reserve(availableLoadFiles.size());
-
     for (auto& file : availableLoadFiles) {
         allOptions.emplace_back(
             Utils::CatStringSpaceBetween(
-                50,
-                file.filePath.filename(),
+                50, file.filePath.filename(),
                 Utils::filesystem_time_to_wstr_local
                                     (file.lastModified)
-            ),
-            file.filePath
+            ), file.filePath
         );
     }
-
     maxPage = allOptions.size() / 10 
             + bool(allOptions.size() % 10);
 }
@@ -127,7 +125,8 @@ bool Common::SaveLoadScreenViewModel::Search()
 
         return a.foundIndex < b.foundIndex;
     };
-
+```
+```
     size_t n = allOptions.size();
     std::vector<SortTemporary> tmp;
     tmp.resize(n);
@@ -152,137 +151,6 @@ bool Common::SaveLoadScreenViewModel::Search()
     return 1;
 }
 ```
-
-==== Cách lưu và tải ván đấu
-Trạng thái của một ván đấu trong trò chơi bao gồm các thông tin sau:
-    - Thời gian chơi hoặc thời gian còn lại của mỗi người chơi, thời gian đã trôi qua
-    - Thông tin của 2 người chơi: tên, avatar, điểm số
-    - Chế độ, loại trò chơi, độ khó của AI, ai đi trước, kết cục của trò chơi
-    - Các nước đi đã được thực hiện trong ván đấu
-Các trạng thái ấy được gộp chung vào một `struct` như sau:
-```
-struct GameState {
-    std::wstring playerNameOne;
-    short playerTimeOne = 0;
-    short playerScoreOne = 0;
-    short playerAvatarOne = -1;
-
-    std::wstring playerNameTwo;
-    short playerTimeTwo = 0;
-    short playerScoreTwo = 0;
-    short playerAvatarTwo = -1;
-    
-    short gameType = 0;
-    short gameMode = 0;
-    short aiDifficulty = 0;
-    bool playerOneFirst = 1;
-    short gameTime = 0;
-    short gameEnd = 0;
-    std::vector<std::pair<short, short>> moveList;
-};
-```
-Với những thông tin ấy, chúng em đã chọn cách lưu ván đấu dưới dạng file văn bản do sự tiện dụng của cách lưu này. Tuy nhiên, khi lưu bằng cách này thì người chơi có thể dễ dàng can thiệp vào file lưu gây ra một số tính huống không mong muốn, một điều khó tránh khỏi kể cả khi lưu bằng file nhị phân. 
-
-Khi lưu ván đấu, hàm sẽ mở file với tên được người chơi nhập vào, sau đó ghi các thông tin của ván đấu vào file. Khi tải ván đấu, hàm sẽ mở file với tên được người chơi chọn, sau đó đọc các thông tin của ván đấu từ file.
-
-Sau đây là chi tiết hàm lưu ván đấu:
-*Implementation:*
-```
-bool SaveLoad::Save(
-    const GameState& data,
-    const std::wstring& name,
-    const std::filesystem::path& dir
-)
-{
-    auto file = FileHandle::OpenOutFile(dir.generic_wstring() + name);
-    if (file.fail()) {
-        return false;
-    }
-    file << data.playerNameOne << '\n';
-    file << data.playerScoreOne << '\n';
-    file << data.playerTimeOne << '\n';
-    file << data.playerAvatarOne << '\n';
-
-    file << data.playerNameTwo << '\n';
-    file << data.playerScoreTwo << '\n';
-    file << data.playerTimeTwo << '\n';
-    file << data.playerAvatarTwo << '\n';
-
-    file << data.gameMode << '\n';
-    file << data.aiDifficulty << '\n';
-    file << data.playerOneFirst << '\n';
-    file << data.gameTime << '\n';
-    file << data.gameEnd << '\n';
-
-    for (auto& i : data.moveList) {
-        file << i.first << ' ' << i.second << '\n';
-    }
-
-    if (file.fail()) {
-        std::filesystem::remove(dir.generic_wstring() + name);
-    }
-
-    return !file.fail();
-}
-```
-*Parameters:*
-    - `data`: Trạng thái của ván đấu cần lưu
-    - `name`: Tên của file lưu
-    - `dir`: Đường dẫn của thư mục chứa file lưu
-
-*Return:*
-    - `true` #sym.arrow.r Lưu thành công
-    - `false` #sym.arrow.r Lưu thất bại
-
-Sau đây là chi tiết hàm tải ván đấu:
-
-*Implementation:*
-```
-std::optional<GameState> 
-SaveLoad::Load(
-    const std::filesystem::path& filePath
-)
-{
-    auto file = FileHandle::OpenInFile(filePath);
-    GameState data;
-    file >> data.playerNameOne;
-    file >> data.playerScoreOne;
-    file >> data.playerTimeOne;
-    file >> data.playerAvatarOne;
-
-    file >> data.playerNameTwo;
-    file >> data.playerScoreTwo;
-    file >> data.playerTimeTwo;
-    file >> data.playerAvatarTwo;
-
-    file >> data.gameMode;
-    file >> data.aiDifficulty;
-    file >> data.playerOneFirst;
-    file >> data.gameTime;
-    file >> data.gameEnd;
-
-    if (file.fail()) {
-        return std::nullopt;
-    }
-
-    short a, b;
-    while (!file.eof()) {
-        file >> a >> b;
-        if (file.eof()) break;
-        if (file.fail() && !file.eof()) {
-            return std::nullopt;
-        }
-        data.moveList.emplace_back(a, b);
-    }
-    return data;
-}
-```
-
-*Parameters:*
-    - `filePath`: Đường dẫn của file lưu
-
-*Return:*
-    - Trạng thái của ván đấu được tải
 
 === Màn hình game chính
 Trong tất cả các màn hình được cài đặt trong chương trình, màn hình game chính là màn hình có cấu trúc phức tạp nhất. Ngoài việc xử lý giao diện của các nước đi và các tính năng bổ trợ (cảnh báo nước 4, nháp, gợi ý) trên bàn cờ, còn phải chú tâm đến các thành phần khác như khung trạng thái (chứa thời gian, số trận thắng của người chơi), khung avatar và khung lịch sử nước đi. Ngoài ra, vì trong quá trình chơi, người chơi có thể tạm ngừng ván đấu, và tiếp tục ngay sau đó, nên việc lưu trữ trạng thái và hiển thị bàn cờ hiện tại cũng trở thành một vấn đề phải đề cập đến.
@@ -431,20 +299,21 @@ class BoardContainer {
     void DrawBoardContainer();
     void DrawBoardRow();
     void DrawBoardCol();
-
+    // Vẽ các label theo chiều ngang bàn cờ
+    void DrawBoardHorizontalLabels();
+    // Vẽ các label theo chiều dọc bàn cờ
+    void DrawBoardVerticalLabels();
+```
+```
     // Vẽ quân cờ vào ô cờ
     void DrawToBoardContainerCell(
         short row, 
         short col,
         std::wstring value, 
-        View::Color color = View::Color::BLACK,
-        bool highlight=false, 
-        bool isGhostMode = false
+        View::Color color,
+        bool highlight, 
+        bool isGhostMode
     );
-    // Vẽ các label theo chiều ngang bàn cờ
-    void DrawBoardHorizontalLabels();
-    // Vẽ các label theo chiều dọc bàn cờ
-    void DrawBoardVerticalLabels();
 };
 ```
 ==== Xử lý nước đi 
@@ -455,7 +324,6 @@ Nếu không có hai hàm này, tuy vẫn có giao diện, trò chơi sẽ khôn
 
 *Bên trong hàm HandleState*
 ```Cpp
-{
     /*...*/ 
     // Lấy trạng thái ván đấu
     short state = Logic::GetGameState(
@@ -472,10 +340,8 @@ Nếu không có hai hàm này, tuy vẫn có giao diện, trò chơi sẽ khôn
                 endGame = Constants::END_GAME_WIN_TWO;
             }
             HightLightWin(
-                move, 
-                winPoint, 
-                player.symbol, 
-                gameScreen
+                move, winPoint, 
+                player.symbol, gameScreen
             );
             break;
         case Logic::DRAW_VALUE:
@@ -483,27 +349,23 @@ Nếu không có hai hàm này, tuy vẫn có giao diện, trò chơi sẽ khôn
             break;
     }
     /*...*/ 
-}
 ```
 
 *Bên trong hàm UpdateGame*
 ```Cpp
-{
-    // Thực hiện nước đi
-    GameAction::MakeMove(board, moveCount, move, player.value);
-
-    if (!loadFromSave) {
-        // Lưu nước đi vào danh sách nước đi
-        if (move.row != -1) {
-            gameState.moveList.push_back({move.row, move.col});
-        }
-        gameScreen.logContainer.DrawToLogContainer(
-            gameState.moveList,
-            gameState.playerNameOne,
-            gameState.playerNameTwo,
-            gameState.playerOneFirst
-        );
+// Thực hiện nước đi
+GameAction::MakeMove(board, moveCount, move, player.value);
+if (!loadFromSave) {
+    // Lưu nước đi vào danh sách nước đi
+    if (move.row != -1) {
+        gameState.moveList.push_back({move.row, move.col});
     }
+    gameScreen.logContainer.DrawToLogContainer(
+        gameState.moveList,
+        gameState.playerNameOne,
+        gameState.playerNameTwo,
+        gameState.playerOneFirst
+    );
 }
 ```
 ==== Lưu và load trạng thái ván đấu
@@ -529,6 +391,7 @@ Từ đó, khi qua một `GameScreenView` mới, ta chỉ cần lấy trạng th
 }
 ```
 Sau khi đã có trạng thái của ván đấu, việc tiếp theo là hiển thị các nước đi đã thực hiện lên bàn cờ, và cập nhật những biến cần thiết. Việc này được thực hiện trước khi vào vòng lặp chính của `GameScreenView`, qua hàm `LoadGameToView`
+#pagebreak()
 *Interface:*
 ```Cpp
 void GameScreenAction::LoadGameToView(
@@ -553,29 +416,133 @@ void GameScreenAction::LoadGameToView(
 - `colorMatrix`: bảng màu sắc của bàn cờ.
 - `lock`: khóa mutex.
 
-*Usage:*
+*Usage(lấy từ hàm `GameScreenView`):*
 ```Cpp
-{
-    /* Sau khi có được trạng thái ván đấu, khai báo các biến cần thiết*/
-    
+    /* Sau khi có được trạng thái ván đấut*/
     // Vẽ màn hình game
     gameScreen(7, 2);
     gameScreen.DrawGameScreen();
     gameScreen.DrawToElements(curGameState);
-
     // Load trạng thái game hiện tại vào các biến và màn hình game
     GameScreenAction::LoadGameToView(
         gameScreen,
         gameBoard,
         moveCount,
-        curGameState,
-        myAI,
+        curGameState, myAI,
         warningPointList,
-        colorMatrix,
-        lock
+        colorMatrix,lock
     );
     /*...*/
-}
 ```
 
 === Các màn hình khác
+Các màn hình còn lại có cấu trúc rất tương tự với nhau. Gồm có 3 phần:
+    - Lấy các dữ liệu cần thiết để vẽ màn hình
+    - Vẽ màn hình 
+    - Chạy vòng lặp để lấy input từ người dùng
+    - Xử lý input người dùng. 
+Do đó chúng em sẽ chỉ nêu chi tiết màn hình "Menu Chính".
+
+Màn hình "Menu Chính" gồm có một menu ở giữa hiện lên các tùy chọn khả dụng cho người chơi, một phần chỉ dẫn các nút ở phía dưới và các hình trang trí. Người chơi có thể sử dụng bàn phím để di chuyển con trỏ chọn, ngoài ra, để tăng sự tiện dụng cho người chơi, chúng em thêm vào các phím tắt, các tùy chọn khác nhau sẽ có phím tắt khác nha. Khi nhấn phím tắt, trò chơi sẽ chọn và thực hiện tùy chọn tương ứng.
+*Impplementation:*
+```
+void MainMenu::MainMenuScreen(NavigationHost& NavHost)
+{
+    // Kiểm tra thiết lập và chơi nhạc nền
+    NavHost.SetContext(
+        Constants::CURRENT_BGM, 
+        Audio::Sound::MenuBGM
+    );
+    if (Config::GetConfig(Config::BGMusic) 
+        == Config::Value_True) 
+    {
+        if (BackgroundAudioService::GetCurrentSong() 
+            != Audio::Sound::MenuBGM) 
+        {
+            BackgroundAudioService::
+                ChangeSong(Audio::Sound::MenuBGM);
+            BackgroundAudioService::Play(true, true);
+        }
+    }
+```
+```
+    // Vẽ các phần không thay đổi
+    Common::DrawHintsLess();
+    Caro(32, 1);
+    Logo_Deadpool(3, 5);
+    Logo_Captain(79 + 4, 5);
+    View::WriteToView(
+        119 - Constants::version.size(), 0, 
+        Constants::version
+    );
+    static short selectedOption = 0;
+    static const short maxOption = 7;
+    auto& soundEffect = Config::GetConfig(L"SoundEffect");
+    View::DrawMenuPrevState menuPrevState;
+
+    // Các phím tắt của các tùy chọn
+    std::vector<std::wstring> shortcuts = {
+        Language::GetString(L"NEW_GAME_SHORTCUT"),
+        Language::GetString(L"LOAD_SHORTCUT"),
+        Language::GetString(L"REPLAY_SHORTCUT"),
+        Language::GetString(L"SETTINGS_SHORTCUT"),
+        Language::GetString(L"TUTORIAL_SHORTCUT"),
+        Language::GetString(L"ABOUT_SHORTCUT"),
+        Language::GetString(L"EXIT_SHORTCUT")
+
+    };
+    // Các tùy chọn của menu
+    std::vector<View::Option> options = {
+        {Language::GetString(L"NEW_GAME_TITLE"), shortcuts[0][0]},
+        {Language::GetString(L"LOAD_TITLE"),     shortcuts[1][0]},
+        {Language::GetString(L"REPLAY_TITLE"),   shortcuts[2][0]},
+        {Language::GetString(L"SETTINGS_TITLE"), shortcuts[3][0]},
+        {Language::GetString(L"TUTORIAL_TITLE"), shortcuts[4][0]},
+        {Language::GetString(L"ABOUT_TITLE"),    shortcuts[5][0]},
+        {Language::GetString(L"EXIT_TITLE"),     shortcuts[6][0]},
+    };
+    while (1) {
+        // Vẽ menu
+        View::DrawMenu(
+            menuPrevState, 50, 13, L"", 
+            options, selectedOption
+        );
+```
+```
+        auto tmp = InputHandle::Get();  // Lấy input từ người dùng
+        // Kiểm tra và chơi hiệu ứng
+        if (soundEffect == Config::Value_True) {
+            if (tmp == L"\r") {
+                Utils::PlaySpecialKeySound();
+            } else {
+                Utils::PlayKeyPressSound();
+            }
+        }
+        // Xử lý input
+        if (Utils::keyMeanUp(tmp)) {
+            selectedOption = Utils::modCycle(
+                selectedOption - 1, 
+                options.size()
+            );
+        }
+        if (Utils::keyMeanDown(tmp)) {
+            selectedOption = Utils::modCycle(
+                selectedOption + 1, 
+                options.size()
+            );
+        }
+        if (Utils::ShortcutCompare(tmp, shortcuts[0])) {
+            return NavHost.Navigate("GameModeTypeView");
+        }
+        // ...
+        if (tmp == L"\r") {
+            switch (selectedOption) {
+                case 0:
+                    return NavHost.Navigate("GameModeTypeView");
+                case 1:
+                    // ...
+            }
+        }
+    }
+}
+```

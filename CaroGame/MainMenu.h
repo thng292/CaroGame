@@ -15,5 +15,5 @@
 #include "Gura.h"
 namespace MainMenu {
 
-    void ScreenMainMenu(NavigationHost& NavHost);
+    void MainMenuScreen(NavigationHost& NavHost);
 }

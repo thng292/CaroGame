@@ -55,23 +55,18 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
     file >> data.gameMode;
     file >> data.aiDifficulty;
     file >> data.playerOneFirst;
-
     file >> data.gameTime;
-
     file >> data.gameEnd;
 
-    if (file.fail()) {
+    short a, b;
+    while (!file.fail()) {
+        file >> a >> b;
+        data.moveList.emplace_back(a, b);
+    }
+
+    if (file.fail() && !file.eof()) {
         return std::nullopt;
     }
 
-    short a, b;
-    while (!file.eof()) {
-        file >> a >> b;
-        if (file.eof()) break;
-        if (file.fail() && !file.eof()) {
-            return std::nullopt;
-        }
-        data.moveList.emplace_back(a, b);
-    }
     return data;
 }

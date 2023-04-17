@@ -45,7 +45,7 @@ int main()
             {"LoadScreen",                 LoadScreen::LoadSceen                },
             {"LoadFailed",                 LoadScreen::LoadFailed               },
             {"EmptyLoad",                  LoadScreen::EmptyLoad                },
-            {"MainMenu",                   MainMenu::ScreenMainMenu             },
+            {"MainMenu",                   MainMenu::MainMenuScreen             },
             {"ReplayLoad",                 ReplayLoad::ReplayLoad               },
             {"ReplaySave",                 ReplaySave::ReplaySave               },
             {"ReplayScreenView",           ReplayScreenView::ReplayScreenView   },
