@@ -164,3 +164,4 @@ WIN_TEXT                    =    đã thắng
 WIN_TIME_TEXT               =    đã thắng (Thời gian)
 YES_TITLE                   =    Có
 YES_TITLE_SHORTCUT          =    C
+EXIT_SEARCH_KEY_TITLE = Ngừng tìm kiếm

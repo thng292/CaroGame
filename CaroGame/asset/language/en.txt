@@ -164,3 +164,4 @@ WIN_TEXT                    =    won the game
 WIN_TIME_TEXT               =    won the game (Through time)
 YES_TITLE                   =    Yes
 YES_TITLE_SHORTCUT          =    Y
+EXIT_SEARCH_KEY_TITLE = Stop searching
