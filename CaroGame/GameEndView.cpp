@@ -35,7 +35,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
 
             );
             tempColor = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
-            X_PIVOT -= 2;
+            X_PIVOT -= 3;
             break;
         case Constants::END_GAME_WIN_TWO:
             playerResultLabel = std::format(
@@ -59,7 +59,7 @@ void GameEndView::GameEndView(NavigationHost& NavHost)
 
             );
             tempColor = Theme::GetColor(ThemeColor::PLAYER_ONE_COLOR);
-            X_PIVOT += 1;
+            X_PIVOT -= 3;
             break;
         case Constants::END_GAME_WIN_TIME_TWO:
             playerResultLabel = std::format(
