@@ -14,10 +14,11 @@ void Common::DrawHints()
     View::DrawTextCenterdVertically(
         29 - 2,
         std::format(
-            L"B: {}, Enter: {}, Tab: {}",
+            L"B: {}, Enter: {}, Tab: {}, ESC: {}",
             Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"),
             Language::GetString(L"SELECT_KEY_TITLE"),
-            Language::GetString(L"SEARCH_KEY_TITLE")
+            Language::GetString(L"SEARCH_KEY_TITLE"),
+            Language::GetString(L"EXIT_SEARCH_KEY_TITLE")
         )
     );
 }
@@ -27,7 +28,7 @@ void Common::DrawHintsLess()
     View::DrawTextCenterdVertically(
         29 - 2,
         std::format(
-            L"A, W, S, D, \u2190\u2191\u2193\u2192: {}, Enter: {}, B: {}",
+            L"W, S, \u2191\u2193: {}, Enter: {}, B: {}",
             Language::GetString(L"NAVIGATION_KEYS_TITLE"),
             Language::GetString(L"SELECT_KEY_TITLE"),
             Language::GetString(L"NAVIGATE_BACK_KEY_TITLE")
@@ -36,9 +37,36 @@ void Common::DrawHintsLess()
     );
 }
 
+void Common::DrawHintsStartup()
+{
+    View::DrawTextCenterdVertically(
+        29 - 2,
+        std::format(
+            L"A, D, \u2190\u2192: {}, Enter: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE"),
+            Language::GetString(L"SELECT_KEY_TITLE")
+
+        )
+    );
+}
+
+void Common::DrawHintsLessNoBack()
+{
+    View::DrawTextCenterdVertically(
+        29 - 2,
+        std::format(
+            L"W, S, \u2191\u2193: {}, Enter: {}",
+            Language::GetString(L"NAVIGATION_KEYS_TITLE"),
+            Language::GetString(L"SELECT_KEY_TITLE")
+        )
+    );
+}
+
 bool Common::ConfirmPrompt(const std::wstring& title)
 {
-    DrawHintsLess();
+    if (title != Language::GetString(L"EXIT_CONFIRM_TITLE") &&
+        title != Language::GetString(L"OVERWRITE_NOTICE_TITLE"))
+        DrawHintsLessNoBack();
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),
          Language::GetString(L"YES_TITLE_SHORTCUT")[0]},

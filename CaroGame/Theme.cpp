@@ -12,8 +12,8 @@ std::array<View::Color, 21> Theme::CurrentTheme{
     View::Color::RED,           View::Color::YELLOW,
     View::Color::GREEN,         View::Color::YELLOW,
     View::Color::MAGENTA,       View::Color::GRAY,
-    View::Color::BLACK,         View::Color::RED,
-    View::Color::BLUE};
+    View::Color::BLACK,         View::Color::BLUE,
+    View::Color::RED};
 
 std::array<View::Color, 21> Theme::defaultTheme = Theme::CurrentTheme;
 

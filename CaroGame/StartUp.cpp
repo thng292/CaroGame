@@ -39,6 +39,7 @@ void StartUp::FirstTimeLanguageScreen(NavigationHost& NavHost)
     std::wstring tmp;
     View::DrawMenuPrevState menuPrevState;
 
+
     while (1) {
         auto drawnRect = View::DrawMenuCenter(
             menuPrevState,
