@@ -790,6 +790,14 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
     std::string navigationValue;
     NavHost.SetContext(Constants::NEXT_VIEW, Constants::NULL_VIEW);
 
+    NavHost.SetContext(Constants::CURRENT_BGM, Audio::Sound::MenuBGM);
+    if (Config::GetConfig(Config::BGMusic) == Config::Value_True) {
+        if (BackgroundAudioService::GetCurrentSong() != Audio::Sound::MenuBGM) {
+            BackgroundAudioService::ChangeSong(Audio::Sound::MenuBGM);
+            BackgroundAudioService::Play(true, true);
+        }
+    }
+
     std::wstring label = Language::GetString(L"LABEL_PAUSE");
 
     std::vector<std::wstring> shortcuts = {
@@ -864,7 +872,7 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             navigationValue = navigationValueList[4];
             break;
         }
-        if (Utils::ShortcutCompare(tmp, shortcuts[5])) {
+        if (Utils::ShortcutCompare(tmp, shortcuts[5]) || Utils::ShortcutCompare(tmp, L"b")) {
             navigationValue = navigationValueList[5];
             break;
         }

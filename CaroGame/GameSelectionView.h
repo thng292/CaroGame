@@ -14,6 +14,7 @@
 #include "Theme.h"
 #include "Utils.h"
 #include "View.h"
+#include "BackgroundAudioService.h"
 
 namespace GameSelectionView {
     // View when choosing PvP / PvE
