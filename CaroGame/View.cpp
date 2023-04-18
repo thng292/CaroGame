@@ -21,6 +21,9 @@ void View::Setup()
          ~ENABLE_MOUSE_INPUT)
     );
 
+    // Hide scoll bar
+    ShowScrollBar(consoleWindow, SB_BOTH, FALSE);
+
 // Hide the cursor
 #if _DEBUG
     ShowCursor(true);

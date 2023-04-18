@@ -35,6 +35,23 @@
   - Thuật toán AI
   - Các tính năng đặc biệt lúc chơi
 
+## Presentation Outline:
+
+- Giới thiệu (Nguyên)
+  - Nói qua về Gomoku
+  - Có để sơ đồ di chuyển
+- Các tính năng
+  1. Màn hình chính (Phước)
+  1. Màn hình cài đặt (Thông)
+  1. Đa ngôn ngữ, chủ đề (Thông)
+  1. Điều hướng trong ứng dụng (Thông)
+  1. Save/load game, replay (Thông)
+  1. Các chế độ chơi, chơi với máy (Vũ)
+  1. Bàn cờ (Vũ)
+  1. Đếm giờ (Vũ)
+  1. Các tính năng đặc biệt khi chơi (Vũ)
+- Kết thúc
+
 ## Báo cáo:
 
 - Giới thiệu tính năng, ý tưởng, code, cách dùng.
