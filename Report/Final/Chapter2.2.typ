@@ -439,12 +439,12 @@ void GameScreenAction::LoadGameToView(
 Các màn hình còn lại có cấu trúc rất tương tự với nhau. Gồm có 3 phần:
     - Lấy các dữ liệu cần thiết để vẽ màn hình
     - Vẽ màn hình 
-    - Chạy vòng lặp để lấy input từ người dùng
-    - Xử lý input người dùng. 
+    - Chạy vòng lặp để lấy và xử lý input người dùng. 
 Do đó chúng em sẽ chỉ nêu chi tiết màn hình "Menu Chính".
 
 Màn hình "Menu Chính" gồm có một menu ở giữa hiện lên các tùy chọn khả dụng cho người chơi, một phần chỉ dẫn các nút ở phía dưới và các hình trang trí. Người chơi có thể sử dụng bàn phím để di chuyển con trỏ chọn, ngoài ra, để tăng sự tiện dụng cho người chơi, chúng em thêm vào các phím tắt, các tùy chọn khác nhau sẽ có phím tắt khác nha. Khi nhấn phím tắt, trò chơi sẽ chọn và thực hiện tùy chọn tương ứng.
-*Impplementation:*
+
+*Implementation:*
 ```
 void MainMenu::MainMenuScreen(NavigationHost& NavHost)
 {
