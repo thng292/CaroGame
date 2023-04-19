@@ -2,93 +2,118 @@ MCI:
   type: Web
   title: MCI
   url: https://learn.microsoft.com/vi-vn/windows/win32/multimedia/mci
+  date: 2023-04-19
 
 PlaySound:
   type: Web
   title: PlaySound function
   url: https://learn.microsoft.com/en-us/previous-versions/dd743680(v=vs.85)
+  date: 2023-04-19
 
 mciSendString:
   type: Web
   title: mciSendString function
   url: https://learn.microsoft.com/en-us/previous-versions//dd757161(v=vs.85)
+  date: 2023-04-19
 
 ComposeNavigation:
   type: Web
   title: Navigating with Compose
   url: https://developer.android.com/jetpack/compose/navigation
+  date: 2023-04-19
 
 Jetpack:
   type: Web
   title: Android Jetpack
   url: https://developer.android.com/jetpack
+  date: 2023-04-19
 
 filesystem:
   type: Web
   title: Filesystem library
   url: https://en.cppreference.com/w/cpp/filesystem
+  date: 2023-04-19
 
 thread:
   type: Web
   title: std::thread
   url: https://en.cppreference.com/w/cpp/thread/thread
+  date: 2023-04-19
 
 mutex:
   type: Web
   title: std::mutex
   url: https://en.cppreference.com/w/cpp/thread/mutex
+  date: 2023-04-19
 
 Gomoku:
   type: Web
   title: Gomoku
   url: https://en.wikipedia.org/wiki/Gomoku
+  date: 2023-04-19
 
 Caro:
   type: Web
   title: Cờ ca-rô
   url: https://vi.wikipedia.org/wiki/C%E1%BB%9D_ca-r%C3%B4
+  date: 2023-04-19
 
 Minimax:
   type: Web
   title: Minimax
   url: https://vi.wikipedia.org/wiki/Minimax
+  date: 2023-04-19
 
 Minimax-Figure:
   type: Web
   title: Minimax
   url: https://vi.wikipedia.org/wiki/Minimax
+  date: 2023-04-19
 
 Transposition_Table:
   type: Web
   title: Tranposition table
   url: https://en.wikipedia.org/wiki/Transposition_table
+  date: 2023-04-19
 
 unordered_map:
   type: Web
   title: Unordered map
   url: https://en.cppreference.com/w/cpp/container/unordered_map
+  date: 2023-04-19
 
 Zobrist_Hashing:
   type: Web
   title: Zobrist hashing
   url: https://en.wikipedia.org/wiki/Zobrist_hashing
+  date: 2023-04-19
+
+Zobrist_Hashing_Impl:
+  type: Web
+  title: Minimax Algorithm in Game Theory | Set 5 (Zobrist Hashing)
+  url: https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-5-zobrist-hashing/amp/?fbclid=IwAR3whF26K5Nnhmonzus0dylEKXtGfsEi-ek3fQPprrRp-uSLA1Um9_3zHfA
+  date: 2023-04-19
 
 Alpha_Beta_Pruning:
   type: Web
   title: Alpha-Beta pruning
   url: https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning
+  date: 2023-04-19
 
 zobrist_chess:
   type: Web
   title: Zobrist hashing in chess
   url: https://www.chessprogramming.org/Zobrist_Hashing
+  date: 2023-04-19
 
 Move_Ordering:
   type: Web
   title: Move ordering
   url: https://www.chessprogramming.org/Move_Ordering
+  date: 2023-04-19
 
 Terminal:
   type: Web
   title: Windows terminal
   url: https://en.wikipedia.org/wiki/Windows_Terminal
+  date: 2023-04-19
