@@ -9,6 +9,10 @@
 1. Võ Nhật Phước
 1. Hoàng Trung Nguyên
 
+# Demo video:
+
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/9916U163W7Y/0.jpg)](http://www.youtube.com/watch?v=9916U163W7Y)
+
 # Features
 
 ![UI Flow](./References/CaroGameFlow.svg)

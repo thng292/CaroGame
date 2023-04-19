@@ -1305,7 +1305,7 @@ Với sự cải thiện này, trong một trận đấu mà các quân cờ n�
 ===== Alpha-Beta pruning
 Một phương pháp hiệu quả để tăng tốc thuật toán Minimax là kĩ thuật *Alpha-Beta pruning*@Alpha_Beta_Pruning. Ý tưởng là nếu nước đi đang xét có thể được chứng minh là tệ hơn một nước đi đã tìm được trước đó, thì ta sẽ ngừng truy xét nước đi này. Hay nói cách khác, ta sẽ "tỉa" những đoạn kiểm tra không cần thiết khỏi quá trình truy xét. Việc này giúp giảm số lượng nước đi phải kiểm tra, từ đó tăng tốc độ xử lý của thuật toán. 
 
-(*Nguồn ảnh*: https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-4-alpha-beta-pruning/)
+(*Nguồn ảnh*: #link("https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-4-alpha-beta-pruning/"))
 #figure(
     image("asset/alpha_beta_figure.jpg", width: 80%),
     caption: text()[Quá trình cắt tỉa thông qua Alpha-Beta pruning]
