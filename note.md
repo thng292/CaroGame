@@ -35,23 +35,6 @@
   - Thuật toán AI
   - Các tính năng đặc biệt lúc chơi
 
-## Presentation Outline:
-
-- Giới thiệu (Nguyên)
-  - Nói qua về Gomoku
-  - Có để sơ đồ di chuyển
-- Các tính năng
-  1. Màn hình chính (Phước)
-  1. Màn hình cài đặt (Thông)
-  1. Đa ngôn ngữ, chủ đề (Thông)
-  1. Điều hướng trong ứng dụng (Thông)
-  1. Save/load game, replay (Thông)
-  1. Các chế độ chơi, chơi với máy (Vũ)
-  1. Bàn cờ (Vũ)
-  1. Đếm giờ (Vũ)
-  1. Các tính năng đặc biệt khi chơi (Vũ)
-- Kết thúc
-
 ## Báo cáo:
 
 - Giới thiệu tính năng, ý tưởng, code, cách dùng.
@@ -82,3 +65,70 @@
   - Thoát ra mainmenu
   - Load replay
   - Thoát game
+
+## Presentation Outline:
+
+- Giới thiệu (Nguyên)
+  - Nói qua về Gomoku
+  - Có để sơ đồ di chuyển
+- Các tính năng
+  1. Màn hình chính (Phước)
+  1. Màn hình cài đặt (Thông)
+  1. Đa ngôn ngữ, chủ đề (Thông)
+  1. Điều hướng trong ứng dụng (Thông)
+  1. Save/load game, replay (Thông)
+  1. Các chế độ chơi, chơi với máy (Vũ)
+  1. Bàn cờ (Vũ)
+  1. Đếm giờ (Vũ)
+  1. Các tính năng đặc biệt khi chơi (Vũ)
+- Kết thúc
+
+# Cài đặt
+
+- Có thể chỉnh sửa các thiết lập của trò chơi. Thiết lập xong có thể lưu cho lần sau
+- Có các thiết lập như:
+  - Bật tắt nhạc nền/hiệu ứng
+  - Bật tắt các tính năng hỗ trợ khi chơi
+  - Chuyển ngôn ngữ, chuyển chủ đề
+
+# Chuyển ngôn ngữ, chủ đề
+
+- Khiến cho việc thêm ngôn ngữ vào trò chơi dễ dàng hơn, làm cho trò chơi dễ tiếp cận hơn
+- Giới thiệu qua ngôn ngữ có sẵn
+- Được tải từ file bên ngoài, tìm file trong thư mục `asset/language`
+
+- Tăng tính cá nhân hóa
+- Giới thiệu các chủ đề có sẵn
+- Được tải từ file bên ngoài, tìm file trong thư mục `theme`
+
+- Mở ra nhiều cách sáng tạo khác nhau
+  - Ngôn ngữ động vật
+  - Ẩn đi các quân cờ, lịch sử khi chơi
+
+# Điều hướng trong ứng dụng
+
+- Giải pháp thay thế cho việc gọi hàm trực tiếp.
+- Điểm yếu của gọi hàm trực tiếp:
+
+  - Cần phải biết chữ kí của hàm cần chuyển tới
+  - Khó quản lý các màn hình, đích đến
+  - Có thể bị tràn stack nếu chuyển màn hình nhiều lần
+  - Nếu muốn sửa lại code thì phải chỉnh ở nhiều nơi
+
+- Giải pháp:
+  - Có một class trung tâm để quản lí các màn hình.
+  - Các màn hình sẽ có 1 nhãn duy nhất
+  - Khi gọi chỉ cần sử dụng nhãn
+- Nhược điểm:
+  - Khó truyền dữ liệu giữa các màn hình
+
+# Save/load game, replay
+
+- Các màn hình có cấu trúc tương tự nhau
+- Gồm các phần:
+  - Danh sách các file
+    - Tên file lưu và thời gian lưu
+    - Chia thành nhiều trang
+  - Ô nhập văn bản để tìm kiếm hoặc nhập tên
+    - Tìm kiếm mỗi khi nhập từ mới
+  - Các hướng dẫn

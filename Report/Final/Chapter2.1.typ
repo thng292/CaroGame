@@ -347,7 +347,7 @@ Một cách tiếp cận khác là mỗi khi người chơi muốn tải trò ch
     - Không cần tạo ra file không cần thiết
     - Người chơi có thể tải trò chơi từ máy khác
 
-Để quét các file trong thư mục, chúng em đã sử dụng thư viện `filesystem` @filesystem. Đây là một thư viện mới xuất hiện trong phiên bản `C++17`. Nó cung cấp các tiện ích để thực hiện các thao tác trên hệ thống tập tin và các thành phần của chúng, chẳng hạn như đường dẫn, tập tin thông thường và thư mục. 
+Để quét các file trong thư mục, chúng em đã sử dụng thư viện `filesystem` @filesystem. Đây là một thư viện mới xuất hiện trong phiên bản C++17. Nó cung cấp các tiện ích để thực hiện các thao tác trên hệ thống tập tin và các thành phần của chúng, chẳng hạn như đường dẫn, tập tin thông thường và thư mục. 
 
 Sau đây là cách mà chúng em đã dùng để quét các file trong thư mục lưu trò chơi:
 #pagebreak()
@@ -483,8 +483,7 @@ Sau đây là chi tiết hàm tải ván đấu:
 
 *Implementation:*
 ```
-std::optional<GameState> 
-SaveLoad::Load(
+std::optional<GameState> SaveLoad::Load(
     const std::filesystem::path& filePath
 )
 {
@@ -509,6 +508,7 @@ SaveLoad::Load(
     short a, b;
     while (!file.fail()) {
         file >> a >> b;
+        if (file.eof()) break;
         data.moveList.emplace_back(a, b);
     }
 

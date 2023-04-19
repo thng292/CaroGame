@@ -38,6 +38,7 @@ Ngoài ra, để tăng tính đa dạng và thêm phần thú vị cho trò chơ
         [*Tên trò chơi*], [Cờ Caro],
         [*Môi trường phát triển và thử nghiệm*], [Visual Studio 2022],
         [*Khả dụng trên nền tảng*], [Windows],
+        [*Video Demo sản phẩm*], link("https://www.youtube.com/watch?v=9916U163W7Y"),
         [*Source code*], link("https://github.com/thng292/CaroGame")
     )
 )
