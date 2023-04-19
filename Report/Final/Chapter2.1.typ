@@ -1138,6 +1138,7 @@ Việc thiết kết chương trình cho chế độ *"Đánh với máy"* là m
 Đối với những trò chơi đối kháng hai người như cờ vua, cờ caro,... Để có thể tìm được một nước tốt qua code, ta không thể lập trình cứng để xét thế nào là nước đi tốt, thế nào là nước đi xấu được. Đơn thuần là vì có quá nhiều trường hợp để xét, và làm như thế chưa thể đảm bảo có thực sự đạt hiệu quả hay không. Thay vào đó, ta cần phải dựa vào thế mạnh của máy tính. Tuy không thể tư duy như con người, nhưng máy tính có khả năng thực hiện hàng chục nghìn phép tính trong một khoảng thời gian rất ngắn. Dựa vào đặc tính ấy, ta phát triển được phương pháp tìm một nước đi tốt cho cờ Caro.
 
 *Thuật toán Minimax*@Minimax là một thuật toán phổ biến được áp dụng trong việc tìm kiếm một nước đi tốt trong các trò chơi đối kháng giữa hai người. Chính vì vậy, nhóm đã quyết định sử dụng thuật toán này để viết nên chương trình "AI" cho trò chơi. Giải thích một cách đơn giản, thuật toán sẽ tìm nước đi tốt nhất thông qua việc đánh giá tất cả các nước đi có thể trong mỗi lượt đi. Ví dụ, đối với cờ Caro, nếu hiện tại là lượt của người chơi O, thuật toán sẽ tìm mọi nước đi có thể của người chơi O. Sau khi đã thực hiện lượt chơi của O, thuật toán sẽ tìm mọi nước đi có thể của người chơi X. Quá trình này sẽ lặp lại đến một độ sâu nhất định, và khi đã đến độ sâu cuối cùng, một phép đánh giá tương đối sẽ được thực hiện để đánh giá "điểm" của bàn cờ. Người chơi *"tối đa hóa"* sẽ cố gắng đạt được bàn cờ có điểm số cao nhất, ngược lại, người chơi *"tối thiểu hóa"* sẽ cố gắng đạt được bàn cờ có điểm số thấp nhất. 
+(*Nguồn ảnh*: https://www.researchgate.net/figure/Game-tree-for-Tic-Tac-Toe-game-using-MiniMax-algorithm_fig1_262672371). 
 #figure(
     image("asset\minimax_tree.png", width: 80%),
     caption: text()[Sơ đồ tìm kiếm Minimax đối với trò chơi Tic-Tac-Toe]
@@ -1303,6 +1304,8 @@ Với sự cải thiện này, trong một trận đấu mà các quân cờ n�
 
 ===== Alpha-Beta pruning
 Một phương pháp hiệu quả để tăng tốc thuật toán Minimax là kĩ thuật *Alpha-Beta pruning*@Alpha_Beta_Pruning. Ý tưởng là nếu nước đi đang xét có thể được chứng minh là tệ hơn một nước đi đã tìm được trước đó, thì ta sẽ ngừng truy xét nước đi này. Hay nói cách khác, ta sẽ "tỉa" những đoạn kiểm tra không cần thiết khỏi quá trình truy xét. Việc này giúp giảm số lượng nước đi phải kiểm tra, từ đó tăng tốc độ xử lý của thuật toán. 
+
+(*Nguồn ảnh*: https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-4-alpha-beta-pruning/)
 #figure(
     image("asset/alpha_beta_figure.jpg", width: 80%),
     caption: text()[Quá trình cắt tỉa thông qua Alpha-Beta pruning]
