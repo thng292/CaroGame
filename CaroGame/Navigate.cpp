@@ -27,6 +27,7 @@ NavigationHost::NavigationHost(
     const std::string& Start, const ViewFuncMap& links
 )
 {
+    View::ClearScreen();
     _CurrentScreen = {Start, nullptr};
     _Links = links;
     while (_CurrentScreen.name != EXIT) {

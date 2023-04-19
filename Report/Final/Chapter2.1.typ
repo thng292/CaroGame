@@ -483,8 +483,7 @@ Sau đây là chi tiết hàm tải ván đấu:
 
 *Implementation:*
 ```
-std::optional<GameState> 
-SaveLoad::Load(
+std::optional<GameState> SaveLoad::Load(
     const std::filesystem::path& filePath
 )
 {
@@ -509,6 +508,7 @@ SaveLoad::Load(
     short a, b;
     while (!file.fail()) {
         file >> a >> b;
+        if (file.eof()) break;
         data.moveList.emplace_back(a, b);
     }
 

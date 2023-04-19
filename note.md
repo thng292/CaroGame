@@ -100,8 +100,6 @@
 - Tăng tính cá nhân hóa
 - Giới thiệu các chủ đề có sẵn
 - Được tải từ file bên ngoài, tìm file trong thư mục `theme`
-- Hạn chế: Có thể lầm các file khác thành file ngôn ngữ
-- Hạn chế: Có thể lầm các file khác thành file chủ đề
 
 - Mở ra nhiều cách sáng tạo khác nhau
   - Ngôn ngữ động vật
