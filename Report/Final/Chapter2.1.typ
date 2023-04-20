@@ -425,42 +425,63 @@ struct GameState {
     std::vector<std::pair<short, short>> moveList;
 };
 ```
-Với những thông tin ấy, chúng em đã chọn cách lưu ván đấu dưới dạng file văn bản do sự tiện dụng của cách lưu này. Tuy nhiên, khi lưu bằng cách này thì người chơi có thể dễ dàng can thiệp vào file lưu gây ra một số tính huống không mong muốn, một điều khó tránh khỏi kể cả khi lưu bằng file nhị phân. 
+Với những thông tin ấy, chúng em đã chọn cách lưu ván đấu dưới dạng file nhị phân để tránh việc người dùng truy cập và gây lỗi file.
 
 Khi lưu ván đấu, hàm sẽ mở file với tên được người chơi nhập vào, sau đó ghi các thông tin của ván đấu vào file. Khi tải ván đấu, hàm sẽ mở file với tên được người chơi chọn, sau đó đọc các thông tin của ván đấu từ file.
-
+#pagebreak()
 Sau đây là chi tiết hàm lưu ván đấu:
 
 *Implementation:*
 ```
+static constexpr int buffSize = 11;
+
 bool SaveLoad::Save(
     const GameState& data,
     const std::wstring& name,
     const std::filesystem::path& dir
 )
 {
-    auto file = FileHandle::OpenOutFile(dir.generic_wstring() + name);
+    std::ofstream file(
+        dir.generic_wstring() + name, 
+        std::ios::out | std::ios::binary
+    );
     if (file.fail()) {
         return false;
     }
-    file << data.playerNameOne << '\n';
-    file << data.playerScoreOne << '\n';
-    file << data.playerTimeOne << '\n';
-    file << data.playerAvatarOne << '\n';
+    wchar_t buff[buffSize] = {0};
+    memcpy_s(
+        buff, sizeof(buff),
+        data.playerNameOne.c_str(),
+        data.playerNameOne.size() * sizeof(wchar_t)
+    );
 
-    file << data.playerNameTwo << '\n';
-    file << data.playerScoreTwo << '\n';
-    file << data.playerTimeTwo << '\n';
-    file << data.playerAvatarTwo << '\n';
+    // Các sizeof(...) ở dưới 
+    // là các kích thước của các thuộc tính cần ghi
+    file.write((char*)buff, sizeof(buff));
+    file.write((char*)&data.playerScoreOne, sizeof(...));
+    file.write((char*)&data.playerTimeOne, sizeof(...));
+    file.write((char*)&data.playerAvatarOne, sizeof(...));
 
-    file << data.gameMode << '\n';
-    file << data.aiDifficulty << '\n';
-    file << data.playerOneFirst << '\n';
-    file << data.gameTime << '\n';
-    file << data.gameEnd << '\n';
-
+    memset(buff, 0, sizeof(buff));
+    memcpy_s(
+        buff, sizeof(buff),
+        data.playerNameTwo.c_str(),
+        data.playerNameTwo.size() * sizeof(wchar_t)
+    );
+    file.write((char*)buff, sizeof(buff));
+    file.write((char*)&data.playerScoreTwo, sizeof(...));
+    file.write((char*)&data.playerTimeTwo, sizeof(...));
+    file.write((char*)&data.playerAvatarTwo, sizeof(...));
+```
+```
+    file.write((char*)&data.gameMode, sizeof(...));
+    file.write((char*)&data.aiDifficulty, sizeof(...));
+    file.write((char*)&data.playerOneFirst, sizeof(...));
+    file.write((char*)&data.gameTime, sizeof(...));
+    file.write((char*)&data.gameEnd, sizeof(...));
     for (auto& i : data.moveList) {
-        file << i.first << ' ' << i.second << '\n';
+        file.write((char*)&i.first, sizeof(i.first));
+        file.write((char*)&i.second, sizeof(i.second));
     }
 
     if (file.fail()) {
@@ -483,31 +504,41 @@ Sau đây là chi tiết hàm tải ván đấu:
 
 *Implementation:*
 ```
+static constexpr int buffSize = 11;
+
 std::optional<GameState> SaveLoad::Load(
     const std::filesystem::path& filePath
 )
 {
-    auto file = FileHandle::OpenInFile(filePath);
+    std::ifstream file(filePath, std::ios::in | std::ios::binary);
     GameState data;
-    file >> data.playerNameOne;
-    file >> data.playerScoreOne;
-    file >> data.playerTimeOne;
-    file >> data.playerAvatarOne;
+    wchar_t buff[buffSize] = {0};       
+```
+```
+    file.read((char*)buff, sizeof(buff));
+    data.playerNameOne = std::wstring(buff);
+    file.read((char*)&data.playerScoreOne, sizeof(...));
+    file.read((char*)&data.playerTimeOne, sizeof(...));
+    file.read((char*)&data.playerAvatarOne, sizeof(...));
+    // Các sizeof(...) ở dưới 
+    // là các kích thước của các thuộc tính cần ghi
+    memset(buff, 0, sizeof(buff));
+    file.read((char*)buff, sizeof(buff));
+    data.playerNameTwo = std::wstring(buff);
+    file.read((char*)&data.playerScoreTwo, sizeof(...));
+    file.read((char*)&data.playerTimeTwo, sizeof(...));
+    file.read((char*)&data.playerAvatarTwo, sizeof(...));
 
-    file >> data.playerNameTwo;
-    file >> data.playerScoreTwo;
-    file >> data.playerTimeTwo;
-    file >> data.playerAvatarTwo;
+    file.read((char*)&data.gameMode, sizeof(...));
+    file.read((char*)&data.aiDifficulty, sizeof(...));
+    file.read((char*)&data.playerOneFirst, sizeof(...));
+    file.read((char*)&data.gameTime, sizeof(...));
+    file.read((char*)&data.gameEnd, sizeof(...));
 
-    file >> data.gameMode;
-    file >> data.aiDifficulty;
-    file >> data.playerOneFirst;
-    file >> data.gameTime;
-    file >> data.gameEnd;
-
-    short a, b;
+    short a = 0, b = 0;
     while (!file.fail()) {
-        file >> a >> b;
+        file.read((char*)&a, sizeof(a));
+        file.read((char*)&b, sizeof(b));
         if (file.eof()) break;
         data.moveList.emplace_back(a, b);
     }
@@ -515,6 +546,7 @@ std::optional<GameState> SaveLoad::Load(
     if (file.fail() && !file.eof()) {
         return std::nullopt;
     }
+
     return data;
 }
 ```
@@ -546,7 +578,7 @@ namespace Config {
     );
 }; // namespace Config
 ```
-#pagebreak()
+
 Đây là chi tiết hàm lưu thiết lập của người chơi:
 
 *Implementation:*
@@ -619,8 +651,7 @@ class Timer {
         _state->callback = callback;
         _state->interval = milliseconds{interval};
     }
-```
-```
+
     inline void Start()
     {
         _state->running = true;
@@ -647,7 +678,7 @@ class Timer {
     - `interval`: khoảng thời gian giữa các lần gọi hàm `callback` tính bằng mili giây
 
 Việc lập trình đa luồng trong C++ khá phức tạp, và cũng là phần dễ gây lỗi nhất trong trò chơi, do việc vẽ lên màn hình phải được đồng bộ giữa các luồng với nhau. Nếu không đồng bộ thì có thể dẫn đến việc các phần tử trên màn hình bị vẽ sai vị trí. Để việc đó không xảy ra, chúng em đã sử dụng một khóa `mutex` @mutex chung để đồng bộ các luồng với nhau.
-#pagebreak()
+
 Đoạn code sử dụng `Timer` và `mutex` trích từ trò chơi:
 ```
 void GameScreenView::GameScreenView(NavigationHost& NavHost) {
@@ -688,7 +719,6 @@ Các nhãn và văn bản trong trò chơi được quản lí, truy xuất và 
 ```
 typedef std::unordered_map<std::wstring, std::wstring> Dict;
 typedef std::filesystem::path fsPath;
-
 struct LanguageOption {
   Dict meta;
   fsPath path;
@@ -696,7 +726,6 @@ struct LanguageOption {
 
 class Language {
   Language() = delete;
-
   // Chỉ đọc các phần thông tin về ngôn ngữ
   static Dict ExtractMetaFromFile(const fsPath& filePath);
 
@@ -710,7 +739,6 @@ class Language {
   // Truy xuất văn bản bằng nhãn
   static const std::wstring& 
   GetString(const std::wstring& Label);
-
   static const std::wstring& 
   GetMeta(const std::wstring& Label);
 };
@@ -720,7 +748,7 @@ class Language {
     - `filePath`: đường dẫn tới file cần mở
     - `dirPath`: đường dẫn tới thư mục cần tìm
     - `Label`: nhãn của văn bản cần lấy
-#pagebreak()
+
 *Usage:*
 ```
 {

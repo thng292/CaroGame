@@ -25,7 +25,7 @@ void GameSelectionView::GameModeVersusView(NavigationHost& NavHost)
 
     std::vector<View::Option> options = {
         {Language::GetString(L"OPTION_MODE_PVP"), shortcuts[0][0]},
-        {Language::GetString(L"OPTION_MODE_PVE"), shortcuts[1][0] }
+        {Language::GetString(L"OPTION_MODE_PVE"), shortcuts[1][0]}
     };
 
     Common::DrawHintsLess();
@@ -186,7 +186,10 @@ void GameSelectionView::AvatarSelectView(NavigationHost& NavHost)
 
         if (selected < 4) {
             drawnRect = {
-                2 + tutorialFlag, short(selected * 30), short(selected * 30 + 29), 14 + tutorialFlag};
+                2 + tutorialFlag,
+                short(selected * 30),
+                short(selected * 30 + 29),
+                14 + tutorialFlag};
         } else {
             drawnRect = {
                 15,
@@ -373,13 +376,12 @@ void GameSelectionView::AreYouSureView(NavigationHost& NavHost)
     std::vector<std::wstring> shortcuts = {
         Language::GetString(L"YES_TITLE_SHORTCUT"),
         Language::GetString(L"NO_TITLE_SHORTCUT"),
-        Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")
-    };
+        Language::GetString(L"NAVIGATE_BACK_KEY_SHORTCUT")};
 
     std::vector<View::Option> options = {
         {Language::GetString(L"YES_TITLE"),               shortcuts[0][0]},
-        {Language::GetString(L"OPTION_NO"),               shortcuts[1][0] },
-        {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"), shortcuts[2][0] }
+        {Language::GetString(L"OPTION_NO"),               shortcuts[1][0]},
+        {Language::GetString(L"NAVIGATE_BACK_KEY_TITLE"), shortcuts[2][0]}
     };
 
     Common::DrawHintsLess();
@@ -450,7 +452,7 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
 
     std::vector<View::Option> options = {
         {Language::GetString(L"OPTION_TYPE_RUSH"),   shortcuts[0][0]},
-        {Language::GetString(L"OPTION_TYPE_NORMAL"), shortcuts[1][0] }
+        {Language::GetString(L"OPTION_TYPE_NORMAL"), shortcuts[1][0]}
     };
 
     Common::DrawHintsLess();
@@ -486,6 +488,9 @@ void GameSelectionView::GameModeTypeView(NavigationHost& NavHost)
             break;
         }
         if (Utils::ShortcutCompare(tmp, L"b")) {
+            if (NavHost.CheckContext(Constants::TUTORIAL_MODE)) {
+                return NavHost.Back();
+            }
             return NavHost.Navigate("MainMenu");
         }
 
@@ -729,9 +734,9 @@ void GameSelectionView::RushTimeView(NavigationHost& NavHost)
 
     };
     std::vector<View::Option> options = {
-                {Language::GetString(L"OPTION_15"), shortcuts[0][0]},
-                {Language::GetString(L"OPTION_5"), shortcuts[1][0]},
-                {Language::GetString(L"OPTION_1"), shortcuts[2][0]}
+        {Language::GetString(L"OPTION_15"), shortcuts[0][0]},
+        {Language::GetString(L"OPTION_5"),  shortcuts[1][0]},
+        {Language::GetString(L"OPTION_1"),  shortcuts[2][0]}
     };
 
     Common::DrawHintsLess();
@@ -815,13 +820,13 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
 
         {Language::GetString(L"NEW_GAME_TITLE"),  shortcuts[1][0]},
 
-        {Language::GetString(L"LOAD_TITLE"),      shortcuts[2][0] },
+        {Language::GetString(L"LOAD_TITLE"),      shortcuts[2][0]},
 
-        {Language::GetString(L"SETTINGS_TITLE"),  shortcuts[3][0] },
+        {Language::GetString(L"SETTINGS_TITLE"),  shortcuts[3][0]},
 
-        {Language::GetString(L"MAIN_MENU_TITLE"), shortcuts[4][0] },
+        {Language::GetString(L"MAIN_MENU_TITLE"), shortcuts[4][0]},
 
-        {Language::GetString(L"BACK_TITLE"),      shortcuts[5][0] }
+        {Language::GetString(L"BACK_TITLE"),      shortcuts[5][0]}
     };
 
     std::array<std::string, MAX_OPTIONS> navigationValueList = {
@@ -872,7 +877,8 @@ void GameSelectionView::PauseMenuView(NavigationHost& NavHost)
             navigationValue = navigationValueList[4];
             break;
         }
-        if (Utils::ShortcutCompare(tmp, shortcuts[5]) || Utils::ShortcutCompare(tmp, L"b")) {
+        if (Utils::ShortcutCompare(tmp, shortcuts[5]) ||
+            Utils::ShortcutCompare(tmp, L"b")) {
             navigationValue = navigationValueList[5];
             break;
         }

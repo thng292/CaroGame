@@ -1,5 +1,5 @@
 #pragma once
-//#pragma warning(disable : 4996)
+// #pragma warning(disable : 4996)
 #include <codecvt>
 #include <filesystem>
 #include <fstream>
@@ -23,15 +23,21 @@ namespace FileHandle {
         }
     }
 
-    std::wofstream OpenOutFile(const std::filesystem::path& filePath);
-
-    std::wifstream OpenInFile (const std::filesystem::path& filePath);
-
-    std::vector<FileDetail> GetAllTextFileInDir(
-        const std::filesystem::path& Dir
+    std::wofstream OpenOutFile(
+        const std::filesystem::path& filePath,
+        std::ios::openmode mode = std::ios::out
     );
 
-    inline bool Delete(const std::filesystem::path& target) {
+    std::wifstream OpenInFile(
+        const std::filesystem::path& filePath,
+        std::ios::openmode mode = std::ios::in
+    );
+
+    std::vector<FileDetail> GetAllTextFileInDir(const std::filesystem::path& Dir
+    );
+
+    inline bool Delete(const std::filesystem::path& target)
+    {
         return std::filesystem::remove(target);
     }
 };  // namespace FileHandle

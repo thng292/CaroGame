@@ -58,6 +58,9 @@ class NavigationHost {
     void NavigateStack(const std::string& path);
     void Navigate(const std::string& path);
 
+    inline bool IsHistoryEmpty() {
+        return _History.empty();
+    }
     void Back();
     void BackToLastNotOverlay();
     void NavigateExit();

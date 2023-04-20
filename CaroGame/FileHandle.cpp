@@ -1,21 +1,25 @@
 #include "FileHandle.h"
 
-std::wofstream FileHandle::OpenOutFile(const std::filesystem::path& filePath)
+std::wofstream FileHandle::OpenOutFile(
+    const std::filesystem::path& filePath, std::ios::openmode mode
+)
 {
     if (filePath.has_parent_path()) {
         Ensure(filePath.parent_path());
     }
-    std::wofstream fout(filePath);
+    std::wofstream fout(filePath, mode);
     fout.imbue(LOCALE);
     return fout;
 }
 
-std::wifstream FileHandle::OpenInFile(const std::filesystem::path& filePath)
+std::wifstream FileHandle::OpenInFile(
+    const std::filesystem::path& filePath, std::ios::openmode mode
+)
 {
     if (filePath.has_parent_path()) {
         Ensure(filePath.parent_path());
     }
-    std::wifstream fin(filePath);
+    std::wifstream fin(filePath, mode);
     fin.imbue(LOCALE);
     return fin;
 }

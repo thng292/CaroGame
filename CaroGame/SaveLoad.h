@@ -1,4 +1,6 @@
 #pragma once
+#include <algorithm>
+
 #include "Constants.h"
 #include "FileHandle.h"
 #include "GameState.h"
