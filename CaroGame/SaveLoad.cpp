@@ -63,7 +63,7 @@ std::optional<GameState> SaveLoad::Load(const std::filesystem::path& filePath)
     std::ifstream file(filePath, std::ios::in | std::ios::binary);
     GameState data;
     wchar_t buff[buffSize] = {0};
-    
+
     file.read((char*)buff, sizeof(buff));
     data.playerNameOne = std::wstring(buff);
     file.read((char*)&data.playerScoreOne, sizeof(data.playerScoreOne));
